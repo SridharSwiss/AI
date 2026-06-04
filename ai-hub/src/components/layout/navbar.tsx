@@ -20,6 +20,7 @@ import {
   Briefcase,
   Library,
   BarChart3,
+  Newspaper,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -67,6 +68,12 @@ const navItems = [
     href: "/resource-library",
     icon: Library,
     description: "Whitepapers & public documents",
+  },
+  {
+    label: "News",
+    href: "/news",
+    icon: Newspaper,
+    description: "Live AI news from 20+ sources",
   },
 ];
 
