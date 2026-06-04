@@ -4,10 +4,10 @@ import { ArrowRight, Search, Zap, TrendingUp, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const stats = [
-  { label: "AI Tools", value: "500+" },
-  { label: "Companies Tracked", value: "200+" },
-  { label: "Case Studies", value: "150+" },
-  { label: "Compliance Frameworks", value: "20+" },
+  { label: "AI Tools", value: "30+" },
+  { label: "Companies Tracked", value: "15+" },
+  { label: "Case Studies", value: "12+" },
+  { label: "Compliance Frameworks", value: "8" },
 ];
 
 const highlights = [
