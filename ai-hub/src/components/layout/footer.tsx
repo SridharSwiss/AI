@@ -23,9 +23,9 @@ const footerLinks = {
   ],
   Toolkit: [
     { label: "Consulting Toolkit", href: "/consulting-toolkit" },
-    { label: "Implementation Playbooks", href: "/consulting-toolkit/playbooks" },
-    { label: "AI Assessment", href: "/consulting-toolkit/assess" },
-    { label: "Pilot Templates", href: "/consulting-toolkit/pilot" },
+    { label: "Implementation Playbooks", href: "consulting-toolkit" },
+    { label: "AI Assessment", href: "consulting-toolkit" },
+    { label: "Pilot Templates", href: "consulting-toolkit" },
   ],
 };
 
