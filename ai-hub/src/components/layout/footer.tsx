@@ -10,10 +10,10 @@ const footerLinks = {
     { label: "Resource Library", href: "/resource-library" },
   ],
   Learn: [
-    { label: "Beginner Guides", href: "/learn?level=beginner" },
-    { label: "Certifications", href: "/learn?type=certification" },
-    { label: "YouTube Guides", href: "/learn?type=youtube" },
-    { label: "Code & Repos", href: "/learn?type=code" },
+    { label: "Beginner Guides", href: "/learn" },
+    { label: "Certifications", href: "/learn" },
+    { label: "YouTube Guides", href: "/learn" },
+    { label: "Code & Repos", href: "/learn" },
   ],
   Governance: [
     { label: "EU AI Act", href: "/compliance/eu-ai-act" },
