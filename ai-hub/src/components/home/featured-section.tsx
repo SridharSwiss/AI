@@ -66,7 +66,7 @@ const featuredCaseStudies = [
     industry: "Finance",
     outcome: "$150M saved annually",
     description: "AI contract analysis and legal document review automation.",
-    href: "/case-studies/jpmorgan-contract-ai",
+    href: "/case-studies/jpmorgan-coin",
   },
   {
     company: "Duolingo",
@@ -78,7 +78,7 @@ const featuredCaseStudies = [
 ];
 
 const sectionNav = [
-  { icon: Wrench, label: "AI Tools", desc: "500+ tools compared", href: "/tools", color: "text-violet-500" },
+  { icon: Wrench, label: "AI Tools", desc: "60+ tools compared", href: "/tools", color: "text-violet-500" },
   { icon: Building2, label: "Companies", desc: "AI vendors & startups", href: "/companies", color: "text-blue-500" },
   { icon: BookOpen, label: "Learn", desc: "Guides for all levels", href: "/learn", color: "text-emerald-500" },
   { icon: BarChart3, label: "Case Studies", desc: "Real-world results", href: "/case-studies", color: "text-amber-500" },
