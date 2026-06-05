@@ -1,3 +1,47 @@
+// ─── Types ───────────────────────────────────────────────────────────────────
+
+export interface ModelBenchmark {
+  name: string;
+  score: string;
+}
+
+export interface CompanyModel {
+  name: string;
+  type: "LLM" | "Multimodal" | "Vision" | "Image Gen" | "Video Gen" | "Audio" | "Code" | "Embedding" | "Reasoning" | "Scientific" | "Hardware";
+  params?: string;
+  contextWindow?: string;
+  releaseDate?: string;
+  description?: string;
+  openSource?: boolean;
+  benchmarks?: ModelBenchmark[];
+}
+
+export interface FundingRound {
+  date: string;
+  round: string;
+  amount: string;
+  investors: string[];
+}
+
+export interface CompanyFinancials {
+  totalFunding?: string;
+  latestValuation?: string;
+  revenue?: string;
+  revenueYear?: string;
+  profitStatus?: string;
+  employees?: string;
+  stockSymbol?: string;
+  marketCap?: string;
+  annualRevenueGrowth?: string;
+  fundingRounds?: FundingRound[];
+  keyInvestors?: string[];
+}
+
+export interface Milestone {
+  date: string;
+  event: string;
+}
+
 export interface CompanyData {
   id: string;
   slug: string;
@@ -15,7 +59,15 @@ export interface CompanyData {
   funding?: string;
   keyPeople?: string[];
   history?: string;
+  // Extended fields
+  models?: CompanyModel[];
+  financials?: CompanyFinancials;
+  milestones?: Milestone[];
+  competitors?: string[];
+  employees?: string;
 }
+
+// ─── Companies ───────────────────────────────────────────────────────────────
 
 export const companies: CompanyData[] = [
   {
@@ -32,9 +84,120 @@ export const companies: CompanyData[] = [
     website: "https://openai.com",
     featured: true,
     notableModels: ["GPT-4o", "GPT-4", "GPT-3.5", "o1", "Whisper"],
-    funding: "$11B+ raised, $86B valuation (2023)",
+    funding: "$17.9B raised, $300B valuation (2025)",
     keyPeople: ["Sam Altman (CEO)", "Greg Brockman (President)", "Ilya Sutskever (co-founder)"],
     history: "Founded in 2015 as a nonprofit by Elon Musk, Sam Altman, and others. Transitioned to a capped-profit model in 2019. Partnership with Microsoft in 2019 and expanded to $10B in 2023. Launched ChatGPT in November 2022, reaching 100M users in 2 months.",
+    employees: "~3,500",
+    models: [
+      {
+        name: "o3",
+        type: "Reasoning",
+        contextWindow: "200K",
+        releaseDate: "Dec 2024",
+        description: "Most capable reasoning model, excels at math, science, coding, and complex analysis.",
+        benchmarks: [
+          { name: "MMLU", score: "96.7%" },
+          { name: "HumanEval", score: "99.5%" },
+          { name: "GPQA Diamond", score: "87.7%" },
+          { name: "AIME 2024", score: "96.7%" },
+        ],
+      },
+      {
+        name: "o1",
+        type: "Reasoning",
+        contextWindow: "128K",
+        releaseDate: "Sep 2024",
+        description: "Chain-of-thought reasoning model for complex problem solving.",
+        benchmarks: [
+          { name: "MMLU", score: "92.3%" },
+          { name: "HumanEval", score: "92.4%" },
+          { name: "GPQA Diamond", score: "78.3%" },
+          { name: "AIME 2024", score: "74.4%" },
+        ],
+      },
+      {
+        name: "GPT-4o",
+        type: "Multimodal",
+        contextWindow: "128K",
+        releaseDate: "May 2024",
+        description: "Flagship omni model — text, image, and audio natively.",
+        benchmarks: [
+          { name: "MMLU", score: "88.7%" },
+          { name: "HumanEval", score: "90.2%" },
+          { name: "MATH", score: "76.6%" },
+          { name: "GPQA Diamond", score: "53.6%" },
+        ],
+      },
+      {
+        name: "GPT-4o mini",
+        type: "LLM",
+        contextWindow: "128K",
+        releaseDate: "Jul 2024",
+        description: "Small, fast, affordable model — replaces GPT-3.5 Turbo.",
+        benchmarks: [
+          { name: "MMLU", score: "82.0%" },
+          { name: "HumanEval", score: "87.2%" },
+        ],
+      },
+      {
+        name: "DALL-E 3",
+        type: "Image Gen",
+        releaseDate: "Nov 2023",
+        description: "State-of-the-art text-to-image model with prompt adherence.",
+      },
+      {
+        name: "Sora",
+        type: "Video Gen",
+        releaseDate: "Feb 2024",
+        description: "Text-to-video up to 60 seconds, 1080p, photorealistic.",
+      },
+      {
+        name: "Whisper v3",
+        type: "Audio",
+        releaseDate: "Nov 2023",
+        openSource: true,
+        description: "Open-source speech recognition model. Near human-level in 99 languages.",
+      },
+      {
+        name: "text-embedding-3-large",
+        type: "Embedding",
+        releaseDate: "Jan 2024",
+        description: "3072-dimension embedding model, best retrieval performance.",
+      },
+    ],
+    financials: {
+      totalFunding: "$17.9B",
+      latestValuation: "$300B (2025)",
+      revenue: "$3.7B ARR",
+      revenueYear: "2024",
+      profitStatus: "Not yet profitable",
+      employees: "~3,500",
+      annualRevenueGrowth: ">200% YoY",
+      keyInvestors: ["Microsoft", "Thrive Capital", "NVIDIA", "SoftBank", "Tiger Global", "Sequoia Capital"],
+      fundingRounds: [
+        { date: "Dec 2015", round: "Seed", amount: "$1M", investors: ["Y Combinator", "Peter Thiel"] },
+        { date: "Apr 2019", round: "Strategic", amount: "$1B", investors: ["Microsoft"] },
+        { date: "Jul 2021", round: "Series C", amount: "$1B", investors: ["Khosla Ventures", "Tiger Global"] },
+        { date: "Jan 2023", round: "Strategic", amount: "$10B", investors: ["Microsoft"] },
+        { date: "Oct 2024", round: "Series ?", amount: "$6.6B", investors: ["Thrive Capital", "NVIDIA", "SoftBank", "Microsoft"] },
+      ],
+    },
+    milestones: [
+      { date: "Dec 2015", event: "Founded as nonprofit by Sam Altman, Elon Musk, Greg Brockman, Ilya Sutskever" },
+      { date: "Jun 2018", event: "Elon Musk departs board to avoid conflict of interest with Tesla" },
+      { date: "Apr 2019", event: "Restructured as 'capped profit'; Microsoft invests $1B" },
+      { date: "Jun 2020", event: "GPT-3 released — 175B parameters, 45TB training data" },
+      { date: "Mar 2021", event: "DALL-E (text-to-image) and GitHub Copilot (coding) launched" },
+      { date: "Nov 2022", event: "ChatGPT launches — reaches 100M users in 60 days" },
+      { date: "Mar 2023", event: "GPT-4 released with multimodal capabilities" },
+      { date: "Jan 2023", event: "Microsoft invests additional $10B" },
+      { date: "Nov 2023", event: "Sam Altman briefly fired by board, rehired within 5 days" },
+      { date: "May 2024", event: "GPT-4o launched — native audio/vision/text model" },
+      { date: "Sep 2024", event: "o1 reasoning model series released" },
+      { date: "Oct 2024", event: "$6.6B raised at $157B valuation" },
+      { date: "Dec 2024", event: "o3 model, $300B valuation target" },
+    ],
+    competitors: ["Anthropic", "Google DeepMind", "Meta AI", "xAI", "Mistral AI"],
   },
   {
     id: "anthropic",
@@ -50,9 +213,92 @@ export const companies: CompanyData[] = [
     website: "https://anthropic.com",
     featured: true,
     notableModels: ["Claude 3.5 Sonnet", "Claude 3 Opus", "Claude 3 Haiku"],
-    funding: "$7.3B raised including $4B from Amazon",
+    funding: "$7.3B raised, $18.4B valuation",
     keyPeople: ["Dario Amodei (CEO)", "Daniela Amodei (President)", "Chris Olah (Research)"],
     history: "Founded in 2021 by former OpenAI researchers including Dario and Daniela Amodei. Known for developing Constitutional AI, a technique for training safer AI systems using AI feedback rather than human labeling alone.",
+    employees: "~1,000",
+    models: [
+      {
+        name: "Claude 3.5 Sonnet",
+        type: "Multimodal",
+        contextWindow: "200K",
+        releaseDate: "Jun 2024",
+        description: "Best-in-class coding, analysis, and visual reasoning. Outperforms GPT-4o on most benchmarks.",
+        benchmarks: [
+          { name: "MMLU", score: "88.7%" },
+          { name: "HumanEval", score: "92.0%" },
+          { name: "GPQA Diamond", score: "59.4%" },
+          { name: "MATH", score: "71.1%" },
+          { name: "MT-Bench", score: "9.0/10" },
+        ],
+      },
+      {
+        name: "Claude 3 Opus",
+        type: "Multimodal",
+        contextWindow: "200K",
+        releaseDate: "Mar 2024",
+        description: "Most intelligent model in Claude 3 family for complex tasks.",
+        benchmarks: [
+          { name: "MMLU", score: "86.8%" },
+          { name: "HumanEval", score: "84.9%" },
+          { name: "GPQA Diamond", score: "50.4%" },
+          { name: "MATH", score: "60.1%" },
+        ],
+      },
+      {
+        name: "Claude 3.5 Haiku",
+        type: "LLM",
+        contextWindow: "200K",
+        releaseDate: "Nov 2024",
+        description: "Fastest, most compact Claude model — matches Claude 3 Opus on many tasks.",
+        benchmarks: [
+          { name: "MMLU", score: "81.9%" },
+          { name: "HumanEval", score: "88.1%" },
+        ],
+      },
+      {
+        name: "Claude 3 Haiku",
+        type: "LLM",
+        contextWindow: "200K",
+        releaseDate: "Mar 2024",
+        description: "Ultra-fast, low-cost model for high-volume tasks.",
+        benchmarks: [
+          { name: "MMLU", score: "75.2%" },
+          { name: "HumanEval", score: "75.9%" },
+        ],
+      },
+    ],
+    financials: {
+      totalFunding: "$7.3B",
+      latestValuation: "$18.4B (2024)",
+      revenue: "$1B+ ARR",
+      revenueYear: "2024",
+      employees: "~1,000",
+      profitStatus: "Pre-profit, growing rapidly",
+      annualRevenueGrowth: ">300% YoY",
+      keyInvestors: ["Amazon", "Google", "Spark Capital", "Salesforce Ventures", "Samsung"],
+      fundingRounds: [
+        { date: "May 2022", round: "Series A", amount: "$124M", investors: ["Spark Capital", "Google"] },
+        { date: "May 2023", round: "Series B", amount: "$450M", investors: ["Google", "Spark Capital", "Salesforce"] },
+        { date: "Sep 2023", round: "Amazon Strategic", amount: "$1.25B", investors: ["Amazon"] },
+        { date: "Dec 2023", round: "Series C", amount: "$750M", investors: ["Google", "Spark Capital"] },
+        { date: "Mar 2024", round: "Amazon Expanded", amount: "$2.75B", investors: ["Amazon"] },
+        { date: "May 2024", round: "Series E", amount: "$3B+", investors: ["Google", "Spark Capital", "Salesforce"] },
+      ],
+    },
+    milestones: [
+      { date: "Jan 2021", event: "Founded by Dario Amodei, Daniela Amodei, and 9 other OpenAI researchers" },
+      { date: "May 2022", event: "Claude v1 internal release; $124M Series A" },
+      { date: "Mar 2023", event: "Claude released publicly via API" },
+      { date: "Jul 2023", event: "Claude 2 launched — 100K token context window, major jump" },
+      { date: "Sep 2023", event: "Amazon commits $1.25B; becomes preferred cloud provider" },
+      { date: "Mar 2024", event: "Claude 3 family (Haiku, Sonnet, Opus) — Opus outperforms GPT-4" },
+      { date: "Mar 2024", event: "Amazon expands investment to $4B total" },
+      { date: "Jun 2024", event: "Claude 3.5 Sonnet — sets new SOTA on coding benchmarks" },
+      { date: "Oct 2024", event: "Computer Use capability — Claude can control computers directly" },
+      { date: "Nov 2024", event: "Claude 3.5 Haiku launched, $18.4B valuation" },
+    ],
+    competitors: ["OpenAI", "Google DeepMind", "Meta AI", "Mistral AI"],
   },
   {
     id: "google-deepmind",
@@ -70,6 +316,90 @@ export const companies: CompanyData[] = [
     notableModels: ["Gemini 1.5 Pro", "Gemma", "PaLM 2"],
     keyPeople: ["Demis Hassabis (CEO)", "Shane Legg (Chief AGI Scientist)"],
     history: "DeepMind founded in London in 2010, acquired by Google in 2014. Google Brain founded separately in 2011. Merged into Google DeepMind in April 2023. Known for AlphaGo, AlphaFold, and the Gemini model family.",
+    employees: "~4,000",
+    models: [
+      {
+        name: "Gemini 2.0 Flash",
+        type: "Multimodal",
+        contextWindow: "1M",
+        releaseDate: "Dec 2024",
+        description: "Fast, efficient multimodal model with native image/audio generation.",
+        benchmarks: [
+          { name: "MMLU", score: "76.4%" },
+          { name: "HumanEval", score: "89.5%" },
+        ],
+      },
+      {
+        name: "Gemini 1.5 Pro",
+        type: "Multimodal",
+        contextWindow: "2M",
+        releaseDate: "Feb 2024",
+        description: "Industry-leading 2M token context window. Handles hours of video, thousands of pages.",
+        benchmarks: [
+          { name: "MMLU", score: "81.9%" },
+          { name: "HumanEval", score: "84.1%" },
+          { name: "MATH", score: "58.5%" },
+          { name: "Video QA (EgoSchema)", score: "72.2%" },
+        ],
+      },
+      {
+        name: "Gemini Ultra 1.0",
+        type: "Multimodal",
+        contextWindow: "32K",
+        releaseDate: "Dec 2023",
+        description: "First model to outperform human experts on MMLU (90.04%).",
+        benchmarks: [
+          { name: "MMLU", score: "90.0%" },
+          { name: "HumanEval", score: "74.4%" },
+          { name: "MATH", score: "53.2%" },
+        ],
+      },
+      {
+        name: "Gemma 2 27B",
+        type: "LLM",
+        params: "27B",
+        contextWindow: "8K",
+        releaseDate: "Jun 2024",
+        openSource: true,
+        description: "Best open-source model at its size class. Outperforms Llama 3 70B on many benchmarks.",
+        benchmarks: [
+          { name: "MMLU", score: "75.2%" },
+          { name: "HumanEval", score: "74.4%" },
+        ],
+      },
+      {
+        name: "AlphaFold 3",
+        type: "Scientific",
+        releaseDate: "May 2024",
+        description: "Predicts 3D structure of all life's molecules — proteins, DNA, RNA, ligands.",
+      },
+      {
+        name: "Imagen 3",
+        type: "Image Gen",
+        releaseDate: "Aug 2024",
+        description: "Highest quality text-to-image model with best prompt adherence.",
+      },
+    ],
+    financials: {
+      stockSymbol: "GOOGL",
+      marketCap: "$2.1T (Alphabet, Jan 2025)",
+      revenue: "Part of Alphabet — FY2024 total revenue: $350B",
+      profitStatus: "Profitable (Alphabet net income $94B FY2024)",
+      employees: "~4,000 (DeepMind/Google Brain)",
+      keyInvestors: ["Alphabet (wholly owned)", "Originally: Founders Fund, Horizons Ventures"],
+    },
+    milestones: [
+      { date: "Sep 2010", event: "DeepMind founded in London by Demis Hassabis, Shane Legg, Mustafa Suleyman" },
+      { date: "Jan 2014", event: "Google acquires DeepMind for ~$500M" },
+      { date: "Jan 2016", event: "AlphaGo defeats world champion Lee Sedol at Go" },
+      { date: "Jul 2021", event: "AlphaFold 2 solves protein structure prediction problem" },
+      { date: "Apr 2023", event: "Google Brain and DeepMind merged into Google DeepMind" },
+      { date: "Dec 2023", event: "Gemini 1.0 unveiled — multimodal, outperforms GPT-4 on MMLU" },
+      { date: "Feb 2024", event: "Gemini 1.5 Pro — 1M token context window" },
+      { date: "May 2024", event: "AlphaFold 3 — predicts structure of all molecules" },
+      { date: "Dec 2024", event: "Gemini 2.0 Flash with native multimodal generation" },
+    ],
+    competitors: ["OpenAI", "Anthropic", "Meta AI", "Microsoft"],
   },
   {
     id: "meta-ai",
@@ -87,6 +417,93 @@ export const companies: CompanyData[] = [
     notableModels: ["Llama 3.1 405B", "Llama 3 70B", "Code Llama"],
     keyPeople: ["Yann LeCun (Chief AI Scientist)", "Joelle Pineau (VP AI Research)"],
     history: "FAIR (Fundamental AI Research) established in 2013 with Yann LeCun as chief scientist. Released Llama in 2023, making it one of the most widely deployed open-source LLM families. Segment Anything Model revolutionized computer vision.",
+    employees: "~2,000 (FAIR)",
+    models: [
+      {
+        name: "Llama 3.1 405B",
+        type: "LLM",
+        params: "405B",
+        contextWindow: "128K",
+        releaseDate: "Jul 2024",
+        openSource: true,
+        description: "First open-source frontier model — competitive with GPT-4o and Claude 3.5 Sonnet.",
+        benchmarks: [
+          { name: "MMLU", score: "88.6%" },
+          { name: "HumanEval", score: "89.0%" },
+          { name: "MATH", score: "73.8%" },
+          { name: "GPQA", score: "51.1%" },
+        ],
+      },
+      {
+        name: "Llama 3.1 70B",
+        type: "LLM",
+        params: "70B",
+        contextWindow: "128K",
+        releaseDate: "Jul 2024",
+        openSource: true,
+        description: "Best open-source model at 70B — outperforms GPT-3.5 and rivals GPT-4o mini.",
+        benchmarks: [
+          { name: "MMLU", score: "83.6%" },
+          { name: "HumanEval", score: "80.5%" },
+        ],
+      },
+      {
+        name: "Llama 3.2 Vision",
+        type: "Multimodal",
+        params: "11B / 90B",
+        contextWindow: "128K",
+        releaseDate: "Sep 2024",
+        openSource: true,
+        description: "First multimodal Llama — image understanding and text generation.",
+      },
+      {
+        name: "Code Llama 70B",
+        type: "Code",
+        params: "70B",
+        contextWindow: "100K",
+        releaseDate: "Jan 2024",
+        openSource: true,
+        description: "Best open-source coding model. Supports 500+ programming languages.",
+        benchmarks: [
+          { name: "HumanEval", score: "67.8%" },
+          { name: "MBPP", score: "62.7%" },
+        ],
+      },
+      {
+        name: "SAM 2",
+        type: "Vision",
+        releaseDate: "Jul 2024",
+        openSource: true,
+        description: "Segment Anything Model 2 — real-time segmentation for images and video.",
+      },
+      {
+        name: "SeamlessM4T v2",
+        type: "Audio",
+        releaseDate: "Nov 2023",
+        openSource: true,
+        description: "Nearly 100 languages. Speech-to-speech, speech-to-text, text-to-speech translation.",
+      },
+    ],
+    financials: {
+      stockSymbol: "META",
+      marketCap: "$1.5T (Jan 2025)",
+      revenue: "FY2024: $164B total Meta revenue",
+      profitStatus: "Profitable — FY2024 net income: $62B",
+      employees: "~2,000 FAIR (Meta total: 67,000)",
+      annualRevenueGrowth: "22% YoY (2024)",
+      keyInvestors: ["Public company (NASDAQ: META)"],
+    },
+    milestones: [
+      { date: "Dec 2013", event: "FAIR (Fundamental AI Research) founded, Yann LeCun appointed Chief AI Scientist" },
+      { date: "Apr 2022", event: "OPT-175B — first large open-source LLM from Meta" },
+      { date: "Feb 2023", event: "LLaMA 1 released as open-weights model (65B)" },
+      { date: "Jul 2023", event: "Llama 2 released — commercially usable, sets open-source standard" },
+      { date: "Apr 2023", event: "Segment Anything Model (SAM) open-sourced — 1B objects segmented" },
+      { date: "Apr 2024", event: "Llama 3 (8B & 70B) released — best open-source at the time" },
+      { date: "Jul 2024", event: "Llama 3.1 405B — first open-source frontier model" },
+      { date: "Sep 2024", event: "Llama 3.2 with multimodal capabilities and 1B/3B edge models" },
+    ],
+    competitors: ["OpenAI", "Google DeepMind", "Anthropic", "Mistral AI"],
   },
   {
     id: "microsoft",
@@ -101,9 +518,74 @@ export const companies: CompanyData[] = [
     tags: ["Enterprise", "Cloud", "Productivity", "AI Infrastructure"],
     website: "https://microsoft.com/ai",
     notableModels: ["Phi-3", "Phi-2"],
-    funding: "Public company, $10B+ invested in OpenAI",
+    funding: "Public company, $13B+ invested in OpenAI",
     keyPeople: ["Satya Nadella (CEO)", "Kevin Scott (CTO)", "Mustafa Suleyman (CEO Microsoft AI)"],
-    history: "Became a major AI player through $1B OpenAI investment in 2019, expanded to $10B in 2023. Launched Bing with ChatGPT in Feb 2023, then Microsoft Copilot. Acquired Nuance (healthcare AI) for $19.7B in 2022.",
+    history: "Became a major AI player through $1B OpenAI investment in 2019, expanded to $13B total. Launched Bing with ChatGPT in Feb 2023, then Microsoft Copilot. Acquired Nuance (healthcare AI) for $19.7B in 2022.",
+    employees: "~221,000",
+    models: [
+      {
+        name: "Phi-3.5 MoE",
+        type: "LLM",
+        params: "16x3.8B (MoE)",
+        contextWindow: "128K",
+        releaseDate: "Aug 2024",
+        openSource: true,
+        description: "Small mixture-of-experts model with strong performance per parameter.",
+        benchmarks: [
+          { name: "MMLU", score: "78.9%" },
+          { name: "HumanEval", score: "88.7%" },
+        ],
+      },
+      {
+        name: "Phi-3 Mini",
+        type: "LLM",
+        params: "3.8B",
+        contextWindow: "128K",
+        releaseDate: "Apr 2024",
+        openSource: true,
+        description: "Best-in-class small model, runs on device. Outperforms Gemma 7B and Llama 3 8B.",
+        benchmarks: [
+          { name: "MMLU", score: "70.9%" },
+          { name: "HumanEval", score: "82.6%" },
+          { name: "MT-Bench", score: "8.38/10" },
+        ],
+      },
+      {
+        name: "Phi-3 Medium",
+        type: "LLM",
+        params: "14B",
+        contextWindow: "128K",
+        releaseDate: "Apr 2024",
+        openSource: true,
+        description: "Mid-size model balancing capability and efficiency.",
+        benchmarks: [
+          { name: "MMLU", score: "78.0%" },
+          { name: "HumanEval", score: "84.1%" },
+        ],
+      },
+    ],
+    financials: {
+      stockSymbol: "MSFT",
+      marketCap: "$3.2T (Jan 2025)",
+      revenue: "$245B FY2024",
+      revenueYear: "FY2024",
+      profitStatus: "Profitable — net income $88B FY2024",
+      employees: "~221,000",
+      annualRevenueGrowth: "16% YoY (FY2024)",
+      keyInvestors: ["Public company (NASDAQ: MSFT)", "Top holders: Vanguard, BlackRock, State Street"],
+    },
+    milestones: [
+      { date: "Apr 2019", event: "$1B investment in OpenAI begins deep partnership" },
+      { date: "Apr 2021", event: "GitHub Copilot technical preview — AI pair programmer" },
+      { date: "Apr 2022", event: "$19.7B acquisition of Nuance Communications (healthcare AI)" },
+      { date: "Jan 2023", event: "Extended OpenAI partnership; total investment commitment $13B" },
+      { date: "Feb 2023", event: "New Bing launched with GPT-4 integration" },
+      { date: "Mar 2023", event: "Microsoft 365 Copilot announced — AI in Word, Excel, Teams" },
+      { date: "Sep 2023", event: "Copilot branded across all Microsoft products" },
+      { date: "Apr 2024", event: "Phi-3 Mini — world's best small open-source language model" },
+      { date: "Mar 2024", event: "Mustafa Suleyman (DeepMind co-founder) hired as CEO of Microsoft AI" },
+    ],
+    competitors: ["Google", "Amazon AWS", "Salesforce", "ServiceNow"],
   },
   {
     id: "hugging-face",
@@ -121,6 +603,28 @@ export const companies: CompanyData[] = [
     funding: "$395M raised, $4.5B valuation",
     keyPeople: ["Clement Delangue (CEO)", "Julien Chaumond (CTO)", "Thomas Wolf (CSO)"],
     history: "Founded 2016 as a chatbot app, pivoted to open-source ML in 2018 with the Transformers library. Grew to become the GitHub of ML. Raised $235M Series D in 2023.",
+    employees: "~300",
+    financials: {
+      totalFunding: "$395M",
+      latestValuation: "$4.5B (2023)",
+      revenue: "~$70M ARR (2023 estimate)",
+      employees: "~300",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["Google", "Amazon", "NVIDIA", "Salesforce", "Intel", "AMD", "Qualcomm"],
+      fundingRounds: [
+        { date: "Mar 2021", round: "Series B", amount: "$40M", investors: ["Addition", "Lux Capital"] },
+        { date: "May 2022", round: "Series C", amount: "$100M", investors: ["Addition", "Sequoia", "Coatue", "NVIDIA"] },
+        { date: "Aug 2023", round: "Series D", amount: "$235M", investors: ["Google", "Amazon", "NVIDIA", "Salesforce"] },
+      ],
+    },
+    milestones: [
+      { date: "2016", event: "Founded as consumer chatbot app" },
+      { date: "2018", event: "Open-source pivot — Transformers library released, immediately dominant" },
+      { date: "2019", event: "Model Hub launched — single destination for sharing AI models" },
+      { date: "2022", event: "500K+ models; becomes 'GitHub for AI'" },
+      { date: "Aug 2023", event: "$235M Series D at $4.5B valuation — Google, Amazon, NVIDIA all invest" },
+    ],
+    competitors: ["GitHub", "Replicate", "Together AI", "Weights & Biases"],
   },
   {
     id: "mistral-ai",
@@ -138,6 +642,96 @@ export const companies: CompanyData[] = [
     funding: "€1.1B raised, €6B valuation",
     keyPeople: ["Arthur Mensch (CEO)", "Guillaume Lample", "Timothée Lacroix"],
     history: "Founded in April 2023 by former DeepMind and Meta researchers. Released Mistral 7B in September 2023 as open weights, immediately surpassing Llama 2 13B. Mixture-of-experts approach with Mixtral became influential.",
+    employees: "~400",
+    models: [
+      {
+        name: "Mistral Large 2",
+        type: "LLM",
+        params: "123B",
+        contextWindow: "128K",
+        releaseDate: "Jul 2024",
+        description: "Flagship model — competitive with GPT-4o and Llama 3.1 405B.",
+        benchmarks: [
+          { name: "MMLU", score: "84.0%" },
+          { name: "HumanEval", score: "92.0%" },
+          { name: "MATH", score: "70.0%" },
+        ],
+      },
+      {
+        name: "Mixtral 8x22B",
+        type: "LLM",
+        params: "141B (active: 39B MoE)",
+        contextWindow: "64K",
+        releaseDate: "Apr 2024",
+        openSource: true,
+        description: "Open-source MoE model. Best open-weights performance at the time of release.",
+        benchmarks: [
+          { name: "MMLU", score: "77.8%" },
+          { name: "HumanEval", score: "75.0%" },
+          { name: "Math", score: "41.8%" },
+        ],
+      },
+      {
+        name: "Mixtral 8x7B",
+        type: "LLM",
+        params: "47B (active: 13B MoE)",
+        contextWindow: "32K",
+        releaseDate: "Dec 2023",
+        openSource: true,
+        description: "Breakthrough MoE model — outperformed Llama 2 70B while using half the compute.",
+        benchmarks: [
+          { name: "MMLU", score: "70.6%" },
+          { name: "HumanEval", score: "64.1%" },
+        ],
+      },
+      {
+        name: "Codestral",
+        type: "Code",
+        params: "22B",
+        contextWindow: "32K",
+        releaseDate: "May 2024",
+        description: "State-of-the-art code model supporting 80+ programming languages.",
+        benchmarks: [
+          { name: "HumanEval", score: "81.1%" },
+          { name: "MBPP", score: "78.2%" },
+        ],
+      },
+      {
+        name: "Mistral 7B",
+        type: "LLM",
+        params: "7B",
+        contextWindow: "32K",
+        releaseDate: "Sep 2023",
+        openSource: true,
+        description: "Outperforms Llama 2 13B on all benchmarks at a smaller size.",
+        benchmarks: [
+          { name: "MMLU", score: "62.5%" },
+          { name: "HumanEval", score: "34.1%" },
+        ],
+      },
+    ],
+    financials: {
+      totalFunding: "€1.1B",
+      latestValuation: "€6B (2024)",
+      employees: "~400",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["Andreessen Horowitz (a16z)", "Lightspeed", "General Catalyst", "NVIDIA", "Microsoft", "Salesforce"],
+      fundingRounds: [
+        { date: "Jun 2023", round: "Seed", amount: "€105M", investors: ["Lightspeed", "Xavier Niel", "Eric Schmidt"] },
+        { date: "Dec 2023", round: "Series A", amount: "€385M", investors: ["a16z", "Lightspeed", "Salesforce"] },
+        { date: "Jun 2024", round: "Series B", amount: "€600M", investors: ["General Catalyst", "NVIDIA", "Samsung"] },
+      ],
+    },
+    milestones: [
+      { date: "Apr 2023", event: "Founded by Guillaume Lample, Timothée Lacroix (Meta FAIR) and Arthur Mensch (DeepMind)" },
+      { date: "Jun 2023", event: "€105M seed round — largest European AI seed at the time" },
+      { date: "Sep 2023", event: "Mistral 7B open-sourced — immediately tops open-source leaderboards" },
+      { date: "Dec 2023", event: "Mixtral 8x7B released on BitTorrent — MoE breakthrough" },
+      { date: "Feb 2024", event: "Partnership with Microsoft Azure announced" },
+      { date: "Apr 2024", event: "Mixtral 8x22B — best open-source model at release" },
+      { date: "Jun 2024", event: "€600M Series B at €6B valuation; Codestral code model" },
+    ],
+    competitors: ["OpenAI", "Anthropic", "Meta AI", "Cohere"],
   },
   {
     id: "stability-ai",
@@ -155,6 +749,45 @@ export const companies: CompanyData[] = [
     funding: "$101M raised",
     keyPeople: ["Emad Mostaque (founder)", "Prem Akkaraju (CEO, 2024)"],
     history: "Founded in 2020, rose to prominence with Stable Diffusion release in August 2022. The open-source release sparked an explosion of creative AI tools and fine-tuned models.",
+    models: [
+      {
+        name: "Stable Diffusion 3.5 Large",
+        type: "Image Gen",
+        params: "8B",
+        releaseDate: "Oct 2024",
+        openSource: true,
+        description: "Best open-source text-to-image model. Photorealistic with excellent prompt adherence.",
+      },
+      {
+        name: "Stable Video Diffusion",
+        type: "Video Gen",
+        releaseDate: "Nov 2023",
+        openSource: true,
+        description: "Image-to-video generation, up to 25 frames at high resolution.",
+      },
+      {
+        name: "Stable Audio 2.0",
+        type: "Audio",
+        releaseDate: "Apr 2024",
+        description: "Text-to-audio and audio-to-audio generation up to 3 minutes.",
+      },
+      {
+        name: "SDXL Turbo",
+        type: "Image Gen",
+        params: "3.5B",
+        releaseDate: "Nov 2023",
+        openSource: true,
+        description: "Real-time image generation in a single diffusion step.",
+      },
+    ],
+    financials: {
+      totalFunding: "$101M",
+      latestValuation: "$1B (2022, has since fallen)",
+      employees: "~150",
+      profitStatus: "Struggling — significant financial difficulties in 2024",
+      keyInvestors: ["Coatue", "Lightspeed", "O'Shaughnessy Ventures"],
+    },
+    competitors: ["Midjourney", "Adobe Firefly", "DALL-E 3", "Ideogram"],
   },
   {
     id: "cohere",
@@ -172,6 +805,63 @@ export const companies: CompanyData[] = [
     funding: "$445M raised, $2.2B valuation",
     keyPeople: ["Aidan Gomez (CEO)", "Nick Frosst", "Ivan Zhang"],
     history: "Founded in 2019 by Aidan Gomez (co-author of the Transformer paper), Nick Frosst, and Ivan Zhang. Focused on enterprise deployments with strong multilingual support through the Aya initiative.",
+    employees: "~900",
+    models: [
+      {
+        name: "Command R+",
+        type: "LLM",
+        params: "104B",
+        contextWindow: "128K",
+        releaseDate: "Apr 2024",
+        description: "Enterprise-grade RAG model. Optimized for multi-step tool use and retrieval.",
+        benchmarks: [
+          { name: "MMLU", score: "75.7%" },
+          { name: "HumanEval", score: "79.3%" },
+          { name: "RAG Accuracy", score: "Best-in-class" },
+        ],
+      },
+      {
+        name: "Command R",
+        type: "LLM",
+        params: "35B",
+        contextWindow: "128K",
+        releaseDate: "Mar 2024",
+        description: "Efficient RAG-optimized model with 10 language support.",
+      },
+      {
+        name: "Embed v3",
+        type: "Embedding",
+        releaseDate: "Nov 2023",
+        description: "State-of-the-art embedding model for semantic search and RAG.",
+      },
+      {
+        name: "Rerank 3",
+        type: "Embedding",
+        releaseDate: "Apr 2024",
+        description: "Best-in-class reranking model for multi-lingual enterprise search.",
+      },
+      {
+        name: "Aya 23",
+        type: "LLM",
+        params: "35B",
+        contextWindow: "8K",
+        releaseDate: "May 2024",
+        openSource: true,
+        description: "Multilingual model for 23 languages, including underserved languages.",
+      },
+    ],
+    financials: {
+      totalFunding: "$445M",
+      latestValuation: "$2.2B (2023)",
+      employees: "~900",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["Index Ventures", "NVIDIA", "Oracle", "Salesforce", "Inovia Capital"],
+      fundingRounds: [
+        { date: "Nov 2021", round: "Series B", amount: "$125M", investors: ["Tiger Global", "Index Ventures"] },
+        { date: "Feb 2023", round: "Series C", amount: "$270M", investors: ["Index Ventures", "NVIDIA", "Oracle"] },
+      ],
+    },
+    competitors: ["OpenAI", "Anthropic", "Mistral AI", "AI21 Labs"],
   },
   {
     id: "runway-ml",
@@ -188,6 +878,32 @@ export const companies: CompanyData[] = [
     funding: "$237M raised, $1.5B valuation",
     keyPeople: ["Cristóbal Valenzuela (CEO)", "Anastasis Germanidis (CTO)"],
     history: "Founded in 2018 as a creative tools company. Gained recognition as a co-developer of Stable Diffusion. Gen-1 and Gen-2 established Runway as the leader in AI video generation.",
+    models: [
+      {
+        name: "Gen-3 Alpha",
+        type: "Video Gen",
+        releaseDate: "Jun 2024",
+        description: "State-of-the-art text-to-video and image-to-video. Cinematic quality, precise control.",
+      },
+      {
+        name: "Gen-3 Alpha Turbo",
+        type: "Video Gen",
+        releaseDate: "Aug 2024",
+        description: "5x faster variant of Gen-3 Alpha for rapid iteration.",
+      },
+    ],
+    financials: {
+      totalFunding: "$237M",
+      latestValuation: "$1.5B (2023)",
+      employees: "~200",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["Google", "Salesforce Ventures", "Nvidia", "Felicis Ventures"],
+      fundingRounds: [
+        { date: "Dec 2022", round: "Series C", amount: "$50M", investors: ["Felicis", "Amplify"] },
+        { date: "Jun 2023", round: "Series D", amount: "$141M", investors: ["Google", "Salesforce", "NVIDIA"] },
+      ],
+    },
+    competitors: ["Sora (OpenAI)", "Pika Labs", "Kling", "HeyGen"],
   },
   {
     id: "elevenlabs",
@@ -204,6 +920,38 @@ export const companies: CompanyData[] = [
     funding: "$111M raised, $1.1B valuation",
     keyPeople: ["Mati Staniszewski (CEO)", "Piotr Dąbkowski (CTO)"],
     history: "Founded in 2022 by two Polish entrepreneurs. Reached unicorn status in January 2024 after raising $80M Series B. Known for both enabling accessibility and raising concerns about voice cloning misuse.",
+    models: [
+      {
+        name: "Eleven Multilingual v2",
+        type: "Audio",
+        releaseDate: "Sep 2023",
+        description: "28 languages with human-level emotion and prosody. Industry-leading quality.",
+      },
+      {
+        name: "Eleven Turbo v2.5",
+        type: "Audio",
+        releaseDate: "Jun 2024",
+        description: "Ultra-low latency (~300ms) for real-time voice applications.",
+      },
+      {
+        name: "Voice Design",
+        type: "Audio",
+        releaseDate: "2024",
+        description: "Generate completely synthetic voices from text description.",
+      },
+    ],
+    financials: {
+      totalFunding: "$111M",
+      latestValuation: "$1.1B (2024)",
+      employees: "~150",
+      profitStatus: "Growing rapidly toward profitability",
+      keyInvestors: ["a16z", "Nat Friedman", "Daniel Gross", "SV Angel"],
+      fundingRounds: [
+        { date: "Jun 2023", round: "Series A", amount: "$19M", investors: ["a16z", "Nat Friedman"] },
+        { date: "Jan 2024", round: "Series B", amount: "$80M", investors: ["a16z", "ICONIQ Growth"] },
+      ],
+    },
+    competitors: ["OpenAI TTS", "Google Cloud TTS", "Microsoft Azure TTS", "PlayHT"],
   },
   {
     id: "perplexity-ai",
@@ -220,6 +968,15 @@ export const companies: CompanyData[] = [
     funding: "$165M raised, $520M valuation",
     keyPeople: ["Aravind Srinivas (CEO)", "Denis Yarats (CTO)"],
     history: "Founded in 2022 by former Google, OpenAI, and Meta researchers. Rapidly grew to 10M+ daily active users. Backed by Jeff Bezos, NVIDIA, and other prominent investors.",
+    financials: {
+      totalFunding: "$165M",
+      latestValuation: "$520M (2024)",
+      revenue: "~$50M ARR (2024 estimate)",
+      employees: "~100",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["Jeff Bezos", "NVIDIA", "IVP", "NEA", "Databricks"],
+    },
+    competitors: ["Google Search", "Bing AI", "You.com", "ChatGPT"],
   },
   {
     id: "scale-ai",
@@ -236,6 +993,20 @@ export const companies: CompanyData[] = [
     funding: "$1.0B raised, $13.8B valuation",
     keyPeople: ["Alexandr Wang (CEO)", "Lucy Guo (co-founder)"],
     history: "Founded in 2016 by 19-year-old Alexandr Wang and Lucy Guo. Grew from simple data labeling to a full AI infrastructure company. Major contracts with US Department of Defense.",
+    financials: {
+      totalFunding: "$1.0B",
+      latestValuation: "$13.8B (2021)",
+      revenue: "~$750M ARR (2024 estimate)",
+      employees: "~1,000",
+      profitStatus: "Reportedly profitable on some segments",
+      keyInvestors: ["Tiger Global", "Coatue", "Founders Fund", "Index Ventures", "Spark Capital"],
+      fundingRounds: [
+        { date: "2019", round: "Series B", amount: "$100M", investors: ["Tiger Global", "Founders Fund"] },
+        { date: "2021", round: "Series E", amount: "$325M", investors: ["Tiger Global", "Coatue"] },
+        { date: "2024", round: "Series F", amount: "$1B", investors: ["Amazon", "Meta", "NVIDIA"] },
+      ],
+    },
+    competitors: ["Appen", "Surge AI", "Labelbox", "DataAnnotation"],
   },
   {
     id: "together-ai",
@@ -283,9 +1054,63 @@ export const companies: CompanyData[] = [
     website: "https://x.ai",
     featured: false,
     notableModels: ["Grok-2", "Grok-1 (open-source)"],
-    funding: "$6B raised",
+    funding: "$6B raised, $24B valuation",
     keyPeople: ["Elon Musk (CEO)", "Igor Babuschkin (co-founder)", "Tony Wu"],
     history: "Founded in July 2023 by Elon Musk after departing OpenAI's board. Released Grok-1 as open-source weights in March 2024 under Apache 2.0 license. Grok is integrated into X Premium and has access to real-time posts.",
+    employees: "~600",
+    models: [
+      {
+        name: "Grok-2",
+        type: "Multimodal",
+        contextWindow: "128K",
+        releaseDate: "Aug 2024",
+        description: "Flagship model with real-time X data access and image generation via Aurora.",
+        benchmarks: [
+          { name: "MMLU", score: "87.5%" },
+          { name: "HumanEval", score: "87.8%" },
+          { name: "MATH", score: "76.1%" },
+          { name: "GPQA", score: "56.0%" },
+        ],
+      },
+      {
+        name: "Grok-1",
+        type: "LLM",
+        params: "314B (MoE)",
+        contextWindow: "8K",
+        releaseDate: "Mar 2024",
+        openSource: true,
+        description: "314B MoE model open-sourced under Apache 2.0 — Musk's transparency move.",
+        benchmarks: [
+          { name: "MMLU", score: "73.0%" },
+          { name: "HumanEval", score: "63.2%" },
+        ],
+      },
+      {
+        name: "Aurora",
+        type: "Image Gen",
+        releaseDate: "Aug 2024",
+        description: "Text-to-image model integrated into Grok-2 on X platform.",
+      },
+    ],
+    financials: {
+      totalFunding: "$6B",
+      latestValuation: "$24B (2024)",
+      employees: "~600",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["Elon Musk (lead)", "Sequoia Capital", "Vy Capital", "Andreessen Horowitz"],
+      fundingRounds: [
+        { date: "Dec 2023", round: "Series A", amount: "$500M", investors: ["Various"] },
+        { date: "May 2024", round: "Series B", amount: "$6B", investors: ["Sequoia", "a16z", "Valor"] },
+      ],
+    },
+    milestones: [
+      { date: "Jul 2023", event: "xAI founded by Elon Musk with 12 researchers" },
+      { date: "Nov 2023", event: "Grok-0 beta released to X Premium subscribers" },
+      { date: "Mar 2024", event: "Grok-1 weights open-sourced (314B MoE, Apache 2.0)" },
+      { date: "May 2024", event: "$6B raise — Colossus supercomputer announced (100K H100s)" },
+      { date: "Aug 2024", event: "Grok-2 with Aurora image generation" },
+    ],
+    competitors: ["OpenAI", "Anthropic", "Google DeepMind", "Meta AI"],
   },
   {
     id: "midjourney-co",
@@ -303,6 +1128,35 @@ export const companies: CompanyData[] = [
     funding: "Self-funded (profitable)",
     keyPeople: ["David Holz (CEO/Founder)"],
     history: "Founded in 2021 by David Holz, co-founder of Leap Motion. Launched in open beta in July 2022, rapidly becoming the most recognized AI art tool. Notably profitable and bootstrapped. Released v6 in December 2023 with photorealism capabilities.",
+    models: [
+      {
+        name: "Midjourney v6.1",
+        type: "Image Gen",
+        releaseDate: "Jul 2024",
+        description: "Most coherent and detailed images; much improved text in image rendering.",
+      },
+      {
+        name: "Midjourney v6",
+        type: "Image Gen",
+        releaseDate: "Dec 2023",
+        description: "Near-photorealistic quality with excellent prompt adherence.",
+      },
+      {
+        name: "Niji v6",
+        type: "Image Gen",
+        releaseDate: "Jan 2024",
+        description: "Anime and illustrated style specialist model.",
+      },
+    ],
+    financials: {
+      totalFunding: "Self-funded / bootstrapped",
+      latestValuation: "Not disclosed (reportedly ~$10B)",
+      revenue: "~$200M ARR (2023 estimate)",
+      profitStatus: "Profitable — rare in AI",
+      employees: "~50",
+      keyInvestors: ["None — fully bootstrapped"],
+    },
+    competitors: ["DALL-E 3", "Stable Diffusion", "Adobe Firefly", "Ideogram"],
   },
   {
     id: "pika-labs",
@@ -324,7 +1178,7 @@ export const companies: CompanyData[] = [
     id: "synthesia-co",
     slug: "synthesia-co",
     name: "Synthesia",
-    description: "Synthesia is an enterprise AI video platform that enables organizations to create professional videos with AI-generated presenters in 130+ languages without cameras, studios, or actors. A leader in AI-powered L&D and corporate communications.",
+    description: "Synthesia is an enterprise AI video platform that enables organizations to create professional videos with AI-generated presenters in 130+ languages without cameras, studios, or actors.",
     founded: 2017,
     hq: "London, UK",
     stage: "Private",
@@ -334,7 +1188,7 @@ export const companies: CompanyData[] = [
     website: "https://synthesia.io",
     funding: "$156M raised, $1B valuation",
     keyPeople: ["Victor Riparbelli (CEO)", "Steffen Tjerrild (CFO)"],
-    history: "Founded in 2017 by researchers from UCL and Stanford. Initially focused on deepfake research before pivoting to enterprise video creation. Became a unicorn in 2023. Used by 50,000+ teams at companies like Reuters, Heineken, and Zoom.",
+    history: "Founded in 2017 by researchers from UCL and Stanford. Used by 50,000+ teams at companies like Reuters, Heineken, and Zoom.",
   },
   {
     id: "heygen-co",
@@ -350,13 +1204,13 @@ export const companies: CompanyData[] = [
     website: "https://heygen.com",
     funding: "$60M raised",
     keyPeople: ["Joshua Xu (CEO)", "Wayne Liang (CTO)"],
-    history: "Originally founded as MovioLabs in 2020, rebranded to HeyGen in 2022. Gained viral attention for video translation technology that went viral on social media in 2023. Raised $60M in 2024 to expand capabilities.",
+    history: "Originally founded as MovioLabs in 2020, rebranded to HeyGen in 2022. Gained viral attention for video translation technology in 2023.",
   },
   {
     id: "groq-co",
     slug: "groq-co",
     name: "Groq",
-    description: "Groq is a chip startup that has developed the Language Processing Unit (LPU), custom silicon designed specifically for LLM inference. Their hardware delivers inference speeds 10-25x faster than GPU-based alternatives, making real-time AI applications practical.",
+    description: "Groq is a chip startup that has developed the Language Processing Unit (LPU), custom silicon designed specifically for LLM inference. Their hardware delivers inference speeds 10-25x faster than GPU-based alternatives.",
     founded: 2016,
     hq: "Mountain View, CA",
     stage: "Private",
@@ -364,15 +1218,41 @@ export const companies: CompanyData[] = [
     products: ["LPU Inference Engine", "GroqCloud", "Groq API"],
     tags: ["Hardware", "Inference", "Chips", "Infrastructure", "Fast"],
     website: "https://groq.com",
-    funding: "$640M raised",
+    funding: "$640M raised, $2.8B valuation",
     keyPeople: ["Jonathan Ross (CEO/Founder)", "Douglas Wightman (CFO)"],
-    history: "Founded in 2016 by Jonathan Ross, a former Google TPU architect. Spent years in stealth building the LPU. Burst into public awareness in early 2024 when their publicly accessible API demonstrated inference speeds of 500+ tokens/second for Llama and Mixtral.",
+    history: "Founded in 2016 by Jonathan Ross, a former Google TPU architect. Burst into public awareness in early 2024 with API demonstrating 500+ tokens/second for Llama and Mixtral.",
+    employees: "~300",
+    models: [
+      {
+        name: "LPU (Language Processing Unit)",
+        type: "Hardware",
+        releaseDate: "2023",
+        description: "Custom ASIC for deterministic, low-latency LLM inference. 750GB/s memory bandwidth.",
+        benchmarks: [
+          { name: "Llama 3.1 70B speed", score: "250 tok/s (vs ~40 tok/s GPU)" },
+          { name: "Mixtral 8x7B speed", score: "575 tok/s" },
+          { name: "Latency", score: "<0.5s first token" },
+        ],
+      },
+    ],
+    financials: {
+      totalFunding: "$640M",
+      latestValuation: "$2.8B (2024)",
+      employees: "~300",
+      profitStatus: "Pre-profit",
+      keyInvestors: ["BlackRock", "Tiger Global", "BatCapital", "Neuberger Berman"],
+      fundingRounds: [
+        { date: "2021", round: "Series C", amount: "$300M", investors: ["Tiger Global", "D1 Capital"] },
+        { date: "Aug 2024", round: "Series D", amount: "$640M", investors: ["BlackRock", "Neuberger Berman"] },
+      ],
+    },
+    competitors: ["NVIDIA", "Cerebras", "SambaNova", "Tenstorrent"],
   },
   {
     id: "cerebras-systems",
     slug: "cerebras-systems",
     name: "Cerebras Systems",
-    description: "Cerebras Systems builds the world's largest computer chips — the Wafer Scale Engine (WSE) — designed specifically for AI training and inference. Their chips enable training of large language models at dramatically faster speeds than GPU clusters.",
+    description: "Cerebras Systems builds the world's largest computer chips — the Wafer Scale Engine (WSE) — designed specifically for AI training and inference.",
     founded: 2016,
     hq: "Sunnyvale, CA",
     stage: "Private",
@@ -382,13 +1262,13 @@ export const companies: CompanyData[] = [
     website: "https://cerebras.net",
     funding: "$720M raised",
     keyPeople: ["Andrew Feldman (CEO/Co-founder)", "Sean Lie (CTO)"],
-    history: "Founded in 2016, Cerebras unveiled the first Wafer Scale Engine in 2019 — a chip 56x the size of the largest GPU. WSE-3 (2024) contains 4 trillion transistors. Partnered with organizations like Argonne National Laboratory and AstraZeneca for AI research.",
+    history: "Founded in 2016, Cerebras unveiled the first Wafer Scale Engine in 2019. WSE-3 (2024) contains 4 trillion transistors. Partnered with Argonne National Laboratory and AstraZeneca.",
   },
   {
     id: "ai21-labs",
     slug: "ai21-labs",
     name: "AI21 Labs",
-    description: "AI21 Labs is an Israeli AI research company developing large language models and enterprise NLP tools. Creator of Jamba, the first production-grade hybrid SSM-Transformer model, and the Jurassic series of LLMs.",
+    description: "AI21 Labs is an Israeli AI research company developing large language models and enterprise NLP tools. Creator of Jamba, the first production-grade hybrid SSM-Transformer model.",
     founded: 2017,
     hq: "Tel Aviv, Israel",
     stage: "Private",
@@ -399,13 +1279,13 @@ export const companies: CompanyData[] = [
     funding: "$336M raised",
     notableModels: ["Jamba 1.5", "Jurassic-2"],
     keyPeople: ["Ori Goshen (CEO)", "Yoav Shoham (co-founder)", "Amnon Shashua (co-founder)"],
-    history: "Founded in 2017 by AI researchers Yoav Shoham, Ori Goshen, and Amnon Shashua. Developed the Jurassic series of LLMs. Released Jamba in 2024, the first production-grade model combining state space models (Mamba) with Transformer architecture.",
+    history: "Founded in 2017. Released Jamba in 2024, the first production-grade model combining state space models (Mamba) with Transformer architecture.",
   },
   {
     id: "character-ai",
     slug: "character-ai",
     name: "Character.AI",
-    description: "Character.AI is a conversational AI platform that enables users to create and interact with AI personas of celebrities, fictional characters, and custom personalities. One of the most-used AI consumer applications with over 20M daily active users.",
+    description: "Character.AI is a conversational AI platform that enables users to create and interact with AI personas of celebrities, fictional characters, and custom personalities. Over 20M daily active users.",
     founded: 2021,
     hq: "Menlo Park, CA",
     stage: "Private",
@@ -415,13 +1295,13 @@ export const companies: CompanyData[] = [
     website: "https://character.ai",
     funding: "$150M raised, $1B valuation",
     keyPeople: ["Noam Shazeer (CEO/co-founder)", "Daniel De Freitas (co-founder)"],
-    history: "Founded in 2021 by Noam Shazeer (Google Brain) and Daniel De Freitas, both former Google engineers. Launched in beta in 2022, quickly amassing millions of users. Known for emotional connection features. Faced controversy about AI companion relationships.",
+    history: "Founded in 2021 by Noam Shazeer (Google Brain) and Daniel De Freitas. Launched in beta in 2022, amassing millions of users. Known for emotional connection features.",
   },
   {
     id: "replicate-co",
     slug: "replicate-co",
     name: "Replicate",
-    description: "Replicate is a cloud platform that makes it easy to run machine learning models with a single API call. Hosts thousands of open-source models including Stable Diffusion, Llama, and Whisper, with pay-per-prediction pricing and fine-tuning support.",
+    description: "Replicate is a cloud platform that makes it easy to run machine learning models with a single API call. Hosts thousands of open-source models with pay-per-prediction pricing.",
     founded: 2019,
     hq: "San Francisco, CA",
     stage: "Private",
@@ -431,13 +1311,13 @@ export const companies: CompanyData[] = [
     website: "https://replicate.com",
     funding: "$40M raised",
     keyPeople: ["Ben Firshman (CEO)", "Andreas Jansson (CTO)"],
-    history: "Founded in 2019 by Docker and Spotify veterans. Created Cog, an open-source tool for packaging ML models. Grew rapidly with the Stable Diffusion wave in 2022. Offers the largest catalog of deployable ML models via simple API.",
+    history: "Founded in 2019 by Docker and Spotify veterans. Created Cog for packaging ML models. Grew rapidly with the Stable Diffusion wave in 2022.",
   },
   {
     id: "weights-biases",
     slug: "weights-biases",
     name: "Weights & Biases",
-    description: "Weights & Biases (W&B) is the leading MLOps platform for tracking experiments, visualizing model performance, and managing the machine learning lifecycle. Used by teams at OpenAI, NVIDIA, and thousands of ML teams worldwide.",
+    description: "Weights & Biases (W&B) is the leading MLOps platform for tracking experiments, visualizing model performance, and managing the machine learning lifecycle.",
     founded: 2017,
     hq: "San Francisco, CA",
     stage: "Private",
@@ -447,13 +1327,13 @@ export const companies: CompanyData[] = [
     website: "https://wandb.ai",
     funding: "$250M raised, $1.25B valuation",
     keyPeople: ["Lukas Biewald (CEO/co-founder)", "Chris Van Pelt (co-founder)"],
-    history: "Founded in 2017, became the standard for ML experiment tracking. Used by 80%+ of top AI research labs. Expanded into full MLOps lifecycle management. Adopted by OpenAI, Hugging Face, NVIDIA, and Samsung.",
+    history: "Founded in 2017, became the standard for ML experiment tracking. Used by 80%+ of top AI research labs including OpenAI, Hugging Face, and NVIDIA.",
   },
   {
     id: "pinecone-co",
     slug: "pinecone-co",
     name: "Pinecone",
-    description: "Pinecone is the leading managed vector database company, providing production-ready infrastructure for similarity search at scale. Their serverless architecture and simple API have made Pinecone the default choice for RAG applications and semantic search.",
+    description: "Pinecone is the leading managed vector database company, providing production-ready infrastructure for similarity search at scale.",
     founded: 2019,
     hq: "San Francisco, CA",
     stage: "Private",
@@ -463,13 +1343,13 @@ export const companies: CompanyData[] = [
     website: "https://pinecone.io",
     funding: "$138M raised, $750M valuation",
     keyPeople: ["Edo Liberty (CEO/Founder)"],
-    history: "Founded in 2019 by Edo Liberty, former head of Amazon AI Labs. Initially launched as an ML infrastructure company, pivoted to vector databases. Grew exponentially with the LLM wave in 2023. Introduced serverless pricing in 2024.",
+    history: "Founded in 2019 by Edo Liberty, former head of Amazon AI Labs. Grew exponentially with the LLM wave in 2023. Introduced serverless pricing in 2024.",
   },
   {
     id: "aleph-alpha",
     slug: "aleph-alpha",
     name: "Aleph Alpha",
-    description: "Aleph Alpha is Germany's leading AI company developing sovereign AI infrastructure for European enterprises and governments. Their Luminous models and PharIA platform emphasize data sovereignty, explainability, and compliance with European regulations.",
+    description: "Aleph Alpha is Germany's leading AI company developing sovereign AI infrastructure for European enterprises and governments.",
     founded: 2019,
     hq: "Heidelberg, Germany",
     stage: "Private",
@@ -480,13 +1360,13 @@ export const companies: CompanyData[] = [
     funding: "€500M raised",
     notableModels: ["Pharia-1", "Luminous-Supreme"],
     keyPeople: ["Jonas Andrulis (CEO/Founder)", "Samuel Weinbach (COO)"],
-    history: "Founded in 2019, received major German government backing. Partnership with SAP and Bosch. Serves German federal ministries and intelligence agencies. Positions itself as the European sovereign alternative to US AI providers.",
+    history: "Founded in 2019, received major German government backing. Serves German federal ministries and intelligence agencies.",
   },
   {
     id: "moonshot-ai",
     slug: "moonshot-ai",
     name: "Moonshot AI",
-    description: "Moonshot AI is a Chinese AI startup developing the Kimi family of large language models with an emphasis on extremely long context windows. Their Kimi model supports million-token context, enabling document-heavy enterprise applications.",
+    description: "Moonshot AI is a Chinese AI startup developing the Kimi family of large language models with an emphasis on extremely long context windows.",
     founded: 2023,
     hq: "Beijing, China",
     stage: "Private",
@@ -497,13 +1377,13 @@ export const companies: CompanyData[] = [
     funding: "$1B raised",
     notableModels: ["Kimi (1M context)"],
     keyPeople: ["Yang Zhilin (CEO/Founder)"],
-    history: "Founded in March 2023 by Yang Zhilin, former CMU and Tsinghua researcher. Raised $1B in 2024 at a multi-billion valuation. Known for pioneering ultra-long context window capabilities in Chinese AI.",
+    history: "Founded in March 2023 by Yang Zhilin, former CMU and Tsinghua researcher. Raised $1B in 2024. Known for pioneering ultra-long context window capabilities.",
   },
   {
     id: "zhipu-ai",
     slug: "zhipu-ai",
     name: "Zhipu AI",
-    description: "Zhipu AI is a leading Chinese AI company and developer of the GLM series of bilingual language models. A spin-off from Tsinghua University's KEG lab, Zhipu focuses on enterprise AI applications and open-source Chinese LLMs.",
+    description: "Zhipu AI is a leading Chinese AI company and developer of the GLM series of bilingual language models. A spin-off from Tsinghua University's KEG lab.",
     founded: 2019,
     hq: "Beijing, China",
     stage: "Private",
@@ -514,13 +1394,13 @@ export const companies: CompanyData[] = [
     funding: "¥10B+ raised",
     notableModels: ["GLM-4", "ChatGLM3"],
     keyPeople: ["Zhang Peng (CEO)", "Tang Jie (Chief Scientist)"],
-    history: "Founded in 2019 as a spin-off from Tsinghua University's Knowledge Engineering Group. Released ChatGLM as the first open-source Chinese-English bilingual LLM. Partners with major Chinese enterprises and government institutions.",
+    history: "Founded in 2019 as a spin-off from Tsinghua University. Released ChatGLM as the first open-source Chinese-English bilingual LLM.",
   },
   {
     id: "01ai",
     slug: "01ai",
     name: "01.AI",
-    description: "01.AI is a Chinese AI company founded by Kai-Fu Lee, developing the Yi series of open-source large language models. Yi models are among the highest-performing open-source LLMs globally, available in multiple sizes from 6B to 34B parameters.",
+    description: "01.AI is a Chinese AI company founded by Kai-Fu Lee, developing the Yi series of open-source large language models globally competitive in performance.",
     founded: 2023,
     hq: "Beijing, China",
     stage: "Private",
@@ -531,13 +1411,13 @@ export const companies: CompanyData[] = [
     funding: "$200M raised",
     notableModels: ["Yi-34B", "Yi-1.5-34B"],
     keyPeople: ["Kai-Fu Lee (CEO/Founder)"],
-    history: "Founded in 2023 by Kai-Fu Lee, former Google China president and author of 'AI Superpowers'. Yi-34B was among the best open-source models globally upon release. Focuses on making frontier AI accessible across Asia.",
+    history: "Founded in 2023 by Kai-Fu Lee, former Google China president. Yi-34B was among the best open-source models globally upon release.",
   },
   {
     id: "sambanova-systems",
     slug: "sambanova-systems",
     name: "SambaNova Systems",
-    description: "SambaNova Systems designs AI accelerator hardware and full-stack AI platforms for enterprise and national lab deployments. Their Reconfigurable Dataflow Architecture (RDA) chips enable efficient training and inference of large models.",
+    description: "SambaNova Systems designs AI accelerator hardware and full-stack AI platforms for enterprise and national lab deployments.",
     founded: 2017,
     hq: "Palo Alto, CA",
     stage: "Private",
@@ -547,13 +1427,13 @@ export const companies: CompanyData[] = [
     website: "https://sambanova.ai",
     funding: "$1.1B raised",
     keyPeople: ["Rodrigo Liang (CEO)", "Kunle Olukotun (CTO/co-founder)"],
-    history: "Founded in 2017 by Stanford faculty and former Intel executives. Backed by BlackRock, Intel, and GIC. Deployed systems at US national labs including Argonne and Lawrence Livermore. Offers cloud API access to 405B Llama at competitive speeds.",
+    history: "Founded in 2017 by Stanford faculty. Deployed at US national labs. Offers cloud API access to 405B Llama at competitive speeds.",
   },
   {
     id: "adept-ai",
     slug: "adept-ai",
     name: "Adept AI",
-    description: "Adept AI is building AI agents that can take actions in software on behalf of users. Their Fuyu-Heavy model and ACT agent are designed to interact with existing software interfaces, automating complex knowledge work tasks.",
+    description: "Adept AI is building AI agents that can take actions in software on behalf of users. Their Fuyu-Heavy model and ACT agent are designed to interact with existing software interfaces.",
     founded: 2022,
     hq: "San Francisco, CA",
     stage: "Private",
@@ -563,7 +1443,7 @@ export const companies: CompanyData[] = [
     website: "https://adept.ai",
     funding: "$415M raised",
     keyPeople: ["David Luan (CEO/co-founder)", "Ashish Vaswani (co-founder)"],
-    history: "Founded in 2022 by Ashish Vaswani (co-author of 'Attention Is All You Need') and David Luan (former OpenAI VP). Raised $350M Series B in 2023. Focuses on AI that can perform actions in existing software environments rather than just generating text.",
+    history: "Founded in 2022 by Ashish Vaswani (co-author of 'Attention Is All You Need') and David Luan (former OpenAI VP). Focuses on AI that can perform actions in existing software environments.",
   },
 ];
 
