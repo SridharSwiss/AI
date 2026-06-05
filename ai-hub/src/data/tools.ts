@@ -1,3 +1,19 @@
+export interface PricingTier {
+  name: string;
+  price: string;
+  features: string[];
+}
+
+export interface ToolMetrics {
+  users?: string;
+  dau?: string;
+  mau?: string;
+  arr?: string;
+  valuation?: string;
+  employees?: string;
+  growth?: string;
+}
+
 export interface ToolData {
   id: string;
   slug: string;
@@ -14,6 +30,17 @@ export interface ToolData {
   pros?: string[];
   cons?: string[];
   alternatives?: string[];
+  // Extended fields
+  launchDate?: string;
+  underlyingModel?: string[];
+  platforms?: string[];
+  integrations?: string[];
+  apiAvailable?: boolean;
+  pricingTiers?: PricingTier[];
+  metrics?: ToolMetrics;
+  history?: string;
+  latestUpdate?: string;
+  idealFor?: string[];
 }
 
 export const tools: ToolData[] = [
@@ -33,6 +60,27 @@ export const tools: ToolData[] = [
     pros: ["Vast knowledge base", "Strong reasoning", "Plugin ecosystem"],
     cons: ["Knowledge cutoff", "Hallucinations", "Cost at scale"],
     alternatives: ["claude", "gemini", "llama"],
+    launchDate: "Nov 30, 2022",
+    underlyingModel: ["GPT-4o", "o1", "o1-mini", "GPT-4o mini"],
+    platforms: ["Web", "iOS", "Android", "macOS App", "API"],
+    integrations: ["Zapier", "Slack", "Microsoft Teams", "2,000+ GPT plugins / Actions"],
+    apiAvailable: true,
+    latestUpdate: "o1 reasoning model, Advanced Voice Mode, memory, macOS app, real-time search",
+    idealFor: ["Knowledge workers", "Students", "Developers", "Writers", "Business analysts"],
+    metrics: {
+      users: "200M+ weekly active users (Aug 2024)",
+      arr: "$3.7B+ (OpenAI total ARR, 2024)",
+      growth: "0 → 100M users in 60 days — fastest consumer app ever",
+      employees: "~3,500 (OpenAI)",
+      valuation: "$300B (2025)",
+    },
+    history: "Launched Nov 30 2022 to unexpected viral success. Reached 1M users in 5 days, 100M in 2 months. Prompted Google to declare a 'code red'. Plus subscription Feb 2023. GPT-4 Mar 2023. Custom GPTs & GPT Store Jan 2024. Advanced Voice Mode and persistent memory 2024. o1 reasoning model Sep 2024.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["GPT-4o mini + limited GPT-4o", "DALL-E 3 image gen", "Web browsing", "Data analysis", "GPT Store access"] },
+      { name: "Plus", price: "$20/mo", features: ["Priority GPT-4o access", "o1 & o1-mini reasoning", "Advanced data analysis", "Custom GPT creation", "5× more messages than Free"] },
+      { name: "Team", price: "$30/user/mo", features: ["Everything in Plus", "Team workspace", "Admin console", "Data NOT used for training", "Higher limits"] },
+      { name: "Enterprise", price: "Custom", features: ["Unlimited usage", "SSO/SAML", "Custom data retention", "Dedicated support", "Enterprise security"] },
+    ],
   },
   {
     id: "claude",
@@ -50,6 +98,26 @@ export const tools: ToolData[] = [
     pros: ["200k+ context window", "Strong instruction following", "Constitutional AI safety"],
     cons: ["Less plugin support", "No image generation"],
     alternatives: ["chatgpt", "gemini"],
+    launchDate: "Mar 2023",
+    underlyingModel: ["Claude 3.5 Sonnet", "Claude 3 Opus", "Claude 3.5 Haiku"],
+    platforms: ["Web", "iOS", "Android", "API"],
+    integrations: ["Slack (via API)", "Notion (via API)", "VS Code (Claude Dev ext.)", "Cursor"],
+    apiAvailable: true,
+    latestUpdate: "Computer Use capability, Claude 3.5 Haiku, extended thinking (Nov 2024)",
+    idealFor: ["Legal/compliance teams", "Researchers", "Developers", "Long document analysis", "Complex instruction following"],
+    metrics: {
+      users: "10M+ registered users (estimate, 2024)",
+      arr: "$1B+ ARR (2024)",
+      growth: "300%+ YoY revenue growth",
+      valuation: "$18.4B (2024)",
+    },
+    history: "Mar 2023: Claude 1 launched via API. Jul 2023: Claude 2 with 100K context window. Mar 2024: Claude 3 family (Haiku/Sonnet/Opus) — Opus surpasses GPT-4 on benchmarks. Jun 2024: Claude 3.5 Sonnet tops coding benchmarks. Oct 2024: Computer Use — Claude can directly operate computers. Nov 2024: Claude 3.5 Haiku. Amazon total investment: $4B.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["Claude 3.5 Sonnet (limited)", "Claude 3.5 Haiku", "File uploads", "Artifacts (code/docs)", "Projects"] },
+      { name: "Pro", price: "$20/mo", features: ["5× more usage than Free", "Claude 3.5 Sonnet priority", "Claude 3 Opus access", "Projects with memory", "Early feature access"] },
+      { name: "Team", price: "$30/user/mo", features: ["Everything in Pro", "Higher limits", "Admin management", "Data NOT used for training"] },
+      { name: "Enterprise", price: "Custom", features: ["Custom usage tiers", "SSO/SAML", "200K+ context", "Priority support", "Custom model deployment"] },
+    ],
   },
   {
     id: "gemini",
@@ -67,6 +135,24 @@ export const tools: ToolData[] = [
     pros: ["Google integration", "Multimodal native", "Real-time search access"],
     cons: ["Variable quality vs GPT-4", "Privacy considerations"],
     alternatives: ["chatgpt", "claude"],
+    launchDate: "Dec 6, 2023 (Gemini 1.0)",
+    underlyingModel: ["Gemini 2.0 Flash", "Gemini 1.5 Pro", "Gemini 1.5 Flash"],
+    platforms: ["Web", "iOS", "Android", "Google Workspace", "API (AI Studio)"],
+    integrations: ["Google Docs", "Gmail", "Google Sheets", "Google Slides", "YouTube", "Google Search"],
+    apiAvailable: true,
+    latestUpdate: "Gemini 2.0 Flash, 2M token context, native image/audio generation, Deep Research",
+    idealFor: ["Google Workspace users", "Multimodal analysis", "Research", "Video understanding"],
+    metrics: {
+      users: "Integrated into 1B+ Google products (Search, Gmail, etc.)",
+      growth: "Rapidly gaining enterprise adoption 2024",
+      valuation: "Part of Alphabet ($2.1T market cap)",
+    },
+    history: "Bard launched Feb 2023 (rocky start). Rebranded to Gemini Dec 2023. Gemini Ultra outperformed GPT-4 on MMLU (90%). 1.5 Pro with 1M then 2M context Feb 2024. Deep Research feature Dec 2024. Gemini 2.0 with native multimodal generation Dec 2024.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["Gemini 1.5 Flash", "Web browsing", "Image generation (Imagen 3)", "Google apps integration"] },
+      { name: "Advanced", price: "$19.99/mo (Google One AI Premium)", features: ["Gemini 1.5 Pro", "2M token context", "Gemini in Docs/Gmail/Sheets/Slides", "1TB Google One storage"] },
+      { name: "Google Workspace AI", price: "$30/user/mo", features: ["Gemini in all Workspace apps", "Meet AI notes", "NotebookLM Plus", "Enterprise security"] },
+    ],
   },
   {
     id: "github-copilot",
@@ -84,6 +170,26 @@ export const tools: ToolData[] = [
     pros: ["Deep IDE integration", "Wide language support", "GitHub integration"],
     cons: ["Monthly cost", "Occasional incorrect suggestions", "Requires internet"],
     alternatives: ["cursor", "codeium", "tabnine"],
+    launchDate: "Jun 29, 2022",
+    underlyingModel: ["GPT-4o", "Claude 3.5 Sonnet", "Gemini 1.5 Pro", "o1"],
+    platforms: ["VS Code", "JetBrains IDEs", "Visual Studio", "Vim/Neovim", "Azure Data Studio", "GitHub.com", "Xcode"],
+    integrations: ["GitHub", "GitHub Actions", "JIRA (via Copilot)", "Azure DevOps"],
+    apiAvailable: false,
+    latestUpdate: "Multi-model selection (GPT-4o/Claude/Gemini), Copilot Edits (multi-file), agent mode, free tier launch",
+    idealFor: ["Individual developers", "Enterprise engineering teams", "GitHub-centric workflows"],
+    metrics: {
+      users: "1.8M+ paid subscribers (2024)",
+      arr: "$100M+ ARR (2023)",
+      growth: "150%+ YoY subscriber growth",
+      employees: "~3,500 (GitHub total)",
+    },
+    history: "Technical preview Jun 2021. GA Jun 2022. Grew to 1M users within first year — fastest Microsoft product to reach $100M ARR. Added business tier 2023. Expanded to 4 models (GPT-4o, Claude, Gemini) 2024. Free tier with 2,000 completions/month launched late 2024.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["2,000 code completions/month", "50 chat requests/month", "Multi-file edits", "All editors"] },
+      { name: "Pro", price: "$10/mo", features: ["Unlimited completions", "Unlimited chat", "Multiple AI models", "Copilot Edits", "PR summaries"] },
+      { name: "Business", price: "$19/user/mo", features: ["Everything in Pro", "Org management", "Audit logs", "IP indemnity", "Policy controls"] },
+      { name: "Enterprise", price: "$39/user/mo", features: ["Custom AI models", "Copilot in GitHub.com", "Security scanning", "Fine-tuning on your codebase"] },
+    ],
   },
   {
     id: "cursor",
@@ -100,6 +206,25 @@ export const tools: ToolData[] = [
     pros: ["Full codebase context", "Multi-file edits", "VS Code compatible"],
     cons: ["Subscription required for best models", "Learning curve"],
     alternatives: ["github-copilot", "codeium"],
+    launchDate: "Mar 2023",
+    underlyingModel: ["GPT-4o", "Claude 3.5 Sonnet", "cursor-small (fast completions)"],
+    platforms: ["macOS", "Windows", "Linux"],
+    integrations: ["Git (built-in)", "GitHub", "GitLab", "Bitbucket", "Linear (via Cursor agent)"],
+    apiAvailable: false,
+    latestUpdate: "Cursor 0.42: Background agents, MCP server support, YOLO mode for autonomous edits",
+    idealFor: ["Full-stack developers", "AI-native coding", "Large codebase navigation"],
+    metrics: {
+      users: "500K+ active developers (2024)",
+      arr: "$50M+ ARR (2024)",
+      valuation: "$400M+ (2024)",
+      growth: "Fastest growing AI IDE, 20%+ MoM growth",
+    },
+    history: "Founded by MIT students 2022. Built as VS Code fork. Launched Mar 2023. Viral growth after Claude 3.5 Sonnet integration mid-2024. Raised at $400M valuation Aug 2024. Popularized 'agentic coding' and multi-file AI edits. Widely regarded as the best AI-native IDE.",
+    pricingTiers: [
+      { name: "Hobby", price: "$0/mo", features: ["2,000 completions/month", "50 slow premium requests/month", "Basic chat (GPT-3.5)"] },
+      { name: "Pro", price: "$20/mo", features: ["Unlimited completions", "500 fast premium requests", "10 o1 requests", "Cursor Tab autocomplete", "Multi-file Composer"] },
+      { name: "Business", price: "$40/user/mo", features: ["Everything in Pro", "SSO enforcement", "Admin dashboard", "Centralized billing", "Usage analytics"] },
+    ],
   },
   {
     id: "midjourney",
@@ -117,6 +242,27 @@ export const tools: ToolData[] = [
     pros: ["Highest aesthetic quality", "Strong community", "Style consistency"],
     cons: ["Discord-only interface", "No free tier", "Limited editing"],
     alternatives: ["dalle-3", "stable-diffusion", "firefly"],
+    launchDate: "Jul 12, 2022",
+    underlyingModel: ["Midjourney v6.1 (proprietary diffusion model)"],
+    platforms: ["Discord", "Web App (midjourney.com, launched 2024)"],
+    integrations: ["Discord", "Midjourney Web", "API (limited beta)"],
+    apiAvailable: false,
+    latestUpdate: "Midjourney v6.1 (Jul 2024), Web App launch, image editing (Vary Region), Style Reference",
+    idealFor: ["Concept artists", "Marketing teams", "Game developers", "Illustrators", "Creative directors"],
+    metrics: {
+      users: "15M+ registered users (2023)",
+      mau: "~1M monthly active (estimate)",
+      arr: "~$200M ARR (2023, bootstrapped & profitable)",
+      employees: "~50",
+      valuation: "~$10B estimated (no VC funding)",
+    },
+    history: "Founded 2021 by David Holz (Leap Motion co-founder). Open beta Jul 2022. Rapidly became the most recognized AI art tool. Unique: completely bootstrapped and profitable with ~50 employees. V4 Nov 2022, V5 Mar 2023 (photorealism leap), V6 Dec 2023. Launched own web app 2024, moving away from Discord-only. David Holz openly states Midjourney is 'infrastructure for imagination.'",
+    pricingTiers: [
+      { name: "Basic", price: "$10/mo", features: ["~200 fast GPU minutes/mo", "3 concurrent jobs", "General commercial terms"] },
+      { name: "Standard", price: "$30/mo", features: ["15h fast GPU/month", "Unlimited relaxed generations", "General commercial terms"] },
+      { name: "Pro", price: "$60/mo", features: ["30h fast GPU/month", "Stealth mode (private images)", "12 concurrent fast jobs"] },
+      { name: "Mega", price: "$120/mo", features: ["60h fast GPU/month", "12 concurrent jobs", "All Pro features included"] },
+    ],
   },
   {
     id: "dalle-3",
@@ -149,6 +295,25 @@ export const tools: ToolData[] = [
     pros: ["Free and open-source", "Runs locally", "Huge model ecosystem"],
     cons: ["Technical setup required", "Hardware requirements", "Variable quality"],
     alternatives: ["midjourney", "dalle-3"],
+    launchDate: "Aug 22, 2022",
+    underlyingModel: ["SD 3.5 Large (8B params)", "SDXL", "SDXL Turbo", "SD 3 Medium", "ControlNet"],
+    platforms: ["Local (Windows/Mac/Linux)", "DreamStudio (web)", "Automatic1111 WebUI", "ComfyUI", "Replicate API", "HuggingFace Spaces"],
+    integrations: ["ComfyUI", "A1111 (1000+ extensions)", "Replicate", "Stability API", "Adobe Photoshop (plugin)"],
+    apiAvailable: true,
+    latestUpdate: "SD 3.5 Large open-sourced Oct 2024, SD 3.5 Medium (2.5B) for consumer GPUs",
+    idealFor: ["Developers", "Artists wanting control", "Fine-tuning enthusiasts", "Self-hosted AI", "Batch generation"],
+    metrics: {
+      users: "10M+ SD model downloads (HuggingFace alone)",
+      arr: "Stability AI struggling (~$30M ARR estimate, 2024)",
+      valuation: "$1B (2022, has since fallen significantly)",
+      employees: "~150",
+    },
+    history: "Released Aug 22, 2022 — open-source release triggered explosion of AI art tools. SDXL (1.0) Jul 2023 — photorealism leap. Stability AI faced financial difficulties 2024; CEO Emad Mostaque resigned Mar 2024. Despite company struggles, SD model ecosystem thrives independently. SD 3 (Mar 2024) and SD 3.5 (Oct 2024) open-sourced.",
+    pricingTiers: [
+      { name: "Open Source (Local)", price: "Free", features: ["Unlimited generations", "Full model control", "Fine-tune freely", "Requires GPU (4GB+ VRAM)"] },
+      { name: "DreamStudio (Web)", price: "Credit-based", features: ["No GPU needed", "Latest official models", "$10 = ~500 images", "REST API included"] },
+      { name: "Stability API (SD 3.5)", price: "$0.065/image", features: ["Highest quality SD 3.5 Large", "No setup required", "Scalable"] },
+    ],
   },
   {
     id: "runway",
@@ -166,6 +331,26 @@ export const tools: ToolData[] = [
     pros: ["Professional quality", "Integrated suite", "API access"],
     cons: ["Expensive for heavy use", "Generation time", "Short clips"],
     alternatives: ["pika", "sora"],
+    launchDate: "Mar 2023 (Gen-1)",
+    underlyingModel: ["Gen-3 Alpha (proprietary diffusion-transformer)"],
+    platforms: ["Web", "API"],
+    apiAvailable: true,
+    latestUpdate: "Gen-3 Alpha Turbo (5× faster), Act-One (character animation), Multi Motion Brush",
+    idealFor: ["Video editors", "VFX artists", "Content creators", "Filmmakers", "Marketing agencies"],
+    metrics: {
+      users: "~3M registered users (estimate)",
+      arr: "~$50M ARR (estimate)",
+      valuation: "$1.5B (2023)",
+      employees: "~200",
+    },
+    history: "Founded 2018 as a creative tools company by Cristóbal Valenzuela. Co-developed original Stable Diffusion model with Stability AI 2022. Gen-1 text-to-video Mar 2023. Gen-2 Nov 2023. $141M Series D (Google, NVIDIA, Salesforce) Jun 2023 at $1.5B valuation. Gen-3 Alpha Jun 2024 — significant quality leap, used in films.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["~125 credits/month", "Watermarked exports", "720p resolution", "Up to 4s clips"] },
+      { name: "Standard", price: "$15/mo", features: ["625 credits/month", "No watermark", "1080p resolution", "Up to 16s clips"] },
+      { name: "Pro", price: "$35/mo", features: ["2,250 credits/month", "4K exports", "Priority generation", "Unlimited image tools"] },
+      { name: "Unlimited", price: "$95/mo", features: ["Unlimited standard generations", "4K", "Fastest queue", "All tools"] },
+      { name: "Enterprise", price: "Custom", features: ["Custom credits", "SLAs", "Custom model fine-tuning", "API access"] },
+    ],
   },
   {
     id: "elevenlabs",
@@ -183,6 +368,28 @@ export const tools: ToolData[] = [
     pros: ["Most realistic voices", "Voice cloning", "Multi-language"],
     cons: ["Ethical concerns", "Cost scales with usage", "TOS restrictions"],
     alternatives: ["murf", "play-ht", "azure-speech"],
+    launchDate: "Jan 2023 (public)",
+    underlyingModel: ["Eleven Multilingual v2", "Turbo v2.5 (low latency)", "Flash v2.5 (ultra-fast)"],
+    platforms: ["Web", "iOS", "Android", "API"],
+    integrations: ["Zapier", "Make (Integromat)", "Notion (via API)", "Adobe Premiere (via API)", "1,000+ apps via API"],
+    apiAvailable: true,
+    latestUpdate: "Conversational AI real-time voice, Sound Effects API, Voice Design from text description (2024)",
+    idealFor: ["Content creators", "Publishers", "Game developers", "Accessibility apps", "Dubbing studios"],
+    metrics: {
+      users: "1M+ registered users (2024)",
+      arr: "~$50M ARR (estimate, 2024)",
+      valuation: "$1.1B (2024 unicorn status)",
+      employees: "~150",
+    },
+    history: "Founded 2022 by Mati Staniszewski and Piotr Dąbkowski in Warsaw. Launched Jan 2023. $19M Series A (a16z) Jun 2023. Reached unicorn status ($1.1B) Jan 2024 after $80M Series B. Viral for voice cloning of celebrities 2023 — raised deepfake concerns. Responded with policies and detection tech.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["10,000 chars/month", "3 custom voices", "Speaker in 28 languages", "Mono audio output"] },
+      { name: "Starter", price: "$5/mo", features: ["30,000 chars/month", "10 voices", "API access", "Basic commercial license"] },
+      { name: "Creator", price: "$22/mo", features: ["100,000 chars/month", "30 voices", "Professional voice clone", "Pro commercial license"] },
+      { name: "Pro", price: "$99/mo", features: ["500,000 chars/month", "160 voices", "44kHz studio audio", "Priority queuing"] },
+      { name: "Scale", price: "$330/mo", features: ["2M chars/month", "660 voices", "Highest quality", "Dedicated support"] },
+      { name: "Enterprise", price: "Custom", features: ["Custom usage", "SLAs", "On-prem option", "Custom voice model"] },
+    ],
   },
   {
     id: "perplexity",
@@ -200,6 +407,26 @@ export const tools: ToolData[] = [
     pros: ["Real-time search", "Cited sources", "Accurate and concise"],
     cons: ["Limited creative writing", "Pro features cost extra"],
     alternatives: ["chatgpt", "you-com", "bing-chat"],
+    launchDate: "Dec 2022",
+    underlyingModel: ["GPT-4o", "Claude 3.5 Sonnet", "o1", "Sonar (Perplexity proprietary)", "Llama 3.1"],
+    platforms: ["Web", "iOS", "Android", "Chrome Extension", "API"],
+    integrations: ["Slack", "API for devs", "Chrome extension", "Copilot for Mac"],
+    apiAvailable: true,
+    latestUpdate: "Deep Research mode, Internal Knowledge Search (Enterprise), Perplexity Assistant on Android",
+    idealFor: ["Researchers", "Journalists", "Students", "Analysts", "Anyone needing cited, up-to-date answers"],
+    metrics: {
+      dau: "10M+ DAU (2024)",
+      mau: "60M+ MAU (2024)",
+      arr: "~$50M ARR (2024 estimate)",
+      valuation: "$520M (2024)",
+      growth: "10× DAU growth in 2024",
+    },
+    history: "Founded Dec 2022 by Aravind Srinivas (ex-Google/OpenAI), Denis Yarats, Andy Konwinski, Johnny Ho. Seed round Jan 2023. Grew from 1M to 10M+ DAU in under a year. Jeff Bezos, NVIDIA, Databricks invested. Launched Pro with model choice Sep 2023. Enterprise product 2024. Expanding to become a 'knowledge assistant' beyond search.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["Unlimited quick searches", "5 Pro searches/day", "File & image uploads", "GPT-4o mini powered"] },
+      { name: "Pro", price: "$20/mo", features: ["300+ Pro searches/day", "GPT-4o / Claude 3.5 / o1 choice", "Image generation (DALL-E 3)", "$5/mo API credits", "Internal knowledge search"] },
+      { name: "Enterprise", price: "Custom", features: ["SSO/SAML", "Data never used for training", "Admin controls", "Audit logs", "Slack integration"] },
+    ],
   },
   {
     id: "pinecone",
@@ -232,6 +459,25 @@ export const tools: ToolData[] = [
     pros: ["Large ecosystem", "Many integrations", "Active community"],
     cons: ["Steep learning curve", "Over-abstracted", "Rapid API changes"],
     alternatives: ["llamaindex", "haystack", "semantic-kernel"],
+    launchDate: "Oct 2022",
+    underlyingModel: ["Any LLM (OpenAI, Anthropic, Google, Mistral, Llama, Cohere — 50+ providers)"],
+    platforms: ["Python", "JavaScript/TypeScript", "LangServe (deployment)", "LangSmith (observability)"],
+    integrations: ["All major LLMs", "Pinecone", "Weaviate", "Chroma", "Redis", "PostgreSQL", "100+ integrations"],
+    apiAvailable: true,
+    latestUpdate: "LangGraph (stateful agents), LangSmith observability GA, LangChain v0.3 simplification",
+    idealFor: ["LLM app developers", "RAG system builders", "AI agent researchers", "Chatbot developers"],
+    metrics: {
+      users: "10M+ GitHub stars, used by 80%+ of LLM developers",
+      valuation: "$200M (2023 funding)",
+      growth: "Fastest-growing developer framework 2023",
+    },
+    history: "Created by Harrison Chase, released Oct 2022 as a side project. Exploded in popularity as ChatGPT API launched. Became the dominant LLM framework. $25M Series A Feb 2023. $25M Series B Jun 2023. LangSmith observability platform 2023. LangGraph for stateful agents 2024. LangChain v0.3 simplification after criticism of complexity.",
+    pricingTiers: [
+      { name: "Open Source", price: "Free", features: ["Full LangChain framework", "All integrations", "LangGraph for agents", "Community support"] },
+      { name: "LangSmith Starter", price: "$0/mo", features: ["5,000 traces/month", "Dashboard & debugging", "Eval tools (limited)"] },
+      { name: "LangSmith Plus", price: "$39/mo", features: ["50,000 traces/month", "Team sharing", "Datasets & evals", "Prompt hub"] },
+      { name: "LangSmith Enterprise", price: "Custom", features: ["Unlimited traces", "SSO/SAML", "On-prem option", "SLAs", "Dedicated support"] },
+    ],
   },
   {
     id: "huggingface",
@@ -249,6 +495,27 @@ export const tools: ToolData[] = [
     pros: ["Huge model library", "Free tier generous", "Strong community"],
     cons: ["GPU costs for inference", "Complex for beginners"],
     alternatives: ["replicate", "modal", "together-ai"],
+    launchDate: "2016",
+    underlyingModel: ["500,000+ community models (Llama, Mistral, Gemma, SDXL, Whisper, BERT, etc.)"],
+    platforms: ["Web (Hub)", "Python (Transformers)", "JavaScript", "CLI", "Spaces (Gradio/Streamlit)"],
+    integrations: ["PyTorch", "TensorFlow", "LangChain", "LlamaIndex", "AWS SageMaker", "Azure ML"],
+    apiAvailable: true,
+    latestUpdate: "HF Inference Providers (10+ backends), AutoTrain no-code fine-tuning, ZeroGPU for Spaces",
+    idealFor: ["ML researchers", "AI developers", "Data scientists", "Enterprises needing open-source models"],
+    metrics: {
+      users: "5M+ registered users (2024)",
+      mau: "25M+ monthly Hub visitors",
+      arr: "~$70M ARR (estimate)",
+      valuation: "$4.5B (Aug 2023)",
+      employees: "~300",
+    },
+    history: "Founded 2016 as a chatbot app. Pivoted to open-source NLP 2018. Transformers library 2019 — immediately becomes the standard. Model Hub launched. Grew to 'GitHub of AI'. $235M Series D at $4.5B (Google, Amazon, NVIDIA, Salesforce) Aug 2023.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["Unlimited public model downloads", "Serverless Inference API (limited)", "CPU Spaces", "Public datasets"] },
+      { name: "Pro", price: "$9/mo", features: ["ZeroGPU for Spaces", "Inference API priority", "Private models up to 50GB"] },
+      { name: "Enterprise Hub", price: "$20/user/mo", features: ["Private org hub", "SSO/SAML", "Audit logs", "Access controls"] },
+      { name: "Inference Endpoints", price: "From $0.06/hr", features: ["Dedicated GPU", "Auto-scaling", "Production SLAs"] },
+    ],
   },
   {
     id: "openai-api",
@@ -265,6 +532,26 @@ export const tools: ToolData[] = [
     pros: ["State-of-the-art models", "Reliable infrastructure", "Extensive documentation"],
     cons: ["Cost at scale", "Rate limits", "Data privacy considerations"],
     alternatives: ["anthropic-api", "google-ai-studio", "cohere"],
+    launchDate: "Jun 11, 2020",
+    underlyingModel: ["GPT-4o", "GPT-4o mini", "o1", "o1-mini", "o3-mini", "text-embedding-3", "Whisper", "DALL-E 3", "TTS-1"],
+    platforms: ["REST API", "Python SDK", "Node.js SDK", "Azure OpenAI Service", ".NET SDK", "Go SDK"],
+    integrations: ["Azure OpenAI", "LangChain", "LlamaIndex", "Vercel AI SDK", "AWS Bedrock (via Claude)"],
+    apiAvailable: true,
+    latestUpdate: "Structured outputs, o1/o3 API access, Realtime API (speech-to-speech), Assistants API v2, Batch API",
+    idealFor: ["Developers building AI apps", "Enterprises", "Startups", "Researchers"],
+    metrics: {
+      users: "2M+ developers (2024)",
+      arr: "$3.7B+ OpenAI total ARR",
+      growth: "200%+ YoY",
+    },
+    history: "API launched Jun 2020 (GPT-3 era). Became the de facto standard for AI APIs. GPT-4 API Mar 2023. Function calling Jun 2023. GPT-4o API May 2024. Realtime API (WebSocket) Sep 2024 — enables real-time voice apps. o1 API Sep 2024. Batch API for 50% discount on async workloads.",
+    pricingTiers: [
+      { name: "GPT-4o", price: "$2.50/1M input tokens", features: ["$10/1M output tokens", "128K context", "Vision + function calling", "Cached input: $1.25/1M"] },
+      { name: "GPT-4o mini", price: "$0.15/1M input tokens", features: ["$0.60/1M output tokens", "128K context", "Vision", "Best value for high-volume"] },
+      { name: "o1", price: "$15/1M input tokens", features: ["$60/1M output tokens", "200K context", "Reasoning tokens billed separately"] },
+      { name: "o3-mini", price: "$1.10/1M input tokens", features: ["$4.40/1M output tokens", "Reasoning at low cost", "200K context"] },
+      { name: "Embeddings (text-3-large)", price: "$0.13/1M tokens", features: ["3072 dimensions", "Best retrieval performance"] },
+    ],
   },
   {
     id: "notion-ai",
@@ -281,6 +568,24 @@ export const tools: ToolData[] = [
     pros: ["Deep Notion integration", "Easy to use", "Great for teams"],
     cons: ["Requires Notion subscription", "Limited to Notion"],
     alternatives: ["chatgpt", "jasper", "copy-ai"],
+    launchDate: "Nov 2022 (alpha), Feb 2023 (GA)",
+    underlyingModel: ["GPT-4o", "Claude (Anthropic)", "Notion proprietary models"],
+    platforms: ["Web", "macOS", "Windows", "iOS", "Android"],
+    integrations: ["Built into Notion (all platforms)", "Slack (via Notion pages)", "Google Calendar", "GitHub"],
+    apiAvailable: false,
+    latestUpdate: "AI Q&A across all workspace pages, AI database autofill, Connected Search, AI meeting notes",
+    idealFor: ["Teams using Notion", "Content teams", "Product managers", "Project documentation"],
+    metrics: {
+      users: "30M+ Notion users (2024)",
+      arr: "Notion: $250M+ ARR (2023)",
+      valuation: "$10B (Notion, 2021)",
+    },
+    history: "Notion launched 2016. AI features (powered by OpenAI) announced Oct 2022, rolled out Feb 2023. Crossed $50M ARR in 2021. AI helped reignite growth — became one of the fastest AI feature rollouts. AI add-on priced at $10/user/mo on top of existing Notion plans.",
+    pricingTiers: [
+      { name: "AI Add-on (required)", price: "$10/user/mo", features: ["Requires any Notion plan", "Unlimited AI usage", "Q&A across all pages", "AI editor (write, edit, summarize)", "Autofill database properties"] },
+      { name: "Plus + AI", price: "$18/user/mo", features: ["Notion Plus ($8) + AI ($10)", "Unlimited blocks", "Unlimited file uploads", "30-day version history"] },
+      { name: "Business + AI", price: "$25/user/mo", features: ["Notion Business ($15) + AI ($10)", "Advanced permissions", "Audit log", "SAML SSO"] },
+    ],
   },
   {
     id: "grammarly",
@@ -297,6 +602,26 @@ export const tools: ToolData[] = [
     pros: ["Works everywhere", "Tone detection", "Free tier useful"],
     cons: ["Premium required for best features", "Can over-suggest"],
     alternatives: ["notion-ai", "hemingway", "prowritingaid"],
+    launchDate: "2009 (full AI features 2022–2023)",
+    underlyingModel: ["Proprietary BERT-based models", "GPT-4o (GrammarlyGO generative features)"],
+    platforms: ["Chrome Extension", "Firefox Extension", "macOS App", "Windows App", "iOS", "Android", "MS Word Plugin", "Google Docs"],
+    integrations: ["Microsoft Word", "Google Docs", "Gmail", "Outlook", "LinkedIn", "Slack", "Salesforce"],
+    apiAvailable: false,
+    latestUpdate: "GrammarlyGO generative AI (2023), context-aware tone rewriter, Knowledge Share for teams",
+    idealFor: ["Professionals", "Students", "Non-native English speakers", "Marketing teams"],
+    metrics: {
+      users: "50M+ daily active users (2024)",
+      arr: "$200M+ ARR (estimate)",
+      valuation: "$13B (2021 funding round)",
+      employees: "~900",
+    },
+    history: "Founded 2009 in Kyiv, Ukraine by Oleksii Shevchenko and Max Lytvyn. Raised $200M at $13B valuation 2021 — one of largest in edtech/productivity. GrammarlyGO (AI generation) launched Apr 2023 based on GPT-4. Expanded from grammar checker to full writing assistant. Revenue largely from individual Premium subscriptions.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["Grammar & spell check", "Basic tone detection", "250 GrammarlyGO prompts/month", "Works everywhere"] },
+      { name: "Premium", price: "$12/mo (annual)", features: ["Full grammar & style", "Vocabulary enhancement", "Plagiarism detection", "1,000 GrammarlyGO prompts", "Tone rewriter"] },
+      { name: "Business", price: "$15/user/mo (annual)", features: ["Everything in Premium", "Brand tone guidelines", "Style guides", "Team analytics", "Priority support"] },
+      { name: "Enterprise", price: "Custom", features: ["SSO/SAML", "Data security controls", "Custom integrations", "Dedicated CSM"] },
+    ],
   },
   {
     id: "descript",
@@ -409,6 +734,23 @@ export const tools: ToolData[] = [
     pros: ["Production-quality output", "shadcn/ui native", "No setup required"],
     cons: ["Primarily frontend focused", "React/Next.js only"],
     alternatives: ["github-copilot", "cursor", "locofy"],
+    launchDate: "Sep 2023",
+    underlyingModel: ["Claude 3.5 Sonnet", "GPT-4o", "v0-1 (Vercel proprietary)"],
+    platforms: ["Web (v0.dev)", "VS Code Extension (2024)"],
+    apiAvailable: true,
+    latestUpdate: "v0 Chat (refine components in conversation), shadcn/ui v2, Next.js 15 support, API access",
+    idealFor: ["Frontend developers", "Product designers", "Startup founders", "Prototypers"],
+    metrics: {
+      users: "Millions of components generated (Vercel doesn't disclose)",
+      valuation: "Vercel $3.25B (2023)",
+      employees: "Vercel: ~500",
+    },
+    history: "Launched Sep 2023 as Vercel's AI UI generator. Immediately viral — developers shared stunning React components generated in seconds. Built on top of shadcn/ui and Tailwind. Became the standard for 'design-to-code' workflows. Added VS Code extension and API in 2024.",
+    pricingTiers: [
+      { name: "Free", price: "$0/mo", features: ["200 credits/month", "shadcn/ui + Tailwind output", "React/Next.js code", "Public projects"] },
+      { name: "Premium", price: "$20/mo", features: ["5,000 credits/month", "Private projects", "Priority generation"] },
+      { name: "Team", price: "$30/user/mo (annual)", features: ["10,000+ credits/month", "Team sharing", "Custom domains", "Priority support"] },
+    ],
   },
   {
     id: "mistral",
@@ -458,6 +800,23 @@ export const tools: ToolData[] = [
     pros: ["Deep M365 integration", "Enterprise security", "Works in existing tools"],
     cons: ["$30/user/month", "Requires M365 subscription", "Enterprise only"],
     alternatives: ["notion-ai", "google-workspace-ai"],
+    launchDate: "Nov 1, 2023",
+    underlyingModel: ["GPT-4o", "Microsoft proprietary models", "Microsoft Graph"],
+    platforms: ["Word", "Excel", "PowerPoint", "Outlook", "Teams", "SharePoint", "Loop", "OneNote", "Planner"],
+    integrations: ["Microsoft 365 ecosystem", "Azure AD/Entra ID", "Salesforce (Copilot connector)", "ServiceNow"],
+    apiAvailable: true,
+    latestUpdate: "Copilot in Teams meetings, Excel Python integration, Copilot Studio for custom agents, BizChat",
+    idealFor: ["Enterprise Microsoft 365 users", "Finance teams", "Legal teams", "Executive assistants"],
+    metrics: {
+      users: "Potential base 400M+ M365 seats",
+      arr: "Microsoft expects multi-$B run rate from Copilot",
+      growth: "Fastest enterprise AI adoption in history per Microsoft CEO",
+      valuation: "MSFT market cap: $3.2T (Jan 2025)",
+    },
+    history: "Announced Mar 2023 alongside M365 Copilot system. Limited EA preview Jul 2023. GA for enterprises Nov 1, 2023. Initial $30/user/mo add-on criticized as expensive. By 2024, Satya Nadella called Copilot 'the most important thing we've ever done at Microsoft'. GitHub Copilot (code) and M365 Copilot (productivity) became two pillars of Microsoft's AI strategy.",
+    pricingTiers: [
+      { name: "Microsoft 365 Copilot", price: "$30/user/mo", features: ["Requires M365 Business Standard ($12.50+/user/mo)", "Word: draft, edit, summarize, translate", "Excel: analyze data, generate formulas, Python", "PowerPoint: generate presentations from prompts", "Outlook: email drafts, summaries, scheduling", "Teams: meeting notes, transcripts, follow-ups", "Copilot Studio: custom AI assistants"] },
+    ],
   },
   {
     id: "adobe-firefly",
