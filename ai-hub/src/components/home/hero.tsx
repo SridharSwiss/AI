@@ -8,7 +8,7 @@ const stats = [
   { label: "Companies Tracked", value: "33+" },
   { label: "Case Studies", value: "26+" },
   { label: "Compliance Frameworks", value: "17+" },
-  { label: "Learn", value: "72+" },
+  { label: "Learn Resources", value: "72+" },
 ];
 
 const highlights = [
@@ -56,7 +56,7 @@ export function Hero() {
 
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
           Tools, companies, learning paths, case studies, compliance frameworks, and
-          implementation playbooks.. all in one curated, searchable platform.
+          implementation playbooks — all in one curated, searchable platform.
         </p>
 
         {/* CTA */}
@@ -76,7 +76,7 @@ export function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 mb-12">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl font-bold gradient-text mb-1">{stat.value}</div>
