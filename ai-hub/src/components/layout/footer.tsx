@@ -45,7 +45,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              The all-in-one AI knowledge platform for everyone — from curious
+              The all-in-one AI knowledge platform for everyone from curious
               beginners to C-suite executives navigating the AI landscape.
             </p>
             <div className="flex items-center gap-3">
