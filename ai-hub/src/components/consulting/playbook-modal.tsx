@@ -26,7 +26,7 @@ const templateTypeBadge: Record<string, string> = {
 
 function TemplatePanel({ item }: { item: ChecklistItem }) {
   return (
-    <div className="mt-3 ml-8 p-4 rounded-xl border border-border bg-muted/40 space-y-4">
+    <div className="mt-3 ml-8 p-4 rounded-xl border border-border bg-muted space-y-4">
       <div className="flex items-center gap-2 flex-wrap">
         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${templateTypeBadge[item.templateType] ?? "bg-muted text-muted-foreground"}`}>
           {item.templateType}
