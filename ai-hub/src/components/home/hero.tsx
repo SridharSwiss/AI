@@ -8,6 +8,7 @@ const stats = [
   { label: "Companies Tracked", value: "33+" },
   { label: "Case Studies", value: "26+" },
   { label: "Compliance Frameworks", value: "17+" },
+  { label: "Learn", value: "72+" },
 ];
 
 const highlights = [
