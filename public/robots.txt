@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sridhar-ai.ch/sitemap.xml
