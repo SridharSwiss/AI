@@ -45,7 +45,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              The all-in-one AI knowledge platform for everyone — from curious
+              The all-in-one AI knowledge platform for everyone: from curious
               beginners to C-suite executives navigating the AI landscape.
             </p>
             <div className="flex items-center gap-3">
@@ -95,7 +95,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © 2026 AIHub by Sridhar Gande. Content is curated for educational purposes. Always verify information with official sources.
+            © 2026 AI Hub by Sridhar Gande. Content is curated for educational purposes. Always verify information with official sources.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
