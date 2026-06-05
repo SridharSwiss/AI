@@ -6,7 +6,7 @@ import { Brain, Target, Users, Globe, Zap, Shield, BookOpen, TrendingUp } from "
 
 export const metadata: Metadata = {
   title: "About AIHub",
-  description: "Learn about AIHub — the all-in-one AI knowledge platform for everyone navigating the AI landscape.",
+  description: "Learn about AIHub.. the all-in-one AI knowledge platform for everyone navigating the AI landscape.",
 };
 
 const values = [
@@ -18,7 +18,7 @@ const values = [
   {
     icon: Users,
     title: "For Every Audience",
-    description: "Whether you're a curious beginner, a practitioner building AI systems, a manager evaluating vendors, or a C-suite executive setting strategy — AIHub has content for you.",
+    description: "Whether you're a curious beginner, a practitioner building AI systems, a manager evaluating vendors, or a C-suite executive setting strategy AIHub has content for you.",
   },
   {
     icon: Shield,
@@ -28,7 +28,7 @@ const values = [
   {
     icon: Globe,
     title: "Global Coverage",
-    description: "AI is happening everywhere. We track developments across the US, EU, UK, China, and beyond — including regulatory frameworks from every major jurisdiction.",
+    description: "AI is happening everywhere. We track developments across the US, EU, UK, China, and beyond including regulatory frameworks from every major jurisdiction.",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="The All-in-One AI Knowledge Platform"
-        description="AIHub brings together everything you need to understand, evaluate, and navigate the AI landscape — from tools and companies to compliance, learning, and real-world case studies."
+        description="AIHub brings together everything you need to understand, evaluate, and navigate the AI landscape: from tools and companies to compliance, learning, and real-world case studies."
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
@@ -63,7 +63,7 @@ export default function AboutPage() {
               Artificial intelligence is transforming every industry, government, and profession at an unprecedented pace. But the information landscape is fragmented, jargon-heavy, and often biased toward selling products rather than building understanding.
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
-              AIHub was built to change that. We aggregate, curate, and explain the AI landscape in one place — covering the tools practitioners use, the companies building the technology, the regulations shaping its deployment, the research driving progress, and the real-world case studies proving business value.
+              AIHub was built to change that. We aggregate, curate, and explain the AI landscape in one place covering the tools practitioners use, the companies building the technology, the regulations shaping its deployment, the research driving progress, and the real-world case studies proving business value.
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
               Our content is designed for four audiences: beginners who want to understand AI without a computer science degree, practitioners who are building AI-powered products, managers who need to evaluate AI investments, and executives who are setting AI strategy for their organizations.
