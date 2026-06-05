@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 import { PageHeader } from "@/components/shared/page-header";
 import { ToolsList } from "@/components/tools/tools-list";
 
@@ -21,4 +21,3 @@ export default function ToolsPage() {
     </>
   );
 }
-
