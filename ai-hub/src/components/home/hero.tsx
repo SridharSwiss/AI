@@ -56,7 +56,7 @@ export function Hero() {
 
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
           Tools, companies, learning paths, case studies, compliance frameworks, and
-          implementation playbooks — all in one curated, searchable platform.
+          implementation playbooks.. all in one curated, searchable platform.
         </p>
 
         {/* CTA */}
