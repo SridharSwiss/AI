@@ -35,7 +35,7 @@ const personas = [
     label: "Builder / Practitioner",
     tagline: "Developer or data scientist",
     description:
-      "I build with AI — give me tools, APIs, code examples, and integration guides.",
+      "I build with AI.. give me tools, APIs, code examples, and integration guides.",
     color: "from-violet-500 to-blue-500",
     bg: "hover:bg-violet-50 dark:hover:bg-violet-950/30 border-violet-200/50 dark:border-violet-800/30",
     active: "bg-violet-50 dark:bg-violet-950/30 border-violet-400 dark:border-violet-600",
