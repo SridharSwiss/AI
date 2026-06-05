@@ -50,7 +50,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="https://x.com/AIHubSite"
+                href="https://www.linkedin.com/in/ch-sgande/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
@@ -59,7 +59,7 @@ export function Footer() {
                 <X className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://www.linkedin.com/company/aihub-platform"
+                href="https://www.linkedin.com/in/ch-sgande/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
@@ -99,7 +99,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} AIHub. Content is curated for educational purposes. Always verify information with official sources.
+            © {new Date().getFullYear()} AIHub by Sridhar Gande. Content is curated for educational purposes. Always verify information with official sources.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
