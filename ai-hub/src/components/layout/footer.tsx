@@ -64,7 +64,7 @@ export function Footer() {
                 <Link2 className="w-3.5 h-3.5" />
               </a>
               <a
-                href="sridhar-ai.ch"
+                href="https://sridhar-ai.ch/"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="Website"
               >
