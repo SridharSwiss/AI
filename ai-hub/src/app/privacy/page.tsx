@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: "Overview",
-    content: `AIHub is a static, read-only knowledge platform. We do not require account creation, do not collect personal information, and do not sell or share user data with third parties. This privacy policy explains what minimal data is collected and how it is used.`,
+    content: `AIHub is a periodically updated, read-only knowledge platform. We do not require account creation, do not collect personal information, and do not sell or share user data with third parties. This privacy policy explains what minimal data is collected and how it is used.`,
   },
   {
     title: "Information We Collect",
@@ -75,7 +75,7 @@ export default function PrivacyPage() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-xs text-muted-foreground">
-          <p>Last updated: June 2025</p>
+          <p>Last updated: June 2026</p>
           <p className="mt-1">AIHub — Educational AI knowledge platform. Content provided for informational purposes only.</p>
         </div>
       </div>
