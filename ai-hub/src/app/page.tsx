@@ -8,14 +8,22 @@ const BASE_URL = "https://sridhar-ai.ch";
 export const metadata: Metadata = {
   title: "AIHub — The AI Knowledge Platform",
   description:
-    "Your all-in-one AI knowledge hub: discover 80+ AI tools, explore leading AI companies, navigate compliance frameworks like the EU AI Act and GDPR, and access curated learning resources for every level.",
+    "Your all-in-one AI knowledge hub: discover 82+ AI tools, explore leading AI companies, navigate compliance frameworks like the EU AI Act and GDPR, and access curated learning resources for every level.",
   alternates: { canonical: BASE_URL },
   openGraph: {
     title: "AIHub — The AI Knowledge Platform",
     description:
-      "Discover 80+ AI tools, explore AI companies, navigate compliance (EU AI Act, GDPR), and access curated learning for every level.",
+      "Discover 82+ AI tools, explore AI companies, navigate compliance (EU AI Act, GDPR), and access curated learning for every level.",
     url: BASE_URL,
     type: "website",
+    images: [
+      {
+        url: `${BASE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "AIHub — The AI Knowledge Platform",
+      },
+    ],
   },
 };
 
