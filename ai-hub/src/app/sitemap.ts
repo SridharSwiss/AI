@@ -6,50 +6,56 @@ import { complianceFrameworks } from "@/data/compliance";
 import { learnResources } from "@/data/learn";
 
 const BASE_URL = "https://sridhar-ai.ch";
+const NOW = new Date().toISOString();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/tools`, priority: 0.9, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/companies`, priority: 0.9, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/case-studies`, priority: 0.9, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/compliance`, priority: 0.9, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/learn`, priority: 0.8, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/news`, priority: 0.8, changeFrequency: "daily" },
-    { url: `${BASE_URL}/consulting-toolkit`, priority: 0.7, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/resource-library`, priority: 0.7, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/search`, priority: 0.6, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/about`, priority: 0.5, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/contribute`, priority: 0.5, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/privacy`, priority: 0.4, changeFrequency: "yearly" },
+    { url: BASE_URL,                              lastModified: NOW, priority: 1.0, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/tools`,                   lastModified: NOW, priority: 0.9, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/companies`,               lastModified: NOW, priority: 0.9, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/case-studies`,            lastModified: NOW, priority: 0.9, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/compliance`,              lastModified: NOW, priority: 0.9, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/learn`,                   lastModified: NOW, priority: 0.8, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/news`,                    lastModified: NOW, priority: 0.8, changeFrequency: "daily" },
+    { url: `${BASE_URL}/consulting-toolkit`,      lastModified: NOW, priority: 0.7, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/resource-library`,        lastModified: NOW, priority: 0.7, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/search`,                  lastModified: NOW, priority: 0.6, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/about`,                   lastModified: NOW, priority: 0.5, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/contribute`,              lastModified: NOW, priority: 0.5, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/privacy`,                 lastModified: NOW, priority: 0.4, changeFrequency: "yearly" },
   ];
 
   const toolRoutes: MetadataRoute.Sitemap = tools.map((t) => ({
     url: `${BASE_URL}/tools/${t.slug}`,
-    priority: 0.7,
+    lastModified: NOW,
+    priority: t.featured ? 0.8 : 0.7,
     changeFrequency: "monthly" as const,
   }));
 
   const companyRoutes: MetadataRoute.Sitemap = companies.map((c) => ({
     url: `${BASE_URL}/companies/${c.slug}`,
+    lastModified: NOW,
     priority: 0.7,
     changeFrequency: "monthly" as const,
   }));
 
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((cs) => ({
     url: `${BASE_URL}/case-studies/${cs.slug}`,
+    lastModified: NOW,
     priority: 0.7,
     changeFrequency: "monthly" as const,
   }));
 
   const complianceRoutes: MetadataRoute.Sitemap = complianceFrameworks.map((f) => ({
     url: `${BASE_URL}/compliance/${f.slug}`,
+    lastModified: NOW,
     priority: 0.7,
     changeFrequency: "monthly" as const,
   }));
 
   const learnRoutes: MetadataRoute.Sitemap = learnResources.map((r) => ({
     url: `${BASE_URL}/learn/${r.slug}`,
+    lastModified: NOW,
     priority: 0.5,
     changeFrequency: "monthly" as const,
   }));

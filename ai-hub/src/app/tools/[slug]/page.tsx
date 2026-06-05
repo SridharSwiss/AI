@@ -42,13 +42,24 @@ export async function generateStaticParams() {
   return tools.map((tool) => ({ slug: tool.slug }));
 }
 
+const BASE_URL = "https://sridhar-ai.ch";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const tool = tools.find((t) => t.slug === slug);
   if (!tool) return { title: "Tool Not Found" };
+  const desc = `${tool.tagline} — ${tool.description.slice(0, 120)}`;
   return {
-    title: `${tool.name} — AI Tools`,
-    description: tool.tagline,
+    title: `${tool.name} Review — Pricing, Features & Alternatives`,
+    description: desc.slice(0, 160),
+    alternates: { canonical: `${BASE_URL}/tools/${tool.slug}` },
+    openGraph: {
+      title: `${tool.name} — AI Tool Review | AIHub`,
+      description: desc.slice(0, 160),
+      url: `${BASE_URL}/tools/${tool.slug}`,
+      type: "website",
+    },
+    keywords: [tool.name, ...(tool.tags ?? []), "AI tool", "review", "pricing", tool.vendor],
   };
 }
 
@@ -63,8 +74,36 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
 
   const m = tool.metrics;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: tool.name,
+    description: tool.description,
+    applicationCategory: tool.category,
+    operatingSystem: (tool.platforms ?? []).join(", "),
+    url: tool.website,
+    offers: tool.pricingTiers
+      ? tool.pricingTiers.map((t) => ({
+          "@type": "Offer",
+          name: t.name,
+          price: t.price,
+          priceCurrency: "USD",
+        }))
+      : undefined,
+    creator: { "@type": "Organization", name: tool.vendor },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: "AI Tools", item: `${BASE_URL}/tools` },
+        { "@type": "ListItem", position: 3, name: tool.name, item: `${BASE_URL}/tools/${tool.slug}` },
+      ],
+    },
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumb
         items={[
           { label: "AI Tools", href: "/tools" },

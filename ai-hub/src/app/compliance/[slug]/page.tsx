@@ -124,13 +124,23 @@ export async function generateStaticParams() {
   return complianceFrameworks.map((f) => ({ slug: f.slug }));
 }
 
+const BASE_URL = "https://sridhar-ai.ch";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const framework = complianceFrameworks.find((f) => f.slug === slug);
   if (!framework) return { title: "Framework Not Found" };
   return {
-    title: `${framework.name} — AI Compliance`,
+    title: `${framework.name} — Compliance Guide, Risk Tiers & Penalties`,
     description: framework.description.slice(0, 160),
+    alternates: { canonical: `${BASE_URL}/compliance/${framework.slug}` },
+    openGraph: {
+      title: `${framework.name} | AIHub`,
+      description: framework.description.slice(0, 160),
+      url: `${BASE_URL}/compliance/${framework.slug}`,
+      type: "article",
+    },
+    keywords: [framework.name, framework.shortName, framework.jurisdiction, ...framework.tags, "AI compliance", "AI regulation"],
   };
 }
 
@@ -143,8 +153,28 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
     ? complianceFrameworks.filter((f) => framework.relatedFrameworks!.includes(f.slug))
     : [];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: framework.name,
+    description: framework.description.slice(0, 160),
+    url: `${BASE_URL}/compliance/${framework.slug}`,
+    author: { "@type": "Organization", name: "AIHub", url: BASE_URL },
+    publisher: { "@type": "Organization", name: "AIHub", url: BASE_URL },
+    keywords: framework.tags.join(", "),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: "AI Compliance", item: `${BASE_URL}/compliance` },
+        { "@type": "ListItem", position: 3, name: framework.shortName, item: `${BASE_URL}/compliance/${framework.slug}` },
+      ],
+    },
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumb
         items={[
           { label: "Compliance", href: "/compliance" },

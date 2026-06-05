@@ -1,4 +1,22 @@
 User-agent: *
 Allow: /
 
+# Avoid indexing internal/utility paths
+Disallow: /api/
+Disallow: /search?*
+Disallow: /_next/
+
+# Allow major crawlers full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
 Sitemap: https://sridhar-ai.ch/sitemap.xml

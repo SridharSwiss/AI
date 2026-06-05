@@ -14,13 +14,25 @@ export async function generateStaticParams() {
   return companies.map((c) => ({ slug: c.slug }));
 }
 
+const BASE_URL = "https://sridhar-ai.ch";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const company = companies.find((c) => c.slug === slug);
   if (!company) return { title: "Company Not Found" };
+  const fin = company.financials;
+  const extra = fin ? ` Valuation: ${fin.latestValuation ?? fin.marketCap ?? ""}. Total funding: ${fin.totalFunding ?? ""}.` : "";
   return {
-    title: `${company.name} — AI Companies`,
-    description: company.description.slice(0, 160),
+    title: `${company.name} — AI Models, Funding & Company Profile`,
+    description: (company.description.slice(0, 130) + extra).slice(0, 160),
+    alternates: { canonical: `${BASE_URL}/companies/${company.slug}` },
+    openGraph: {
+      title: `${company.name} | AIHub`,
+      description: company.description.slice(0, 160),
+      url: `${BASE_URL}/companies/${company.slug}`,
+      type: "website",
+    },
+    keywords: [company.name, ...(company.tags ?? []), "AI company", "AI models", company.hq ?? ""],
   };
 }
 
@@ -106,8 +118,28 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
 
   const fin = company.financials;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: company.name,
+    description: company.description,
+    url: company.website,
+    foundingDate: company.founded,
+    numberOfEmployees: fin?.employees ? { "@type": "QuantitativeValue", value: fin.employees } : undefined,
+    location: company.hq ? { "@type": "Place", name: company.hq } : undefined,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: "AI Companies", item: `${BASE_URL}/companies` },
+        { "@type": "ListItem", position: 3, name: company.name, item: `${BASE_URL}/companies/${company.slug}` },
+      ],
+    },
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumb
         items={[
           { label: "Companies", href: "/companies" },
