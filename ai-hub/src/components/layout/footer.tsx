@@ -50,21 +50,21 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.linkedin.com/in/ch-sgande/"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="X (Twitter)"
               >
                 <X className="w-3.5 h-3.5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/ch-sgande/"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Link2 className="w-3.5 h-3.5" />
               </a>
               <a
-                href="#"
+                href="sridhar-ai.ch"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="Website"
               >
