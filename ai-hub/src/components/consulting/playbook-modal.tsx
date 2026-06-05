@@ -80,10 +80,10 @@ function PlaybookModal({ playbook, onClose }: PlaybookModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
       <div
-        className="bg-background rounded-2xl border border-border w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="bg-white dark:bg-zinc-900 rounded-2xl border border-border w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 bg-background border-b border-border p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
+        <div className="sticky top-0 bg-white dark:bg-zinc-900 border-b border-border p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
           <div>
             <Badge variant={levelColor[playbook.level] ?? "blue"} className="mb-2">{playbook.level}</Badge>
             <h2 className="text-xl font-bold">{playbook.title}</h2>
