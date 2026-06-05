@@ -69,16 +69,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AIHub — The AI Knowledge Platform",
+    title: {
+      template: "%s | AIHub",
+      default: "AIHub — The AI Knowledge Platform",
+    },
     description:
       "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks.",
     images: [`${BASE_URL}/og-image.png`],
     creator: "@AIHubSite",
     site: "@AIHubSite",
   },
-  verification: {
-    google: "replace-with-google-search-console-token",
-  },
+  // Add your Google Search Console verification token here:
+  // verification: { google: "YOUR_GSC_TOKEN" },
 };
 
 const orgJsonLd = {

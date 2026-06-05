@@ -10,10 +10,10 @@ const footerLinks = {
     { label: "Resource Library", href: "/resource-library" },
   ],
   Learn: [
-    { label: "Beginner Guides", href: "/learn" },
-    { label: "Certifications", href: "/learn" },
-    { label: "YouTube Guides", href: "/learn" },
-    { label: "Learning Resources", href: "/learn" },
+    { label: "Beginner Guides", href: "/learn#beginner" },
+    { label: "Certifications", href: "/learn#certifications" },
+    { label: "YouTube Guides", href: "/learn#youtube" },
+    { label: "Learning Resources", href: "/learn#resources" },
   ],
   Governance: [
     { label: "EU AI Act", href: "/compliance/eu-ai-act" },
@@ -23,9 +23,9 @@ const footerLinks = {
   ],
   Toolkit: [
     { label: "Consulting Toolkit", href: "/consulting-toolkit" },
-    { label: "Implementation Playbooks", href: "/consulting-toolkit" },
-    { label: "AI Assessment", href: "/consulting-toolkit" },
-    { label: "Pilot Templates", href: "/consulting-toolkit" },
+    { label: "Implementation Playbooks", href: "/consulting-toolkit#playbooks" },
+    { label: "AI Assessment", href: "/consulting-toolkit#assessment" },
+    { label: "Pilot Templates", href: "/consulting-toolkit#pilot" },
   ],
 };
 
@@ -45,26 +45,30 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              The all-in-one AI knowledge platform for everyone from curious
+              The all-in-one AI knowledge platform for everyone — from curious
               beginners to C-suite executives navigating the AI landscape.
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="https://www.linkedin.com/in/ch-sgande/"
+                href="https://x.com/AIHubSite"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="X (Twitter)"
               >
                 <X className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://www.linkedin.com/in/ch-sgande/"
+                href="https://www.linkedin.com/company/aihub-platform"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Link2 className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://sridhar-ai.ch/"
+                href="https://sridhar-ai.ch"
                 className="w-8 h-8 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
                 aria-label="Website"
               >
@@ -95,7 +99,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © 2025 AIHub by Sridhar Gande. Content is curated for educational purposes. Always verify information with official sources.
+            © {new Date().getFullYear()} AIHub. Content is curated for educational purposes. Always verify information with official sources.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">

@@ -132,11 +132,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!framework) return { title: "Framework Not Found" };
   return {
     title: `${framework.name} — Compliance Guide, Risk Tiers & Penalties`,
-    description: framework.description.slice(0, 160),
+    description: framework.description.replace(/^(.{120,}?\.).*/, "$1").slice(0, 200),
     alternates: { canonical: `${BASE_URL}/compliance/${framework.slug}` },
     openGraph: {
       title: `${framework.name} | AIHub`,
-      description: framework.description.slice(0, 160),
+      description: framework.description.replace(/^(.{120,}?\.).*/, "$1").slice(0, 200),
       url: `${BASE_URL}/compliance/${framework.slug}`,
       type: "article",
     },
@@ -157,7 +157,7 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
     "@context": "https://schema.org",
     "@type": "Article",
     headline: framework.name,
-    description: framework.description.slice(0, 160),
+    description: framework.description.replace(/^(.{120,}?\.).*/, "$1").slice(0, 200),
     url: `${BASE_URL}/compliance/${framework.slug}`,
     author: { "@type": "Organization", name: "AIHub", url: BASE_URL },
     publisher: { "@type": "Organization", name: "AIHub", url: BASE_URL },

@@ -9,12 +9,12 @@ const BASE_URL = "https://sridhar-ai.ch";
 export const metadata: Metadata = {
   title: "About AIHub",
   description:
-    "AIHub is the independent, curated AI knowledge platform — covering 80+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies. Built for everyone from beginners to executives.",
+    "AIHub is the independent, curated AI knowledge platform — covering 82+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies. Built for everyone from beginners to executives.",
   alternates: { canonical: `${BASE_URL}/about` },
   openGraph: {
     title: "About AIHub — The AI Knowledge Platform",
     description:
-      "AIHub is the independent, curated AI knowledge platform — 80+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies. Unbiased. For everyone.",
+      "AIHub is the independent, curated AI knowledge platform — 82+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies. Unbiased. For everyone.",
     url: `${BASE_URL}/about`,
     type: "website",
   },
@@ -44,7 +44,7 @@ const values = [
 ];
 
 const sections = [
-  { icon: Zap, label: "AI Tools Directory", href: "/tools", description: "63+ tools across every category" },
+  { icon: Zap, label: "AI Tools Directory", href: "/tools", description: "82+ tools across every category" },
   { icon: TrendingUp, label: "Case Studies", href: "/case-studies", description: "26 real-world implementations with measured outcomes" },
   { icon: Shield, label: "Compliance", href: "/compliance", description: "17 regulatory frameworks explained clearly" },
   { icon: BookOpen, label: "Learn AI", href: "/learn", description: "20+ curated courses, videos, and certifications" },
