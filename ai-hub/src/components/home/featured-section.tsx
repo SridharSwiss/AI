@@ -31,12 +31,48 @@ const featuredCaseStudies = [
 ];
 
 const sectionNav = [
-  { icon: Wrench,    label: "AI Tools",          desc: "82+ tools compared",    href: "/tools",              color: "text-violet-500",  bg: "bg-violet-500/[0.08] dark:bg-violet-500/[0.12]", span: "col-span-2", stat: "82+ tools compared across 15 categories" },
-  { icon: Building2, label: "Companies",          desc: "AI vendors & startups", href: "/companies",          color: "text-blue-500",    bg: "bg-blue-500/[0.08] dark:bg-blue-500/[0.12]",    span: "col-span-1", stat: null },
-  { icon: BarChart3, label: "Case Studies",       desc: "Real-world results",    href: "/case-studies",       color: "text-amber-500",   bg: "bg-amber-500/[0.08] dark:bg-amber-500/[0.12]",  span: "col-span-1", stat: null },
-  { icon: BookOpen,  label: "Learn",              desc: "Guides for all levels", href: "/learn",              color: "text-emerald-500", bg: "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12]", span: "col-span-2", stat: "72 resources from beginner to production ML" },
-  { icon: Shield,    label: "Compliance",         desc: "Regulatory guidance",   href: "/compliance",         color: "text-rose-500",    bg: "bg-rose-500/[0.08] dark:bg-rose-500/[0.12]",    span: "col-span-1", stat: null },
-  { icon: Briefcase, label: "Consulting Toolkit", desc: "Playbooks & templates", href: "/consulting-toolkit", color: "text-pink-500",    bg: "bg-pink-500/[0.08] dark:bg-pink-500/[0.12]",    span: "col-span-2", stat: "Proven frameworks from top consulting firms" },
+  {
+    icon: Wrench,    label: "AI Tools",          href: "/tools",
+    color: "text-violet-500",  bg: "bg-violet-500/[0.08] dark:bg-violet-500/[0.12]", span: "col-span-2",
+    desc: "Every major AI tool, side by side.",
+    body: "Filter by category, pricing model, and use case. Freemium to enterprise — 82 tools across 15 categories with verified specs.",
+    stat: "82 tools · 15 categories",
+  },
+  {
+    icon: Building2, label: "Companies",          href: "/companies",
+    color: "text-blue-500",    bg: "bg-blue-500/[0.08] dark:bg-blue-500/[0.12]",    span: "col-span-1",
+    desc: "33 vendors profiled.",
+    body: "From OpenAI and Anthropic to niche specialists — funding stage, focus area, and key products in one view.",
+    stat: "33 companies",
+  },
+  {
+    icon: BarChart3, label: "Case Studies",       href: "/case-studies",
+    color: "text-amber-500",   bg: "bg-amber-500/[0.08] dark:bg-amber-500/[0.12]",  span: "col-span-1",
+    desc: "ROI data, not press releases.",
+    body: "31 real deployments with measured outcomes — cost saved, time reduced, accuracy gained — across healthcare, finance, and more.",
+    stat: "31 case studies",
+  },
+  {
+    icon: BookOpen,  label: "Learn",              href: "/learn",
+    color: "text-emerald-500", bg: "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12]", span: "col-span-2",
+    desc: "Structured paths from zero to production.",
+    body: "Courses, certifications, video guides, and books — curated for beginners through ML engineers. Updated as the field moves.",
+    stat: "72 resources · all levels",
+  },
+  {
+    icon: Shield,    label: "Compliance",         href: "/compliance",
+    color: "text-rose-500",    bg: "bg-rose-500/[0.08] dark:bg-rose-500/[0.12]",    span: "col-span-1",
+    desc: "16 frameworks. Deadlines tracked.",
+    body: "EU AI Act, GDPR, NIST RMF, ISO 42001 and more — obligations mapped, enforcement dates flagged.",
+    stat: "16 frameworks",
+  },
+  {
+    icon: Briefcase, label: "Consulting Toolkit", href: "/consulting-toolkit",
+    color: "text-pink-500",    bg: "bg-pink-500/[0.08] dark:bg-pink-500/[0.12]",    span: "col-span-2",
+    desc: "Playbooks built for practitioners.",
+    body: "Assessment templates, implementation checklists, and pilot frameworks drawn from Big4 and MBB methodology — ready to deploy.",
+    stat: "4 phase playbook",
+  },
 ];
 
 const personas = [
@@ -91,14 +127,13 @@ export function FeaturedSection() {
           <div className="grid grid-cols-3 gap-3">
             {sectionNav.map((item) => (
               <Link key={item.href} href={item.href} className={`group flex flex-col p-5 rounded-2xl border border-border/70 bg-card hover:border-border hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-200 ${item.span}`}>
-                <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200 ${item.stat ? "w-12 h-12" : ""}`}>
-                  <item.icon className={`w-5 h-5 ${item.color} ${item.stat ? "w-6 h-6" : ""}`} />
+                <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200`}>
+                  <item.icon className={`w-5 h-5 ${item.color}`} />
                 </div>
-                <span className="text-sm font-semibold mb-0.5">{item.label}</span>
-                <span className="text-xs text-muted-foreground">{item.desc}</span>
-                {item.stat && (
-                  <span className="text-xs font-medium text-muted-foreground/70 mt-2 pt-2 border-t border-border/50">{item.stat}</span>
-                )}
+                <span className="text-sm font-bold mb-1">{item.label}</span>
+                <span className="text-xs font-semibold text-muted-foreground mb-2">{item.desc}</span>
+                <span className="text-xs text-muted-foreground leading-relaxed flex-1">{item.body}</span>
+                <span className={`text-[11px] font-semibold mt-3 pt-3 border-t border-border/50 ${item.color}`}>{item.stat}</span>
               </Link>
             ))}
           </div>
