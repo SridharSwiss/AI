@@ -196,7 +196,19 @@
   }
 }
 
+@layer base {
+  .font-display { font-family: var(--font-serif), Georgia, serif; }
+}
+
 @layer utilities {
+  .text-display-serif {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+  }
+
   .gradient-text {
     background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(316 70% 55%) 50%, hsl(var(--primary)) 100%);
     background-size: 200% auto;
@@ -309,6 +321,58 @@
     z-index: -1;
   }
 }
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(8%, -12%) scale(1.15); }
+  66% { transform: translate(-6%, 8%) scale(0.92); }
+}
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  33% { transform: translate(-10%, 6%) scale(1.1); }
+  66% { transform: translate(12%, -8%) scale(0.95); }
+}
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  50% { transform: translate(6%, 10%) scale(1.08); }
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  will-change: transform;
+  opacity: 0.35;
+}
+.aurora-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, hsl(258 85% 65%) 0%, transparent 70%);
+  top: -10%; left: 10%;
+  animation: aurora-drift-1 18s ease-in-out infinite;
+}
+.aurora-orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, hsl(320 80% 60%) 0%, transparent 70%);
+  top: 5%; right: 5%;
+  animation: aurora-drift-2 22s ease-in-out infinite;
+}
+.aurora-orb-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, hsl(200 85% 60%) 0%, transparent 70%);
+  bottom: 10%; left: 35%;
+  animation: aurora-drift-3 16s ease-in-out infinite;
+}
+
+.dark .aurora-orb { opacity: 0.2; }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker-scroll 40s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }

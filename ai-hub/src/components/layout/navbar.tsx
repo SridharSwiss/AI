@@ -45,7 +45,7 @@ const megaMenus = {
   governance: {
     label: "Governance",
     items: [
-      { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",      href: "/compliance",                     color: "text-rose-500",   bg: "bg-rose-500/8" },
+      { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",      href: "/compliance",                     color: "text-rose-500",   bg: "bg-rose-500/8", gold: true },
       { icon: Briefcase, label: "Consulting Toolkit",    desc: "Playbooks & templates",              href: "/consulting-toolkit",             color: "text-pink-500",   bg: "bg-pink-500/8" },
       { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",   href: "/consulting-toolkit?tab=assess",  color: "text-orange-500", bg: "bg-orange-500/8" },
       { icon: Globe,     label: "Global Regulations",    desc: "Multi-jurisdiction coverage",       href: "/compliance#jurisdictions",       color: "text-teal-500",   bg: "bg-teal-500/8" },
@@ -81,8 +81,13 @@ function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean 
               <div className={cn("w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5", item.bg)}>
                 <item.icon className={cn("w-4.5 h-4.5", item.color)} />
               </div>
-              <div className="min-w-0">
-                <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{item.label}</div>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                  {item.label}
+                  {"gold" in item && item.gold && (
+                    <span className="ml-auto w-2 h-2 rounded-full bg-amber-400 ring-2 ring-amber-400/30 animate-pulse" />
+                  )}
+                </div>
                 <div className="text-xs text-muted-foreground mt-0.5 leading-snug">{item.desc}</div>
               </div>
             </Link>
@@ -146,7 +151,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-[100]",
         "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        scrolled || mobileOpen ? "bg-white dark:bg-zinc-950 border-b border-border/40 shadow-sm" : "bg-transparent"
+        scrolled || mobileOpen ? "bg-white/80 dark:bg-zinc-950/85 backdrop-blur-xl border-b border-white/20 dark:border-zinc-800/60 shadow-sm" : "bg-transparent"
       )}
     >
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">

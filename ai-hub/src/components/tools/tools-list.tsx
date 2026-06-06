@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -53,6 +53,22 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Autonomous Agents": "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
 };
 
+function useTilt() {
+  const ref = useRef<HTMLDivElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(4px)`;
+  };
+  const handleLeave = () => {
+    if (ref.current) ref.current.style.transform = "";
+  };
+  return { ref, onMouseMove: handleMove, onMouseLeave: handleLeave };
+}
+
 function ToolIcon({ tool }: { tool: ToolData }) {
   const Icon = CATEGORY_ICONS[tool.category] ?? Bot;
   const colorClass = CATEGORY_COLORS[tool.category] ?? "bg-muted text-muted-foreground";
@@ -73,6 +89,44 @@ function EmptyState({ category }: { category: string }) {
       <p className="text-sm text-muted-foreground max-w-xs">
         {category !== "All" ? `Remove the "${category}" filter or try a different pricing tier.` : "Try a different pricing tier."}
       </p>
+    </div>
+  );
+}
+
+function TiltCard({ tool }: { tool: ToolData }) {
+  const tilt = useTilt();
+  return (
+    <div ref={tilt.ref} onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave} className="transition-transform duration-100 ease-out">
+      <Link href={`/tools/${tool.slug}`} className="group block">
+        <Card className="h-full group-hover:border-border">
+          <CardHeader className="pb-3">
+            <div className="flex items-start justify-between gap-2 mb-3">
+              <ToolIcon tool={tool} />
+              <Badge variant={pricingBadge[tool.pricing] ?? "blue"}>{tool.pricing}</Badge>
+            </div>
+            <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors leading-snug">{tool.name}</CardTitle>
+            <CardDescription className="text-xs mt-0.5">{tool.vendor} · {tool.category}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{tool.tagline}</p>
+            <div className="flex flex-wrap gap-1 mb-4">
+              {tool.tags.slice(0, 3).map((tag) => (
+                <span key={tag} className="text-[11px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{tag}</span>
+              ))}
+            </div>
+            <a
+              href={tool.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExternalLink className="w-3 h-3" />
+              Visit website
+            </a>
+          </CardContent>
+        </Card>
+      </Link>
     </div>
   );
 }
@@ -122,36 +176,7 @@ export function ToolsList() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filtered.map((tool) => (
-            <Link key={tool.slug} href={`/tools/${tool.slug}`} className="group block">
-              <Card className="h-full group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-card-hover)] group-hover:border-border">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-2 mb-3">
-                    <ToolIcon tool={tool} />
-                    <Badge variant={pricingBadge[tool.pricing] ?? "blue"}>{tool.pricing}</Badge>
-                  </div>
-                  <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors leading-snug">{tool.name}</CardTitle>
-                  <CardDescription className="text-xs mt-0.5">{tool.vendor} · {tool.category}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{tool.tagline}</p>
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {tool.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="text-[11px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{tag}</span>
-                    ))}
-                  </div>
-                  <a
-                    href={tool.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink className="w-3 h-3" />
-                    Visit website
-                  </a>
-                </CardContent>
-              </Card>
-            </Link>
+            <TiltCard key={tool.slug} tool={tool} />
           ))}
         </div>
       )}

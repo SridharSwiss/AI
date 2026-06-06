@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Wrench, BookOpen, Shield, Briefcase, BarChart3, Building2, Sparkles, MessageSquare, Code2, Image, Zap } from "lucide-react";
+import { ArrowRight, Wrench, BookOpen, Shield, Briefcase, BarChart3, Building2, Sparkles, MessageSquare, Code2, Image, GraduationCap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
@@ -31,12 +31,19 @@ const featuredCaseStudies = [
 ];
 
 const sectionNav = [
-  { icon: Wrench,    label: "AI Tools",          desc: "82+ tools compared",    href: "/tools",              color: "text-violet-500",  bg: "bg-violet-500/8 dark:bg-violet-500/12" },
-  { icon: Building2, label: "Companies",          desc: "AI vendors & startups", href: "/companies",          color: "text-blue-500",    bg: "bg-blue-500/8 dark:bg-blue-500/12" },
-  { icon: BookOpen,  label: "Learn",              desc: "Guides for all levels", href: "/learn",              color: "text-emerald-500", bg: "bg-emerald-500/8 dark:bg-emerald-500/12" },
-  { icon: BarChart3, label: "Case Studies",       desc: "Real-world results",    href: "/case-studies",       color: "text-amber-500",   bg: "bg-amber-500/8 dark:bg-amber-500/12" },
-  { icon: Shield,    label: "Compliance",         desc: "Regulatory guidance",   href: "/compliance",         color: "text-rose-500",    bg: "bg-rose-500/8 dark:bg-rose-500/12" },
-  { icon: Briefcase, label: "Consulting Toolkit", desc: "Playbooks & templates", href: "/consulting-toolkit", color: "text-pink-500",    bg: "bg-pink-500/8 dark:bg-pink-500/12" },
+  { icon: Wrench,    label: "AI Tools",          desc: "82+ tools compared",    href: "/tools",              color: "text-violet-500",  bg: "bg-violet-500/[0.08] dark:bg-violet-500/[0.12]", span: "col-span-2", stat: "82+ tools compared across 15 categories" },
+  { icon: Building2, label: "Companies",          desc: "AI vendors & startups", href: "/companies",          color: "text-blue-500",    bg: "bg-blue-500/[0.08] dark:bg-blue-500/[0.12]",    span: "col-span-1", stat: null },
+  { icon: BarChart3, label: "Case Studies",       desc: "Real-world results",    href: "/case-studies",       color: "text-amber-500",   bg: "bg-amber-500/[0.08] dark:bg-amber-500/[0.12]",  span: "col-span-1", stat: null },
+  { icon: BookOpen,  label: "Learn",              desc: "Guides for all levels", href: "/learn",              color: "text-emerald-500", bg: "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12]", span: "col-span-2", stat: "72 resources from beginner to production ML" },
+  { icon: Shield,    label: "Compliance",         desc: "Regulatory guidance",   href: "/compliance",         color: "text-rose-500",    bg: "bg-rose-500/[0.08] dark:bg-rose-500/[0.12]",    span: "col-span-1", stat: null },
+  { icon: Briefcase, label: "Consulting Toolkit", desc: "Playbooks & templates", href: "/consulting-toolkit", color: "text-pink-500",    bg: "bg-pink-500/[0.08] dark:bg-pink-500/[0.12]",    span: "col-span-2", stat: "Proven frameworks from top consulting firms" },
+];
+
+const personas = [
+  { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 82 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
+  { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 31 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
+  { role: "Compliance Officer", icon: Shield, desc: "16 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
+  { role: "Learner", icon: GraduationCap, desc: "72 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
 ];
 
 const pricingVariant: Record<string, "green" | "blue" | "amber" | "purple"> = {
@@ -50,8 +57,12 @@ function SectionHeading({ eyebrow, eyebrowColor = "text-primary", eyebrowIcon: I
   return (
     <div className="flex items-end justify-between mb-10 gap-4">
       <div>
-        <div className={`flex items-center gap-2 mb-2 text-sm font-semibold ${eyebrowColor}`}>
-          <Icon className="w-4 h-4" />{eyebrow}
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-px flex-1 bg-border" />
+          <div className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-widest ${eyebrowColor}`}>
+            <Icon className="w-3.5 h-3.5" />{eyebrow}
+          </div>
+          <div className="h-px w-8 bg-border" />
         </div>
         <h2 className="text-headline">{title}</h2>
       </div>
@@ -69,18 +80,25 @@ export function FeaturedSection() {
 
       <ScrollReveal>
         <div className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Everything in one place</p>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-px flex-1 bg-border" />
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Everything in one place</p>
+            <div className="h-px w-8 bg-border" />
+          </div>
           <h2 className="text-headline mb-10">Your complete AI knowledge base</h2>
         </div>
         <ScrollReveal stagger>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-3 gap-3">
             {sectionNav.map((item) => (
-              <Link key={item.href} href={item.href} className="group flex flex-col items-center text-center p-5 rounded-2xl border border-border/70 bg-card hover:border-border hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-200">
-                <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200`}>
-                  <item.icon className={`w-5 h-5 ${item.color}`} />
+              <Link key={item.href} href={item.href} className={`group flex flex-col p-5 rounded-2xl border border-border/70 bg-card hover:border-border hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-200 ${item.span}`}>
+                <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200 ${item.stat ? "w-12 h-12" : ""}`}>
+                  <item.icon className={`w-5 h-5 ${item.color} ${item.stat ? "w-6 h-6" : ""}`} />
                 </div>
                 <span className="font-semibold text-sm mb-0.5">{item.label}</span>
                 <span className="text-xs text-muted-foreground">{item.desc}</span>
+                {item.stat && (
+                  <span className="text-xs font-medium text-muted-foreground/70 mt-2 pt-2 border-t border-border/50">{item.stat}</span>
+                )}
               </Link>
             ))}
           </div>
@@ -131,6 +149,31 @@ export function FeaturedSection() {
                   </CardHeader>
                   <CardContent><p className="text-sm text-muted-foreground leading-relaxed">{cs.description}</p></CardContent>
                 </Card>
+              </Link>
+            ))}
+          </div>
+        </ScrollReveal>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-px flex-1 bg-border" />
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Find your path</p>
+            <div className="h-px w-8 bg-border" />
+          </div>
+          <h2 className="text-headline mb-10">Built for every AI role</h2>
+        </div>
+        <ScrollReveal stagger>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {personas.map((persona) => (
+              <Link key={persona.role} href={persona.href} className={`relative overflow-hidden rounded-xl border-2 border-border bg-card p-6 group cursor-pointer hover:-translate-y-1 transition-all duration-200 hover:${persona.color}`}>
+                <div className="mb-4">
+                  <persona.icon className="w-7 h-7 text-muted-foreground group-hover:text-foreground transition-colors duration-200" />
+                </div>
+                <div className="font-bold text-base mb-2">{persona.role}</div>
+                <div className="text-sm text-muted-foreground leading-relaxed">{persona.desc}</div>
+                <div className={`absolute bottom-0 left-0 h-[3px] w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${persona.barColor}`} />
               </Link>
             ))}
           </div>
