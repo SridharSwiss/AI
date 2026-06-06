@@ -254,6 +254,7 @@ export function NewsClient() {
                 "hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] hover:border-border/80"
               )}
             >
+              {/* Source + category */}
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs text-muted-foreground font-medium truncate max-w-[140px]">
                   {article.sourceName}
@@ -263,6 +264,7 @@ export function NewsClient() {
                 </Badge>
               </div>
 
+              {/* Title */}
               <a
                 href={article.link}
                 target="_blank"
@@ -275,12 +277,14 @@ export function NewsClient() {
                 <ExternalLink className="w-3 h-3 mt-0.5 flex-shrink-0 text-muted-foreground opacity-0 group-hover/link:opacity-60 transition-opacity duration-150" />
               </a>
 
+              {/* Description */}
               {article.description && (
                 <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 flex-1">
                   {article.description}
                 </p>
               )}
 
+              {/* Timestamp */}
               {article.pubDate && (
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-auto pt-2.5 border-t border-border/40">
                   <Clock className="w-3 h-3" />
