@@ -14,7 +14,7 @@ const items = [
 export function NewsTicker() {
   const content = [...items, ...items];
   return (
-    <div className="relative overflow-hidden bg-zinc-950 dark:bg-zinc-900 text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-zinc-800">
+    <div className="fixed top-0 left-0 right-0 z-[150] relative overflow-hidden bg-zinc-950 dark:bg-zinc-900 text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-zinc-800">
       <div className="absolute left-0 z-10 px-3 py-1 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest h-full flex items-center shrink-0">
         LIVE
       </div>

@@ -280,7 +280,7 @@ function ConsultingToolkitInner() {
 
   return (
     <div>
-      <div className="sticky top-16 z-30 bg-background/95 border-b border-border backdrop-blur-sm -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-8">
+      <div className="sticky top-24 z-30 bg-background/95 border-b border-border backdrop-blur-sm -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-8">
         <div className="flex gap-1 overflow-x-auto py-2 scrollbar-none">
           {tabConfig.map((tab) => {
             const Icon = tab.icon;
