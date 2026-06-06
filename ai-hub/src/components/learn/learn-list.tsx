@@ -13,11 +13,11 @@ const typeIcon: Record<string, React.ElementType> = {
 };
 
 const typeBg: Record<string, string> = {
-  course: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-  youtube: "bg-red-500/10 text-red-600 dark:text-red-400",
-  certification: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-  book: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
-  tutorial: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  course: "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-600 dark:text-blue-400",
+  youtube: "bg-red-500/10 dark:bg-red-500/[0.18] text-red-600 dark:text-red-400",
+  certification: "bg-amber-500/10 dark:bg-amber-500/[0.18] text-amber-600 dark:text-amber-400",
+  book: "bg-purple-500/10 dark:bg-purple-500/[0.18] text-purple-600 dark:text-purple-400",
+  tutorial: "bg-emerald-500/10 dark:bg-emerald-500/[0.18] text-emerald-600 dark:text-emerald-400",
 };
 
 const typeColor: Record<string, "blue" | "pink" | "amber" | "purple" | "green"> = {

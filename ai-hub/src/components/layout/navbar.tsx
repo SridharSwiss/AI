@@ -20,10 +20,10 @@ const megaMenus = {
   explore: {
     label: "Explore",
     items: [
-      { icon: Wrench,    label: "AI Tools",    desc: "82+ tools, compared",        href: "/tools",        color: "text-violet-500", bg: "bg-violet-500/8" },
-      { icon: Building2, label: "Companies",   desc: "Vendors & AI startups",      href: "/companies",    color: "text-blue-500",   bg: "bg-blue-500/8" },
-      { icon: BarChart3, label: "Case Studies",desc: "Real-world outcomes",        href: "/case-studies", color: "text-amber-500",  bg: "bg-amber-500/8" },
-      { icon: Newspaper, label: "News",        desc: "Live feed from 20+ sources", href: "/news",         color: "text-sky-500",    bg: "bg-sky-500/8" },
+      { icon: Wrench,    label: "AI Tools",    desc: "82+ tools, compared",        href: "/tools",        color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
+      { icon: Building2, label: "Companies",   desc: "Vendors & AI startups",      href: "/companies",    color: "text-blue-500",   bg: "bg-blue-500/10 dark:bg-blue-500/[0.18]" },
+      { icon: BarChart3, label: "Case Studies",desc: "Real-world outcomes",        href: "/case-studies", color: "text-amber-500",  bg: "bg-amber-500/10 dark:bg-amber-500/[0.18]" },
+      { icon: Newspaper, label: "News",        desc: "Live feed from 20+ sources", href: "/news",         color: "text-sky-500",    bg: "bg-sky-500/10 dark:bg-sky-500/[0.18]" },
     ],
     featured: {
       label: "Just added",
@@ -35,20 +35,20 @@ const megaMenus = {
   learn: {
     label: "Learn",
     items: [
-      { icon: GraduationCap, label: "Courses & Certifications", desc: "Structured learning paths",   href: "/learn#certifications", color: "text-emerald-500", bg: "bg-emerald-500/8" },
-      { icon: PlayCircle,    label: "Video Guides",             desc: "YouTube & free tutorials",    href: "/learn#youtube",        color: "text-red-500",     bg: "bg-red-500/8" },
-      { icon: BookMarked,    label: "Books & Reading",          desc: "Essential AI reading list",   href: "/learn#books",          color: "text-purple-500",  bg: "bg-purple-500/8" },
-      { icon: Library,       label: "Resource Library",         desc: "Whitepapers & reports",      href: "/resource-library",    color: "text-indigo-500",  bg: "bg-indigo-500/8" },
+      { icon: GraduationCap, label: "Courses & Certifications", desc: "Structured learning paths",   href: "/learn#certifications", color: "text-emerald-500", bg: "bg-emerald-500/10 dark:bg-emerald-500/[0.18]" },
+      { icon: PlayCircle,    label: "Video Guides",             desc: "YouTube & free tutorials",    href: "/learn#youtube",        color: "text-red-500",     bg: "bg-red-500/10 dark:bg-red-500/[0.18]" },
+      { icon: BookMarked,    label: "Books & Reading",          desc: "Essential AI reading list",   href: "/learn#books",          color: "text-purple-500",  bg: "bg-purple-500/10 dark:bg-purple-500/[0.18]" },
+      { icon: Library,       label: "Resource Library",         desc: "Whitepapers & reports",      href: "/resource-library",    color: "text-indigo-500",  bg: "bg-indigo-500/10 dark:bg-indigo-500/[0.18]" },
     ],
     featured: null,
   },
   governance: {
     label: "Governance",
     items: [
-      { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",      href: "/compliance",                     color: "text-rose-500",   bg: "bg-rose-500/8", gold: true },
-      { icon: Briefcase, label: "Consulting Toolkit",    desc: "Playbooks & templates",              href: "/consulting-toolkit",             color: "text-pink-500",   bg: "bg-pink-500/8" },
-      { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",   href: "/consulting-toolkit?tab=assess",  color: "text-orange-500", bg: "bg-orange-500/8" },
-      { icon: Globe,     label: "Global Regulations",    desc: "Multi-jurisdiction coverage",       href: "/compliance#jurisdictions",       color: "text-teal-500",   bg: "bg-teal-500/8" },
+      { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",      href: "/compliance",                     color: "text-rose-500",   bg: "bg-rose-500/10 dark:bg-rose-500/[0.18]", gold: true },
+      { icon: Briefcase, label: "Consulting Toolkit",    desc: "Playbooks & templates",              href: "/consulting-toolkit",             color: "text-pink-500",   bg: "bg-pink-500/10 dark:bg-pink-500/[0.18]" },
+      { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",   href: "/consulting-toolkit?tab=assess",  color: "text-orange-500", bg: "bg-orange-500/10 dark:bg-orange-500/[0.18]" },
+      { icon: Globe,     label: "Global Regulations",    desc: "Multi-jurisdiction coverage",       href: "/compliance#jurisdictions",       color: "text-teal-500",   bg: "bg-teal-500/10 dark:bg-teal-500/[0.18]" },
     ],
     featured: null,
   },
