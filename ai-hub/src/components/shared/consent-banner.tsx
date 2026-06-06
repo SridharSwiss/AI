@@ -52,37 +52,38 @@ export function ConsentBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[500] p-3 sm:p-4 pointer-events-none">
       <div className="max-w-3xl mx-auto pointer-events-auto">
-        <div className="rounded-2xl border border-border bg-card shadow-[0_8px_40px_rgba(0,0,0,0.18)] overflow-hidden">
+        <div className="rounded-2xl border border-border bg-card shadow-[0_8px_40px_rgba(0,0,0,0.22)] overflow-hidden"
+          style={{ background: "hsl(222 47% 9%)", borderColor: "rgba(255,255,255,0.1)", color: "#fff" }}>
           {/* top bar */}
-          <div className="flex items-center gap-2 px-5 py-3 bg-muted/50 border-b border-border">
-            <Cookie className="w-4 h-4 text-primary flex-shrink-0" />
-            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Privacy &amp; Analytics</span>
+          <div className="flex items-center gap-2 px-5 py-3 border-b" style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.08)" }}>
+            <Cookie className="w-4 h-4 text-violet-400 flex-shrink-0" />
+            <span className="text-xs font-bold uppercase tracking-widest text-white/50">Privacy &amp; Analytics</span>
           </div>
 
           <div className="px-5 py-4">
-            <p className="text-sm text-foreground leading-relaxed mb-1">
-              We use <span className="font-semibold">privacy-respecting analytics</span> to understand how visitors use AIHub — no personal data, no cross-site tracking.
+            <p className="text-sm text-white/85 leading-relaxed mb-1">
+              We use <span className="font-semibold text-white">privacy-respecting analytics</span> to understand how visitors use AIHub — no personal data, no cross-site tracking.
             </p>
-            <p className="text-xs text-muted-foreground mb-4">
+            <p className="text-xs text-white/45 mb-4">
               Collected: page paths, session duration, device type, traffic source. No cookies.{" "}
-              <Link href="/privacy" className="underline hover:text-foreground transition-colors">Privacy policy</Link>
+              <Link href="/privacy" className="underline hover:text-white transition-colors">Privacy policy</Link>
             </p>
 
             {showDetails && (
               <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <div className="rounded-xl border border-border p-3 bg-muted/30">
+                <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
                   <div className="flex items-center gap-2 mb-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-xs font-semibold">Essential (always on)</span>
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-xs font-semibold text-white">Essential (always on)</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">Theme preference, consent choice. Required for the site to function.</p>
+                  <p className="text-xs text-white/45">Theme preference, consent choice. Required for the site to function.</p>
                 </div>
-                <div className="rounded-xl border border-border p-3 bg-muted/30">
+                <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
                   <div className="flex items-center gap-2 mb-1">
-                    <BarChart2 className="w-3.5 h-3.5 text-primary" />
-                    <span className="text-xs font-semibold">Analytics (optional)</span>
+                    <BarChart2 className="w-3.5 h-3.5 text-violet-400" />
+                    <span className="text-xs font-semibold text-white">Analytics (optional)</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">Page views, session duration, traffic source. Stored in our private database — never sold or shared.</p>
+                  <p className="text-xs text-white/45">Page views, session duration, traffic source. Stored in our private database — never sold or shared.</p>
                 </div>
               </div>
             )}
@@ -90,19 +91,20 @@ export function ConsentBanner() {
             <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={accept}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-500 transition-colors"
               >
                 Accept analytics
               </button>
               <button
                 onClick={decline}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-medium text-white/60 hover:text-white transition-colors"
+                style={{ border: "1px solid rgba(255,255,255,0.15)" }}
               >
                 Essential only
               </button>
               <button
                 onClick={() => setShowDetails((v) => !v)}
-                className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors ml-auto"
+                className="text-xs text-white/35 hover:text-white/70 underline underline-offset-2 transition-colors ml-auto"
               >
                 {showDetails ? "Hide details" : "What do we collect?"}
               </button>
