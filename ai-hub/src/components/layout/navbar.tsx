@@ -146,7 +146,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-[100]",
         "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        scrolled ? "glass border-b border-border/40 shadow-sm" : "bg-transparent"
+        scrolled || mobileOpen ? "bg-white dark:bg-zinc-950 border-b border-border/40 shadow-sm" : "bg-transparent"
       )}
     >
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -224,7 +224,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className={cn("lg:hidden overflow-hidden", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
+        <div className={cn("lg:hidden overflow-hidden bg-white dark:bg-zinc-950", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
           <div className="py-3 border-t border-border/40 space-y-4">
             {(Object.entries(megaMenus) as [MenuKey, typeof megaMenus[MenuKey]][]).map(([key, menu], groupIdx) => (
               <div key={key}>
