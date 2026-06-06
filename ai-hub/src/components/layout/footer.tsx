@@ -39,8 +39,6 @@ export function Footer() {
     <footer className="relative border-t border-border/40 bg-muted/25 dark:bg-muted/10 overflow-hidden">
       {/* Gradient top accent */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-      {/* Subtle background grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.015] dark:opacity-[0.025]" style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
       <div className="container-site py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-12">
           <div className="col-span-2">
@@ -51,7 +49,7 @@ export function Footer() {
               <span className="font-bold text-lg tracking-tight">AIHub</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-xs">
-              The all-in-one AI knowledge platform for everyone from curious beginners to C-suite executives navigating the AI landscape.
+              82 AI tools, 33 vendors, 31 case studies, and 16 compliance frameworks - hand-verified and updated weekly.
             </p>
             <div className="flex items-center gap-2">
               {socialLinks.map(({ href, label, icon: Icon }) => (

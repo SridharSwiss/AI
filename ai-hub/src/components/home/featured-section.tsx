@@ -75,7 +75,7 @@ export function FeaturedSection() {
         <ScrollReveal stagger>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {sectionNav.map((item) => (
-              <Link key={item.href} href={item.href} className="group flex flex-col items-center text-center p-5 rounded-2xl border border-border/50 bg-card hover:border-border hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-200">
+              <Link key={item.href} href={item.href} className="group flex flex-col items-center text-center p-5 rounded-2xl border border-border/70 bg-card hover:border-border hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-200">
                 <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200`}>
                   <item.icon className={`w-5 h-5 ${item.color}`} />
                 </div>
@@ -138,15 +138,12 @@ export function FeaturedSection() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <div className="relative overflow-hidden rounded-3xl noise">
+        <div className="relative overflow-hidden rounded-3xl">
           <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-violet-700 to-pink-700" />
-          <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-white/8 rounded-full blur-2xl" />
-          <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(rgb(255 255 255) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
           <div className="relative px-8 py-12 md:px-14 md:py-16 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 text-white/90 text-xs font-semibold mb-6 backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5" />
-              What&apos;s New · June 2025
+              What&apos;s New · 2026
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight tracking-tight">
               EU AI Act enters force.<br /><span className="text-white/80">Are you ready?</span>

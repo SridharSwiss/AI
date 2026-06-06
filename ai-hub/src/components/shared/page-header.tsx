@@ -32,13 +32,7 @@ export function PageHeader({
 
   return (
     <div className={cn("relative overflow-hidden border-b border-border/40", className)}>
-      {/* Clean layered background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-muted/20 to-background pointer-events-none" />
-      {/* Subtle dot grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.018] dark:opacity-[0.03]"
-        style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "28px 28px" }}
-      />
       {/* Accent color wash - very subtle */}
       <div className={cn("absolute inset-0 pointer-events-none", cfg.glow, "opacity-60")} />
       {/* Gradient top line (accent color) */}
