@@ -21,6 +21,8 @@ const industryColors: Record<string, "blue" | "green" | "amber" | "purple" | "pi
   Technology: "blue",
   Pharma: "green",
   "Enterprise Software": "amber",
+  Insurance: "blue",
+  Reinsurance: "purple",
 };
 
 export function CaseStudiesList() {
