@@ -85,7 +85,7 @@ function TemplatePanel({ item }: { item: ChecklistItem }) {
               {section.items.map((q, qi) => (
                 <li key={qi} className="flex gap-2.5 text-xs text-foreground/80">
                   <span className="w-4 h-4 rounded-full bg-primary/15 dark:bg-primary/10 text-primary flex items-center justify-center font-bold text-[9px] flex-shrink-0 mt-0.5">{qi + 1}</span>
-                  <span className="leading-relaxed">{q}</span>
+                  <span className="leading-relaxed text-zinc-600 dark:text-zinc-300">{q}</span>
                 </li>
               ))}
             </ul>
@@ -161,8 +161,8 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                   Playbook
                 </span>
               </div>
-              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight tracking-tight">{playbook.title}</h2>
-              <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{playbook.desc}</p>
+              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight tracking-tight text-zinc-800 dark:text-zinc-100">{playbook.title}</h2>
+              <p className="text-sm text-zinc-500 dark:text-muted-foreground mt-1.5 leading-relaxed">{playbook.desc}</p>
             </div>
             <button
               onClick={onClose}
@@ -194,7 +194,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         <div className="flex-1 overflow-y-auto">
           {/* guidance */}
           <div className="px-6 py-5 border-b border-border/60">
-            <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
+            <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">{playbook.guidance}</p>
           </div>
 
           {/* checklist */}
@@ -228,7 +228,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                     {/* label */}
                     <span
                       className={`flex-1 text-sm leading-snug transition-colors cursor-pointer select-none ${
-                        checked.has(i) ? "line-through text-muted-foreground" : "text-foreground"
+                        checked.has(i) ? "line-through text-muted-foreground" : "text-zinc-700 dark:text-zinc-200"
                       }`}
                       onClick={() => toggleChecked(i)}
                     >
