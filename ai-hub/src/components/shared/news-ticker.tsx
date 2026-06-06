@@ -34,10 +34,10 @@ export function NewsTicker() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[150] overflow-hidden bg-zinc-950 dark:bg-zinc-900 text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-zinc-800">
-      <div className="absolute left-0 z-10 px-3 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest h-full flex items-center shrink-0">
+      <div className="absolute left-0 z-10 px-3 bg-red-600 text-white text-[10px] font-bold uppercase tracking-widest h-full flex items-center shrink-0 shadow-[4px_0_8px_rgba(0,0,0,0.4)]">
         LIVE
       </div>
-      <div className="ticker-track ml-14 flex gap-12 whitespace-nowrap">
+      <div className="ticker-track pl-2 flex gap-12 whitespace-nowrap" style={{ paddingLeft: "72px" }}>
         {content.map((item, i) => (
           <a
             key={i}
