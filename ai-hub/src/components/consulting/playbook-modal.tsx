@@ -7,7 +7,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import {
   CheckSquare, X, CheckCircle, FileText,
   ClipboardList, FlaskConical, TrendingUp, Shield, ScanSearch,
-  ChevronDown, ChevronRight,
+  ChevronDown, ChevronUp, Sparkles,
 } from "lucide-react";
 import { phases } from "@/data/playbooks";
 import type { Playbook, ChecklistItem, Phase } from "@/data/playbooks";
@@ -61,23 +61,31 @@ const templateTypeBadge: Record<string, string> = {
 
 function TemplatePanel({ item }: { item: ChecklistItem }) {
   return (
-    <div className="mt-2 ml-8 p-4 rounded-xl border border-border bg-muted/40 space-y-4">
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${templateTypeBadge[item.templateType] ?? "bg-muted text-muted-foreground"}`}>
+    <div className="mt-3 ml-9 rounded-xl border border-primary/20 bg-primary/[0.03] dark:bg-primary/[0.06] overflow-hidden">
+      {/* template header */}
+      <div className="flex items-center gap-3 px-4 py-3 bg-primary/[0.06] dark:bg-primary/[0.10] border-b border-primary/15">
+        <FileText className="w-4 h-4 text-primary flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-foreground leading-tight">{item.templateTitle}</p>
+        </div>
+        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide flex-shrink-0 ${templateTypeBadge[item.templateType] ?? "bg-muted text-muted-foreground"}`}>
           {item.templateType}
         </span>
-        <span className="text-sm font-semibold">{item.templateTitle}</span>
       </div>
-      <p className="text-xs text-muted-foreground leading-relaxed">{item.instructions}</p>
-      <div className="space-y-3">
+      {/* instructions */}
+      <div className="px-4 py-3 border-b border-primary/10">
+        <p className="text-xs text-muted-foreground leading-relaxed">{item.instructions}</p>
+      </div>
+      {/* sections */}
+      <div className="px-4 py-3 space-y-4">
         {item.sections.map((section, si) => (
           <div key={si}>
-            <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground mb-2">{section.heading}</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-primary/70 mb-2">{section.heading}</p>
             <ul className="space-y-1.5">
               {section.items.map((q, qi) => (
-                <li key={qi} className="text-xs text-foreground/80 flex gap-2">
-                  <span className="text-muted-foreground flex-shrink-0">{qi + 1}.</span>
-                  <span>{q}</span>
+                <li key={qi} className="flex gap-2.5 text-xs text-foreground/80">
+                  <span className="w-4 h-4 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-[9px] flex-shrink-0 mt-0.5">{qi + 1}</span>
+                  <span className="leading-relaxed">{q}</span>
                 </li>
               ))}
             </ul>
@@ -128,7 +136,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
 
   return (
     <div
-      className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[300] flex items-center justify-center p-4 sm:p-6 bg-black/65 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -136,89 +144,123 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         role="dialog"
         aria-modal="true"
         aria-labelledby="playbook-modal-title"
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-card text-card-foreground rounded-2xl border border-border shadow-2xl"
+        className="relative w-full max-w-2xl max-h-[90vh] flex flex-col bg-card text-card-foreground rounded-2xl border border-border shadow-[0_32px_64px_rgba(0,0,0,0.25)] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* sticky header with subtle gradient so it visually separates from body */}
-        <div className="sticky top-0 z-10 rounded-t-2xl bg-card border-b border-border px-6 pt-5 pb-4">
+        {/* ── Rich header ─────────────────────────────── */}
+        <div className="relative flex-shrink-0 px-6 pt-6 pb-5 bg-gradient-to-br from-primary/[0.07] via-card to-card border-b border-border">
+          {/* decorative accent bar */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-violet-400 to-pink-500 rounded-t-2xl" />
+
           <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <Badge variant={levelColor[playbook.level] ?? "blue"} className="mb-2">{playbook.level}</Badge>
-              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight">{playbook.title}</h2>
-              <p className="text-sm text-muted-foreground mt-1">{playbook.desc}</p>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-3">
+                <Badge variant={levelColor[playbook.level] ?? "blue"}>{playbook.level}</Badge>
+                <span className="flex items-center gap-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">
+                  <Sparkles className="w-3 h-3 text-primary" />
+                  Playbook
+                </span>
+              </div>
+              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight tracking-tight">{playbook.title}</h2>
+              <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{playbook.desc}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg hover:bg-muted transition-colors flex-shrink-0 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="p-2 rounded-xl hover:bg-muted transition-colors flex-shrink-0 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Close playbook"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* progress bar in the header so it's always visible */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between mb-1.5">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Progress</p>
-              <p className="text-xs tabular-nums font-semibold text-muted-foreground">{done} / {total}</p>
+          {/* progress row */}
+          <div className="mt-5 flex items-center gap-4">
+            <div className="flex-1">
+              <div className="h-2 rounded-full bg-muted overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-primary to-violet-400"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
             </div>
-            <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-              <div
-                className="h-full bg-primary rounded-full transition-all duration-500"
-                style={{ width: `${progress}%` }}
-              />
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <span className="text-sm font-bold tabular-nums text-foreground">{done}</span>
+              <span className="text-xs text-muted-foreground">/ {total} done</span>
             </div>
           </div>
         </div>
 
-        <div className="p-6 space-y-6 bg-card">
-          <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
+        {/* ── Scrollable body ──────────────────────────── */}
+        <div className="flex-1 overflow-y-auto">
+          {/* guidance */}
+          <div className="px-6 py-5 border-b border-border/60">
+            <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
+          </div>
 
-          <div className="rounded-xl border border-border bg-card overflow-hidden">
-            <div className="px-4 py-3 border-b border-border bg-muted/40">
+          {/* checklist */}
+          <div className="px-6 py-5">
+            <div className="flex items-center justify-between mb-4">
               <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Checklist &amp; Templates</p>
+              <span className="text-[11px] font-semibold text-muted-foreground">{done}/{total} completed</span>
             </div>
-            <ul className="divide-y divide-border/50">
+
+            <div className="space-y-2">
               {playbook.checklist.map((item, i) => (
-                <li key={i} className="px-4 py-3 hover:bg-muted/30 transition-colors">
-                  <div className="flex items-center justify-between gap-4">
+                <div key={i} className={`rounded-xl border transition-all duration-200 ${
+                  checked.has(i)
+                    ? "border-emerald-200 dark:border-emerald-800/50 bg-emerald-50/50 dark:bg-emerald-950/20"
+                    : "border-border bg-card hover:border-border/80 hover:bg-muted/20"
+                }`}>
+                  <div className="flex items-center gap-3 px-4 py-3">
+                    {/* check toggle */}
                     <button
-                      className="flex items-center gap-3 flex-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+                      className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full"
                       onClick={() => toggleChecked(i)}
+                      aria-label={checked.has(i) ? "Mark incomplete" : "Mark complete"}
                     >
                       <CheckCircle
-                        className={`w-5 h-5 flex-shrink-0 transition-colors ${
-                          checked.has(i) ? "text-emerald-500" : "text-border"
+                        className={`w-5 h-5 transition-all duration-200 ${
+                          checked.has(i) ? "text-emerald-500 scale-110" : "text-muted-foreground/30 hover:text-muted-foreground/60"
                         }`}
                       />
-                      <span
-                        className={`text-sm transition-colors ${
-                          checked.has(i) ? "line-through text-muted-foreground" : "text-foreground"
-                        }`}
-                      >
-                        {item.item}
-                      </span>
                     </button>
+
+                    {/* label */}
+                    <span
+                      className={`flex-1 text-sm leading-snug transition-colors cursor-pointer select-none ${
+                        checked.has(i) ? "line-through text-muted-foreground" : "text-foreground"
+                      }`}
+                      onClick={() => toggleChecked(i)}
+                    >
+                      {item.item}
+                    </span>
+
+                    {/* template toggle */}
                     {item.sections.length > 0 && (
                       <button
-                        className={`inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                        className={`inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 border transition-all duration-150 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                           expanded.has(i)
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-primary/10 text-primary hover:bg-primary/20"
+                            ? "bg-primary border-primary text-primary-foreground shadow-sm"
+                            : "bg-background border-border text-muted-foreground hover:text-foreground hover:border-primary/40 hover:bg-primary/5"
                         }`}
                         onClick={(e) => toggleExpanded(i, e)}
                         aria-expanded={expanded.has(i)}
                       >
-                        <FileText className="w-3 h-3" />
-                        <span>Template</span>
-                        {expanded.has(i) ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
+                        <FileText className="w-3.5 h-3.5" />
+                        Template
+                        {expanded.has(i) ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                       </button>
                     )}
                   </div>
-                  {expanded.has(i) && <TemplatePanel item={item} />}
-                </li>
+
+                  {expanded.has(i) && (
+                    <div className="px-4 pb-4">
+                      <TemplatePanel item={item} />
+                    </div>
+                  )}
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
