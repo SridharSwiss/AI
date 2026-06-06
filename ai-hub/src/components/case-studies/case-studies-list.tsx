@@ -64,7 +64,7 @@ export function CaseStudiesList() {
               {/* Company + title */}
               <div>
                 <p className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors duration-150 mb-0.5">{cs.company}</p>
-                <p className="text-xs text-muted-foreground line-clamp-2">{cs.title}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{cs.title}</p>
               </div>
 
               {/* Key metric */}
@@ -74,7 +74,7 @@ export function CaseStudiesList() {
               </div>
 
               {/* Problem */}
-              <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 flex-1">{cs.problem}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-1">{cs.problem}</p>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-1 pt-2.5 border-t border-border/40">

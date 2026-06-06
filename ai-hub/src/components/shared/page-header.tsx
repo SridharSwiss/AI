@@ -40,14 +40,14 @@ export function PageHeader({
 
       <div className="container-site relative py-10 sm:py-12">
         {eyebrow && (
-          <div className={cn("flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-widest", cfg.eyebrow)}>
+          <div className={cn("flex items-center gap-2 mb-3 text-eyebrow", cfg.eyebrow)}>
             <span className={cn("w-1.5 h-1.5 rounded-full", cfg.dot)} />
             {eyebrow}
           </div>
         )}
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-3 max-w-3xl">{title}</h1>
+        <h1 className="text-headline mb-3 max-w-3xl">{title}</h1>
         {description && (
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
+          <p className="text-body text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
         )}
         {children && <div className="mt-5">{children}</div>}
       </div>

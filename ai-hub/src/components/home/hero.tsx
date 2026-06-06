@@ -77,7 +77,7 @@ export function Hero() {
           </span>
         </h1>
 
-        <p className="animate-fade-up delay-300 text-sm font-semibold uppercase tracking-wider text-muted-foreground max-w-2xl mx-auto mb-4">
+        <p className="animate-fade-up delay-300 text-xs font-semibold uppercase tracking-wider text-muted-foreground max-w-2xl mx-auto mb-4">
           82 tools. 33 companies. 31 case studies. 16 compliance frameworks.
         </p>
 
@@ -104,10 +104,10 @@ export function Hero() {
             { target: 16, label: "Frameworks",     href: "/compliance" },
           ].map(({ target, label, href }) => (
             <Link key={label} href={href} className="group flex flex-col items-center p-4 rounded-xl border border-border/60 bg-background/50 backdrop-blur-sm hover:border-primary/40 hover:bg-primary/5 hover:-translate-y-1 hover:shadow-md transition-all duration-200">
-              <div className="text-2xl font-bold gradient-text">
+              <div className="text-3xl font-black gradient-text tabular-nums">
                 <CountUp target={target} />
               </div>
-              <div className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">{label}</div>
+              <div className="text-xs font-medium text-muted-foreground mt-1 group-hover:text-primary transition-colors">{label}</div>
             </Link>
           ))}
         </div>

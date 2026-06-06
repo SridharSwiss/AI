@@ -59,7 +59,7 @@ function SectionHeading({ eyebrow, eyebrowColor = "text-primary", eyebrowIcon: I
       <div>
         <div className="flex items-center gap-3 mb-3">
           <div className="h-px flex-1 bg-border" />
-          <div className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-widest ${eyebrowColor}`}>
+          <div className={`flex items-center gap-2 text-eyebrow ${eyebrowColor}`}>
             <Icon className="w-3.5 h-3.5" />{eyebrow}
           </div>
           <div className="h-px w-8 bg-border" />
@@ -82,7 +82,7 @@ export function FeaturedSection() {
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px flex-1 bg-border" />
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Everything in one place</p>
+            <p className="text-eyebrow text-muted-foreground">Everything in one place</p>
             <div className="h-px w-8 bg-border" />
           </div>
           <h2 className="text-headline mb-10">Your complete AI knowledge base</h2>
@@ -94,7 +94,7 @@ export function FeaturedSection() {
                 <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200 ${item.stat ? "w-12 h-12" : ""}`}>
                   <item.icon className={`w-5 h-5 ${item.color} ${item.stat ? "w-6 h-6" : ""}`} />
                 </div>
-                <span className="font-semibold text-sm mb-0.5">{item.label}</span>
+                <span className="text-sm font-semibold mb-0.5">{item.label}</span>
                 <span className="text-xs text-muted-foreground">{item.desc}</span>
                 {item.stat && (
                   <span className="text-xs font-medium text-muted-foreground/70 mt-2 pt-2 border-t border-border/50">{item.stat}</span>
@@ -159,7 +159,7 @@ export function FeaturedSection() {
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px flex-1 bg-border" />
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Find your path</p>
+            <p className="text-eyebrow text-muted-foreground">Find your path</p>
             <div className="h-px w-8 bg-border" />
           </div>
           <h2 className="text-headline mb-10">Built for every AI role</h2>
@@ -171,7 +171,7 @@ export function FeaturedSection() {
                 <div className="mb-4">
                   <persona.icon className="w-7 h-7 text-muted-foreground group-hover:text-foreground transition-colors duration-200" />
                 </div>
-                <div className="font-bold text-base mb-2">{persona.role}</div>
+                <div className="text-base font-bold mb-2">{persona.role}</div>
                 <div className="text-sm text-muted-foreground leading-relaxed">{persona.desc}</div>
                 <div className={`absolute bottom-0 left-0 h-[3px] w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${persona.barColor}`} />
               </Link>
@@ -188,10 +188,10 @@ export function FeaturedSection() {
               <Sparkles className="w-3.5 h-3.5" />
               What&apos;s New · 2026
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 leading-tight tracking-tight">
               EU AI Act enters force.<br /><span className="text-white/80">Are you ready?</span>
             </h2>
-            <p className="text-white/75 text-lg mb-8 leading-relaxed">
+            <p className="text-white/75 text-base mb-8 leading-relaxed">
               The world&apos;s first comprehensive AI regulation is now in effect. Explore our compliance guide to understand what it means for your organization.
             </p>
             <div className="flex flex-wrap gap-3">

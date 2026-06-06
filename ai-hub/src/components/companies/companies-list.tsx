@@ -101,7 +101,7 @@ export function CompaniesList() {
 
               {/* Products */}
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1.5">Key Products</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1.5">Key Products</p>
                 <div className="flex flex-wrap gap-1">
                   {company.products.slice(0, 4).map((p) => (
                     <span key={p} className="text-[11px] px-2 py-0.5 rounded-md bg-muted text-muted-foreground font-medium">{p}</span>
