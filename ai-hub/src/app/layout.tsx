@@ -33,19 +33,27 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     template: "%s | AIHub",
-    default: "AIHub - The AI Knowledge Platform",
+    default: "AIHub — AI Tools, Companies & Compliance in One Place",
   },
   description:
-    "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks - curated for everyone from beginners to executives.",
+    "AIHub is the world's most complete AI knowledge platform: compare 82+ AI tools, explore 33 companies, navigate EU AI Act compliance, and access structured learning paths — all in one place.",
   keywords: [
-    "AI tools", "artificial intelligence", "machine learning", "AI companies",
-    "AI compliance", "AI governance", "AI learning", "AI case studies",
-    "ChatGPT", "Claude", "Gemini", "LLM", "generative AI", "AI regulation",
-    "EU AI Act", "GDPR", "AI implementation", "AI strategy",
+    "AI tools comparison", "artificial intelligence platform", "EU AI Act compliance",
+    "AI companies database", "machine learning resources", "AI governance",
+    "ChatGPT alternatives", "Claude AI", "Gemini", "LLM comparison",
+    "generative AI tools", "AI regulation", "GDPR AI", "AI strategy",
+    "AI implementation guide", "AI case studies", "NIST AI RMF",
   ],
   authors: [{ name: "AIHub", url: BASE_URL }],
   creator: "AIHub",
   publisher: "AIHub",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   robots: {
     index: true,
     follow: true,
@@ -63,9 +71,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "AIHub",
-    title: "AIHub - The AI Knowledge Platform",
+    title: "AIHub — AI Tools, Companies & Compliance in One Place",
     description:
-      "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks.",
+      "Compare 82+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all curated in one platform.",
     url: BASE_URL,
     locale: "en_US",
     images: [
@@ -73,7 +81,7 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "AIHub - The AI Knowledge Platform",
+        alt: "AIHub — The AI Knowledge Platform",
       },
     ],
   },
@@ -81,16 +89,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: {
       template: "%s | AIHub",
-      default: "AIHub - The AI Knowledge Platform",
+      default: "AIHub — AI Tools, Companies & Compliance in One Place",
     },
     description:
-      "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks.",
+      "Compare 82+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all in one platform.",
     images: [`${BASE_URL}/og-image.png`],
     creator: "@AIHubSite",
     site: "@AIHubSite",
   },
-  // Add your Google Search Console verification token here:
-  // verification: { google: "YOUR_GSC_TOKEN" },
 };
 
 const orgJsonLd = {
@@ -98,10 +104,18 @@ const orgJsonLd = {
   "@type": "Organization",
   name: "AIHub",
   url: BASE_URL,
-  logo: `${BASE_URL}/logo.png`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${BASE_URL}/icon.svg`,
+    width: 32,
+    height: 32,
+  },
   description:
-    "AIHub is the all-in-one AI knowledge platform for tools, companies, compliance, learning resources, and implementation playbooks.",
-  sameAs: [],
+    "AIHub is the world's most complete AI knowledge platform: 82+ tools, 33 companies, EU AI Act compliance guides, structured learning paths, and consulting playbooks.",
+  foundingDate: "2024",
+  sameAs: [
+    "https://www.linkedin.com/company/aihub",
+  ],
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -116,8 +130,10 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "AIHub",
+  alternateName: "AIHub — The AI Knowledge Platform",
   url: BASE_URL,
-  description: "The AI Knowledge Platform - tools, companies, compliance, learning, case studies.",
+  description: "Compare AI tools, explore companies, navigate EU AI Act compliance, and access learning resources — all in one platform.",
+  inLanguage: "en",
   potentialAction: {
     "@type": "SearchAction",
     target: {

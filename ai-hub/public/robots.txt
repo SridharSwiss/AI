@@ -1,12 +1,17 @@
 User-agent: *
 Allow: /
 
-# Avoid indexing internal/utility paths
+# Block internal/utility paths
 Disallow: /api/
+Disallow: /admin/
 Disallow: /search?*
 Disallow: /_next/
 
-# Allow major crawlers full access
+# Allow crawlers explicit access to key assets
+Allow: /icon.svg
+Allow: /og-image.png
+Allow: /sitemap.xml
+
 User-agent: Googlebot
 Allow: /
 
