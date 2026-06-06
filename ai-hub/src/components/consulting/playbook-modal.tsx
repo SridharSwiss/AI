@@ -61,9 +61,9 @@ const templateTypeBadge: Record<string, string> = {
 
 function TemplatePanel({ item }: { item: ChecklistItem }) {
   return (
-    <div className="mt-3 ml-9 rounded-xl border border-primary/20 bg-primary/[0.03] dark:bg-primary/[0.06] overflow-hidden">
+    <div className="mt-3 ml-9 rounded-xl border border-border bg-muted/60 dark:bg-primary/[0.06] overflow-hidden">
       {/* template header */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-primary/[0.06] dark:bg-primary/[0.10] border-b border-primary/15">
+      <div className="flex items-center gap-3 px-4 py-3 bg-muted dark:bg-primary/[0.10] border-b border-border">
         <FileText className="w-4 h-4 text-primary flex-shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-foreground leading-tight">{item.templateTitle}</p>
@@ -73,7 +73,7 @@ function TemplatePanel({ item }: { item: ChecklistItem }) {
         </span>
       </div>
       {/* instructions */}
-      <div className="px-4 py-3 border-b border-primary/10">
+      <div className="px-4 py-3 border-b border-border">
         <p className="text-xs text-muted-foreground leading-relaxed">{item.instructions}</p>
       </div>
       {/* sections */}
@@ -84,7 +84,7 @@ function TemplatePanel({ item }: { item: ChecklistItem }) {
             <ul className="space-y-1.5">
               {section.items.map((q, qi) => (
                 <li key={qi} className="flex gap-2.5 text-xs text-foreground/80">
-                  <span className="w-4 h-4 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-[9px] flex-shrink-0 mt-0.5">{qi + 1}</span>
+                  <span className="w-4 h-4 rounded-full bg-primary/15 dark:bg-primary/10 text-primary flex items-center justify-center font-bold text-[9px] flex-shrink-0 mt-0.5">{qi + 1}</span>
                   <span className="leading-relaxed">{q}</span>
                 </li>
               ))}
@@ -148,7 +148,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Rich header ─────────────────────────────── */}
-        <div className="relative flex-shrink-0 px-6 pt-6 pb-5 bg-gradient-to-br from-primary/[0.07] via-card to-card border-b border-border">
+        <div className="relative flex-shrink-0 px-6 pt-6 pb-5 bg-card dark:bg-gradient-to-br dark:from-primary/[0.07] dark:via-card dark:to-card border-b border-border">
           {/* decorative accent bar */}
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-violet-400 to-pink-500 rounded-t-2xl" />
 
@@ -208,8 +208,8 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
               {playbook.checklist.map((item, i) => (
                 <div key={i} className={`rounded-xl border transition-all duration-200 ${
                   checked.has(i)
-                    ? "border-emerald-200 dark:border-emerald-800/50 bg-emerald-50/50 dark:bg-emerald-950/20"
-                    : "border-border bg-card hover:border-border/80 hover:bg-muted/20"
+                    ? "border-emerald-300 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-950/20"
+                    : "border-border bg-card hover:border-border/80 hover:bg-muted/30"
                 }`}>
                   <div className="flex items-center gap-3 px-4 py-3">
                     {/* check toggle */}
