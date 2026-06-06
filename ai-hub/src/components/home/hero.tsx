@@ -98,17 +98,17 @@ export function Hero() {
 
         <div className="animate-fade-up delay-500 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
           {[
-            { target: 82, label: "AI Tools" },
-            { target: 33, label: "Companies" },
-            { target: 31, label: "Case Studies" },
-            { target: 16, label: "Frameworks" },
-          ].map(({ target, label }) => (
-            <div key={label} className="flex flex-col items-center p-4 rounded-xl border border-border/60 bg-background/50 backdrop-blur-sm">
+            { target: 82, label: "AI Tools",      href: "/tools" },
+            { target: 33, label: "Companies",      href: "/companies" },
+            { target: 31, label: "Case Studies",   href: "/case-studies" },
+            { target: 16, label: "Frameworks",     href: "/compliance" },
+          ].map(({ target, label, href }) => (
+            <Link key={label} href={href} className="group flex flex-col items-center p-4 rounded-xl border border-border/60 bg-background/50 backdrop-blur-sm hover:border-primary/40 hover:bg-primary/5 hover:-translate-y-1 hover:shadow-md transition-all duration-200">
               <div className="text-2xl font-bold gradient-text">
                 <CountUp target={target} />
               </div>
-              <div className="text-xs text-muted-foreground mt-1">{label}</div>
-            </div>
+              <div className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">{label}</div>
+            </Link>
           ))}
         </div>
       </div>
