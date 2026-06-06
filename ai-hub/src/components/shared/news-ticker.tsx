@@ -7,9 +7,19 @@ const FALLBACK = [
   "EU AI Act enforcement begins · June 2026",
   "NIST AI RMF — risk management framework published",
   "ISO/IEC 42001 AI management standard now certifiable",
+  "OpenAI o3 sets new reasoning benchmarks",
+  "Anthropic raises $4B Series E",
 ];
 
 const REFRESH_INTERVAL = 5 * 60 * 1000;
+
+function getTop5(data: { title?: string; pubDate?: string }[]): string[] {
+  return [...data]
+    .filter((a) => a.title && a.pubDate)
+    .sort((a, b) => new Date(b.pubDate!).getTime() - new Date(a.pubDate!).getTime())
+    .slice(0, 5)
+    .map((a) => a.title as string);
+}
 
 export function NewsTicker() {
   const [items, setItems] = useState<string[]>(FALLBACK);
@@ -18,11 +28,11 @@ export function NewsTicker() {
   const fetchItems = useCallback(() => {
     fetch("/api/news", { cache: "no-store" })
       .then((r) => r.json())
-      .then((data: { title?: string }[]) => {
+      .then((data: { title?: string; pubDate?: string }[]) => {
         if (!Array.isArray(data) || data.length === 0) return;
-        const parsed = data.slice(0, 12).filter((a) => a.title).map((a) => a.title as string);
-        if (parsed.length > 0) {
-          setItems(parsed);
+        const top5 = getTop5(data);
+        if (top5.length > 0) {
+          setItems(top5);
           setKey((k) => k + 1);
         }
       })
