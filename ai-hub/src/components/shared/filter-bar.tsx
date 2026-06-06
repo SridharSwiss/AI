@@ -76,7 +76,7 @@ export function ToggleChip({ label, active, onChange, className }: ToggleChipPro
       {/* Indicator dot */}
       <span className={cn(
         "w-1.5 h-1.5 rounded-full transition-colors",
-        active ? "bg-white" : "bg-muted-foreground/40"
+        active ? "bg-white dark:bg-white" : "bg-muted-foreground/40"
       )} />
       {label}
     </button>
