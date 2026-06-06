@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import {
-  CheckSquare, X, CheckCircle, ChevronDown, ChevronRight, FileText,
+  CheckSquare, X, CheckCircle, FileText,
   ClipboardList, FlaskConical, TrendingUp, Shield, ScanSearch,
+  ChevronDown, ChevronRight,
 } from "lucide-react";
 import { phases } from "@/data/playbooks";
 import type { Playbook, ChecklistItem, Phase } from "@/data/playbooks";
@@ -34,18 +35,18 @@ const phaseIcons: Record<string, React.ElementType> = {
   govern: Shield,
 };
 
-const phaseAccent: Record<string, { border: string; icon: string; dot: string }> = {
-  assess: { border: "border-blue-200 dark:border-blue-800/60",    icon: "text-blue-600 dark:text-blue-400",    dot: "bg-blue-500" },
-  pilot:  { border: "border-violet-200 dark:border-violet-800/60",icon: "text-violet-600 dark:text-violet-400",dot: "bg-violet-500" },
-  scale:  { border: "border-emerald-200 dark:border-emerald-800/60",icon: "text-emerald-600 dark:text-emerald-400",dot: "bg-emerald-500" },
-  govern: { border: "border-rose-200 dark:border-rose-800/60",    icon: "text-rose-600 dark:text-rose-400",    dot: "bg-rose-500" },
+const phaseAccent: Record<string, { border: string; icon: string }> = {
+  assess: { border: "border-blue-200 dark:border-blue-800/60",     icon: "text-blue-600 dark:text-blue-400" },
+  pilot:  { border: "border-violet-200 dark:border-violet-800/60", icon: "text-violet-600 dark:text-violet-400" },
+  scale:  { border: "border-emerald-200 dark:border-emerald-800/60", icon: "text-emerald-600 dark:text-emerald-400" },
+  govern: { border: "border-rose-200 dark:border-rose-800/60",     icon: "text-rose-600 dark:text-rose-400" },
 };
 
 const levelColor: Record<string, "blue" | "green" | "purple" | "amber"> = {
-  beginner: "green",
+  beginner:     "green",
   practitioner: "blue",
-  manager: "purple",
-  executive: "amber",
+  manager:      "purple",
+  executive:    "amber",
 };
 
 const templateTypeBadge: Record<string, string> = {
@@ -90,80 +91,119 @@ function TemplatePanel({ item }: { item: ChecklistItem }) {
 function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () => void }) {
   const [checked, setChecked] = useState<Set<number>>(new Set());
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
   const toggleChecked = (i: number) => {
-    const next = new Set(checked);
-    if (next.has(i)) next.delete(i); else next.add(i);
-    setChecked(next);
+    setChecked((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i); else next.add(i);
+      return next;
+    });
   };
 
   const toggleExpanded = (i: number, e: React.MouseEvent) => {
     e.stopPropagation();
-    const next = new Set(expanded);
-    if (next.has(i)) next.delete(i); else next.add(i);
-    setExpanded(next);
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i); else next.add(i);
+      return next;
+    });
   };
 
-  const progress = Math.round((checked.size / playbook.checklist.length) * 100);
+  const total = playbook.checklist.length;
+  const done = checked.size;
+  const progress = total > 0 ? Math.round((done / total) * 100) : 0;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
       <div
-        className="bg-background rounded-2xl border border-border w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="playbook-modal-title"
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-white dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 bg-background border-b border-border p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
-          <div>
+        <div className="sticky top-0 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
+          <div className="min-w-0">
             <Badge variant={levelColor[playbook.level] ?? "blue"} className="mb-2">{playbook.level}</Badge>
-            <h2 className="text-xl font-bold">{playbook.title}</h2>
+            <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight">{playbook.title}</h2>
             <p className="text-sm text-muted-foreground mt-1">{playbook.desc}</p>
           </div>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-accent transition-colors flex-shrink-0 text-muted-foreground">
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex-shrink-0 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Close playbook"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <div className="p-6 space-y-6">
-          <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
-            <p className="text-sm text-foreground/80">{playbook.guidance}</p>
-          </div>
+          <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
 
           <div>
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-medium">Progress</p>
-              <p className="text-sm text-muted-foreground">{checked.size} / {playbook.checklist.length} ({progress}%)</p>
+              <p className="text-sm tabular-nums text-muted-foreground">{done} / {total}</p>
             </div>
-            <div className="h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+            <div className="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
             </div>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Checklist & Templates</p>
-            <ul className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Checklist &amp; Templates</p>
+            <ul className="divide-y divide-border/40">
               {playbook.checklist.map((item, i) => (
-                <li key={i}>
-                  <div
-                    className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
-                      checked.has(i)
-                        ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800/60"
-                        : "bg-card border-border hover:bg-accent/40"
-                    }`}
-                    onClick={() => toggleChecked(i)}
-                  >
-                    <CheckCircle className={`w-5 h-5 mt-0.5 flex-shrink-0 transition-colors ${checked.has(i) ? "text-emerald-500" : "text-muted-foreground/30"}`} />
-                    <span className={`text-sm flex-1 transition-colors ${checked.has(i) ? "line-through text-muted-foreground" : "text-foreground"}`}>
-                      {item.item}
-                    </span>
+                <li key={i} className="py-3 last:pb-0 first:pt-0">
+                  <div className="flex items-center justify-between gap-4">
                     <button
-                      className="flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors flex-shrink-0 ml-2 px-2 py-0.5 rounded border border-primary/30 hover:bg-primary/5"
-                      onClick={(e) => toggleExpanded(i, e)}
-                      title="View template"
+                      className="flex items-center gap-3 flex-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+                      onClick={() => toggleChecked(i)}
                     >
-                      <FileText className="w-3 h-3" />
-                      <span className="hidden sm:inline">Template</span>
-                      {expanded.has(i) ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
+                      <CheckCircle
+                        className={`w-5 h-5 flex-shrink-0 transition-colors ${
+                          checked.has(i) ? "text-emerald-500" : "text-muted-foreground/30"
+                        }`}
+                      />
+                      <span
+                        className={`text-sm transition-colors ${
+                          checked.has(i) ? "line-through text-muted-foreground" : "text-foreground"
+                        }`}
+                      >
+                        {item.item}
+                      </span>
                     </button>
+                    {item.sections.length > 0 && (
+                      <button
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 border border-primary/20 rounded-md px-2.5 py-1 hover:bg-primary/5 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        onClick={(e) => toggleExpanded(i, e)}
+                        aria-expanded={expanded.has(i)}
+                      >
+                        <FileText className="w-3 h-3" />
+                        <span>Template</span>
+                        {expanded.has(i) ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
+                      </button>
+                    )}
                   </div>
                   {expanded.has(i) && <TemplatePanel item={item} />}
                 </li>
@@ -183,7 +223,9 @@ function PhaseSection({ phase }: { phase: Phase }) {
 
   return (
     <div>
-      {activePlaybook && <PlaybookModal playbook={activePlaybook} onClose={() => setActivePlaybook(null)} />}
+      {activePlaybook && (
+        <PlaybookModal playbook={activePlaybook} onClose={() => setActivePlaybook(null)} />
+      )}
       <div className="flex items-center gap-2.5 mb-4">
         <Icon className={`w-5 h-5 ${accent.icon}`} />
         <h2 className="text-lg font-bold">{phase.label}</h2>
@@ -193,15 +235,15 @@ function PhaseSection({ phase }: { phase: Phase }) {
         {phase.playbooks.map((pb) => (
           <Card
             key={pb.title}
-            className={`group cursor-pointer border border-border rounded-xl bg-card shadow-sm hover:-translate-y-1 hover:shadow-md transition-all ${accent.border}`}
+            className={`group cursor-pointer border border-border rounded-xl bg-card p-5 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all ${accent.border}`}
             onClick={() => setActivePlaybook(pb)}
           >
-            <CardHeader className="pb-3">
+            <CardHeader className="p-0 pb-3">
               <Badge variant={levelColor[pb.level] ?? "blue"} className="w-fit mb-2">{pb.level}</Badge>
               <CardTitle className="text-base group-hover:text-primary transition-colors">{pb.title}</CardTitle>
               <CardDescription>{pb.desc}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                 <CheckSquare className="w-4 h-4 text-primary" />
                 {pb.checklist.length} checklist items with templates
@@ -247,7 +289,7 @@ function ConsultingToolkitInner() {
               <button
                 key={tab.id}
                 onClick={() => setTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-accent"
