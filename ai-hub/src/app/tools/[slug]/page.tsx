@@ -10,7 +10,42 @@ import {
   ExternalLink, CheckCircle, XCircle, ArrowRight,
   DollarSign, Users, TrendingUp, Cpu, Globe, Layers,
   Calendar, Zap, Star,
+  MessageSquare, Code2, Image, Video, Mic2, SearchCheck,
+  Server, LayoutGrid, Rocket, Pen, BarChart2, Headphones, Bot,
 } from "lucide-react";
+
+const CATEGORY_ICONS: Record<string, React.ElementType> = {
+  "Language Models":   MessageSquare,
+  "Code Assistance":   Code2,
+  "Image Generation":  Image,
+  "Video Generation":  Video,
+  "Voice & Audio":     Mic2,
+  "Search & Research": SearchCheck,
+  "Infrastructure":    Server,
+  "Frameworks":        Layers,
+  "Platforms":         LayoutGrid,
+  "APIs":              Zap,
+  "Productivity":      Rocket,
+  "Design":            Pen,
+  "Data & Analytics":  BarChart2,
+  "Customer Service":  Headphones,
+  "Autonomous Agents": Bot,
+};
+
+const CATEGORY_COLORS: Record<string, string> = {
+  "Language Models":   "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
+  "Code Assistance":   "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+  "Image Generation":  "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",
+  "Video Generation":  "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
+  "Voice & Audio":     "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+  "Search & Research": "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300",
+  "Platforms":         "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300",
+  "APIs":              "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
+  "Productivity":      "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300",
+  "Design":            "bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/30 dark:text-fuchsia-300",
+  "Data & Analytics":  "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+  "Customer Service":  "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+};
 
 const pricingBadge: Record<string, "green" | "blue" | "amber" | "purple"> = {
   Free: "green",
@@ -114,8 +149,8 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
 
       {/* Header */}
       <div className="flex items-start gap-6 mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/10 to-blue-500/10 border border-violet-500/20 flex items-center justify-center text-2xl font-bold text-violet-600 flex-shrink-0">
-          {tool.name[0]}
+        <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${CATEGORY_COLORS[tool.category] ?? "bg-muted text-muted-foreground"}`}>
+          {(() => { const Icon = CATEGORY_ICONS[tool.category] ?? Bot; return <Icon className="w-8 h-8" />; })()}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap mb-2">
@@ -147,7 +182,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
 
       {/* Key metrics bar */}
       {m && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
           {m.users && (
             <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><Users className="w-3 h-3" />Users</p>
@@ -297,8 +332,8 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
                       href={`/tools/${alt.slug}`}
                       className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-accent transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500/10 to-blue-500/10 border border-violet-500/20 flex items-center justify-center font-bold text-violet-600 text-sm flex-shrink-0">
-                        {alt.name[0]}
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${CATEGORY_COLORS[alt.category] ?? "bg-muted text-muted-foreground"}`}>
+                        {(() => { const Icon = CATEGORY_ICONS[alt.category] ?? Bot; return <Icon className="w-4 h-4" />; })()}
                       </div>
                       <div>
                         <p className="text-sm font-medium group-hover:text-primary transition-colors">{alt.name}</p>

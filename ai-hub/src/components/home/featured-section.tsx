@@ -1,15 +1,27 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Wrench, BookOpen, Shield, Briefcase, BarChart3, Building2, Sparkles } from "lucide-react";
+import { ArrowRight, Wrench, BookOpen, Shield, Briefcase, BarChart3, Building2, Sparkles, MessageSquare, Code2, Image, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
+const TOOL_ICONS: Record<string, React.ElementType> = {
+  "Language Models": MessageSquare,
+  "Code Assistance": Code2,
+  "Image Generation": Image,
+};
+
+const TOOL_COLORS: Record<string, string> = {
+  "Language Models": "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
+  "Code Assistance": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+  "Image Generation": "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",
+};
+
 const featuredTools = [
-  { name: "ChatGPT",       vendor: "OpenAI",         category: "Language Models", description: "Conversational AI for writing, analysis, coding, and problem-solving.",          tags: ["NLP", "Productivity", "Coding"], pricing: "freemium", href: "/tools/chatgpt",       emoji: "💬" },
-  { name: "Claude",        vendor: "Anthropic",      category: "Language Models", description: "Safety-focused AI assistant with strong reasoning and document analysis.",       tags: ["NLP", "Safety", "Analysis"],    pricing: "freemium", href: "/tools/claude",        emoji: "🤖" },
-  { name: "Midjourney",    vendor: "Midjourney",     category: "Image Generation",description: "High-quality AI image generation from text prompts.",                          tags: ["Image", "Creative", "Design"],  pricing: "paid",     href: "/tools/midjourney",   emoji: "🎨" },
-  { name: "GitHub Copilot",vendor: "GitHub / OpenAI",category: "Code Assistance", description: "AI pair programmer that suggests code completions in your IDE.",                tags: ["Coding", "IDE", "Productivity"],pricing: "paid",     href: "/tools/github-copilot",emoji: "⚡" },
+  { name: "ChatGPT",       vendor: "OpenAI",         category: "Language Models", description: "Conversational AI for writing, analysis, coding, and problem-solving.",          tags: ["NLP", "Productivity", "Coding"], pricing: "freemium", href: "/tools/chatgpt" },
+  { name: "Claude",        vendor: "Anthropic",      category: "Language Models", description: "Safety-focused AI assistant with strong reasoning and document analysis.",       tags: ["NLP", "Safety", "Analysis"],    pricing: "freemium", href: "/tools/claude" },
+  { name: "Midjourney",    vendor: "Midjourney",     category: "Image Generation",description: "High-quality AI image generation from text prompts.",                          tags: ["Image", "Creative", "Design"],  pricing: "paid",     href: "/tools/midjourney" },
+  { name: "GitHub Copilot",vendor: "GitHub / OpenAI",category: "Code Assistance", description: "AI pair programmer that suggests code completions in your IDE.",                tags: ["Coding", "IDE", "Productivity"],pricing: "paid",     href: "/tools/github-copilot" },
 ];
 
 const featuredCaseStudies = [
@@ -84,7 +96,9 @@ export function FeaturedSection() {
                 <Card className="h-full group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-card-hover)] group-hover:border-border/80">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-2 mb-3">
-                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500/10 to-blue-500/10 border border-violet-500/15 flex items-center justify-center text-xl">{tool.emoji}</div>
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${TOOL_COLORS[tool.category] ?? "bg-muted text-muted-foreground"}`}>
+                        {React.createElement(TOOL_ICONS[tool.category] ?? MessageSquare, { className: "w-5 h-5" })}
+                      </div>
                       <Badge variant={pricingVariant[tool.pricing]}>{tool.pricing}</Badge>
                     </div>
                     <CardTitle className="text-base group-hover:text-primary transition-colors duration-200">{tool.name}</CardTitle>

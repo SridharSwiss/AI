@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { FilterBar, ToggleChip } from "@/components/shared/filter-bar";
-import { BookOpen, Play, Award, Clock, ExternalLink, Book, GraduationCap } from "lucide-react";
+import { BookOpen, Youtube, Award, Clock, ExternalLink, BookMarked, GraduationCap, Code2 } from "lucide-react";
 import { learnResources, resourceTypes, resourceLevels } from "@/data/learn";
 import { cn } from "@/lib/utils";
 
 const typeIcon: Record<string, React.ElementType> = {
-  course: GraduationCap, youtube: Play, certification: Award, book: Book, tutorial: BookOpen,
+  course: GraduationCap, youtube: Youtube, certification: Award, book: BookMarked, tutorial: Code2,
 };
 
 const typeBg: Record<string, string> = {
@@ -82,7 +82,7 @@ export function LearnList() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((r) => {
-            const TypeIcon = typeIcon[r.type] ?? BookOpen;
+            const TypeIcon = typeIcon[r.type] ?? GraduationCap;
             return (
               <Card key={r.slug} className="group hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] hover:border-border/80">
                 <CardHeader className="pb-3">

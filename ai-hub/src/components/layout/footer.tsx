@@ -48,7 +48,7 @@ export function Footer() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center shadow-sm group-hover:shadow-violet-500/30 transition-shadow duration-300">
                 <Brain className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-lg tracking-tight">AI<span className="gradient-text">Hub</span></span>
+              <span className="font-bold text-lg tracking-tight">AIHub</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-xs">
               The all-in-one AI knowledge platform for everyone from curious beginners to C-suite executives navigating the AI landscape.

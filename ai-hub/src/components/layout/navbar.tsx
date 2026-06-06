@@ -160,7 +160,7 @@ export function Navbar() {
                 <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
               </span>
             </div>
-            <span className="font-bold text-lg tracking-tight">AI<span className="gradient-text">Hub</span></span>
+            <span className="font-bold text-lg tracking-tight">AIHub</span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5 relative">
