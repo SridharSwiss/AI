@@ -171,7 +171,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
           </div>
         </div>
 
-        <div className="p-6 space-y-6 bg-muted/20">
+        <div className="p-6 space-y-6 bg-card">
           <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
 
           <div className="rounded-xl border border-border bg-card overflow-hidden">
