@@ -6,14 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import {
   CheckSquare, X, CheckCircle, ChevronDown, ChevronRight, FileText,
-  ClipboardList, FlaskConical, TrendingUp, Shield,
+  ClipboardList, FlaskConical, TrendingUp, Shield, ScanSearch,
 } from "lucide-react";
 import { phases } from "@/data/playbooks";
 import type { Playbook, ChecklistItem, Phase } from "@/data/playbooks";
 
 const tabConfig: { id: string; label: string; icon: React.ElementType; phaseKey: string | null }[] = [
   { id: "all",    label: "All Phases",  icon: ClipboardList, phaseKey: null },
-  { id: "assess", label: "Assess",      icon: ClipboardList, phaseKey: "assess" },
+  { id: "assess", label: "Assess",      icon: ScanSearch,    phaseKey: "assess" },
   { id: "pilot",  label: "Pilot",       icon: FlaskConical,  phaseKey: "pilot" },
   { id: "scale",  label: "Scale",       icon: TrendingUp,    phaseKey: "scale" },
   { id: "govern", label: "Govern",      icon: Shield,        phaseKey: "govern" },
@@ -229,7 +229,7 @@ function ConsultingToolkitInner() {
       params.set("tab", tabId);
     }
     const qs = params.toString();
-    router.replace(qs ? `?${qs}` : "?", { scroll: false });
+    router.replace(qs ? `?${qs}` : "/consulting-toolkit", { scroll: false });
   };
 
   const visiblePhases = activeTab === "all"
