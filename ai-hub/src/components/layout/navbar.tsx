@@ -47,7 +47,7 @@ const megaMenus = {
     items: [
       { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",      href: "/compliance",                     color: "text-rose-500",   bg: "bg-rose-500/8" },
       { icon: Briefcase, label: "Consulting Toolkit",    desc: "Playbooks & templates",              href: "/consulting-toolkit",             color: "text-pink-500",   bg: "bg-pink-500/8" },
-      { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",   href: "/consulting-toolkit#assessment",  color: "text-orange-500", bg: "bg-orange-500/8" },
+      { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",   href: "/consulting-toolkit?tab=assess",  color: "text-orange-500", bg: "bg-orange-500/8" },
       { icon: Globe,     label: "Global Regulations",    desc: "Multi-jurisdiction coverage",       href: "/compliance#jurisdictions",       color: "text-teal-500",   bg: "bg-teal-500/8" },
     ],
     featured: null,
