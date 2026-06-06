@@ -136,45 +136,51 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         role="dialog"
         aria-modal="true"
         aria-labelledby="playbook-modal-title"
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-popover text-popover-foreground rounded-2xl border border-border shadow-2xl"
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-card text-card-foreground rounded-2xl border border-border shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 bg-popover border-b border-border p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
-          <div className="min-w-0">
-            <Badge variant={levelColor[playbook.level] ?? "blue"} className="mb-2">{playbook.level}</Badge>
-            <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight">{playbook.title}</h2>
-            <p className="text-sm text-muted-foreground mt-1">{playbook.desc}</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex-shrink-0 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            aria-label="Close playbook"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        <div className="p-6 space-y-6">
-          <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
-
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm font-medium">Progress</p>
-              <p className="text-sm tabular-nums text-muted-foreground">{done} / {total}</p>
+        {/* sticky header with subtle gradient so it visually separates from body */}
+        <div className="sticky top-0 z-10 rounded-t-2xl bg-card border-b border-border px-6 pt-5 pb-4">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <Badge variant={levelColor[playbook.level] ?? "blue"} className="mb-2">{playbook.level}</Badge>
+              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight">{playbook.title}</h2>
+              <p className="text-sm text-muted-foreground mt-1">{playbook.desc}</p>
             </div>
-            <div className="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+            <button
+              onClick={onClose}
+              className="p-2 rounded-lg hover:bg-muted transition-colors flex-shrink-0 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label="Close playbook"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* progress bar in the header so it's always visible */}
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-1.5">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Progress</p>
+              <p className="text-xs tabular-nums font-semibold text-muted-foreground">{done} / {total}</p>
+            </div>
+            <div className="h-1.5 rounded-full bg-muted overflow-hidden">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-300"
+                className="h-full bg-primary rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
+        </div>
 
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Checklist &amp; Templates</p>
-            <ul className="divide-y divide-border/40">
+        <div className="p-6 space-y-6 bg-muted/20">
+          <p className="text-sm text-foreground/80 leading-relaxed">{playbook.guidance}</p>
+
+          <div className="rounded-xl border border-border bg-card overflow-hidden">
+            <div className="px-4 py-3 border-b border-border bg-muted/40">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Checklist &amp; Templates</p>
+            </div>
+            <ul className="divide-y divide-border/50">
               {playbook.checklist.map((item, i) => (
-                <li key={i} className="py-3 last:pb-0 first:pt-0">
+                <li key={i} className="px-4 py-3 hover:bg-muted/30 transition-colors">
                   <div className="flex items-center justify-between gap-4">
                     <button
                       className="flex items-center gap-3 flex-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
@@ -182,7 +188,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                     >
                       <CheckCircle
                         className={`w-5 h-5 flex-shrink-0 transition-colors ${
-                          checked.has(i) ? "text-emerald-500" : "text-muted-foreground/30"
+                          checked.has(i) ? "text-emerald-500" : "text-border"
                         }`}
                       />
                       <span
@@ -195,7 +201,11 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                     </button>
                     {item.sections.length > 0 && (
                       <button
-                        className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 border border-primary/20 rounded-md px-2.5 py-1 hover:bg-primary/5 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        className={`inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                          expanded.has(i)
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-primary/10 text-primary hover:bg-primary/20"
+                        }`}
                         onClick={(e) => toggleExpanded(i, e)}
                         aria-expanded={expanded.has(i)}
                       >
