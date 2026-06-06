@@ -51,25 +51,25 @@
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
-    --card: 222 47% 6.5%;
-    --card-foreground: 210 20% 98%;
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 258 85% 65%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --background:          222 47% 5%;
+    --foreground:          210 40% 96%;
+    --card:                222 47% 9%;
+    --card-foreground:     210 40% 96%;
+    --popover:             222 47% 11%;
+    --popover-foreground:  210 40% 96%;
+    --primary:             258 85% 68%;
+    --primary-foreground:  210 20% 98%;
+    --secondary:           215 32% 16%;
+    --secondary-foreground:210 40% 96%;
+    --muted:               215 32% 13%;
+    --muted-foreground:    215 25% 62%;
+    --accent:              215 32% 16%;
+    --accent-foreground:   210 40% 96%;
+    --destructive:         0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
-    --border: 217 33% 22%;
-    --input: 217 33% 18%;
-    --ring: 263.4 70% 50.4%;
+    --border:              215 32% 26%;
+    --input:               215 32% 20%;
+    --ring:                258 85% 68%;
 
     --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.20);
     --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.30), 0 1px 2px rgb(0 0 0 / 0.18);
@@ -238,10 +238,10 @@
   }
 
   .dark .glass {
-    background: rgb(10 10 20 / 0.65);
+    background: rgb(20 22 40 / 0.85);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.12);
   }
 
   .text-display {
