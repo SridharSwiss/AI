@@ -43,7 +43,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     architecture:
       "Documents enter via an ingestion pipeline that normalizes PDFs to structured text. A BERT-class NLP model identifies document type and extracts 150+ key data fields. A clause classification layer flags exceptions and non-standard terms. Output feeds a lawyer review queue ranked by exception severity, with all AI decisions logged for audit.",
     dataRequirements:
-      "12 years of historical commercial loan agreements (500,000+ documents) used for training. Data remained entirely within JPMorgan's private infrastructure — no documents were sent to external APIs. Legal teams hand-labeled 50,000 documents to create the training corpus.",
+      "12 years of historical commercial loan agreements (500,000+ documents) used for training. Data remained entirely within JPMorgan's private infrastructure - no documents were sent to external APIs. Legal teams hand-labeled 50,000 documents to create the training corpus.",
     investmentEstimate: "$25–35M over 3 years (engineering, data labeling, infrastructure, change management)",
     annualReturn: "$150M+",
     paybackPeriod: "~3 months post-deployment",
@@ -101,18 +101,18 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Lawyer trust and adoption: Senior attorneys were skeptical of AI making legal determinations and required extensive validation before accepting AI-flagged exceptions",
       "Legal edge cases: The long tail of unusual contract clauses required continuous model retraining as new document types surfaced",
       "Regulatory concerns: The OCC (Office of the Comptroller of the Currency) required explainability for any AI involved in credit decisions",
-      "Data labeling quality: Legal nuance is hard to codify — initial label consistency between annotators was only 72%, requiring iterative guidelines",
+      "Data labeling quality: Legal nuance is hard to codify - initial label consistency between annotators was only 72%, requiring iterative guidelines",
       "System integration: COIN needed to integrate with 8 legacy document management systems across different business units",
     ],
     governanceFramework: [
-      "Human-in-the-loop for all exception-flagged clauses — AI never makes final binding decisions",
+      "Human-in-the-loop for all exception-flagged clauses - AI never makes final binding decisions",
       "Quarterly model performance reviews with legal and risk teams",
       "All AI decisions logged with full audit trail retained for 7 years",
       "Model drift monitoring: alerts triggered if AI exception detection rate deviates >15% from baseline",
       "Explainability layer providing human-readable reasoning for every flagged clause",
     ],
     dataPrivacy: [
-      "All processing occurs within JPMorgan's private cloud — no client data sent to third-party APIs",
+      "All processing occurs within JPMorgan's private cloud - no client data sent to third-party APIs",
       "Customer PII fields masked before model training",
       "Data retained per existing document retention policies (7 years)",
       "Access controls: only authorized legal team members can access review queues",
@@ -125,10 +125,10 @@ export const caseStudiesData1: CaseStudyData[] = [
       "GDPR for European counterparty data",
     ],
     lessonsLearned: [
-      "Start with the 20% of document types that represent 80% of volume — don't try to automate edge cases first",
+      "Start with the 20% of document types that represent 80% of volume - don't try to automate edge cases first",
       "Lawyer co-development is non-negotiable: the model's 150 extraction points were defined by lawyers, not engineers",
       "Explainability investment pays for itself: OCC compliance was faster because the explainability layer was built from day one",
-      "Measure both recall (catching errors) and false positive rate (lawyer fatigue from incorrect flags) — optimizing only one destroys the other",
+      "Measure both recall (catching errors) and false positive rate (lawyer fatigue from incorrect flags) - optimizing only one destroys the other",
       "Change management budget should equal engineering budget for professional knowledge work automation",
     ],
     whatWorkedWell: [
@@ -170,7 +170,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     industry: "Healthcare",
     title: "AI-Powered Radiology: Reducing Diagnostic Time by 30%",
     problem:
-      "Radiologists at Mayo Clinic faced overwhelming scan volumes — over 1 million imaging studies per year. Fatigue-related errors and long turnaround times threatened patient safety and satisfaction.",
+      "Radiologists at Mayo Clinic faced overwhelming scan volumes - over 1 million imaging studies per year. Fatigue-related errors and long turnaround times threatened patient safety and satisfaction.",
     solution:
       "Deployed an AI-powered imaging analysis assistant integrated directly into the PACS (Picture Archiving and Communication System) workflow. AI pre-reads scans, flags anomalies, and prioritizes urgent cases for immediate radiologist review.",
     outcome:
@@ -261,13 +261,13 @@ export const caseStudiesData1: CaseStudyData[] = [
     teamSize: "25 engineers, 15 data scientists, 20 radiologist collaborators, 3 FDA regulatory specialists, 5 clinical informaticists",
     challenges: [
       "FDA regulatory pathway: Navigating 510(k) clearance as a novel software device added 12 months and significant cost to the program",
-      "Radiologist workflow integration: Radiologists initially feared AI would be used to benchmark their performance rather than assist them — required transparent communication",
-      "False positive rate management: Early models flagged too many false positives, causing radiologists to ignore AI suggestions — required significant tuning",
+      "Radiologist workflow integration: Radiologists initially feared AI would be used to benchmark their performance rather than assist them - required transparent communication",
+      "False positive rate management: Early models flagged too many false positives, causing radiologists to ignore AI suggestions - required significant tuning",
       "PACS system heterogeneity: Mayo uses 4 different PACS systems across campuses, requiring custom integration for each",
       "Prospective validation gap: Retrospective accuracy didn't fully translate to prospective performance, requiring an additional 6 months of shadow mode",
     ],
     governanceFramework: [
-      "AI findings are advisory only — every study requires radiologist sign-off before clinical use",
+      "AI findings are advisory only - every study requires radiologist sign-off before clinical use",
       "Monthly model performance reviews comparing AI findings to final radiologist reads",
       "Radiologist feedback loop: any disagreement with AI flagged finding is logged for model improvement",
       "Annual external audit of model performance by independent clinical AI board",
@@ -288,20 +288,20 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Joint Commission standards for diagnostic imaging quality",
     ],
     lessonsLearned: [
-      "Involve radiologists in model design from day one — models built without clinical input had unacceptably high false positive rates",
+      "Involve radiologists in model design from day one - models built without clinical input had unacceptably high false positive rates",
       "FDA clearance timeline should be planned into the project roadmap from the start, not treated as an afterthought",
-      "Shadow mode validation is essential before clinical deployment — prospective performance always differs from retrospective validation",
+      "Shadow mode validation is essential before clinical deployment - prospective performance always differs from retrospective validation",
       "Communicate clearly to clinicians that AI is meant to reduce their burden, not measure their performance",
-      "Prioritize the highest-acuity, time-critical use cases (PE, stroke) first — the value is clearest and physician resistance is lowest",
+      "Prioritize the highest-acuity, time-critical use cases (PE, stroke) first - the value is clearest and physician resistance is lowest",
     ],
     whatWorkedWell: [
       "Partnering with NVIDIA and using MONAI framework accelerated model development by ~8 months vs. building from scratch",
       "Radiologist champions program: recruiting 5 senior radiologists as model advisors built credibility with the broader clinical community",
-      "Starting with the night/weekend shift use case — radiologists most receptive to AI assistance during highest-fatigue periods",
+      "Starting with the night/weekend shift use case - radiologists most receptive to AI assistance during highest-fatigue periods",
     ],
     openSourceRepos: [
       {
-        name: "MONAI — Medical Open Network for AI",
+        name: "MONAI - Medical Open Network for AI",
         url: "https://github.com/Project-MONAI/MONAI",
         description:
           "PyTorch-based open-source framework for deep learning in healthcare imaging, used as the foundation for Mayo's model development",
@@ -335,7 +335,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     problem:
       "Klarna's customer service handled 10M+ contacts annually across 35 languages. Response times averaged 11 minutes, and scaling human agents was costly and slow as Klarna expanded into new markets.",
     solution:
-      "Deployed an AI assistant powered by OpenAI to handle the full customer service interaction lifecycle — from query understanding to resolution, refund processing, and follow-up. Integrated with Klarna's backend payment and order management systems.",
+      "Deployed an AI assistant powered by OpenAI to handle the full customer service interaction lifecycle - from query understanding to resolution, refund processing, and follow-up. Integrated with Klarna's backend payment and order management systems.",
     outcome:
       "The AI handles 2/3 of all customer chats. $40M annual savings. Average resolution time dropped from 11 minutes to under 2 minutes. Customer satisfaction maintained at 82%.",
     metrics: [
@@ -424,10 +424,10 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     teamSize: "20 engineers, 8 ML engineers, 5 product managers, 15 QA specialists, 10 customer service team leads",
     challenges: [
-      "Financial service sensitivity: LLM hallucinations in a financial context can cause direct monetary harm — required multiple safeguard layers and extensive red-teaming",
+      "Financial service sensitivity: LLM hallucinations in a financial context can cause direct monetary harm - required multiple safeguard layers and extensive red-teaming",
       "GDPR compliance: EU data residency requirements for customer data meant the LLM pipeline needed to be hosted in EU regions with strict data isolation",
       "Agent displacement morale: The program required significant change management as 700 agent roles were eliminated",
-      "Language quality at scale: Quality across 35 languages varied significantly — required language-specific evaluation and tuning",
+      "Language quality at scale: Quality across 35 languages varied significantly - required language-specific evaluation and tuning",
       "Edge case coverage: The long tail of unusual payment disputes (merchant fraud, delivery failures) required extensive resolution playbook expansion",
     ],
     governanceFramework: [
@@ -452,11 +452,11 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Emerging EU AI Act requirements for high-risk financial AI systems",
     ],
     lessonsLearned: [
-      "Start with the most common, most transactional query types — 'Where is my order?' and 'I want a refund' represent 60% of volume and are safest for AI to handle",
-      "Financial AI requires a more conservative confidence threshold than other domains — a 90% accuracy bar isn't good enough when errors cost customers money",
-      "Red-team the system extensively before launch — adversarial users will attempt to manipulate the AI into unauthorized refunds",
-      "Invest in multilingual evaluation infrastructure early — English performance metrics don't transfer to other languages",
-      "Be transparent with customers that they're talking to AI — deception creates backlash and regulatory risk",
+      "Start with the most common, most transactional query types - 'Where is my order?' and 'I want a refund' represent 60% of volume and are safest for AI to handle",
+      "Financial AI requires a more conservative confidence threshold than other domains - a 90% accuracy bar isn't good enough when errors cost customers money",
+      "Red-team the system extensively before launch - adversarial users will attempt to manipulate the AI into unauthorized refunds",
+      "Invest in multilingual evaluation infrastructure early - English performance metrics don't transfer to other languages",
+      "Be transparent with customers that they're talking to AI - deception creates backlash and regulatory risk",
     ],
     whatWorkedWell: [
       "OpenAI's tool-calling API made it possible to give the LLM direct access to Klarna's systems without building a custom function-calling layer",
@@ -568,7 +568,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     teamSize: "15 engineers, 5 ML specialists, 200+ contract linguists (review role), 8 product managers",
     challenges: [
       "Linguistic accuracy: GPT-4 makes subtle grammatical errors in less-common languages that are hard to catch without expert review",
-      "Pedagogical alignment: AI-generated content didn't always match Duolingo's teaching philosophy — required significant prompt engineering",
+      "Pedagogical alignment: AI-generated content didn't always match Duolingo's teaching philosophy - required significant prompt engineering",
       "Quality consistency: Maintaining consistent voice and difficulty calibration across AI-generated content batches",
       "Linguist resistance: Some linguists felt AI content generation threatened their roles",
       "Cultural sensitivity: AI-generated cultural notes occasionally contained stereotypes requiring careful editorial guidelines",
@@ -593,10 +593,10 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Emerging EU AI Act requirements for AI in educational contexts",
     ],
     lessonsLearned: [
-      "Prompt templates for specific exercise types outperform general prompts significantly — invest in prompt engineering per content type",
+      "Prompt templates for specific exercise types outperform general prompts significantly - invest in prompt engineering per content type",
       "Measure AI content quality by learner outcomes, not just linguist approval rates",
-      "Start with your highest-traffic, most-documented language pairs — the AI performs better with more reference content available",
-      "Build the human review workflow UI carefully — a poor review interface is the biggest bottleneck to scaling AI content review",
+      "Start with your highest-traffic, most-documented language pairs - the AI performs better with more reference content available",
+      "Build the human review workflow UI carefully - a poor review interface is the biggest bottleneck to scaling AI content review",
     ],
     whatWorkedWell: [
       "OpenAI API's reliability and low latency made it viable to integrate into the content creation workflow without building custom infrastructure",
@@ -626,7 +626,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     industry: "Manufacturing",
     title: "Generative AI Cuts Aircraft Design Time from 6 Months to 2 Weeks",
     problem:
-      "Aircraft wiring harness design — arguably the most complex part of an aircraft — took 6+ months and was error-prone. Each aircraft has kilometers of wiring with millions of possible configurations and strict weight, safety, and certification constraints.",
+      "Aircraft wiring harness design - arguably the most complex part of an aircraft - took 6+ months and was error-prone. Each aircraft has kilometers of wiring with millions of possible configurations and strict weight, safety, and certification constraints.",
     solution:
       "Built a generative AI design assistant trained on 50 years of engineering documentation, CAD drawings, and compliance requirements. Engineers describe constraints and the AI generates optimized designs meeting all weight, safety, and regulatory requirements simultaneously.",
     outcome:
@@ -645,7 +645,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       "7,000+ aircraft backlog requiring design throughput acceleration",
       "Frequent late supply chain substitutions requiring rapid design rework",
       "Weight reduction mandates for fuel efficiency driving more complex trade-off optimization",
-      "Engineering talent shortage — senior wiring harness designers average age 52 with imminent retirements",
+      "Engineering talent shortage - senior wiring harness designers average age 52 with imminent retirements",
       "EU Aerospace AI strategy recommending AI adoption across design and manufacturing",
     ],
     techStack: [
@@ -661,7 +661,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     architecture:
       "A knowledge graph encodes 50 years of wiring design rules, component specs, and certification requirements as structured data. Engineers input design constraints (weight budget, power requirements, routing zones) via a natural language interface. A generative search algorithm explores the design space, guided by the knowledge graph constraints. Top design candidates are presented with trade-off analysis. The system outputs designs in CATIA-compatible format with auto-generated certification documentation.",
     dataRequirements:
-      "50 years of Airbus technical documentation digitized and structured (12M+ pages). Historical design files from A320, A330, A350, A380 programs. Component specifications from 2,000+ suppliers. All data remains within Airbus's secure private infrastructure — no design data sent to external AI providers.",
+      "50 years of Airbus technical documentation digitized and structured (12M+ pages). Historical design files from A320, A330, A350, A380 programs. Component specifications from 2,000+ suppliers. All data remains within Airbus's secure private infrastructure - no design data sent to external AI providers.",
     investmentEstimate: "$50–70M over 5 years including knowledge graph construction and CAD system integration",
     annualReturn: "$120M+",
     paybackPeriod: "24 months post full deployment",
@@ -717,17 +717,17 @@ export const caseStudiesData1: CaseStudyData[] = [
     teamSize: "60 engineers, 20 data scientists, 30 domain expert engineers, 10 certification specialists",
     challenges: [
       "Knowledge graph completeness: Decades of implicit design knowledge held in engineers' heads proved very difficult to formalize",
-      "Certification authority engagement: EASA had no established framework for certifying AI-generated aerospace designs — required extensive regulatory engagement",
+      "Certification authority engagement: EASA had no established framework for certifying AI-generated aerospace designs - required extensive regulatory engagement",
       "CAD system integration: Airbus uses 4 different CAD systems across programs, requiring significant integration investment",
       "Engineer adoption: Senior engineers were deeply skeptical of AI-generated designs for safety-critical systems",
-      "Novel design validation: AI proposed genuinely novel configurations that had no historical precedent for certification — new validation methodologies were needed",
+      "Novel design validation: AI proposed genuinely novel configurations that had no historical precedent for certification - new validation methodologies were needed",
     ],
     governanceFramework: [
       "All AI-generated designs reviewed and signed off by a senior engineer before release to manufacturing",
       "EASA-approved validation protocol for novel AI-generated configurations",
       "Digital twin simulation verification of all AI designs before physical prototyping",
       "Design audit trail from constraint input to final design stored for aircraft lifetime (20+ years)",
-      "Model performance review quarterly — designs compared to manufactured outcomes for accuracy",
+      "Model performance review quarterly - designs compared to manufactured outcomes for accuracy",
     ],
     dataPrivacy: [
       "All design data retained within Airbus's private secure infrastructure",
@@ -744,10 +744,10 @@ export const caseStudiesData1: CaseStudyData[] = [
       "EU AI Act high-risk AI system requirements",
     ],
     lessonsLearned: [
-      "Knowledge graph construction is the most time-consuming part — budget 18+ months and involve senior engineers throughout",
+      "Knowledge graph construction is the most time-consuming part - budget 18+ months and involve senior engineers throughout",
       "EASA engagement must start at project inception, not after the model is built",
       "Build explainability first: engineers need to understand why the AI chose a design before they trust it",
-      "Weight optimization creates the fastest demonstrable ROI — use it as the initial use case to build credibility",
+      "Weight optimization creates the fastest demonstrable ROI - use it as the initial use case to build credibility",
       "Digital twin verification as a mandatory step between AI design and physical build significantly reduced risk",
     ],
     whatWorkedWell: [
@@ -791,7 +791,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     tags: ["Education", "Tutoring", "LLM", "GPT-4", "Personalization"],
     businessContext:
-      "Khan Academy's mission is to provide 'a free, world-class education for anyone, anywhere.' Khanmigo represented the first real opportunity to deliver personalized tutoring — historically a privilege of wealthy students — at zero marginal cost to the learner. The $5/month donor-supported model was designed to be sustainable without excluding low-income users.",
+      "Khan Academy's mission is to provide 'a free, world-class education for anyone, anywhere.' Khanmigo represented the first real opportunity to deliver personalized tutoring - historically a privilege of wealthy students - at zero marginal cost to the learner. The $5/month donor-supported model was designed to be sustainable without excluding low-income users.",
     strategicDrivers: [
       "Mission alignment: AI tutoring democratizes access to personalized education previously only available to privileged students",
       "OpenAI partnership providing GPT-4 access at favorable rates as part of OpenAI's social mission investment",
@@ -866,7 +866,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     teamSize: "30 engineers, 10 AI/ML researchers, 15 education specialists, 5 child safety experts, 5 policy/ethics staff",
     challenges: [
-      "Child safety: AI interacting with minors requires extraordinary care — extensive red-teaming for grooming, self-harm, and inappropriate content risks",
+      "Child safety: AI interacting with minors requires extraordinary care - extensive red-teaming for grooming, self-harm, and inappropriate content risks",
       "Socratic balance: GPT-4's default tendency to provide answers required sophisticated prompt engineering to maintain Socratic questioning style",
       "Teacher trust: Many teachers were skeptical that AI tutoring would undermine critical thinking skills",
       "FERPA/COPPA compliance: Student data privacy regulations required careful data architecture",
@@ -880,8 +880,8 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Regular bias audits to ensure AI provides equivalent quality help across student demographics",
     ],
     dataPrivacy: [
-      "COPPA compliance for users under 13 — parental consent required, no advertising data use",
-      "FERPA compliance for school district deployments — student data never sold or used for advertising",
+      "COPPA compliance for users under 13 - parental consent required, no advertising data use",
+      "FERPA compliance for school district deployments - student data never sold or used for advertising",
       "Conversation data retained for 90 days for safety review, then deleted",
       "Student data anonymized before any use in model improvement",
     ],
@@ -894,8 +894,8 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Emerging EU AI Act requirements for AI in educational settings",
     ],
     lessonsLearned: [
-      "The Socratic prompt is the product — investing 6 months in prompt engineering before building any UI was the right call",
-      "Teacher buy-in is more important than student buy-in — teachers are the gatekeepers in school deployments",
+      "The Socratic prompt is the product - investing 6 months in prompt engineering before building any UI was the right call",
+      "Teacher buy-in is more important than student buy-in - teachers are the gatekeepers in school deployments",
       "Child safety requires a dedicated expert team, not just a content filter bolted on at the end",
       "Free access for low-income students should be built into the business model from the start, not as an afterthought",
     ],
@@ -949,7 +949,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Microsoft needed to monetize GitHub's 100M+ developer user base beyond free repository hosting",
       "OpenAI partnership required high-profile deployment to demonstrate commercial viability of Codex",
       "Developer tooling is a direct path to enterprise AI adoption and broader Azure consumption",
-      "JetBrains and Tabnine were already shipping AI code completion — first-mover advantage window was closing",
+      "JetBrains and Tabnine were already shipping AI code completion - first-mover advantage window was closing",
       "Developer satisfaction and retention tied directly to productivity tooling quality",
     ],
     techStack: [
@@ -965,7 +965,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     architecture:
       "When a developer pauses typing, the IDE extension sends surrounding code context (up to 128k tokens in GPT-4 Turbo) along with the current cursor position to the GitHub Copilot service. The service uses RAG to retrieve relevant code from the user's repository and related GitHub repositories. GPT-4 generates completion suggestions that appear as ghost text in the IDE. Enterprise deployments add custom knowledge bases of internal APIs and coding standards.",
     dataRequirements:
-      "Pre-training: all public GitHub code (terabytes of code across 500+ programming languages). Fine-tuning: curated code examples with tests and documentation. No customer code is used for model training — only for in-context retrieval during completion generation.",
+      "Pre-training: all public GitHub code (terabytes of code across 500+ programming languages). Fine-tuning: curated code examples with tests and documentation. No customer code is used for model training - only for in-context retrieval during completion generation.",
     investmentEstimate: "$200M+ in model training costs, infrastructure, and engineering (Microsoft/OpenAI investment)",
     annualReturn: "$1.5B+ ARR (at $19/month × 1M+ subscribers + enterprise)",
     paybackPeriod: "18 months post GA launch",
@@ -1020,7 +1020,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       "IDE performance: Real-time suggestion generation required extensive optimization to avoid UI lag",
     ],
     governanceFramework: [
-      "No customer code used for model training — explicit policy and contractual commitment",
+      "No customer code used for model training - explicit policy and contractual commitment",
       "Code security scanning integrated alongside suggestions to flag known vulnerability patterns",
       "Duplicate code detection to avoid surfacing near-verbatim copies of licensed code",
       "Enterprise policy controls: organizations can disable Copilot for specific repositories",
@@ -1033,21 +1033,21 @@ export const caseStudiesData1: CaseStudyData[] = [
       "GitHub Privacy Statement governs all data handling",
     ],
     humanOversight:
-      "Developers review and accept or reject every suggestion — Copilot generates, humans decide. GitHub publishes quarterly transparency reports on model performance and security incident statistics. Microsoft's Responsible AI team conducts annual assessments of Copilot's impact on code security and quality.",
+      "Developers review and accept or reject every suggestion - Copilot generates, humans decide. GitHub publishes quarterly transparency reports on model performance and security incident statistics. Microsoft's Responsible AI team conducts annual assessments of Copilot's impact on code security and quality.",
     regulatoryConsiderations: [
       "Ongoing US copyright litigation (Doe v. GitHub) regarding training data",
       "EU AI Act classification as a general purpose AI system",
       "SOC 2 and ISO 27001 for enterprise data handling",
     ],
     lessonsLearned: [
-      "Latency is the product — suggestions arriving in >200ms are ignored; invest in inference optimization before feature expansion",
-      "Trust is built one suggestion at a time — quality beats quantity; better to suggest less and be right more often",
+      "Latency is the product - suggestions arriving in >200ms are ignored; invest in inference optimization before feature expansion",
+      "Trust is built one suggestion at a time - quality beats quantity; better to suggest less and be right more often",
       "Enterprise security controls must be designed before enterprise launch, not added in response to enterprise concerns",
-      "The copyright question doesn't go away — engage legal proactively and build filtering systems from day one",
+      "The copyright question doesn't go away - engage legal proactively and build filtering systems from day one",
     ],
     whatWorkedWell: [
-      "VS Code as the launch platform — GitHub's ownership of VS Code and Codespaces created a seamless distribution channel",
-      "Publishing the productivity research — the 55% faster figure became the go-to statistic for AI coding tools adoption conversations",
+      "VS Code as the launch platform - GitHub's ownership of VS Code and Codespaces created a seamless distribution channel",
+      "Publishing the productivity research - the 55% faster figure became the go-to statistic for AI coding tools adoption conversations",
       "Ghost text UI pattern: inline completion suggestions felt natural to developers without disrupting their workflow",
     ],
     openSourceRepos: [
@@ -1092,8 +1092,8 @@ export const caseStudiesData1: CaseStudyData[] = [
     businessContext:
       "Netflix's core unit economics depend on keeping subscribers engaged. Each percentage point reduction in monthly churn is worth ~$300M in annual revenue at Netflix's scale. The recommendation system is not a nice-to-have feature; it is the primary mechanism by which Netflix's streaming business model works.",
     strategicDrivers: [
-      "Monthly churn is Netflix's primary business metric — every point reduction is worth ~$300M/year",
-      "Long-tail content discovery is the competitive moat — helping users find less-known content reduces content licensing cost vs. relying only on blockbusters",
+      "Monthly churn is Netflix's primary business metric - every point reduction is worth ~$300M/year",
+      "Long-tail content discovery is the competitive moat - helping users find less-known content reduces content licensing cost vs. relying only on blockbusters",
       "Data flywheel advantage: more subscribers → more viewing data → better recommendations → lower churn → more subscribers",
       "Personalized marketing reduces CAC (customer acquisition cost) by increasing word-of-mouth from satisfied subscribers",
       "International expansion requires recommendations that adapt to local tastes without manual curation",
@@ -1120,7 +1120,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       {
         category: "Churn reduction",
         value: "$700M/year",
-        note: "26% churn reduction attributable to recommendations — at $12B+ annual revenue, each point of churn = ~$300M",
+        note: "26% churn reduction attributable to recommendations - at $12B+ annual revenue, each point of churn = ~$300M",
       },
       {
         category: "Content cost efficiency",
@@ -1166,9 +1166,9 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     teamSize: "200+ ML engineers and data scientists across the recommendations, platform, and A/B testing teams",
     challenges: [
-      "Cold start problem: New subscribers have no viewing history — recommendation quality is lowest when it matters most (preventing early churn)",
+      "Cold start problem: New subscribers have no viewing history - recommendation quality is lowest when it matters most (preventing early churn)",
       "Popularity bias: Models naturally favor popular content, undermining the goal of long-tail discovery",
-      "Causal vs. correlation: Recommendations cause viewing, which generates training data — creating feedback loops that are hard to break",
+      "Causal vs. correlation: Recommendations cause viewing, which generates training data - creating feedback loops that are hard to break",
       "Multi-objective optimization: Optimizing for engagement vs. subscriber satisfaction vs. content diversity creates trade-offs",
       "International personalization: Taste models trained primarily on US viewing data don't transfer well to international markets",
     ],
@@ -1193,8 +1193,8 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Emerging EU AI Act requirements for recommendation systems with significant user impact",
     ],
     lessonsLearned: [
-      "The A/B testing platform is as important as the recommendation model — you can't improve what you can't measure",
-      "Personalized artwork delivers surprisingly large CTR improvements for low additional cost — a high-ROI extension of the core recommendation system",
+      "The A/B testing platform is as important as the recommendation model - you can't improve what you can't measure",
+      "Personalized artwork delivers surprisingly large CTR improvements for low additional cost - a high-ROI extension of the core recommendation system",
       "Metaflow being open-sourced created an ecosystem of external contributions that accelerated Netflix's own development",
       "Multi-armed bandit approaches outperform static recommendation models for exploration of new content",
     ],
@@ -1273,7 +1273,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       {
         category: "Stockout reduction (revenue recovery)",
         value: "$600M/year",
-        note: "30% reduction in stockouts — each stockout costs $25+ in lost sales on average at Walmart scale",
+        note: "30% reduction in stockouts - each stockout costs $25+ in lost sales on average at Walmart scale",
       },
       {
         category: "Overstock waste reduction",
@@ -1289,7 +1289,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     implementationTimeline: "48 months from pilot to full enterprise deployment",
     implementationPhases: [
       {
-        phase: "Pilot — Grocery Category",
+        phase: "Pilot - Grocery Category",
         duration: "12 months",
         description:
           "Focused on grocery (highest spoilage risk) in 50 stores. Validated forecast accuracy vs. traditional methods. Designed the automated replenishment trigger system.",
@@ -1321,19 +1321,19 @@ export const caseStudiesData1: CaseStudyData[] = [
     challenges: [
       "Data quality at scale: 100M+ SKU-store combinations means even small data quality issues affect millions of forecasts",
       "Demand causality: Separating true demand signals from stockout-masked demand (when items are out of stock, demand appears lower than reality)",
-      "New product forecasting: No historical data for new SKUs — required separate cold-start models",
+      "New product forecasting: No historical data for new SKUs - required separate cold-start models",
       "Promotional demand spikes: AI models initially underestimated promotional lift, creating stockouts during key events",
       "Organizational change: Buyers accustomed to manual ordering resisted automation of their core workflow",
     ],
     governanceFramework: [
       "All replenishment orders above $50k reviewed by human buyers before submission",
-      "Model accuracy monitored daily by category — automatic fallback to traditional methods if accuracy drops below threshold",
+      "Model accuracy monitored daily by category - automatic fallback to traditional methods if accuracy drops below threshold",
       "Weekly cross-functional review of forecast vs. actuals by category managers",
       "Annual third-party audit of model fairness (no disparate impact on smaller supplier SKUs)",
       "Supplier communication of AI-driven order changes with 48-hour advance notice",
     ],
     dataPrivacy: [
-      "Customer transaction data anonymized — no PII in demand forecasting models",
+      "Customer transaction data anonymized - no PII in demand forecasting models",
       "Social media signal data subject to platform API terms of service",
       "Supplier data handled under NDAs with explicit use limitations",
     ],
@@ -1345,9 +1345,9 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Food safety regulations requiring FIFO inventory management that interacts with AI replenishment",
     ],
     lessonsLearned: [
-      "Demand masking is the biggest accuracy challenge — build stockout detection into the training data preparation pipeline from day one",
+      "Demand masking is the biggest accuracy challenge - build stockout detection into the training data preparation pipeline from day one",
       "External signals (weather, events) provide disproportionate value for seasonal and perishable categories",
-      "Buyer workflow integration is more important than model accuracy — the best model fails if buyers don't trust or use it",
+      "Buyer workflow integration is more important than model accuracy - the best model fails if buyers don't trust or use it",
       "Start with the highest-spoilage, highest-stockout-cost categories to maximize early ROI and build credibility",
     ],
     whatWorkedWell: [
@@ -1378,7 +1378,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     industry: "Technology",
     title: "DeepMind + Google Maps: 50% More Accurate ETAs",
     problem:
-      "ETA predictions in Google Maps needed to account for complex, non-linear traffic patterns. Traditional models used averages and couldn't capture cascading traffic effects — where a slowdown on one road causes ripple effects across connected roads.",
+      "ETA predictions in Google Maps needed to account for complex, non-linear traffic patterns. Traditional models used averages and couldn't capture cascading traffic effects - where a slowdown on one road causes ripple effects across connected roads.",
     solution:
       "DeepMind partnered with Google Maps to apply Graph Neural Networks (GNNs) to traffic prediction. The model learns road segment dependencies and how congestion propagates through the network, treating the road network as a graph rather than independent segments.",
     outcome:
@@ -1393,14 +1393,14 @@ export const caseStudiesData1: CaseStudyData[] = [
     businessContext:
       "Google Maps' primary utility for navigation depends on ETA accuracy. Poor ETA predictions directly undermine trust in the product and drive users toward competitors like Apple Maps and Waze. As ride-sharing and delivery services (both major Google Maps API customers) grew, ETA accuracy became a direct revenue driver through API pricing tied to prediction quality guarantees.",
     strategicDrivers: [
-      "ETA accuracy is the core trust driver for navigation — users defect to competitors after repeated bad predictions",
+      "ETA accuracy is the core trust driver for navigation - users defect to competitors after repeated bad predictions",
       "Ride-sharing API customers (Uber, Lyft, DoorDash) pay premium API rates for high-accuracy ETA data",
       "Real-time traffic prediction creates network effects: more users → better data → better predictions → more users",
       "DeepMind's GNN research needed a high-impact production deployment to validate at scale",
       "Competitive response to Waze's community-sourced traffic data advantage",
     ],
     techStack: [
-      "Graph Neural Networks (GNN) — custom DeepMind architecture",
+      "Graph Neural Networks (GNN) - custom DeepMind architecture",
       "TensorFlow for model training and serving",
       "Google's proprietary road network graph database",
       "Real-time GPS probe data from 1B+ devices",
@@ -1416,7 +1416,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     investmentEstimate: "$50M+ in research, model development, and infrastructure (DeepMind + Google Maps joint investment)",
     annualReturn: "Indirect: Google Maps API revenue attributable to accuracy leadership estimated at $500M+",
     paybackPeriod: "Deployed as product quality improvement; ROI measured in API revenue retention",
-    roiMultiple: "Strategic/infrastructure investment — not measured in direct product ROI",
+    roiMultiple: "Strategic/infrastructure investment - not measured in direct product ROI",
     roiBreakdown: [
       {
         category: "Ride-sharing API revenue retention",
@@ -1460,21 +1460,21 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     teamSize: "25 DeepMind researchers, 40 Google Maps engineers, 15 infrastructure engineers",
     challenges: [
-      "Graph scale: The global road network contains billions of nodes and edges — GNN training and inference at this scale required custom infrastructure",
-      "Real-time latency: GNN inference needed to complete within 100ms to support real-time routing — required significant optimization",
+      "Graph scale: The global road network contains billions of nodes and edges - GNN training and inference at this scale required custom infrastructure",
+      "Real-time latency: GNN inference needed to complete within 100ms to support real-time routing - required significant optimization",
       "Data sparsity in less-mapped regions: GPS probe density is much lower in developing markets, reducing model accuracy",
       "Model deployment at 1B-user scale: Even small accuracy regressions affect hundreds of millions of journeys daily",
       "Incident detection integration: The GNN needed to rapidly adapt to sudden traffic events (accidents, road closures) that historical patterns couldn't predict",
     ],
     governanceFramework: [
-      "Staged rollout with accuracy gates — each geographic region requires measured improvement before expansion",
+      "Staged rollout with accuracy gates - each geographic region requires measured improvement before expansion",
       "Daily monitoring of ETA accuracy vs. actual arrival times across all markets",
       "Automatic fallback to previous model if accuracy drops below threshold in any region",
       "Privacy review for all new GPS probe data uses",
       "Annual accessibility review to ensure AI routing doesn't systematically disadvantage certain communities",
     ],
     dataPrivacy: [
-      "GPS probe data anonymized and aggregated — individual device trajectories not stored beyond 30 seconds",
+      "GPS probe data anonymized and aggregated - individual device trajectories not stored beyond 30 seconds",
       "Location data subject to Google Privacy Policy and applicable regional regulations",
       "No individual user journey data used in model training",
       "GDPR compliance for EU users' location data",
@@ -1487,10 +1487,10 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Various national mapping data regulations in China, Russia, and India",
     ],
     lessonsLearned: [
-      "Graph-based modeling is fundamentally more accurate than treating road segments independently — the network structure is the key signal",
-      "Production infrastructure at 1B-user scale is a harder problem than the model itself — budget appropriately",
+      "Graph-based modeling is fundamentally more accurate than treating road segments independently - the network structure is the key signal",
+      "Production infrastructure at 1B-user scale is a harder problem than the model itself - budget appropriately",
       "Academic-production collaboration (DeepMind + Maps) works when research validates on real production data from day one",
-      "Staged geographic rollout is essential for a safety-critical application — never deploy globally in one step",
+      "Staged geographic rollout is essential for a safety-critical application - never deploy globally in one step",
     ],
     whatWorkedWell: [
       "Publishing the GNN approach in Nature created credibility and enabled external validation of the methodology",
@@ -1511,11 +1511,11 @@ export const caseStudiesData1: CaseStudyData[] = [
     industry: "Pharma",
     title: "AI-Accelerated mRNA Design: COVID Vaccine Candidate in 48 Hours",
     problem:
-      "Traditional vaccine development takes 5-10 years. When COVID-19 emerged in January 2020, the world needed a vaccine in months, not years. mRNA sequence design optimization — selecting the sequence with optimal stability, efficacy, and manufacturing properties from billions of possible designs — was a key technical bottleneck.",
+      "Traditional vaccine development takes 5-10 years. When COVID-19 emerged in January 2020, the world needed a vaccine in months, not years. mRNA sequence design optimization - selecting the sequence with optimal stability, efficacy, and manufacturing properties from billions of possible designs - was a key technical bottleneck.",
     solution:
       "Moderna used AI/ML models to design optimized mRNA sequences, select lipid nanoparticle (LNP) formulations, and predict manufacturing outcomes. AI compressed the design-selection cycle from months to days, enabling rapid iteration on mRNA-1273.",
     outcome:
-      "Initial mRNA-1273 vaccine candidate designed in 48 hours. Clinical trials initiated in 66 days — the fastest in history. Emergency Use Authorization granted in 11 months. 94.1% efficacy in Phase 3 trials.",
+      "Initial mRNA-1273 vaccine candidate designed in 48 hours. Clinical trials initiated in 66 days - the fastest in history. Emergency Use Authorization granted in 11 months. 94.1% efficacy in Phase 3 trials.",
     metrics: [
       "mRNA design finalized in 48 hours",
       "Clinical trials started in 66 days",
@@ -1528,7 +1528,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Moderna had been building an AI-driven mRNA platform for 10 years before COVID-19. The company's foundational thesis was that mRNA could be programmed like software and that AI could accelerate the design-test-iterate cycle. COVID-19 was the first large-scale proof of concept for this platform strategy, and its success transformed Moderna from a research-stage biotech into a $100B+ company.",
     strategicDrivers: [
       "Moderna's entire business model was predicated on AI-accelerated mRNA design as a platform",
-      "COVID-19 was an existential proving-ground — success would validate the platform and enable future pipeline development",
+      "COVID-19 was an existential proving-ground - success would validate the platform and enable future pipeline development",
       "BARDA (Biomedical Advanced Research and Development Authority) funding contingent on rapid development timelines",
       "First-mover advantage in mRNA vaccines created a 5-year head start over conventional vaccine manufacturers",
       "Successful COVID vaccine provided $18B in revenue to fund pipeline expansion across oncology, rare disease, and infectious disease",
@@ -1601,7 +1601,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     teamSize: "500+ scientists, 200+ engineers, AI/ML team of 50, manufacturing team of 300",
     challenges: [
-      "Regulatory novelty: No mRNA vaccine had ever been approved — FDA required novel evidence frameworks that existing AI validation methods weren't designed for",
+      "Regulatory novelty: No mRNA vaccine had ever been approved - FDA required novel evidence frameworks that existing AI validation methods weren't designed for",
       "Manufacturing scale-up: AI could design the mRNA but manufacturing billions of doses required rapid scale-up of processes the AI models had only seen at small scale",
       "Cold chain requirements: mRNA-1273's -20°C storage requirement was partially an AI design choice optimizing for efficacy over logistics",
       "Variant response: As the virus mutated, the AI platform needed to be redeployed rapidly for booster variants",
@@ -1621,7 +1621,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       "De-identification of all clinical data before AI analysis",
     ],
     humanOversight:
-      "All mRNA designs generated by AI are reviewed by Moderna's design team before moving to synthesis. All clinical decisions (dosing, trial design, safety stopping rules) require human physician and regulatory review. The AI platform accelerates design iteration — clinical judgment and regulatory review remain entirely human.",
+      "All mRNA designs generated by AI are reviewed by Moderna's design team before moving to synthesis. All clinical decisions (dosing, trial design, safety stopping rules) require human physician and regulatory review. The AI platform accelerates design iteration - clinical judgment and regulatory review remain entirely human.",
     regulatoryConsiderations: [
       "FDA Emergency Use Authorization (EUA) pathway",
       "ICH guidelines for pharmaceutical development (Q8, Q9, Q10)",
@@ -1630,14 +1630,14 @@ export const caseStudiesData1: CaseStudyData[] = [
       "International regulatory submissions (EMA, Health Canada, etc.)",
     ],
     lessonsLearned: [
-      "10 years of platform investment made the 48-hour design possible — there is no shortcut for building foundational AI capabilities",
-      "Investing in manufacturing process ML models is as important as molecular design — you can design the best molecule but can't deliver impact if you can't manufacture it",
-      "Regulatory engagement early and continuously — FDA's willingness to accept AI-supported evidence was built over years of relationship, not negotiated in a crisis",
-      "Design variants to optimize for multiple objectives (efficacy, stability, manufacturability) simultaneously — single-objective optimization creates trade-offs that become problems later",
+      "10 years of platform investment made the 48-hour design possible - there is no shortcut for building foundational AI capabilities",
+      "Investing in manufacturing process ML models is as important as molecular design - you can design the best molecule but can't deliver impact if you can't manufacture it",
+      "Regulatory engagement early and continuously - FDA's willingness to accept AI-supported evidence was built over years of relationship, not negotiated in a crisis",
+      "Design variants to optimize for multiple objectives (efficacy, stability, manufacturability) simultaneously - single-objective optimization creates trade-offs that become problems later",
     ],
     whatWorkedWell: [
       "Drug Design Studio providing a unified interface for scientists to interact with AI models without needing ML expertise",
-      "Parallel workstream execution enabled by AI — design, preclinical, and manufacturing prep happened simultaneously rather than sequentially",
+      "Parallel workstream execution enabled by AI - design, preclinical, and manufacturing prep happened simultaneously rather than sequentially",
       "BARDA partnership providing regulatory runway and funding certainty during the development sprint",
     ],
     references: [
@@ -1658,9 +1658,9 @@ export const caseStudiesData1: CaseStudyData[] = [
     industry: "Enterprise Software",
     title: "Einstein AI: Increasing Sales Win Rates by 26%",
     problem:
-      "Sales representatives spent 65%+ of time on non-selling activities — data entry, research, and email drafting. CRM data was underutilized for prediction. Sales teams lacked insight into which leads to prioritize and which deals were at risk.",
+      "Sales representatives spent 65%+ of time on non-selling activities - data entry, research, and email drafting. CRM data was underutilized for prediction. Sales teams lacked insight into which leads to prioritize and which deals were at risk.",
     solution:
-      "Salesforce Einstein integrates ML prediction throughout the CRM — lead scoring, opportunity insights, email send time optimization, next-best-action recommendations, and automated data entry via Einstein Activity Capture.",
+      "Salesforce Einstein integrates ML prediction throughout the CRM - lead scoring, opportunity insights, email send time optimization, next-best-action recommendations, and automated data entry via Einstein Activity Capture.",
     outcome:
       "Customers using Einstein report 26% higher win rates and 28% increase in deals closed. Sales reps save 4+ hours per week on administrative tasks, refocusing time on high-value customer interactions.",
     metrics: [
@@ -1741,13 +1741,13 @@ export const caseStudiesData1: CaseStudyData[] = [
         phase: "Agentforce Platform (2024-present)",
         duration: "Ongoing",
         description:
-          "Launched Agentforce — autonomous AI agents that can take actions across the Salesforce platform without human input, moving from prediction to autonomous action.",
+          "Launched Agentforce - autonomous AI agents that can take actions across the Salesforce platform without human input, moving from prediction to autonomous action.",
         keyOutputs: ["Agentforce launch", "Autonomous sales and service agents", "$2B ARR target announced"],
       },
     ],
     teamSize: "1,000+ AI/ML engineers and researchers across Salesforce AI Research, Einstein team, and product teams",
     challenges: [
-      "Data quality dependency: Einstein models are only as good as the CRM data quality — poor data entry habits undermined initial model accuracy",
+      "Data quality dependency: Einstein models are only as good as the CRM data quality - poor data entry habits undermined initial model accuracy",
       "Adoption barriers: Sales managers resisted AI lead scoring as perceived threat to their judgment",
       "Multi-tenant ML: Building models that work across 150,000+ customers with radically different data schemas required a metadata-aware ML architecture",
       "LLM hallucination in sales context: Einstein GPT's early email drafts occasionally contained factually incorrect account details",
@@ -1775,10 +1775,10 @@ export const caseStudiesData1: CaseStudyData[] = [
       "EU AI Act classification review for CRM AI systems",
     ],
     lessonsLearned: [
-      "Data quality is the prerequisite for CRM AI — launch data quality tooling before AI features",
+      "Data quality is the prerequisite for CRM AI - launch data quality tooling before AI features",
       "Explaining the model's reasoning (contributing factors to lead score) dramatically increases adoption vs. a black-box score",
-      "Multi-tenant ML architecture is genuinely hard — the metadata-driven approach was the right long-term bet but took 3 years to get right",
-      "Generative AI add-ons have faster adoption than predictive AI — sales reps see immediate value in AI-drafted emails",
+      "Multi-tenant ML architecture is genuinely hard - the metadata-driven approach was the right long-term bet but took 3 years to get right",
+      "Generative AI add-ons have faster adoption than predictive AI - sales reps see immediate value in AI-drafted emails",
     ],
     whatWorkedWell: [
       "Metadata-driven approach: Einstein works out of the box on any customer's CRM schema without custom ML engineering",
@@ -1796,7 +1796,7 @@ export const caseStudiesData1: CaseStudyData[] = [
     ],
     references: [
       {
-        label: "Salesforce: Einstein AI — State of Sales Report",
+        label: "Salesforce: Einstein AI - State of Sales Report",
         url: "https://www.salesforce.com/resources/research-reports/state-of-sales/",
       },
     ],
@@ -1899,12 +1899,12 @@ export const caseStudiesData1: CaseStudyData[] = [
     challenges: [
       "Latency constraint: LLMs are fundamentally slow; achieving <300ms response latency for voice required massive inference optimization",
       "Accuracy vs. fluency trade-off: LLMs are fluent but can hallucinate; voice assistant hallucinations are immediately noticeable and damaging to trust",
-      "Skill ecosystem compatibility: 100,000+ existing Alexa skills were built for intent-based architecture — LLM transition required compatibility layer",
-      "Privacy perception: Users are more sensitive about always-on voice devices than typed queries — LLM training on voice data required careful privacy communication",
-      "Hardware constraints: Many existing Echo devices had insufficient compute for on-device LLM inference — required cloud-heavy architecture",
+      "Skill ecosystem compatibility: 100,000+ existing Alexa skills were built for intent-based architecture - LLM transition required compatibility layer",
+      "Privacy perception: Users are more sensitive about always-on voice devices than typed queries - LLM training on voice data required careful privacy communication",
+      "Hardware constraints: Many existing Echo devices had insufficient compute for on-device LLM inference - required cloud-heavy architecture",
     ],
     governanceFramework: [
-      "Wake word detection only — Alexa only listens after 'Alexa' is spoken; no ambient recording",
+      "Wake word detection only - Alexa only listens after 'Alexa' is spoken; no ambient recording",
       "Voice recordings review opt-out available to all users",
       "Content policy enforcement integrated into LLM output layer",
       "Monthly AI quality sampling by dedicated Alexa QA team",
@@ -1914,7 +1914,7 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Voice recordings processed in Amazon's secure cloud with customer opt-out available",
       "GDPR compliance for EU users including right to delete all voice history",
       "Voice data subject to Amazon Privacy Notice with granular deletion options",
-      "COPPA compliance for Alexa Kids profiles — enhanced data restrictions for children",
+      "COPPA compliance for Alexa Kids profiles - enhanced data restrictions for children",
     ],
     humanOversight:
       "A dedicated Alexa Quality team reviews samples of AI responses daily, focusing on safety, accuracy, and brand alignment. Users can provide feedback on any Alexa response (thumbs up/down). Systematic feedback is reviewed weekly by the Alexa product team. Safety incidents (inappropriate content, privacy violations) trigger immediate review and model update protocols.",
@@ -1925,10 +1925,10 @@ export const caseStudiesData1: CaseStudyData[] = [
       "Emerging EU AI Act requirements for voice AI systems",
     ],
     lessonsLearned: [
-      "Latency is the top priority for voice AI — a correct answer after 3 seconds is worse user experience than a slightly less accurate answer in 300ms",
-      "Hallucination in voice AI damages trust faster than in text AI — tune for factual accuracy even at the cost of conversational fluency",
-      "The skills ecosystem is both a strength and a migration challenge — design the LLM transition path with existing developer investment in mind",
-      "Transparent privacy communication is non-negotiable for always-on voice devices — proactive privacy features build more trust than reactive compliance",
+      "Latency is the top priority for voice AI - a correct answer after 3 seconds is worse user experience than a slightly less accurate answer in 300ms",
+      "Hallucination in voice AI damages trust faster than in text AI - tune for factual accuracy even at the cost of conversational fluency",
+      "The skills ecosystem is both a strength and a migration challenge - design the LLM transition path with existing developer investment in mind",
+      "Transparent privacy communication is non-negotiable for always-on voice devices - proactive privacy features build more trust than reactive compliance",
     ],
     whatWorkedWell: [
       "RLHF (Reinforcement Learning from Human Feedback) with voice-specific preference raters significantly improved response quality for voice-specific patterns",

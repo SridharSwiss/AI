@@ -54,7 +54,7 @@ export const phase2: Phase = {
           item: "Set 3-5 measurable success criteria (KPIs)",
           templateTitle: "Pilot KPI Definition & Baseline Template",
           templateType: "template",
-          instructions: "Define every KPI before the pilot starts — not after. Capture the baseline today. Agree on minimum acceptable performance (not just target) so go/no-go decisions are objective.",
+          instructions: "Define every KPI before the pilot starts - not after. Capture the baseline today. Agree on minimum acceptable performance (not just target) so go/no-go decisions are objective.",
           sections: [
             {
               heading: "KPI Definition Table",
@@ -120,7 +120,7 @@ export const phase2: Phase = {
           item: "Document data sources and access requirements",
           templateTitle: "Pilot Data Access & Preparation Plan",
           templateType: "template",
-          instructions: "Confirm all data access BEFORE the pilot start date — data delays are the #1 cause of pilot overruns. If access isn't confirmed 2 weeks before start, escalate to sponsor immediately.",
+          instructions: "Confirm all data access BEFORE the pilot start date - data delays are the #1 cause of pilot overruns. If access isn't confirmed 2 weeks before start, escalate to sponsor immediately.",
           sections: [
             {
               heading: "Data Sources Required",
@@ -165,7 +165,7 @@ export const phase2: Phase = {
                 "Week 2: Data exploration, quality assessment, data prep plan agreed",
                 "Week 3: Data cleaning and feature engineering complete, model architecture selected",
                 "Week 4: Initial model trained, first internal evaluation, Stakeholder Demo #1",
-                "Milestone: 'Model v0.1 ready' — Target date: ___ | Owner: ___ | Status: ___",
+                "Milestone: 'Model v0.1 ready' - Target date: ___ | Owner: ___ | Status: ___",
               ],
             },
             {
@@ -174,7 +174,7 @@ export const phase2: Phase = {
                 "Week 5–6: Model refinement based on Demo #1 feedback, hyperparameter tuning",
                 "Week 7: Integration testing with target system, user acceptance testing (UAT) group 1",
                 "Week 8: UAT group 2, Stakeholder Demo #2, mid-pilot KPI check",
-                "Milestone: 'UAT complete, KPIs on track' — Target date: ___ | Owner: ___ | Status: ___",
+                "Milestone: 'UAT complete, KPIs on track' - Target date: ___ | Owner: ___ | Status: ___",
               ],
             },
             {
@@ -183,7 +183,7 @@ export const phase2: Phase = {
                 "Week 9–10: Final model training on full dataset, final validation metrics captured",
                 "Week 11: Final KPI measurement, user satisfaction survey, cost capture",
                 "Week 12: Lessons learned session, Scale/Kill recommendation document, Steering presentation",
-                "Milestone: 'Scale/Kill decision made' — Target date: ___ | Owner: ___ | Status: ___",
+                "Milestone: 'Scale/Kill decision made' - Target date: ___ | Owner: ___ | Status: ___",
               ],
             },
           ],
@@ -192,7 +192,7 @@ export const phase2: Phase = {
           item: "Define risk mitigation and rollback plan",
           templateTitle: "Pilot Risk Register & Rollback Plan",
           templateType: "template",
-          instructions: "Identify risks before the pilot starts — not when they materialise. Pre-define rollback triggers so the team can act without delay if something goes wrong.",
+          instructions: "Identify risks before the pilot starts - not when they materialise. Pre-define rollback triggers so the team can act without delay if something goes wrong.",
           sections: [
             {
               heading: "Risk Register (Top Pilot Risks Pre-filled)",
@@ -217,7 +217,7 @@ export const phase2: Phase = {
               items: [
                 "Step 1: PM notifies Sponsor and Tech Lead immediately upon trigger",
                 "Step 2: Disable AI feature / revert to manual process within ___ hours",
-                "Step 3: Communicate to affected users: template — 'We are temporarily pausing [feature] while we investigate [issue]. [Manual process] is restored.'",
+                "Step 3: Communicate to affected users: template - 'We are temporarily pausing [feature] while we investigate [issue]. [Manual process] is restored.'",
                 "Step 4: Conduct root cause analysis within 5 business days",
                 "Step 5: Lessons learned session within 2 weeks; recommendation to re-try or close",
               ],
@@ -228,7 +228,7 @@ export const phase2: Phase = {
           item: "Establish user testing and feedback mechanisms",
           templateTitle: "Pilot User Testing & Feedback Plan",
           templateType: "template",
-          instructions: "Involve real users in testing from week 4 onwards — not just at the end. Early feedback catches UX issues that don't show up in technical metrics.",
+          instructions: "Involve real users in testing from week 4 onwards - not just at the end. Early feedback catches UX issues that don't show up in technical metrics.",
           sections: [
             {
               heading: "User Testing Groups",
@@ -256,7 +256,7 @@ export const phase2: Phase = {
               items: [
                 "Feedback collection frequency: Weekly during UAT | Owner: PM",
                 "Review process: PM + Tech Lead triage within 48 hrs; categorise as Fix Now / Next Sprint / Backlog / Won't Fix",
-                "Communication back to users: Weekly update email — what we heard, what we changed",
+                "Communication back to users: Weekly update email - what we heard, what we changed",
                 "Satisfaction target: Average ≥4.0/5 across all questions at final evaluation",
               ],
             },
@@ -266,7 +266,7 @@ export const phase2: Phase = {
           item: "Set weekly check-in cadence and reporting",
           templateTitle: "Pilot Status Report Template",
           templateType: "template",
-          instructions: "Send weekly status reports every Friday. Keep them to one page. Traffic light (RAG) status forces honest assessment. Escalate anything Red immediately — don't wait for the report.",
+          instructions: "Send weekly status reports every Friday. Keep them to one page. Traffic light (RAG) status forces honest assessment. Escalate anything Red immediately - don't wait for the report.",
           sections: [
             {
               heading: "Weekly Status Report Structure",
@@ -274,7 +274,7 @@ export const phase2: Phase = {
                 "Report date: ___ | Pilot name: ___ | Week: ___ of 12",
                 "OVERALL STATUS: ☐ Green (on track)  ☐ Amber (at risk, mitigation in place)  ☐ Red (off track, action needed)",
                 "KPI Dashboard: KPI 1: ___ (target: ___) | KPI 2: ___ (target: ___) | KPI 3: ___ (target: ___)",
-                "Milestones this week — Completed: ___ | Missed: ___ (reason: ___)",
+                "Milestones this week - Completed: ___ | Missed: ___ (reason: ___)",
                 "Milestones next week: ___________________________",
                 "Issues & blockers (if Red/Amber): ___________________ | Action: ___ | Owner: ___ | Due: ___",
                 "Budget: Spent to date £/$ ___ of £/$ ___ budget (___%) | Forecast to complete: £/$ ___",
@@ -303,11 +303,11 @@ export const phase2: Phase = {
             {
               heading: "Lessons Learned Session Agenda (90 min)",
               items: [
-                "0:00–0:10 — Facilitator intro: ground rules (no blame, focus on systems not people, all voices equal)",
-                "0:10–0:30 — Round 1: What went well? (each person 2 sticky notes, read out, cluster)",
-                "0:30–0:50 — Round 2: What didn't go well? What surprised us? (2 sticky notes each)",
-                "0:50–1:10 — Round 3: What would we do differently? (prioritise top 5 by dot vote)",
-                "1:10–1:30 — Action owners: for each top lesson, assign owner and next-pilot action",
+                "0:00–0:10 - Facilitator intro: ground rules (no blame, focus on systems not people, all voices equal)",
+                "0:10–0:30 - Round 1: What went well? (each person 2 sticky notes, read out, cluster)",
+                "0:30–0:50 - Round 2: What didn't go well? What surprised us? (2 sticky notes each)",
+                "0:50–1:10 - Round 3: What would we do differently? (prioritise top 5 by dot vote)",
+                "1:10–1:30 - Action owners: for each top lesson, assign owner and next-pilot action",
               ],
             },
             {
@@ -323,12 +323,12 @@ export const phase2: Phase = {
             {
               heading: "Universal AI Pilot Lessons (Pre-filled)",
               items: [
-                "Data quality always takes 2–3× longer than estimated — build in buffer from day 1",
-                "Involve end users in design from week 1, not week 8 — UX surprises sink technically-good models",
+                "Data quality always takes 2–3× longer than estimated - build in buffer from day 1",
+                "Involve end users in design from week 1, not week 8 - UX surprises sink technically-good models",
                 "Define the success criteria before starting, not when results look ambiguous",
-                "Human-in-the-loop requirements are discovered late — ask regulatory/legal questions in week 1",
-                "Model accuracy in development ≠ model accuracy in production — test on real production data early",
-                "Change management effort should equal technical effort — it is not an afterthought",
+                "Human-in-the-loop requirements are discovered late - ask regulatory/legal questions in week 1",
+                "Model accuracy in development ≠ model accuracy in production - test on real production data early",
+                "Change management effort should equal technical effort - it is not an afterthought",
               ],
             },
           ],
@@ -337,7 +337,7 @@ export const phase2: Phase = {
           item: "Define scale/kill decision criteria",
           templateTitle: "Pilot Scale / Kill Decision Framework",
           templateType: "framework",
-          instructions: "Complete the scoring table at week 8 and week 12. Share with steering committee. Decision should be made in the committee meeting — not by any individual.",
+          instructions: "Complete the scoring table at week 8 and week 12. Share with steering committee. Decision should be made in the committee meeting - not by any individual.",
           sections: [
             {
               heading: "Decision Scoring (Complete at Week 8 & 12)",
@@ -368,13 +368,13 @@ export const phase2: Phase = {
       title: "Vendor Evaluation Scorecard",
       level: "manager",
       desc: "Compare AI vendors across 15 dimensions.",
-      guidance: "Evaluate vendors across technical, commercial, and strategic dimensions. Weight criteria by your priorities. Never rely solely on demos — require proof-of-concept on your own data.",
+      guidance: "Evaluate vendors across technical, commercial, and strategic dimensions. Weight criteria by your priorities. Never rely solely on demos - require proof-of-concept on your own data.",
       checklist: [
         {
           item: "Define must-have vs. nice-to-have requirements",
           templateTitle: "AI Vendor Requirements Definition Workshop",
           templateType: "template",
-          instructions: "Run a 60-minute internal session before engaging any vendor. Define requirements first — never let a vendor demo define your requirements for you.",
+          instructions: "Run a 60-minute internal session before engaging any vendor. Define requirements first - never let a vendor demo define your requirements for you.",
           sections: [
             {
               heading: "Must-Have Requirements (deal-breakers if absent)",
@@ -389,12 +389,12 @@ export const phase2: Phase = {
             {
               heading: "Automatic Disqualifiers",
               items: [
-                "☐ No SOC 2 Type II report — DISQUALIFY",
-                "☐ Refuses to sign a GDPR/UK GDPR data processing agreement — DISQUALIFY",
-                "☐ No data deletion capability on request — DISQUALIFY",
-                "☐ Data centres only in jurisdiction incompatible with our regulatory requirements — DISQUALIFY",
-                "☐ No contractual SLA uptime guarantee — DISQUALIFY",
-                "☐ Training data uses customer inputs without opt-out — DISQUALIFY",
+                "☐ No SOC 2 Type II report - DISQUALIFY",
+                "☐ Refuses to sign a GDPR/UK GDPR data processing agreement - DISQUALIFY",
+                "☐ No data deletion capability on request - DISQUALIFY",
+                "☐ Data centres only in jurisdiction incompatible with our regulatory requirements - DISQUALIFY",
+                "☐ No contractual SLA uptime guarantee - DISQUALIFY",
+                "☐ Training data uses customer inputs without opt-out - DISQUALIFY",
               ],
             },
             {
@@ -419,7 +419,7 @@ export const phase2: Phase = {
             {
               heading: "Documents to Request",
               items: [
-                "☐ SOC 2 Type II audit report (within last 12 months) — issued by accredited auditor",
+                "☐ SOC 2 Type II audit report (within last 12 months) - issued by accredited auditor",
                 "☐ ISO 27001 / ISO 42001 certificate (current, in-scope for AI services)",
                 "☐ Most recent penetration test executive summary (within last 12 months)",
                 "☐ GDPR Data Processing Agreement (your jurisdiction's template, or vendor's DPA)",
@@ -434,7 +434,7 @@ export const phase2: Phase = {
               items: [
                 "SOC 2: Scope covers the services we will use? ☐ Yes  ☐ No | Qualified opinion? ☐ Clean  ☐ Qualified (review exceptions)",
                 "Pen test: Conducted by reputable third party? ☐ Yes  ☐ No | Critical/High findings remediated? ☐ Yes  ☐ Open issues: ___",
-                "Sub-processors: All in acceptable jurisdictions? ☐ Yes  ☐ No — flag: ___ | Can we restrict sub-processors? ☐ Yes  ☐ No",
+                "Sub-processors: All in acceptable jurisdictions? ☐ Yes  ☐ No - flag: ___ | Can we restrict sub-processors? ☐ Yes  ☐ No",
                 "Breach notification: <72 hours to notify us? ☐ Yes  ☐ No | Named contact provided? ☐ Yes  ☐ No",
               ],
             },
@@ -444,16 +444,16 @@ export const phase2: Phase = {
           item: "Evaluate data privacy and model training practices",
           templateTitle: "Vendor Data Privacy Questionnaire",
           templateType: "questionnaire",
-          instructions: "Send to vendor's security/privacy team. Require written responses — verbal assurances in a sales call are not contractually binding.",
+          instructions: "Send to vendor's security/privacy team. Require written responses - verbal assurances in a sales call are not contractually binding.",
           sections: [
             {
               heading: "Model Training & Data Use",
               items: [
                 "Does the vendor train or fine-tune models using customer data by default? ☐ Yes  ☐ No  ☐ Opt-out available",
                 "Is customer data used to improve shared/foundation models? ☐ Yes  ☐ No  ☐ With consent only",
-                "Is customer data isolated from other customers at rest and in compute? ☐ Yes  ☐ No — explain: ___",
+                "Is customer data isolated from other customers at rest and in compute? ☐ Yes  ☐ No - explain: ___",
                 "What is the vendor's data retention period for our inputs/outputs? ___________________________",
-                "Can we request deletion of all our data? ☐ Yes — SLA: ___ days  ☐ No",
+                "Can we request deletion of all our data? ☐ Yes - SLA: ___ days  ☐ No",
               ],
             },
             {
@@ -462,7 +462,7 @@ export const phase2: Phase = {
                 "Do we own all outputs generated using our data? ☐ Yes  ☐ Shared  ☐ No",
                 "If we fine-tune a model, who owns the fine-tuned weights? ☐ Us  ☐ Vendor  ☐ Shared",
                 "Can we export our fine-tuned model weights on contract termination? ☐ Yes  ☐ No",
-                "Is there an exit assistance period (data export, knowledge transfer)? ☐ Yes — ___ months  ☐ No",
+                "Is there an exit assistance period (data export, knowledge transfer)? ☐ Yes - ___ months  ☐ No",
               ],
             },
           ],
@@ -492,7 +492,7 @@ export const phase2: Phase = {
                 "API latency p99: We need ≤___ ms | Vendor offers ___ ms | Gap: ___",
                 "Rate limit (requests/minute): We need ___ | Vendor offers ___ | Gap: ___",
                 "Support response SLA (P1 critical): We need ≤___ hrs | Vendor offers ___ hrs | Gap: ___",
-                "SLA credits / penalties if breached: ☐ Yes — ___% credit  ☐ No",
+                "SLA credits / penalties if breached: ☐ Yes - ___% credit  ☐ No",
               ],
             },
           ],
@@ -501,7 +501,7 @@ export const phase2: Phase = {
           item: "Compare pricing models and cost at scale",
           templateTitle: "AI Vendor Total Cost of Ownership Calculator",
           templateType: "worksheet",
-          instructions: "Model costs at current usage, 10×, and 100× scale. AI costs can surprise — token-based pricing in particular grows super-linearly with usage. Always get a pricing cap in the contract.",
+          instructions: "Model costs at current usage, 10×, and 100× scale. AI costs can surprise - token-based pricing in particular grows super-linearly with usage. Always get a pricing cap in the contract.",
           sections: [
             {
               heading: "Pricing Model Comparison",
@@ -533,13 +533,13 @@ export const phase2: Phase = {
           item: "Check reference customers in your industry",
           templateTitle: "Vendor Reference Check Script",
           templateType: "template",
-          instructions: "Request 3 references in your industry or at similar scale. Call them — don't accept written testimonials. 30-minute call with structured questions yields far more than a case study PDF.",
+          instructions: "Request 3 references in your industry or at similar scale. Call them - don't accept written testimonials. 30-minute call with structured questions yields far more than a case study PDF.",
           sections: [
             {
               heading: "Reference Check Questions",
               items: [
                 "How long have you been using [vendor] and what is your primary use case?",
-                "What was the biggest challenge during implementation — and how did the vendor respond?",
+                "What was the biggest challenge during implementation - and how did the vendor respond?",
                 "How accurate/reliable is the model in production vs. what was promised in the demo?",
                 "How is their support team? Can you give me an example of an incident and how it was handled?",
                 "Has pricing changed since you signed? Any surprises in invoicing?",
@@ -550,9 +550,9 @@ export const phase2: Phase = {
             {
               heading: "Reference Summary Scoring",
               items: [
-                "Reference 1 — Company: ___ | Contact: ___ | Overall score: ___ / 10 | Key insight: ___",
-                "Reference 2 — Company: ___ | Contact: ___ | Overall score: ___ / 10 | Key insight: ___",
-                "Reference 3 — Company: ___ | Contact: ___ | Overall score: ___ / 10 | Key insight: ___",
+                "Reference 1 - Company: ___ | Contact: ___ | Overall score: ___ / 10 | Key insight: ___",
+                "Reference 2 - Company: ___ | Contact: ___ | Overall score: ___ / 10 | Key insight: ___",
+                "Reference 3 - Company: ___ | Contact: ___ | Overall score: ___ / 10 | Key insight: ___",
                 "Common themes (positive): ___________________________",
                 "Common concerns raised: ___________________________",
                 "Reference check recommendation: ☐ Proceed  ☐ Proceed with caution  ☐ Do not proceed",
@@ -572,8 +572,8 @@ export const phase2: Phase = {
                 "Company type: ☐ Public (ticker: ___)  ☐ Private VC-backed  ☐ Private bootstrapped  ☐ Subsidiary of ___",
                 "For startups: Total funding raised: £/$ ___ | Last round: Series ___ | Estimated runway: ___ months",
                 "Approximate ARR (if available): £/$ ___ | Customer count: ___ | Growth rate: ___%/yr",
-                "Key person / founder dependency: ☐ High risk  ☐ Medium  ☐ Low — explain: ___",
-                "Acquisition rumours or strategic review: ☐ Yes — concern: ___  ☐ No",
+                "Key person / founder dependency: ☐ High risk  ☐ Medium  ☐ Low - explain: ___",
+                "Acquisition rumours or strategic review: ☐ Yes - concern: ___  ☐ No",
               ],
             },
             {
@@ -600,7 +600,7 @@ export const phase2: Phase = {
           item: "Test performance on sample of your actual data",
           templateTitle: "Vendor Proof-of-Concept Evaluation Protocol",
           templateType: "template",
-          instructions: "Run a blind POC on a representative sample of your real data — not the vendor's curated demo data. Score objectively using pre-defined rubric. Share rubric with vendor before POC starts.",
+          instructions: "Run a blind POC on a representative sample of your real data - not the vendor's curated demo data. Score objectively using pre-defined rubric. Share rubric with vendor before POC starts.",
           sections: [
             {
               heading: "POC Setup",
@@ -608,7 +608,7 @@ export const phase2: Phase = {
                 "Data sample: ___ examples, representative of production distribution (not cherry-picked)",
                 "Evaluation metrics (pre-defined): Accuracy ___ | Precision ___ | Recall ___ | Latency ___ | Other: ___",
                 "Test scenarios: Typical case ___ | Edge case ___ | Adversarial case ___ | Out-of-distribution case ___",
-                "Blind evaluation: Evaluators should not know which vendor produced which output — randomise output IDs",
+                "Blind evaluation: Evaluators should not know which vendor produced which output - randomise output IDs",
                 "Duration: ___ days of POC access per vendor",
               ],
             },
@@ -620,7 +620,7 @@ export const phase2: Phase = {
                 "Latency p50 (ms): ___ | ___ | ___ | ___",
                 "Failure mode description (what breaks and how): Vendor A: ___ | Vendor B: ___ | Vendor C: ___",
                 "Qualitative quality (human evaluator score 1–5): Vendor A: ___ | Vendor B: ___ | Vendor C: ___",
-                "POC Recommendation: ☐ Vendor A  ☐ Vendor B  ☐ Vendor C  ☐ None — restart selection",
+                "POC Recommendation: ☐ Vendor A  ☐ Vendor B  ☐ Vendor C  ☐ None - restart selection",
               ],
             },
           ],
@@ -629,13 +629,13 @@ export const phase2: Phase = {
           item: "Assess integration complexity with existing systems",
           templateTitle: "Vendor Integration Complexity Assessment",
           templateType: "questionnaire",
-          instructions: "Complete with your integration/platform engineering team. Integration complexity is consistently underestimated — get engineering input before commercial negotiations.",
+          instructions: "Complete with your integration/platform engineering team. Integration complexity is consistently underestimated - get engineering input before commercial negotiations.",
           sections: [
             {
               heading: "Integration Options Available",
               items: [
                 "REST API: ☐ Yes  ☐ No | Auth method: ☐ API key  ☐ OAuth 2.0  ☐ SAML SSO",
-                "Native connector for our stack: ☐ Yes — for: ___  ☐ No",
+                "Native connector for our stack: ☐ Yes - for: ___  ☐ No",
                 "iPaaS connector (Zapier / Make / MuleSoft): ☐ Yes  ☐ No",
                 "Webhook / event-driven: ☐ Yes  ☐ No",
                 "Batch file / SFTP: ☐ Yes  ☐ No",
@@ -659,13 +659,13 @@ export const phase2: Phase = {
           item: "Review support model (enterprise vs. self-serve)",
           templateTitle: "Vendor Support Model Evaluation",
           templateType: "scorecard",
-          instructions: "Support quality matters most when something goes wrong at 2am. Test support responsiveness during the POC — open a non-urgent ticket and measure actual response time.",
+          instructions: "Support quality matters most when something goes wrong at 2am. Test support responsiveness during the POC - open a non-urgent ticket and measure actual response time.",
           sections: [
             {
               heading: "Support Tier Assessment",
               items: [
                 "Support tier we would purchase: ☐ Community  ☐ Business  ☐ Enterprise  ☐ Dedicated",
-                "Dedicated Customer Success Manager (CSM): ☐ Yes — min response time: ___  ☐ No",
+                "Dedicated Customer Success Manager (CSM): ☐ Yes - min response time: ___  ☐ No",
                 "P1 critical incident response time (contractual): ___ hours",
                 "P2 high severity response time: ___ hours",
                 "P3/P4 response time: ___ hours / ___ days",
@@ -687,7 +687,7 @@ export const phase2: Phase = {
               items: [
                 "Ticket opened: ___ (non-urgent) | Response received: ___ | Time taken: ___ hours",
                 "Quality of response (1=Useless, 5=Excellent): ___ / 5",
-                "Was issue resolved on first contact: ☐ Yes  ☐ No — ___ contacts needed",
+                "Was issue resolved on first contact: ☐ Yes  ☐ No - ___ contacts needed",
                 "Support test overall verdict: ☐ Meets expectations  ☐ Concern  ☐ Disqualifying",
               ],
             },
@@ -716,7 +716,7 @@ export const phase2: Phase = {
                 "Disparate impact measurement: ☐ Built-in  ☐ API endpoint  ☐ Not available",
                 "Production bias monitoring / drift detection: ☐ Yes  ☐ No",
                 "Published model card with evaluation on diverse datasets: ☐ Yes  ☐ No",
-                "Responsible AI team or published policy: ☐ Yes — link: ___  ☐ No",
+                "Responsible AI team or published policy: ☐ Yes - link: ___  ☐ No",
               ],
             },
           ],
@@ -725,7 +725,7 @@ export const phase2: Phase = {
           item: "Check model update/versioning policies",
           templateTitle: "Model Stability & Versioning Assessment",
           templateType: "questionnaire",
-          instructions: "Unexpected model updates can break production applications. Understand the vendor's update policy before signing — version locking is a non-negotiable for production workloads.",
+          instructions: "Unexpected model updates can break production applications. Understand the vendor's update policy before signing - version locking is a non-negotiable for production workloads.",
           sections: [
             {
               heading: "Model Update Policy",
@@ -740,7 +740,7 @@ export const phase2: Phase = {
             {
               heading: "Regression Risk",
               items: [
-                "Does vendor run regression testing before updates: ☐ Yes — benchmark shared  ☐ Yes — not shared  ☐ Unknown",
+                "Does vendor run regression testing before updates: ☐ Yes - benchmark shared  ☐ Yes - not shared  ☐ Unknown",
                 "Performance deltas disclosed in changelogs: ☐ Yes  ☐ No",
                 "Can we request rollback to previous version if update breaks our system: ☐ Yes  ☐ No",
                 "Model update notification channel: ☐ Email  ☐ Slack/Teams  ☐ Status page  ☐ No proactive notification",
@@ -752,13 +752,13 @@ export const phase2: Phase = {
           item: "Assess vendor lock-in risks and exit clauses",
           templateTitle: "Vendor Lock-in Risk Assessment",
           templateType: "template",
-          instructions: "Assess exit costs before signing. Vendor lock-in is the biggest long-term commercial risk in AI procurement. Negotiate exit protections into the contract — they are much harder to add later.",
+          instructions: "Assess exit costs before signing. Vendor lock-in is the biggest long-term commercial risk in AI procurement. Negotiate exit protections into the contract - they are much harder to add later.",
           sections: [
             {
               heading: "Data & Model Portability",
               items: [
-                "Can we export all our data on demand: ☐ Yes — format: ___ — time: ___ days  ☐ No",
-                "Can we export fine-tuned model weights: ☐ Yes  ☐ No — who owns them: ___",
+                "Can we export all our data on demand: ☐ Yes - format: ___ - time: ___ days  ☐ No",
+                "Can we export fine-tuned model weights: ☐ Yes  ☐ No - who owns them: ___",
                 "Are outputs in open, portable formats: ☐ Yes  ☐ Proprietary format",
                 "Estimated switching cost to alternative vendor: ___ engineering-days | £/$ ___",
               ],
@@ -793,12 +793,12 @@ export const phase2: Phase = {
             {
               heading: "Vendor Residency Options vs Requirements",
               items: [
-                "EU (Germany / Ireland / Netherlands): ☐ Available  ☐ Not available — impact: ___",
-                "UK: ☐ Available  ☐ Not available — impact: ___",
-                "US (AWS us-east, us-west): ☐ Available  ☐ Not available — impact: ___",
-                "APAC (Singapore / Tokyo / Sydney): ☐ Available  ☐ Not available — impact: ___",
+                "EU (Germany / Ireland / Netherlands): ☐ Available  ☐ Not available - impact: ___",
+                "UK: ☐ Available  ☐ Not available - impact: ___",
+                "US (AWS us-east, us-west): ☐ Available  ☐ Not available - impact: ___",
+                "APAC (Singapore / Tokyo / Sydney): ☐ Available  ☐ Not available - impact: ___",
                 "Private cloud / on-premises in our data centre: ☐ Available  ☐ Not available",
-                "Overall residency compliance: ☐ Fully compliant  ☐ Partially — workaround: ___  ☐ Not compliant — DISQUALIFY",
+                "Overall residency compliance: ☐ Fully compliant  ☐ Partially - workaround: ___  ☐ Not compliant - DISQUALIFY",
               ],
             },
           ],
@@ -807,7 +807,7 @@ export const phase2: Phase = {
           item: "Score and rank vendors; select top 2 for POC",
           templateTitle: "Vendor Final Scoring & Selection Worksheet",
           templateType: "scorecard",
-          instructions: "Complete after all evaluations. Weight each criterion by your priorities. Share the weighted scoring with your steering committee — the score should inform, not replace, the decision.",
+          instructions: "Complete after all evaluations. Weight each criterion by your priorities. Share the weighted scoring with your steering committee - the score should inform, not replace, the decision.",
           sections: [
             {
               heading: "Weighted Scoring Matrix",
@@ -847,7 +847,7 @@ export const phase2: Phase = {
           item: "Identify all groups affected by the AI system",
           templateTitle: "Stakeholder Impact Mapping Exercise",
           templateType: "worksheet",
-          instructions: "Map all parties who could be helped or harmed by this AI system — including indirect parties and future users. This is the foundation of all subsequent ethics work.",
+          instructions: "Map all parties who could be helped or harmed by this AI system - including indirect parties and future users. This is the foundation of all subsequent ethics work.",
           sections: [
             {
               heading: "Affected Party Categories",
@@ -866,7 +866,7 @@ export const phase2: Phase = {
                 "Group: ___ | Impact type: ☐ Financial  ☐ Employment  ☐ Freedom  ☐ Health  ☐ Dignity  ☐ Privacy | Severity: H/M/L",
                 "Group: ___ | Impact type: ☐ Financial  ☐ Employment  ☐ Freedom  ☐ Health  ☐ Dignity  ☐ Privacy | Severity: H/M/L",
                 "Highest-risk group identified: ___________________ | Mitigation planned: ___",
-                "Consultation with affected groups planned: ☐ Yes — method: ___  ☐ Not needed — rationale: ___",
+                "Consultation with affected groups planned: ☐ Yes - method: ___  ☐ Not needed - rationale: ___",
               ],
             },
           ],
@@ -875,7 +875,7 @@ export const phase2: Phase = {
           item: "Test for bias across protected characteristics",
           templateTitle: "AI Bias Testing Protocol",
           templateType: "template",
-          instructions: "Run bias tests before any user-facing deployment. Document results and set acceptance thresholds in advance — changing thresholds after seeing results invalidates the test.",
+          instructions: "Run bias tests before any user-facing deployment. Document results and set acceptance thresholds in advance - changing thresholds after seeing results invalidates the test.",
           sections: [
             {
               heading: "Bias Test Design",
@@ -892,7 +892,7 @@ export const phase2: Phase = {
                 "Metric: Demographic Parity | Group A result: ___ | Group B result: ___ | Ratio: ___ | Pass/Fail: ___",
                 "Metric: Equalised Odds (TPR) | Group A: ___ | Group B: ___ | Ratio: ___ | Pass/Fail: ___",
                 "Metric: False Positive Rate | Group A: ___ | Group B: ___ | Ratio: ___ | Pass/Fail: ___",
-                "Overall bias assessment: ☐ No significant bias detected  ☐ Bias detected — remediation required before deployment",
+                "Overall bias assessment: ☐ No significant bias detected  ☐ Bias detected - remediation required before deployment",
                 "Remediation approach (if bias detected): ☐ Re-sample training data  ☐ Fairness constraints  ☐ Post-processing calibration  ☐ Redesign use case",
               ],
             },
@@ -902,15 +902,15 @@ export const phase2: Phase = {
           item: "Define human oversight and override mechanisms",
           templateTitle: "Human-in-the-Loop Design Template",
           templateType: "template",
-          instructions: "Design human oversight proportional to risk. For high-stakes decisions, human review is mandatory under EU AI Act. Document the oversight mechanism clearly — vague commitments to 'human review' are not sufficient.",
+          instructions: "Design human oversight proportional to risk. For high-stakes decisions, human review is mandatory under EU AI Act. Document the oversight mechanism clearly - vague commitments to 'human review' are not sufficient.",
           sections: [
             {
               heading: "Oversight Level Selection",
               items: [
-                "LEVEL 5 — Human decides, AI advises only (mandatory for: criminal justice, medical diagnosis, significant financial decisions)",
-                "LEVEL 4 — Human reviews all AI decisions before action (recommended for: employment, lending, insurance)",
-                "LEVEL 3 — Human reviews sampled decisions + all flagged cases (suitable for: content moderation, customer segmentation)",
-                "LEVEL 2 — Fully automated, human reviews metrics (suitable for: recommendations, personalisation, internal automation)",
+                "LEVEL 5 - Human decides, AI advises only (mandatory for: criminal justice, medical diagnosis, significant financial decisions)",
+                "LEVEL 4 - Human reviews all AI decisions before action (recommended for: employment, lending, insurance)",
+                "LEVEL 3 - Human reviews sampled decisions + all flagged cases (suitable for: content moderation, customer segmentation)",
+                "LEVEL 2 - Fully automated, human reviews metrics (suitable for: recommendations, personalisation, internal automation)",
                 "Selected oversight level for this system: LEVEL ___ | Justification: ___",
               ],
             },
@@ -918,10 +918,10 @@ export const phase2: Phase = {
               heading: "Override Mechanism Design",
               items: [
                 "How does a human override an AI decision: ___________________________",
-                "Override is logged: ☐ Yes — where: ___  ☐ No — not acceptable for high-risk systems",
-                "Override reason is captured (mandatory for audit): ☐ Yes — free text / dropdown  ☐ No",
+                "Override is logged: ☐ Yes - where: ___  ☐ No - not acceptable for high-risk systems",
+                "Override reason is captured (mandatory for audit): ☐ Yes - free text / dropdown  ☐ No",
                 "Override data fed back to improve model: ☐ Yes  ☐ No",
-                "Override rate monitoring: ☐ Yes — alert if rate exceeds ___% | Owner: ___  ☐ No",
+                "Override rate monitoring: ☐ Yes - alert if rate exceeds ___% | Owner: ___  ☐ No",
               ],
             },
           ],
@@ -947,11 +947,11 @@ export const phase2: Phase = {
             {
               heading: "Explanation Documentation",
               items: [
-                "Global explanation — top 5 features driving model decisions: 1) ___ 2) ___ 3) ___ 4) ___ 5) ___",
+                "Global explanation - top 5 features driving model decisions: 1) ___ 2) ___ 3) ___ 4) ___ 5) ___",
                 "User-facing explanation template: 'Our AI suggested [outcome] primarily because [top 2 factors in plain language].'",
                 "Technical explanation method used: ☐ SHAP  ☐ LIME  ☐ Integrated Gradients  ☐ Attention  ☐ Other: ___",
-                "Explanation available in UI: ☐ Yes — where: ___  ☐ On request  ☐ Not available",
-                "Regulatory-grade explanation package available: ☐ Yes  ☐ No — build plan: ___",
+                "Explanation available in UI: ☐ Yes - where: ___  ☐ On request  ☐ Not available",
+                "Regulatory-grade explanation package available: ☐ Yes  ☐ No - build plan: ___",
               ],
             },
           ],
@@ -960,15 +960,15 @@ export const phase2: Phase = {
           item: "Review training data for representation and bias",
           templateTitle: "Training Data Audit Checklist",
           templateType: "template",
-          instructions: "Garbage in, biased out. Audit training data before model development. Addressing data bias post-training is expensive — catching it pre-training is cheap.",
+          instructions: "Garbage in, biased out. Audit training data before model development. Addressing data bias post-training is expensive - catching it pre-training is cheap.",
           sections: [
             {
               heading: "Data Source Audit",
               items: [
                 "Source 1: ___ | Collection date: ___ | Collection method: ___ | Known biases: ___",
                 "Source 2: ___ | Collection date: ___ | Collection method: ___ | Known biases: ___",
-                "Overall representation of minority groups vs population baseline: Adequate ☐ / Underrepresented ☐ — groups: ___",
-                "Historical bias risk (does data reflect past discriminatory practices): ☐ Yes — mitigate: ___  ☐ No",
+                "Overall representation of minority groups vs population baseline: Adequate ☐ / Underrepresented ☐ - groups: ___",
+                "Historical bias risk (does data reflect past discriminatory practices): ☐ Yes - mitigate: ___  ☐ No",
               ],
             },
             {
@@ -976,8 +976,8 @@ export const phase2: Phase = {
               items: [
                 "Labelling team composition (are labellers representative of affected population): ___________________________",
                 "Inter-annotator agreement score: ___ (target: ≥0.8 Cohen's Kappa)",
-                "Labelling guidelines reviewed for implicit bias: ☐ Yes  ☐ No — review required",
-                "Underrepresented groups — remediation plan: ☐ Oversample  ☐ Collect more data  ☐ Synthetic augmentation  ☐ Accept limitation and document",
+                "Labelling guidelines reviewed for implicit bias: ☐ Yes  ☐ No - review required",
+                "Underrepresented groups - remediation plan: ☐ Oversample  ☐ Collect more data  ☐ Synthetic augmentation  ☐ Accept limitation and document",
               ],
             },
           ],
@@ -994,7 +994,7 @@ export const phase2: Phase = {
                 "Before AI interaction: 'This service uses artificial intelligence to [purpose]. Your [data types] will be processed to provide this service.'",
                 "During AI interaction (if automated decision): 'This recommendation/decision was made by an AI system. [How to get human review].'",
                 "After AI decision (right to explanation): 'The main factors in this decision were [top 2–3 factors]. To request a human review, [action].'",
-                "Opt-out mechanism: ☐ Users can opt out of AI processing — describe: ___  ☐ Opt-out not applicable — rationale: ___",
+                "Opt-out mechanism: ☐ Users can opt out of AI processing - describe: ___  ☐ Opt-out not applicable - rationale: ___",
               ],
             },
             {
@@ -1017,10 +1017,10 @@ export const phase2: Phase = {
             {
               heading: "Feedback Channels",
               items: [
-                "In-product feedback button: ☐ Yes — placement: ___  ☐ No",
-                "Email/web form for AI complaints: ☐ Yes — address: ___  ☐ No",
-                "Phone escalation for formal complaints: ☐ Yes — number: ___  ☐ No",
-                "Accessible formats (for users with disabilities): ☐ Yes  ☐ No — plan: ___",
+                "In-product feedback button: ☐ Yes - placement: ___  ☐ No",
+                "Email/web form for AI complaints: ☐ Yes - address: ___  ☐ No",
+                "Phone escalation for formal complaints: ☐ Yes - number: ___  ☐ No",
+                "Accessible formats (for users with disabilities): ☐ Yes  ☐ No - plan: ___",
               ],
             },
             {
@@ -1039,7 +1039,7 @@ export const phase2: Phase = {
           item: "Define accountability chain for AI decisions",
           templateTitle: "AI Accountability Matrix",
           templateType: "matrix",
-          instructions: "Every AI decision must have a named human accountable for it — 'the algorithm decided' is not an acceptable answer. This matrix makes accountability explicit.",
+          instructions: "Every AI decision must have a named human accountable for it - 'the algorithm decided' is not an acceptable answer. This matrix makes accountability explicit.",
           sections: [
             {
               heading: "Accountability by Decision Type",
@@ -1054,10 +1054,10 @@ export const phase2: Phase = {
             {
               heading: "Accountability Documentation",
               items: [
-                "Accountability register updated: ☐ Yes — location: ___  ☐ No",
+                "Accountability register updated: ☐ Yes - location: ___  ☐ No",
                 "Accountability communicated to all named individuals: ☐ Yes  ☐ No",
                 "Board accountability statement published: ☐ Yes  ☐ No (required for EU AI Act high-risk systems)",
-                "Annual accountability review scheduled: ☐ Yes — date: ___  ☐ No",
+                "Annual accountability review scheduled: ☐ Yes - date: ___  ☐ No",
               ],
             },
           ],
@@ -1066,14 +1066,14 @@ export const phase2: Phase = {
           item: "Schedule periodic ethics reviews post-deployment",
           templateTitle: "AI Ethics Review Calendar & Agenda",
           templateType: "template",
-          instructions: "Ethics is not a one-time pre-deployment review — it is ongoing. Schedule reviews in advance and treat them like financial audits. Unscheduled ethics reviews only happen after incidents.",
+          instructions: "Ethics is not a one-time pre-deployment review - it is ongoing. Schedule reviews in advance and treat them like financial audits. Unscheduled ethics reviews only happen after incidents.",
           sections: [
             {
               heading: "Review Cadence",
               items: [
-                "Monthly: Metrics review (bias indicators, override rates, complaints), flagged cases review — 30 min",
-                "Quarterly: Full bias testing re-run, complaints analysis, regulatory updates briefing, model performance vs baseline — 90 min",
-                "Annually: Comprehensive ethics audit, external review (if high-risk AI), policy review, affected stakeholder consultation — half day",
+                "Monthly: Metrics review (bias indicators, override rates, complaints), flagged cases review - 30 min",
+                "Quarterly: Full bias testing re-run, complaints analysis, regulatory updates briefing, model performance vs baseline - 90 min",
+                "Annually: Comprehensive ethics audit, external review (if high-risk AI), policy review, affected stakeholder consultation - half day",
                 "Trigger-based: Any bias incident, regulatory change affecting this system, model update, significant scope change",
               ],
             },

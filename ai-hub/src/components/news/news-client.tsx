@@ -83,7 +83,7 @@ function EmptyState({ category }: { category: string }) {
         <p className="font-semibold mb-1">No articles found</p>
         <p className="text-sm text-muted-foreground">
           {category !== "All"
-            ? `No ${category} articles in the current feed — try a different category or hit Refresh.`
+            ? `No ${category} articles in the current feed - try a different category or hit Refresh.`
             : "Try hitting Refresh to pull the latest feeds."}
         </p>
       </div>

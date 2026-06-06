@@ -23,10 +23,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     template: "%s | AIHub",
-    default: "AIHub — The AI Knowledge Platform",
+    default: "AIHub - The AI Knowledge Platform",
   },
   description:
-    "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks — curated for everyone from beginners to executives.",
+    "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks - curated for everyone from beginners to executives.",
   keywords: [
     "AI tools", "artificial intelligence", "machine learning", "AI companies",
     "AI compliance", "AI governance", "AI learning", "AI case studies",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "AIHub",
-    title: "AIHub — The AI Knowledge Platform",
+    title: "AIHub - The AI Knowledge Platform",
     description:
       "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks.",
     url: BASE_URL,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "AIHub — The AI Knowledge Platform",
+        alt: "AIHub - The AI Knowledge Platform",
       },
     ],
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: {
       template: "%s | AIHub",
-      default: "AIHub — The AI Knowledge Platform",
+      default: "AIHub - The AI Knowledge Platform",
     },
     description:
       "Your all-in-one AI knowledge hub: tools, companies, learning resources, case studies, compliance guidance, and implementation playbooks.",
@@ -107,7 +107,7 @@ const websiteJsonLd = {
   "@type": "WebSite",
   name: "AIHub",
   url: BASE_URL,
-  description: "The AI Knowledge Platform — tools, companies, compliance, learning, case studies.",
+  description: "The AI Knowledge Platform - tools, companies, compliance, learning, case studies.",
   potentialAction: {
     "@type": "SearchAction",
     target: {

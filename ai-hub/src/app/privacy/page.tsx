@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/shared/page-header";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "AIHub privacy policy — how we handle your data and protect your privacy.",
+  description: "AIHub privacy policy - how we handle your data and protect your privacy.",
 };
 
 const sections = [
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
 
         <div className="mt-12 pt-8 border-t border-border text-xs text-muted-foreground">
           <p>Last updated: June 2026</p>
-          <p className="mt-1">AIHub — Educational AI knowledge platform. Content provided for informational purposes only.</p>
+          <p className="mt-1">AIHub - Educational AI knowledge platform. Content provided for informational purposes only.</p>
         </div>
       </div>
     </>

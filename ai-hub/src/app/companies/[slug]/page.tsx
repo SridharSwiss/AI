@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const fin = company.financials;
   const extra = fin ? ` Valuation: ${fin.latestValuation ?? fin.marketCap ?? ""}. Total funding: ${fin.totalFunding ?? ""}.` : "";
   return {
-    title: `${company.name} — AI Models, Funding & Company Profile`,
+    title: `${company.name} - AI Models, Funding & Company Profile`,
     description: (company.description.slice(0, 130) + extra).slice(0, 160),
     alternates: { canonical: `${BASE_URL}/companies/${company.slug}` },
     openGraph: {

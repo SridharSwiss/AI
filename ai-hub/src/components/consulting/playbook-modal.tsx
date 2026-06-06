@@ -202,7 +202,7 @@ export function ConsultingToolkitClient() {
         <PlaybookModal playbook={activePlaybook} onClose={() => setActivePlaybook(null)} />
       )}
 
-      {/* Phase overview cards — hardcoded dark-mode classes so Tailwind picks them up */}
+      {/* Phase overview cards - hardcoded dark-mode classes so Tailwind picks them up */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
         {phases.map((p) => {
           const s = phaseStyles[p.phase] ?? phaseStyles.assess;

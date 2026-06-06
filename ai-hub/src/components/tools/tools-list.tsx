@@ -44,7 +44,7 @@ function EmptyState({ category, pricing }: { category: string; pricing: string }
       </div>
       <p className="text-base font-semibold mb-1.5">No tools match these filters</p>
       <p className="text-sm text-muted-foreground max-w-xs">
-        Try broadening your search —{" "}
+        Try broadening your search -{" "}
         {category !== "All" ? `remove the "${category}" filter` : "try a different pricing tier"}.
       </p>
     </div>

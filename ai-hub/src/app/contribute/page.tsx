@@ -26,7 +26,7 @@ const contributionTypes = [
   {
     icon: TrendingUp,
     title: "Case Study",
-    description: "A real-world AI implementation with verifiable outcomes — from any industry.",
+    description: "A real-world AI implementation with verifiable outcomes - from any industry.",
     fields: ["Company & industry", "Problem statement", "AI solution used", "Measurable outcomes & metrics", "Source / public reference"],
     color: "from-emerald-500 to-teal-500",
   },
@@ -59,7 +59,7 @@ export default function ContributePage() {
       <PageHeader
         eyebrow="Contribute"
         title="Help Build the Best AI Knowledge Hub"
-        description="AIHub is a community effort. If you know something we've missed — a tool, company, case study, or framework — we want to hear from you."
+        description="AIHub is a community effort. If you know something we've missed - a tool, company, case study, or framework - we want to hear from you."
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
@@ -69,8 +69,8 @@ export default function ContributePage() {
           <h2 className="text-2xl font-bold mb-6">How to Contribute</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { step: "1", title: "Find a Gap", desc: "Browse the directory and find something missing — a tool, company, case study, or resource." },
-              { step: "2", title: "Gather Details", desc: "Collect the key facts using the field guides below. Public sources only — no proprietary info." },
+              { step: "1", title: "Find a Gap", desc: "Browse the directory and find something missing - a tool, company, case study, or resource." },
+              { step: "2", title: "Gather Details", desc: "Collect the key facts using the field guides below. Public sources only - no proprietary info." },
               { step: "3", title: "Submit via GitHub", desc: "Open an issue or pull request on our GitHub repository with your proposed addition." },
             ].map((s) => (
               <div key={s.step} className="flex gap-4 p-5 rounded-xl border border-border bg-card">
@@ -123,7 +123,7 @@ export default function ContributePage() {
           <div className="space-y-3">
             {[
               "All submissions must be based on publicly available information with verifiable sources.",
-              "No self-promotion — if you work for a company, disclose this in your submission.",
+              "No self-promotion - if you work for a company, disclose this in your submission.",
               "Content must be accurate, neutral in tone, and free of marketing language.",
               "Case studies require at least one verifiable metric from a public source (press release, earnings call, research paper, etc.).",
               "Compliance entries must reference official government or standards body sources.",

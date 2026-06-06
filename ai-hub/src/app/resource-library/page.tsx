@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "AI Resource Library",
   description: "Curated collection of AI whitepapers, research reports, government publications, and official documents.",
   alternates: { canonical: `${BASE_URL}/resource-library` },
-  openGraph: { title: "AI Resource Library — Whitepapers & Research | AIHub", description: "AI whitepapers, research reports, and official documents.", url: `${BASE_URL}/resource-library`, type: "website" },
+  openGraph: { title: "AI Resource Library - Whitepapers & Research | AIHub", description: "AI whitepapers, research reports, and official documents.", url: `${BASE_URL}/resource-library`, type: "website" },
 };
 
 const jsonLd = {

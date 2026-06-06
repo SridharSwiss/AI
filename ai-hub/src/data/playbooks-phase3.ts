@@ -17,7 +17,7 @@ export const phase3: Phase = {
           item: "Audit current model deployment process (manual vs. automated)",
           templateTitle: "Current-State MLOps Assessment",
           templateType: "questionnaire",
-          instructions: "Assess where you are today before planning where to go. Be honest — most organisations overestimate their MLOps maturity.",
+          instructions: "Assess where you are today before planning where to go. Be honest - most organisations overestimate their MLOps maturity.",
           sections: [
             {
               heading: "Deployment Process Today",
@@ -26,16 +26,16 @@ export const phase3: Phase = {
                 "Average time from 'model ready' to 'in production': ___ days",
                 "Number of models currently in production: ___",
                 "Do you have a staging/pre-prod environment for models: ☐ Yes  ☐ No",
-                "Is there a rollback process: ☐ Yes — time to rollback: ___ hours  ☐ No",
+                "Is there a rollback process: ☐ Yes - time to rollback: ___ hours  ☐ No",
               ],
             },
             {
               heading: "Current MLOps Maturity Level",
               items: [
-                "LEVEL 0: Manual process — models deployed as scripts, no monitoring, no versioning → Score: 0",
-                "LEVEL 1: ML pipeline automation — reproducible training pipelines, model registry, basic monitoring → Score: 1",
-                "LEVEL 2: CI/CD for ML — automated testing, continuous deployment, A/B testing → Score: 2",
-                "LEVEL 3: Full MLOps — automated retraining, self-healing pipelines, advanced monitoring → Score: 3",
+                "LEVEL 0: Manual process - models deployed as scripts, no monitoring, no versioning → Score: 0",
+                "LEVEL 1: ML pipeline automation - reproducible training pipelines, model registry, basic monitoring → Score: 1",
+                "LEVEL 2: CI/CD for ML - automated testing, continuous deployment, A/B testing → Score: 2",
+                "LEVEL 3: Full MLOps - automated retraining, self-healing pipelines, advanced monitoring → Score: 3",
                 "Current level: ___ | Target level (12 months): ___ | Priority gaps: ___",
               ],
             },
@@ -45,7 +45,7 @@ export const phase3: Phase = {
           item: "Establish model registry and versioning",
           templateTitle: "Model Registry Setup Checklist",
           templateType: "template",
-          instructions: "A model registry is your source of truth for all ML models — it enables rollback, audit trails, and team collaboration. MLflow, Weights & Biases, and SageMaker Model Registry are common options.",
+          instructions: "A model registry is your source of truth for all ML models - it enables rollback, audit trails, and team collaboration. MLflow, Weights & Biases, and SageMaker Model Registry are common options.",
           sections: [
             {
               heading: "Registry Requirements",
@@ -73,7 +73,7 @@ export const phase3: Phase = {
           item: "Implement feature store for consistent training/serving features",
           templateTitle: "Feature Store Requirements Specification",
           templateType: "template",
-          instructions: "A feature store prevents training-serving skew — the #1 cause of silent production model failures. Implement when you have multiple models sharing features or strict latency requirements.",
+          instructions: "A feature store prevents training-serving skew - the #1 cause of silent production model failures. Implement when you have multiple models sharing features or strict latency requirements.",
           sections: [
             {
               heading: "Feature Store Needs Assessment",
@@ -105,19 +105,19 @@ export const phase3: Phase = {
             {
               heading: "Pipeline Components",
               items: [
-                "Step 1 — Data ingestion: Pull from source ___ | Validate schema | Log data version hash",
-                "Step 2 — Data preprocessing: Apply transformations | Validate output statistics | Flag anomalies",
-                "Step 3 — Feature engineering: Compute features | Store in feature store | Log feature importance",
-                "Step 4 — Model training: Train on defined config | Log hyperparameters and metrics to registry",
-                "Step 5 — Model evaluation: Run on held-out test set | Compare vs production model | Gate on threshold",
-                "Step 6 — Model registration: If evaluation passes, register to model registry with metadata",
+                "Step 1 - Data ingestion: Pull from source ___ | Validate schema | Log data version hash",
+                "Step 2 - Data preprocessing: Apply transformations | Validate output statistics | Flag anomalies",
+                "Step 3 - Feature engineering: Compute features | Store in feature store | Log feature importance",
+                "Step 4 - Model training: Train on defined config | Log hyperparameters and metrics to registry",
+                "Step 5 - Model evaluation: Run on held-out test set | Compare vs production model | Gate on threshold",
+                "Step 6 - Model registration: If evaluation passes, register to model registry with metadata",
               ],
             },
             {
               heading: "Pipeline Requirements",
               items: [
                 "Orchestration tool: ☐ Airflow  ☐ Prefect  ☐ Kubeflow Pipelines  ☐ Azure ML Pipelines  ☐ Vertex AI Pipelines  ☐ Other: ___",
-                "Containerised steps: ☐ Yes (Docker)  ☐ No — dependency risk: ___",
+                "Containerised steps: ☐ Yes (Docker)  ☐ No - dependency risk: ___",
                 "Pipeline run triggered by: ☐ Schedule  ☐ New data  ☐ Drift alert  ☐ Manual  ☐ Code commit",
                 "Full pipeline run time target: ≤ ___ hours",
                 "Pipeline test coverage: Unit tests for each step ☐ | Integration test (full run) ☐",
@@ -129,7 +129,7 @@ export const phase3: Phase = {
           item: "Set up CI/CD for model deployment",
           templateTitle: "ML CI/CD Pipeline Configuration Guide",
           templateType: "template",
-          instructions: "Treat ML models like software — every model change should go through automated testing before deployment. This dramatically reduces deployment failures and rollback events.",
+          instructions: "Treat ML models like software - every model change should go through automated testing before deployment. This dramatically reduces deployment failures and rollback events.",
           sections: [
             {
               heading: "CI Pipeline (on every code commit)",
@@ -160,14 +160,14 @@ export const phase3: Phase = {
           item: "Implement A/B testing infrastructure",
           templateTitle: "ML A/B Testing Design Template",
           templateType: "template",
-          instructions: "A/B testing validates that a new model actually improves business metrics — not just ML metrics. Poor A/B design leads to false positives. Calculate required sample size before starting.",
+          instructions: "A/B testing validates that a new model actually improves business metrics - not just ML metrics. Poor A/B design leads to false positives. Calculate required sample size before starting.",
           sections: [
             {
               heading: "A/B Test Design",
               items: [
                 "Test name: ___________________ | Model A (control): ___ | Model B (challenger): ___",
                 "Primary metric (business KPI): ___________________ | Minimum detectable effect: ___%",
-                "Secondary metrics to monitor (guardrails — must not worsen): ___________________________",
+                "Secondary metrics to monitor (guardrails - must not worsen): ___________________________",
                 "Required sample size (per arm): ___ users/requests (use power calculator at 80% power, α=0.05)",
                 "Estimated duration at current traffic: ___ days",
                 "Traffic split: Control ___% / Challenger ___%",
@@ -189,7 +189,7 @@ export const phase3: Phase = {
           item: "Deploy model performance monitoring (data drift, concept drift)",
           templateTitle: "Model Monitoring Setup Worksheet",
           templateType: "worksheet",
-          instructions: "Production models degrade silently — monitoring is the only way to catch it. Set up monitoring before going live, not after the first incident.",
+          instructions: "Production models degrade silently - monitoring is the only way to catch it. Set up monitoring before going live, not after the first incident.",
           sections: [
             {
               heading: "Monitoring Metrics to Track",
@@ -218,7 +218,7 @@ export const phase3: Phase = {
           item: "Establish data quality monitoring and alerting",
           templateTitle: "Data Quality Alert Configuration",
           templateType: "template",
-          instructions: "Model quality is bounded by data quality. Monitor data at every stage — ingestion, preprocessing, and feature computation. Silent data issues are more dangerous than loud ones.",
+          instructions: "Model quality is bounded by data quality. Monitor data at every stage - ingestion, preprocessing, and feature computation. Silent data issues are more dangerous than loud ones.",
           sections: [
             {
               heading: "Data Quality Checks",
@@ -246,7 +246,7 @@ export const phase3: Phase = {
           item: "Create automated model retraining triggers",
           templateTitle: "Retraining Trigger Criteria Template",
           templateType: "template",
-          instructions: "Define retraining triggers before you need them. Reactive retraining (after performance collapse) is expensive — proactive retraining (on drift detection) is cheap.",
+          instructions: "Define retraining triggers before you need them. Reactive retraining (after performance collapse) is expensive - proactive retraining (on drift detection) is cheap.",
           sections: [
             {
               heading: "Trigger Criteria",
@@ -274,7 +274,7 @@ export const phase3: Phase = {
           item: "Set up model serving infrastructure with SLAs",
           templateTitle: "Model Serving SLA Definition Template",
           templateType: "template",
-          instructions: "Define serving SLAs before go-live and test under realistic load. Latency problems discovered in production require emergency infrastructure work — catch them in load testing.",
+          instructions: "Define serving SLAs before go-live and test under realistic load. Latency problems discovered in production require emergency infrastructure work - catch them in load testing.",
           sections: [
             {
               heading: "Serving SLA Requirements",
@@ -301,13 +301,13 @@ export const phase3: Phase = {
           item: "Implement shadow mode deployment capability",
           templateTitle: "Shadow Mode Deployment Checklist",
           templateType: "template",
-          instructions: "Shadow mode runs a new model on live traffic without affecting users — the new model's outputs are logged but not used. It's the safest way to validate production performance before cutover.",
+          instructions: "Shadow mode runs a new model on live traffic without affecting users - the new model's outputs are logged but not used. It's the safest way to validate production performance before cutover.",
           sections: [
             {
               heading: "Shadow Mode Setup",
               items: [
                 "Traffic duplication method: ☐ API gateway mirroring  ☐ Application-level duplication  ☐ Message queue fan-out",
-                "Shadow model logs: All inputs and outputs stored in ☐ S3  ☐ BigQuery  ☐ Snowflake — with zero impact on user experience",
+                "Shadow model logs: All inputs and outputs stored in ☐ S3  ☐ BigQuery  ☐ Snowflake - with zero impact on user experience",
                 "Shadow model latency requirement: Shadow calls must not add latency to user-facing requests (fire-and-forget)",
                 "Duration of shadow mode: ___ days (enough to cover all seasonal patterns and edge cases)",
                 "Analysis plan: Compare shadow outputs to production model daily, look for systematic differences",
@@ -320,7 +320,7 @@ export const phase3: Phase = {
                 "Cases where they disagree: ___ sample of disagreements manually reviewed",
                 "Shadow model preferred by domain experts (where ground truth available): ___% of cases",
                 "Performance difference in shadow: Shadow is ___% faster/slower than production",
-                "Decision to proceed with canary/full cutover: ☐ Yes  ☐ No — issues: ___",
+                "Decision to proceed with canary/full cutover: ☐ Yes  ☐ No - issues: ___",
               ],
             },
           ],
@@ -329,7 +329,7 @@ export const phase3: Phase = {
           item: "Document model cards for all production models",
           templateTitle: "Model Card Template",
           templateType: "template",
-          instructions: "A model card is a standardised fact sheet for a ML model — like a nutrition label. Complete one for every production model. Store in your model registry. Update on every model version.",
+          instructions: "A model card is a standardised fact sheet for a ML model - like a nutrition label. Complete one for every production model. Store in your model registry. Update on every model version.",
           sections: [
             {
               heading: "Model Card: Identity & Purpose",
@@ -372,13 +372,13 @@ export const phase3: Phase = {
             {
               heading: "Rollback Steps (Model [Name] v[X] → v[X-1])",
               items: [
-                "Step 1: Log incident in incident tracker — time, trigger, current metrics",
+                "Step 1: Log incident in incident tracker - time, trigger, current metrics",
                 "Step 2: Notify: Slack #ml-incidents: '@ml-team Rolling back [model] due to [trigger]. ETA: 10 min'",
                 "Step 3: In model registry, set v[X-1] as 'Production' and v[X] as 'Staging'",
-                "Step 4: Update serving endpoint to v[X-1] — command: [specific command for your infra]",
+                "Step 4: Update serving endpoint to v[X-1] - command: [specific command for your infra]",
                 "Step 5: Verify rollback: Check latency, error rate, and model version in monitoring dashboard",
                 "Step 6: Notify: '@ml-team Rollback complete. [Metrics]. RCA meeting at [time].'",
-                "Step 7: Post-mortem within 48 hours — root cause, fix plan, prevention measures",
+                "Step 7: Post-mortem within 48 hours - root cause, fix plan, prevention measures",
               ],
             },
           ],
@@ -387,7 +387,7 @@ export const phase3: Phase = {
           item: "Establish on-call rotation for model incidents",
           templateTitle: "ML On-Call Setup Guide",
           templateType: "template",
-          instructions: "ML incidents are different from software incidents — they can be subtle, gradual, and hard to diagnose. Your on-call process must account for this.",
+          instructions: "ML incidents are different from software incidents - they can be subtle, gradual, and hard to diagnose. Your on-call process must account for this.",
           sections: [
             {
               heading: "On-Call Structure",
@@ -402,10 +402,10 @@ export const phase3: Phase = {
             {
               heading: "Incident Severity Levels",
               items: [
-                "P1 — Critical: Production model down or causing incorrect decisions at scale | Response: 15 min | Resolution: 1 hour",
-                "P2 — High: Significant performance degradation or bias detected | Response: 1 hour | Resolution: 4 hours",
-                "P3 — Medium: Drift detected, no immediate user impact | Response: 4 hours | Resolution: 24 hours",
-                "P4 — Low: Monitoring alert, investigation needed | Response: Next business day",
+                "P1 - Critical: Production model down or causing incorrect decisions at scale | Response: 15 min | Resolution: 1 hour",
+                "P2 - High: Significant performance degradation or bias detected | Response: 1 hour | Resolution: 4 hours",
+                "P3 - Medium: Drift detected, no immediate user impact | Response: 4 hours | Resolution: 24 hours",
+                "P4 - Low: Monitoring alert, investigation needed | Response: Next business day",
                 "All P1/P2 incidents require post-mortem within 48 hours | Post-mortem owner: ___",
               ],
             },
@@ -415,7 +415,7 @@ export const phase3: Phase = {
           item: "Implement cost monitoring for model serving",
           templateTitle: "ML Cost Monitoring Dashboard Template",
           templateType: "template",
-          instructions: "ML serving costs can grow unexpectedly with usage scale — or be wasted on idle infrastructure. Monitor costs weekly and set budget alerts before they become problems.",
+          instructions: "ML serving costs can grow unexpectedly with usage scale - or be wasted on idle infrastructure. Monitor costs weekly and set budget alerts before they become problems.",
           sections: [
             {
               heading: "Cost Tracking Setup",
@@ -442,14 +442,14 @@ export const phase3: Phase = {
           item: "Create model audit trails for compliance",
           templateTitle: "Model Audit Trail Requirements",
           templateType: "template",
-          instructions: "Regulators increasingly require evidence of model governance. Build audit trails from day one — retrofitting them is very expensive. GDPR Article 22 and EU AI Act require audit logs for automated decision-making.",
+          instructions: "Regulators increasingly require evidence of model governance. Build audit trails from day one - retrofitting them is very expensive. GDPR Article 22 and EU AI Act require audit logs for automated decision-making.",
           sections: [
             {
               heading: "What to Log (for every production prediction)",
               items: [
                 "Timestamp (UTC, millisecond precision)",
                 "Model name and version number",
-                "Input features (or hash if PII — never log raw PII in audit logs)",
+                "Input features (or hash if PII - never log raw PII in audit logs)",
                 "Model output / prediction",
                 "Confidence score or probability",
                 "Downstream action taken (what the system did with the prediction)",
@@ -472,14 +472,14 @@ export const phase3: Phase = {
           item: "Set up automated bias monitoring",
           templateTitle: "Production Bias Monitoring Configuration",
           templateType: "template",
-          instructions: "Bias can emerge in production even if pre-deployment testing was clean — due to data distribution shifts, feedback loops, or changing user populations. Continuous monitoring is essential.",
+          instructions: "Bias can emerge in production even if pre-deployment testing was clean - due to data distribution shifts, feedback loops, or changing user populations. Continuous monitoring is essential.",
           sections: [
             {
               heading: "Production Bias Metrics",
               items: [
-                "Metric 1: Demographic parity — prediction rate by protected group | Alert if gap >___% | Frequency: daily",
-                "Metric 2: Equalised odds — TPR and FPR by protected group | Alert if ratio >___ | Frequency: weekly",
-                "Metric 3: Calibration by group — confidence scores vs actual outcomes | Frequency: monthly",
+                "Metric 1: Demographic parity - prediction rate by protected group | Alert if gap >___% | Frequency: daily",
+                "Metric 2: Equalised odds - TPR and FPR by protected group | Alert if ratio >___ | Frequency: weekly",
+                "Metric 3: Calibration by group - confidence scores vs actual outcomes | Frequency: monthly",
                 "Protected attributes monitored: ___________________________",
                 "Ground truth availability: ☐ Real-time  ☐ Delayed (___ days)  ☐ Sample only (___% of cases)  ☐ None (use proxy metrics)",
               ],
@@ -491,7 +491,7 @@ export const phase3: Phase = {
                 "Alert recipient: ___________________ | Escalation: ___________________",
                 "Response SLA: Bias alert → investigation within ___ hours | Mitigation plan within ___ business days",
                 "Mitigation options: Model retraining with fairness constraints | Post-processing calibration | Emergency human review for affected group | Suspend model for affected cases",
-                "Regulatory notification required if bias incident confirmed: ☐ Yes — notify: ___ within ___ days  ☐ No",
+                "Regulatory notification required if bias incident confirmed: ☐ Yes - notify: ___ within ___ days  ☐ No",
               ],
             },
           ],
@@ -521,7 +521,7 @@ export const phase3: Phase = {
                 "Title: [Runbook name] | ID: RB-0X | Owner: ___ | Last tested: ___ | Next review: ___",
                 "Trigger: What event triggers this runbook (alert, schedule, request)",
                 "Prerequisites: Access, tools, and knowledge required before starting",
-                "Steps: Numbered list — specific commands, links, decision points",
+                "Steps: Numbered list - specific commands, links, decision points",
                 "Verification: How to confirm the runbook completed successfully",
                 "Escalation: If steps fail or situation is unclear, contact: ___",
               ],
@@ -569,24 +569,24 @@ export const phase3: Phase = {
           item: "Create AI adoption communication plan",
           templateTitle: "AI Communication Plan Template",
           templateType: "template",
-          instructions: "Communicate early, frequently, and honestly. Never let the rumour mill fill the information vacuum — someone will always fill it with fear.",
+          instructions: "Communicate early, frequently, and honestly. Never let the rumour mill fill the information vacuum - someone will always fill it with fear.",
           sections: [
             {
               heading: "Communication Timeline",
               items: [
-                "T-8 weeks: Leadership announcement — why AI, what we're doing, what it means for our people",
-                "T-6 weeks: Department briefings — what changes in your team, timeline, how to ask questions",
-                "T-4 weeks: Pilot team announcement — who's involved, what they'll test, how to follow along",
-                "T-2 weeks: Pre-launch briefing — what's launching, what to expect, support available",
-                "Launch day: Go-live announcement — how to access, where to get help, success story from pilot",
-                "T+2 weeks: Early adopter feedback share — what we heard, what we're improving",
-                "Monthly: Progress update — adoption stats, wins, improvements made",
+                "T-8 weeks: Leadership announcement - why AI, what we're doing, what it means for our people",
+                "T-6 weeks: Department briefings - what changes in your team, timeline, how to ask questions",
+                "T-4 weeks: Pilot team announcement - who's involved, what they'll test, how to follow along",
+                "T-2 weeks: Pre-launch briefing - what's launching, what to expect, support available",
+                "Launch day: Go-live announcement - how to access, where to get help, success story from pilot",
+                "T+2 weeks: Early adopter feedback share - what we heard, what we're improving",
+                "Monthly: Progress update - adoption stats, wins, improvements made",
               ],
             },
             {
               heading: "Message Templates",
               items: [
-                "LAUNCH EMAIL SUBJECT: 'AI is live — here's what changes for you [and what doesn't]'",
+                "LAUNCH EMAIL SUBJECT: 'AI is live - here's what changes for you [and what doesn't]'",
                 "OPENING LINE: 'Today we launch [AI feature]. This is designed to [specific benefit] so you can spend more time on [high-value work].'",
                 "CONCERN ADDRESSED: 'We know some of you have questions about what this means for your role. Here's what we know: [facts]. Here's what will stay the same: [facts].'",
                 "CALL TO ACTION: 'Start using [feature] by [specific date]. Your manager will schedule a 30-minute demo in the next two weeks.'",
@@ -599,27 +599,27 @@ export const phase3: Phase = {
           item: "Develop role-specific AI training curriculum",
           templateTitle: "AI Training Curriculum Design Template",
           templateType: "template",
-          instructions: "One-size-fits-all training doesn't work. Design role-specific tracks. The executive track is fundamentally different from the data scientist track — both in content and format.",
+          instructions: "One-size-fits-all training doesn't work. Design role-specific tracks. The executive track is fundamentally different from the data scientist track - both in content and format.",
           sections: [
             {
               heading: "Training Tracks by Role",
               items: [
-                "EXECUTIVE TRACK (2 hrs): AI strategy, ethical leadership, ROI frameworks, regulatory responsibilities — format: workshop",
-                "MANAGER TRACK (4 hrs): AI project management, reading dashboards, change management, escalation — format: workshop + self-paced",
-                "BUSINESS USER TRACK (3 hrs): Using the specific AI tool, prompting effectively, knowing when to override, giving feedback — format: hands-on lab",
-                "DATA ANALYST TRACK (8 hrs): AI/ML concepts, interpreting model outputs, bias awareness, when to trust AI — format: course + exercises",
-                "DEVELOPER TRACK (16 hrs): AI APIs, fine-tuning, prompt engineering, responsible AI coding — format: technical course",
-                "ML ENGINEER TRACK (40 hrs): Full MLOps curriculum — format: certification path",
+                "EXECUTIVE TRACK (2 hrs): AI strategy, ethical leadership, ROI frameworks, regulatory responsibilities - format: workshop",
+                "MANAGER TRACK (4 hrs): AI project management, reading dashboards, change management, escalation - format: workshop + self-paced",
+                "BUSINESS USER TRACK (3 hrs): Using the specific AI tool, prompting effectively, knowing when to override, giving feedback - format: hands-on lab",
+                "DATA ANALYST TRACK (8 hrs): AI/ML concepts, interpreting model outputs, bias awareness, when to trust AI - format: course + exercises",
+                "DEVELOPER TRACK (16 hrs): AI APIs, fine-tuning, prompt engineering, responsible AI coding - format: technical course",
+                "ML ENGINEER TRACK (40 hrs): Full MLOps curriculum - format: certification path",
               ],
             },
             {
               heading: "Training Delivery Checklist",
               items: [
-                "Training content created/curated: ☐ Yes  ☐ In progress — completion date: ___",
+                "Training content created/curated: ☐ Yes  ☐ In progress - completion date: ___",
                 "Platform selected: ☐ LMS (Moodle/Cornerstone)  ☐ Course platform (Coursera/LinkedIn)  ☐ In-person  ☐ Hybrid",
                 "Training mandatory or optional: ☐ Mandatory for all impacted roles  ☐ Optional  ☐ Mandatory for specific roles: ___",
                 "Completion deadline: ___ | Completion tracking method: ___",
-                "Assessment / certification: ☐ Yes — passing score: ___  ☐ No",
+                "Assessment / certification: ☐ Yes - passing score: ___  ☐ No",
                 "Training evaluation (did it work): Survey 2 weeks after training on confidence and application",
               ],
             },
@@ -629,7 +629,7 @@ export const phase3: Phase = {
           item: "Launch AI champion network in each department",
           templateTitle: "AI Champion Programme Setup Guide",
           templateType: "template",
-          instructions: "AI champions are respected peers who help colleagues adopt AI. They are not the IT team — they are enthusiastic business users. The champion network is one of the highest-ROI change investments you can make.",
+          instructions: "AI champions are respected peers who help colleagues adopt AI. They are not the IT team - they are enthusiastic business users. The champion network is one of the highest-ROI change investments you can make.",
           sections: [
             {
               heading: "Champion Selection & Recruitment",
@@ -644,7 +644,7 @@ export const phase3: Phase = {
             {
               heading: "Champion Training & Support",
               items: [
-                "Champion onboarding: Full-day session — AI overview, tool deep dive, coaching skills, escalation paths",
+                "Champion onboarding: Full-day session - AI overview, tool deep dive, coaching skills, escalation paths",
                 "Champion community: Monthly 60-min call | Shared Slack channel | Resource library",
                 "Champion toolkit: FAQ document, demo scripts, troubleshooting guide, escalation contacts",
                 "Champion feedback to programme team: Weekly Slack update on top questions received | Monthly report on adoption barriers",
@@ -657,14 +657,14 @@ export const phase3: Phase = {
           item: "Create feedback channels for frontline users",
           templateTitle: "Employee AI Feedback System Design",
           templateType: "template",
-          instructions: "Frontline users see AI failures that never make it to dashboards. A good feedback loop is your early warning system. Make it easy to give feedback — five taps not five minutes.",
+          instructions: "Frontline users see AI failures that never make it to dashboards. A good feedback loop is your early warning system. Make it easy to give feedback - five taps not five minutes.",
           sections: [
             {
               heading: "Feedback Channels",
               items: [
-                "In-product: 👍 / 👎 button on every AI output — captures sentiment with zero friction",
+                "In-product: 👍 / 👎 button on every AI output - captures sentiment with zero friction",
                 "In-product: 'Report a problem' link → short form: what AI output, what was wrong, what you expected",
-                "Champion: Users can bring feedback to their AI champion verbally — champion logs it weekly",
+                "Champion: Users can bring feedback to their AI champion verbally - champion logs it weekly",
                 "Monthly survey (3 Qs): Satisfaction score 1–5 | What AI helps most | What frustrates most",
                 "Quarterly focus groups: 6–8 frontline users | 60 min facilitated session | All feedback anonymised",
               ],
@@ -691,19 +691,19 @@ export const phase3: Phase = {
               heading: "Universal AI FAQ (Adapt for Your Context)",
               items: [
                 "Q: Will AI replace my job? A: Our AI is designed to automate repetitive tasks so you can focus on [higher-value work]. We are not reducing headcount as a result of this programme. We will invest savings in [upskilling / growth].",
-                "Q: Is the AI always right? A: No — AI makes mistakes. Always apply your judgement. If the AI output seems wrong, trust your instincts and use the override button. Please also report it so we can improve.",
+                "Q: Is the AI always right? A: No - AI makes mistakes. Always apply your judgement. If the AI output seems wrong, trust your instincts and use the override button. Please also report it so we can improve.",
                 "Q: Who sees the data I enter into the AI? A: [Specify: only our systems / vendor processes but doesn't train on it / etc]. Never enter [specific prohibited data types] into the AI.",
-                "Q: What if I disagree with the AI's recommendation? A: You always have the final say. Use the override button and note your reason — this helps improve the system.",
+                "Q: What if I disagree with the AI's recommendation? A: You always have the final say. Use the override button and note your reason - this helps improve the system.",
                 "Q: Will my AI usage be monitored and used to evaluate my performance? A: [Specific policy]. AI usage data is used only to improve the system, not to evaluate individual performance.",
               ],
             },
             {
               heading: "Myth Busting",
               items: [
-                "MYTH: 'AI is 100% accurate' — TRUTH: AI has error rates. For [our use case], accuracy is ___%. Always review critical outputs.",
-                "MYTH: 'AI understands the business like we do' — TRUTH: AI recognises patterns in data. It doesn't understand context, relationships, or nuance the way you do.",
-                "MYTH: 'I can't make mistakes if I follow the AI' — TRUTH: Following AI blindly removes human oversight — which is the most important safeguard we have.",
-                "MYTH: 'The AI learns from my corrections immediately' — TRUTH: Model updates happen on [retraining schedule]. Your corrections are valuable but don't change the model in real time.",
+                "MYTH: 'AI is 100% accurate' - TRUTH: AI has error rates. For [our use case], accuracy is ___%. Always review critical outputs.",
+                "MYTH: 'AI understands the business like we do' - TRUTH: AI recognises patterns in data. It doesn't understand context, relationships, or nuance the way you do.",
+                "MYTH: 'I can't make mistakes if I follow the AI' - TRUTH: Following AI blindly removes human oversight - which is the most important safeguard we have.",
+                "MYTH: 'The AI learns from my corrections immediately' - TRUTH: Model updates happen on [retraining schedule]. Your corrections are valuable but don't change the model in real time.",
               ],
             },
           ],
@@ -744,13 +744,13 @@ export const phase3: Phase = {
           item: "Create incentive structure for AI adoption",
           templateTitle: "AI Adoption Incentive Framework",
           templateType: "framework",
-          instructions: "People adopt behaviours when they see clear personal benefit. Design incentives to accelerate early adoption — the fastest adopters become your informal champions.",
+          instructions: "People adopt behaviours when they see clear personal benefit. Design incentives to accelerate early adoption - the fastest adopters become your informal champions.",
           sections: [
             {
               heading: "Intrinsic Incentives (most durable)",
               items: [
                 "Time savings: Communicate clearly that time saved goes to [high-value work, not workload increase]",
-                "Skill development: AI proficiency becomes a career-valued skill — include in job grade frameworks",
+                "Skill development: AI proficiency becomes a career-valued skill - include in job grade frameworks",
                 "Recognition: Public recognition for AI power users ('AI Pioneer' programme)",
                 "Autonomy: Power users get early access to new AI features",
               ],
@@ -770,16 +770,16 @@ export const phase3: Phase = {
           item: "Measure and report adoption metrics weekly",
           templateTitle: "AI Adoption Metrics Dashboard Template",
           templateType: "template",
-          instructions: "Define what 'adoption' means before launch. Active usage is not the same as feature access. Track the metric that measures genuine value delivery — not vanity metrics.",
+          instructions: "Define what 'adoption' means before launch. Active usage is not the same as feature access. Track the metric that measures genuine value delivery - not vanity metrics.",
           sections: [
             {
               heading: "Adoption Metrics Hierarchy",
               items: [
-                "LEVEL 1 — Access: ___ users with access to AI feature | Target: ___% of eligible users",
-                "LEVEL 2 — Activation: ___ users who used AI feature at least once | Target: ___% of users with access",
-                "LEVEL 3 — Active use: ___ users using AI at least weekly | Target: ___% of activated users",
-                "LEVEL 4 — Power users: ___ users using AI daily | Target: ___% of active users",
-                "LEVEL 5 — Value delivery: Business KPI impacted by AI users vs non-AI users | Gap: ___",
+                "LEVEL 1 - Access: ___ users with access to AI feature | Target: ___% of eligible users",
+                "LEVEL 2 - Activation: ___ users who used AI feature at least once | Target: ___% of users with access",
+                "LEVEL 3 - Active use: ___ users using AI at least weekly | Target: ___% of activated users",
+                "LEVEL 4 - Power users: ___ users using AI daily | Target: ___% of active users",
+                "LEVEL 5 - Value delivery: Business KPI impacted by AI users vs non-AI users | Gap: ___",
               ],
             },
             {
@@ -799,7 +799,7 @@ export const phase3: Phase = {
           item: "Develop escalation path for user concerns",
           templateTitle: "User Concern Escalation Framework",
           templateType: "framework",
-          instructions: "Make it easy for users to raise concerns — a system that suppresses concerns will have bigger problems later. Separate the 'I need help' path from the 'I think something is wrong' path.",
+          instructions: "Make it easy for users to raise concerns - a system that suppresses concerns will have bigger problems later. Separate the 'I need help' path from the 'I think something is wrong' path.",
           sections: [
             {
               heading: "Concern Categories & Routing",
@@ -898,13 +898,13 @@ export const phase3: Phase = {
       title: "AI ROI Measurement Framework",
       level: "executive",
       desc: "Track and report business value of AI investments.",
-      guidance: "Establish your ROI baseline before deployment — you can't measure what you didn't measure before. Mix hard metrics (revenue, cost, time) with soft metrics (quality, satisfaction). Track total cost of ownership.",
+      guidance: "Establish your ROI baseline before deployment - you can't measure what you didn't measure before. Mix hard metrics (revenue, cost, time) with soft metrics (quality, satisfaction). Track total cost of ownership.",
       checklist: [
         {
           item: "Define ROI baseline metrics before deployment",
           templateTitle: "Pre-Deployment Baseline Measurement Plan",
           templateType: "template",
-          instructions: "Capture baselines within 4 weeks of go-live decision — not after launch. Without a baseline, ROI calculation is impossible and claims are unverifiable.",
+          instructions: "Capture baselines within 4 weeks of go-live decision - not after launch. Without a baseline, ROI calculation is impossible and claims are unverifiable.",
           sections: [
             {
               heading: "Baseline Metrics to Capture",
@@ -920,9 +920,9 @@ export const phase3: Phase = {
             {
               heading: "Measurement Method",
               items: [
-                "PREFERRED: A/B comparison — half users get AI, half continue without. Measure both groups simultaneously.",
-                "ALTERNATIVE: Before/after — measure same group before launch and after. Account for seasonal variation.",
-                "MINIMUM: Expert estimate — have domain experts estimate improvement with confidence ranges. Least reliable.",
+                "PREFERRED: A/B comparison - half users get AI, half continue without. Measure both groups simultaneously.",
+                "ALTERNATIVE: Before/after - measure same group before launch and after. Account for seasonal variation.",
+                "MINIMUM: Expert estimate - have domain experts estimate improvement with confidence ranges. Least reliable.",
                 "Selected method: ___ | Rationale: ___ | Confidence level: H/M/L",
                 "When will we first measure post-launch: ___ weeks after go-live | Full measurement at: ___ months",
               ],
@@ -933,7 +933,7 @@ export const phase3: Phase = {
           item: "Identify direct cost savings and efficiency gains",
           templateTitle: "Cost Savings Quantification Worksheet",
           templateType: "worksheet",
-          instructions: "Quantify savings conservatively — use the lower bound of your estimates for the business case. Executives who over-promise on AI ROI lose credibility for future investment requests.",
+          instructions: "Quantify savings conservatively - use the lower bound of your estimates for the business case. Executives who over-promise on AI ROI lose credibility for future investment requests.",
           sections: [
             {
               heading: "Time Savings → FTE Cost",
@@ -963,7 +963,7 @@ export const phase3: Phase = {
           item: "Quantify revenue impact and new value creation",
           templateTitle: "Revenue Impact Measurement Framework",
           templateType: "framework",
-          instructions: "Revenue impact is harder to attribute than cost savings. Use controlled tests where possible. Be conservative — revenue attribution is contested in budget reviews.",
+          instructions: "Revenue impact is harder to attribute than cost savings. Use controlled tests where possible. Be conservative - revenue attribution is contested in budget reviews.",
           sections: [
             {
               heading: "Revenue Impact Measurement",
@@ -990,7 +990,7 @@ export const phase3: Phase = {
           item: "Track total cost of ownership (build + run + maintain)",
           templateTitle: "AI Total Cost of Ownership Calculator",
           templateType: "worksheet",
-          instructions: "TCO over 3 years is the right comparison for AI investment decisions — not just year 1 build cost. Include hidden costs: model maintenance, retraining, and change management.",
+          instructions: "TCO over 3 years is the right comparison for AI investment decisions - not just year 1 build cost. Include hidden costs: model maintenance, retraining, and change management.",
           sections: [
             {
               heading: "3-Year Cost Summary",
@@ -1019,10 +1019,10 @@ export const phase3: Phase = {
           item: "Create executive AI value dashboard",
           templateTitle: "AI Executive Dashboard Specification",
           templateType: "template",
-          instructions: "The executive dashboard should show value delivered, not technical metrics. Executives don't care about model accuracy — they care about business outcomes and costs.",
+          instructions: "The executive dashboard should show value delivered, not technical metrics. Executives don't care about model accuracy - they care about business outcomes and costs.",
           sections: [
             {
-              heading: "Dashboard KPIs (Top of Page — at-a-glance)",
+              heading: "Dashboard KPIs (Top of Page - at-a-glance)",
               items: [
                 "ROI to date: £/$ ___ | Target: £/$ ___ | Status: ☐ On track  ☐ At risk  ☐ Ahead",
                 "Cost savings YTD: £/$ ___ vs target £/$ ___",
@@ -1048,14 +1048,14 @@ export const phase3: Phase = {
           item: "Define ROI reporting cadence to leadership",
           templateTitle: "AI ROI Report Template",
           templateType: "template",
-          instructions: "Quarterly ROI reports to leadership create accountability and justify continued investment. Use this template — keep it to 2 pages maximum.",
+          instructions: "Quarterly ROI reports to leadership create accountability and justify continued investment. Use this template - keep it to 2 pages maximum.",
           sections: [
             {
               heading: "Quarterly ROI Report Structure",
               items: [
-                "PAGE 1 — EXECUTIVE SUMMARY: Total value delivered YTD | Vs target | Top 3 wins | Top 3 risks | Recommendation",
-                "PAGE 2 — FINANCIAL DETAIL: Cost savings (by use case) | Revenue impact | Investment spent | Net value | Quarterly trend",
-                "PAGE 2 — PORTFOLIO STATUS: Each active use case RAG status | Upcoming launches | Decision requests",
+                "PAGE 1 - EXECUTIVE SUMMARY: Total value delivered YTD | Vs target | Top 3 wins | Top 3 risks | Recommendation",
+                "PAGE 2 - FINANCIAL DETAIL: Cost savings (by use case) | Revenue impact | Investment spent | Net value | Quarterly trend",
+                "PAGE 2 - PORTFOLIO STATUS: Each active use case RAG status | Upcoming launches | Decision requests",
                 "APPENDIX (optional): Methodology notes | Use case deep-dives | Case study testimonials",
                 "Distribution: Board (summary only) | AI Steering (full) | Finance (financial pages)",
               ],
@@ -1066,7 +1066,7 @@ export const phase3: Phase = {
                 "Use Case | Status | Investment YTD | Benefit YTD | Net Value | KPI vs Target | Next Milestone",
                 "Use Case 1: ___ | ☐ Live  ☐ Pilot  ☐ Paused | £/$ ___ | £/$ ___ | £/$ ___ | ___% | ___",
                 "Use Case 2: ___ | ___ | £/$ ___ | £/$ ___ | £/$ ___ | ___% | ___",
-                "TOTAL: — | — | £/$ ___ | £/$ ___ | £/$ ___ | — | —",
+                "TOTAL: - | - | £/$ ___ | £/$ ___ | £/$ ___ | - | -",
               ],
             },
           ],
@@ -1090,9 +1090,9 @@ export const phase3: Phase = {
             {
               heading: "Measurement Validity Checklist",
               items: [
-                "Sample size sufficient for statistical significance: ☐ Yes — calculated: ___ per group  ☐ Not yet — use power calculator",
-                "Measurement period long enough to capture seasonal variation: ☐ Yes  ☐ No — risk: ___",
-                "External confounds identified and accounted for: ☐ Yes: ___  ☐ No — risk: ___",
+                "Sample size sufficient for statistical significance: ☐ Yes - calculated: ___ per group  ☐ Not yet - use power calculator",
+                "Measurement period long enough to capture seasonal variation: ☐ Yes  ☐ No - risk: ___",
+                "External confounds identified and accounted for: ☐ Yes: ___  ☐ No - risk: ___",
                 "Attribution: Can we isolate AI contribution from other simultaneous changes: ☐ Yes  ☐ Partially  ☐ No",
                 "Measurement reviewed by Finance: ☐ Yes  ☐ No",
               ],

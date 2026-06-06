@@ -105,20 +105,20 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     teamSize: "55 engineers, 18 data scientists, 8 ML ops, 20 claims domain experts, 5 compliance officers, 3 actuaries",
     challenges: [
       "Legacy system heterogeneity: Claims data existed in 12 different systems across markets with no common schema, requiring 18 months of data engineering before models could be trained",
-      "Regulatory fragmentation: Autonomous settlement authority required separate regulatory approval in each jurisdiction — EU, UK FCA, and US state-by-state",
+      "Regulatory fragmentation: Autonomous settlement authority required separate regulatory approval in each jurisdiction - EU, UK FCA, and US state-by-state",
       "Adjuster trust: Senior adjusters were skeptical of AI handling 'their' cases, requiring extensive accuracy proof-points and change management",
       "Edge cases in damage assessment: Weather-related total loss claims and catastrophe events required manual override protocols",
       "Fraud model calibration: Initial fraud model had high false positive rates flagging legitimate claims, eroding customer trust in pilot markets",
     ],
     governanceFramework: [
-      "Autonomous settlement capped at £5,000 / €6,000 / $7,500 per claim — above threshold always requires human adjuster",
+      "Autonomous settlement capped at £5,000 / €6,000 / $7,500 per claim - above threshold always requires human adjuster",
       "Monthly model performance review by claims leadership and actuarial team",
       "Full audit trail for every AI decision stored for 10 years per FCA/BaFin requirements",
       "Explainability report generated for any claim where AI recommendation is overridden by adjuster",
       "Quarterly bias audit checking settlement equity across demographic proxies",
     ],
     dataPrivacy: [
-      "All PII processed within Zurich's private Azure tenant — no claims data sent to external APIs",
+      "All PII processed within Zurich's private Azure tenant - no claims data sent to external APIs",
       "GDPR-compliant right-to-explanation implemented: customers can request AI decision rationale",
       "Data minimisation: AI models use only claim-relevant fields, not lifestyle or social data",
       "Third-party photo uploads scanned and stripped of EXIF metadata before storage",
@@ -126,22 +126,22 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     humanOversight:
       "All claims above the autonomous settlement threshold require a qualified adjuster decision. All AI-flagged fraud cases are reviewed by the Special Investigations Unit before any claim is denied. A claims director reviews weekly STP approval rate trends for anomaly detection.",
     regulatoryConsiderations: [
-      "FCA Consumer Duty (UK) — fair outcomes for customers in automated claims",
-      "EU AI Act Article 6 — high-risk AI system classification for automated insurance decisions",
+      "FCA Consumer Duty (UK) - fair outcomes for customers in automated claims",
+      "EU AI Act Article 6 - high-risk AI system classification for automated insurance decisions",
       "BaFin circular on AI in financial services (Germany)",
       "US NAIC model bulletin on AI in insurance (adopted in 29 states)",
       "Solvency II model governance requirements",
     ],
     lessonsLearned: [
-      "Parallel running for 3 months before any autonomous decisions was essential — it built adjuster trust and produced the statistical evidence needed for regulatory approval",
+      "Parallel running for 3 months before any autonomous decisions was essential - it built adjuster trust and produced the statistical evidence needed for regulatory approval",
       "The fraud model needed 6 months of post-deployment tuning; launch accuracy is not production accuracy",
       "Starting with motor claims (standardised, high volume) rather than commercial lines (complex, low volume) was the right sequencing decision",
-      "Invest in adjuster UI as much as in AI models — adoption speed depended almost entirely on queue interface quality",
-      "Reinsurance treaty notification requirements were underestimated — Munich Re required formal notification before deployment affecting reinsured portfolios",
+      "Invest in adjuster UI as much as in AI models - adoption speed depended almost entirely on queue interface quality",
+      "Reinsurance treaty notification requirements were underestimated - Munich Re required formal notification before deployment affecting reinsured portfolios",
     ],
     whatWorkedWell: [
       "Computer vision for vehicle damage assessment outperformed initial accuracy targets because mobile photo quality had improved significantly since the training data era",
-      "The 5-tier complexity taxonomy created by senior adjusters proved durable — it needed only minor refinement after 18 months in production",
+      "The 5-tier complexity taxonomy created by senior adjusters proved durable - it needed only minor refinement after 18 months in production",
       "Kafka-based event streaming allowed real-time triage with sub-second latency even at 50,000 daily claim volume",
     ],
     references: [
@@ -165,7 +165,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     problem:
       "Swiss Re's treaty reinsurance underwriters manually priced 8,000+ renewal contracts annually using spreadsheet-based models. Each pricing exercise took 3–5 days, relied on individual underwriter judgment with high variability, and could not incorporate the full breadth of available external risk data at quote time.",
     solution:
-      "Built an AI-assisted treaty underwriting platform — 'Magnum AI' — combining predictive loss models trained on Swiss Re's 170-year proprietary loss database with real-time external data enrichment (climate, economic, cat model outputs) and an LLM-powered contract analysis layer that extracts key terms from cedant submissions automatically.",
+      "Built an AI-assisted treaty underwriting platform - 'Magnum AI' - combining predictive loss models trained on Swiss Re's 170-year proprietary loss database with real-time external data enrichment (climate, economic, cat model outputs) and an LLM-powered contract analysis layer that extracts key terms from cedant submissions automatically.",
     outcome:
       "Treaty pricing time cut from 3–5 days to under 4 hours for standard treaties. Pricing consistency across the underwriting portfolio improved significantly. Loss ratio prediction accuracy improved by 8 percentage points versus benchmark models, directly improving profitability.",
     metrics: [
@@ -178,7 +178,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     tags: ["Reinsurance", "Underwriting", "Actuarial", "NLP", "Predictive Modelling", "Treaty", "P&C"],
     featured: true,
     businessContext:
-      "Swiss Re is the world's second-largest reinsurer with $44B+ in premiums written. Treaty underwriting is the core of its P&C business — pricing accuracy directly determines whether the company makes or loses hundreds of millions per year. Increasing climate volatility and data availability made traditional spreadsheet-based pricing inadequate and created a strategic opportunity for data-driven differentiation.",
+      "Swiss Re is the world's second-largest reinsurer with $44B+ in premiums written. Treaty underwriting is the core of its P&C business - pricing accuracy directly determines whether the company makes or loses hundreds of millions per year. Increasing climate volatility and data availability made traditional spreadsheet-based pricing inadequate and created a strategic opportunity for data-driven differentiation.",
     strategicDrivers: [
       "Climate change increasing frequency and severity of natural catastrophe losses, breaking historical pricing assumptions",
       "Cedants (primary insurers) submitting richer data than underwriters could analyse manually",
@@ -255,14 +255,14 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     ],
     teamSize: "70 engineers, 25 data scientists, 15 actuaries, 10 senior underwriters (domain experts), 6 ML ops, 4 compliance officers",
     challenges: [
-      "Actuarial credibility: Senior actuaries required the AI model to meet the same statistical rigour standards as internal actuarial methods — a 12-month validation process",
+      "Actuarial credibility: Senior actuaries required the AI model to meet the same statistical rigour standards as internal actuarial methods - a 12-month validation process",
       "Regulatory capital treatment: In some jurisdictions, AI-driven pricing required regulatory disclosure under Solvency II internal model rules",
       "Underwriter adoption: Experienced underwriters with 20+ year track records were reluctant to follow AI indications that contradicted their intuition",
-      "Data heterogeneity: Cedant loss run formats varied enormously — the LLM extraction layer required 400+ prompt examples to handle the range of submission formats",
+      "Data heterogeneity: Cedant loss run formats varied enormously - the LLM extraction layer required 400+ prompt examples to handle the range of submission formats",
       "Model performance in tail events: Standard loss models underperformed during catastrophe clustering scenarios (back-to-back events), requiring separate cat pricing modules",
     ],
     governanceFramework: [
-      "AI pricing indications are advisory — underwriters retain final pricing authority on all treaties",
+      "AI pricing indications are advisory - underwriters retain final pricing authority on all treaties",
       "Mandatory override documentation: underwriters must record reason when deviating >10% from AI indication",
       "Quarterly actuarial model performance review against actual loss emergence",
       "Annual independent model validation by external actuarial firm",
@@ -284,11 +284,11 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
       "Lloyd's of London market bulletin on AI in underwriting",
     ],
     lessonsLearned: [
-      "Actuarial partnership from day one is non-negotiable — models that bypass actuarial validation never make it to production in reinsurance",
+      "Actuarial partnership from day one is non-negotiable - models that bypass actuarial validation never make it to production in reinsurance",
       "Shadow underwriting for a full renewal season before go-live built the empirical track record needed for underwriter buy-in",
       "LLM-based contract extraction reduced the single biggest manual bottleneck (submission data entry) and was faster to build than a traditional NLP pipeline",
-      "Confidence intervals alongside point estimates dramatically improved underwriter trust — knowing when the model is uncertain is as valuable as the prediction itself",
-      "Retrocession and ILS desks need to be involved from the start — AI risk stratification changes what they want to cede and buy",
+      "Confidence intervals alongside point estimates dramatically improved underwriter trust - knowing when the model is uncertain is as valuable as the prediction itself",
+      "Retrocession and ILS desks need to be involved from the start - AI risk stratification changes what they want to cede and buy",
     ],
     whatWorkedWell: [
       "The proprietary 170-year loss database gave Swiss Re a data moat that external competitors cannot replicate",
@@ -316,7 +316,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     problem:
       "Traditional insurance claims processes take days or weeks, involve adversarial dynamics between insurers and customers, and cost $80–$120 per claim to administer. Lemonade was founded on the premise that AI could eliminate this friction entirely for straightforward personal lines claims.",
     solution:
-      "Built 'AI Jim', an end-to-end AI claims handler for homeowners, renters, pet, and life insurance. Customers submit claims via the Lemonade app, AI Jim reviews the claim, runs 18 anti-fraud algorithms, cross-references the policy, and for eligible simple claims authorises payment instantly — in as little as 3 seconds.",
+      "Built 'AI Jim', an end-to-end AI claims handler for homeowners, renters, pet, and life insurance. Customers submit claims via the Lemonade app, AI Jim reviews the claim, runs 18 anti-fraud algorithms, cross-references the policy, and for eligible simple claims authorises payment instantly - in as little as 3 seconds.",
     outcome:
       "Record claim settled in 3 seconds without human involvement. 30%+ of claims paid instantly. Claims handling cost reduced to under $10 per claim. Customer satisfaction (NPS) scores 2x industry average. Fraud loss ratio materially below industry benchmark.",
     metrics: [
@@ -350,10 +350,10 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
       "Customer submits claim via app with text description and optional photos/video. AI Jim parses the claim narrative, validates against policy coverage, and simultaneously runs 18 fraud detection algorithms including cross-referencing prior claims, social signals, and behavioural metadata from the submission session. If all signals are clear and claim value is within the autonomous authority threshold, payment is authorised and transferred via Stripe. Claims above threshold or flagged by fraud models route to human adjusters.",
     dataRequirements:
       "Lemonade's proprietary claims corpus (growing annually since 2016). Fraud model trained on flagged and confirmed fraudulent claims. External public records for address, identity, and event cross-referencing. Behavioural data (submission patterns, video metadata) used only for fraud detection, not claim valuation.",
-    investmentEstimate: "Core claims AI built as part of Lemonade's founding engineering team — estimated $15–20M in cumulative development cost through IPO",
+    investmentEstimate: "Core claims AI built as part of Lemonade's founding engineering team - estimated $15–20M in cumulative development cost through IPO",
     annualReturn: "Claims cost reduction of $70–100M/year at scale vs. traditional handling",
-    paybackPeriod: "Embedded in product from launch — no legacy migration cost",
-    roiMultiple: "Enables entire business model — not separable from product",
+    paybackPeriod: "Embedded in product from launch - no legacy migration cost",
+    roiMultiple: "Enables entire business model - not separable from product",
     roiBreakdown: [
       {
         category: "Claims handling cost reduction",
@@ -369,10 +369,10 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     implementationTimeline: "Launched with the product in 2016; continuously evolved since",
     teamSize: "Core AI team of 30–40 engineers and data scientists (as reported in S-1 filing)",
     challenges: [
-      "Regulatory approval: Several US states initially required human review of all claims — Lemonade worked with regulators state-by-state to demonstrate AI fairness",
+      "Regulatory approval: Several US states initially required human review of all claims - Lemonade worked with regulators state-by-state to demonstrate AI fairness",
       "Fraud adversarial dynamics: As AI Jim's patterns became known, fraudsters adapted, requiring continuous model evolution",
       "Edge case coverage explosions: AI handling works for standard claims but catastrophe events (Hurricane Ida) required rapid fallback to human adjusters at scale",
-      "Trust building: Early customers were sceptical that a claim submitted to an app would actually be paid — social proof and transparency were critical",
+      "Trust building: Early customers were sceptical that a claim submitted to an app would actually be paid - social proof and transparency were critical",
       "Behavioural data ethics: Use of video and typing pattern analysis for fraud detection attracted regulatory scrutiny on privacy grounds",
     ],
     governanceFramework: [
@@ -383,7 +383,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
       "Customer can always request human review of any AI claim decision",
     ],
     dataPrivacy: [
-      "Behavioural metadata (video, typing) used only for fraud detection — deleted after claim resolution",
+      "Behavioural metadata (video, typing) used only for fraud detection - deleted after claim resolution",
       "State-by-state data privacy compliance (CCPA, NY DFS)",
       "No third-party data sharing of individual claim details",
       "GDPR-compliant for European operations",
@@ -398,15 +398,15 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
       "State fair claims settlement practices acts (US)",
     ],
     lessonsLearned: [
-      "Designing for AI-first from day one is fundamentally different from retrofitting AI into legacy processes — the two approaches are not equivalent",
+      "Designing for AI-first from day one is fundamentally different from retrofitting AI into legacy processes - the two approaches are not equivalent",
       "Transparency with customers about AI involvement increased rather than decreased trust",
-      "Fraud detection requires continuous adversarial retraining — fraudsters learn the system faster than expected",
+      "Fraud detection requires continuous adversarial retraining - fraudsters learn the system faster than expected",
       "Regulatory engagement early and proactively is far less costly than reactive compliance after launch",
-      "The 'Giveback' model (donating unclaimed premiums to charity) meaningfully reduces fraudulent claims — behavioural economics at scale",
+      "The 'Giveback' model (donating unclaimed premiums to charity) meaningfully reduces fraudulent claims - behavioural economics at scale",
     ],
     whatWorkedWell: [
       "Mobile-first submission UI with video option created richer fraud signals than traditional paper forms",
-      "Stripe instant payment rails were critical — speed of payment is itself a trust signal to customers",
+      "Stripe instant payment rails were critical - speed of payment is itself a trust signal to customers",
       "Building the fraud graph database in-house rather than using third-party solutions gave Lemonade proprietary detection patterns",
     ],
     references: [
@@ -430,7 +430,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     problem:
       "Traditional natural catastrophe (nat cat) pricing relies on vendor models (RMS, AIR, Verisk) that are updated infrequently, use historical loss data that may not reflect forward-looking climate risk, and cannot incorporate the full range of real-time earth observation and climate data now available. Munich Re's underwriters had limited ability to challenge or supplement vendor model outputs.",
     solution:
-      "Munich Re's Digital Partners and NatCat teams built a proprietary AI-enhanced catastrophe pricing layer — 'geo:unison' — that ingests satellite imagery, climate model outputs, real-time weather data, and Munich Re's proprietary 50-year nat cat loss experience to produce location-level risk scores that supplement and challenge vendor cat model outputs.",
+      "Munich Re's Digital Partners and NatCat teams built a proprietary AI-enhanced catastrophe pricing layer - 'geo:unison' - that ingests satellite imagery, climate model outputs, real-time weather data, and Munich Re's proprietary 50-year nat cat loss experience to produce location-level risk scores that supplement and challenge vendor cat model outputs.",
     outcome:
       "Location-level flood and wildfire risk scores now available for 1 billion+ properties globally. Underwriters can price individual risk locations that vendor models cannot resolve at sufficient granularity. Portfolio aggregation losses improved, contributing to a combined ratio improvement of 3–4 percentage points on nat cat-exposed books.",
     metrics: [
@@ -466,7 +466,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     architecture:
       "A geospatial data pipeline ingests satellite imagery (Sentinel-2, 10m resolution globally, updated every 5 days), climate model projections, and elevation/topology data for every 30m grid cell globally. A convolutional neural network extracts hazard-relevant features (vegetation index, impervious surface, slope, proximity to water). These features feed into peril-specific gradient boosting models (wildfire, flood, wind) trained on Munich Re's 50-year loss history. Output is a location-level annual expected loss (AEL) and return-period loss curve that underwriters use alongside vendor cat model outputs.",
     dataRequirements:
-      "50 years of Munich Re proprietary nat cat loss data (global, peril-specific). 5 years of Sentinel-2 satellite imagery (petabyte scale — processed via Google Earth Engine). CMIP6 climate projections to 2100. Third-party property exposure databases (CoreLogic, Verisk). All proprietary data processed within Munich Re's private cloud.",
+      "50 years of Munich Re proprietary nat cat loss data (global, peril-specific). 5 years of Sentinel-2 satellite imagery (petabyte scale - processed via Google Earth Engine). CMIP6 climate projections to 2100. Third-party property exposure databases (CoreLogic, Verisk). All proprietary data processed within Munich Re's private cloud.",
     investmentEstimate: "$50–70M over 4 years (data infrastructure, model development, satellite data licensing, actuarial validation)",
     annualReturn: "$400–500M attributable combined ratio improvement on nat cat portfolio",
     paybackPeriod: "~12 months post full integration into underwriting",
@@ -523,19 +523,19 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     challenges: [
       "Petabyte-scale satellite data processing: Processing global Sentinel-2 imagery required significant investment in Google Earth Engine and Databricks infrastructure",
       "Actuarial validation rigour: Munich Re's actuarial council required the model to meet the same standards as Solvency II internal models, requiring 12 months of backtesting",
-      "Vendor model comparison: Demonstrating proprietary model outperformance required agreed-upon methodology — contentious as vendor models are black boxes",
+      "Vendor model comparison: Demonstrating proprietary model outperformance required agreed-upon methodology - contentious as vendor models are black boxes",
       "Underwriter workflow integration: Underwriters were accustomed to vendor model outputs and needed guidance on how to use and weight an additional proprietary score",
       "Climate model uncertainty: CMIP6 scenarios have wide uncertainty ranges for 2050+ projections, requiring the model to express uncertainty rather than point estimates",
     ],
     governanceFramework: [
-      "Proprietary model used as supplementary tool — vendor cat models still required for all treaty pricing",
+      "Proprietary model used as supplementary tool - vendor cat models still required for all treaty pricing",
       "Annual actuarial council review of model performance vs. actual loss emergence",
       "Independent external validation every 3 years",
       "Underwriter override documentation when deviating from AI-indicated pricing",
       "Catastrophe event post-mortems: every major event triggers model performance review and recalibration",
     ],
     dataPrivacy: [
-      "No individual policyholder data used in model training — only aggregate loss event data",
+      "No individual policyholder data used in model training - only aggregate loss event data",
       "Satellite imagery is public domain (Sentinel-2, Landsat) or licensed without privacy constraints",
       "Property database data licensed from CoreLogic/Verisk under enterprise agreements with data security provisions",
       "GDPR-compliant for any European property data",
@@ -551,9 +551,9 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     ],
     lessonsLearned: [
       "Publishing research findings externally (academic papers) accelerated credibility with regulators and internal actuarial teams",
-      "Petabyte-scale geospatial ML requires a dedicated platform team — this cannot be done with standard data science infrastructure",
-      "The model's value is highest at the sub-grid level where vendor models are weakest — target integration to those use cases first",
-      "Climate model uncertainty must be expressed explicitly in outputs, not hidden — underwriters need to understand the forward-looking uncertainty range",
+      "Petabyte-scale geospatial ML requires a dedicated platform team - this cannot be done with standard data science infrastructure",
+      "The model's value is highest at the sub-grid level where vendor models are weakest - target integration to those use cases first",
+      "Climate model uncertainty must be expressed explicitly in outputs, not hidden - underwriters need to understand the forward-looking uncertainty range",
       "Validating against individual historical events (Hurricane Harvey, 2018 California wildfires) was more persuasive than aggregate statistics for underwriter adoption",
     ],
     whatWorkedWell: [
@@ -582,7 +582,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
     problem:
       "Insurance fraud costs the industry an estimated €20B per year in Europe alone. AXA's traditional rules-based fraud detection caught only the most obvious patterns, generating high false positive rates that burdened legitimate customers while missing sophisticated organised fraud rings. Claims fraud, application fraud, and broker fraud all required separate, siloed detection approaches.",
     solution:
-      "Built 'AXA Fraud Intelligence Network' — a unified AI fraud detection platform combining graph neural networks to detect fraud rings and collusion, unsupervised anomaly detection on claim patterns, NLP on claim narratives to detect inconsistencies, and application fraud models that score new policies at point of sale.",
+      "Built 'AXA Fraud Intelligence Network' - a unified AI fraud detection platform combining graph neural networks to detect fraud rings and collusion, unsupervised anomaly detection on claim patterns, NLP on claim narratives to detect inconsistencies, and application fraud models that score new policies at point of sale.",
     outcome:
       "€500M+ in fraud detected and recovered annually across AXA's European operations. False positive rate reduced by 55% vs. rules-based predecessor. Fraud ring detection capability introduced for the first time. SIU (Special Investigations Unit) investigator productivity tripled through AI-prioritised work queues.",
     metrics: [
@@ -634,7 +634,7 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
       {
         category: "SIU efficiency",
         value: "€40M/year",
-        note: "Investigator productivity tripled — same team handles 3x the caseload",
+        note: "Investigator productivity tripled - same team handles 3x the caseload",
       },
     ],
     implementationTimeline: "28 months from business case to full European deployment",
@@ -674,40 +674,40 @@ export const caseStudiesDataInsurance: CaseStudyData[] = [
       "Label quality: Confirmed fraud labels are sparse (fraud is rare) and noisy (some fraud is never detected and enters as 'legitimate' in training data)",
       "Graph database scale: Neo4j graph with 50M+ nodes and 200M+ edges required significant infrastructure tuning for real-time query performance",
       "Cross-border fraud rings: Fraud rings operating across multiple AXA country subsidiaries required pan-European data sharing within GDPR constraints",
-      "False positive management: Reducing false positives was as important as increasing detection — wrongly accusing a legitimate customer of fraud causes significant brand and legal damage",
+      "False positive management: Reducing false positives was as important as increasing detection - wrongly accusing a legitimate customer of fraud causes significant brand and legal damage",
     ],
     governanceFramework: [
       "AI fraud scores are always reviewed by a qualified SIU investigator before any claim denial or legal referral",
-      "Fraud model bias audit quarterly — checking detection rates are equitable across demographic proxies",
+      "Fraud model bias audit quarterly - checking detection rates are equitable across demographic proxies",
       "All denied claims based on fraud scoring require documented SIU investigator sign-off",
       "Model performance reviewed monthly by Head of Fraud and Group Chief Risk Officer",
       "Customer can appeal any fraud-based claim denial through an independent review panel",
     ],
     dataPrivacy: [
       "GDPR-compliant consent framework for third-party data enrichment signals",
-      "Behavioural/device data used for fraud detection only — deleted after claim resolution",
+      "Behavioural/device data used for fraud detection only - deleted after claim resolution",
       "Data sharing between AXA country entities governed by intra-group data transfer agreements",
       "Right to explanation: customers can request why their claim was referred for fraud investigation",
     ],
     humanOversight:
       "No claim is denied for fraud based solely on AI scoring. Every fraud-flagged claim requires a qualified SIU investigator to review the evidence and make the final determination. Claim denials above €10,000 require SIU supervisor sign-off. Legal referrals for prosecution require SIU Director approval.",
     regulatoryConsiderations: [
-      "GDPR Article 22 — automated individual decision-making restrictions",
-      "EU AI Act — potential high-risk AI classification for automated fraud determination",
+      "GDPR Article 22 - automated individual decision-making restrictions",
+      "EU AI Act - potential high-risk AI classification for automated fraud determination",
       "FCA Insurance Conduct of Business Sourcebook (UK)",
       "ACPR guidance on AI in insurance (France)",
       "IFB (Insurance Fraud Bureau) data sharing protocols",
     ],
     lessonsLearned: [
-      "Graph neural networks for ring detection were the single highest-value model — organised fraud was 4x more impactful than opportunistic fraud",
-      "GDPR is a genuine constraint on fraud detection, not just a compliance checkbox — model design must account for it from day one",
-      "SIU investigator buy-in was critical — they knew the fraud patterns and their domain expertise was essential for label quality and model validation",
-      "False positive rate is a primary KPI alongside detection rate — the cost of a wrongly accused customer is not just financial",
+      "Graph neural networks for ring detection were the single highest-value model - organised fraud was 4x more impactful than opportunistic fraud",
+      "GDPR is a genuine constraint on fraud detection, not just a compliance checkbox - model design must account for it from day one",
+      "SIU investigator buy-in was critical - they knew the fraud patterns and their domain expertise was essential for label quality and model validation",
+      "False positive rate is a primary KPI alongside detection rate - the cost of a wrongly accused customer is not just financial",
       "Starting with France (AXA's largest European market) gave the model the most training data and the most impactful pilot",
     ],
     whatWorkedWell: [
       "Graph neural network approach identified fraud rings that claim-level models were completely blind to",
-      "AI-prioritised SIU queues improved investigator job satisfaction — they spent time on high-value complex cases instead of obvious low-value ones",
+      "AI-prioritised SIU queues improved investigator job satisfaction - they spent time on high-value complex cases instead of obvious low-value ones",
       "Real-time Kafka streaming enabled fraud scoring at FNOL, not just post-settlement, significantly improving recovery rates",
     ],
     references: [

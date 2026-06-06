@@ -29,7 +29,7 @@ const personas = [
     icon: Code2,
     label: "Builder / Practitioner",
     tagline: "Developer or data scientist",
-    description: "I build with AI — give me tools, APIs, code examples, and integration guides.",
+    description: "I build with AI - give me tools, APIs, code examples, and integration guides.",
     gradient: "from-violet-500 to-blue-500",
     ring: "ring-violet-400/60",
     activeBg: "bg-violet-50 dark:bg-violet-950/30",

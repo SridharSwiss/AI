@@ -46,7 +46,7 @@ export function Hero() {
         </h1>
 
         <p className="animate-fade-up delay-300 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-          Tools, companies, learning paths, case studies, compliance frameworks, and implementation playbooks — all in one curated, searchable platform.
+          Tools, companies, learning paths, case studies, compliance frameworks, and implementation playbooks - all in one curated, searchable platform.
         </p>
 
         <div className="animate-fade-up delay-400 flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">

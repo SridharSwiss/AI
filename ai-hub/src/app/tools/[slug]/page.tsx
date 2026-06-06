@@ -48,13 +48,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const tool = tools.find((t) => t.slug === slug);
   if (!tool) return { title: "Tool Not Found" };
-  const desc = `${tool.tagline} — ${tool.description.slice(0, 120)}`;
+  const desc = `${tool.tagline} - ${tool.description.slice(0, 120)}`;
   return {
-    title: `${tool.name} Review — Pricing, Features & Alternatives`,
+    title: `${tool.name} Review - Pricing, Features & Alternatives`,
     description: desc.slice(0, 160),
     alternates: { canonical: `${BASE_URL}/tools/${tool.slug}` },
     openGraph: {
-      title: `${tool.name} — AI Tool Review | AIHub`,
+      title: `${tool.name} - AI Tool Review | AIHub`,
       description: desc.slice(0, 160),
       url: `${BASE_URL}/tools/${tool.slug}`,
       type: "website",

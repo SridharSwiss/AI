@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "AI Consulting Toolkit",
   description: "Practical AI implementation playbooks, assessment frameworks, checklists, and templates for every stage of the AI project lifecycle.",
   alternates: { canonical: `${BASE_URL}/consulting-toolkit` },
-  openGraph: { title: "AI Consulting Toolkit — Playbooks & Templates | AIHub", description: "Implementation playbooks, checklists, and templates for every AI project phase.", url: `${BASE_URL}/consulting-toolkit`, type: "website" },
+  openGraph: { title: "AI Consulting Toolkit - Playbooks & Templates | AIHub", description: "Implementation playbooks, checklists, and templates for every AI project phase.", url: `${BASE_URL}/consulting-toolkit`, type: "website" },
 };
 
 const jsonLd = {

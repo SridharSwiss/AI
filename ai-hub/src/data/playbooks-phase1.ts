@@ -43,7 +43,7 @@ export const phase1: Phase = {
             {
               heading: "Data Governance & Access",
               items: [
-                "Data catalog in place: ☐ Yes  ☐ No  ☐ In progress — Tool: ___________",
+                "Data catalog in place: ☐ Yes  ☐ No  ☐ In progress - Tool: ___________",
                 "Data lineage tracked end-to-end: ☐ Yes  ☐ Partially  ☐ No",
                 "Documented data governance policy: ☐ Yes  ☐ Draft only  ☐ No",
                 "Data quality accountability owner: ☐ Dedicated team  ☐ IT  ☐ Business units  ☐ Nobody",
@@ -97,7 +97,7 @@ export const phase1: Phase = {
           item: "Identify top 5 candidate AI use cases",
           templateTitle: "AI Use Case Nomination Form",
           templateType: "template",
-          instructions: "Complete one form per use case. Collect from department heads — aim for 15–20 nominations before prioritisation. Use the feasibility section to filter obvious non-starters early.",
+          instructions: "Complete one form per use case. Collect from department heads - aim for 15–20 nominations before prioritisation. Use the feasibility section to filter obvious non-starters early.",
           sections: [
             {
               heading: "Use Case Overview",
@@ -124,7 +124,7 @@ export const phase1: Phase = {
               items: [
                 "Historical data available for training: ☐ Yes  ☐ Partial  ☐ No",
                 "Volume of available labelled examples: ___________________________",
-                "Regulatory / compliance constraints: ☐ None  ☐ Minor  ☐ Significant — describe: ___",
+                "Regulatory / compliance constraints: ☐ None  ☐ Minor  ☐ Significant - describe: ___",
                 "Business champion identified: ☐ Yes – Name: ___________  ☐ No",
                 "Estimated implementation effort: ☐ <3 months  ☐ 3–6 months  ☐ 6–12 months  ☐ Unknown",
               ],
@@ -243,12 +243,12 @@ export const phase1: Phase = {
             {
               heading: "Role Inventory",
               items: [
-                "ML Engineer — Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
-                "Data Scientist — Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
-                "Data Engineer — Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
-                "AI Product Manager — Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
-                "MLOps Engineer — Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
-                "Responsible AI / Ethics Lead — Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
+                "ML Engineer - Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
+                "Data Scientist - Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
+                "Data Engineer - Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
+                "AI Product Manager - Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
+                "MLOps Engineer - Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
+                "Responsible AI / Ethics Lead - Current: ___ | Required: ___ | Gap: ___ | Action: ☐ Hire  ☐ Train  ☐ Partner",
               ],
             },
             {
@@ -291,18 +291,18 @@ export const phase1: Phase = {
             {
               heading: "Integration Complexity (Rate 1–5, 5 = hardest)",
               items: [
-                "ERP / Finance system: ___ / 5 — System name: ___",
-                "CRM: ___ / 5 — System name: ___",
-                "Data warehouse / BI tool: ___ / 5 — System name: ___",
-                "Customer-facing platform: ___ / 5 — System name: ___",
-                "HR / People systems: ___ / 5 — System name: ___",
+                "ERP / Finance system: ___ / 5 - System name: ___",
+                "CRM: ___ / 5 - System name: ___",
+                "Data warehouse / BI tool: ___ / 5 - System name: ___",
+                "Customer-facing platform: ___ / 5 - System name: ___",
+                "HR / People systems: ___ / 5 - System name: ___",
               ],
             },
             {
               heading: "Technical Constraints",
               items: [
                 "Legacy mainframe systems that cannot be easily integrated: ☐ Yes  ☐ No",
-                "Enterprise Service Bus (ESB) or integration middleware: ☐ Yes — Tool: ___  ☐ No",
+                "Enterprise Service Bus (ESB) or integration middleware: ☐ Yes - Tool: ___  ☐ No",
                 "Maximum acceptable API response latency for AI features: ___ ms",
                 "Event-driven architecture (Kafka / SNS / EventBridge) in use: ☐ Yes  ☐ No  ☐ Planned",
                 "Network segmentation constraints affecting AI service comms: ☐ Yes  ☐ No",
@@ -314,7 +314,7 @@ export const phase1: Phase = {
           item: "Review cloud infrastructure readiness",
           templateTitle: "Cloud AI Infrastructure Readiness Checklist",
           templateType: "template",
-          instructions: "Complete with DevOps/cloud engineering team. Assess current cloud maturity and gaps for AI workloads — GPU access, model serving, vector databases, security.",
+          instructions: "Complete with DevOps/cloud engineering team. Assess current cloud maturity and gaps for AI workloads - GPU access, model serving, vector databases, security.",
           sections: [
             {
               heading: "Cloud Platform Status",
@@ -350,7 +350,7 @@ export const phase1: Phase = {
           item: "Evaluate change management capacity",
           templateTitle: "Change Management Capacity Survey",
           templateType: "survey",
-          instructions: "Assess your organisation's track record and capability for managing large-scale technology change. AI transformations require robust change management — this sets your baseline.",
+          instructions: "Assess your organisation's track record and capability for managing large-scale technology change. AI transformations require robust change management - this sets your baseline.",
           sections: [
             {
               heading: "Change History",
@@ -477,12 +477,12 @@ export const phase1: Phase = {
             {
               heading: "Workshop Agenda (90 min)",
               items: [
-                "0:00–0:10 — Introduction: AI possibilities overview and session rules",
-                "0:10–0:25 — Individual ideation (silent): each participant writes use cases on sticky notes",
-                "0:25–0:45 — Round-robin sharing: each person presents their top 3 ideas",
-                "0:45–1:00 — Clustering: group similar ideas, eliminate duplicates",
-                "1:00–1:15 — Dot voting: each participant places 5 votes on their favourite ideas",
-                "1:15–1:30 — Capture output and assign owners for each use case to nominate formally",
+                "0:00–0:10 - Introduction: AI possibilities overview and session rules",
+                "0:10–0:25 - Individual ideation (silent): each participant writes use cases on sticky notes",
+                "0:25–0:45 - Round-robin sharing: each person presents their top 3 ideas",
+                "0:45–1:00 - Clustering: group similar ideas, eliminate duplicates",
+                "1:00–1:15 - Dot voting: each participant places 5 votes on their favourite ideas",
+                "1:15–1:30 - Capture output and assign owners for each use case to nominate formally",
               ],
             },
             {
@@ -554,11 +554,11 @@ export const phase1: Phase = {
             {
               heading: "Automatic Disqualifiers",
               items: [
-                "☐ Training data is prohibited from processing under GDPR Article 9 without explicit consent — DISQUALIFY",
-                "☐ No identified data owner willing to provide access — DISQUALIFY",
-                "☐ Use case would require >24 months to production — DEFER",
-                "☐ Active legal dispute about data ownership — PAUSE pending resolution",
-                "☐ Use case requires AI capability that doesn't exist yet — MOVE TO RESEARCH BACKLOG",
+                "☐ Training data is prohibited from processing under GDPR Article 9 without explicit consent - DISQUALIFY",
+                "☐ No identified data owner willing to provide access - DISQUALIFY",
+                "☐ Use case would require >24 months to production - DEFER",
+                "☐ Active legal dispute about data ownership - PAUSE pending resolution",
+                "☐ Use case requires AI capability that doesn't exist yet - MOVE TO RESEARCH BACKLOG",
               ],
             },
           ],
@@ -625,7 +625,7 @@ export const phase1: Phase = {
                 "Gap 1: ___________________ | Mitigation: ☐ Collect new data  ☐ Buy/license  ☐ Synthetic data  ☐ Reduce scope",
                 "Gap 2: ___________________ | Mitigation: ☐ Collect new data  ☐ Buy/license  ☐ Synthetic data  ☐ Reduce scope",
                 "Labelling requirements: ___ examples to label | Estimated effort: ___ person-hours",
-                "Overall data readiness: ☐ Ready now  ☐ Ready in ___ weeks  ☐ Blocker — escalate",
+                "Overall data readiness: ☐ Ready now  ☐ Ready in ___ weeks  ☐ Blocker - escalate",
               ],
             },
           ],
@@ -634,17 +634,17 @@ export const phase1: Phase = {
           item: "Assess regulatory/compliance constraints",
           templateTitle: "Regulatory Constraint Screening Checklist",
           templateType: "questionnaire",
-          instructions: "Screen each use case for regulatory constraints before committing resources. High-risk AI under EU AI Act requires conformity assessment — identify early to plan accordingly.",
+          instructions: "Screen each use case for regulatory constraints before committing resources. High-risk AI under EU AI Act requires conformity assessment - identify early to plan accordingly.",
           sections: [
             {
               heading: "High-Risk AI Screening (EU AI Act Annex III)",
               items: [
-                "Does use case involve employment/worker management decisions: ☐ Yes — HIGH RISK  ☐ No",
-                "Does use case affect credit scoring or insurance pricing: ☐ Yes — HIGH RISK  ☐ No",
-                "Does use case involve healthcare diagnosis or treatment decisions: ☐ Yes — HIGH RISK  ☐ No",
-                "Does use case involve law enforcement or border control: ☐ Yes — HIGH RISK  ☐ No",
-                "Does use case affect access to education or essential services: ☐ Yes — HIGH RISK  ☐ No",
-                "Does use case use biometric identification in public spaces: ☐ Yes — PROHIBITED in EU  ☐ No",
+                "Does use case involve employment/worker management decisions: ☐ Yes - HIGH RISK  ☐ No",
+                "Does use case affect credit scoring or insurance pricing: ☐ Yes - HIGH RISK  ☐ No",
+                "Does use case involve healthcare diagnosis or treatment decisions: ☐ Yes - HIGH RISK  ☐ No",
+                "Does use case involve law enforcement or border control: ☐ Yes - HIGH RISK  ☐ No",
+                "Does use case affect access to education or essential services: ☐ Yes - HIGH RISK  ☐ No",
+                "Does use case use biometric identification in public spaces: ☐ Yes - PROHIBITED in EU  ☐ No",
               ],
             },
             {
@@ -681,7 +681,7 @@ export const phase1: Phase = {
                 "Top use case by combined impact + feasibility + strategic alignment: ___",
                 "Recommended Pilot 1: ___________________ | Owner: ___ | Timeline: ___ | Budget: £/$ ___",
                 "Recommended Pilot 2: ___________________ | Owner: ___ | Timeline: ___ | Budget: £/$ ___",
-                "Strategic bets (high impact, harder): ___________________ — revisit in 12 months",
+                "Strategic bets (high impact, harder): ___________________ - revisit in 12 months",
                 "Rejected / deferred use cases and reasons: ___________________________",
               ],
             },
@@ -691,7 +691,7 @@ export const phase1: Phase = {
           item: "Produce prioritized use case ranking and recommendation",
           templateTitle: "AI Use Case Prioritisation Report Template",
           templateType: "template",
-          instructions: "Compile the prioritisation output into this one-pager for executive sign-off. Keep it concise — executives read the summary; details are in appendices.",
+          instructions: "Compile the prioritisation output into this one-pager for executive sign-off. Keep it concise - executives read the summary; details are in appendices.",
           sections: [
             {
               heading: "Executive Summary",
@@ -706,10 +706,10 @@ export const phase1: Phase = {
             {
               heading: "Prioritisation Matrix Summary",
               items: [
-                "QUICK WINS (High feasibility, High impact) — pilot immediately: ___________________________",
-                "STRATEGIC BETS (Lower feasibility, High impact) — invest in capability first: ___________________________",
-                "FILL-INS (High feasibility, Lower impact) — backlog for later: ___________________________",
-                "NOT RECOMMENDED (Low feasibility, Low impact) — archived: ___________________________",
+                "QUICK WINS (High feasibility, High impact) - pilot immediately: ___________________________",
+                "STRATEGIC BETS (Lower feasibility, High impact) - invest in capability first: ___________________________",
+                "FILL-INS (High feasibility, Lower impact) - backlog for later: ___________________________",
+                "NOT RECOMMENDED (Low feasibility, Low impact) - archived: ___________________________",
               ],
             },
             {
@@ -739,12 +739,12 @@ export const phase1: Phase = {
             {
               heading: "Briefing Structure (15 slides)",
               items: [
-                "Slide 1–2: The AI moment — why now matters (market context, adoption inflection point)",
-                "Slide 3–4: What AI can do today — concrete capability examples with business outcomes",
-                "Slide 5–6: What AI cannot do — managing expectations, common myths debunked",
-                "Slide 7–8: Your industry's AI landscape — who is ahead, case studies with ROI data",
-                "Slide 9–10: Our AI position today — honest readiness assessment results",
-                "Slide 11–12: The opportunity — top 3 use cases and projected value",
+                "Slide 1–2: The AI moment - why now matters (market context, adoption inflection point)",
+                "Slide 3–4: What AI can do today - concrete capability examples with business outcomes",
+                "Slide 5–6: What AI cannot do - managing expectations, common myths debunked",
+                "Slide 7–8: Your industry's AI landscape - who is ahead, case studies with ROI data",
+                "Slide 9–10: Our AI position today - honest readiness assessment results",
+                "Slide 11–12: The opportunity - top 3 use cases and projected value",
                 "Slide 13–14: Investment required and governance needed",
                 "Slide 15: Recommendation and decision needed today",
               ],
@@ -752,9 +752,9 @@ export const phase1: Phase = {
             {
               heading: "Evidence & Data Sources",
               items: [
-                "McKinsey Global AI Survey (annual) — sector-specific AI adoption rates",
-                "Stanford AI Index Report — capability benchmarks and investment trends",
-                "Competitor AI announcements — public earnings calls, press releases, LinkedIn",
+                "McKinsey Global AI Survey (annual) - sector-specific AI adoption rates",
+                "Stanford AI Index Report - capability benchmarks and investment trends",
+                "Competitor AI announcements - public earnings calls, press releases, LinkedIn",
                 "Industry analyst reports (Gartner, IDC, Forrester) on AI ROI in your sector",
                 "3–5 named case studies from your industry with quantified outcomes",
               ],
@@ -779,11 +779,11 @@ export const phase1: Phase = {
             {
               heading: "Vision Validation Questions",
               items: [
-                "Is it ambitious but achievable within the timeframe: ☐ Yes  ☐ No — revise",
-                "Does it align with company values and ethical commitments: ☐ Yes  ☐ No — revise",
-                "Can every employee understand it in plain language: ☐ Yes  ☐ No — simplify",
-                "Does it guide resource allocation decisions: ☐ Yes  ☐ No — make more specific",
-                "Is there a measurable outcome embedded: ☐ Yes  ☐ No — add metrics",
+                "Is it ambitious but achievable within the timeframe: ☐ Yes  ☐ No - revise",
+                "Does it align with company values and ethical commitments: ☐ Yes  ☐ No - revise",
+                "Can every employee understand it in plain language: ☐ Yes  ☐ No - simplify",
+                "Does it guide resource allocation decisions: ☐ Yes  ☐ No - make more specific",
+                "Is there a measurable outcome embedded: ☐ Yes  ☐ No - add metrics",
                 "Final agreed vision statement: ___________________________",
                 "Approved by (names & roles): ___ | Date: ___",
               ],
@@ -794,16 +794,16 @@ export const phase1: Phase = {
           item: "Identify and address executive concerns and fears",
           templateTitle: "Executive AI Concern Mapping & Response Framework",
           templateType: "worksheet",
-          instructions: "Collect concerns anonymously before the workshop. Categorise and respond with evidence. Don't dismiss concerns — they often surface real risks that need mitigation plans.",
+          instructions: "Collect concerns anonymously before the workshop. Categorise and respond with evidence. Don't dismiss concerns - they often surface real risks that need mitigation plans.",
           sections: [
             {
-              heading: "Common Executive Concerns — Pre-populated Responses",
+              heading: "Common Executive Concerns - Pre-populated Responses",
               items: [
-                "CONCERN: 'AI will eliminate jobs and damage morale' — RESPONSE: AI typically augments rather than eliminates; share specific examples of role evolution, commit to retraining programme",
-                "CONCERN: 'We'll spend millions and get nothing' — RESPONSE: Start with small, scoped pilots with clear kill criteria; share comparable ROI case studies",
-                "CONCERN: 'AI decisions can't be explained or trusted' — RESPONSE: Explainable AI techniques + human oversight requirements; show examples of explainability in practice",
-                "CONCERN: 'We'll break privacy regulations and get fined' — RESPONSE: Governance framework + DPO involvement + privacy-by-design; reference sector-specific compliance approach",
-                "CONCERN: 'Our data isn't good enough' — RESPONSE: This is usually true; data quality programme must precede AI; show phased approach",
+                "CONCERN: 'AI will eliminate jobs and damage morale' - RESPONSE: AI typically augments rather than eliminates; share specific examples of role evolution, commit to retraining programme",
+                "CONCERN: 'We'll spend millions and get nothing' - RESPONSE: Start with small, scoped pilots with clear kill criteria; share comparable ROI case studies",
+                "CONCERN: 'AI decisions can't be explained or trusted' - RESPONSE: Explainable AI techniques + human oversight requirements; show examples of explainability in practice",
+                "CONCERN: 'We'll break privacy regulations and get fined' - RESPONSE: Governance framework + DPO involvement + privacy-by-design; reference sector-specific compliance approach",
+                "CONCERN: 'Our data isn't good enough' - RESPONSE: This is usually true; data quality programme must precede AI; show phased approach",
               ],
             },
             {
@@ -822,21 +822,21 @@ export const phase1: Phase = {
           item: "Establish AI steering committee membership",
           templateTitle: "AI Steering Committee Charter Template",
           templateType: "template",
-          instructions: "Adopt this charter template as the founding document of your AI governance committee. Agree membership before the first meeting — include both technology and business leaders.",
+          instructions: "Adopt this charter template as the founding document of your AI governance committee. Agree membership before the first meeting - include both technology and business leaders.",
           sections: [
             {
               heading: "Charter: Purpose & Mandate",
               items: [
                 "Purpose: The AI Steering Committee provides strategic direction and oversight for all AI initiatives at [Organisation].",
                 "Authority: Approves AI investments >£[threshold], AI policies, and high-risk AI use case deployments.",
-                "Reports to: [Board / CEO / ExCo] — quarterly written updates, annual in-person review.",
-                "Relationship to other bodies: Works alongside [Risk Committee / Tech Council / Ethics Board] — describe handoffs.",
+                "Reports to: [Board / CEO / ExCo] - quarterly written updates, annual in-person review.",
+                "Relationship to other bodies: Works alongside [Risk Committee / Tech Council / Ethics Board] - describe handoffs.",
               ],
             },
             {
               heading: "Membership & Governance",
               items: [
-                "Chair: [CTO / CDO / COO / CEO] — name: ___",
+                "Chair: [CTO / CDO / COO / CEO] - name: ___",
                 "Standing members: CISO, CFO, CHRO, Chief Data Officer, Legal Counsel, 2 × Business Unit heads",
                 "Invited (non-standing): External AI advisor, Regulator liaison (if applicable), DPO",
                 "Quorum: Chair + 4 standing members required for binding decisions",
@@ -847,7 +847,7 @@ export const phase1: Phase = {
             {
               heading: "Standing Agenda Items",
               items: [
-                "1. AI portfolio status — RAG against KPIs (15 min)",
+                "1. AI portfolio status - RAG against KPIs (15 min)",
                 "2. New use case approval requests (10 min)",
                 "3. Incident and risk review (10 min)",
                 "4. Regulatory and policy updates (5 min)",
@@ -861,7 +861,7 @@ export const phase1: Phase = {
           item: "Agree on pilot project selection criteria",
           templateTitle: "Pilot Selection Criteria Agreement Template",
           templateType: "template",
-          instructions: "Agree and document selection criteria before evaluating candidates — not after. This prevents post-hoc rationalisation and ensures consistent decisions.",
+          instructions: "Agree and document selection criteria before evaluating candidates - not after. This prevents post-hoc rationalisation and ensures consistent decisions.",
           sections: [
             {
               heading: "Must-Have Criteria (all must be met)",

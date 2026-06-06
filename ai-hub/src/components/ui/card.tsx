@@ -18,7 +18,7 @@ const Card = React.forwardRef<
 ));
 Card.displayName = "Card";
 
-/* Hoverable variant — apply card-hover class for lift effect */
+/* Hoverable variant - apply card-hover class for lift effect */
 const CardHoverable = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>

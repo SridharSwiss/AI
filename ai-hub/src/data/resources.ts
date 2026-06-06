@@ -58,7 +58,7 @@ export const resources: ResourceDocument[] = [
   {
     id: "eu-ai-act-text",
     slug: "eu-ai-act-text",
-    title: "EU AI Act — Official Consolidated Text",
+    title: "EU AI Act - Official Consolidated Text",
     source: "European Union",
     year: 2024,
     category: "Regulation",
@@ -95,7 +95,7 @@ export const resources: ResourceDocument[] = [
     source: "Anthropic",
     year: 2022,
     category: "Research Paper",
-    description: "Anthropic's paper introducing Constitutional AI — a method for training safer AI using AI feedback rather than human feedback for the harmlessness component. Foundation of Claude's safety approach.",
+    description: "Anthropic's paper introducing Constitutional AI - a method for training safer AI using AI feedback rather than human feedback for the harmlessness component. Foundation of Claude's safety approach.",
     link: "https://arxiv.org/abs/2212.08073",
     tags: ["Safety", "RLHF", "Research", "Anthropic", "Alignment"],
   },

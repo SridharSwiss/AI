@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const framework = complianceFrameworks.find((f) => f.slug === slug);
   if (!framework) return { title: "Framework Not Found" };
   return {
-    title: `${framework.name} — Compliance Guide, Risk Tiers & Penalties`,
+    title: `${framework.name} - Compliance Guide, Risk Tiers & Penalties`,
     description: framework.description.replace(/^(.{120,}?\.).*/, "$1").slice(0, 200),
     alternates: { canonical: `${BASE_URL}/compliance/${framework.slug}` },
     openGraph: {

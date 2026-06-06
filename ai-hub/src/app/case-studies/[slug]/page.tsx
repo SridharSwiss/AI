@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     ? `${cs.businessContext.slice(0, 120).replace(/\.$/, "")}. ${cs.outcome.slice(0, 80)}`
     : cs.outcome.slice(0, 200);
   return {
-    title: `${cs.company} AI Case Study — ${cs.title}`,
+    title: `${cs.company} AI Case Study - ${cs.title}`,
     description: description.slice(0, 200),
     alternates: { canonical: `${BASE_URL}/case-studies/${cs.slug}` },
     openGraph: {

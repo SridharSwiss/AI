@@ -73,7 +73,7 @@ export function Footer() {
         </div>
         <div className="mt-14 pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} AIHub by Sridhar Gande. Curated for educational purposes — always verify with official sources.
+            © {new Date().getFullYear()} AIHub by Sridhar Gande. Curated for educational purposes - always verify with official sources.
           </p>
           <div className="flex items-center gap-5">
             {[{ label: "About", href: "/about" }, { label: "Contribute", href: "/contribute" }, { label: "Privacy", href: "/privacy" }, { label: "News", href: "/news" }].map(({ label, href }) => (

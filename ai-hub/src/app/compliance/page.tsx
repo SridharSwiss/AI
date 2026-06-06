@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "AI Compliance & Governance",
   description: "Navigate AI regulations worldwide: EU AI Act, GDPR, NIST AI RMF, UK AI Safety, FDA AI/ML SaMD, and 15+ more frameworks.",
   alternates: { canonical: `${BASE_URL}/compliance` },
-  openGraph: { title: "AI Compliance & Governance | AIHub", description: "EU AI Act, GDPR, NIST AI RMF, and 15+ frameworks explained — risk tiers, compliance roadmaps, guardrails, and enforcement cases.", url: `${BASE_URL}/compliance`, type: "website" },
+  openGraph: { title: "AI Compliance & Governance | AIHub", description: "EU AI Act, GDPR, NIST AI RMF, and 15+ frameworks explained - risk tiers, compliance roadmaps, guardrails, and enforcement cases.", url: `${BASE_URL}/compliance`, type: "website" },
 };
 
 const jsonLd = {

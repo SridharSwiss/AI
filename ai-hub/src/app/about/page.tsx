@@ -8,16 +8,16 @@ const BASE_URL = "https://sridhar-ai.ch";
 
 export const metadata: Metadata = {
   title: "About AIHub",
-  description: "AIHub is the independent, curated AI knowledge platform — covering 82+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies.",
+  description: "AIHub is the independent, curated AI knowledge platform - covering 82+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies.",
   alternates: { canonical: `${BASE_URL}/about` },
-  openGraph: { title: "About AIHub — The AI Knowledge Platform", description: "AIHub is the independent, curated AI knowledge platform — 82+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies.", url: `${BASE_URL}/about`, type: "website" },
+  openGraph: { title: "About AIHub - The AI Knowledge Platform", description: "AIHub is the independent, curated AI knowledge platform - 82+ tools, 30+ companies, 16 compliance frameworks, and 25+ case studies.", url: `${BASE_URL}/about`, type: "website" },
 };
 
 const values = [
   { icon: Target,  title: "Curated, Not Crawled",    description: "Every tool, company, and resource is hand-selected and verified. We prioritize quality and accuracy over volume." },
-  { icon: Users,  title: "For Every Audience",        description: "Whether you're a curious beginner, a practitioner building AI systems, a manager evaluating vendors, or a C-suite executive setting strategy — AIHub has content for you." },
+  { icon: Users,  title: "For Every Audience",        description: "Whether you're a curious beginner, a practitioner building AI systems, a manager evaluating vendors, or a C-suite executive setting strategy - AIHub has content for you." },
   { icon: Shield, title: "Independent & Unbiased",    description: "We are not affiliated with any AI company or vendor. Our goal is to give you honest, balanced information to make informed decisions." },
-  { icon: Globe,  title: "Global Coverage",           description: "AI is happening everywhere. We track developments across the US, EU, UK, China, and beyond — including regulatory frameworks from every major jurisdiction." },
+  { icon: Globe,  title: "Global Coverage",           description: "AI is happening everywhere. We track developments across the US, EU, UK, China, and beyond - including regulatory frameworks from every major jurisdiction." },
 ];
 
 const sections = [
@@ -30,7 +30,7 @@ const sections = [
 export default function AboutPage() {
   return (
     <>
-      <PageHeader accent="violet" eyebrow="About" title="The All-in-One AI Knowledge Platform" description="AIHub brings together everything you need to understand, evaluate, and navigate the AI landscape — from tools and companies to compliance, learning, and real-world case studies." />
+      <PageHeader accent="violet" eyebrow="About" title="The All-in-One AI Knowledge Platform" description="AIHub brings together everything you need to understand, evaluate, and navigate the AI landscape - from tools and companies to compliance, learning, and real-world case studies." />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
         <section>
           <div className="flex items-center gap-3 mb-6">
@@ -41,7 +41,7 @@ export default function AboutPage() {
           </div>
           <div className="prose prose-neutral dark:prose-invert max-w-none">
             <p className="text-lg text-muted-foreground leading-relaxed">Artificial intelligence is transforming every industry, government, and profession at an unprecedented pace. But the information landscape is fragmented, jargon-heavy, and often biased toward selling products rather than building understanding.</p>
-            <p className="text-muted-foreground leading-relaxed mt-4">AIHub was built to change that. We aggregate, curate, and explain the AI landscape in one place — covering the tools practitioners use, the companies building the technology, the regulations shaping its deployment, the research driving progress, and the real-world case studies proving business value.</p>
+            <p className="text-muted-foreground leading-relaxed mt-4">AIHub was built to change that. We aggregate, curate, and explain the AI landscape in one place - covering the tools practitioners use, the companies building the technology, the regulations shaping its deployment, the research driving progress, and the real-world case studies proving business value.</p>
             <p className="text-muted-foreground leading-relaxed mt-4">Our content is designed for four audiences: beginners who want to understand AI without a computer science degree, practitioners who are building AI-powered products, managers who need to evaluate AI investments, and executives who are setting AI strategy for their organizations.</p>
           </div>
         </section>

@@ -17,7 +17,7 @@ export const phase4: Phase = {
           item: "Define AI governance principles and values statement",
           templateTitle: "AI Principles & Values Statement Template",
           templateType: "template",
-          instructions: "Draft 5–7 principles that will guide all AI decisions. They must be specific enough to resolve real tradeoffs — not so vague that everything qualifies. Review with ethics lead, legal, and senior leadership before publishing.",
+          instructions: "Draft 5–7 principles that will guide all AI decisions. They must be specific enough to resolve real tradeoffs - not so vague that everything qualifies. Review with ethics lead, legal, and senior leadership before publishing.",
           sections: [
             {
               heading: "AI Principles Template",
@@ -25,7 +25,7 @@ export const phase4: Phase = {
                 "1. HUMAN-CENTRED: AI augments human decision-making; it never removes human accountability for significant decisions affecting people.",
                 "2. TRANSPARENT: We explain how our AI systems work to those they affect, in plain language. We do not deploy black-box AI in high-stakes domains.",
                 "3. FAIR: We test AI systems for bias before deployment and monitor continuously. We refuse to deploy AI that creates unfair disparate outcomes.",
-                "4. SAFE: We apply a risk-proportionate approach — the higher the stakes, the more rigorous our review. We deploy AI where benefits clearly outweigh risks.",
+                "4. SAFE: We apply a risk-proportionate approach - the higher the stakes, the more rigorous our review. We deploy AI where benefits clearly outweigh risks.",
                 "5. PRIVATE: We process only the personal data necessary for the AI's purpose. We never use data in ways people would not reasonably expect.",
                 "6. ACCOUNTABLE: Every AI system has a named owner. Our AI governance committee provides independent oversight. We publish summary information about our material AI systems.",
                 "7. CONTINUOUSLY IMPROVED: We treat AI governance as an ongoing practice. We learn from incidents, share lessons, and raise our standards as the field advances.",
@@ -47,14 +47,14 @@ export const phase4: Phase = {
           item: "Establish AI governance committee with clear mandate",
           templateTitle: "AI Governance Committee Charter",
           templateType: "template",
-          instructions: "The governance committee must have real authority — not be a rubber stamp. Define veto powers, escalation rights, and decision-making authority in the charter.",
+          instructions: "The governance committee must have real authority - not be a rubber stamp. Define veto powers, escalation rights, and decision-making authority in the charter.",
           sections: [
             {
               heading: "Committee Mandate",
               items: [
                 "Purpose: Provide strategic oversight and risk governance for all AI initiatives at [Organisation].",
                 "Authority: Veto power over high-risk AI deployments | Approve AI policy | Set AI risk thresholds | Mandate audits",
-                "Reporting line: Reports to: ☐ Board  ☐ CEO  ☐ ExCo  — quarterly written report required",
+                "Reporting line: Reports to: ☐ Board  ☐ CEO  ☐ ExCo  - quarterly written report required",
                 "Annual deliverables: AI risk assessment, AI governance report, AI policy review, external audit commissioning (if required)",
               ],
             },
@@ -80,12 +80,12 @@ export const phase4: Phase = {
             {
               heading: "Risk Categories",
               items: [
-                "CATEGORY 1 — MODEL RISK: Performance degradation, training data bias, overfitting, concept drift, adversarial attacks",
-                "CATEGORY 2 — DATA RISK: Data quality failures, privacy breaches, data poisoning, training-serving skew, retention violations",
-                "CATEGORY 3 — OPERATIONAL RISK: Model downtime, serving failures, integration failures, vendor failure, on-call gaps",
-                "CATEGORY 4 — COMPLIANCE RISK: Regulatory breach (EU AI Act, GDPR), audit findings, inadequate documentation, unexplainable decisions",
-                "CATEGORY 5 — ETHICAL RISK: Unfair outcomes, discrimination, manipulation, erosion of human oversight, opacity",
-                "CATEGORY 6 — STRATEGIC RISK: Vendor lock-in, reputational damage from AI incident, competitor AI advantage, talent risk",
+                "CATEGORY 1 - MODEL RISK: Performance degradation, training data bias, overfitting, concept drift, adversarial attacks",
+                "CATEGORY 2 - DATA RISK: Data quality failures, privacy breaches, data poisoning, training-serving skew, retention violations",
+                "CATEGORY 3 - OPERATIONAL RISK: Model downtime, serving failures, integration failures, vendor failure, on-call gaps",
+                "CATEGORY 4 - COMPLIANCE RISK: Regulatory breach (EU AI Act, GDPR), audit findings, inadequate documentation, unexplainable decisions",
+                "CATEGORY 5 - ETHICAL RISK: Unfair outcomes, discrimination, manipulation, erosion of human oversight, opacity",
+                "CATEGORY 6 - STRATEGIC RISK: Vendor lock-in, reputational damage from AI incident, competitor AI advantage, talent risk",
               ],
             },
             {
@@ -105,15 +105,15 @@ export const phase4: Phase = {
           item: "Define AI use case approval process",
           templateTitle: "AI Use Case Approval Workflow",
           templateType: "framework",
-          instructions: "Proportionate approval — low-risk use cases don't need board-level approval. High-risk use cases do. Define the thresholds clearly so teams know when to escalate.",
+          instructions: "Proportionate approval - low-risk use cases don't need board-level approval. High-risk use cases do. Define the thresholds clearly so teams know when to escalate.",
           sections: [
             {
               heading: "Approval Tiers by Risk Level",
               items: [
-                "TIER 1 — LOW RISK (internal process automation, internal tools): Self-approval by department head + AI lead review | Timeline: 5 business days",
-                "TIER 2 — MEDIUM RISK (customer-facing, uses personal data, consequential decisions): AI Steering Committee review | Full ethics checklist required | Timeline: 15 business days",
-                "TIER 3 — HIGH RISK (EU AI Act Annex III, safety-critical, affects employment/credit/health): External review + Steering Committee vote | DPIA required | Timeline: 30 business days",
-                "PROHIBITED: Real-time biometric surveillance in public, social scoring, AI exploiting vulnerabilities | No approval process — prohibited per policy",
+                "TIER 1 - LOW RISK (internal process automation, internal tools): Self-approval by department head + AI lead review | Timeline: 5 business days",
+                "TIER 2 - MEDIUM RISK (customer-facing, uses personal data, consequential decisions): AI Steering Committee review | Full ethics checklist required | Timeline: 15 business days",
+                "TIER 3 - HIGH RISK (EU AI Act Annex III, safety-critical, affects employment/credit/health): External review + Steering Committee vote | DPIA required | Timeline: 30 business days",
+                "PROHIBITED: Real-time biometric surveillance in public, social scoring, AI exploiting vulnerabilities | No approval process - prohibited per policy",
               ],
             },
             {
@@ -162,7 +162,7 @@ export const phase4: Phase = {
           item: "Create AI acceptable use policy",
           templateTitle: "AI Acceptable Use Policy Template",
           templateType: "template",
-          instructions: "Publish this policy to all employees before deploying any AI tools. Update whenever a new AI tool or significant capability is introduced. Keep it readable — legal language that nobody reads protects nobody.",
+          instructions: "Publish this policy to all employees before deploying any AI tools. Update whenever a new AI tool or significant capability is introduced. Keep it readable - legal language that nobody reads protects nobody.",
           sections: [
             {
               heading: "Permitted Uses",
@@ -200,7 +200,7 @@ export const phase4: Phase = {
           item: "Define roles: AI owner, model owner, data steward",
           templateTitle: "AI Role Definitions & Accountability Framework",
           templateType: "framework",
-          instructions: "Clear role definitions prevent accountability gaps. Every AI system in production must have a named individual for each of these roles. 'The team' is not accountable — a named person is.",
+          instructions: "Clear role definitions prevent accountability gaps. Every AI system in production must have a named individual for each of these roles. 'The team' is not accountable - a named person is.",
           sections: [
             {
               heading: "Role Definitions",
@@ -254,7 +254,7 @@ export const phase4: Phase = {
           item: "Establish third-party AI vendor governance process",
           templateTitle: "Third-Party AI Vendor Governance Framework",
           templateType: "framework",
-          instructions: "Your AI governance obligations extend to your AI vendors. You cannot outsource accountability. Third-party AI risks are your risks — especially under GDPR and EU AI Act.",
+          instructions: "Your AI governance obligations extend to your AI vendors. You cannot outsource accountability. Third-party AI risks are your risks - especially under GDPR and EU AI Act.",
           sections: [
             {
               heading: "Vendor Onboarding Requirements",
@@ -282,7 +282,7 @@ export const phase4: Phase = {
           item: "Define AI incident classification and response SLAs",
           templateTitle: "AI Incident Classification Guide",
           templateType: "template",
-          instructions: "AI incidents are different from IT incidents — they can be subtle, widespread, and hard to diagnose. Define classification criteria clearly so the first responder can act without waiting for expert diagnosis.",
+          instructions: "AI incidents are different from IT incidents - they can be subtle, widespread, and hard to diagnose. Define classification criteria clearly so the first responder can act without waiting for expert diagnosis.",
           sections: [
             {
               heading: "Incident Severity Classification",
@@ -364,7 +364,7 @@ export const phase4: Phase = {
           item: "Define cross-functional AI review board process",
           templateTitle: "AI Review Board Process Design",
           templateType: "template",
-          instructions: "The AI review board is distinct from the governance committee — it is an operational body that reviews specific AI systems or decisions, not strategy. It should include technical, ethical, legal, and business perspectives.",
+          instructions: "The AI review board is distinct from the governance committee - it is an operational body that reviews specific AI systems or decisions, not strategy. It should include technical, ethical, legal, and business perspectives.",
           sections: [
             {
               heading: "Review Board Composition",
@@ -441,7 +441,7 @@ export const phase4: Phase = {
                 "£/$ ___ to £/$ ___: CTO approval (substantial tooling, pilot projects, small vendor contracts)",
                 "£/$ ___ to £/$ ___: CFO + CTO joint approval (major AI investments, annual vendor contracts)",
                 "Above £/$ ___: Board approval required (strategic AI programmes, major vendor relationships)",
-                "All AI investments >£/$ ___ require AI Steering Committee awareness (not approval — awareness)",
+                "All AI investments >£/$ ___ require AI Steering Committee awareness (not approval - awareness)",
               ],
             },
             {
@@ -466,7 +466,7 @@ export const phase4: Phase = {
               items: [
                 "AI-ASSISTED HUMAN WORK: Where a human significantly directs, edits, and takes responsibility for AI-generated content → company IP applies as normal",
                 "PURE AI OUTPUT (minimal human input): Legal status uncertain in most jurisdictions → treat as unprotected; focus on trade secret protection of prompts and workflows",
-                "VENDOR-GENERATED AI CONTENT: Review vendor's IP ownership clause in contract — many AI APIs grant you licence to outputs, not ownership",
+                "VENDOR-GENERATED AI CONTENT: Review vendor's IP ownership clause in contract - many AI APIs grant you licence to outputs, not ownership",
                 "FINE-TUNED MODEL WEIGHTS: Your IP if fine-tuned on your proprietary data with your compute → confirm in vendor contract",
                 "CODE GENERATED BY AI COPILOT: Company owns as work-for-hire; developer responsible for ensuring no copyright-encumbered code is introduced",
               ],
@@ -475,9 +475,9 @@ export const phase4: Phase = {
               heading: "Practical Guidelines",
               items: [
                 "Employees must disclose use of AI in creating materials where disclosure is required by client contracts or professional standards",
-                "Do not enter proprietary business information into AI tools that may use inputs for training — check each vendor's policy",
+                "Do not enter proprietary business information into AI tools that may use inputs for training - check each vendor's policy",
                 "AI-generated code must undergo standard code review with specific attention to licence encumbrance",
-                "Patent applications: Disclose AI involvement to patent attorney — laws vary by jurisdiction on AI inventor status",
+                "Patent applications: Disclose AI involvement to patent attorney - laws vary by jurisdiction on AI inventor status",
                 "Policy review: Annual | Owner: Legal | Last reviewed: ___ | Next review: ___",
               ],
             },
@@ -502,7 +502,7 @@ export const phase4: Phase = {
               items: [
                 "Marketing claims about AI: Must be technically accurate | No absolute claims (e.g. '100% accurate') | Legal sign-off required for all AI capability claims",
                 "Press/media inquiries about AI: Route to PR + Legal | No individual spokespeople except approved | Approved Q&A list maintained by PR",
-                "Social media: Employee personal social media — may discuss publicly available AI information; must not disclose unreleased AI plans or confidential data",
+                "Social media: Employee personal social media - may discuss publicly available AI information; must not disclose unreleased AI plans or confidential data",
                 "Regulatory disclosures: All mandatory disclosures to regulators reviewed by Legal + DPO before submission",
                 "Customer disclosure of AI use: Required when AI makes automated decisions affecting them (GDPR Art. 13/22) | Template: ___",
               ],
@@ -520,7 +520,7 @@ export const phase4: Phase = {
               items: [
                 "Trigger: ☐ Business need ceased  ☐ Better replacement available  ☐ Performance below minimum threshold  ☐ Regulatory non-compliance  ☐ Vendor contract end  ☐ Cost no longer justified",
                 "Decision authority: Tier 1 (low-risk): Use Case Owner | Tier 2: AI Lead | Tier 3: AI Steering Committee",
-                "Minimum notice to users: ___ weeks | Communication required: ☐ Yes — template: ___  ☐ No",
+                "Minimum notice to users: ___ weeks | Communication required: ☐ Yes - template: ___  ☐ No",
                 "Transition plan required (if users need to move to alternative): ___________________________",
               ],
             },
@@ -529,10 +529,10 @@ export const phase4: Phase = {
               items: [
                 "Step 1: Decision documented and approved per authority matrix",
                 "Step 2: Communication sent to affected users ___ weeks before shutdown",
-                "Step 3: Training data deleted per data retention policy — certificate of deletion obtained",
-                "Step 4: Model artefacts archived (if needed for audit) or deleted — documented in model registry",
+                "Step 3: Training data deleted per data retention policy - certificate of deletion obtained",
+                "Step 4: Model artefacts archived (if needed for audit) or deleted - documented in model registry",
                 "Step 5: System access removed from all users and service accounts",
-                "Step 6: Vendor contract terminated / not renewed — confirm data deletion from vendor",
+                "Step 6: Vendor contract terminated / not renewed - confirm data deletion from vendor",
                 "Step 7: AI inventory updated to 'Retired' status | Audit trail archived for ___ years",
                 "Step 8: Lessons learned documented for future AI procurement decisions",
               ],
@@ -543,7 +543,7 @@ export const phase4: Phase = {
           item: "Define metrics for AI governance effectiveness",
           templateTitle: "AI Governance Effectiveness Scorecard",
           templateType: "scorecard",
-          instructions: "Measure your governance programme — not just your AI systems. Weak governance metrics indicate where the governance framework itself needs strengthening.",
+          instructions: "Measure your governance programme - not just your AI systems. Weak governance metrics indicate where the governance framework itself needs strengthening.",
           sections: [
             {
               heading: "Governance Metrics",
@@ -577,11 +577,11 @@ export const phase4: Phase = {
             {
               heading: "Annual Review Agenda (Half-day session)",
               items: [
-                "09:00–09:30 — Year in review: AI portfolio performance, incidents, governance metrics vs targets",
-                "09:30–10:30 — Regulatory landscape update: New laws/guidance, enforcement trends, peer organisation benchmarking",
-                "10:30–11:30 — Framework gap assessment: What worked, what didn't, stakeholder feedback from employees/users",
-                "11:30–12:30 — Update decisions: Policy revisions needed, new governance requirements, training updates",
-                "12:30–13:00 — Year ahead: Planned AI initiatives, emerging risks, resource and capability needs",
+                "09:00–09:30 - Year in review: AI portfolio performance, incidents, governance metrics vs targets",
+                "09:30–10:30 - Regulatory landscape update: New laws/guidance, enforcement trends, peer organisation benchmarking",
+                "10:30–11:30 - Framework gap assessment: What worked, what didn't, stakeholder feedback from employees/users",
+                "11:30–12:30 - Update decisions: Policy revisions needed, new governance requirements, training updates",
+                "12:30–13:00 - Year ahead: Planned AI initiatives, emerging risks, resource and capability needs",
               ],
             },
             {
@@ -591,7 +591,7 @@ export const phase4: Phase = {
                 "Revised policies: Legal review + Steering Committee approval",
                 "Updated training requirements: HR implementation plan",
                 "Governance metrics for the year: Published in annual report (if applicable)",
-                "Board sign-off on updated framework: ☐ Yes — date: ___  ☐ No update needed",
+                "Board sign-off on updated framework: ☐ Yes - date: ___  ☐ No update needed",
                 "Next review date set: ___",
               ],
             },
@@ -636,7 +636,7 @@ export const phase4: Phase = {
           item: "Define validation requirements by risk tier",
           templateTitle: "Model Validation Requirements Matrix",
           templateType: "matrix",
-          instructions: "Validation requirements are proportionate to risk. High-risk models require independent validation — the development team validating their own model is not independent.",
+          instructions: "Validation requirements are proportionate to risk. High-risk models require independent validation - the development team validating their own model is not independent.",
           sections: [
             {
               heading: "Validation Requirements by Tier",
@@ -661,7 +661,7 @@ export const phase4: Phase = {
           item: "Establish pre-deployment validation checklist",
           templateTitle: "Pre-Deployment Model Validation Checklist",
           templateType: "template",
-          instructions: "Every model must pass this checklist before production deployment. No exceptions. The checklist is the minimum — high-risk models require additional validation per tier requirements.",
+          instructions: "Every model must pass this checklist before production deployment. No exceptions. The checklist is the minimum - high-risk models require additional validation per tier requirements.",
           sections: [
             {
               heading: "Technical Validation",
@@ -677,9 +677,9 @@ export const phase4: Phase = {
             {
               heading: "Safety & Compliance Validation",
               items: [
-                "☐ Bias testing completed — results within acceptable thresholds for all required protected attributes",
-                "☐ Privacy review completed — no PII used in violation of policy or regulation",
-                "☐ Security review completed — no critical or high vulnerabilities in model serving code",
+                "☐ Bias testing completed - results within acceptable thresholds for all required protected attributes",
+                "☐ Privacy review completed - no PII used in violation of policy or regulation",
+                "☐ Security review completed - no critical or high vulnerabilities in model serving code",
                 "☐ Explainability mechanism in place (for applicable use cases)",
                 "☐ Human oversight mechanism tested and working",
                 "☐ Rollback plan documented and tested",
@@ -693,7 +693,7 @@ export const phase4: Phase = {
           item: "Create model performance baselines and SLAs",
           templateTitle: "Model Performance Baseline & SLA Template",
           templateType: "template",
-          instructions: "Record the performance baseline at deployment. All future monitoring compares to this baseline. SLAs define the minimum acceptable performance — breaching them triggers the escalation process.",
+          instructions: "Record the performance baseline at deployment. All future monitoring compares to this baseline. SLAs define the minimum acceptable performance - breaching them triggers the escalation process.",
           sections: [
             {
               heading: "Performance Baseline at Deployment",
@@ -723,7 +723,7 @@ export const phase4: Phase = {
           item: "Implement automated monitoring for model drift",
           templateTitle: "Model Drift Monitoring Configuration",
           templateType: "template",
-          instructions: "Configure drift detection before go-live. Data drift (input distribution change) precedes performance degradation — catching drift early enables proactive retraining before model quality degrades.",
+          instructions: "Configure drift detection before go-live. Data drift (input distribution change) precedes performance degradation - catching drift early enables proactive retraining before model quality degrades.",
           sections: [
             {
               heading: "Drift Detection Setup",
@@ -739,7 +739,7 @@ export const phase4: Phase = {
               items: [
                 "Features monitored (list top 10 most important): ___________________ ___________________",
                 "PSI thresholds: No drift (0–0.1) | Minor drift (0.1–0.2) → log | Significant drift (>0.2) → alert",
-                "Priority features (model highly sensitive to these): ___________________ — monitor at higher frequency",
+                "Priority features (model highly sensitive to these): ___________________ - monitor at higher frequency",
                 "Drift dashboard: Available at: ___________________ | Owner: ___________________ | Review: weekly",
               ],
             },
@@ -749,7 +749,7 @@ export const phase4: Phase = {
           item: "Define model performance degradation thresholds",
           templateTitle: "Performance Degradation Alert Thresholds",
           templateType: "template",
-          instructions: "Set thresholds before deployment — not after. Post-hoc threshold setting is subject to bias towards explaining away problems. These thresholds should be agreed by the business owner, not just the ML team.",
+          instructions: "Set thresholds before deployment - not after. Post-hoc threshold setting is subject to bias towards explaining away problems. These thresholds should be agreed by the business owner, not just the ML team.",
           sections: [
             {
               heading: "Threshold Setting Guidelines",
@@ -757,7 +757,7 @@ export const phase4: Phase = {
                 "Approach: Start with minimum business-acceptable performance (e.g. what accuracy makes this worthwhile) | Set AMBER at 80% of baseline | Set RED at 60% of baseline",
                 "AMBER (investigate, possible retrain): Accuracy: ___ | Precision: ___ | Recall: ___ | Business KPI drop: ___%",
                 "RED (escalate, possible rollback): Accuracy: ___ | Precision: ___ | Recall: ___ | Business KPI drop: ___%",
-                "Hysteresis rule: Don't alert on a single data point — require ___ consecutive measurement periods above threshold",
+                "Hysteresis rule: Don't alert on a single data point - require ___ consecutive measurement periods above threshold",
               ],
             },
             {
@@ -775,7 +775,7 @@ export const phase4: Phase = {
           item: "Create model audit schedule and methodology",
           templateTitle: "Model Audit Methodology & Schedule",
           templateType: "template",
-          instructions: "Scheduled model audits are distinct from real-time monitoring. Audits are periodic deep-dives that review governance, performance history, and compliance — not just current metrics.",
+          instructions: "Scheduled model audits are distinct from real-time monitoring. Audits are periodic deep-dives that review governance, performance history, and compliance - not just current metrics.",
           sections: [
             {
               heading: "Audit Schedule",
@@ -803,7 +803,7 @@ export const phase4: Phase = {
           item: "Document model limitations and known failure modes",
           templateTitle: "Model Limitations & Failure Mode Documentation",
           templateType: "template",
-          instructions: "Document limitations before deployment — not after your first incident. Users and decision-makers need to know where not to trust the model. Honest limitation documentation is a legal protection, not a liability.",
+          instructions: "Document limitations before deployment - not after your first incident. Users and decision-makers need to know where not to trust the model. Honest limitation documentation is a legal protection, not a liability.",
           sections: [
             {
               heading: "Limitations Documentation",
@@ -821,7 +821,7 @@ export const phase4: Phase = {
                 "Failure mode 1: When ___________________ occurs, model tends to ___________________ | Frequency: ___ | Mitigation: ___",
                 "Failure mode 2: When ___________________ occurs, model tends to ___________________ | Frequency: ___ | Mitigation: ___",
                 "Failure mode 3: When ___________________ occurs, model tends to ___________________ | Frequency: ___ | Mitigation: ___",
-                "Adversarial inputs: Is the model vulnerable to adversarial attacks? ☐ Yes — describe: ___  ☐ Tested, not vulnerable",
+                "Adversarial inputs: Is the model vulnerable to adversarial attacks? ☐ Yes - describe: ___  ☐ Tested, not vulnerable",
                 "Limitations communicated to users: ☐ In product documentation  ☐ In user training  ☐ Not yet",
               ],
             },
@@ -831,7 +831,7 @@ export const phase4: Phase = {
           item: "Establish model remediation process",
           templateTitle: "Model Remediation Playbook",
           templateType: "template",
-          instructions: "Define the remediation process for when a model underperforms — before you need it. A clear process ensures systematic improvement rather than ad-hoc firefighting.",
+          instructions: "Define the remediation process for when a model underperforms - before you need it. A clear process ensures systematic improvement rather than ad-hoc firefighting.",
           sections: [
             {
               heading: "Remediation Decision Tree",
@@ -845,13 +845,13 @@ export const phase4: Phase = {
             {
               heading: "Remediation Execution Steps",
               items: [
-                "Step 1: Contain — suspend model or implement human review for affected cases",
-                "Step 2: Communicate — notify affected business owners and (if applicable) users",
-                "Step 3: Diagnose — root cause analysis using monitoring data, model explainability, and data analysis",
-                "Step 4: Fix — implement fix (retrain, data fix, post-processing, or model change)",
-                "Step 5: Validate — run full pre-deployment checklist before re-deploying fixed model",
-                "Step 6: Monitor — enhanced monitoring for ___ weeks post-remediation",
-                "Step 7: Document — update model card, incident log, and lessons learned registry",
+                "Step 1: Contain - suspend model or implement human review for affected cases",
+                "Step 2: Communicate - notify affected business owners and (if applicable) users",
+                "Step 3: Diagnose - root cause analysis using monitoring data, model explainability, and data analysis",
+                "Step 4: Fix - implement fix (retrain, data fix, post-processing, or model change)",
+                "Step 5: Validate - run full pre-deployment checklist before re-deploying fixed model",
+                "Step 6: Monitor - enhanced monitoring for ___ weeks post-remediation",
+                "Step 7: Document - update model card, incident log, and lessons learned registry",
               ],
             },
           ],
@@ -878,10 +878,10 @@ export const phase4: Phase = {
                 "☐ Retirement decision documented and approved at appropriate authority level",
                 "☐ Users notified ___ weeks in advance with transition plan",
                 "☐ Replacement or alternative process in place before shutdown",
-                "☐ Training data deleted per retention policy — deletion certificate obtained",
+                "☐ Training data deleted per retention policy - deletion certificate obtained",
                 "☐ Model artefacts archived (for audit trail) or deleted",
                 "☐ All access removed (API keys, user access, service accounts)",
-                "☐ Vendor contract terminated (if applicable) — confirm vendor data deletion",
+                "☐ Vendor contract terminated (if applicable) - confirm vendor data deletion",
                 "☐ AI inventory updated to 'Retired' | Audit trail archived for ___ years",
               ],
             },
@@ -891,7 +891,7 @@ export const phase4: Phase = {
           item: "Define override and human-in-the-loop requirements",
           templateTitle: "Human Override Requirements Specification",
           templateType: "template",
-          instructions: "Human override requirements must be specified at design time — retrofitting meaningful override into a deployed system is very difficult. Regulatory requirements in this area are increasing.",
+          instructions: "Human override requirements must be specified at design time - retrofitting meaningful override into a deployed system is very difficult. Regulatory requirements in this area are increasing.",
           sections: [
             {
               heading: "Override Design Specification",
@@ -899,7 +899,7 @@ export const phase4: Phase = {
                 "Override mechanism type: ☐ User can override any AI output  ☐ User can flag for human review  ☐ Automatic escalation on low confidence  ☐ All high-stakes decisions require human sign-off",
                 "Override accessibility: Available within ___ clicks | Available to: ☐ All users  ☐ Supervisors only  ☐ Named reviewers",
                 "Override UI design: [Describe override button/flow] ___________________________",
-                "Override reason required: ☐ Yes — options: ___ / ___  ☐ Free text  ☐ No reason required",
+                "Override reason required: ☐ Yes - options: ___ / ___  ☐ Free text  ☐ No reason required",
               ],
             },
             {
@@ -959,7 +959,7 @@ export const phase4: Phase = {
             {
               heading: "Risk Register Governance",
               items: [
-                "New risks identified by: Any team member — report to Model Owner | Owner: Model Owner logs in register",
+                "New risks identified by: Any team member - report to Model Owner | Owner: Model Owner logs in register",
                 "Review cadence: CRITICAL risks: weekly | HIGH: monthly | MEDIUM: quarterly | LOW: annually",
                 "Risk register shared with: AI Steering Committee (HIGH+ only) | Model owners (all)",
                 "Register location: ___________________ | Owner: ___________________ | Tool: ☐ Spreadsheet  ☐ GRC tool  ☐ JIRA",
@@ -990,7 +990,7 @@ export const phase4: Phase = {
                 "CTO: ___________________ | Phone: ___ | Backup: ___",
                 "DPO (for data/privacy risk): ___________________ | Phone: ___",
                 "Legal (for regulatory risk): ___________________ | Phone: ___",
-                "Out-of-hours escalation: ☐ PagerDuty  ☐ Phone tree  ☐ On-call rota — details: ___",
+                "Out-of-hours escalation: ☐ PagerDuty  ☐ Phone tree  ☐ On-call rota - details: ___",
               ],
             },
           ],
@@ -1001,13 +1001,13 @@ export const phase4: Phase = {
       title: "AI Incident Response Playbook",
       level: "manager",
       desc: "Handle AI failures, bias incidents, and compliance breaches.",
-      guidance: "AI incidents range from model performance degradation (often silent and gradual) to bias incidents to regulatory breaches. Your response plan must account for the unique nature of AI failures — they can be subtle, widespread, and hard to diagnose.",
+      guidance: "AI incidents range from model performance degradation (often silent and gradual) to bias incidents to regulatory breaches. Your response plan must account for the unique nature of AI failures - they can be subtle, widespread, and hard to diagnose.",
       checklist: [
         {
           item: "Define AI incident classification criteria and severity levels",
           templateTitle: "AI Incident Severity Classification Guide",
           templateType: "template",
-          instructions: "The first responder needs to classify an incident in under 5 minutes — during which time they may be under pressure. Make classification criteria unambiguous. When in doubt, classify higher.",
+          instructions: "The first responder needs to classify an incident in under 5 minutes - during which time they may be under pressure. Make classification criteria unambiguous. When in doubt, classify higher.",
           sections: [
             {
               heading: "Severity Levels",
@@ -1035,7 +1035,7 @@ export const phase4: Phase = {
           item: "Create AI incident detection and reporting channels",
           templateTitle: "AI Incident Detection & Reporting System Design",
           templateType: "template",
-          instructions: "Automated detection is your first line — monitoring alerts should catch most incidents before users report them. User reporting channels are your second line for issues monitoring misses.",
+          instructions: "Automated detection is your first line - monitoring alerts should catch most incidents before users report them. User reporting channels are your second line for issues monitoring misses.",
           sections: [
             {
               heading: "Automated Detection",
@@ -1098,10 +1098,10 @@ export const phase4: Phase = {
             {
               heading: "Containment Options (in order of preference)",
               items: [
-                "OPTION 1 — ROLLBACK (fastest if previous version available): Revert to last known good version in model registry | Time to execute: ≤15 min | Command: [specific command]",
-                "OPTION 2 — DISABLE AI FEATURE (if rollback not available): Toggle feature flag to disable AI component | Route all traffic to manual/rule-based fallback | Time: ≤5 min | Command/location: ___",
-                "OPTION 3 — THROTTLE (if partial containment needed): Reduce AI traffic to ___% | Route remainder to fallback | Time: ≤10 min | Command: ___",
-                "OPTION 4 — SUSPEND FOR AFFECTED GROUP ONLY (if bias/fairness incident): Block AI for affected demographic group | Route to human review | Time: ___",
+                "OPTION 1 - ROLLBACK (fastest if previous version available): Revert to last known good version in model registry | Time to execute: ≤15 min | Command: [specific command]",
+                "OPTION 2 - DISABLE AI FEATURE (if rollback not available): Toggle feature flag to disable AI component | Route all traffic to manual/rule-based fallback | Time: ≤5 min | Command/location: ___",
+                "OPTION 3 - THROTTLE (if partial containment needed): Reduce AI traffic to ___% | Route remainder to fallback | Time: ≤10 min | Command: ___",
+                "OPTION 4 - SUSPEND FOR AFFECTED GROUP ONLY (if bias/fairness incident): Block AI for affected demographic group | Route to human review | Time: ___",
               ],
             },
             {
@@ -1110,7 +1110,7 @@ export const phase4: Phase = {
                 "Step 1 (T+0): IC declares incident | Sets severity | Opens war room / Slack incident channel",
                 "Step 2 (T+5): Technical Lead assesses fastest containment option | IC approves",
                 "Step 3 (T+10): Containment action executed | IC verifies reduction in impact via monitoring",
-                "Step 4 (T+15): IC posts status update in #ai-incidents: 'Incident [ID] — Containment complete/in progress — [brief status]'",
+                "Step 4 (T+15): IC posts status update in #ai-incidents: 'Incident [ID] - Containment complete/in progress - [brief status]'",
                 "Step 5 (T+20): Business Owner notified of impact scope | Legal/DPO notified if data or regulatory implications",
                 "Step 6 (T+30): External communication decision made (if customer-facing impact)",
               ],
@@ -1121,7 +1121,7 @@ export const phase4: Phase = {
           item: "Create communication templates for different incident types",
           templateTitle: "AI Incident Communication Templates",
           templateType: "template",
-          instructions: "Pre-drafted templates allow rapid, accurate communication without the risk of off-the-cuff statements during a crisis. Fill in the [BLANKS] — don't write from scratch during an incident.",
+          instructions: "Pre-drafted templates allow rapid, accurate communication without the risk of off-the-cuff statements during a crisis. Fill in the [BLANKS] - don't write from scratch during an incident.",
           sections: [
             {
               heading: "Internal Communication Templates",
@@ -1135,7 +1135,7 @@ export const phase4: Phase = {
               heading: "External Communication Templates",
               items: [
                 "CUSTOMER NOTICE (if customer-facing impact): 'We are aware that some customers experienced [issue] with [feature] between [time] and [time]. We have resolved the issue. [If decision affected]: If you believe this affected a decision made about you, please contact us at [email] for a human review.'",
-                "REGULATOR NOTIFICATION (GDPR Article 33 — adapt per jurisdiction): 'We are notifying you of an incident involving [brief description] that occurred on [date]. [N] individuals may be affected. We became aware at [time]. Steps taken: [summary]. Further information to follow.'",
+                "REGULATOR NOTIFICATION (GDPR Article 33 - adapt per jurisdiction): 'We are notifying you of an incident involving [brief description] that occurred on [date]. [N] individuals may be affected. We became aware at [time]. Steps taken: [summary]. Further information to follow.'",
                 "PRESS STATEMENT (if media inquiry): '[Company] is aware of an issue with our AI system affecting [brief description]. We have taken immediate steps to [action]. We are investigating and will provide updates. Customer safety and privacy are our priority. Contact: [PR].'",
               ],
             },
@@ -1160,10 +1160,10 @@ export const phase4: Phase = {
               heading: "Notification Execution",
               items: [
                 "DPO assessment of notification requirement: Within 24 hours of incident (must be able to decide in time for 72-hour GDPR deadline)",
-                "Notification approved by: DPO + Legal Counsel (no CEO approval needed — speed is critical)",
+                "Notification approved by: DPO + Legal Counsel (no CEO approval needed - speed is critical)",
                 "Notification tracking: Log notification date/time, regulator, contact, reference number received",
-                "Follow-up required: Most regulators require follow-up report within 30 days — schedule immediately",
-                "Legal privilege: Incident communications and RCA should be conducted under legal privilege advice — consult Legal within first hour of SEV-1",
+                "Follow-up required: Most regulators require follow-up report within 30 days - schedule immediately",
+                "Legal privilege: Incident communications and RCA should be conducted under legal privilege advice - consult Legal within first hour of SEV-1",
               ],
             },
           ],
@@ -1172,7 +1172,7 @@ export const phase4: Phase = {
           item: "Define root cause analysis methodology for AI incidents",
           templateTitle: "AI Incident Root Cause Analysis Template",
           templateType: "template",
-          instructions: "AI root cause analysis requires a structured approach — AI failures often have multiple contributing causes. The 5-Why method works well. Complete within 5 business days of incident closure.",
+          instructions: "AI root cause analysis requires a structured approach - AI failures often have multiple contributing causes. The 5-Why method works well. Complete within 5 business days of incident closure.",
           sections: [
             {
               heading: "Incident Timeline",
@@ -1210,16 +1210,16 @@ export const phase4: Phase = {
           item: "Create post-incident review and lessons-learned process",
           templateTitle: "AI Post-Incident Review Template",
           templateType: "template",
-          instructions: "Conduct the post-incident review within 5 business days while details are fresh. The goal is systemic improvement — not blame. Assign every action to a named owner with a due date.",
+          instructions: "Conduct the post-incident review within 5 business days while details are fresh. The goal is systemic improvement - not blame. Assign every action to a named owner with a due date.",
           sections: [
             {
               heading: "Post-Incident Review Agenda (90 min)",
               items: [
-                "0:00–0:10 — Ground rules: No blame, focus on systems not people, all voices equally valid, no hierarchy in this room",
-                "0:10–0:30 — Incident timeline: Walk through what happened, when, and who did what (factual, no judgement)",
-                "0:30–0:50 — Root cause analysis: Work through the 5-Why together, identify contributing factors",
-                "0:50–1:10 — What went well: What helped us respond effectively? What would we keep?",
-                "1:10–1:30 — Action items: What changes would have prevented this? What would improve our response next time? Assign owners + due dates",
+                "0:00–0:10 - Ground rules: No blame, focus on systems not people, all voices equally valid, no hierarchy in this room",
+                "0:10–0:30 - Incident timeline: Walk through what happened, when, and who did what (factual, no judgement)",
+                "0:30–0:50 - Root cause analysis: Work through the 5-Why together, identify contributing factors",
+                "0:50–1:10 - What went well: What helped us respond effectively? What would we keep?",
+                "1:10–1:30 - Action items: What changes would have prevented this? What would improve our response next time? Assign owners + due dates",
               ],
             },
             {

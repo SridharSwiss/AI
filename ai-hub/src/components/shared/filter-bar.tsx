@@ -49,7 +49,7 @@ export function FilterBar({
   );
 }
 
-/* ── Toggle chip — replaces the freeOnly button pattern ─ */
+/* ── Toggle chip - replaces the freeOnly button pattern ─ */
 interface ToggleChipProps {
   label: string;
   active: boolean;

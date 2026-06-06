@@ -6,9 +6,9 @@ const BASE_URL = "https://sridhar-ai.ch";
 
 export const metadata: Metadata = {
   title: "AI Case Studies",
-  description: "Real-world AI implementations with measurable business outcomes — healthcare, finance, retail, manufacturing, and more.",
+  description: "Real-world AI implementations with measurable business outcomes - healthcare, finance, retail, manufacturing, and more.",
   alternates: { canonical: `${BASE_URL}/case-studies` },
-  openGraph: { title: "AI Case Studies — Real Business Results | AIHub", description: "25+ verified AI case studies with measured ROI, deployment timelines, and lessons learned.", url: `${BASE_URL}/case-studies`, type: "website" },
+  openGraph: { title: "AI Case Studies - Real Business Results | AIHub", description: "25+ verified AI case studies with measured ROI, deployment timelines, and lessons learned.", url: `${BASE_URL}/case-studies`, type: "website" },
 };
 
 const jsonLd = {
@@ -25,7 +25,7 @@ export default function CaseStudiesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PageHeader accent="amber" eyebrow="Case Studies" title="AI Delivering Real Business Value" description="Verified implementations with measured outcomes across industries — including ROI, deployment timelines, and lessons learned." />
+      <PageHeader accent="amber" eyebrow="Case Studies" title="AI Delivering Real Business Value" description="Verified implementations with measured outcomes across industries - including ROI, deployment timelines, and lessons learned." />
       <div className="container-site py-10"><CaseStudiesList /></div>
     </>
   );

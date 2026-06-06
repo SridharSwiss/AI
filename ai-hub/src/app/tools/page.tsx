@@ -6,7 +6,7 @@ const BASE_URL = "https://sridhar-ai.ch";
 
 export const metadata: Metadata = {
   title: "AI Tools Directory",
-  description: "Discover and compare 80+ AI tools across every category — language models, code assistants, image generation, video, voice, and more. Filter by pricing, category, and use case.",
+  description: "Discover and compare 80+ AI tools across every category - language models, code assistants, image generation, video, voice, and more. Filter by pricing, category, and use case.",
   alternates: { canonical: `${BASE_URL}/tools` },
   openGraph: { title: "AI Tools Directory | AIHub", description: "Compare 80+ AI tools: ChatGPT, Claude, Gemini, Cursor, Midjourney, and more.", url: `${BASE_URL}/tools`, type: "website" },
 };

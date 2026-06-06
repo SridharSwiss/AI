@@ -6,9 +6,9 @@ const BASE_URL = "https://sridhar-ai.ch";
 
 export const metadata: Metadata = {
   title: "AI News",
-  description: "Latest AI news aggregated from 20+ trusted sources — tech, research, government, healthcare, finance, and quantum computing. Updated every 6 hours.",
+  description: "Latest AI news aggregated from 20+ trusted sources - tech, research, government, healthcare, finance, and quantum computing. Updated every 6 hours.",
   alternates: { canonical: `${BASE_URL}/news` },
-  openGraph: { title: "AI News — Real-Time Updates | AIHub", description: "Latest AI news from 20+ sources — tech, research, government, healthcare, and finance.", url: `${BASE_URL}/news`, type: "website" },
+  openGraph: { title: "AI News - Real-Time Updates | AIHub", description: "Latest AI news from 20+ sources - tech, research, government, healthcare, and finance.", url: `${BASE_URL}/news`, type: "website" },
 };
 
 const jsonLd = {
