@@ -81,18 +81,12 @@ export function PersonaSelector() {
 
   return (
     <div className="w-full">
-      {/* Header */}
       <div className="text-center mb-10">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-          Personalized for you
-        </p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Personalized for you</p>
         <h2 className="text-headline mb-3">Who are you exploring AI as?</h2>
-        <p className="text-muted-foreground text-lg max-w-md mx-auto">
-          Select your role to get a tailored view of the platform.
-        </p>
+        <p className="text-muted-foreground text-lg max-w-md mx-auto">Select your role to get a tailored view of the platform.</p>
       </div>
 
-      {/* Persona grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {personas.map((persona) => {
           const isSelected = selected === persona.id;
@@ -108,40 +102,16 @@ export function PersonaSelector() {
                 isSelected
                   ? cn(persona.activeBg, persona.activeBorder, "shadow-md")
                   : "border-border/60 bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]",
-                /* Press feel */
                 "active:scale-[0.98]"
               )}
             >
-              {/* Icon */}
-              <div
-                className={cn(
-                  "w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4 shadow-sm",
-                  "transition-transform duration-200",
-                  "group-hover:scale-105",
-                  persona.gradient
-                )}
-              >
+              <div className={cn("w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4 shadow-sm", "transition-transform duration-200", "group-hover:scale-105", persona.gradient)}>
                 <persona.icon className="w-5 h-5 text-white" />
               </div>
-
-              {/* Labels */}
-              <div className={cn("text-xs font-semibold mb-1", persona.accent)}>
-                {persona.tagline}
-              </div>
-              <h3 className="font-semibold text-sm mb-2 text-foreground">
-                {persona.label}
-              </h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {persona.description}
-              </p>
-
-              {/* Feature list (shown when selected) */}
-              <div
-                className={cn(
-                  "mt-4 space-y-1.5 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                  isSelected ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                )}
-              >
+              <div className={cn("text-xs font-semibold mb-1", persona.accent)}>{persona.tagline}</div>
+              <h3 className="font-semibold text-sm mb-2 text-foreground">{persona.label}</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">{persona.description}</p>
+              <div className={cn("mt-4 space-y-1.5 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", isSelected ? "max-h-32 opacity-100" : "max-h-0 opacity-0")}>
                 {persona.features.map((f) => (
                   <div key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
                     <span className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", persona.dot)} />
@@ -149,14 +119,8 @@ export function PersonaSelector() {
                   </div>
                 ))}
               </div>
-
-              {/* Selected check */}
               {isSelected && (
-                <div className={cn(
-                  "absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center",
-                  "bg-gradient-to-br",
-                  persona.gradient
-                )}>
+                <div className={cn("absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center", "bg-gradient-to-br", persona.gradient)}>
                   <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
                     <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -167,33 +131,14 @@ export function PersonaSelector() {
         })}
       </div>
 
-      {/* CTA */}
-      <div
-        className={cn(
-          "flex flex-col sm:flex-row items-center justify-center gap-3",
-          "overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-          selected ? "max-h-24 opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
+      <div className={cn("flex flex-col sm:flex-row items-center justify-center gap-3", "overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]", selected ? "max-h-24 opacity-100" : "max-h-0 opacity-0")}>
         {selected && selectedPersona && (
           <>
-            <Button
-              variant="gradient"
-              size="lg"
-              onClick={() => router.push(selectedPersona.cta)}
-              className="gap-2.5 shadow-primary"
-            >
+            <Button variant="gradient" size="lg" onClick={() => router.push(selectedPersona.cta)} className="gap-2.5 shadow-primary">
               Start my {selectedPersona.label} journey
               <ArrowRight className="w-4 h-4" />
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => router.push("/")}
-              className="gap-2"
-            >
-              Explore everything
-            </Button>
+            <Button variant="outline" size="lg" onClick={() => router.push("/")} className="gap-2">Explore everything</Button>
           </>
         )}
       </div>
