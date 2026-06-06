@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
-import dynamic from "next/dynamic";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/layout/providers";
 import { NewsTicker } from "@/components/shared/news-ticker";
-
-// Lazy-load non-critical client components — keeps them out of the initial JS bundle
-const ConsentBanner = dynamic(() => import("@/components/shared/consent-banner").then(m => ({ default: m.ConsentBanner })), { ssr: false });
-const AnalyticsTracker = dynamic(() => import("@/components/shared/analytics-tracker").then(m => ({ default: m.AnalyticsTracker })), { ssr: false });
+import { ClientOverlays } from "@/components/layout/client-overlays";
 
 const BASE_URL = "https://sridhar-ai.ch";
 
@@ -172,12 +168,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Providers>
-          <AnalyticsTracker />
+          <ClientOverlays />
           <NewsTicker />
           <Navbar />
           <main className="flex-1 pt-24">{children}</main>
           <Footer />
-          <ConsentBanner />
         </Providers>
       </body>
     </html>
