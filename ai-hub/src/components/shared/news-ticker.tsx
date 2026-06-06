@@ -28,9 +28,18 @@ export function NewsTicker() {
   const fetchItems = useCallback(() => {
     fetch("/api/news", { cache: "no-store" })
       .then((r) => r.json())
-      .then((data: { title?: string; pubDate?: string }[]) => {
-        if (!Array.isArray(data) || data.length === 0) return;
-        const top5 = getTop5(data);
+      .then((data: { articles?: { title?: string; pubDate?: string }[] }) => {
+        const articles = data.articles;
+        if (!Array.isArray(articles) || articles.length === 0) return;
+        const cutoff24 = Date.now() - 24 * 60 * 60 * 1000;
+        const cutoff48 = Date.now() - 48 * 60 * 60 * 1000;
+        const window24 = articles.filter((a) => a.pubDate && new Date(a.pubDate).getTime() >= cutoff24);
+        const pool = window24.length >= 5 ? window24 : articles.filter((a) => a.pubDate && new Date(a.pubDate).getTime() >= cutoff48);
+        const top5 = [...pool]
+          .filter((a) => a.title && a.pubDate)
+          .sort((a, b) => new Date(b.pubDate!).getTime() - new Date(a.pubDate!).getTime())
+          .slice(0, 5)
+          .map((a) => a.title as string);
         if (top5.length > 0) {
           setItems(top5);
           setKey((k) => k + 1);
