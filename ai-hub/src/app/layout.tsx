@@ -134,12 +134,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased dark`}
       suppressHydrationWarning
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='"dark"'||t==='dark')document.documentElement.classList.add('dark');else if(t==='"light"'||t==='light')document.documentElement.classList.remove('dark');}catch(e){}})();` }} />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <script
