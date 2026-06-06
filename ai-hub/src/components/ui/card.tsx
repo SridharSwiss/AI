@@ -8,13 +8,31 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-200",
+      "rounded-xl border border-border/60 bg-card text-card-foreground",
+      "shadow-[var(--shadow-sm)]",
+      "transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
       className
     )}
     {...props}
   />
 ));
 Card.displayName = "Card";
+
+/* Hoverable variant — apply card-hover class for lift effect */
+const CardHoverable = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <Card
+    ref={ref}
+    className={cn(
+      "hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] hover:border-border/80",
+      className
+    )}
+    {...props}
+  />
+));
+CardHoverable.displayName = "CardHoverable";
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
@@ -34,7 +52,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("font-semibold leading-none tracking-tight", className)}
+    className={cn("font-semibold leading-snug tracking-tight", className)}
     {...props}
   />
 ));
@@ -46,7 +64,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-sm text-muted-foreground leading-relaxed", className)}
     {...props}
   />
 ));
@@ -72,4 +90,12 @@ const CardFooter = React.forwardRef<
 ));
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export {
+  Card,
+  CardHoverable,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+};

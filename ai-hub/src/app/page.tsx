@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { PersonaSelector } from "@/components/home/persona-selector";
 import { FeaturedSection } from "@/components/home/featured-section";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
 const BASE_URL = "https://sridhar-ai.ch";
 
@@ -42,15 +43,27 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+
+      {/* Hero */}
       <Hero />
+
+      {/* Persona selector — distinct chapter with tinted bg */}
       <section
         aria-label="Explore by role"
-        className="border-y border-border/50 bg-muted/30 py-16 px-4 sm:px-6 lg:px-8"
+        className="relative border-y border-border/40 bg-muted/25 dark:bg-muted/10 overflow-hidden"
       >
-        <div className="max-w-5xl mx-auto">
-          <PersonaSelector />
+        {/* Subtle decorative glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-primary/4 blur-3xl" />
+        </div>
+        <div className="container-site section-gap relative">
+          <ScrollReveal>
+            <PersonaSelector />
+          </ScrollReveal>
         </div>
       </section>
+
+      {/* Featured content */}
       <FeaturedSection />
     </>
   );
