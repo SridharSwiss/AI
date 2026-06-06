@@ -136,10 +136,10 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         role="dialog"
         aria-modal="true"
         aria-labelledby="playbook-modal-title"
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-white dark:bg-[hsl(222,47%,11%)] rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-2xl"
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-popover text-popover-foreground rounded-2xl border border-border shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 bg-white dark:bg-[hsl(222,47%,11%)] border-b border-zinc-200 dark:border-zinc-700 p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
+        <div className="sticky top-0 bg-popover border-b border-border p-6 flex items-start justify-between gap-4 rounded-t-2xl z-10">
           <div className="min-w-0">
             <Badge variant={levelColor[playbook.level] ?? "blue"} className="mb-2">{playbook.level}</Badge>
             <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight">{playbook.title}</h2>

@@ -52,7 +52,7 @@ const modelTypeBadge: Record<string, string> = {
 
 function ModelCard({ model }: { model: CompanyModel }) {
   return (
-    <div className="p-4 rounded-xl border border-border bg-white dark:bg-zinc-900 space-y-3">
+    <div className="p-4 rounded-xl border border-border bg-card space-y-3">
       <div className="flex items-start justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-semibold text-sm">{model.name}</span>
@@ -188,43 +188,43 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
       {fin && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {fin.latestValuation && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Valuation</p>
               <p className="text-sm font-bold text-violet-600">{fin.latestValuation}</p>
             </div>
           )}
           {fin.marketCap && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Market Cap</p>
               <p className="text-sm font-bold text-green-600">{fin.marketCap}</p>
             </div>
           )}
           {(fin.totalFunding || company.funding) && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Total Funding</p>
               <p className="text-sm font-bold text-blue-600">{fin.totalFunding ?? company.funding}</p>
             </div>
           )}
           {fin.revenue && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Revenue</p>
               <p className="text-sm font-bold text-emerald-600">{fin.revenue}</p>
             </div>
           )}
           {fin.profitStatus && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Profit Status</p>
               <p className="text-xs font-semibold">{fin.profitStatus}</p>
             </div>
           )}
           {fin.annualRevenueGrowth && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Revenue Growth</p>
               <p className="text-sm font-bold text-orange-600">{fin.annualRevenueGrowth}</p>
             </div>
           )}
           {fin.employees && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Employees</p>
               <p className="text-sm font-bold">{fin.employees}</p>
             </div>

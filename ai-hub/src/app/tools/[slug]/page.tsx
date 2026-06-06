@@ -56,7 +56,7 @@ const pricingBadge: Record<string, "green" | "blue" | "amber" | "purple"> = {
 
 function PricingCard({ tier }: { tier: PricingTier }) {
   return (
-    <div className="p-4 rounded-xl border border-border bg-white dark:bg-zinc-900 flex flex-col gap-3">
+    <div className="p-4 rounded-xl border border-border bg-card flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <p className="font-bold text-sm">{tier.name}</p>
         <p className="text-sm font-semibold text-primary">{tier.price}</p>
@@ -184,37 +184,37 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
       {m && (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
           {m.users && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><Users className="w-3 h-3" />Users</p>
               <p className="text-xs font-bold">{m.users}</p>
             </div>
           )}
           {m.dau && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">DAU</p>
               <p className="text-sm font-bold text-violet-600">{m.dau}</p>
             </div>
           )}
           {m.arr && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><DollarSign className="w-3 h-3" />Revenue</p>
               <p className="text-xs font-bold text-emerald-600">{m.arr}</p>
             </div>
           )}
           {m.valuation && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Valuation</p>
               <p className="text-xs font-bold text-blue-600">{m.valuation}</p>
             </div>
           )}
           {m.growth && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><TrendingUp className="w-3 h-3" />Growth</p>
               <p className="text-xs font-bold text-orange-600">{m.growth}</p>
             </div>
           )}
           {m.employees && (
-            <div className="p-3 rounded-xl border border-border bg-white dark:bg-zinc-900 text-center">
+            <div className="p-3 rounded-xl border border-border bg-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Employees</p>
               <p className="text-sm font-bold">{m.employees}</p>
             </div>

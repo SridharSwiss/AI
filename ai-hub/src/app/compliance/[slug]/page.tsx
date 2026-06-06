@@ -225,7 +225,7 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
           { icon: <MapPin className="w-4 h-4" />, label: "Jurisdiction", value: framework.jurisdiction },
           { icon: <Clock className="w-4 h-4" />, label: "Enforcement", value: framework.enforcementDate },
         ].map((s) => (
-          <div key={s.label} className="bg-white dark:bg-zinc-900 border border-border rounded-xl p-3 text-center">
+          <div key={s.label} className="bg-card border border-border rounded-xl p-3 text-center">
             <div className="flex justify-center text-muted-foreground mb-1">{s.icon}</div>
             <p className="text-xs text-muted-foreground mb-0.5">{s.label}</p>
             <p className="text-sm font-semibold leading-tight">{s.value}</p>

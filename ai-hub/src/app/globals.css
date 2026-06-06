@@ -233,10 +233,12 @@
   .surface-dropdown {
     background: #ffffff;
     border: 1px solid hsl(220 13% 85%);
+    color: hsl(224 71.4% 4.1%);
   }
   .dark .surface-dropdown {
     background: hsl(222 47% 11%);
     border: 1px solid hsl(215 32% 28%);
+    color: hsl(210 40% 96%);
   }
 
   .surface-nav {

@@ -243,7 +243,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">ROI Breakdown</p>
                   <div className="divide-y divide-border border border-border rounded-xl overflow-hidden">
                     {cs.roiBreakdown.map((item, i) => (
-                      <div key={i} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 p-3 bg-white dark:bg-zinc-900">
+                      <div key={i} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 p-3 bg-card">
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium">{item.category}</p>
                           {item.note && <p className="text-xs text-muted-foreground mt-0.5">{item.note}</p>}
