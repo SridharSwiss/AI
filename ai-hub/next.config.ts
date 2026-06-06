@@ -4,11 +4,13 @@ import createMDX from "@next/mdx";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  // Compress responses
   compress: true,
-
-  // Power-by header removal (minor security + removes server fingerprint)
   poweredByHeader: false,
+
+  experimental: {
+    // Tree-shake icon libraries — only import what's used
+    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+  },
 
   // Security & SEO headers
   async headers() {

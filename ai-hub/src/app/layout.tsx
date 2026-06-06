@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/layout/providers";
 import { NewsTicker } from "@/components/shared/news-ticker";
-import { ConsentBanner } from "@/components/shared/consent-banner";
-import { AnalyticsTracker } from "@/components/shared/analytics-tracker";
+
+// Lazy-load non-critical client components — keeps them out of the initial JS bundle
+const ConsentBanner = dynamic(() => import("@/components/shared/consent-banner").then(m => ({ default: m.ConsentBanner })), { ssr: false });
+const AnalyticsTracker = dynamic(() => import("@/components/shared/analytics-tracker").then(m => ({ default: m.AnalyticsTracker })), { ssr: false });
 
 const BASE_URL = "https://sridhar-ai.ch";
 
@@ -27,6 +30,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -156,8 +160,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='"dark"'||t==='dark')document.documentElement.classList.add('dark');else if(t==='"light"'||t==='light')document.documentElement.classList.remove('dark');}catch(e){}})();` }} />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
