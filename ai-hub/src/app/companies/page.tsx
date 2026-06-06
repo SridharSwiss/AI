@@ -26,7 +26,7 @@ export default function CompaniesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHeader accent="blue" eyebrow="AI Companies" title="Who's Building AI?" description="Profiles of the companies, research labs, and startups shaping the AI landscape - with models, benchmarks, financials, and funding rounds." />
-      <div className="container-site py-10"><CompaniesList /></div>
+      <div className="container-site pt-6 pb-12"><CompaniesList /></div>
     </>
   );
 }

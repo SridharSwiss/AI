@@ -36,7 +36,11 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-muted/20 dark:bg-muted/10">
+    <footer className="relative border-t border-border/40 bg-muted/25 dark:bg-muted/10 overflow-hidden">
+      {/* Gradient top accent */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+      {/* Subtle background grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.015] dark:opacity-[0.025]" style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
       <div className="container-site py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-12">
           <div className="col-span-2">

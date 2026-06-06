@@ -26,7 +26,7 @@ export default function NewsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHeader accent="sky" eyebrow="AI News" title="Latest AI News" description="Real-time news aggregated from 20+ sources across tech, research, government, medical, financial, and quantum computing. Updates automatically every 6 hours." />
-      <div className="container-site py-10"><NewsClient /></div>
+      <div className="container-site pt-6 pb-12"><NewsClient /></div>
     </>
   );
 }

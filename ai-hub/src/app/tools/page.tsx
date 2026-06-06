@@ -26,7 +26,7 @@ export default function ToolsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHeader eyebrow="AI Tools Directory" accent="violet" title="Discover & Compare AI Tools" description="80+ AI tools curated across every category. Filter by use case and pricing to find the right tool for your needs." />
-      <div className="container-site py-10"><ToolsList /></div>
+      <div className="container-site pt-6 pb-12"><ToolsList /></div>
     </>
   );
 }

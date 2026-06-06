@@ -26,7 +26,7 @@ export default function LearnPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHeader accent="emerald" eyebrow="Learn AI" title="Learning Resources for Every Level" description="Curated courses, YouTube playlists, and certifications - from total beginner to ML engineer. Free and paid options across every AI discipline." />
-      <div className="container-site py-10"><LearnList /></div>
+      <div className="container-site pt-6 pb-12"><LearnList /></div>
     </>
   );
 }

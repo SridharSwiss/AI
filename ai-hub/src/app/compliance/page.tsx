@@ -32,7 +32,7 @@ export default function CompliancePage() {
           This is educational guidance. Always consult legal counsel for compliance decisions.
         </div>
       </PageHeader>
-      <div className="container-site py-10"><ComplianceList /></div>
+      <div className="container-site pt-6 pb-12"><ComplianceList /></div>
     </>
   );
 }

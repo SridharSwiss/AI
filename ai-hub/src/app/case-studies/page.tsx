@@ -26,7 +26,7 @@ export default function CaseStudiesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHeader accent="amber" eyebrow="Case Studies" title="AI Delivering Real Business Value" description="Verified implementations with measured outcomes across industries - including ROI, deployment timelines, and lessons learned." />
-      <div className="container-site py-10"><CaseStudiesList /></div>
+      <div className="container-site pt-6 pb-12"><CaseStudiesList /></div>
     </>
   );
 }
