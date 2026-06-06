@@ -62,8 +62,7 @@ function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean 
     <div
       className={cn(
         "absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-[200]",
-        "bg-white dark:bg-[hsl(222,47%,11%)] rounded-2xl border border-zinc-200 dark:border-zinc-700",
-        "shadow-2xl overflow-hidden isolate",
+        "surface-dropdown rounded-2xl shadow-2xl overflow-hidden isolate",
         "origin-top transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
         isOpen
           ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
@@ -151,7 +150,7 @@ export function Navbar() {
       className={cn(
         "fixed top-8 left-0 right-0 z-[100]",
         "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        scrolled || mobileOpen ? "bg-white/80 dark:bg-[hsl(222,47%,8%)]/85 backdrop-blur-xl border-b border-white/20 dark:border-zinc-700/60 shadow-sm" : "bg-transparent"
+        scrolled || mobileOpen ? "surface-nav shadow-sm" : "bg-transparent"
       )}
     >
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,7 +228,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className={cn("lg:hidden overflow-hidden bg-white dark:bg-[hsl(222,47%,8%)]", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
+        <div className={cn("lg:hidden overflow-hidden surface-dropdown", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
           <div className="py-3 border-t border-border/40 space-y-4">
             {(Object.entries(megaMenus) as [MenuKey, typeof megaMenus[MenuKey]][]).map(([key, menu], groupIdx) => (
               <div key={key}>

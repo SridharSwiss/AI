@@ -230,6 +230,28 @@
     animation: shimmer 4s linear infinite;
   }
 
+  .surface-dropdown {
+    background: #ffffff;
+    border: 1px solid hsl(220 13% 85%);
+  }
+  .dark .surface-dropdown {
+    background: hsl(222 47% 11%);
+    border: 1px solid hsl(215 32% 28%);
+  }
+
+  .surface-nav {
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid hsl(220 13% 85%);
+  }
+  .dark .surface-nav {
+    background: hsl(222 47% 8% / 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid hsl(215 32% 24%);
+  }
+
   .glass {
     background: rgb(255 255 255 / 0.70);
     backdrop-filter: blur(16px) saturate(180%);
