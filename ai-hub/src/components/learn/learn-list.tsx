@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { FilterBar, ToggleChip } from "@/components/shared/filter-bar";
-import { BookOpen, Youtube, Award, Clock, ExternalLink, BookMarked, GraduationCap, Code2 } from "lucide-react";
+import { BookOpen, PlayCircle, Award, Clock, ExternalLink, BookMarked, GraduationCap, Code2 } from "lucide-react";
 import { learnResources, resourceTypes, resourceLevels } from "@/data/learn";
 import { cn } from "@/lib/utils";
 
 const typeIcon: Record<string, React.ElementType> = {
-  course: GraduationCap, youtube: Youtube, certification: Award, book: BookMarked, tutorial: Code2,
+  course: GraduationCap, youtube: PlayCircle, certification: Award, book: BookMarked, tutorial: Code2,
 };
 
 const typeBg: Record<string, string> = {
