@@ -156,7 +156,7 @@ export function Navbar() {
     >
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
+          <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group flex-shrink-0">
             <div className="relative">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center shadow-md group-hover:shadow-violet-500/40 transition-shadow duration-300">
                 <Brain className="w-4 h-4 text-white" />
