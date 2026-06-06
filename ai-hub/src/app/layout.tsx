@@ -5,6 +5,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/layout/providers";
 import { NewsTicker } from "@/components/shared/news-ticker";
+import { ConsentBanner } from "@/components/shared/consent-banner";
+import { AnalyticsTracker } from "@/components/shared/analytics-tracker";
 
 const BASE_URL = "https://sridhar-ai.ch";
 
@@ -152,10 +154,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Providers>
+          <AnalyticsTracker />
           <NewsTicker />
           <Navbar />
           <main className="flex-1 pt-24">{children}</main>
           <Footer />
+          <ConsentBanner />
         </Providers>
       </body>
     </html>
