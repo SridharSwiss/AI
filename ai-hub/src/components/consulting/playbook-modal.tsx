@@ -61,31 +61,31 @@ const templateTypeBadge: Record<string, string> = {
 
 function TemplatePanel({ item }: { item: ChecklistItem }) {
   return (
-    <div className="mt-3 ml-9 rounded-xl border border-border bg-muted/60 dark:bg-primary/[0.06] overflow-hidden">
+    <div className="mt-3 ml-9 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(139,92,246,0.25)", background: "rgba(139,92,246,0.06)" }}>
       {/* template header */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-muted dark:bg-primary/[0.10] border-b border-border">
-        <FileText className="w-4 h-4 text-primary flex-shrink-0" />
+      <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ background: "rgba(139,92,246,0.12)", borderColor: "rgba(139,92,246,0.2)" }}>
+        <FileText className="w-4 h-4 text-violet-400 flex-shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-foreground leading-tight">{item.templateTitle}</p>
+          <p className="text-sm font-semibold text-white leading-tight">{item.templateTitle}</p>
         </div>
-        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide flex-shrink-0 ${templateTypeBadge[item.templateType] ?? "bg-muted text-muted-foreground"}`}>
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide flex-shrink-0 bg-violet-500/20 text-violet-300">
           {item.templateType}
         </span>
       </div>
       {/* instructions */}
-      <div className="px-4 py-3 border-b border-border">
-        <p className="text-xs text-muted-foreground leading-relaxed">{item.instructions}</p>
+      <div className="px-4 py-3 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <p className="text-xs text-white/55 leading-relaxed">{item.instructions}</p>
       </div>
       {/* sections */}
       <div className="px-4 py-3 space-y-4">
         {item.sections.map((section, si) => (
           <div key={si}>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-primary/70 mb-2">{section.heading}</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-violet-400/80 mb-2">{section.heading}</p>
             <ul className="space-y-1.5">
               {section.items.map((q, qi) => (
-                <li key={qi} className="flex gap-2.5 text-xs text-foreground/80">
-                  <span className="w-4 h-4 rounded-full bg-primary/15 dark:bg-primary/10 text-primary flex items-center justify-center font-bold text-[9px] flex-shrink-0 mt-0.5">{qi + 1}</span>
-                  <span className="leading-relaxed text-zinc-600 dark:text-zinc-300">{q}</span>
+                <li key={qi} className="flex gap-2.5 text-xs">
+                  <span className="w-4 h-4 rounded-full bg-violet-500/20 text-violet-300 flex items-center justify-center font-bold text-[9px] flex-shrink-0 mt-0.5">{qi + 1}</span>
+                  <span className="leading-relaxed text-white/70">{q}</span>
                 </li>
               ))}
             </ul>
@@ -144,29 +144,31 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         role="dialog"
         aria-modal="true"
         aria-labelledby="playbook-modal-title"
-        className="relative w-full max-w-2xl max-h-[90vh] flex flex-col bg-card text-card-foreground rounded-2xl border border-border shadow-[0_32px_64px_rgba(0,0,0,0.25)] overflow-hidden"
+        className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-2xl border border-white/10 shadow-[0_32px_64px_rgba(0,0,0,0.5)] overflow-hidden"
+        style={{ background: "hsl(222 47% 9%)", color: "#fff" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Rich header ─────────────────────────────── */}
-        <div className="relative flex-shrink-0 px-6 pt-6 pb-5 bg-card dark:bg-gradient-to-br dark:from-primary/[0.07] dark:via-card dark:to-card border-b border-border">
+        <div className="relative flex-shrink-0 px-6 pt-6 pb-5 border-b border-white/10"
+          style={{ background: "linear-gradient(135deg, hsl(222 47% 13%) 0%, hsl(222 47% 10%) 100%)" }}>
           {/* decorative accent bar */}
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-violet-400 to-pink-500 rounded-t-2xl" />
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-violet-500 via-violet-400 to-pink-500 rounded-t-2xl" />
 
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-3">
                 <Badge variant={levelColor[playbook.level] ?? "blue"}>{playbook.level}</Badge>
-                <span className="flex items-center gap-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">
-                  <Sparkles className="w-3 h-3 text-primary" />
+                <span className="flex items-center gap-1 text-[10px] font-semibold text-white/40 uppercase tracking-widest">
+                  <Sparkles className="w-3 h-3 text-violet-400" />
                   Playbook
                 </span>
               </div>
-              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight tracking-tight text-zinc-800 dark:text-zinc-100">{playbook.title}</h2>
-              <p className="text-sm text-zinc-500 dark:text-muted-foreground mt-1.5 leading-relaxed">{playbook.desc}</p>
+              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight tracking-tight text-white">{playbook.title}</h2>
+              <p className="text-sm text-white/55 mt-1.5 leading-relaxed">{playbook.desc}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl hover:bg-muted transition-colors flex-shrink-0 text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
               aria-label="Close playbook"
             >
               <X className="w-5 h-5" />
@@ -176,51 +178,51 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
           {/* progress row */}
           <div className="mt-5 flex items-center gap-4">
             <div className="flex-1">
-              <div className="h-2 rounded-full bg-muted overflow-hidden">
+              <div className="h-2 rounded-full bg-white/10 overflow-hidden">
                 <div
-                  className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-primary to-violet-400"
+                  className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-violet-500 to-pink-500"
                   style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
             <div className="flex items-center gap-1.5 flex-shrink-0">
-              <span className="text-sm font-bold tabular-nums text-foreground">{done}</span>
-              <span className="text-xs text-muted-foreground">/ {total} done</span>
+              <span className="text-sm font-bold tabular-nums text-white">{done}</span>
+              <span className="text-xs text-white/45">/ {total} done</span>
             </div>
           </div>
         </div>
 
         {/* ── Scrollable body ──────────────────────────── */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto" style={{ background: "hsl(222 47% 9%)" }}>
           {/* guidance */}
-          <div className="px-6 py-5 border-b border-border/60">
-            <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">{playbook.guidance}</p>
+          <div className="px-6 py-5 border-b border-white/8">
+            <p className="text-sm text-white/65 leading-relaxed">{playbook.guidance}</p>
           </div>
 
           {/* checklist */}
           <div className="px-6 py-5">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Checklist &amp; Templates</p>
-              <span className="text-[11px] font-semibold text-muted-foreground">{done}/{total} completed</span>
+              <p className="text-[11px] font-bold uppercase tracking-widest text-white/40">Checklist &amp; Templates</p>
+              <span className="text-[11px] font-semibold text-white/40">{done}/{total} completed</span>
             </div>
 
             <div className="space-y-2">
               {playbook.checklist.map((item, i) => (
-                <div key={i} className={`rounded-xl border transition-all duration-200 ${
-                  checked.has(i)
-                    ? "border-emerald-300 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-950/20"
-                    : "border-border bg-card hover:border-border/80 hover:bg-muted/30"
-                }`}>
+                <div key={i} className="rounded-xl border transition-all duration-200"
+                  style={{
+                    borderColor: checked.has(i) ? "rgba(16,185,129,0.35)" : "rgba(255,255,255,0.08)",
+                    background: checked.has(i) ? "rgba(16,185,129,0.08)" : "rgba(255,255,255,0.03)",
+                  }}>
                   <div className="flex items-center gap-3 px-4 py-3">
                     {/* check toggle */}
                     <button
-                      className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full"
+                      className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-full"
                       onClick={() => toggleChecked(i)}
                       aria-label={checked.has(i) ? "Mark incomplete" : "Mark complete"}
                     >
                       <CheckCircle
                         className={`w-5 h-5 transition-all duration-200 ${
-                          checked.has(i) ? "text-emerald-500 scale-110" : "text-muted-foreground/30 hover:text-muted-foreground/60"
+                          checked.has(i) ? "text-emerald-400 scale-110" : "text-white/20 hover:text-white/40"
                         }`}
                       />
                     </button>
@@ -228,7 +230,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                     {/* label */}
                     <span
                       className={`flex-1 text-sm leading-snug transition-colors cursor-pointer select-none ${
-                        checked.has(i) ? "line-through text-muted-foreground" : "text-zinc-700 dark:text-zinc-200"
+                        checked.has(i) ? "line-through text-white/30" : "text-white/85"
                       }`}
                       onClick={() => toggleChecked(i)}
                     >
@@ -238,10 +240,10 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                     {/* template toggle */}
                     {item.sections.length > 0 && (
                       <button
-                        className={`inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 border transition-all duration-150 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                        className={`inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 border transition-all duration-150 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 ${
                           expanded.has(i)
-                            ? "bg-primary border-primary text-primary-foreground shadow-sm"
-                            : "bg-background border-border text-muted-foreground hover:text-foreground hover:border-primary/40 hover:bg-primary/5"
+                            ? "bg-violet-600 border-violet-500 text-white shadow-sm"
+                            : "border-white/15 text-white/55 hover:text-white hover:border-white/30 hover:bg-white/8"
                         }`}
                         onClick={(e) => toggleExpanded(i, e)}
                         aria-expanded={expanded.has(i)}
