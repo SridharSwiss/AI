@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const { session_id, device_type, browser, os, referrer_source, referrer_url, utm_source, utm_medium, utm_campaign } = body;
     if (!session_id) return NextResponse.json({ error: "missing session_id" }, { status: 400 });
 
-    await supabase.from("analytics_sessions").insert({
+    const { error } = await supabase.from("analytics_sessions").insert({
       id: session_id,
       device_type,
       browser,
@@ -19,8 +19,14 @@ export async function POST(req: NextRequest) {
       utm_campaign,
     });
 
+    if (error) {
+      console.error("[analytics/session POST]", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
+    console.error("[analytics/session POST] exception", e);
     return NextResponse.json({ error: "internal" }, { status: 500 });
   }
 }
@@ -30,13 +36,16 @@ export async function PATCH(req: NextRequest) {
     const { session_id, session_duration_secs } = await req.json();
     if (!session_id) return NextResponse.json({ error: "missing session_id" }, { status: 400 });
 
-    await supabase
+    const { error } = await supabase
       .from("analytics_sessions")
       .update({ session_duration_secs, last_seen_at: new Date().toISOString() })
       .eq("id", session_id);
 
+    if (error) console.error("[analytics/session PATCH]", error.message);
+
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
+    console.error("[analytics/session PATCH] exception", e);
     return NextResponse.json({ error: "internal" }, { status: 500 });
   }
 }

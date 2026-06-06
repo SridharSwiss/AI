@@ -6,13 +6,23 @@ export async function POST(req: NextRequest) {
     const { session_id, page_path, page_title, time_spent_secs } = await req.json();
     if (!session_id || !page_path) return NextResponse.json({ error: "missing fields" }, { status: 400 });
 
-    await supabase.from("analytics_pageviews").insert({ session_id, page_path, page_title, time_spent_secs });
+    const { error } = await supabase.from("analytics_pageviews").insert({
+      session_id,
+      page_path,
+      page_title,
+      time_spent_secs,
+    });
 
-    // update page_count on session
+    if (error) {
+      console.error("[analytics/pageview POST]", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
     await supabase.rpc("increment_page_count", { sid: session_id });
 
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
+    console.error("[analytics/pageview POST] exception", e);
     return NextResponse.json({ error: "internal" }, { status: 500 });
   }
 }
