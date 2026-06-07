@@ -52,13 +52,13 @@ export function Hero() {
 
       <div className="container-site py-24 text-center">
         <div className="animate-fade-up delay-75 w-full flex justify-center mb-8">
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold dark:bg-amber-950/40 dark:border-amber-700 dark:text-amber-300">
+          <Link href="/compliance/eu-ai-act" className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold dark:bg-amber-950/40 dark:border-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors">
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-70" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500" />
             </span>
             EU AI Act in force · Are you compliant? Read the guide →
-          </div>
+          </Link>
         </div>
 
         <div className="animate-fade-up delay-100 flex items-center justify-center gap-3 mb-6">
