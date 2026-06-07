@@ -62,7 +62,7 @@ function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean 
     <div
       className={cn(
         "absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-[200]",
-        "surface-dropdown rounded-2xl shadow-2xl overflow-hidden isolate",
+        "surface-dropdown dark:bg-[hsl(222_47%_11%)] dark:border-[hsl(215_32%_28%)] dark:text-[hsl(210_40%_96%)] rounded-2xl shadow-2xl overflow-hidden isolate",
         "origin-top transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
         isOpen
           ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
@@ -228,7 +228,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className={cn("lg:hidden overflow-hidden bg-white dark:bg-[hsl(222_47%_11%)] text-zinc-900 dark:text-zinc-100 border-border", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
+        <div className={cn("lg:hidden overflow-hidden bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-border", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
           <div className="py-3 border-t border-border/40 space-y-4">
             {(Object.entries(megaMenus) as [MenuKey, typeof megaMenus[MenuKey]][]).map(([key, menu], groupIdx) => (
               <div key={key}>
