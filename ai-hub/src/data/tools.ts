@@ -1489,7 +1489,6 @@ export const tools: ToolData[] = [
     alternatives: ["replicate", "huggingface", "together-ai"],
   },
   {
-  {
     id: "groq-api",
     slug: "groq-api",
     name: "Groq API",
