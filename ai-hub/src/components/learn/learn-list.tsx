@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { FilterBar, ToggleChip } from "@/components/shared/filter-bar";
-import { BookOpen, PlayCircle, Award, Clock, ExternalLink, BookMarked, GraduationCap, Code2 } from "lucide-react";
+import { BookOpen, PlayCircle, Award, ExternalLink, BookMarked, GraduationCap, Code2, Clock, ChevronDown } from "lucide-react";
 import { learnResources, resourceTypes, resourceLevels } from "@/data/learn";
 import { cn } from "@/lib/utils";
 
@@ -13,11 +11,11 @@ const typeIcon: Record<string, React.ElementType> = {
 };
 
 const typeBg: Record<string, string> = {
-  course: "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-600 dark:text-blue-400",
-  youtube: "bg-red-500/10 dark:bg-red-500/[0.18] text-red-600 dark:text-red-400",
+  course:        "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-600 dark:text-blue-400",
+  youtube:       "bg-red-500/10 dark:bg-red-500/[0.18] text-red-600 dark:text-red-400",
   certification: "bg-amber-500/10 dark:bg-amber-500/[0.18] text-amber-600 dark:text-amber-400",
-  book: "bg-purple-500/10 dark:bg-purple-500/[0.18] text-purple-600 dark:text-purple-400",
-  tutorial: "bg-emerald-500/10 dark:bg-emerald-500/[0.18] text-emerald-600 dark:text-emerald-400",
+  book:          "bg-purple-500/10 dark:bg-purple-500/[0.18] text-purple-600 dark:text-purple-400",
+  tutorial:      "bg-emerald-500/10 dark:bg-emerald-500/[0.18] text-emerald-600 dark:text-emerald-400",
 };
 
 const typeColor: Record<string, "blue" | "pink" | "amber" | "purple" | "green"> = {
@@ -28,17 +26,7 @@ const levelColor: Record<string, "green" | "blue" | "purple"> = {
   beginner: "green", intermediate: "blue", advanced: "purple",
 };
 
-function EmptyState() {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-4">
-        <BookOpen className="w-6 h-6 text-muted-foreground" />
-      </div>
-      <p className="text-base font-semibold mb-1.5">No resources match these filters</p>
-      <p className="text-sm text-muted-foreground max-w-xs">Try adjusting your filters or toggling off "Free Only".</p>
-    </div>
-  );
-}
+const SELECT_CLS = "appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer";
 
 export function LearnList() {
   const [activeType, setActiveType]   = useState("All");
@@ -56,61 +44,124 @@ export function LearnList() {
 
   return (
     <div>
-      <div className="space-y-3 mb-8">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-2">Type</p>
-          <FilterBar options={resourceTypes} active={activeType} onChange={setActiveType} size="sm" />
+      {/* Filter bar */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        {/* Type dropdown */}
+        <div className="relative">
+          <select value={activeType} onChange={(e) => setActiveType(e.target.value)} className={SELECT_CLS}>
+            <option value="All">All Types</option>
+            {resourceTypes.filter((t) => t !== "All").map((t) => (
+              <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
         </div>
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-2">Level</p>
-          <FilterBar options={resourceLevels} active={activeLevel} onChange={setActiveLevel} size="sm" />
-        </div>
-        <ToggleChip label="Free only" active={freeOnly} onChange={setFreeOnly} />
-      </div>
 
-      <div className="flex items-center justify-between mb-5">
-        <p className="text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">{filtered.length}</span> of {learnResources.length} resources
-        </p>
+        {/* Level dropdown */}
+        <div className="relative">
+          <select value={activeLevel} onChange={(e) => setActiveLevel(e.target.value)} className={SELECT_CLS}>
+            <option value="All">All Levels</option>
+            {resourceLevels.filter((l) => l !== "All").map((l) => (
+              <option key={l} value={l}>{l.charAt(0).toUpperCase() + l.slice(1)}</option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+        </div>
+
+        {/* Free only toggle */}
+        <button
+          onClick={() => setFreeOnly(!freeOnly)}
+          className={cn(
+            "px-3 py-2 rounded-lg text-sm font-medium border transition-colors",
+            freeOnly
+              ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+              : "border-border bg-card text-muted-foreground hover:text-foreground"
+          )}
+        >
+          Free only
+        </button>
+
         {isFiltered && (
-          <button onClick={() => { setActiveType("All"); setActiveLevel("All"); setFreeOnly(false); }} className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline transition-colors">Clear filters</button>
+          <button
+            onClick={() => { setActiveType("All"); setActiveLevel("All"); setFreeOnly(false); }}
+            className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors whitespace-nowrap"
+          >
+            Clear filters
+          </button>
         )}
+
+        <span className="ml-auto text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">{filtered.length}</span> of {learnResources.length} resources
+        </span>
       </div>
 
       {filtered.length === 0 ? (
-        <EmptyState />
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-4">
+            <BookOpen className="w-6 h-6 text-muted-foreground" />
+          </div>
+          <p className="text-base font-semibold mb-1.5">No resources match these filters</p>
+          <p className="text-sm text-muted-foreground max-w-xs">Try adjusting your filters or toggling off "Free Only".</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+          {/* Header */}
+          <div className="hidden md:grid grid-cols-[40px_220px_1fr_140px_130px_80px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            <div />
+            <div>Resource</div>
+            <div>Description</div>
+            <div>Tags</div>
+            <div>Level / Type</div>
+            <div>Duration</div>
+          </div>
+
           {filtered.map((r) => {
             const TypeIcon = typeIcon[r.type] ?? GraduationCap;
             return (
-              <Card key={r.slug} className="group hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] hover:border-border/80">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0", typeBg[r.type] ?? "bg-muted text-muted-foreground")}>
-                      <TypeIcon className="w-4.5 h-4.5" />
-                    </div>
-                    {r.free && <Badge variant="green" className="flex-shrink-0">Free</Badge>}
+              <a
+                key={r.slug}
+                href={r.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_220px_1fr_140px_130px_80px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
+              >
+                {/* Icon */}
+                <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", typeBg[r.type] ?? "bg-muted text-muted-foreground")}>
+                  <TypeIcon className="w-5 h-5" />
+                </div>
+
+                {/* Title + provider */}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{r.title}</span>
+                    {r.free && <Badge variant="green" className="text-[10px] py-0 flex-shrink-0">Free</Badge>}
                   </div>
-                  <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors leading-snug">{r.title}</CardTitle>
-                  <CardDescription className="text-xs mt-0.5">{r.provider}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed line-clamp-2">{r.description}</p>
-                  <div className="flex items-center gap-2 mb-4 flex-wrap">
-                    <Badge variant={typeColor[r.type] ?? "blue"}>{r.type}</Badge>
-                    <Badge variant={levelColor[r.level] ?? "blue"}>{r.level}</Badge>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground ml-auto">
-                      <Clock className="w-3 h-3" />
-                      ~{r.readTime}h
-                    </span>
-                  </div>
-                  <a href={r.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors">
-                    <ExternalLink className="w-3 h-3" />
-                    Open resource
-                  </a>
-                </CardContent>
-              </Card>
+                  <p className="text-xs text-muted-foreground truncate">{r.provider}</p>
+                </div>
+
+                {/* Description */}
+                <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{r.description}</p>
+
+                {/* Tags */}
+                <div className="hidden md:flex flex-wrap gap-1 min-w-0">
+                  {r.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium whitespace-nowrap">{tag}</span>
+                  ))}
+                </div>
+
+                {/* Level + type badges */}
+                <div className="hidden md:flex flex-wrap gap-1">
+                  <Badge variant={levelColor[r.level] ?? "blue"} className="text-[10px]">{r.level}</Badge>
+                  <Badge variant={typeColor[r.type] ?? "blue"} className="text-[10px]">{r.type}</Badge>
+                </div>
+
+                {/* Duration */}
+                <div className="hidden md:flex items-center gap-1 text-xs text-muted-foreground">
+                  <Clock className="w-3 h-3 flex-shrink-0" />
+                  ~{r.readTime}h
+                  <ExternalLink className="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-primary transition-colors flex-shrink-0" />
+                </div>
+              </a>
             );
           })}
         </div>
