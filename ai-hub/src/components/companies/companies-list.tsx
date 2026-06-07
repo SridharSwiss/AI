@@ -3,19 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { FilterBar } from "@/components/shared/filter-bar";
 import {
-  ExternalLink, Building2,
+  ExternalLink, Building2, ChevronDown,
   Brain, Sparkles, Code2, FlaskConical, Bot, Palette, ShieldCheck, Cpu, Globe,
 } from "lucide-react";
 import { companies, companyStages } from "@/data/companies";
 import { cn } from "@/lib/utils";
 
 const stageVariant: Record<string, "blue" | "green" | "amber" | "purple" | "outline"> = {
-  Private: "blue",
-  Public: "green",
-  Nonprofit: "purple",
-  "Research Lab": "amber",
+  Private: "blue", Public: "green", Nonprofit: "purple", "Research Lab": "amber",
 };
 
 const FOCUS_ICONS: Record<string, React.ElementType> = {
@@ -56,91 +52,113 @@ function CompanyIcon({ focus }: { focus: string }) {
   );
 }
 
+// Get unique focus areas for dropdown
+const focusAreas = ["All", ...Array.from(new Set(companies.map((c) => c.focus))).sort()];
+
 export function CompaniesList() {
   const [activeStage, setActiveStage] = useState("All");
+  const [activeFocus, setActiveFocus] = useState("All");
 
-  const filtered = companies.filter((c) =>
-    activeStage === "All" || c.stage === activeStage
-  );
+  const filtered = companies.filter((c) => {
+    const stageMatch = activeStage === "All" || c.stage === activeStage;
+    const focusMatch = activeFocus === "All" || c.focus === activeFocus;
+    return stageMatch && focusMatch;
+  });
+
+  const isFiltered = activeStage !== "All" || activeFocus !== "All";
 
   return (
     <div>
-      <div className="mb-6">
-        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-2">Type</p>
-        <FilterBar options={companyStages} active={activeStage} onChange={setActiveStage} size="sm" />
+      {/* Dropdown filter bar */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        {/* Stage dropdown */}
+        <div className="relative">
+          <select
+            value={activeStage}
+            onChange={(e) => setActiveStage(e.target.value)}
+            className="appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+          >
+            <option value="All">All Types</option>
+            {companyStages.filter((s) => s !== "All").map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+        </div>
+
+        {/* Focus dropdown */}
+        <div className="relative">
+          <select
+            value={activeFocus}
+            onChange={(e) => setActiveFocus(e.target.value)}
+            className="appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+          >
+            {focusAreas.map((f) => (
+              <option key={f} value={f}>{f === "All" ? "All Focus Areas" : f}</option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+        </div>
+
+        {isFiltered && (
+          <button
+            onClick={() => { setActiveStage("All"); setActiveFocus("All"); }}
+            className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors whitespace-nowrap"
+          >
+            Clear filters
+          </button>
+        )}
+        <span className="ml-auto text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">{filtered.length}</span> of {companies.length} companies
+        </span>
       </div>
 
-      <p className="text-sm text-muted-foreground mb-6">
-        <span className="font-semibold text-foreground">{filtered.length}</span> of {companies.length} companies
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filtered.map((company) => (
-          <Link key={company.slug} href={`/companies/${company.slug}`} className="group block">
-            <div className={cn(
-              "h-full flex flex-col gap-4 p-5 rounded-xl",
-              "border border-border/80 bg-card",
-              "shadow-[var(--shadow-sm)]",
-              "transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-              "hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] hover:border-border"
-            )}>
-              {/* Header */}
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  <CompanyIcon focus={company.focus} />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors duration-150 truncate">{company.name}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{company.focus} · {company.founded}</p>
-                  </div>
-                </div>
-                <Badge variant={stageVariant[company.stage] ?? "outline"} className="flex-shrink-0">{company.stage}</Badge>
-              </div>
-
-              {/* Description */}
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">{company.description}</p>
-
-              {/* Products */}
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1.5">Key Products</p>
-                <div className="flex flex-wrap gap-1">
-                  {company.products.slice(0, 4).map((p) => (
-                    <span key={p} className="text-[11px] px-2 py-0.5 rounded-md bg-muted text-muted-foreground font-medium">{p}</span>
-                  ))}
-                  {company.products.length > 4 && (
-                    <span className="text-[11px] px-2 py-0.5 rounded-md bg-muted text-muted-foreground font-medium">+{company.products.length - 4}</span>
-                  )}
-                </div>
-              </div>
-
-              {/* Tags + link */}
-              <div className="flex items-center justify-between gap-2 pt-2.5 border-t border-border/60">
-                <div className="flex flex-wrap gap-1">
-                  {company.tags.slice(0, 3).map((tag) => (
-                    <Badge key={tag} variant="purple" className="text-[10px]">{tag}</Badge>
-                  ))}
-                </div>
-                <a
-                  href={company.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors flex-shrink-0"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
+      {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <div className="w-14 h-14 rounded-lg border border-border bg-muted flex items-center justify-center mb-4">
             <Building2 className="w-6 h-6 text-muted-foreground" />
           </div>
           <p className="text-base font-semibold mb-1">No companies found</p>
           <p className="text-sm text-muted-foreground">Try adjusting your filters.</p>
+        </div>
+      ) : (
+        <div className="flex flex-col divide-y divide-border border border-border rounded-xl overflow-hidden">
+          {filtered.map((company) => (
+            <Link
+              key={company.slug}
+              href={`/companies/${company.slug}`}
+              className="group flex items-center gap-4 px-5 py-4 bg-card hover:bg-accent/40 transition-colors duration-150"
+            >
+              <CompanyIcon focus={company.focus} />
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{company.name}</span>
+                </div>
+                <p className="text-xs text-muted-foreground truncate">{company.focus} · Founded {company.founded}</p>
+              </div>
+
+              <p className="hidden sm:block text-sm text-muted-foreground line-clamp-1 flex-1 min-w-0 max-w-sm">{company.description}</p>
+
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="hidden md:flex flex-wrap gap-1">
+                  {company.products.slice(0, 2).map((p) => (
+                    <span key={p} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{p}</span>
+                  ))}
+                </div>
+                <Badge variant={stageVariant[company.stage] ?? "outline"} className="flex-shrink-0">{company.stage}</Badge>
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </Link>
+          ))}
         </div>
       )}
     </div>

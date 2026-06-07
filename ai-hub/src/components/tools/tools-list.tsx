@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { FilterBar } from "@/components/shared/filter-bar";
 import {
-  ExternalLink, SlidersHorizontal,
+  ExternalLink, SlidersHorizontal, ChevronDown,
   MessageSquare, Code2, Image, Video, Mic2, SearchCheck,
   Server, Layers, LayoutGrid, Zap, Rocket, Pen, BarChart2, Headphones, Bot,
 } from "lucide-react";
@@ -53,20 +51,32 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Autonomous Agents": "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
 };
 
-function useTilt() {
-  const ref = useRef<HTMLDivElement>(null);
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    el.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(4px)`;
-  };
-  const handleLeave = () => {
-    if (ref.current) ref.current.style.transform = "";
-  };
-  return { ref, onMouseMove: handleMove, onMouseLeave: handleLeave };
+function FilterSelect({ label, value, options, onChange }: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div className="relative">
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={cn(
+          "appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium",
+          "border border-border bg-card text-foreground",
+          "hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40",
+          "transition-colors cursor-pointer"
+        )}
+      >
+        <option value="All">All {label}s</option>
+        {options.filter((o) => o !== "All").map((o) => (
+          <option key={o} value={o}>{o}</option>
+        ))}
+      </select>
+      <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+    </div>
+  );
 }
 
 function ToolIcon({ tool }: { tool: ToolData }) {
@@ -75,58 +85,6 @@ function ToolIcon({ tool }: { tool: ToolData }) {
   return (
     <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", colorClass)}>
       <Icon className="w-5 h-5" />
-    </div>
-  );
-}
-
-function EmptyState({ category }: { category: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="w-14 h-14 rounded-lg border border-border bg-muted flex items-center justify-center mb-4">
-        <SlidersHorizontal className="w-6 h-6 text-muted-foreground" />
-      </div>
-      <p className="text-base font-semibold mb-1.5">No tools match these filters</p>
-      <p className="text-sm text-muted-foreground max-w-xs">
-        {category !== "All" ? `Remove the "${category}" filter or try a different pricing tier.` : "Try a different pricing tier."}
-      </p>
-    </div>
-  );
-}
-
-function TiltCard({ tool }: { tool: ToolData }) {
-  const tilt = useTilt();
-  return (
-    <div ref={tilt.ref} onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave} className="transition-transform duration-100 ease-out">
-      <Link href={`/tools/${tool.slug}`} className="group block">
-        <Card className="h-full group-hover:border-border">
-          <CardHeader className="pb-3">
-            <div className="flex items-start justify-between gap-2 mb-3">
-              <ToolIcon tool={tool} />
-              <Badge variant={pricingBadge[tool.pricing] ?? "blue"}>{tool.pricing}</Badge>
-            </div>
-            <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors leading-snug">{tool.name}</CardTitle>
-            <CardDescription className="text-xs mt-0.5">{tool.vendor} · {tool.category}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{tool.tagline}</p>
-            <div className="flex flex-wrap gap-1 mb-4">
-              {tool.tags.slice(0, 3).map((tag) => (
-                <span key={tag} className="text-[11px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{tag}</span>
-              ))}
-            </div>
-            <a
-              href={tool.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink className="w-3 h-3" />
-              Visit website
-            </a>
-          </CardContent>
-        </Card>
-      </Link>
     </div>
   );
 }
@@ -145,38 +103,69 @@ export function ToolsList() {
 
   return (
     <div>
-      <div className="space-y-3 mb-8">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-2">Category</p>
-          <FilterBar options={toolCategories} active={activeCategory} onChange={setActiveCategory} size="sm" />
-        </div>
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-2">Pricing</p>
-          <FilterBar options={pricingOptions} active={activePricing} onChange={setActivePricing} size="sm" />
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between mb-5">
-        <p className="text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">{filtered.length}</span> of {tools.length} tools
-          {activeCategory !== "All" && <> in <span className="font-medium text-foreground">{activeCategory}</span></>}
-        </p>
+      {/* Dropdown filter bar */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <FilterSelect label="Category" value={activeCategory} options={toolCategories} onChange={setActiveCategory} />
+        <FilterSelect label="Pricing"  value={activePricing}  options={pricingOptions}  onChange={setActivePricing} />
         {isFiltered && (
           <button
             onClick={() => { setActiveCategory("All"); setActivePricing("All"); }}
-            className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline transition-colors"
+            className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors whitespace-nowrap"
           >
             Clear filters
           </button>
         )}
+        <span className="ml-auto text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">{filtered.length}</span> of {tools.length} tools
+        </span>
       </div>
 
       {filtered.length === 0 ? (
-        <EmptyState category={activeCategory} />
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="w-14 h-14 rounded-lg border border-border bg-muted flex items-center justify-center mb-4">
+            <SlidersHorizontal className="w-6 h-6 text-muted-foreground" />
+          </div>
+          <p className="text-base font-semibold mb-1.5">No tools match these filters</p>
+          <p className="text-sm text-muted-foreground max-w-xs">Try a different category or pricing tier.</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="flex flex-col divide-y divide-border border border-border rounded-xl overflow-hidden">
           {filtered.map((tool) => (
-            <TiltCard key={tool.slug} tool={tool} />
+            <Link
+              key={tool.slug}
+              href={`/tools/${tool.slug}`}
+              className="group flex items-center gap-4 px-5 py-4 bg-card hover:bg-accent/40 transition-colors duration-150"
+            >
+              <ToolIcon tool={tool} />
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{tool.name}</span>
+                  {tool.featured && <Badge variant="purple" className="text-[10px] py-0">Featured</Badge>}
+                </div>
+                <p className="text-xs text-muted-foreground truncate">{tool.vendor} · {tool.category}</p>
+              </div>
+
+              <p className="hidden sm:block text-sm text-muted-foreground line-clamp-1 flex-1 min-w-0 max-w-sm">{tool.tagline}</p>
+
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="hidden md:flex flex-wrap gap-1">
+                  {tool.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{tag}</span>
+                  ))}
+                </div>
+                <Badge variant={pricingBadge[tool.pricing] ?? "blue"} className="flex-shrink-0">{tool.pricing}</Badge>
+                <a
+                  href={tool.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </Link>
           ))}
         </div>
       )}
