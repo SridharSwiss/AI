@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import {
   CheckSquare, X, CheckCircle, FileText,
   ClipboardList, FlaskConical, TrendingUp, Shield, ScanSearch,
@@ -11,58 +10,48 @@ import {
 } from "lucide-react";
 import { phases } from "@/data/playbooks";
 import type { Playbook, ChecklistItem, Phase } from "@/data/playbooks";
+import { cn } from "@/lib/utils";
 
-const tabConfig: { id: string; label: string; icon: React.ElementType; phaseKey: string | null }[] = [
-  { id: "all",    label: "All Phases",  icon: ClipboardList, phaseKey: null },
-  { id: "assess", label: "Assess",      icon: ScanSearch,    phaseKey: "assess" },
-  { id: "pilot",  label: "Pilot",       icon: FlaskConical,  phaseKey: "pilot" },
-  { id: "scale",  label: "Scale",       icon: TrendingUp,    phaseKey: "scale" },
-  { id: "govern", label: "Govern",      icon: Shield,        phaseKey: "govern" },
+/* ── Constants ───────────────────────────────────────────── */
+
+const phaseOptions = [
+  { id: "all",    label: "All Phases", icon: ClipboardList },
+  { id: "assess", label: "Assess",     icon: ScanSearch    },
+  { id: "pilot",  label: "Pilot",      icon: FlaskConical  },
+  { id: "scale",  label: "Scale",      icon: TrendingUp    },
+  { id: "govern", label: "Govern",     icon: Shield        },
 ];
 
-const paramToTab: Record<string, string> = {
-  playbooks:  "all",
-  assessment: "assess",
-  pilot:      "pilot",
-  scale:      "scale",
-  govern:     "govern",
+const paramToPhase: Record<string, string> = {
+  playbooks: "all", assessment: "assess", pilot: "pilot", scale: "scale", govern: "govern",
 };
 
-const phaseIcons: Record<string, React.ElementType> = {
-  assess: ClipboardList,
-  pilot:  FlaskConical,
-  scale:  TrendingUp,
-  govern: Shield,
+const phaseIconMap: Record<string, React.ElementType> = {
+  assess: ScanSearch, pilot: FlaskConical, scale: TrendingUp, govern: Shield,
 };
 
-const phaseAccent: Record<string, { border: string; icon: string }> = {
-  assess: { border: "border-blue-200 dark:border-blue-800/60",     icon: "text-blue-600 dark:text-blue-400" },
-  pilot:  { border: "border-violet-200 dark:border-violet-800/60", icon: "text-violet-600 dark:text-violet-400" },
-  scale:  { border: "border-emerald-200 dark:border-emerald-800/60", icon: "text-emerald-600 dark:text-emerald-400" },
-  govern: { border: "border-rose-200 dark:border-rose-800/60",     icon: "text-rose-600 dark:text-rose-400" },
+const phaseIconColor: Record<string, string> = {
+  assess: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+  pilot:  "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+  scale:  "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  govern: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+};
+
+const phaseBadgeVariant: Record<string, "blue" | "purple" | "green" | "destructive"> = {
+  assess: "blue", pilot: "purple", scale: "green", govern: "destructive",
 };
 
 const levelColor: Record<string, "blue" | "green" | "purple" | "amber"> = {
-  beginner:     "green",
-  practitioner: "blue",
-  manager:      "purple",
-  executive:    "amber",
+  beginner: "green", practitioner: "blue", manager: "purple", executive: "amber",
 };
 
-const templateTypeBadge: Record<string, string> = {
-  survey:        "bg-blue-100    dark:bg-blue-900/50    text-blue-700    dark:text-blue-300",
-  questionnaire: "bg-violet-100  dark:bg-violet-900/50  text-violet-700  dark:text-violet-300",
-  template:      "bg-slate-100   dark:bg-slate-800      text-slate-700   dark:text-slate-300",
-  scorecard:     "bg-amber-100   dark:bg-amber-900/50   text-amber-700   dark:text-amber-300",
-  matrix:        "bg-rose-100    dark:bg-rose-900/50    text-rose-700    dark:text-rose-300",
-  worksheet:     "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300",
-  framework:     "bg-cyan-100    dark:bg-cyan-900/50    text-cyan-700    dark:text-cyan-300",
-};
+const SELECT_CLS = "appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer";
+
+/* ── Template panel (inside modal) ──────────────────────── */
 
 function TemplatePanel({ item }: { item: ChecklistItem }) {
   return (
     <div className="mt-3 ml-9 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(139,92,246,0.25)", background: "rgba(139,92,246,0.06)" }}>
-      {/* template header */}
       <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ background: "rgba(139,92,246,0.12)", borderColor: "rgba(139,92,246,0.2)" }}>
         <FileText className="w-4 h-4 text-violet-400 flex-shrink-0" />
         <div className="flex-1 min-w-0">
@@ -72,11 +61,9 @@ function TemplatePanel({ item }: { item: ChecklistItem }) {
           {item.templateType}
         </span>
       </div>
-      {/* instructions */}
       <div className="px-4 py-3 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
         <p className="text-xs text-white/55 leading-relaxed">{item.instructions}</p>
       </div>
-      {/* sections */}
       <div className="px-4 py-3 space-y-4">
         {item.sections.map((section, si) => (
           <div key={si}>
@@ -96,6 +83,8 @@ function TemplatePanel({ item }: { item: ChecklistItem }) {
   );
 }
 
+/* ── Playbook modal ──────────────────────────────────────── */
+
 function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () => void }) {
   const [checked, setChecked] = useState<Set<number>>(new Set());
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
@@ -113,32 +102,15 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  const toggleChecked = (i: number) => {
-    setChecked((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i); else next.add(i);
-      return next;
-    });
-  };
-
-  const toggleExpanded = (i: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i); else next.add(i);
-      return next;
-    });
-  };
+  const toggleChecked = (i: number) => setChecked((prev) => { const s = new Set(prev); s.has(i) ? s.delete(i) : s.add(i); return s; });
+  const toggleExpanded = (i: number, e: React.MouseEvent) => { e.stopPropagation(); setExpanded((prev) => { const s = new Set(prev); s.has(i) ? s.delete(i) : s.add(i); return s; }); };
 
   const total = playbook.checklist.length;
   const done = checked.size;
   const progress = total > 0 ? Math.round((done / total) * 100) : 0;
 
   return (
-    <div
-      className="fixed inset-0 z-[300] flex items-center justify-center p-4 sm:p-6 bg-black/65 backdrop-blur-sm"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 sm:p-6 bg-black/65 backdrop-blur-sm" onClick={onClose}>
       <div
         ref={dialogRef}
         role="dialog"
@@ -148,41 +120,29 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         style={{ background: "hsl(222 47% 9%)", color: "#fff" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* ── Rich header ─────────────────────────────── */}
-        <div className="relative flex-shrink-0 px-6 pt-6 pb-5 border-b border-white/10"
+        {/* Header */}
+        <div className="relative flex-shrink-0 px-5 sm:px-6 pt-6 pb-5 border-b border-white/10"
           style={{ background: "linear-gradient(135deg, hsl(222 47% 13%) 0%, hsl(222 47% 10%) 100%)" }}>
-          {/* decorative accent bar */}
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-violet-500 via-violet-400 to-pink-500 rounded-t-2xl" />
-
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-3">
                 <Badge variant={levelColor[playbook.level] ?? "blue"}>{playbook.level}</Badge>
                 <span className="flex items-center gap-1 text-[10px] font-semibold text-white/40 uppercase tracking-widest">
-                  <Sparkles className="w-3 h-3 text-violet-400" />
-                  Playbook
+                  <Sparkles className="w-3 h-3 text-violet-400" />Playbook
                 </span>
               </div>
-              <h2 id="playbook-modal-title" className="text-xl font-bold leading-tight tracking-tight text-white">{playbook.title}</h2>
+              <h2 id="playbook-modal-title" className="text-lg sm:text-xl font-bold leading-tight tracking-tight text-white">{playbook.title}</h2>
               <p className="text-sm text-white/55 mt-1.5 leading-relaxed">{playbook.desc}</p>
             </div>
-            <button
-              onClick={onClose}
-              className="p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-              aria-label="Close playbook"
-            >
+            <button onClick={onClose} className="p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30" aria-label="Close playbook">
               <X className="w-5 h-5" />
             </button>
           </div>
-
-          {/* progress row */}
           <div className="mt-5 flex items-center gap-4">
             <div className="flex-1">
               <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-violet-500 to-pink-500"
-                  style={{ width: `${progress}%` }}
-                />
+                <div className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-violet-500 to-pink-500" style={{ width: `${progress}%` }} />
               </div>
             </div>
             <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -192,74 +152,42 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
           </div>
         </div>
 
-        {/* ── Scrollable body ──────────────────────────── */}
+        {/* Body */}
         <div className="flex-1 overflow-y-auto" style={{ background: "hsl(222 47% 9%)" }}>
-          {/* guidance */}
-          <div className="px-6 py-5 border-b border-white/8">
+          <div className="px-5 sm:px-6 py-5 border-b border-white/8">
             <p className="text-sm text-white/65 leading-relaxed">{playbook.guidance}</p>
           </div>
-
-          {/* checklist */}
-          <div className="px-6 py-5">
+          <div className="px-5 sm:px-6 py-5">
             <div className="flex items-center justify-between mb-4">
               <p className="text-[11px] font-bold uppercase tracking-widest text-white/40">Checklist &amp; Templates</p>
               <span className="text-[11px] font-semibold text-white/40">{done}/{total} completed</span>
             </div>
-
             <div className="space-y-2">
               {playbook.checklist.map((item, i) => (
                 <div key={i} className="rounded-xl border transition-all duration-200"
-                  style={{
-                    borderColor: checked.has(i) ? "rgba(16,185,129,0.35)" : "rgba(255,255,255,0.08)",
-                    background: checked.has(i) ? "rgba(16,185,129,0.08)" : "rgba(255,255,255,0.03)",
-                  }}>
+                  style={{ borderColor: checked.has(i) ? "rgba(16,185,129,0.35)" : "rgba(255,255,255,0.08)", background: checked.has(i) ? "rgba(16,185,129,0.08)" : "rgba(255,255,255,0.03)" }}>
                   <div className="flex items-center gap-3 px-4 py-3">
-                    {/* check toggle */}
-                    <button
-                      className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-full"
-                      onClick={() => toggleChecked(i)}
-                      aria-label={checked.has(i) ? "Mark incomplete" : "Mark complete"}
-                    >
-                      <CheckCircle
-                        className={`w-5 h-5 transition-all duration-200 ${
-                          checked.has(i) ? "text-emerald-400 scale-110" : "text-white/20 hover:text-white/40"
-                        }`}
-                      />
+                    <button className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-full" onClick={() => toggleChecked(i)} aria-label={checked.has(i) ? "Mark incomplete" : "Mark complete"}>
+                      <CheckCircle className={cn("w-5 h-5 transition-all duration-200", checked.has(i) ? "text-emerald-400 scale-110" : "text-white/20 hover:text-white/40")} />
                     </button>
-
-                    {/* label */}
-                    <span
-                      className={`flex-1 text-sm leading-snug transition-colors cursor-pointer select-none ${
-                        checked.has(i) ? "line-through text-white/30" : "text-white/85"
-                      }`}
-                      onClick={() => toggleChecked(i)}
-                    >
+                    <span className={cn("flex-1 text-sm leading-snug transition-colors cursor-pointer select-none", checked.has(i) ? "line-through text-white/30" : "text-white/85")} onClick={() => toggleChecked(i)}>
                       {item.item}
                     </span>
-
-                    {/* template toggle */}
                     {item.sections.length > 0 && (
                       <button
-                        className={`inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 border transition-all duration-150 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 ${
-                          expanded.has(i)
-                            ? "bg-violet-600 border-violet-500 text-white shadow-sm"
-                            : "border-white/15 text-white/55 hover:text-white hover:border-white/30 hover:bg-white/8"
-                        }`}
+                        className={cn("inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-1.5 border transition-all duration-150 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20",
+                          expanded.has(i) ? "bg-violet-600 border-violet-500 text-white shadow-sm" : "border-white/15 text-white/55 hover:text-white hover:border-white/30 hover:bg-white/8"
+                        )}
                         onClick={(e) => toggleExpanded(i, e)}
                         aria-expanded={expanded.has(i)}
                       >
                         <FileText className="w-3.5 h-3.5" />
-                        Template
+                        <span className="hidden sm:inline">Template</span>
                         {expanded.has(i) ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                       </button>
                     )}
                   </div>
-
-                  {expanded.has(i) && (
-                    <div className="px-4 pb-4">
-                      <TemplatePanel item={item} />
-                    </div>
-                  )}
+                  {expanded.has(i) && <div className="px-4 pb-4"><TemplatePanel item={item} /></div>}
                 </div>
               ))}
             </div>
@@ -270,96 +198,111 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
   );
 }
 
-function PhaseSection({ phase }: { phase: Phase }) {
-  const [activePlaybook, setActivePlaybook] = useState<Playbook | null>(null);
-  const accent = phaseAccent[phase.phase] ?? phaseAccent.assess;
-  const Icon = phaseIcons[phase.phase] ?? ClipboardList;
+/* ── Flat list layout ────────────────────────────────────── */
 
+function PlaybookRow({ pb, phase, onOpen }: { pb: Playbook; phase: Phase; onOpen: () => void }) {
+  const Icon = phaseIconMap[phase.phase] ?? ClipboardList;
   return (
-    <div>
-      {activePlaybook && (
-        <PlaybookModal playbook={activePlaybook} onClose={() => setActivePlaybook(null)} />
-      )}
-      <div className="flex items-center gap-2.5 mb-4">
-        <Icon className={`w-5 h-5 ${accent.icon}`} />
-        <h2 className="text-lg font-bold">{phase.label}</h2>
-        <span className="text-sm text-muted-foreground">{phase.description}</span>
+    <button
+      onClick={onOpen}
+      className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_220px_1fr_160px_140px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150 w-full text-left"
+    >
+      {/* Icon */}
+      <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", phaseIconColor[phase.phase] ?? "bg-muted text-muted-foreground")}>
+        <Icon className="w-5 h-5" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {phase.playbooks.map((pb) => (
-          <Card
-            key={pb.title}
-            className={`group cursor-pointer border border-border rounded-xl bg-card p-5 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all ${accent.border}`}
-            onClick={() => setActivePlaybook(pb)}
-          >
-            <CardHeader className="p-0 pb-3">
-              <Badge variant={levelColor[pb.level] ?? "blue"} className="w-fit mb-2">{pb.level}</Badge>
-              <CardTitle className="text-base group-hover:text-primary transition-colors">{pb.title}</CardTitle>
-              <CardDescription>{pb.desc}</CardDescription>
-            </CardHeader>
-            <CardContent className="p-0">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                <CheckSquare className="w-4 h-4 text-primary" />
-                {pb.checklist.length} checklist items with templates
-              </div>
-              <span className="text-xs text-primary font-medium group-hover:underline">Open playbook →</span>
-            </CardContent>
-          </Card>
-        ))}
+
+      {/* Title + level */}
+      <div className="min-w-0">
+        <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate block">{pb.title}</span>
+        <p className="text-xs text-muted-foreground truncate">{phase.label}</p>
       </div>
-    </div>
+
+      {/* Mobile: level + checklist count */}
+      <div className="flex flex-col items-end gap-1 md:hidden">
+        <Badge variant={levelColor[pb.level] ?? "blue"} className="text-[10px]">{pb.level}</Badge>
+        <span className="text-[10px] text-muted-foreground whitespace-nowrap">{pb.checklist.length} items</span>
+      </div>
+
+      {/* Description */}
+      <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0 text-left">{pb.desc}</p>
+
+      {/* Level badge */}
+      <div className="hidden md:flex">
+        <Badge variant={levelColor[pb.level] ?? "blue"}>{pb.level}</Badge>
+      </div>
+
+      {/* Phase badge */}
+      <div className="hidden md:flex">
+        <Badge variant={phaseBadgeVariant[phase.phase] ?? "blue"}>{phase.label}</Badge>
+      </div>
+
+      {/* Checklist count + CTA */}
+      <div className="hidden md:flex items-center gap-1 text-xs text-muted-foreground">
+        <CheckSquare className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+        {pb.checklist.length} items
+        <span className="ml-auto text-[10px] font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+          Open →
+        </span>
+      </div>
+    </button>
   );
 }
+
+/* ── Inner client component ──────────────────────────────── */
 
 function ConsultingToolkitInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const rawTab = searchParams?.get("tab") ?? "all";
-  const activeTab = paramToTab[rawTab] ?? rawTab;
+  const activePhase = paramToPhase[rawTab] ?? rawTab;
+  const [activePlaybook, setActivePlaybook] = useState<{ pb: Playbook; phase: Phase } | null>(null);
 
-  const setTab = (tabId: string) => {
+  const setPhase = (phaseId: string) => {
     const params = new URLSearchParams(Array.from(searchParams?.entries() ?? []));
-    if (tabId === "all") {
-      params.delete("tab");
-    } else {
-      params.set("tab", tabId);
-    }
+    if (phaseId === "all") { params.delete("tab"); } else { params.set("tab", phaseId); }
     const qs = params.toString();
     router.replace(qs ? `?${qs}` : "/consulting-toolkit", { scroll: false });
   };
 
-  const visiblePhases = activeTab === "all"
-    ? phases
-    : phases.filter((p) => p.phase === activeTab);
+  const visiblePhases = activePhase === "all" ? phases : phases.filter((p) => p.phase === activePhase);
+  const allPlaybooks = visiblePhases.flatMap((phase) => phase.playbooks.map((pb) => ({ pb, phase })));
 
   return (
     <div>
-      <div className="sticky top-24 z-30 bg-background/95 border-b border-border backdrop-blur-sm -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-8">
-        <div className="flex gap-1 overflow-x-auto py-2 scrollbar-none">
-          {tabConfig.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = (tab.id === "all" && activeTab === "all") || tab.id === activeTab;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  isActive
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            );
-          })}
+      {activePlaybook && (
+        <PlaybookModal playbook={activePlaybook.pb} onClose={() => setActivePlaybook(null)} />
+      )}
+
+      {/* Filter bar */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <div className="relative">
+          <select value={activePhase} onChange={(e) => setPhase(e.target.value)} className={SELECT_CLS}>
+            {phaseOptions.map((opt) => (
+              <option key={opt.id} value={opt.id}>{opt.label}</option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
         </div>
+        <span className="ml-auto text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">{allPlaybooks.length}</span> of {phases.flatMap((p) => p.playbooks).length} playbooks
+        </span>
       </div>
 
-      <div className="space-y-12">
-        {visiblePhases.map((phase) => (
-          <PhaseSection key={phase.phase} phase={phase} />
+      {/* List */}
+      <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+        {/* Header */}
+        <div className="hidden md:grid grid-cols-[40px_220px_1fr_160px_140px_120px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          <div />
+          <div>Playbook</div>
+          <div>Description</div>
+          <div>Level</div>
+          <div>Phase</div>
+          <div>Items</div>
+        </div>
+
+        {allPlaybooks.map(({ pb, phase }) => (
+          <PlaybookRow key={`${phase.phase}-${pb.title}`} pb={pb} phase={phase} onOpen={() => setActivePlaybook({ pb, phase })} />
         ))}
       </div>
     </div>
