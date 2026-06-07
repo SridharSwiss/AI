@@ -1245,7 +1245,6 @@ export const tools: ToolData[] = [
     alternatives: ["elevenlabs", "play-ht", "azure-speech"],
   },
   {
-  {
     id: "play-ht",
     slug: "play-ht",
     name: "Play.ht (PlayAI)",
