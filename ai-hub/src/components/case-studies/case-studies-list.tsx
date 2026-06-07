@@ -81,40 +81,48 @@ export function CaseStudiesList() {
           <p className="text-sm text-muted-foreground">Try adjusting your filters.</p>
         </div>
       ) : (
-        <div className="flex flex-col divide-y divide-border border border-border rounded-xl overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+          {/* Header */}
+          <div className="hidden md:grid grid-cols-[40px_180px_1fr_200px_160px_120px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            <div />
+            <div>Company</div>
+            <div>Case Study</div>
+            <div>Key Outcome</div>
+            <div>Tags</div>
+            <div>Industry</div>
+          </div>
           {filtered.map((cs) => (
             <Link
               key={cs.slug}
               href={`/case-studies/${cs.slug}`}
-              className="group flex items-center gap-4 px-5 py-4 bg-card hover:bg-accent/40 transition-colors duration-150 border-l-[3px] border-l-emerald-500/30 hover:border-l-emerald-500"
+              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_180px_1fr_200px_160px_120px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150 border-l-[3px] border-l-emerald-500/30 hover:border-l-emerald-500"
             >
-              {/* Industry icon placeholder */}
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
               </div>
 
-              {/* Company + title */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
                   <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{cs.company}</span>
-                  {cs.featured && <Badge variant="purple" className="text-[10px] py-0">Featured</Badge>}
+                  {cs.featured && <Badge variant="purple" className="text-[10px] py-0 flex-shrink-0">Featured</Badge>}
                 </div>
-                <p className="text-xs text-muted-foreground truncate">{cs.title}</p>
+                <p className="text-xs text-muted-foreground truncate">{cs.industry}</p>
               </div>
 
-              {/* Key outcome */}
-              <p className="hidden sm:block text-sm font-semibold text-emerald-600 dark:text-emerald-400 line-clamp-1 flex-shrink-0 max-w-[200px]">
+              <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{cs.title}</p>
+
+              <p className="hidden md:block text-sm font-semibold text-emerald-600 dark:text-emerald-400 line-clamp-2 min-w-0">
                 {cs.metrics[0]}
               </p>
 
-              {/* Tags + industry */}
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <div className="hidden md:flex flex-wrap gap-1">
-                  {cs.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{tag}</span>
-                  ))}
-                </div>
-                <Badge variant={industryColors[cs.industry] ?? "blue"} className="flex-shrink-0">{cs.industry}</Badge>
+              <div className="hidden md:flex flex-wrap gap-1 min-w-0">
+                {cs.tags.slice(0, 2).map((tag) => (
+                  <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium whitespace-nowrap">{tag}</span>
+                ))}
+              </div>
+
+              <div className="hidden md:block">
+                <Badge variant={industryColors[cs.industry] ?? "blue"}>{cs.industry}</Badge>
               </div>
             </Link>
           ))}

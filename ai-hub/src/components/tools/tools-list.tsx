@@ -129,42 +129,53 @@ export function ToolsList() {
           <p className="text-sm text-muted-foreground max-w-xs">Try a different category or pricing tier.</p>
         </div>
       ) : (
-        <div className="flex flex-col divide-y divide-border border border-border rounded-xl overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+          {/* Header */}
+          <div className="hidden md:grid grid-cols-[40px_180px_1fr_180px_100px_32px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            <div />
+            <div>Tool</div>
+            <div>Description</div>
+            <div>Tags</div>
+            <div>Pricing</div>
+            <div />
+          </div>
           {filtered.map((tool) => (
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}`}
-              className="group flex items-center gap-4 px-5 py-4 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_180px_1fr_180px_100px_32px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
             >
               <ToolIcon tool={tool} />
 
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
                   <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{tool.name}</span>
-                  {tool.featured && <Badge variant="purple" className="text-[10px] py-0">Featured</Badge>}
+                  {tool.featured && <Badge variant="purple" className="text-[10px] py-0 flex-shrink-0">Featured</Badge>}
                 </div>
                 <p className="text-xs text-muted-foreground truncate">{tool.vendor} · {tool.category}</p>
               </div>
 
-              <p className="hidden sm:block text-sm text-muted-foreground line-clamp-1 flex-1 min-w-0 max-w-sm">{tool.tagline}</p>
+              <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{tool.tagline}</p>
 
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <div className="hidden md:flex flex-wrap gap-1">
-                  {tool.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{tag}</span>
-                  ))}
-                </div>
-                <Badge variant={pricingBadge[tool.pricing] ?? "blue"} className="flex-shrink-0">{tool.pricing}</Badge>
-                <a
-                  href={tool.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+              <div className="hidden md:flex flex-wrap gap-1 min-w-0">
+                {tool.tags.slice(0, 2).map((tag) => (
+                  <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium whitespace-nowrap">{tag}</span>
+                ))}
               </div>
+
+              <div className="hidden md:block">
+                <Badge variant={pricingBadge[tool.pricing] ?? "blue"}>{tool.pricing}</Badge>
+              </div>
+
+              <a
+                href={tool.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex text-muted-foreground hover:text-primary transition-colors justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </Link>
           ))}
         </div>

@@ -122,41 +122,50 @@ export function CompaniesList() {
           <p className="text-sm text-muted-foreground">Try adjusting your filters.</p>
         </div>
       ) : (
-        <div className="flex flex-col divide-y divide-border border border-border rounded-xl overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+          {/* Header */}
+          <div className="hidden md:grid grid-cols-[40px_180px_1fr_180px_130px_32px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            <div />
+            <div>Company</div>
+            <div>Description</div>
+            <div>Products</div>
+            <div>Type</div>
+            <div />
+          </div>
           {filtered.map((company) => (
             <Link
               key={company.slug}
               href={`/companies/${company.slug}`}
-              className="group flex items-center gap-4 px-5 py-4 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_180px_1fr_180px_130px_32px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
             >
               <CompanyIcon focus={company.focus} />
 
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{company.name}</span>
-                </div>
-                <p className="text-xs text-muted-foreground truncate">{company.focus} · Founded {company.founded}</p>
+              <div className="min-w-0">
+                <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate block">{company.name}</span>
+                <p className="text-xs text-muted-foreground truncate">{company.focus} · {company.founded}</p>
               </div>
 
-              <p className="hidden sm:block text-sm text-muted-foreground line-clamp-1 flex-1 min-w-0 max-w-sm">{company.description}</p>
+              <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{company.description}</p>
 
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <div className="hidden md:flex flex-wrap gap-1">
-                  {company.products.slice(0, 2).map((p) => (
-                    <span key={p} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{p}</span>
-                  ))}
-                </div>
-                <Badge variant={stageVariant[company.stage] ?? "outline"} className="flex-shrink-0">{company.stage}</Badge>
-                <a
-                  href={company.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+              <div className="hidden md:flex flex-wrap gap-1 min-w-0">
+                {company.products.slice(0, 2).map((p) => (
+                  <span key={p} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium whitespace-nowrap">{p}</span>
+                ))}
               </div>
+
+              <div className="hidden md:block">
+                <Badge variant={stageVariant[company.stage] ?? "outline"}>{company.stage}</Badge>
+              </div>
+
+              <a
+                href={company.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex text-muted-foreground hover:text-primary transition-colors justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </Link>
           ))}
         </div>

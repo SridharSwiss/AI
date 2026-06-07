@@ -76,30 +76,36 @@ export function ComplianceList() {
           <p className="text-sm">Try adjusting your filters.</p>
         </div>
       ) : (
-        <div className="flex flex-col divide-y divide-border border border-border rounded-xl overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+          {/* Header */}
+          <div className="hidden md:grid grid-cols-[40px_200px_1fr_260px_120px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            <div />
+            <div>Framework</div>
+            <div>Description</div>
+            <div>Key Requirements</div>
+            <div>Risk Level</div>
+          </div>
           {filtered.map((f) => (
             <Link
               key={f.slug}
               href={`/compliance/${f.slug}`}
-              className="group flex items-start gap-4 px-5 py-4 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_200px_1fr_260px_120px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
             >
-              {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Shield className="w-5 h-5 text-primary" />
               </div>
 
-              {/* Main info */}
-              <div className="flex-1 min-w-0">
+              <div className="min-w-0">
                 <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                  <span className="text-sm font-semibold group-hover:text-primary transition-colors">{f.name}</span>
-                  <Badge variant={statusColor[f.status] ?? "blue"} className="text-[10px]">{f.status}</Badge>
+                  <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{f.name}</span>
+                  <Badge variant={statusColor[f.status] ?? "blue"} className="text-[10px] flex-shrink-0">{f.status}</Badge>
                 </div>
-                <p className="text-xs text-muted-foreground mb-1">{f.jurisdiction} · {f.enforcementDate}</p>
-                <p className="hidden sm:block text-sm text-muted-foreground line-clamp-1">{f.description}</p>
+                <p className="text-xs text-muted-foreground truncate">{f.jurisdiction} · {f.enforcementDate}</p>
               </div>
 
-              {/* Requirements preview */}
-              <div className="hidden lg:flex flex-col gap-1 min-w-0 max-w-xs">
+              <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{f.description}</p>
+
+              <div className="hidden md:flex flex-col gap-1 min-w-0">
                 {f.keyRequirements.slice(0, 2).map((req) => (
                   <div key={req} className="flex items-start gap-1.5">
                     <CheckCircle className="w-3 h-3 text-emerald-500 mt-0.5 flex-shrink-0" />
@@ -108,10 +114,11 @@ export function ComplianceList() {
                 ))}
               </div>
 
-              {/* Risk badge */}
-              <Badge variant={riskColor[f.riskLevel] ?? "blue"} className={cn("flex-shrink-0 capitalize self-center")}>
-                {f.riskLevel} risk
-              </Badge>
+              <div className="hidden md:block">
+                <Badge variant={riskColor[f.riskLevel] ?? "blue"} className="capitalize">
+                  {f.riskLevel} risk
+                </Badge>
+              </div>
             </Link>
           ))}
         </div>
