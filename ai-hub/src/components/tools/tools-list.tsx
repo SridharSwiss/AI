@@ -64,7 +64,7 @@ function FilterSelect({ label, value, options, onChange }: {
         onChange={(e) => onChange(e.target.value)}
         className={cn(
           "appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium",
-          "border border-border bg-card text-foreground",
+          "border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark]",
           "hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40",
           "transition-colors cursor-pointer"
         )}

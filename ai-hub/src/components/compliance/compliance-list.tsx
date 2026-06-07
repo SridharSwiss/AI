@@ -35,7 +35,7 @@ export function ComplianceList() {
           <select
             value={activeJurisdiction}
             onChange={(e) => setActiveJurisdiction(e.target.value)}
-            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
           >
             {complianceJurisdictions.map((j) => (
               <option key={j} value={j}>{j === "All" ? "All Jurisdictions" : j}</option>
@@ -48,7 +48,7 @@ export function ComplianceList() {
           <select
             value={activeRisk}
             onChange={(e) => setActiveRisk(e.target.value)}
-            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
           >
             {complianceRiskLevels.map((r) => (
               <option key={r} value={r}>{r === "All" ? "All Risk Levels" : `${r.charAt(0).toUpperCase() + r.slice(1)} risk`}</option>

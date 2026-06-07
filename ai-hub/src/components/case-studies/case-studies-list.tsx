@@ -37,7 +37,7 @@ export function CaseStudiesList() {
           <select
             value={activeIndustry}
             onChange={(e) => setActiveIndustry(e.target.value)}
-            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
           >
             {caseStudyIndustries.map((i) => (
               <option key={i} value={i}>{i === "All" ? "All Industries" : i}</option>
@@ -50,7 +50,7 @@ export function CaseStudiesList() {
           <select
             value={activeTool}
             onChange={(e) => setActiveTool(e.target.value)}
-            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+            className="appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
           >
             {allTools.map((t) => (
               <option key={t} value={t}>{t === "All" ? "All AI Tools" : t}</option>
