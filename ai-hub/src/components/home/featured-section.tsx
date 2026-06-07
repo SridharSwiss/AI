@@ -33,78 +33,42 @@ const featuredCaseStudies = [
 const sectionNav = [
   {
     icon: Wrench,    label: "AI Tools",          href: "/tools",
-    color: "text-violet-500",
-    glow: "group-hover:shadow-[0_0_0_1px_rgb(139,92,246,0.5),0_8px_32px_rgb(139,92,246,0.12)]",
-    accent: "from-violet-500/10 to-transparent",
-    border: "group-hover:border-violet-500/40",
-    bg: "bg-violet-500/[0.08] dark:bg-violet-500/[0.12]",
-    statBg: "bg-violet-500/10 text-violet-500 dark:text-violet-400",
-    span: "col-span-2",
+    iconCls: "bg-violet-500/10 dark:bg-violet-500/[0.18] text-violet-500",
     desc: "Every major AI tool, side by side.",
     body: "Filter by category, pricing model, and use case. Freemium to enterprise — 82 tools across 15 categories with verified specs.",
     stat: "82 tools · 15 categories",
   },
   {
     icon: Building2, label: "Companies",          href: "/companies",
-    color: "text-blue-500",
-    glow: "group-hover:shadow-[0_0_0_1px_rgb(59,130,246,0.5),0_8px_32px_rgb(59,130,246,0.12)]",
-    accent: "from-blue-500/10 to-transparent",
-    border: "group-hover:border-blue-500/40",
-    bg: "bg-blue-500/[0.08] dark:bg-blue-500/[0.12]",
-    statBg: "bg-blue-500/10 text-blue-500 dark:text-blue-400",
-    span: "col-span-1",
+    iconCls: "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-500",
     desc: "33 vendors profiled.",
     body: "From OpenAI and Anthropic to niche specialists — funding stage, focus area, and key products in one view.",
     stat: "33 companies",
   },
   {
     icon: BarChart3, label: "Case Studies",       href: "/case-studies",
-    color: "text-amber-500",
-    glow: "group-hover:shadow-[0_0_0_1px_rgb(245,158,11,0.5),0_8px_32px_rgb(245,158,11,0.12)]",
-    accent: "from-amber-500/10 to-transparent",
-    border: "group-hover:border-amber-500/40",
-    bg: "bg-amber-500/[0.08] dark:bg-amber-500/[0.12]",
-    statBg: "bg-amber-500/10 text-amber-500 dark:text-amber-400",
-    span: "col-span-1",
+    iconCls: "bg-amber-500/10 dark:bg-amber-500/[0.18] text-amber-500",
     desc: "ROI data, not press releases.",
     body: "31 real deployments with measured outcomes — cost saved, time reduced, accuracy gained — across healthcare, finance, and more.",
     stat: "31 case studies",
   },
   {
     icon: BookOpen,  label: "Learn",              href: "/learn",
-    color: "text-emerald-500",
-    glow: "group-hover:shadow-[0_0_0_1px_rgb(16,185,129,0.5),0_8px_32px_rgb(16,185,129,0.12)]",
-    accent: "from-emerald-500/10 to-transparent",
-    border: "group-hover:border-emerald-500/40",
-    bg: "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12]",
-    statBg: "bg-emerald-500/10 text-emerald-500 dark:text-emerald-400",
-    span: "col-span-2",
+    iconCls: "bg-emerald-500/10 dark:bg-emerald-500/[0.18] text-emerald-500",
     desc: "Structured paths from zero to production.",
     body: "Courses, certifications, video guides, and books — curated for beginners through ML engineers. Updated as the field moves.",
     stat: "72 resources · all levels",
   },
   {
     icon: Shield,    label: "Compliance",         href: "/compliance",
-    color: "text-rose-500",
-    glow: "group-hover:shadow-[0_0_0_1px_rgb(244,63,94,0.5),0_8px_32px_rgb(244,63,94,0.12)]",
-    accent: "from-rose-500/10 to-transparent",
-    border: "group-hover:border-rose-500/40",
-    bg: "bg-rose-500/[0.08] dark:bg-rose-500/[0.12]",
-    statBg: "bg-rose-500/10 text-rose-500 dark:text-rose-400",
-    span: "col-span-1",
+    iconCls: "bg-rose-500/10 dark:bg-rose-500/[0.18] text-rose-500",
     desc: "16 frameworks. Deadlines tracked.",
     body: "EU AI Act, GDPR, NIST RMF, ISO 42001 and more — obligations mapped, enforcement dates flagged.",
     stat: "16 frameworks",
   },
   {
     icon: Briefcase, label: "Consulting Toolkit", href: "/consulting-toolkit",
-    color: "text-pink-500",
-    glow: "group-hover:shadow-[0_0_0_1px_rgb(236,72,153,0.5),0_8px_32px_rgb(236,72,153,0.12)]",
-    accent: "from-pink-500/10 to-transparent",
-    border: "group-hover:border-pink-500/40",
-    bg: "bg-pink-500/[0.08] dark:bg-pink-500/[0.12]",
-    statBg: "bg-pink-500/10 text-pink-500 dark:text-pink-400",
-    span: "col-span-2",
+    iconCls: "bg-pink-500/10 dark:bg-pink-500/[0.18] text-pink-500",
     desc: "Playbooks built for practitioners.",
     body: "Assessment templates, implementation checklists, and pilot frameworks drawn from Big4 and MBB methodology — ready to deploy.",
     stat: "4 phase playbook",
@@ -168,22 +132,21 @@ export function FeaturedSection() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card min-h-[200px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card min-h-[200px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-border"
               >
-                <div className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${item.accent} pointer-events-none`} />
-                <div className="relative flex flex-col flex-1 p-6">
+                <div className="flex flex-col flex-1 p-6">
                   <div className="flex items-start justify-between mb-5">
-                    <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className={`w-5 h-5 ${item.color}`} />
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110 ${item.iconCls}`}>
+                      <item.icon className="w-5 h-5" />
                     </div>
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide bg-muted text-muted-foreground">
                       {item.stat}
                     </span>
                   </div>
                   <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
                   <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
                   <p className="text-xs text-muted-foreground leading-relaxed flex-1">{item.body}</p>
-                  <div className={`flex items-center gap-1 mt-5 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                  <div className="flex items-center gap-1 mt-5 text-[11px] font-semibold text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-foreground transition-all duration-200">
                     Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
