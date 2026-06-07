@@ -76,7 +76,7 @@ export function CompaniesList() {
           <select
             value={activeStage}
             onChange={(e) => setActiveStage(e.target.value)}
-            className="appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+            className="appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
           >
             <option value="All">All Types</option>
             {companyStages.filter((s) => s !== "All").map((s) => (
@@ -91,7 +91,7 @@ export function CompaniesList() {
           <select
             value={activeFocus}
             onChange={(e) => setActiveFocus(e.target.value)}
-            className="appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
+            className="appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer"
           >
             {focusAreas.map((f) => (
               <option key={f} value={f}>{f === "All" ? "All Focus Areas" : f}</option>
