@@ -126,6 +126,7 @@ export default async function AnalyticsPage({
   const bySource = groupBy(sessions, "referrer_source");
   const byDevice = groupBy(sessions, "device_type");
   const byBrowser = groupBy(sessions, "browser");
+  const byCountry = groupBy(sessions, "country");
   const byPage = groupBy(pageviews, "page_path");
 
   const topPages = topN(byPage, 10).map(([path, views]) => ({
@@ -136,6 +137,8 @@ export default async function AnalyticsPage({
 
   const topSources = topN(bySource, 8);
   const maxSource = topSources[0]?.[1].length ?? 1;
+  const topCountries = topN(byCountry, 10);
+  const maxCountry = topCountries[0]?.[1].length ?? 1;
 
   const dayOptions = [7, 14, 30, 90];
   const key = params.key;
@@ -228,6 +231,39 @@ export default async function AnalyticsPage({
           </div>
         </div>
 
+        {/* countries */}
+        <div className="rounded-2xl border border-white/10 p-5" style={{ background: "rgba(255,255,255,0.03)" }}>
+          <h2 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-violet-400" /> Visitors by Country
+          </h2>
+          {topCountries.length === 0 ? (
+            <p className="text-xs text-white/30 py-4">No location data yet — will populate for new sessions</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+              {topCountries.map(([country, rows]) => {
+                const sample = rows[0] as { country_code?: string };
+                const flag = sample?.country_code
+                  ? String.fromCodePoint(...[...sample.country_code.toUpperCase()].map(c => 0x1f1e6 + c.charCodeAt(0) - 65))
+                  : "🌍";
+                return (
+                  <div key={country} className="flex items-center gap-3 py-2">
+                    <span className="text-lg leading-none">{flag}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm text-white/70 truncate">{country === "Unknown" ? "Unknown" : country}</span>
+                        <span className="text-sm font-semibold text-white ml-2">{rows.length}</span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+                        <div className="h-full rounded-full bg-violet-500" style={{ width: `${Math.round((rows.length / maxCountry) * 100)}%` }} />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
         {/* device + browser */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-white/10 p-5" style={{ background: "rgba(255,255,255,0.03)" }}>
@@ -267,7 +303,7 @@ export default async function AnalyticsPage({
             <table className="w-full text-xs">
               <thead>
                 <tr className="border-b border-white/8 text-left">
-                  {["Date / Time","Device","OS","Browser","Source","Pages","Duration","Referrer URL"].map(h => (
+                  {["Date / Time","Location","Device","OS","Browser","Source","Pages","Duration","Referrer URL"].map(h => (
                     <th key={h} className="px-4 py-3 text-white/35 font-semibold whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
@@ -277,6 +313,18 @@ export default async function AnalyticsPage({
                   <tr key={s.id} className="border-b border-white/5 hover:bg-white/3 transition-colors">
                     <td className="px-4 py-3 text-white/60 whitespace-nowrap">
                       {new Date(s.created_at).toLocaleString("en-CH", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      {s.country ? (
+                        <span className="flex items-center gap-1.5 text-white/70">
+                          <span className="text-base leading-none">
+                            {s.country_code
+                              ? String.fromCodePoint(...[...s.country_code.toUpperCase()].map((c: string) => 0x1f1e6 + c.charCodeAt(0) - 65))
+                              : "🌍"}
+                          </span>
+                          <span className="text-xs">{s.city ? `${s.city}, ${s.country}` : s.country}</span>
+                        </span>
+                      ) : <span className="text-white/25">—</span>}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1.5 text-white/70 capitalize">
@@ -297,7 +345,7 @@ export default async function AnalyticsPage({
                   </tr>
                 ))}
                 {sessions.length === 0 && (
-                  <tr><td colSpan={8} className="px-4 py-12 text-center text-white/25">No sessions recorded yet — analytics will appear once visitors consent</td></tr>
+                  <tr><td colSpan={9} className="px-4 py-12 text-center text-white/25">No sessions recorded yet — analytics will appear once visitors consent</td></tr>
                 )}
               </tbody>
             </table>
