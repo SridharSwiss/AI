@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AIHub" parent="android:Theme.Material.NoTitleBar">
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- Launcher theme shown during cold start before TWA loads -->
+    <style name="Theme.AIHub.Launcher">
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+</resources>

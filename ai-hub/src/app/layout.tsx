@@ -157,6 +157,12 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='"dark"'||t==='dark')document.documentElement.classList.add('dark');else if(t==='"light"'||t==='light')document.documentElement.classList.remove('dark');}catch(e){}})();` }} />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="AIHub" />
+        <meta name="theme-color" content="#09090B" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <script

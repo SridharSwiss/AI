@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AIHub</string>
+    <string name="twa_url">https://sridhar-ai.ch/</string>
+
+    <!-- Digital Asset Links - links this app to sridhar-ai.ch -->
+    <string name="asset_statements">
+        [{
+            \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+            \"target\": {
+                \"namespace\": \"web\",
+                \"site\": \"https://sridhar-ai.ch\"
+            }
+        }]
+    </string>
+</resources>

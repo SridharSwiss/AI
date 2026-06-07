@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ch.sridharai.hub",
+      "sha256_cert_fingerprints": [
+        "34:B4:90:CB:04:9F:29:3D:50:2A:0D:25:83:68:E8:A8:EE:B6:4E:7A:1E:7D:AE:79:DC:9C:E0:13:D4:B3:5B:B5"
+      ]
+    }
+  }
+]
