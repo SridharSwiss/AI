@@ -162,41 +162,171 @@ export function FeaturedSection() {
           </div>
           <h2 className="text-headline">Your complete AI knowledge base</h2>
         </div>
+
         <ScrollReveal stagger>
-          <div className="grid grid-cols-3 gap-3">
-            {sectionNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1 ${item.span}`}
-              >
-                {/* accent gradient wash at top */}
-                <div className={`absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${item.accent} pointer-events-none`} />
-
-                <div className="relative flex flex-col flex-1 p-5">
-                  {/* header row */}
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className={`w-5 h-5 ${item.color}`} />
+          {/* Row 1: AI Tools (large) + Companies (small) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+            {/* AI Tools — spans 2 cols, taller */}
+            {(() => {
+              const item = sectionNav[0];
+              return (
+                <Link href={item.href} className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card sm:col-span-2 min-h-[200px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}>
+                  <div className={`absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${item.accent} pointer-events-none`} />
+                  <div className="relative flex flex-col flex-1 p-6">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className={`w-5 h-5 ${item.color}`} />
+                      </div>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>{item.stat}</span>
                     </div>
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>
-                      {item.stat}
-                    </span>
+                    <div className="mt-6">
+                      <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
+                      <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                    <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                      Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                   </div>
+                </Link>
+              );
+            })()}
 
-                  {/* text */}
-                  <span className="text-sm font-bold mb-1 tracking-tight">{item.label}</span>
-                  <span className="text-xs font-semibold text-muted-foreground mb-2">{item.desc}</span>
-                  <span className="text-xs text-muted-foreground leading-relaxed flex-1">{item.body}</span>
-
-                  {/* footer cta */}
-                  <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
-                    Explore
-                    <ArrowRight className="w-3 h-3 translate-x-0 group-hover:translate-x-0.5 transition-transform" />
+            {/* Companies */}
+            {(() => {
+              const item = sectionNav[1];
+              return (
+                <Link href={item.href} className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card min-h-[200px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}>
+                  <div className={`absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${item.accent} pointer-events-none`} />
+                  <div className="relative flex flex-col flex-1 p-6">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className={`w-5 h-5 ${item.color}`} />
+                      </div>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>{item.stat}</span>
+                    </div>
+                    <div className="mt-6">
+                      <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
+                      <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                    <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                      Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })()}
+          </div>
+
+          {/* Row 2: Case Studies + Learn (spans 2) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+            {/* Case Studies */}
+            {(() => {
+              const item = sectionNav[2];
+              return (
+                <Link href={item.href} className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card min-h-[180px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}>
+                  <div className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${item.accent} pointer-events-none`} />
+                  <div className="relative flex flex-col flex-1 p-6">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className={`w-5 h-5 ${item.color}`} />
+                      </div>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>{item.stat}</span>
+                    </div>
+                    <div className="mt-5">
+                      <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
+                      <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                    <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                      Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })()}
+
+            {/* Learn — spans 2 cols */}
+            {(() => {
+              const item = sectionNav[3];
+              return (
+                <Link href={item.href} className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card sm:col-span-2 min-h-[180px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}>
+                  <div className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${item.accent} pointer-events-none`} />
+                  <div className="relative flex flex-col flex-1 p-6">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className={`w-5 h-5 ${item.color}`} />
+                      </div>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>{item.stat}</span>
+                    </div>
+                    <div className="mt-5">
+                      <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
+                      <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                    <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                      Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })()}
+          </div>
+
+          {/* Row 3: Compliance + Consulting Toolkit (spans 2) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Compliance */}
+            {(() => {
+              const item = sectionNav[4];
+              return (
+                <Link href={item.href} className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card min-h-[180px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}>
+                  <div className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${item.accent} pointer-events-none`} />
+                  <div className="relative flex flex-col flex-1 p-6">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className={`w-5 h-5 ${item.color}`} />
+                      </div>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>{item.stat}</span>
+                    </div>
+                    <div className="mt-5">
+                      <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
+                      <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                    <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                      Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })()}
+
+            {/* Consulting Toolkit — spans 2 cols */}
+            {(() => {
+              const item = sectionNav[5];
+              return (
+                <Link href={item.href} className={`group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card sm:col-span-2 min-h-[180px] transition-all duration-300 ${item.border} ${item.glow} hover:-translate-y-1`}>
+                  <div className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${item.accent} pointer-events-none`} />
+                  <div className="relative flex flex-col flex-1 p-6">
+                    <div className="flex items-start justify-between mb-auto">
+                      <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className={`w-5 h-5 ${item.color}`} />
+                      </div>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide ${item.statBg}`}>{item.stat}</span>
+                    </div>
+                    <div className="mt-5">
+                      <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
+                      <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                    <div className={`flex items-center gap-1 mt-4 text-[11px] font-semibold ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                      Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })()}
           </div>
         </ScrollReveal>
       </ScrollReveal>
