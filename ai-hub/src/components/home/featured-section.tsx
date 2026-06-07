@@ -162,7 +162,7 @@ export function FeaturedSection() {
           </div>
           <h2 className="text-headline">Your complete AI knowledge base</h2>
         </div>
-
+        <ScrollReveal stagger>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {sectionNav.map((item) => (
               <Link
