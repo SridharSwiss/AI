@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { Monitor, Smartphone, Tablet, Globe, Clock, MousePointer, TrendingUp, Users, FileText, ArrowUpRight } from "lucide-react";
+import { Monitor, Smartphone, Tablet, Globe, Clock, MousePointer, TrendingUp, Users, FileText, ArrowUpRight, MapPin } from "lucide-react";
+import { WorldMap } from "./world-map";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -231,35 +232,49 @@ export default async function AnalyticsPage({
           </div>
         </div>
 
-        {/* countries */}
+        {/* visitor locations */}
         <div className="rounded-2xl border border-white/10 p-5" style={{ background: "rgba(255,255,255,0.03)" }}>
-          <h2 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-violet-400" /> Visitors by Country
+          <h2 className="text-sm font-bold text-white mb-5 flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-violet-400" /> Visitor Locations
           </h2>
           {topCountries.length === 0 ? (
-            <p className="text-xs text-white/30 py-4">No location data yet — will populate for new sessions</p>
+            <p className="text-xs text-white/30 py-8 text-center">No location data yet — will populate for new sessions</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
-              {topCountries.map(([country, rows]) => {
-                const sample = rows[0] as { country_code?: string };
-                const flag = sample?.country_code
-                  ? String.fromCodePoint(...[...sample.country_code.toUpperCase()].map(c => 0x1f1e6 + c.charCodeAt(0) - 65))
-                  : "🌍";
-                return (
-                  <div key={country} className="flex items-center gap-3 py-2">
-                    <span className="text-lg leading-none">{flag}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm text-white/70 truncate">{country === "Unknown" ? "Unknown" : country}</span>
-                        <span className="text-sm font-semibold text-white ml-2">{rows.length}</span>
-                      </div>
-                      <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
-                        <div className="h-full rounded-full bg-violet-500" style={{ width: `${Math.round((rows.length / maxCountry) * 100)}%` }} />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* world map */}
+              <div className="lg:col-span-2">
+                <WorldMap
+                  data={topCountries.map(([country, rows]) => ({
+                    country,
+                    country_code: (rows[0] as { country_code?: string })?.country_code ?? "",
+                    count: rows.length,
+                  }))}
+                />
+              </div>
+              {/* ranked list */}
+              <div className="space-y-1">
+                {topCountries.map(([country, rows], i) => {
+                  const sample = rows[0] as { country_code?: string };
+                  const f = sample?.country_code
+                    ? String.fromCodePoint(...[...sample.country_code.toUpperCase()].map(c => 0x1f1e6 + c.charCodeAt(0) - 65))
+                    : "🌍";
+                  return (
+                    <div key={country} className="flex items-center gap-3 py-1.5">
+                      <span className="text-xs text-white/25 w-4 text-right font-mono">{i + 1}</span>
+                      <span className="text-base leading-none">{f}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <span className="text-sm text-white/70 truncate">{country === "Unknown" ? "Unknown" : country}</span>
+                          <span className="text-sm font-semibold text-white ml-2">{rows.length}</span>
+                        </div>
+                        <div className="h-1 rounded-full bg-white/8 overflow-hidden">
+                          <div className="h-full rounded-full bg-violet-500" style={{ width: `${Math.round((rows.length / maxCountry) * 100)}%` }} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
