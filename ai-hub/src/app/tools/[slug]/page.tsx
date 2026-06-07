@@ -83,18 +83,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const tool = tools.find((t) => t.slug === slug);
   if (!tool) return { title: "Tool Not Found" };
-  const desc = `${tool.tagline} - ${tool.description.slice(0, 120)}`;
+  // Answer-first meta description for GEO/AIO eligibility
+  const priceSummary = tool.pricingTiers
+    ? `Pricing from ${tool.pricingTiers[0]?.price ?? "varies"}.`
+    : `${tool.pricing} tool.`;
+  const desc = `${tool.name} is ${tool.tagline.toLowerCase()}. ${priceSummary} ${tool.description.slice(0, 80)}...`;
   return {
-    title: `${tool.name} Review - Pricing, Features & Alternatives`,
+    title: `What is ${tool.name}? Pricing, Features & Review (Jun 2026)`,
     description: desc.slice(0, 160),
     alternates: { canonical: `${BASE_URL}/tools/${tool.slug}` },
     openGraph: {
-      title: `${tool.name} - AI Tool Review | AIHub`,
+      title: `${tool.name} Review — Pricing, Features & Alternatives | AIHub`,
       description: desc.slice(0, 160),
       url: `${BASE_URL}/tools/${tool.slug}`,
       type: "website",
     },
-    keywords: [tool.name, ...(tool.tags ?? []), "AI tool", "review", "pricing", tool.vendor],
+    keywords: [
+      tool.name,
+      `what is ${tool.name}`,
+      `${tool.name} pricing`,
+      `${tool.name} alternatives`,
+      `${tool.name} review 2026`,
+      ...(tool.tags ?? []),
+      "AI tool", tool.vendor,
+    ],
   };
 }
 
@@ -109,6 +121,34 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
 
   const m = tool.metrics;
 
+  // Build FAQ pairs for schema — directly answerable questions AI engines can cite
+  const faqItems = [
+    tool.pricingTiers && {
+      q: `How much does ${tool.name} cost?`,
+      a: `${tool.name} pricing: ${tool.pricingTiers.map((t) => `${t.name} at ${t.price}`).join("; ")}.`,
+    },
+    {
+      q: `Is ${tool.name} free?`,
+      a: tool.pricing === "Free"
+        ? `Yes, ${tool.name} is fully free and open source.`
+        : tool.pricing === "Freemium"
+        ? `${tool.name} offers a free tier with limited usage. Paid plans unlock additional features.`
+        : `${tool.name} is a ${tool.pricing.toLowerCase()} product with no permanent free tier.`,
+    },
+    tool.useCases && {
+      q: `What is ${tool.name} used for?`,
+      a: `${tool.name} is used for: ${tool.useCases.join(", ")}.`,
+    },
+    alternatives.length > 0 && {
+      q: `What are the best alternatives to ${tool.name}?`,
+      a: `Top alternatives to ${tool.name} include ${alternatives.map((a) => a.name).join(", ")}.`,
+    },
+    tool.platforms && {
+      q: `What platforms does ${tool.name} support?`,
+      a: `${tool.name} is available on: ${tool.platforms.join(", ")}.`,
+    },
+  ].filter(Boolean) as { q: string; a: string }[];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -117,6 +157,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
     applicationCategory: tool.category,
     operatingSystem: (tool.platforms ?? []).join(", "),
     url: tool.website,
+    dateModified: "2026-06-07",
     offers: tool.pricingTiers
       ? tool.pricingTiers.map((t) => ({
           "@type": "Offer",
@@ -136,9 +177,34 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
     },
   };
 
+  // FAQ schema — enables AI Overview / People Also Ask rich results
+  const faqJsonLd = faqItems.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  } : null;
+
+  // Speakable — signals which blocks are suitable for voice / AI Overview citation
+  const speakableJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${tool.name} Review`,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["[data-speakable]"],
+    },
+    url: `${BASE_URL}/tools/${tool.slug}`,
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }} />
       <Breadcrumb
         items={[
           { label: "AI Tools", href: "/tools" },
@@ -178,6 +244,20 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
           <ExternalLink className="w-4 h-4" />
           Visit Website
         </a>
+      </div>
+
+      {/* GEO: Answer block — front-loaded direct answer for AI Overview extraction */}
+      <div data-speakable className="mb-6 p-4 rounded-xl border border-border bg-muted/40">
+        <p className="text-sm font-semibold text-foreground mb-1">Quick Answer</p>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          <strong>{tool.name}</strong> is {tool.tagline.toLowerCase()}, made by <strong>{tool.vendor}</strong>.{" "}
+          {tool.pricing === "Free" ? "It is free and open source." : tool.pricing === "Freemium" ? "It offers a free tier with paid upgrades." : `It is a ${tool.pricing.toLowerCase()} product.`}{" "}
+          {tool.useCases && `Key uses: ${tool.useCases.slice(0, 3).join(", ")}.`}
+        </p>
+        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+          <Calendar className="w-3 h-3" />
+          Last updated: <time dateTime="2026-06-07">June 7, 2026</time>
+        </p>
       </div>
 
       {/* Key metrics bar */}
@@ -227,16 +307,16 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
         <div className="lg:col-span-2 space-y-6">
           {/* About */}
           <Card>
-            <CardHeader><CardTitle>About {tool.name}</CardTitle></CardHeader>
+            <CardHeader><CardTitle as="h2">What is {tool.name}?</CardTitle></CardHeader>
             <CardContent>
-              <p className="text-muted-foreground leading-relaxed">{tool.description}</p>
+              <p data-speakable className="text-muted-foreground leading-relaxed">{tool.description}</p>
             </CardContent>
           </Card>
 
           {/* History */}
           {tool.history && (
             <Card>
-              <CardHeader><CardTitle className="flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" />History & Milestones</CardTitle></CardHeader>
+              <CardHeader><CardTitle as="h2" className="flex items-center gap-2"><Star className="w-4 h-4 text-amber-500" />How did {tool.name} get started?</CardTitle></CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed text-sm">{tool.history}</p>
               </CardContent>
@@ -246,9 +326,9 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
           {/* Latest Update */}
           {tool.latestUpdate && (
             <Card>
-              <CardHeader><CardTitle className="flex items-center gap-2"><Zap className="w-4 h-4 text-yellow-500" />Latest Updates</CardTitle></CardHeader>
+              <CardHeader><CardTitle as="h2" className="flex items-center gap-2"><Zap className="w-4 h-4 text-yellow-500" />What&apos;s new in {tool.name} in 2026?</CardTitle></CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">{tool.latestUpdate}</p>
+                <p data-speakable className="text-sm text-muted-foreground">{tool.latestUpdate}</p>
               </CardContent>
             </Card>
           )}
@@ -256,7 +336,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
           {/* Pricing Tiers */}
           {tool.pricingTiers && tool.pricingTiers.length > 0 && (
             <Card>
-              <CardHeader><CardTitle className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-green-500" />Pricing Plans</CardTitle></CardHeader>
+              <CardHeader><CardTitle as="h2" className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-green-500" />How much does {tool.name} cost?</CardTitle></CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {tool.pricingTiers.map((tier) => (
@@ -270,7 +350,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
           {/* Use cases */}
           {tool.useCases && tool.useCases.length > 0 && (
             <Card>
-              <CardHeader><CardTitle>Key Use Cases</CardTitle></CardHeader>
+              <CardHeader><CardTitle as="h2">What can you do with {tool.name}?</CardTitle></CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   {tool.useCases.map((useCase) => (
@@ -323,7 +403,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
           {/* Alternatives */}
           {alternatives.length > 0 && (
             <Card>
-              <CardHeader><CardTitle>Alternatives to Consider</CardTitle></CardHeader>
+              <CardHeader><CardTitle as="h2">What are the best alternatives to {tool.name}?</CardTitle></CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {alternatives.map((alt) => (
@@ -342,6 +422,21 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
                     </Link>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* GEO: Visible FAQ section — mirrors FAQ schema for AI citation eligibility */}
+          {faqItems.length > 0 && (
+            <Card>
+              <CardHeader><CardTitle as="h2">Frequently Asked Questions about {tool.name}</CardTitle></CardHeader>
+              <CardContent className="space-y-4">
+                {faqItems.map(({ q, a }) => (
+                  <div key={q}>
+                    <p className="text-sm font-semibold mb-1">{q}</p>
+                    <p data-speakable className="text-sm text-muted-foreground">{a}</p>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           )}
