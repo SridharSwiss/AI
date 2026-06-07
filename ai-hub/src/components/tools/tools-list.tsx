@@ -143,16 +143,21 @@ export function ToolsList() {
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}`}
-              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_180px_1fr_180px_100px_32px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_180px_1fr_180px_100px_32px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
             >
               <ToolIcon tool={tool} />
 
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5 mb-0.5">
                   <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{tool.name}</span>
-                  {tool.featured && <Badge variant="purple" className="text-[10px] py-0 flex-shrink-0">Featured</Badge>}
+                  {tool.featured && <Badge variant="purple" className="text-[10px] py-0 flex-shrink-0 hidden sm:inline-flex">Featured</Badge>}
                 </div>
                 <p className="text-xs text-muted-foreground truncate">{tool.vendor} · {tool.category}</p>
+              </div>
+
+              {/* Always-visible pricing badge */}
+              <div className="flex items-center gap-2 md:hidden">
+                <Badge variant={pricingBadge[tool.pricing] ?? "blue"} className="text-[10px]">{tool.pricing}</Badge>
               </div>
 
               <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{tool.tagline}</p>

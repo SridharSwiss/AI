@@ -123,7 +123,7 @@ export function LearnList() {
                 href={r.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_220px_1fr_140px_130px_80px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
+                className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_220px_1fr_140px_130px_80px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
               >
                 {/* Icon */}
                 <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", typeBg[r.type] ?? "bg-muted text-muted-foreground")}>
@@ -134,9 +134,17 @@ export function LearnList() {
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 mb-0.5">
                     <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{r.title}</span>
-                    {r.free && <Badge variant="green" className="text-[10px] py-0 flex-shrink-0">Free</Badge>}
+                    {r.free && <Badge variant="green" className="text-[10px] py-0 flex-shrink-0 hidden sm:inline-flex">Free</Badge>}
                   </div>
                   <p className="text-xs text-muted-foreground truncate">{r.provider}</p>
+                </div>
+
+                {/* Always-visible badges on mobile */}
+                <div className="flex flex-col items-end gap-1 md:hidden">
+                  <Badge variant={levelColor[r.level] ?? "blue"} className="text-[10px]">{r.level}</Badge>
+                  <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                    <Clock className="w-3 h-3" />~{r.readTime}h
+                  </div>
                 </div>
 
                 {/* Description */}

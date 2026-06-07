@@ -89,18 +89,24 @@ export function ComplianceList() {
             <Link
               key={f.slug}
               href={`/compliance/${f.slug}`}
-              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_200px_1fr_260px_120px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_200px_1fr_260px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
             >
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Shield className="w-5 h-5 text-primary" />
               </div>
 
               <div className="min-w-0">
-                <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                <div className="flex items-center gap-2 mb-0.5">
                   <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{f.name}</span>
-                  <Badge variant={statusColor[f.status] ?? "blue"} className="text-[10px] flex-shrink-0">{f.status}</Badge>
+                  <Badge variant={statusColor[f.status] ?? "blue"} className="text-[10px] flex-shrink-0 hidden sm:inline-flex">{f.status}</Badge>
                 </div>
                 <p className="text-xs text-muted-foreground truncate">{f.jurisdiction} · {f.enforcementDate}</p>
+              </div>
+
+              {/* Always-visible risk badge */}
+              <div className="flex flex-col items-end gap-1 md:hidden">
+                <Badge variant={riskColor[f.riskLevel] ?? "blue"} className="capitalize text-[10px]">{f.riskLevel}</Badge>
+                <Badge variant={statusColor[f.status] ?? "blue"} className="text-[10px] sm:hidden">{f.status}</Badge>
               </div>
 
               <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{f.description}</p>

@@ -189,7 +189,7 @@ export function FeaturedSection() {
       <ScrollReveal>
         <SectionHeading eyebrow="Real Results" eyebrowColor="text-emerald-600 dark:text-emerald-400" eyebrowIcon={BarChart3} title="AI delivering measurable outcomes" viewAllHref="/case-studies" viewAllLabel="All case studies" />
         <ScrollReveal stagger>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {featuredCaseStudies.map((cs) => (
               <Link key={cs.company} href={cs.href} className="group block">
                 <Card className="h-full border-l-[3px] border-l-emerald-500/40 group-hover:border-l-emerald-500 group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-card-hover)]">
@@ -234,7 +234,7 @@ export function FeaturedSection() {
       <ScrollReveal>
         <div className="relative overflow-hidden rounded-3xl">
           <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-violet-700 to-pink-700" />
-          <div className="relative px-8 py-12 md:px-14 md:py-16 max-w-2xl">
+          <div className="relative px-5 py-10 sm:px-8 sm:py-12 md:px-14 md:py-16 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 text-white/90 text-xs font-semibold mb-6 backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5" />
               What&apos;s New · 2026

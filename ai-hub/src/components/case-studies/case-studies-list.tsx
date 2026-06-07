@@ -95,7 +95,7 @@ export function CaseStudiesList() {
             <Link
               key={cs.slug}
               href={`/case-studies/${cs.slug}`}
-              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_180px_1fr_200px_160px_120px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150 border-l-[3px] border-l-emerald-500/30 hover:border-l-emerald-500"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_180px_1fr_200px_160px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150 border-l-[3px] border-l-emerald-500/30 hover:border-l-emerald-500"
             >
               <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
@@ -104,9 +104,15 @@ export function CaseStudiesList() {
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5 mb-0.5">
                   <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate">{cs.company}</span>
-                  {cs.featured && <Badge variant="purple" className="text-[10px] py-0 flex-shrink-0">Featured</Badge>}
+                  {cs.featured && <Badge variant="purple" className="text-[10px] py-0 flex-shrink-0 hidden sm:inline-flex">Featured</Badge>}
                 </div>
                 <p className="text-xs text-muted-foreground truncate">{cs.industry}</p>
+              </div>
+
+              {/* Always-visible industry badge + outcome on mobile */}
+              <div className="flex flex-col items-end gap-1 md:hidden">
+                <Badge variant={industryColors[cs.industry] ?? "blue"} className="text-[10px]">{cs.industry}</Badge>
+                <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 text-right line-clamp-1 max-w-[110px]">{cs.metrics[0]}</span>
               </div>
 
               <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{cs.title}</p>

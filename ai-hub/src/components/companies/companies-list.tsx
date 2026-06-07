@@ -136,13 +136,18 @@ export function CompaniesList() {
             <Link
               key={company.slug}
               href={`/companies/${company.slug}`}
-              className="group grid grid-cols-[40px_1fr] md:grid-cols-[40px_180px_1fr_180px_130px_32px] gap-4 items-center px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_180px_1fr_180px_130px_32px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
             >
               <CompanyIcon focus={company.focus} />
 
               <div className="min-w-0">
                 <span className="text-sm font-semibold group-hover:text-primary transition-colors truncate block">{company.name}</span>
                 <p className="text-xs text-muted-foreground truncate">{company.focus} · {company.founded}</p>
+              </div>
+
+              {/* Always-visible stage badge */}
+              <div className="flex items-center gap-2 md:hidden">
+                <Badge variant={stageVariant[company.stage] ?? "outline"} className="text-[10px]">{company.stage}</Badge>
               </div>
 
               <p className="hidden md:block text-sm text-muted-foreground line-clamp-2 min-w-0">{company.description}</p>
