@@ -1,0 +1,17 @@
+# Build outputs — never commit these
+build/
+.gradle/
+*.aab
+*.apk
+*.ap_
+
+# Local keystore — back this up separately, never commit if it contains prod keys
+# aihub-upload.jks
+
+# Android Studio
+*.iml
+.idea/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
