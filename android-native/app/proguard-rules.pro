@@ -1,0 +1,2 @@
+-keep class com.aihub.sridhar.app.data.models.** { *; }
+-keepattributes *Annotation*

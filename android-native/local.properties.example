@@ -1,0 +1,4 @@
+# Copy to local.properties (gitignored) and fill in values
+sdk.dir=/path/to/Android/Sdk
+KEYSTORE_PASS=your_keystore_password
+KEY_PASS=your_key_password

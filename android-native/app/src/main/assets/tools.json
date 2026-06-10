@@ -1,0 +1,4808 @@
+[
+  {
+    "id": "chatgpt",
+    "slug": "chatgpt",
+    "name": "ChatGPT",
+    "tagline": "The world's most popular AI assistant",
+    "description": "ChatGPT is a conversational AI developed by OpenAI. It can write, analyze, code, summarize, translate, and engage in nuanced multi-turn conversations. Available via web, API, and mobile apps.",
+    "category": "Language Models",
+    "pricing": "Freemium",
+    "vendor": "OpenAI",
+    "tags": [
+      "NLP",
+      "Productivity",
+      "Coding",
+      "Writing"
+    ],
+    "website": "https://chat.openai.com",
+    "featured": true,
+    "useCases": [
+      "Content writing",
+      "Code generation",
+      "Research summaries",
+      "Customer support drafts"
+    ],
+    "pros": [
+      "Vast knowledge base",
+      "Strong reasoning",
+      "Plugin ecosystem"
+    ],
+    "cons": [
+      "Knowledge cutoff",
+      "Hallucinations",
+      "Cost at scale"
+    ],
+    "alternatives": [
+      "claude",
+      "gemini",
+      "llama"
+    ],
+    "launchDate": "Nov 30, 2022",
+    "underlyingModel": [
+      "GPT-4.1",
+      "GPT-4.1 mini",
+      "GPT-4.1 nano",
+      "GPT-4o",
+      "o3",
+      "o4-mini",
+      "o3-mini"
+    ],
+    "platforms": [
+      "Web",
+      "iOS",
+      "Android",
+      "macOS App",
+      "Windows App",
+      "API"
+    ],
+    "integrations": [
+      "Zapier",
+      "Slack",
+      "Microsoft Teams",
+      "2,000+ GPT plugins / Actions",
+      "Memory (long-term)"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "GPT-5.5 default model (Apr 2026); ChatGPT 1 BILLION WAU (May 2026, fastest consumer product ever); GPT Image 2 launched (Apr 2026); DALL-E 2/3 removed from API May 2026; Ads on free tier (Feb 2026); 'Go' tier $8/mo; Codex coding agent 3M weekly users; Personal Finance feature (Pro, May 2026)",
+    "idealFor": [
+      "Knowledge workers",
+      "Students",
+      "Developers",
+      "Writers",
+      "Business analysts"
+    ],
+    "history": "Launched Nov 30 2022 to unexpected viral success. Reached 1M users in 5 days, 100M in 2 months. Prompted Google to declare a 'code red'. Plus subscription Feb 2023. GPT-4 Mar 2023. Custom GPTs & GPT Store Jan 2024. Advanced Voice Mode and persistent memory 2024. o1 reasoning model Sep 2024. GPT-4.5 (preview) Feb 2025. o3 + o4-mini released Apr 2025. GPT-4.1 family (1M context) Apr 2025. GPT-5 / GPT-5.5 (2026). 1B WAU milestone May 2026.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo (with ads)",
+        "features": [
+          "GPT-5.3 Instant model",
+          "GPT Image 2 (limited)",
+          "Web search",
+          "Codex Mobile (free)",
+          "Ads shown"
+        ]
+      },
+      {
+        "name": "Go",
+        "price": "$8/mo",
+        "features": [
+          "GPT-5 access",
+          "Higher limits than Free",
+          "No ads",
+          "Codex Mobile"
+        ]
+      },
+      {
+        "name": "Plus",
+        "price": "$20/mo",
+        "features": [
+          "GPT-5.5 default",
+          "Thinking Mode (reasoning + web + image)",
+          "Advanced data analysis",
+          "Canvas",
+          "5× more messages"
+        ]
+      },
+      {
+        "name": "Business",
+        "price": "$20/seat/mo (dropped Apr 2026)",
+        "features": [
+          "GPT-5.5",
+          "Team workspace",
+          "Admin console",
+          "Data NOT used for training"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$200/mo",
+        "features": [
+          "Unlimited GPT-5.5",
+          "Extended thinking",
+          "Personal Finance (US, May 2026)",
+          "Priority new features",
+          "ChatGPT Personal Finance"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "Custom",
+        "features": [
+          "Unlimited usage",
+          "SSO/SAML",
+          "Custom data retention",
+          "Dedicated support",
+          "Enterprise security"
+        ]
+      }
+    ],
+    "metrics": {
+      "users": "1 BILLION WAU (May 2026) / 1B+ MAU (Jun 2026)",
+      "arr": "$24B ARR (~$2B/month run rate)",
+      "growth": "400M WAU Jan 2025 → 900M WAU Feb 2026 → 1B WAU May 2026",
+      "employees": "~9,268 (OpenAI, Jun 2026)",
+      "valuation": "$852B (Mar 2026)"
+    }
+  },
+  {
+    "id": "claude",
+    "slug": "claude",
+    "name": "Claude",
+    "tagline": "Safety-first AI with superior long-context understanding",
+    "description": "Claude is Anthropic's AI assistant focused on safety, reliability, and interpretability. Excels at long-document analysis, nuanced reasoning, and following complex instructions.",
+    "category": "Language Models",
+    "pricing": "Freemium",
+    "vendor": "Anthropic",
+    "tags": [
+      "NLP",
+      "Safety",
+      "Analysis",
+      "Long Context"
+    ],
+    "website": "https://claude.ai",
+    "featured": true,
+    "useCases": [
+      "Document analysis",
+      "Legal review",
+      "Research",
+      "Coding"
+    ],
+    "pros": [
+      "200k+ context window",
+      "Strong instruction following",
+      "Constitutional AI safety"
+    ],
+    "cons": [
+      "Less plugin support",
+      "No image generation"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "gemini"
+    ],
+    "launchDate": "Mar 2023",
+    "underlyingModel": [
+      "Claude 4 Opus",
+      "Claude 4 Sonnet",
+      "Claude 3.7 Sonnet",
+      "Claude 3.5 Haiku"
+    ],
+    "platforms": [
+      "Web",
+      "iOS",
+      "Android",
+      "API",
+      "Claude Code (CLI)"
+    ],
+    "integrations": [
+      "Slack (via API)",
+      "Notion (via API)",
+      "VS Code (Claude Code ext.)",
+      "Cursor",
+      "JetBrains"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "Claude Opus 4.8 (May 2026) current flagship; Claude Code GA with GitHub Actions & VS Code/JetBrains native; $45B ARR at Anthropic; IPO filed confidentially Jun 2026; API: $5/M input, $25/M output (fast mode: $10/$50); controllable effort level; Files API, MCP connector, 1-hour prompt caching",
+    "idealFor": [
+      "Legal/compliance teams",
+      "Researchers",
+      "Developers",
+      "Long document analysis",
+      "Complex instruction following",
+      "Agentic coding"
+    ],
+    "history": "Mar 2023: Claude 1 launched via API. Jul 2023: Claude 2 with 100K context window. Mar 2024: Claude 3 family (Haiku/Sonnet/Opus). Jun 2024: Claude 3.5 Sonnet tops coding benchmarks. Oct 2024: Computer Use. Nov 2024: Claude 3.5 Haiku. Feb 2025: Claude 3.7 Sonnet with extended thinking. May 2025: Claude 4 Opus and Sonnet — Opus leads SWE-bench. May 2026: Claude Opus 4.8 flagship. Jun 2026: IPO filed confidentially. Amazon total investment: $33B+.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "Claude Haiku 4.5 (limited)",
+          "File uploads",
+          "Artifacts",
+          "Projects",
+          "Web search"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$20/mo",
+        "features": [
+          "Claude Sonnet 4.6 + Opus 4.8 access",
+          "Extended thinking",
+          "Projects with memory",
+          "5× usage vs Free"
+        ]
+      },
+      {
+        "name": "Team Standard",
+        "price": "$25/seat/mo",
+        "features": [
+          "Everything in Pro",
+          "Team workspace",
+          "Admin mgmt",
+          "Data NOT used for training"
+        ]
+      },
+      {
+        "name": "Max 5×",
+        "price": "$100/mo",
+        "features": [
+          "5× more usage than Pro",
+          "Priority Opus 4.8 access",
+          "Research-grade usage"
+        ]
+      },
+      {
+        "name": "Max 20×",
+        "price": "$200/mo",
+        "features": [
+          "20× more usage than Pro",
+          "Priority all models",
+          "Heaviest workloads"
+        ]
+      },
+      {
+        "name": "Team Premium",
+        "price": "$125/seat/mo",
+        "features": [
+          "Enterprise-grade limits",
+          "Higher priority queue",
+          "Advanced admin"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "Custom",
+        "features": [
+          "Custom tiers",
+          "SSO/SAML",
+          "200K+ context",
+          "HIPAA BAA",
+          "Priority support"
+        ]
+      }
+    ],
+    "metrics": {
+      "users": "~30M+ registered users (estimate, Jun 2026)",
+      "arr": "$45B ARR (May 2026, from $9B end-2025)",
+      "valuation": "~$965B (Series H, Jun 2026); IPO filed confidentially",
+      "growth": ">400% YoY"
+    }
+  },
+  {
+    "id": "gemini",
+    "slug": "gemini",
+    "name": "Gemini",
+    "tagline": "Google's multimodal AI deeply integrated with Workspace",
+    "description": "Gemini is Google's flagship AI model available in multiple sizes. Deep integration with Google Workspace (Docs, Sheets, Gmail) and native multimodal capabilities including image and video understanding.",
+    "category": "Language Models",
+    "pricing": "Freemium",
+    "vendor": "Google",
+    "tags": [
+      "Multimodal",
+      "Search",
+      "Productivity",
+      "Google Workspace"
+    ],
+    "website": "https://gemini.google.com",
+    "featured": true,
+    "useCases": [
+      "Google Workspace automation",
+      "Multimodal analysis",
+      "Code generation",
+      "Search augmentation"
+    ],
+    "pros": [
+      "Google integration",
+      "Multimodal native",
+      "Real-time search access"
+    ],
+    "cons": [
+      "Variable quality vs GPT-4",
+      "Privacy considerations"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "claude"
+    ],
+    "launchDate": "Dec 6, 2023 (Gemini 1.0)",
+    "underlyingModel": [
+      "Gemini 2.5 Pro",
+      "Gemini 2.5 Flash",
+      "Gemini 2.0 Flash",
+      "Gemini 2.0 Flash-Lite"
+    ],
+    "platforms": [
+      "Web",
+      "iOS",
+      "Android",
+      "Google Workspace",
+      "API (AI Studio)",
+      "Vertex AI"
+    ],
+    "integrations": [
+      "Google Docs",
+      "Gmail",
+      "Google Sheets",
+      "Google Slides",
+      "YouTube",
+      "Google Search",
+      "NotebookLM"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "Gemini 3.5 Flash default since May 19, 2026 (4× faster than frontier competitors; Terminal-Bench 76.2%, MCP Atlas 83.6%); Gemini 3.5 Pro rolling out Jun 2026; 750M MAU on Gemini app; 2B users via AI Overviews in Search; Gemini Spark 24/7 personal agent; Google AI subscriptions rebranded (Ultra $99.99/mo); 8.5M developers monthly",
+    "idealFor": [
+      "Google Workspace users",
+      "Multimodal analysis",
+      "Research",
+      "Video understanding",
+      "Long context tasks"
+    ],
+    "history": "Bard launched Feb 2023 (rocky start). Rebranded to Gemini Dec 2023. Gemini 1.5 Pro with 1M context Feb 2024. Deep Research Dec 2024. Gemini 2.0 Flash Dec 2024. Gemini 2.5 Pro (Mar 2025) hits #1 on LMArena. Gemini 2.5 Flash (May 2025) best speed/intelligence ratio. Gemini 3.5 Flash default May 2026. Gemini 3.5 Pro rolling Jun 2026. Google AI Ultra cut to $99.99/mo.",
+    "pricingTiers": [
+      {
+        "name": "Google AI Free",
+        "price": "$0/mo",
+        "features": [
+          "Gemini 3.5 Flash",
+          "1M token context",
+          "Image gen (Imagen)",
+          "Google apps integration",
+          "Gemini Spark (limited)"
+        ]
+      },
+      {
+        "name": "Google AI Plus",
+        "price": "$7.99/mo",
+        "features": [
+          "Gemini 3.1 Pro access",
+          "Higher limits",
+          "Google apps AI"
+        ]
+      },
+      {
+        "name": "Google AI Pro",
+        "price": "$19.99/mo",
+        "features": [
+          "Gemini 3.1 Pro + 3.5 Flash",
+          "1M token context",
+          "NotebookLM Plus",
+          "Gemini in Docs/Gmail/Sheets/Slides",
+          "Daily Brief agent"
+        ]
+      },
+      {
+        "name": "Google AI Ultra",
+        "price": "$99.99/mo (cut from $249.99)",
+        "features": [
+          "Gemini 3.5 Pro (latest)",
+          "20TB storage",
+          "20× limits",
+          "Deep Research Max",
+          "Gemini Spark full access"
+        ]
+      },
+      {
+        "name": "Google Workspace AI",
+        "price": "$30/user/mo",
+        "features": [
+          "Gemini in all Workspace",
+          "Meet AI notes",
+          "Enterprise security"
+        ]
+      }
+    ],
+    "metrics": {
+      "users": "750M MAU (Gemini app, Q4 2025); 2B users via AI Overviews in Search; 350M paid subscriptions; 8.5M developers monthly",
+      "valuation": "Part of Alphabet ($2.5T+ market cap)"
+    }
+  },
+  {
+    "id": "github-copilot",
+    "slug": "github-copilot",
+    "name": "GitHub Copilot",
+    "tagline": "Your AI pair programmer in any IDE",
+    "description": "GitHub Copilot uses OpenAI Codex to suggest code completions, entire functions, and documentation as you type. Supports 20+ languages and integrates with VS Code, JetBrains, Neovim, and more.",
+    "category": "Code Assistance",
+    "pricing": "Paid",
+    "vendor": "GitHub / OpenAI",
+    "tags": [
+      "Coding",
+      "IDE",
+      "Productivity",
+      "Autocomplete"
+    ],
+    "website": "https://github.com/features/copilot",
+    "featured": true,
+    "useCases": [
+      "Code completion",
+      "Test generation",
+      "Documentation",
+      "Boilerplate generation"
+    ],
+    "pros": [
+      "Deep IDE integration",
+      "Wide language support",
+      "GitHub integration"
+    ],
+    "cons": [
+      "Monthly cost",
+      "Occasional incorrect suggestions",
+      "Requires internet"
+    ],
+    "alternatives": [
+      "cursor",
+      "codeium",
+      "tabnine"
+    ],
+    "launchDate": "Jun 29, 2022",
+    "underlyingModel": [
+      "GPT-4.1",
+      "Claude Sonnet 4.6",
+      "Gemini 2.5 Pro",
+      "o3",
+      "o4-mini",
+      "Claude Opus 4.8"
+    ],
+    "platforms": [
+      "VS Code",
+      "JetBrains IDEs",
+      "Visual Studio",
+      "Vim/Neovim",
+      "Azure Data Studio",
+      "GitHub.com",
+      "Xcode"
+    ],
+    "integrations": [
+      "GitHub",
+      "GitHub Actions",
+      "JIRA (via Copilot)",
+      "Azure DevOps",
+      "GitHub Models",
+      "MCP servers"
+    ],
+    "apiAvailable": false,
+    "latestUpdate": "Usage-based AI Credits billing launched Jun 1 2026 (pay per request); Copilot Pro+ $39/mo; Copilot Max $100/mo with advanced reasoning; 20M+ users (Apr 2026); Copilot coding agent embedded in GitHub.com; SWE-bench top performer via Claude Opus 4.8",
+    "idealFor": [
+      "Individual developers",
+      "Enterprise engineering teams",
+      "GitHub-centric workflows"
+    ],
+    "metrics": {
+      "users": "20M+ users (Apr 2026)",
+      "arr": "$2B+ ARR (2026 est.)",
+      "growth": "1M (2023) → 10M (2024) → 20M (Apr 2026)",
+      "employees": "~3,500 (GitHub total)"
+    },
+    "history": "Technical preview Jun 2021. GA Jun 2022. Grew to 1M users within first year — fastest Microsoft product to reach $100M ARR. Business tier 2023. Expanded to multi-model (GPT-4o, Claude, Gemini) 2024. Free tier launched late 2024. Agent mode with autonomous multi-step tasks 2025. Usage-based AI Credits billing Jun 1 2026. Copilot Pro+ ($39) and Max ($100) tiers introduced.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "2,000 code completions/month",
+          "50 chat requests/month",
+          "Multi-file edits",
+          "All editors"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$10/mo",
+        "features": [
+          "Unlimited completions",
+          "Unlimited chat",
+          "Multiple AI models",
+          "Copilot Edits",
+          "PR summaries"
+        ]
+      },
+      {
+        "name": "Pro+",
+        "price": "$39/mo (Jun 2026)",
+        "features": [
+          "All Pro features",
+          "Copilot coding agent (unlimited)",
+          "Access to premium models incl. Claude Opus 4.8",
+          "Priority queue"
+        ]
+      },
+      {
+        "name": "Business",
+        "price": "$19/user/mo",
+        "features": [
+          "Everything in Pro",
+          "Org management",
+          "Audit logs",
+          "IP indemnity",
+          "Policy controls"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "$39/user/mo",
+        "features": [
+          "Custom AI models",
+          "Copilot in GitHub.com",
+          "Security scanning",
+          "Fine-tuning on your codebase"
+        ]
+      },
+      {
+        "name": "Copilot Max",
+        "price": "$100/mo (Jun 2026)",
+        "features": [
+          "Advanced reasoning models",
+          "Unlimited premium requests",
+          "Early access to new features",
+          "Highest SWE-bench performance"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cursor",
+    "slug": "cursor",
+    "name": "Cursor",
+    "tagline": "The AI-first code editor for pair programming with LLMs",
+    "description": "Cursor is a fork of VS Code with native AI capabilities. Offers chat-based code editing, multi-file context awareness, and the ability to apply AI edits across your codebase.",
+    "category": "Code Assistance",
+    "pricing": "Freemium",
+    "vendor": "Anysphere",
+    "tags": [
+      "Coding",
+      "IDE",
+      "Editor",
+      "Chat"
+    ],
+    "website": "https://cursor.sh",
+    "useCases": [
+      "Large codebase refactoring",
+      "Chat-driven development",
+      "Code review",
+      "Bug fixing"
+    ],
+    "pros": [
+      "Full codebase context",
+      "Multi-file edits",
+      "VS Code compatible"
+    ],
+    "cons": [
+      "Subscription required for best models",
+      "Learning curve"
+    ],
+    "alternatives": [
+      "github-copilot",
+      "codeium"
+    ],
+    "launchDate": "Mar 2023",
+    "underlyingModel": [
+      "Claude Sonnet 4.6",
+      "Claude Opus 4.8",
+      "GPT-4.1",
+      "Gemini 2.5 Pro",
+      "cursor-small (fast completions)"
+    ],
+    "platforms": [
+      "macOS",
+      "Windows",
+      "Linux"
+    ],
+    "integrations": [
+      "Git (built-in)",
+      "GitHub",
+      "GitLab",
+      "Bitbucket",
+      "Linear (via Cursor agent)",
+      "MCP servers (100+)"
+    ],
+    "apiAvailable": false,
+    "latestUpdate": "Cursor reached $3B ARR (Apr 2026); 1M+ DAU; 64% of Fortune 500 use Cursor; $50B valuation talks in progress (Jun 2026); Background agents, BugBot, Memory; Claude Opus 4.8 as top-tier model option",
+    "idealFor": [
+      "Full-stack developers",
+      "AI-native coding",
+      "Large codebase navigation",
+      "Agentic engineering"
+    ],
+    "metrics": {
+      "users": "1M+ DAU (Apr 2026); 64% Fortune 500 adoption",
+      "arr": "$3B ARR (Apr 2026)",
+      "valuation": "$9.9B Series C (May 2025); $50B valuation talks (Jun 2026)",
+      "growth": "$100M ARR (Jan 2025) → $1B ARR (late 2025) → $3B ARR (Apr 2026)"
+    },
+    "history": "Founded by MIT students 2022. Built as VS Code fork. Launched Mar 2023. Viral growth after Claude 3.5 Sonnet integration mid-2024. Raised at $400M valuation Aug 2024. Grew to $100M ARR by Jan 2025. $9.9B Series C (Andreessen Horowitz, Thrive) May 2025. Cursor 1.0 with autonomous background agents. Hit $3B ARR by Apr 2026 with 64% Fortune 500 penetration. Secondary market valuation discussions at $50B as of Jun 2026.",
+    "pricingTiers": [
+      {
+        "name": "Hobby",
+        "price": "$0/mo",
+        "features": [
+          "2,000 completions/month",
+          "50 slow premium requests/month",
+          "Basic chat"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$20/mo",
+        "features": [
+          "Unlimited completions",
+          "500 fast premium requests",
+          "Background agents",
+          "Cursor Tab autocomplete",
+          "Multi-file Composer",
+          "Memory"
+        ]
+      },
+      {
+        "name": "Business",
+        "price": "$40/user/mo",
+        "features": [
+          "Everything in Pro",
+          "SSO enforcement",
+          "Admin dashboard",
+          "Centralized billing",
+          "Usage analytics",
+          "BugBot for PRs"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "midjourney",
+    "slug": "midjourney",
+    "name": "Midjourney",
+    "tagline": "Stunning AI imagery for creatives and designers",
+    "description": "Midjourney generates high-quality artistic images from text prompts via Discord. Known for its distinctive aesthetic quality and ability to produce publication-ready artwork.",
+    "category": "Image Generation",
+    "pricing": "Paid",
+    "vendor": "Midjourney",
+    "tags": [
+      "Image",
+      "Creative",
+      "Design",
+      "Art"
+    ],
+    "website": "https://midjourney.com",
+    "featured": true,
+    "useCases": [
+      "Concept art",
+      "Marketing visuals",
+      "Product mockups",
+      "Illustration"
+    ],
+    "pros": [
+      "Highest aesthetic quality",
+      "Strong community",
+      "Style consistency"
+    ],
+    "cons": [
+      "Discord-only interface",
+      "No free tier",
+      "Limited editing"
+    ],
+    "alternatives": [
+      "dalle-3",
+      "stable-diffusion",
+      "firefly"
+    ],
+    "launchDate": "Jul 12, 2022",
+    "underlyingModel": [
+      "Midjourney v8.1 (Apr 2026, proprietary diffusion-transformer)",
+      "Midjourney v8",
+      "Midjourney Video V1"
+    ],
+    "platforms": [
+      "Web App (midjourney.com)",
+      "Discord",
+      "API (enterprise beta)"
+    ],
+    "integrations": [
+      "Midjourney Web Editor",
+      "Discord",
+      "Figma (via plugin)",
+      "API (enterprise)"
+    ],
+    "apiAvailable": false,
+    "latestUpdate": "Midjourney v8.1 (Apr 2026) - highest detail and realism yet; Video V1 general availability with 60% MoM growth; web editor with multi-layer support; personalization engine; estimated $700M+ ARR (Jun 2026)",
+    "idealFor": [
+      "Concept artists",
+      "Marketing teams",
+      "Game developers",
+      "Illustrators",
+      "Creative directors"
+    ],
+    "metrics": {
+      "users": "25M+ registered users (Jun 2026)",
+      "mau": "~7M monthly active (estimate)",
+      "arr": "~$700M+ ARR (Jun 2026, bootstrapped & highly profitable)",
+      "employees": "~150",
+      "valuation": "~$10B estimated (no VC funding, profitable)"
+    },
+    "history": "Founded 2021 by David Holz (Leap Motion co-founder). Open beta Jul 2022. Bootstrapped to profitability with ~50 employees. V4 Nov 2022, V5 Mar 2023, V6 Dec 2023. Launched own web app 2024. V6.1 Jul 2024. V7 Mar 2025 - draft mode. V8 late 2025 - major quality upgrade. Video V1 GA with 60% MoM growth. V8.1 Apr 2026 - highest detail and photorealism yet. First AI art tool to reach $500M+ ARR with no outside funding.",
+    "pricingTiers": [
+      {
+        "name": "Basic",
+        "price": "$10/mo",
+        "features": [
+          "~200 fast GPU minutes/mo",
+          "3 concurrent jobs",
+          "General commercial terms"
+        ]
+      },
+      {
+        "name": "Standard",
+        "price": "$30/mo",
+        "features": [
+          "15h fast GPU/month",
+          "Unlimited relaxed generations",
+          "General commercial terms"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$60/mo",
+        "features": [
+          "30h fast GPU/month",
+          "Stealth mode (private images)",
+          "12 concurrent fast jobs"
+        ]
+      },
+      {
+        "name": "Mega",
+        "price": "$120/mo",
+        "features": [
+          "60h fast GPU/month",
+          "12 concurrent jobs",
+          "All Pro features included"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dalle-3",
+    "slug": "dalle-3",
+    "name": "GPT Image 2",
+    "tagline": "OpenAI's image generation - GPT Image 2 replaces DALL-E 2/3",
+    "description": "GPT Image 2 (gpt-image-2) is OpenAI's latest image generation model, released Apr 2026. DALL-E 2 and DALL-E 3 were removed from the API on May 12, 2026. GPT Image 2 delivers superior text rendering, photorealism, and instruction following. Available natively in ChatGPT and via API.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "OpenAI",
+    "tags": [
+      "Image",
+      "Creative",
+      "Editing",
+      "OpenAI"
+    ],
+    "website": "https://openai.com/research/gpt-image-1",
+    "useCases": [
+      "Content creation",
+      "Product visualization",
+      "Logo concepts",
+      "Social media assets",
+      "In-painting/editing"
+    ],
+    "pros": [
+      "Excellent prompt fidelity",
+      "GPT Image 1: superior text rendering",
+      "ChatGPT integration",
+      "In-painting/editing"
+    ],
+    "cons": [
+      "API cost",
+      "Rate limits",
+      "Midjourney still better for artistic styles"
+    ],
+    "alternatives": [
+      "midjourney",
+      "stable-diffusion",
+      "ideogram"
+    ],
+    "latestUpdate": "GPT Image 2 (Apr 2026) - successor to GPT Image 1; DALL-E 2 and DALL-E 3 removed from API May 12 2026; GPT Image 2 natively in ChatGPT free tier (limited); enhanced text rendering and photorealism; $0.04/image standard",
+    "pricingTiers": [
+      {
+        "name": "ChatGPT Free",
+        "price": "$0 (limited)",
+        "features": [
+          "DALL-E via ChatGPT (15 images/day)",
+          "Standard quality"
+        ]
+      },
+      {
+        "name": "ChatGPT Plus",
+        "price": "Included in $20/mo",
+        "features": [
+          "GPT Image 1 in ChatGPT",
+          "Higher limits",
+          "HD quality"
+        ]
+      },
+      {
+        "name": "API (GPT Image 1)",
+        "price": "$0.040/image (standard)",
+        "features": [
+          "Programmatic access",
+          "1024×1024 to 1792×1024",
+          "Inpainting",
+          "$0.080 for HD quality"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "stable-diffusion",
+    "slug": "stable-diffusion",
+    "name": "Stable Diffusion",
+    "tagline": "Open-source image generation you can run locally",
+    "description": "Stable Diffusion is an open-source latent diffusion model for image generation. Can be run locally on consumer hardware, with a massive ecosystem of fine-tuned models and ControlNet extensions.",
+    "category": "Image Generation",
+    "pricing": "Free",
+    "vendor": "Stability AI",
+    "tags": [
+      "Image",
+      "Open-Source",
+      "Local",
+      "Fine-tuning"
+    ],
+    "website": "https://stability.ai",
+    "useCases": [
+      "Local image generation",
+      "Custom model fine-tuning",
+      "Batch generation",
+      "Research"
+    ],
+    "pros": [
+      "Free and open-source",
+      "Runs locally",
+      "Huge model ecosystem"
+    ],
+    "cons": [
+      "Technical setup required",
+      "Hardware requirements",
+      "Variable quality"
+    ],
+    "alternatives": [
+      "midjourney",
+      "dalle-3"
+    ],
+    "launchDate": "Aug 22, 2022",
+    "underlyingModel": [
+      "SD 3.5 Large (8B params)",
+      "SD 3.5 Large Turbo",
+      "SD 3.5 Medium (2.5B)",
+      "SDXL",
+      "ControlNet"
+    ],
+    "platforms": [
+      "Local (Windows/Mac/Linux)",
+      "DreamStudio (web)",
+      "Automatic1111 WebUI",
+      "ComfyUI",
+      "Replicate API",
+      "HuggingFace Spaces"
+    ],
+    "integrations": [
+      "ComfyUI",
+      "A1111 (1000+ extensions)",
+      "Replicate",
+      "Stability API",
+      "Adobe Photoshop (plugin)",
+      "Invoke AI"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "SD 3.5 Large Turbo (fast inference, Apr 2025); Stability AI restructured under new CEO (2025); community ecosystem thrives independently via ComfyUI & A1111",
+    "idealFor": [
+      "Developers",
+      "Artists wanting control",
+      "Fine-tuning enthusiasts",
+      "Self-hosted AI",
+      "Batch generation"
+    ],
+    "metrics": {
+      "users": "10M+ SD model downloads (HuggingFace alone)",
+      "arr": "Stability AI struggling (~$30M ARR estimate, 2024)",
+      "valuation": "$1B (2022, has since fallen significantly)",
+      "employees": "~150"
+    },
+    "history": "Released Aug 22, 2022 - open-source release triggered explosion of AI art tools. SDXL (1.0) Jul 2023 - photorealism leap. Stability AI faced financial difficulties 2024; CEO Emad Mostaque resigned Mar 2024. Despite company struggles, SD model ecosystem thrives independently. SD 3 (Mar 2024) and SD 3.5 (Oct 2024) open-sourced.",
+    "pricingTiers": [
+      {
+        "name": "Open Source (Local)",
+        "price": "Free",
+        "features": [
+          "Unlimited generations",
+          "Full model control",
+          "Fine-tune freely",
+          "Requires GPU (4GB+ VRAM)"
+        ]
+      },
+      {
+        "name": "DreamStudio (Web)",
+        "price": "Credit-based",
+        "features": [
+          "No GPU needed",
+          "Latest official models",
+          "$10 = ~500 images",
+          "REST API included"
+        ]
+      },
+      {
+        "name": "Stability API (SD 3.5)",
+        "price": "$0.065/image",
+        "features": [
+          "Highest quality SD 3.5 Large",
+          "No setup required",
+          "Scalable"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "runway",
+    "slug": "runway",
+    "name": "Runway",
+    "tagline": "Professional AI video generation and editing",
+    "description": "Runway ML provides AI-powered video tools including Gen-2 text-to-video, motion brush, background removal, and a full creative suite for video professionals.",
+    "category": "Video Generation",
+    "pricing": "Freemium",
+    "vendor": "Runway ML",
+    "tags": [
+      "Video",
+      "Creative",
+      "Media",
+      "Generation"
+    ],
+    "website": "https://runwayml.com",
+    "featured": true,
+    "useCases": [
+      "Text-to-video",
+      "Video editing",
+      "VFX",
+      "Content creation"
+    ],
+    "pros": [
+      "Professional quality",
+      "Integrated suite",
+      "API access"
+    ],
+    "cons": [
+      "Expensive for heavy use",
+      "Generation time",
+      "Short clips"
+    ],
+    "alternatives": [
+      "pika",
+      "sora"
+    ],
+    "launchDate": "Mar 2023 (Gen-1)",
+    "underlyingModel": [
+      "Gen-4.5 (Jun 2026, proprietary video diffusion-transformer)",
+      "Gen-4 Turbo",
+      "Gen-4"
+    ],
+    "platforms": [
+      "Web",
+      "API (Enterprise only, Jan 2026)",
+      "iOS"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "Gen-4.5 (Jun 2026) - enhanced temporal consistency, 4K 60fps option; Runway API now enterprise-only (Jan 2026); $315M Series E (Feb 2026) at $5.3B valuation; ~$300M ARR; used in Netflix and A24 productions",
+    "idealFor": [
+      "Video editors",
+      "VFX artists",
+      "Content creators",
+      "Filmmakers",
+      "Marketing agencies"
+    ],
+    "metrics": {
+      "users": "~6M registered users (estimate, Jun 2026)",
+      "arr": "~$300M ARR (2026 est.)",
+      "valuation": "$5.3B (Series E, Feb 2026)",
+      "employees": "~382"
+    },
+    "history": "Founded 2018 by Cristóbal Valenzuela. Co-developed original Stable Diffusion 2022. Gen-1 Mar 2023. Gen-2 Nov 2023. $141M Series D at $1.5B valuation Jun 2023. Gen-3 Alpha Jun 2024. $308M at $3B valuation Oct 2024. Gen-4 Mar 2025 - character consistency across scenes. $315M Series E at $5.3B valuation Feb 2026. API restricted to enterprise Jan 2026. Gen-4.5 Jun 2026 with 4K 60fps. Used in Netflix originals and A24 feature films.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "~125 credits/month",
+          "Watermarked exports",
+          "720p resolution",
+          "Up to 4s clips"
+        ]
+      },
+      {
+        "name": "Standard",
+        "price": "$15/mo",
+        "features": [
+          "625 credits/month",
+          "No watermark",
+          "1080p resolution",
+          "Up to 16s clips"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$35/mo",
+        "features": [
+          "2,250 credits/month",
+          "4K exports",
+          "Priority generation",
+          "Unlimited image tools"
+        ]
+      },
+      {
+        "name": "Unlimited",
+        "price": "$95/mo",
+        "features": [
+          "Unlimited standard generations",
+          "4K",
+          "Fastest queue",
+          "All tools"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "Custom",
+        "features": [
+          "Custom credits",
+          "SLAs",
+          "API access (enterprise only)",
+          "Custom model fine-tuning",
+          "Dedicated support"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "elevenlabs",
+    "slug": "elevenlabs",
+    "name": "ElevenLabs",
+    "tagline": "Hyper-realistic AI voice synthesis and cloning",
+    "description": "ElevenLabs creates ultra-realistic text-to-speech voices and can clone any voice from a short sample. Used for audiobooks, podcasts, video narration, and accessibility applications.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "ElevenLabs",
+    "tags": [
+      "Audio",
+      "Voice",
+      "TTS",
+      "Cloning"
+    ],
+    "website": "https://elevenlabs.io",
+    "featured": true,
+    "useCases": [
+      "Audiobook production",
+      "Podcast narration",
+      "Video dubbing",
+      "Voice accessibility"
+    ],
+    "pros": [
+      "Most realistic voices",
+      "Voice cloning",
+      "Multi-language"
+    ],
+    "cons": [
+      "Ethical concerns",
+      "Cost scales with usage",
+      "TOS restrictions"
+    ],
+    "alternatives": [
+      "murf",
+      "play-ht",
+      "azure-speech"
+    ],
+    "launchDate": "Jan 2023 (public)",
+    "underlyingModel": [
+      "Eleven v3 (Feb 2026, 70+ languages, inline audio tags)",
+      "Eleven Flash v2.5 (ultra-fast, 75ms latency)",
+      "Eleven Turbo v2.5 (low latency)",
+      "Eleven Multilingual v2"
+    ],
+    "platforms": [
+      "Web",
+      "iOS",
+      "Android",
+      "API"
+    ],
+    "integrations": [
+      "Zapier",
+      "Make (Integromat)",
+      "Adobe Premiere (via API)",
+      "Unreal Engine",
+      "Unity",
+      "1,000+ apps via API"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "Eleven v3 (Feb 2026) - 70+ languages, inline audio tags for emotion/pacing control, SSML-like markup; $500M Series D (Sequoia, NVIDIA, Salesforce, BlackRock) at $11B valuation; $500M+ ARR (Jun 2026); Personal AI Voice cloning expanded",
+    "idealFor": [
+      "Content creators",
+      "Publishers",
+      "Game developers",
+      "Accessibility apps",
+      "Dubbing studios",
+      "Voice agent builders"
+    ],
+    "metrics": {
+      "users": "8M+ registered users (Jun 2026)",
+      "arr": "$500M+ ARR (Jun 2026)",
+      "valuation": "$11B (Series D, 2026)",
+      "employees": "~500"
+    },
+    "history": "Founded 2022 by Mati Staniszewski and Piotr Dąbkowski in Warsaw. Launched Jan 2023. $19M Series A (a16z) Jun 2023. Unicorn ($1.1B) Jan 2024. $180M Series C at $3.3B Jan 2025. Conversational AI platform 2024. Eleven v3 released Feb 2026 — 70+ languages and inline audio tags for precise emotional control. $500M Series D (Sequoia, NVIDIA, Salesforce, BlackRock) at $11B valuation. Hit $500M+ ARR by Jun 2026.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "10,000 chars/month",
+          "3 custom voices",
+          "Speaker in 28 languages",
+          "Mono audio output"
+        ]
+      },
+      {
+        "name": "Starter",
+        "price": "$5/mo",
+        "features": [
+          "30,000 chars/month",
+          "10 voices",
+          "API access",
+          "Basic commercial license"
+        ]
+      },
+      {
+        "name": "Creator",
+        "price": "$22/mo",
+        "features": [
+          "100,000 chars/month",
+          "30 voices",
+          "Professional voice clone",
+          "Pro commercial license"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$99/mo",
+        "features": [
+          "500,000 chars/month",
+          "160 voices",
+          "44kHz studio audio",
+          "Priority queuing"
+        ]
+      },
+      {
+        "name": "Scale",
+        "price": "$330/mo",
+        "features": [
+          "2M chars/month",
+          "660 voices",
+          "Highest quality",
+          "Dedicated support"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "Custom",
+        "features": [
+          "Custom usage",
+          "SLAs",
+          "On-prem option",
+          "Custom voice model"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perplexity",
+    "slug": "perplexity",
+    "name": "Perplexity",
+    "tagline": "AI-powered answer engine with live cited sources",
+    "description": "Perplexity AI combines LLMs with real-time web search to provide accurate, cited answers. Includes Pro Search, file uploads, focus modes, and a research API.",
+    "category": "Search & Research",
+    "pricing": "Freemium",
+    "vendor": "Perplexity AI",
+    "tags": [
+      "Search",
+      "Research",
+      "Citations",
+      "Real-time"
+    ],
+    "website": "https://perplexity.ai",
+    "featured": true,
+    "useCases": [
+      "Research queries",
+      "Fact checking",
+      "Market research",
+      "Academic research"
+    ],
+    "pros": [
+      "Real-time search",
+      "Cited sources",
+      "Accurate and concise"
+    ],
+    "cons": [
+      "Limited creative writing",
+      "Pro features cost extra"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "you-com",
+      "bing-chat"
+    ],
+    "launchDate": "Dec 2022",
+    "underlyingModel": [
+      "Sonar Pro ($3/$15 per M tokens, Jun 2026)",
+      "Sonar",
+      "Claude Sonnet 4.6",
+      "GPT-4.1",
+      "Llama 4"
+    ],
+    "platforms": [
+      "Web",
+      "iOS",
+      "Android",
+      "macOS App",
+      "Chrome Extension",
+      "API",
+      "Comet Browser (free, Mar 2026)"
+    ],
+    "integrations": [
+      "Slack",
+      "API for devs",
+      "Chrome extension",
+      "Perplexity for Mac",
+      "Comet browser",
+      "Zapier"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "Comet browser (free, Mar 18 2026) - AI-native browser with Perplexity built-in; Max tier $200/mo for power users; $500M ARR (2026, +335% YoY); $22.6B valuation; Sonar Pro API $3/$15 per M tokens; Personal Computer hardware in development",
+    "idealFor": [
+      "Researchers",
+      "Journalists",
+      "Students",
+      "Analysts",
+      "Anyone needing cited, up-to-date answers"
+    ],
+    "metrics": {
+      "dau": "30M+ DAU (2026 est.)",
+      "mau": "150M+ MAU (2026 est.)",
+      "arr": "$500M ARR (2026, +335% YoY)",
+      "valuation": "$22.6B (2026)",
+      "growth": "100M+ MAU (2025) → 150M+ MAU (2026); $100M ARR → $500M ARR"
+    },
+    "history": "Founded Dec 2022 by Aravind Srinivas (ex-Google/OpenAI), Denis Yarats, Andy Konwinski, Johnny Ho. Grew from 1M to 100M+ MAU. Jeff Bezos, NVIDIA, SoftBank invested. Pro with model choice Sep 2023. Sonar search-optimized LLM family. Perplexity Assistant Jan 2025. $18B valuation Mar 2025. Comet browser launched free Mar 18 2026. $500M ARR by 2026 (+335% YoY). $22.6B valuation. Max tier $200/mo launched. Personal Computer hardware announced.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "Unlimited quick searches",
+          "5 Pro searches/day",
+          "File & image uploads",
+          "Comet browser (free)"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$20/mo",
+        "features": [
+          "300+ Pro searches/day",
+          "Sonar Pro / Claude Sonnet 4.6 / GPT-4.1 choice",
+          "Image generation",
+          "$5/mo API credits",
+          "Internal knowledge search"
+        ]
+      },
+      {
+        "name": "Max",
+        "price": "$200/mo (Jun 2026)",
+        "features": [
+          "Unlimited Pro searches",
+          "Priority access to all models",
+          "Early access to new features",
+          "Highest rate limits"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "Custom",
+        "features": [
+          "SSO/SAML",
+          "Data never used for training",
+          "Admin controls",
+          "Audit logs",
+          "Slack integration",
+          "On-prem option"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pinecone",
+    "slug": "pinecone",
+    "name": "Pinecone",
+    "tagline": "The managed vector database for production AI apps",
+    "description": "Pinecone is a fully managed vector database optimized for similarity search at scale. Core infrastructure for RAG applications, semantic search, and recommendation systems.",
+    "category": "Infrastructure",
+    "pricing": "Freemium",
+    "vendor": "Pinecone",
+    "tags": [
+      "Vector DB",
+      "Infrastructure",
+      "RAG",
+      "Search"
+    ],
+    "website": "https://pinecone.io",
+    "useCases": [
+      "RAG pipelines",
+      "Semantic search",
+      "Recommendation engines",
+      "Anomaly detection"
+    ],
+    "pros": [
+      "Serverless option",
+      "High performance",
+      "Easy integration"
+    ],
+    "cons": [
+      "Cost at scale",
+      "Vendor lock-in"
+    ],
+    "alternatives": [
+      "weaviate",
+      "qdrant",
+      "chroma"
+    ]
+  },
+  {
+    "id": "langchain",
+    "slug": "langchain",
+    "name": "LangChain",
+    "tagline": "The framework for building LLM-powered applications",
+    "description": "LangChain provides abstractions for chaining LLM calls, integrating tools and memory, building agents, and connecting to data sources. Available in Python and JavaScript.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "LangChain",
+    "tags": [
+      "Framework",
+      "Python",
+      "LLM",
+      "Agents",
+      "Open-Source"
+    ],
+    "website": "https://langchain.com",
+    "useCases": [
+      "RAG applications",
+      "AI agents",
+      "Document Q&A",
+      "Chatbots"
+    ],
+    "pros": [
+      "Large ecosystem",
+      "Many integrations",
+      "Active community"
+    ],
+    "cons": [
+      "Steep learning curve",
+      "Over-abstracted",
+      "Rapid API changes"
+    ],
+    "alternatives": [
+      "llamaindex",
+      "haystack",
+      "semantic-kernel"
+    ],
+    "launchDate": "Oct 2022",
+    "underlyingModel": [
+      "Any LLM (OpenAI, Anthropic, Google, Mistral, Llama, Cohere - 60+ providers)"
+    ],
+    "platforms": [
+      "Python",
+      "JavaScript/TypeScript",
+      "LangGraph Platform (deployment)",
+      "LangSmith (observability)"
+    ],
+    "integrations": [
+      "All major LLMs",
+      "Pinecone",
+      "Weaviate",
+      "Chroma",
+      "Redis",
+      "PostgreSQL",
+      "100+ integrations",
+      "MCP servers"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "LangGraph Platform GA (2025) - deploy & scale stateful agents; LangSmith v2 with evals & prompt registry; LangChain v0.3 with simplified interface; MCP integration",
+    "idealFor": [
+      "LLM app developers",
+      "RAG system builders",
+      "AI agent researchers",
+      "Chatbot developers"
+    ],
+    "metrics": {
+      "users": "10M+ GitHub stars, used by 80%+ of LLM developers",
+      "valuation": "$200M (2023 funding)",
+      "growth": "Fastest-growing developer framework 2023"
+    },
+    "history": "Created by Harrison Chase, released Oct 2022 as a side project. Exploded in popularity as ChatGPT API launched. Became the dominant LLM framework. $25M Series A Feb 2023. $25M Series B Jun 2023. LangSmith observability platform 2023. LangGraph for stateful agents 2024. LangChain v0.3 simplification after criticism of complexity.",
+    "pricingTiers": [
+      {
+        "name": "Open Source",
+        "price": "Free",
+        "features": [
+          "Full LangChain framework",
+          "All integrations",
+          "LangGraph for agents",
+          "Community support"
+        ]
+      },
+      {
+        "name": "LangSmith Starter",
+        "price": "$0/mo",
+        "features": [
+          "5,000 traces/month",
+          "Dashboard & debugging",
+          "Eval tools (limited)"
+        ]
+      },
+      {
+        "name": "LangSmith Plus",
+        "price": "$39/mo",
+        "features": [
+          "50,000 traces/month",
+          "Team sharing",
+          "Datasets & evals",
+          "Prompt hub"
+        ]
+      },
+      {
+        "name": "LangSmith Enterprise",
+        "price": "Custom",
+        "features": [
+          "Unlimited traces",
+          "SSO/SAML",
+          "On-prem option",
+          "SLAs",
+          "Dedicated support"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "huggingface",
+    "slug": "huggingface",
+    "name": "Hugging Face",
+    "tagline": "The GitHub of machine learning - host, find, and deploy models",
+    "description": "Hugging Face hosts 500,000+ ML models, datasets, and Spaces. The Transformers library provides easy access to BERT, GPT, Llama, and thousands of fine-tuned models.",
+    "category": "Platforms",
+    "pricing": "Freemium",
+    "vendor": "Hugging Face",
+    "tags": [
+      "Platform",
+      "Open-Source",
+      "Models",
+      "Community",
+      "Transformers"
+    ],
+    "website": "https://huggingface.co",
+    "featured": true,
+    "useCases": [
+      "Model hosting",
+      "Fine-tuning",
+      "Dataset access",
+      "Inference API"
+    ],
+    "pros": [
+      "Huge model library",
+      "Free tier generous",
+      "Strong community"
+    ],
+    "cons": [
+      "GPU costs for inference",
+      "Complex for beginners"
+    ],
+    "alternatives": [
+      "replicate",
+      "modal",
+      "together-ai"
+    ],
+    "launchDate": "2016",
+    "underlyingModel": [
+      "1M+ community models (Llama 4, Gemma 3, Mistral, Phi-4, SDXL, Whisper, BERT, etc.)"
+    ],
+    "platforms": [
+      "Web (Hub)",
+      "Python (Transformers)",
+      "JavaScript",
+      "CLI",
+      "Spaces (Gradio/Streamlit)"
+    ],
+    "integrations": [
+      "PyTorch",
+      "TensorFlow",
+      "LangChain",
+      "LlamaIndex",
+      "AWS SageMaker",
+      "Azure ML",
+      "Google Vertex AI"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "1M+ models milestone (2025); Inference Providers marketplace (10+ backends: Together, Groq, Fireworks); SmolLM2 & SmolVLM tiny models; Serverless Inference API expansion; Hugging Face Assistants",
+    "idealFor": [
+      "ML researchers",
+      "AI developers",
+      "Data scientists",
+      "Enterprises needing open-source models"
+    ],
+    "metrics": {
+      "users": "5M+ registered users (2024)",
+      "mau": "25M+ monthly Hub visitors",
+      "arr": "~$70M ARR (estimate)",
+      "valuation": "$4.5B (Aug 2023)",
+      "employees": "~300"
+    },
+    "history": "Founded 2016 as a chatbot app. Pivoted to open-source NLP 2018. Transformers library 2019 - immediately becomes the standard. Model Hub launched. Grew to 'GitHub of AI'. $235M Series D at $4.5B (Google, Amazon, NVIDIA, Salesforce) Aug 2023.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "Unlimited public model downloads",
+          "Serverless Inference API (limited)",
+          "CPU Spaces",
+          "Public datasets"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$9/mo",
+        "features": [
+          "ZeroGPU for Spaces",
+          "Inference API priority",
+          "Private models up to 50GB"
+        ]
+      },
+      {
+        "name": "Enterprise Hub",
+        "price": "$20/user/mo",
+        "features": [
+          "Private org hub",
+          "SSO/SAML",
+          "Audit logs",
+          "Access controls"
+        ]
+      },
+      {
+        "name": "Inference Endpoints",
+        "price": "From $0.06/hr",
+        "features": [
+          "Dedicated GPU",
+          "Auto-scaling",
+          "Production SLAs"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openai-api",
+    "slug": "openai-api",
+    "name": "OpenAI API",
+    "tagline": "Build AI products on GPT-4, embeddings, and more",
+    "description": "The OpenAI API provides programmatic access to GPT-4o, GPT-4, GPT-3.5, DALL-E 3, Whisper, and embeddings models. Powers thousands of AI applications.",
+    "category": "APIs",
+    "pricing": "Paid",
+    "vendor": "OpenAI",
+    "tags": [
+      "API",
+      "GPT-4",
+      "Embeddings",
+      "Enterprise"
+    ],
+    "website": "https://platform.openai.com",
+    "useCases": [
+      "Chatbot backends",
+      "Content generation",
+      "Embedding search",
+      "Image generation"
+    ],
+    "pros": [
+      "State-of-the-art models",
+      "Reliable infrastructure",
+      "Extensive documentation"
+    ],
+    "cons": [
+      "Cost at scale",
+      "Rate limits",
+      "Data privacy considerations"
+    ],
+    "alternatives": [
+      "anthropic-api",
+      "google-ai-studio",
+      "cohere"
+    ],
+    "launchDate": "Jun 11, 2020",
+    "underlyingModel": [
+      "GPT-4.1",
+      "GPT-4.1 mini",
+      "GPT-4.1 nano",
+      "GPT-4o",
+      "o3",
+      "o4-mini",
+      "text-embedding-3",
+      "Whisper",
+      "DALL-E 3",
+      "TTS-1",
+      "GPT-4.5 (preview)"
+    ],
+    "platforms": [
+      "REST API",
+      "Python SDK",
+      "Node.js SDK",
+      "Azure OpenAI Service",
+      ".NET SDK",
+      "Go SDK",
+      "Java SDK"
+    ],
+    "integrations": [
+      "Azure OpenAI",
+      "LangChain",
+      "LlamaIndex",
+      "Vercel AI SDK",
+      "AWS (via partnership)",
+      "Responses API (Agents SDK)"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "GPT-4.1 family (Apr 2025, 1M context, 26% cheaper than GPT-4o); o3 flagship reasoning; o4-mini with vision; Responses API for agentic workflows; Realtime API GA; Batch API (50% off); prompt caching",
+    "idealFor": [
+      "Developers building AI apps",
+      "Enterprises",
+      "Startups",
+      "Researchers",
+      "AI agent builders"
+    ],
+    "metrics": {
+      "users": "3M+ developers (2025)",
+      "arr": "$6B+ OpenAI total ARR (2025 est.)",
+      "growth": "200%+ YoY"
+    },
+    "history": "API launched Jun 2020 (GPT-3 era). Became the de facto standard for AI APIs. GPT-4 API Mar 2023. Function calling Jun 2023. GPT-4o API May 2024. Realtime API (WebSocket) Sep 2024. o1 API Sep 2024. Batch API for 50% discount on async workloads. GPT-4.5 (preview) Feb 2025. o3 + o4-mini Apr 2025. GPT-4.1 family (1M context, lowest latency) Apr 2025 - major step for long-context apps.",
+    "pricingTiers": [
+      {
+        "name": "GPT-4.1",
+        "price": "$2.00/1M input tokens",
+        "features": [
+          "$8.00/1M output tokens",
+          "1M token context",
+          "Vision + function calling",
+          "Prompt caching: $0.50/1M"
+        ]
+      },
+      {
+        "name": "GPT-4.1 mini",
+        "price": "$0.40/1M input tokens",
+        "features": [
+          "$1.60/1M output tokens",
+          "1M token context",
+          "Vision",
+          "Best value for high-volume"
+        ]
+      },
+      {
+        "name": "GPT-4.1 nano",
+        "price": "$0.10/1M input tokens",
+        "features": [
+          "$0.40/1M output tokens",
+          "Ultra-low cost",
+          "1M context",
+          "Fast responses"
+        ]
+      },
+      {
+        "name": "o3",
+        "price": "$10/1M input tokens",
+        "features": [
+          "$40/1M output tokens",
+          "200K context",
+          "Best reasoning model",
+          "Reasoning tokens billed separately"
+        ]
+      },
+      {
+        "name": "o4-mini",
+        "price": "$1.10/1M input tokens",
+        "features": [
+          "$4.40/1M output tokens",
+          "Vision + reasoning",
+          "200K context",
+          "Best reasoning value"
+        ]
+      },
+      {
+        "name": "Embeddings (text-3-large)",
+        "price": "$0.13/1M tokens",
+        "features": [
+          "3072 dimensions",
+          "Best retrieval performance"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "notion-ai",
+    "slug": "notion-ai",
+    "name": "Notion AI",
+    "tagline": "AI writing and summarization built into your workspace",
+    "description": "Notion AI integrates LLM capabilities directly into Notion pages. Write, summarize, translate, brainstorm, and fill databases with AI - all without leaving your workspace.",
+    "category": "Productivity",
+    "pricing": "Paid",
+    "vendor": "Notion",
+    "tags": [
+      "Productivity",
+      "Writing",
+      "Summarization",
+      "Workspace"
+    ],
+    "website": "https://notion.so/product/ai",
+    "useCases": [
+      "Meeting notes summarization",
+      "Content drafting",
+      "Database population",
+      "Translation"
+    ],
+    "pros": [
+      "Deep Notion integration",
+      "Easy to use",
+      "Great for teams"
+    ],
+    "cons": [
+      "Requires Notion subscription",
+      "Limited to Notion"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "jasper",
+      "copy-ai"
+    ],
+    "launchDate": "Nov 2022 (alpha), Feb 2023 (GA)",
+    "underlyingModel": [
+      "Claude 3.7 Sonnet",
+      "GPT-4.1",
+      "Notion proprietary models"
+    ],
+    "platforms": [
+      "Web",
+      "macOS",
+      "Windows",
+      "iOS",
+      "Android"
+    ],
+    "integrations": [
+      "Built into Notion (all platforms)",
+      "Slack (via Notion pages)",
+      "Google Calendar",
+      "GitHub",
+      "Zapier"
+    ],
+    "apiAvailable": false,
+    "latestUpdate": "Notion AI 2.0 (2025): AI-powered Q&A across all pages, meeting notes, database autofill, AI chart generation, web search from within Notion",
+    "idealFor": [
+      "Teams using Notion",
+      "Content teams",
+      "Product managers",
+      "Project documentation"
+    ],
+    "metrics": {
+      "users": "30M+ Notion users (2024)",
+      "arr": "Notion: $250M+ ARR (2023)",
+      "valuation": "$10B (Notion, 2021)"
+    },
+    "history": "Notion launched 2016. AI features (powered by OpenAI) announced Oct 2022, rolled out Feb 2023. Crossed $50M ARR in 2021. AI helped reignite growth - became one of the fastest AI feature rollouts. AI add-on priced at $10/user/mo on top of existing Notion plans.",
+    "pricingTiers": [
+      {
+        "name": "AI Add-on (required)",
+        "price": "$10/user/mo",
+        "features": [
+          "Requires any Notion plan",
+          "Unlimited AI usage",
+          "Q&A across all pages",
+          "AI editor (write, edit, summarize)",
+          "Autofill database properties"
+        ]
+      },
+      {
+        "name": "Plus + AI",
+        "price": "$18/user/mo",
+        "features": [
+          "Notion Plus ($8) + AI ($10)",
+          "Unlimited blocks",
+          "Unlimited file uploads",
+          "30-day version history"
+        ]
+      },
+      {
+        "name": "Business + AI",
+        "price": "$25/user/mo",
+        "features": [
+          "Notion Business ($15) + AI ($10)",
+          "Advanced permissions",
+          "Audit log",
+          "SAML SSO"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "grammarly",
+    "slug": "grammarly",
+    "name": "Grammarly",
+    "tagline": "AI writing assistance for clarity, tone, and correctness",
+    "description": "Grammarly uses AI to check grammar, spelling, punctuation, clarity, engagement, and delivery in real-time across browsers, apps, and documents.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Grammarly",
+    "tags": [
+      "Writing",
+      "Grammar",
+      "Productivity",
+      "Browser"
+    ],
+    "website": "https://grammarly.com",
+    "useCases": [
+      "Professional emails",
+      "Academic writing",
+      "Blog posts",
+      "Business documents"
+    ],
+    "pros": [
+      "Works everywhere",
+      "Tone detection",
+      "Free tier useful"
+    ],
+    "cons": [
+      "Premium required for best features",
+      "Can over-suggest"
+    ],
+    "alternatives": [
+      "notion-ai",
+      "hemingway",
+      "prowritingaid"
+    ],
+    "launchDate": "2009 (full AI features 2022–2023)",
+    "underlyingModel": [
+      "Proprietary BERT-based grammar models",
+      "GPT-4.1 (GrammarlyGO generative features)",
+      "Grammarly proprietary writing models"
+    ],
+    "platforms": [
+      "Chrome Extension",
+      "Firefox Extension",
+      "macOS App",
+      "Windows App",
+      "iOS",
+      "Android",
+      "MS Word Plugin",
+      "Google Docs"
+    ],
+    "integrations": [
+      "Microsoft Word",
+      "Google Docs",
+      "Gmail",
+      "Outlook",
+      "LinkedIn",
+      "Slack",
+      "Salesforce"
+    ],
+    "apiAvailable": false,
+    "latestUpdate": "GrammarlyGO generative AI (2023), context-aware tone rewriter, Knowledge Share for teams",
+    "idealFor": [
+      "Professionals",
+      "Students",
+      "Non-native English speakers",
+      "Marketing teams"
+    ],
+    "metrics": {
+      "users": "50M+ daily active users (2024)",
+      "arr": "$200M+ ARR (estimate)",
+      "valuation": "$13B (2021 funding round)",
+      "employees": "~900"
+    },
+    "history": "Founded 2009 in Kyiv, Ukraine by Oleksii Shevchenko and Max Lytvyn. Raised $200M at $13B valuation 2021 - one of largest in edtech/productivity. GrammarlyGO (AI generation) launched Apr 2023 based on GPT-4. Expanded from grammar checker to full writing assistant. Revenue largely from individual Premium subscriptions.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "Grammar & spell check",
+          "Basic tone detection",
+          "250 GrammarlyGO prompts/month",
+          "Works everywhere"
+        ]
+      },
+      {
+        "name": "Premium",
+        "price": "$12/mo (annual)",
+        "features": [
+          "Full grammar & style",
+          "Vocabulary enhancement",
+          "Plagiarism detection",
+          "1,000 GrammarlyGO prompts",
+          "Tone rewriter"
+        ]
+      },
+      {
+        "name": "Business",
+        "price": "$15/user/mo (annual)",
+        "features": [
+          "Everything in Premium",
+          "Brand tone guidelines",
+          "Style guides",
+          "Team analytics",
+          "Priority support"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "price": "Custom",
+        "features": [
+          "SSO/SAML",
+          "Data security controls",
+          "Custom integrations",
+          "Dedicated CSM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "descript",
+    "slug": "descript",
+    "name": "Descript",
+    "tagline": "Edit video and podcast by editing the transcript",
+    "description": "Descript revolutionizes audio/video editing by letting you edit media by editing text. Features AI overdub for voice correction, filler word removal, and automatic transcription.",
+    "category": "Video Generation",
+    "pricing": "Freemium",
+    "vendor": "Descript",
+    "tags": [
+      "Video",
+      "Audio",
+      "Podcast",
+      "Transcription",
+      "Editing"
+    ],
+    "website": "https://descript.com",
+    "useCases": [
+      "Podcast editing",
+      "Video production",
+      "Content repurposing",
+      "Training videos"
+    ],
+    "pros": [
+      "Unique text-based editing",
+      "Overdub voice cloning",
+      "Team collaboration"
+    ],
+    "cons": [
+      "Learning curve",
+      "Export quality limits on free tier"
+    ],
+    "alternatives": [
+      "runway",
+      "capcut",
+      "adobe-premiere"
+    ]
+  },
+  {
+    "id": "whisper",
+    "slug": "whisper",
+    "name": "Whisper",
+    "tagline": "OpenAI's open-source speech recognition model",
+    "description": "Whisper is a general-purpose speech recognition model trained on 680,000 hours of multilingual data. Supports transcription and translation across 99 languages with state-of-the-art accuracy.",
+    "category": "Voice & Audio",
+    "pricing": "Free",
+    "vendor": "OpenAI",
+    "tags": [
+      "Speech-to-Text",
+      "Open-Source",
+      "Transcription",
+      "Multilingual"
+    ],
+    "website": "https://openai.com/research/whisper",
+    "useCases": [
+      "Meeting transcription",
+      "Subtitle generation",
+      "Language translation",
+      "Voice commands"
+    ],
+    "pros": [
+      "Free and open-source",
+      "99 languages",
+      "High accuracy"
+    ],
+    "cons": [
+      "Runs locally (GPU beneficial)",
+      "Not real-time"
+    ],
+    "alternatives": [
+      "google-speech",
+      "assembly-ai",
+      "deepgram"
+    ]
+  },
+  {
+    "id": "weaviate",
+    "slug": "weaviate",
+    "name": "Weaviate",
+    "tagline": "Open-source vector database for hybrid search",
+    "description": "Weaviate is an open-source vector database that supports hybrid search combining dense and sparse vectors. Features built-in vectorization, multi-tenancy, and GraphQL API.",
+    "category": "Infrastructure",
+    "pricing": "Freemium",
+    "vendor": "Weaviate",
+    "tags": [
+      "Vector DB",
+      "Open-Source",
+      "Infrastructure",
+      "Hybrid Search"
+    ],
+    "website": "https://weaviate.io",
+    "useCases": [
+      "Semantic search",
+      "RAG",
+      "Knowledge graphs",
+      "Multi-modal search"
+    ],
+    "pros": [
+      "Open source",
+      "Built-in vectorizers",
+      "Scalable"
+    ],
+    "cons": [
+      "Complex configuration",
+      "Smaller community than Pinecone"
+    ],
+    "alternatives": [
+      "pinecone",
+      "qdrant",
+      "chroma"
+    ]
+  },
+  {
+    "id": "jasper",
+    "slug": "jasper",
+    "name": "Jasper",
+    "tagline": "Enterprise AI writing for marketing teams",
+    "description": "Jasper is an enterprise AI content platform built for marketing. Offers brand voice customization, SEO integration, campaign generation, and team collaboration features.",
+    "category": "Productivity",
+    "pricing": "Paid",
+    "vendor": "Jasper AI",
+    "tags": [
+      "Marketing",
+      "Writing",
+      "SEO",
+      "Enterprise",
+      "Content"
+    ],
+    "website": "https://jasper.ai",
+    "useCases": [
+      "Blog content",
+      "Ad copy",
+      "Email campaigns",
+      "Social media",
+      "SEO content"
+    ],
+    "pros": [
+      "Brand voice training",
+      "Marketing-specific templates",
+      "Team features"
+    ],
+    "cons": [
+      "Expensive",
+      "Generic outputs without tuning"
+    ],
+    "alternatives": [
+      "copy-ai",
+      "notion-ai",
+      "chatgpt"
+    ]
+  },
+  {
+    "id": "replicate",
+    "slug": "replicate",
+    "name": "Replicate",
+    "tagline": "Run AI models in the cloud with a simple API - now part of Cloudflare",
+    "description": "Replicate allows you to run thousands of open-source AI models with a single API call. No infrastructure setup required - pay per prediction for models like Llama, Stable Diffusion, and Whisper. Acquired by Cloudflare in 2025, enabling global edge inference at Cloudflare's 200+ PoPs worldwide.",
+    "category": "Platforms",
+    "pricing": "Paid",
+    "vendor": "Replicate / Cloudflare",
+    "tags": [
+      "API",
+      "Infrastructure",
+      "Open-Source Models",
+      "Pay-per-use",
+      "Edge AI"
+    ],
+    "website": "https://replicate.com",
+    "useCases": [
+      "Prototype AI features",
+      "Run open-source models",
+      "Image generation API",
+      "Fine-tuning",
+      "Edge AI deployment"
+    ],
+    "pros": [
+      "Huge model library",
+      "No infra management",
+      "Great for prototyping",
+      "Cloudflare global edge network"
+    ],
+    "cons": [
+      "Cold start latency",
+      "Cost for high volume",
+      "Integration uncertainty post-acquisition"
+    ],
+    "alternatives": [
+      "huggingface",
+      "modal",
+      "together-ai"
+    ],
+    "latestUpdate": "Acquired by Cloudflare 2025 - enabling AI inference at Cloudflare's global edge network (200+ PoPs); Cloudflare Workers AI integration; expanded model catalog with Llama 4 and Gemma 3 support"
+  },
+  {
+    "id": "cohere",
+    "slug": "cohere",
+    "name": "Cohere",
+    "tagline": "Enterprise NLP for search, classification, and generation",
+    "description": "Cohere provides enterprise-grade language AI including Command for generation, Embed for semantic search, and Rerank for improving search relevance. Strong focus on enterprise deployment.",
+    "category": "APIs",
+    "pricing": "Freemium",
+    "vendor": "Cohere",
+    "tags": [
+      "Enterprise",
+      "NLP",
+      "Search",
+      "Embeddings",
+      "Reranking"
+    ],
+    "website": "https://cohere.com",
+    "useCases": [
+      "Enterprise search",
+      "Document classification",
+      "RAG pipelines",
+      "Content moderation"
+    ],
+    "pros": [
+      "Enterprise-ready",
+      "Strong embeddings",
+      "On-prem deployment option"
+    ],
+    "cons": [
+      "Less consumer-facing",
+      "Smaller model ecosystem"
+    ],
+    "alternatives": [
+      "openai-api",
+      "anthropic-api",
+      "google-ai-studio"
+    ]
+  },
+  {
+    "id": "v0",
+    "slug": "v0",
+    "name": "v0",
+    "tagline": "Generate React UI components with a chat interface",
+    "description": "v0 by Vercel generates React and Next.js UI components from text descriptions and screenshots. Produces clean, production-ready code using shadcn/ui and Tailwind CSS.",
+    "category": "Code Assistance",
+    "pricing": "Freemium",
+    "vendor": "Vercel",
+    "tags": [
+      "UI Generation",
+      "React",
+      "Next.js",
+      "Frontend",
+      "Tailwind"
+    ],
+    "website": "https://v0.dev",
+    "useCases": [
+      "UI prototyping",
+      "Component generation",
+      "Design-to-code",
+      "Rapid prototyping"
+    ],
+    "pros": [
+      "Production-quality output",
+      "shadcn/ui native",
+      "No setup required"
+    ],
+    "cons": [
+      "Primarily frontend focused",
+      "React/Next.js only"
+    ],
+    "alternatives": [
+      "github-copilot",
+      "cursor",
+      "locofy"
+    ],
+    "launchDate": "Sep 2023",
+    "underlyingModel": [
+      "Claude 3.7 Sonnet",
+      "Claude 4 Sonnet",
+      "GPT-4.1",
+      "v0-1 (Vercel proprietary)"
+    ],
+    "platforms": [
+      "Web (v0.dev)",
+      "VS Code Extension",
+      "CLI"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "v0 Agent mode (full-stack app generation, May 2025); deploy directly to Vercel; GitHub sync; Next.js 15 + shadcn/ui native; CLI tool for local dev",
+    "idealFor": [
+      "Frontend developers",
+      "Product designers",
+      "Startup founders",
+      "Prototypers"
+    ],
+    "metrics": {
+      "users": "Millions of components generated (Vercel doesn't disclose)",
+      "valuation": "Vercel $3.25B (2023)",
+      "employees": "Vercel: ~500"
+    },
+    "history": "Launched Sep 2023 as Vercel's AI UI generator. Immediately viral - developers shared stunning React components generated in seconds. Built on top of shadcn/ui and Tailwind. Became the standard for 'design-to-code' workflows. Added VS Code extension and API in 2024.",
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "200 credits/month",
+          "shadcn/ui + Tailwind output",
+          "React/Next.js code",
+          "Public projects"
+        ]
+      },
+      {
+        "name": "Premium",
+        "price": "$20/mo",
+        "features": [
+          "5,000 credits/month",
+          "Private projects",
+          "Priority generation"
+        ]
+      },
+      {
+        "name": "Team",
+        "price": "$30/user/mo (annual)",
+        "features": [
+          "10,000+ credits/month",
+          "Team sharing",
+          "Custom domains",
+          "Priority support"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mistral",
+    "slug": "mistral",
+    "name": "Mistral AI",
+    "tagline": "European frontier AI - Mistral Large 2 & Codestral lead open-weight models",
+    "description": "Mistral AI's latest models include Mistral Large 2 (123B, rivals GPT-4o), Mistral Small 3 (24B, ultra-efficient), Codestral 2501 (code specialist), and Pixtral Large (multimodal). Strong commitment to open weights and EU data sovereignty.",
+    "category": "Language Models",
+    "pricing": "Freemium",
+    "vendor": "Mistral AI",
+    "tags": [
+      "LLM",
+      "Open-Source",
+      "European",
+      "Efficient",
+      "MoE",
+      "Code"
+    ],
+    "website": "https://mistral.ai",
+    "useCases": [
+      "Self-hosted LLM",
+      "API access",
+      "Code generation",
+      "European data compliance",
+      "Edge deployment"
+    ],
+    "pros": [
+      "Open weights",
+      "EU data sovereignty",
+      "Codestral best-in-class for code",
+      "Mistral Small 3 exceptional efficiency",
+      "Competitive pricing"
+    ],
+    "cons": [
+      "Smaller ecosystem vs OpenAI/Anthropic",
+      "Less consumer recognition"
+    ],
+    "alternatives": [
+      "llama",
+      "chatgpt",
+      "claude"
+    ],
+    "underlyingModel": [
+      "Mistral Large 2 (123B)",
+      "Mistral Small 3 (24B)",
+      "Codestral 2501 (code)",
+      "Pixtral Large (multimodal)",
+      "Mistral Nemo (12B, open)"
+    ],
+    "latestUpdate": "Mistral Small 3 (Jan 2025) - 24B best-in-class efficiency; Codestral 2501 (Jan 2025) - top coding model; Le Chat (consumer app) with fast inference; raised €600M Series B (Jun 2024)"
+  },
+  {
+    "id": "llamaindex",
+    "slug": "llamaindex",
+    "name": "LlamaIndex",
+    "tagline": "Data framework for building LLM applications over your data",
+    "description": "LlamaIndex (formerly GPT Index) simplifies connecting custom data sources to LLMs. Provides data connectors, indexing strategies, and query engines for building RAG applications.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "LlamaIndex",
+    "tags": [
+      "Framework",
+      "RAG",
+      "Python",
+      "Open-Source",
+      "Data"
+    ],
+    "website": "https://llamaindex.ai",
+    "useCases": [
+      "RAG over documents",
+      "Structured data querying",
+      "Multi-agent systems",
+      "Knowledge bases"
+    ],
+    "pros": [
+      "Data-focused",
+      "Easy RAG setup",
+      "Many connectors"
+    ],
+    "cons": [
+      "Less agent-focused than LangChain",
+      "Learning curve"
+    ],
+    "alternatives": [
+      "langchain",
+      "haystack"
+    ]
+  },
+  {
+    "id": "copilot-365",
+    "slug": "copilot-365",
+    "name": "Microsoft Copilot 365",
+    "tagline": "AI assistant embedded across the Microsoft 365 suite",
+    "description": "Microsoft 365 Copilot integrates GPT-4 into Word, Excel, PowerPoint, Outlook, and Teams. Automates document creation, data analysis, email drafting, and meeting summaries.",
+    "category": "Productivity",
+    "pricing": "Enterprise",
+    "vendor": "Microsoft",
+    "tags": [
+      "Enterprise",
+      "Microsoft 365",
+      "Productivity",
+      "Office"
+    ],
+    "website": "https://microsoft.com/en-us/microsoft-365/copilot",
+    "featured": true,
+    "useCases": [
+      "Document creation",
+      "Data analysis in Excel",
+      "Email drafting",
+      "Meeting summarization"
+    ],
+    "pros": [
+      "Deep M365 integration",
+      "Enterprise security",
+      "Works in existing tools"
+    ],
+    "cons": [
+      "$30/user/month",
+      "Requires M365 subscription",
+      "Enterprise only"
+    ],
+    "alternatives": [
+      "notion-ai",
+      "google-workspace-ai"
+    ],
+    "launchDate": "Nov 1, 2023",
+    "underlyingModel": [
+      "GPT-4.1",
+      "o3",
+      "Microsoft proprietary models",
+      "Microsoft Graph",
+      "Phi-4"
+    ],
+    "platforms": [
+      "Word",
+      "Excel",
+      "PowerPoint",
+      "Outlook",
+      "Teams",
+      "SharePoint",
+      "Loop",
+      "OneNote",
+      "Planner",
+      "Windows 11 (Copilot+)"
+    ],
+    "integrations": [
+      "Microsoft 365 ecosystem",
+      "Azure AD/Entra ID",
+      "Salesforce (Copilot connector)",
+      "ServiceNow",
+      "SAP",
+      "3,000+ Copilot connectors"
+    ],
+    "apiAvailable": true,
+    "latestUpdate": "Copilot Pages (collaborative AI docs); Copilot+ PCs with on-device Phi-4; o3 reasoning in Excel & Word; Copilot Studio 2.0 (custom agents marketplace); 70% of Fortune 500 are Copilot customers (May 2025)",
+    "idealFor": [
+      "Enterprise Microsoft 365 users",
+      "Finance teams",
+      "Legal teams",
+      "Executive assistants"
+    ],
+    "metrics": {
+      "users": "Potential base 400M+ M365 seats",
+      "arr": "Microsoft expects multi-$B run rate from Copilot",
+      "growth": "Fastest enterprise AI adoption in history per Microsoft CEO",
+      "valuation": "MSFT market cap: $3.2T (Jan 2025)"
+    },
+    "history": "Announced Mar 2023 alongside M365 Copilot system. Limited EA preview Jul 2023. GA for enterprises Nov 1, 2023. Initial $30/user/mo add-on criticized as expensive. By 2024, Satya Nadella called Copilot 'the most important thing we've ever done at Microsoft'. GitHub Copilot (code) and M365 Copilot (productivity) became two pillars of Microsoft's AI strategy.",
+    "pricingTiers": [
+      {
+        "name": "Microsoft 365 Copilot",
+        "price": "$30/user/mo",
+        "features": [
+          "Requires M365 Business Standard ($12.50+/user/mo)",
+          "Word: draft, edit, summarize, translate",
+          "Excel: analyze data, generate formulas, Python",
+          "PowerPoint: generate presentations from prompts",
+          "Outlook: email drafts, summaries, scheduling",
+          "Teams: meeting notes, transcripts, follow-ups",
+          "Copilot Studio: custom AI assistants"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "adobe-firefly",
+    "slug": "adobe-firefly",
+    "name": "Adobe Firefly",
+    "tagline": "Commercially safe AI art generation for creative professionals",
+    "description": "Adobe Firefly is a family of creative AI models trained on licensed content. Integrated into Photoshop, Illustrator, and Express. Designed for commercially safe content creation.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "Adobe",
+    "tags": [
+      "Image",
+      "Creative",
+      "Commercial Use",
+      "Adobe",
+      "Design"
+    ],
+    "website": "https://firefly.adobe.com",
+    "useCases": [
+      "Commercial design work",
+      "Photo editing",
+      "Vector creation",
+      "Brand content"
+    ],
+    "pros": [
+      "Commercially licensed",
+      "Adobe integration",
+      "Generative fill"
+    ],
+    "cons": [
+      "Credits system",
+      "Limited styles vs Midjourney"
+    ],
+    "alternatives": [
+      "midjourney",
+      "dalle-3",
+      "stable-diffusion"
+    ]
+  },
+  {
+    "id": "databricks",
+    "slug": "databricks",
+    "name": "Databricks",
+    "tagline": "Unified analytics and AI platform for enterprise data teams",
+    "description": "Databricks provides a lakehouse platform combining data engineering, ML, and analytics. Features MLflow for experiment tracking, Delta Lake for reliable data, and Dolly open-source LLMs.",
+    "category": "Infrastructure",
+    "pricing": "Enterprise",
+    "vendor": "Databricks",
+    "tags": [
+      "Enterprise",
+      "MLOps",
+      "Data Engineering",
+      "ML Platform"
+    ],
+    "website": "https://databricks.com",
+    "useCases": [
+      "ML model training",
+      "Data pipelines",
+      "Feature engineering",
+      "Model serving"
+    ],
+    "pros": [
+      "Unified platform",
+      "MLflow integration",
+      "Scalable infrastructure"
+    ],
+    "cons": [
+      "Complex and expensive",
+      "Overkill for small teams"
+    ],
+    "alternatives": [
+      "aws-sagemaker",
+      "google-vertex-ai",
+      "azure-ml"
+    ]
+  },
+  {
+    "id": "zapier-ai",
+    "slug": "zapier-ai",
+    "name": "Zapier AI",
+    "tagline": "AI-powered automation connecting 6,000+ apps",
+    "description": "Zapier's AI features let you build automated workflows using natural language, create AI chatbots, and add AI steps to existing Zaps. Connects to 6,000+ apps without code.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Zapier",
+    "tags": [
+      "Automation",
+      "No-Code",
+      "Integration",
+      "Workflow"
+    ],
+    "website": "https://zapier.com/ai",
+    "useCases": [
+      "Marketing automation",
+      "CRM workflows",
+      "Data sync",
+      "Notification systems"
+    ],
+    "pros": [
+      "Huge app ecosystem",
+      "No-code friendly",
+      "AI-native workflows"
+    ],
+    "cons": [
+      "Expensive at scale",
+      "Limited logic complexity"
+    ],
+    "alternatives": [
+      "make",
+      "n8n",
+      "power-automate"
+    ]
+  },
+  {
+    "id": "llama",
+    "slug": "llama",
+    "name": "Llama",
+    "tagline": "Meta's open-source LLM family - Llama 4 with multimodal MoE architecture",
+    "description": "Llama is Meta's family of open-weight large language models. Llama 4 Scout (17B active params, 16 experts MoE) and Maverick (17B active, 128 experts) delivered top multimodal benchmarks at launch Apr 2025. Llama 3.3 70B remains the best open-source value for text tasks.",
+    "category": "Language Models",
+    "pricing": "Free",
+    "vendor": "Meta",
+    "tags": [
+      "Open-Source",
+      "LLM",
+      "Self-Hosted",
+      "Fine-tuning",
+      "Multimodal",
+      "MoE"
+    ],
+    "website": "https://llama.meta.com",
+    "useCases": [
+      "Self-hosted AI",
+      "Fine-tuning for custom tasks",
+      "Research",
+      "Edge deployment",
+      "Multimodal apps"
+    ],
+    "pros": [
+      "Fully open weights",
+      "Multiple size options (1B–400B)",
+      "Commercial license",
+      "Multimodal (Llama 4)",
+      "MoE efficiency"
+    ],
+    "cons": [
+      "Requires hosting infrastructure",
+      "Large models need significant GPU RAM"
+    ],
+    "alternatives": [
+      "mistral",
+      "gemma",
+      "phi-3"
+    ],
+    "underlyingModel": [
+      "Llama 5 (Apr 2026, 600B+ params, multimodal)",
+      "Llama 4 Maverick (17B active / 400B total)",
+      "Llama 4 Scout (17B active / 109B total)",
+      "Llama 3.3 70B",
+      "Llama 3.2 (1B/3B edge)"
+    ],
+    "latestUpdate": "Llama 5 (Apr 2026) — 600B+ params, top multimodal benchmarks, available via Meta AI and Hugging Face; Muse Spark closed-weight creative model (Apr 2026); Llama 5 'Avocado' projected 2027; Meta AI 600M+ MAU",
+    "metrics": {
+      "users": "600M+ MAU (Meta AI, Jun 2026)",
+      "valuation": "Part of Meta ($1.8T+ market cap)"
+    }
+  },
+  {
+    "id": "gemma",
+    "slug": "gemma",
+    "name": "Gemma",
+    "tagline": "Google's lightweight open models - Gemma 3 leads open-source benchmarks",
+    "description": "Gemma 3 (released Mar 2025) is Google DeepMind's family of open-source models available in 1B, 4B, 12B, and 27B parameter sizes. The 27B model leads open-source benchmarks outperforming Llama 3.3 70B at half the size. Features 128K context and multimodal support.",
+    "category": "Language Models",
+    "pricing": "Free",
+    "vendor": "Google DeepMind",
+    "tags": [
+      "Open-Source",
+      "LLM",
+      "Efficient",
+      "Google",
+      "Local",
+      "Multimodal"
+    ],
+    "website": "https://ai.google.dev/gemma",
+    "useCases": [
+      "Local AI deployment",
+      "Fine-tuning",
+      "Research",
+      "Edge devices",
+      "Multimodal apps"
+    ],
+    "pros": [
+      "Runs on consumer hardware",
+      "Open weights",
+      "Gemma 3 27B beats 70B models",
+      "128K context",
+      "Multimodal (image input)"
+    ],
+    "cons": [
+      "Smaller capability ceiling vs frontier models",
+      "No official fine-tuning SLAs"
+    ],
+    "alternatives": [
+      "llama",
+      "mistral",
+      "phi-3"
+    ],
+    "underlyingModel": [
+      "Gemma 3 27B",
+      "Gemma 3 12B",
+      "Gemma 3 4B",
+      "Gemma 3 1B (edge)",
+      "PaliGemma 2 (vision)"
+    ],
+    "latestUpdate": "Gemma 3 (Mar 2025) - 128K context, multimodal image input, #1 single-GPU open model; ShieldGemma 2 safety classifier; CodeGemma for coding tasks"
+  },
+  {
+    "id": "command-r-plus",
+    "slug": "command-r-plus",
+    "name": "Command R+",
+    "tagline": "Cohere's enterprise-grade LLM optimized for RAG and agents",
+    "description": "Command R+ is Cohere's most capable language model, specifically engineered for enterprise retrieval-augmented generation (RAG) workflows, multi-step tool use, and multilingual tasks across 10+ languages.",
+    "category": "Language Models",
+    "pricing": "Paid",
+    "vendor": "Cohere",
+    "tags": [
+      "Enterprise",
+      "RAG",
+      "Multilingual",
+      "Agents",
+      "Tool Use"
+    ],
+    "website": "https://cohere.com/command",
+    "useCases": [
+      "Enterprise RAG",
+      "Multi-step agents",
+      "Document summarization",
+      "Multilingual Q&A"
+    ],
+    "pros": [
+      "Best-in-class for RAG",
+      "On-prem deployment option",
+      "Strong tool use"
+    ],
+    "cons": [
+      "Less consumer-facing",
+      "Pricing for high volume"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "claude",
+      "mistral"
+    ]
+  },
+  {
+    "id": "phi-3",
+    "slug": "phi-3",
+    "name": "Phi-4",
+    "tagline": "Microsoft's small language models - Phi-4 leads SLM benchmarks",
+    "description": "Phi-4 (Dec 2024) is Microsoft's latest small language model at 14B parameters, surpassing GPT-4o mini and Gemini 1.5 Pro on STEM and reasoning benchmarks. Phi-4-mini (3.8B) and Phi-4-multimodal add vision and audio capabilities. Phi-4-reasoning (May 2025) adds chain-of-thought.",
+    "category": "Language Models",
+    "pricing": "Free",
+    "vendor": "Microsoft",
+    "tags": [
+      "SLM",
+      "Edge AI",
+      "Open-Source",
+      "Efficient",
+      "Mobile",
+      "Reasoning"
+    ],
+    "website": "https://azure.microsoft.com/en-us/blog/phi-4",
+    "useCases": [
+      "On-device AI",
+      "Mobile apps",
+      "Low-latency inference",
+      "Cost-efficient deployment",
+      "STEM reasoning"
+    ],
+    "pros": [
+      "Phi-4 14B beats much larger models on STEM",
+      "Open weights (MIT license)",
+      "Multimodal support",
+      "Reasoning model available",
+      "Runs on consumer hardware"
+    ],
+    "cons": [
+      "Limited for very long documents",
+      "Less well-known outside enterprise"
+    ],
+    "alternatives": [
+      "gemma",
+      "llama",
+      "mistral"
+    ],
+    "underlyingModel": [
+      "Phi-4 (14B)",
+      "Phi-4-mini (3.8B)",
+      "Phi-4-multimodal (vision+audio)",
+      "Phi-4-reasoning (chain-of-thought)"
+    ],
+    "latestUpdate": "Phi-4-reasoning (May 2025) - #1 open model on AIME math; Phi-4-mini-reasoning for edge devices; Phi-4-multimodal adds speech & image understanding; all released under MIT license"
+  },
+  {
+    "id": "grok",
+    "slug": "grok",
+    "name": "Grok",
+    "tagline": "xAI's frontier AI - Grok 4.3 with real-time X data access",
+    "description": "Grok 4.3 (Apr 2026) is xAI's latest model, part of the SpaceX/xAI combined entity ($1.25T). Features DeepSearch (multi-step web research), Think mode (extended reasoning), and unique real-time X/Twitter data access. API pricing: $1.25/$2.50 per M tokens. SuperGrok Lite $10/mo.",
+    "category": "Language Models",
+    "pricing": "Freemium",
+    "vendor": "xAI",
+    "tags": [
+      "LLM",
+      "Real-time",
+      "X/Twitter",
+      "Reasoning",
+      "Frontier"
+    ],
+    "website": "https://grok.x.ai",
+    "useCases": [
+      "Real-time news analysis",
+      "Social media insights",
+      "Complex reasoning",
+      "Code assistance",
+      "Deep research"
+    ],
+    "pros": [
+      "Grok 3 rivals GPT-4.1 on coding",
+      "Real-time X data access",
+      "DeepSearch multi-step research",
+      "Think mode reasoning",
+      "Free via grok.com"
+    ],
+    "cons": [
+      "Best features require X Premium or SuperGrok",
+      "Smaller app ecosystem"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "underlyingModel": [
+      "Grok 4.3 (Apr 2026)",
+      "Grok 3",
+      "Grok 3 mini"
+    ],
+    "latestUpdate": "Grok 4.3 (Apr 2026) — $1.25/$2.50 per M tokens (input/output); SuperGrok Lite $10/mo; xAI merged with SpaceX Feb 2, 2026 (combined $1.25T entity); Colossus 1 cluster leased to Anthropic; grok.com free tier continues; Aurora image generation",
+    "metrics": {
+      "valuation": "$250B standalone xAI valuation; part of SpaceX/$1.25T combined entity (Feb 2026)"
+    }
+  },
+  {
+    "id": "tabnine",
+    "slug": "tabnine",
+    "name": "Tabnine",
+    "tagline": "Privacy-first AI code completion for enterprise teams",
+    "description": "Tabnine is an AI code completion tool that supports 30+ programming languages and can be deployed fully on-premises for maximum privacy. Offers team learning capabilities that adapt to your codebase style.",
+    "category": "Code Assistance",
+    "pricing": "Freemium",
+    "vendor": "Tabnine",
+    "tags": [
+      "Coding",
+      "IDE",
+      "Privacy",
+      "On-Prem",
+      "Enterprise"
+    ],
+    "website": "https://tabnine.com",
+    "useCases": [
+      "Code completion",
+      "Enterprise on-prem AI",
+      "Code suggestions",
+      "Team learning"
+    ],
+    "pros": [
+      "On-premises deployment",
+      "Privacy-first",
+      "30+ languages",
+      "Team training"
+    ],
+    "cons": [
+      "Less capable than GPT-4 powered tools",
+      "UI less polished"
+    ],
+    "alternatives": [
+      "github-copilot",
+      "codeium",
+      "cursor"
+    ]
+  },
+  {
+    "id": "codeium",
+    "slug": "codeium",
+    "name": "Windsurf (formerly Codeium)",
+    "tagline": "AI-first IDE with agentic Cascade engine - rebranded from Codeium",
+    "description": "Codeium rebranded to Windsurf in late 2024, launching an AI-first IDE (fork of VS Code) with Cascade - an agentic engine that can autonomously plan and execute multi-step coding tasks. Acquired by Cognition AI (makers of Devin) in May 2025 for $3B.",
+    "category": "Code Assistance",
+    "pricing": "Freemium",
+    "vendor": "Windsurf (Cognition AI)",
+    "tags": [
+      "Coding",
+      "IDE",
+      "Agentic",
+      "Autocomplete",
+      "Multi-language"
+    ],
+    "website": "https://windsurf.com",
+    "useCases": [
+      "Code completion",
+      "Agentic coding",
+      "Refactoring",
+      "Multi-file edits"
+    ],
+    "pros": [
+      "Cascade agentic engine",
+      "Free tier available",
+      "70+ languages",
+      "VS Code compatible"
+    ],
+    "cons": [
+      "New product, less mature than Cursor",
+      "Cognition acquisition uncertainty"
+    ],
+    "alternatives": [
+      "cursor",
+      "github-copilot",
+      "tabnine"
+    ],
+    "latestUpdate": "Acquired by Cognition AI for ~$250M Dec 2025 (NOT $3B — that was Cognition's own valuation); rebranding to Devin Desktop (the merged IDE); SWE-1.5/SWE-1.6 coding models (Jun 2026); Cascade agentic engine powers Windsurf and Devin Desktop",
+    "metrics": {
+      "users": "1.5M+ developers (2026 est.)",
+      "valuation": "~$250M acquisition price (Dec 2025)"
+    }
+  },
+  {
+    "id": "amazon-codewhisperer",
+    "slug": "amazon-q-developer",
+    "name": "Amazon Q Developer",
+    "tagline": "AWS-native AI coding assistant with security scanning (rebranded from CodeWhisperer)",
+    "description": "Amazon Q Developer (previously CodeWhisperer) is an AI coding assistant deeply integrated with the AWS ecosystem. Offers inline code suggestions, security vulnerability scanning, automated code reviews, and agent capabilities for feature development and code transformation.",
+    "category": "Code Assistance",
+    "pricing": "Freemium",
+    "vendor": "Amazon Web Services",
+    "tags": [
+      "Coding",
+      "AWS",
+      "Security",
+      "Cloud",
+      "IDE",
+      "Agents"
+    ],
+    "website": "https://aws.amazon.com/q/developer",
+    "useCases": [
+      "AWS development",
+      "Security scanning",
+      "Infrastructure as code",
+      "Code generation",
+      "Legacy code transformation"
+    ],
+    "pros": [
+      "Free for individual use (50 requests/day)",
+      "Security scanning built-in",
+      "License tracking",
+      "AWS Console integration",
+      "Java/COBOL transformation"
+    ],
+    "cons": [
+      "Best for AWS workloads",
+      "Limited context window vs Cursor",
+      "Less consumer recognition"
+    ],
+    "alternatives": [
+      "github-copilot",
+      "cursor",
+      "tabnine"
+    ],
+    "latestUpdate": "Rebranded from CodeWhisperer to Amazon Q Developer (Apr 2024); added agent capabilities for full feature development; automated code reviews in GitHub/GitLab; code transformation (Java upgrades, COBOL to Java); Q in AWS Console for infra questions"
+  },
+  {
+    "id": "aider",
+    "slug": "aider",
+    "name": "Aider",
+    "tagline": "AI pair programming in your terminal with git integration",
+    "description": "Aider is an open-source AI coding tool that runs in your terminal and integrates directly with git. It can edit multiple files, understand your full codebase, and automatically commit changes, making it ideal for test-driven development.",
+    "category": "Code Assistance",
+    "pricing": "Free",
+    "vendor": "Aider AI",
+    "tags": [
+      "Open-Source",
+      "Terminal",
+      "Git",
+      "Coding",
+      "Agentic"
+    ],
+    "website": "https://aider.chat",
+    "useCases": [
+      "Test-driven development",
+      "Multi-file refactoring",
+      "Bug fixing",
+      "Feature addition"
+    ],
+    "pros": [
+      "Open source",
+      "Git-integrated",
+      "Works with any LLM API",
+      "Terminal-based"
+    ],
+    "cons": [
+      "Terminal interface (no GUI)",
+      "Requires API keys"
+    ],
+    "alternatives": [
+      "cursor",
+      "github-copilot",
+      "devin"
+    ]
+  },
+  {
+    "id": "devin",
+    "slug": "devin",
+    "name": "Devin",
+    "tagline": "Autonomous AI software engineer - Devin 2.0 at $20/mo",
+    "description": "Devin by Cognition AI is an autonomous AI agent capable of completing complex software engineering tasks end-to-end. It operates its own browser, terminal, and code editor, planning and executing multi-step engineering projects. Devin 2.0 (Mar 2025) dramatically reduced pricing from $500/mo to $20/mo and added collaborative features. Cognition also acquired Windsurf (Codeium) for $3B in May 2025.",
+    "category": "Code Assistance",
+    "pricing": "Paid",
+    "vendor": "Cognition AI",
+    "tags": [
+      "Agentic AI",
+      "Autonomous",
+      "Coding",
+      "Engineering",
+      "SWE-bench"
+    ],
+    "website": "https://cognition.ai/devin",
+    "useCases": [
+      "Full feature development",
+      "Bug resolution",
+      "Codebase exploration",
+      "Test writing",
+      "Collaborative coding"
+    ],
+    "pros": [
+      "Fully autonomous",
+      "Handles long-horizon tasks",
+      "Sets up own environment",
+      "Dramatically lower cost (Devin 2.0)",
+      "Collaborative mode"
+    ],
+    "cons": [
+      "Can make mistakes on complex tasks",
+      "Still requires oversight",
+      "Occasional infinite loops"
+    ],
+    "alternatives": [
+      "cursor",
+      "github-copilot",
+      "aider"
+    ],
+    "latestUpdate": "Devin 2.0 (Mar 2025) - price cut from $500 to $20/mo; Cognition acquired Windsurf for ~$250M Dec 2025; Devin Desktop = Windsurf IDE rebranded (2026); SWE-1.5/SWE-1.6 models; Goldman Sachs pilot (Jul 2025); $4B valuation (2026)",
+    "pricingTiers": [
+      {
+        "name": "Devin",
+        "price": "$20/mo",
+        "features": [
+          "250 ACUs/month",
+          "Autonomous task execution",
+          "Browser + terminal + editor",
+          "GitHub integration",
+          "Collaborative mode"
+        ]
+      },
+      {
+        "name": "Teams",
+        "price": "$500/mo",
+        "features": [
+          "5,000 ACUs/month",
+          "Team workspace",
+          "Priority queue",
+          "SLA support"
+        ]
+      }
+    ],
+    "metrics": {
+      "valuation": "$4B (Cognition AI, 2026)",
+      "users": "Goldman Sachs, Fortune 500 enterprise pilots"
+    }
+  },
+  {
+    "id": "sourcegraph-cody",
+    "slug": "sourcegraph-cody",
+    "name": "Sourcegraph Cody",
+    "tagline": "AI coding assistant with full codebase context (enterprise focus)",
+    "description": "Sourcegraph Cody uses Sourcegraph's code intelligence to provide AI assistance with complete understanding of your entire codebase. As of 2025, Cody's free tier has been discontinued and it focuses on enterprise deployments with multi-model choice (Claude, GPT-4, Gemini).",
+    "category": "Code Assistance",
+    "pricing": "Enterprise",
+    "vendor": "Sourcegraph",
+    "tags": [
+      "Coding",
+      "Codebase Search",
+      "IDE",
+      "Enterprise",
+      "Code Intelligence"
+    ],
+    "website": "https://sourcegraph.com/cody",
+    "useCases": [
+      "Large codebase navigation",
+      "Code explanation",
+      "Enterprise onboarding",
+      "Refactoring at scale"
+    ],
+    "pros": [
+      "Full codebase context via Sourcegraph",
+      "Multi-model choice",
+      "Enterprise security",
+      "Cross-repository search"
+    ],
+    "cons": [
+      "No free tier (discontinued 2025)",
+      "Requires Sourcegraph license",
+      "Complexity for small teams"
+    ],
+    "alternatives": [
+      "cursor",
+      "github-copilot",
+      "amazon-q-developer"
+    ],
+    "latestUpdate": "Free tier discontinued 2025; pivoted to enterprise-only; multi-model support (Claude 4, GPT-4.1, Gemini 2.5); Sourcegraph expanded Code Search + Cody bundle for enterprises"
+  },
+  {
+    "id": "canva-ai",
+    "slug": "canva-ai",
+    "name": "Canva AI",
+    "tagline": "AI-powered design for everyone - no design skills needed",
+    "description": "Canva AI integrates multiple AI features into the popular design platform, including text-to-image generation (Magic Media), AI background removal, AI writing tools, and the Magic Design feature that generates full layouts from a prompt.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "Canva",
+    "tags": [
+      "Design",
+      "Image",
+      "No-Code",
+      "Templates",
+      "Creative"
+    ],
+    "website": "https://canva.com/ai-image-generator",
+    "useCases": [
+      "Social media graphics",
+      "Presentations",
+      "Marketing materials",
+      "Brand content"
+    ],
+    "pros": [
+      "All-in-one design platform",
+      "Easy to use",
+      "Templates library"
+    ],
+    "cons": [
+      "Less artistic quality than Midjourney",
+      "Premium required for best features"
+    ],
+    "alternatives": [
+      "adobe-firefly",
+      "midjourney",
+      "dalle-3"
+    ]
+  },
+  {
+    "id": "ideogram",
+    "slug": "ideogram",
+    "name": "Ideogram",
+    "tagline": "AI image generation that actually gets text right",
+    "description": "Ideogram specializes in generating images with accurate text rendering - a major weakness of other AI image tools. It also produces strong typography, logos, and graphic design assets with consistent text placement.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "Ideogram AI",
+    "tags": [
+      "Image",
+      "Text Rendering",
+      "Design",
+      "Typography",
+      "Logos"
+    ],
+    "website": "https://ideogram.ai",
+    "useCases": [
+      "Logos with text",
+      "Posters",
+      "Social graphics",
+      "Product labels"
+    ],
+    "pros": [
+      "Best text rendering in images",
+      "Typography-aware",
+      "Great for graphic design"
+    ],
+    "cons": [
+      "Smaller model variety",
+      "Less photorealistic than Midjourney"
+    ],
+    "alternatives": [
+      "midjourney",
+      "dalle-3",
+      "canva-ai"
+    ]
+  },
+  {
+    "id": "leonardo-ai",
+    "slug": "leonardo-ai",
+    "name": "Leonardo AI",
+    "tagline": "Game asset generation and photorealistic AI imagery",
+    "description": "Leonardo AI is a creative AI platform popular among game developers and digital artists. Offers fine-tuned models for consistent character generation, texture creation, and photorealistic imagery with style consistency controls.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "Leonardo AI",
+    "tags": [
+      "Image",
+      "Game Assets",
+      "Characters",
+      "Fine-tuning",
+      "Creative"
+    ],
+    "website": "https://leonardo.ai",
+    "useCases": [
+      "Game asset creation",
+      "Character design",
+      "Texture generation",
+      "Concept art"
+    ],
+    "pros": [
+      "Game-focused models",
+      "Character consistency",
+      "Daily free credits"
+    ],
+    "cons": [
+      "Complex interface for beginners",
+      "Credits system"
+    ],
+    "alternatives": [
+      "midjourney",
+      "stable-diffusion",
+      "adobe-firefly"
+    ]
+  },
+  {
+    "id": "flux",
+    "slug": "flux",
+    "name": "Flux",
+    "tagline": "FLUX 1.1 Pro Ultra - state-of-the-art image generation by Black Forest Labs",
+    "description": "Flux is a family of text-to-image models by Black Forest Labs (founded by Stable Diffusion creators). FLUX 1.1 Pro Ultra (4MP resolution) and FLUX.1 Pro set the standard for photorealism and prompt accuracy. [schnell] open-weights variant runs locally.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "Black Forest Labs",
+    "tags": [
+      "Image",
+      "Open-Source",
+      "Photorealistic",
+      "High Quality",
+      "4K"
+    ],
+    "website": "https://blackforestlabs.ai",
+    "useCases": [
+      "Photorealistic generation",
+      "Commercial photography",
+      "Fine-tuning",
+      "API integration",
+      "4K image creation"
+    ],
+    "pros": [
+      "FLUX 1.1 Pro Ultra: 4MP native resolution",
+      "Best prompt accuracy of any model",
+      "Fast variants available",
+      "Open weights [schnell]",
+      "Video generation (FLUX Video, 2025)"
+    ],
+    "cons": [
+      "Pro version costs credits",
+      "Ecosystem still growing vs Midjourney"
+    ],
+    "alternatives": [
+      "midjourney",
+      "stable-diffusion",
+      "dalle-3"
+    ],
+    "underlyingModel": [
+      "FLUX 1.1 Pro Ultra (4MP)",
+      "FLUX 1.1 Pro",
+      "FLUX.1 Dev (open)",
+      "FLUX.1 Schnell (open, fast)"
+    ],
+    "latestUpdate": "FLUX 1.1 Pro Ultra (Nov 2024) - 4MP resolution, best-in-class realism; FLUX Video (2025, alpha); FLUX.1 Fill for inpainting; FLUX.1 Canny/Depth for ControlNet-style conditioning"
+  },
+  {
+    "id": "pika",
+    "slug": "pika",
+    "name": "Pika",
+    "tagline": "Turn ideas into stunning AI videos in seconds",
+    "description": "Pika Labs offers accessible text-to-video and image-to-video generation with a focus on ease of use. The Pika 1.0 model supports custom aspect ratios, camera movements, and seamless looping for social media content.",
+    "category": "Video Generation",
+    "pricing": "Freemium",
+    "vendor": "Pika Labs",
+    "tags": [
+      "Video",
+      "Text-to-Video",
+      "Social Media",
+      "Creative"
+    ],
+    "website": "https://pika.art",
+    "useCases": [
+      "Social media video",
+      "Product animations",
+      "Creative shorts",
+      "Marketing content"
+    ],
+    "pros": [
+      "Easy to use",
+      "Fast generation",
+      "Free credits available"
+    ],
+    "cons": [
+      "Short clip duration",
+      "Less cinematic than Runway"
+    ],
+    "alternatives": [
+      "runway",
+      "sora",
+      "luma-ai"
+    ]
+  },
+  {
+    "id": "sora",
+    "slug": "sora",
+    "name": "Sora",
+    "tagline": "OpenAI's breakthrough text-to-video AI model",
+    "description": "Sora is OpenAI's text-to-video model capable of generating up to 60-second photorealistic videos from text prompts. It understands physics, object permanence, and complex scene composition at an unprecedented level.",
+    "category": "Video Generation",
+    "pricing": "Paid",
+    "vendor": "OpenAI",
+    "tags": [
+      "Video",
+      "Text-to-Video",
+      "Photorealistic",
+      "OpenAI"
+    ],
+    "website": "https://openai.com/sora",
+    "useCases": [
+      "Cinematic video generation",
+      "Storyboarding",
+      "Marketing films",
+      "Creative production"
+    ],
+    "pros": [
+      "Best video quality available",
+      "60-second clips",
+      "Physics simulation"
+    ],
+    "cons": [
+      "Limited access",
+      "Expensive",
+      "Content restrictions"
+    ],
+    "alternatives": [
+      "runway",
+      "pika",
+      "luma-ai"
+    ]
+  },
+  {
+    "id": "heyGen",
+    "slug": "heygen",
+    "name": "HeyGen",
+    "tagline": "AI video generation with talking avatar presenters",
+    "description": "HeyGen enables businesses to create professional AI-generated videos with customizable avatars, voice cloning, and multi-language dubbing. Widely used for product demos, training content, and marketing videos at scale.",
+    "category": "Video Generation",
+    "pricing": "Freemium",
+    "vendor": "HeyGen",
+    "tags": [
+      "Video",
+      "Avatars",
+      "Dubbing",
+      "Marketing",
+      "Training"
+    ],
+    "website": "https://heygen.com",
+    "useCases": [
+      "Corporate training videos",
+      "Product demos",
+      "Multilingual content",
+      "Personalized outreach"
+    ],
+    "pros": [
+      "Realistic avatars",
+      "Video translation/dubbing",
+      "Fast production"
+    ],
+    "cons": [
+      "Subscription cost",
+      "Avatar quality variability"
+    ],
+    "alternatives": [
+      "synthesia",
+      "descript",
+      "runway"
+    ]
+  },
+  {
+    "id": "synthesia",
+    "slug": "synthesia",
+    "name": "Synthesia",
+    "tagline": "Professional AI video creation with 230+ avatars",
+    "description": "Synthesia is an enterprise AI video platform that lets teams create professional videos with AI presenters in 130+ languages. Widely adopted for L&D, internal communications, and customer education content.",
+    "category": "Video Generation",
+    "pricing": "Paid",
+    "vendor": "Synthesia",
+    "tags": [
+      "Video",
+      "Avatars",
+      "Enterprise",
+      "L&D",
+      "Multilingual"
+    ],
+    "website": "https://synthesia.io",
+    "useCases": [
+      "Employee training",
+      "Onboarding videos",
+      "Product education",
+      "Internal comms"
+    ],
+    "pros": [
+      "130+ languages",
+      "230+ AI avatars",
+      "Enterprise-grade security"
+    ],
+    "cons": [
+      "Expensive for small teams",
+      "Less creative flexibility"
+    ],
+    "alternatives": [
+      "heygen",
+      "descript",
+      "runway"
+    ]
+  },
+  {
+    "id": "luma-ai",
+    "slug": "luma-ai",
+    "name": "Luma AI",
+    "tagline": "Photorealistic 3D and video AI with Dream Machine",
+    "description": "Luma AI's Dream Machine generates high-quality, physically realistic video clips from text and images. Also offers NeRF-based 3D capture technology. Known for cinematic motion quality and realistic lighting.",
+    "category": "Video Generation",
+    "pricing": "Freemium",
+    "vendor": "Luma AI",
+    "tags": [
+      "Video",
+      "3D",
+      "NeRF",
+      "Photorealistic",
+      "Dream Machine"
+    ],
+    "website": "https://lumalabs.ai",
+    "useCases": [
+      "Cinematic AI video",
+      "3D capture",
+      "Product visualization",
+      "Creative shorts"
+    ],
+    "pros": [
+      "Excellent motion quality",
+      "3D capabilities",
+      "Free tier available"
+    ],
+    "cons": [
+      "Limited clip duration",
+      "Queue times on free tier"
+    ],
+    "alternatives": [
+      "runway",
+      "pika",
+      "sora"
+    ]
+  },
+  {
+    "id": "murf",
+    "slug": "murf",
+    "name": "Murf",
+    "tagline": "Studio-quality AI voiceovers for videos and presentations",
+    "description": "Murf provides AI-generated voiceovers with 120+ natural-sounding voices across 20+ languages. Designed for content creators, L&D professionals, and marketers who need professional narration without a recording studio.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "Murf AI",
+    "tags": [
+      "Audio",
+      "TTS",
+      "Voiceover",
+      "Video",
+      "L&D"
+    ],
+    "website": "https://murf.ai",
+    "useCases": [
+      "E-learning narration",
+      "Video voiceover",
+      "Podcast production",
+      "Presentations"
+    ],
+    "pros": [
+      "120+ voices",
+      "Pitch/speed control",
+      "Integrated video editor"
+    ],
+    "cons": [
+      "Less natural than ElevenLabs",
+      "Credits system"
+    ],
+    "alternatives": [
+      "elevenlabs",
+      "play-ht",
+      "azure-speech"
+    ]
+  },
+  {
+    "id": "play-ht",
+    "slug": "play-ht",
+    "name": "Play.ht (PlayAI)",
+    "tagline": "AI voice platform - team acquired by Meta in 2025",
+    "description": "Play.ht (rebranded PlayAI) offered AI voice synthesis with fine-grained control over emotion, pacing, and inflection. The core team and technology were acquired by Meta in early 2025 as Meta significantly ramped up voice AI investments. The PlayAI brand/service continued under new ownership/direction.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "PlayAI / Meta (acquired)",
+    "tags": [
+      "Audio",
+      "TTS",
+      "Voice Cloning",
+      "Emotion",
+      "API"
+    ],
+    "website": "https://play.ai",
+    "useCases": [
+      "Podcast creation",
+      "Audio articles",
+      "Voice assistants",
+      "Audiobook production"
+    ],
+    "pros": [
+      "Emotional control",
+      "Quick voice cloning",
+      "Developer API"
+    ],
+    "cons": [
+      "Uncertainty post-Meta acquisition",
+      "Competition from ElevenLabs"
+    ],
+    "alternatives": [
+      "elevenlabs",
+      "murf",
+      "azure-speech"
+    ],
+    "latestUpdate": "Play.ht team/core tech acquired by Meta in 2025; Meta integrating AI voice capabilities into WhatsApp and other products; PlayAI brand continues but roadmap uncertain"
+  },
+  {
+    "id": "suno-ai",
+    "slug": "suno-ai",
+    "name": "Suno AI",
+    "tagline": "Create full songs with vocals from a text prompt",
+    "description": "Suno AI generates complete, radio-quality songs including lyrics, vocals, and instrumentation from a simple text description. Supports a wide range of musical genres and has democratized music creation for non-musicians.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "Suno AI",
+    "tags": [
+      "Music Generation",
+      "AI Music",
+      "Vocals",
+      "Creative"
+    ],
+    "website": "https://suno.ai",
+    "useCases": [
+      "Background music creation",
+      "Song prototyping",
+      "Content soundtracks",
+      "Music education"
+    ],
+    "pros": [
+      "Full songs with vocals",
+      "All genres supported",
+      "Free tier available"
+    ],
+    "cons": [
+      "Commercial use restrictions on free tier",
+      "Limited style control",
+      "Ongoing copyright litigation"
+    ],
+    "alternatives": [
+      "udio",
+      "stable-audio",
+      "soundraw"
+    ],
+    "latestUpdate": "Suno v5.5 (Mar 2026) - improved vocal clarity, instrument separation, genre precision; $400M raised at $5.4B valuation (Jun 2026); Warner Music settled out-of-court; UMG and Sony litigation ongoing; Pro tier $8/mo, Premier $24/mo",
+    "metrics": {
+      "valuation": "$5.4B (Jun 2026)",
+      "arr": "~$100M+ ARR (2026 est.)"
+    },
+    "pricingTiers": [
+      {
+        "name": "Free",
+        "price": "$0/mo",
+        "features": [
+          "50 credits/day",
+          "Non-commercial use",
+          "Unlimited listening"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$8/mo",
+        "features": [
+          "2,500 credits/month",
+          "Commercial use license",
+          "Priority generation"
+        ]
+      },
+      {
+        "name": "Premier",
+        "price": "$24/mo",
+        "features": [
+          "10,000 credits/month",
+          "Commercial use",
+          "Highest priority",
+          "Early access"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "udio",
+    "slug": "udio",
+    "name": "Udio",
+    "tagline": "AI music generation with studio-quality audio fidelity",
+    "description": "Udio (formerly Swap) generates high-fidelity music across genres from text prompts. Known for exceptional audio quality and nuanced genre blending, Udio allows users to extend and remix generated tracks.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "Udio",
+    "tags": [
+      "Music Generation",
+      "AI Music",
+      "High Fidelity",
+      "Creative"
+    ],
+    "website": "https://udio.com",
+    "useCases": [
+      "Music production",
+      "Background tracks",
+      "Creative exploration",
+      "Remixing"
+    ],
+    "pros": [
+      "High audio quality",
+      "Genre blending",
+      "Track extension"
+    ],
+    "cons": [
+      "Copyright uncertainty",
+      "Limited control over arrangement"
+    ],
+    "alternatives": [
+      "suno-ai",
+      "stable-audio"
+    ]
+  },
+  {
+    "id": "assemblyai",
+    "slug": "assemblyai",
+    "name": "AssemblyAI",
+    "tagline": "Speech AI API for transcription, understanding, and insights",
+    "description": "AssemblyAI provides developer-friendly APIs for speech-to-text transcription, speaker diarization, sentiment analysis, topic detection, and audio intelligence. Built for production-grade voice applications at scale.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "AssemblyAI",
+    "tags": [
+      "Speech-to-Text",
+      "API",
+      "NLP",
+      "Audio Intelligence",
+      "Developer"
+    ],
+    "website": "https://assemblyai.com",
+    "useCases": [
+      "Meeting transcription",
+      "Call analytics",
+      "Podcast indexing",
+      "Voice apps"
+    ],
+    "pros": [
+      "High accuracy",
+      "Rich audio intelligence",
+      "Developer-friendly API"
+    ],
+    "cons": [
+      "Cost at high volume",
+      "Not real-time for free tier"
+    ],
+    "alternatives": [
+      "deepgram",
+      "whisper",
+      "google-speech"
+    ]
+  },
+  {
+    "id": "deepgram",
+    "slug": "deepgram",
+    "name": "Deepgram",
+    "tagline": "Real-time speech recognition API built for production scale",
+    "description": "Deepgram offers enterprise-grade real-time and batch speech-to-text with specialized models for different use cases (medical, conversational, phonecall). Known for low latency, high accuracy, and competitive pricing.",
+    "category": "Voice & Audio",
+    "pricing": "Freemium",
+    "vendor": "Deepgram",
+    "tags": [
+      "Speech-to-Text",
+      "Real-time",
+      "API",
+      "Enterprise",
+      "Medical"
+    ],
+    "website": "https://deepgram.com",
+    "useCases": [
+      "Real-time transcription",
+      "Call center analytics",
+      "Medical dictation",
+      "Voice agents"
+    ],
+    "pros": [
+      "Low latency",
+      "Specialized models",
+      "High accuracy at scale"
+    ],
+    "cons": [
+      "Primarily for developers",
+      "Cost at massive scale"
+    ],
+    "alternatives": [
+      "assemblyai",
+      "whisper",
+      "google-speech"
+    ]
+  },
+  {
+    "id": "otter-ai",
+    "slug": "otter-ai",
+    "name": "Otter.ai",
+    "tagline": "AI meeting notes and transcription for every conversation",
+    "description": "Otter.ai automatically transcribes meetings in real-time, identifies speakers, highlights key action items, and generates meeting summaries. Integrates with Zoom, Google Meet, and Microsoft Teams.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Otter.ai",
+    "tags": [
+      "Transcription",
+      "Meetings",
+      "Productivity",
+      "Notes",
+      "Collaboration"
+    ],
+    "website": "https://otter.ai",
+    "useCases": [
+      "Meeting transcription",
+      "Interview notes",
+      "Lecture capture",
+      "Action item tracking"
+    ],
+    "pros": [
+      "Real-time transcription",
+      "Speaker identification",
+      "Meeting integrations"
+    ],
+    "cons": [
+      "Accuracy drops with accents",
+      "Storage limits on free tier"
+    ],
+    "alternatives": [
+      "fireflies-ai",
+      "notion-ai",
+      "microsoft-copilot"
+    ]
+  },
+  {
+    "id": "fireflies-ai",
+    "slug": "fireflies-ai",
+    "name": "Fireflies.ai",
+    "tagline": "AI notetaker that records, transcribes, and analyzes meetings",
+    "description": "Fireflies.ai joins your meetings as a bot participant, records conversations, provides searchable transcripts, sentiment analysis, and topic tracking. Integrates with 40+ tools including Salesforce and HubSpot.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Fireflies.ai",
+    "tags": [
+      "Meetings",
+      "Transcription",
+      "CRM Integration",
+      "Sales",
+      "Productivity"
+    ],
+    "website": "https://fireflies.ai",
+    "useCases": [
+      "Sales call analysis",
+      "Meeting intelligence",
+      "CRM data capture",
+      "Team collaboration"
+    ],
+    "pros": [
+      "CRM integrations",
+      "Sentiment analysis",
+      "Searchable transcript library"
+    ],
+    "cons": [
+      "Bot participant can feel intrusive",
+      "Premium for advanced analytics"
+    ],
+    "alternatives": [
+      "otter-ai",
+      "gong",
+      "chorus"
+    ]
+  },
+  {
+    "id": "gamma",
+    "slug": "gamma",
+    "name": "Gamma",
+    "tagline": "AI-generated presentations, documents, and webpages instantly",
+    "description": "Gamma uses AI to generate beautiful presentations, documents, and webpages from a text prompt or outline. Unlike PowerPoint, Gamma outputs are interactive web-based decks that work across all devices.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Gamma",
+    "tags": [
+      "Presentations",
+      "AI Generation",
+      "Documents",
+      "No-Code",
+      "Design"
+    ],
+    "website": "https://gamma.app",
+    "useCases": [
+      "Pitch decks",
+      "Internal presentations",
+      "Landing pages",
+      "Reports"
+    ],
+    "pros": [
+      "Beautiful outputs",
+      "Fast generation",
+      "Interactive web format"
+    ],
+    "cons": [
+      "Less control than PowerPoint",
+      "Brand customization limits on free"
+    ],
+    "alternatives": [
+      "notion-ai",
+      "copilot-365",
+      "beautiful-ai"
+    ]
+  },
+  {
+    "id": "reclaim-ai",
+    "slug": "reclaim-ai",
+    "name": "Reclaim.ai",
+    "tagline": "AI calendar management that protects your focus time",
+    "description": "Reclaim.ai intelligently schedules tasks, habits, and meetings on your Google Calendar. It automatically finds optimal time slots, defends focus blocks from meeting overload, and reschedules when conflicts arise.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Reclaim AI",
+    "tags": [
+      "Calendar",
+      "Scheduling",
+      "Productivity",
+      "Focus Time",
+      "Automation"
+    ],
+    "website": "https://reclaim.ai",
+    "useCases": [
+      "Task scheduling",
+      "Focus time protection",
+      "Team meeting coordination",
+      "Habit building"
+    ],
+    "pros": [
+      "Automatic scheduling",
+      "Focus time defense",
+      "Team availability"
+    ],
+    "cons": [
+      "Google Calendar only",
+      "Learning period to optimize"
+    ],
+    "alternatives": [
+      "motion",
+      "clockwise",
+      "notion-ai"
+    ]
+  },
+  {
+    "id": "you-com",
+    "slug": "you-com",
+    "name": "You.com",
+    "tagline": "AI search engine with apps, coding, and multimodal capabilities",
+    "description": "You.com is a privacy-focused AI search engine with a unique app ecosystem. Features YouWrite for content, YouCode for coding, YouImagine for images, and a Pro mode with access to multiple LLMs including GPT-4 and Claude.",
+    "category": "Search & Research",
+    "pricing": "Freemium",
+    "vendor": "You.com",
+    "tags": [
+      "Search",
+      "AI Search",
+      "Privacy",
+      "Multimodal",
+      "Productivity"
+    ],
+    "website": "https://you.com",
+    "useCases": [
+      "Web search with AI",
+      "Research",
+      "Code generation",
+      "Image generation"
+    ],
+    "pros": [
+      "Privacy-focused",
+      "Multiple LLM access",
+      "App ecosystem"
+    ],
+    "cons": [
+      "Less refined than Perplexity",
+      "Index quality varies"
+    ],
+    "alternatives": [
+      "perplexity",
+      "chatgpt",
+      "bing-chat"
+    ]
+  },
+  {
+    "id": "elicit",
+    "slug": "elicit",
+    "name": "Elicit",
+    "tagline": "AI research assistant for literature review and synthesis",
+    "description": "Elicit automates the research literature review process by searching academic papers, extracting key findings, and synthesizing across studies. Built specifically for researchers who need reliable, cited scientific information.",
+    "category": "Search & Research",
+    "pricing": "Freemium",
+    "vendor": "Elicit",
+    "tags": [
+      "Research",
+      "Academic",
+      "Literature Review",
+      "Science",
+      "Citations"
+    ],
+    "website": "https://elicit.com",
+    "useCases": [
+      "Systematic literature reviews",
+      "Research synthesis",
+      "Academic Q&A",
+      "Evidence-based writing"
+    ],
+    "pros": [
+      "Academic paper focus",
+      "Automated extraction",
+      "Citation tracking"
+    ],
+    "cons": [
+      "Science-focused only",
+      "Limited to indexed literature"
+    ],
+    "alternatives": [
+      "perplexity",
+      "consensus",
+      "semantic-scholar"
+    ]
+  },
+  {
+    "id": "consensus",
+    "slug": "consensus",
+    "name": "Consensus",
+    "tagline": "Search engine that finds what the science actually says",
+    "description": "Consensus searches 200M+ academic papers to find scientific consensus on research questions. It highlights agreement and disagreement across studies, making it invaluable for evidence-based decision-making.",
+    "category": "Search & Research",
+    "pricing": "Freemium",
+    "vendor": "Consensus",
+    "tags": [
+      "Research",
+      "Academic",
+      "Science",
+      "Evidence",
+      "Consensus Finding"
+    ],
+    "website": "https://consensus.app",
+    "useCases": [
+      "Medical research",
+      "Policy research",
+      "Academic writing",
+      "Evidence review"
+    ],
+    "pros": [
+      "Finds scientific consensus",
+      "200M+ papers",
+      "Reliable citations"
+    ],
+    "cons": [
+      "Academic papers only",
+      "No general web search"
+    ],
+    "alternatives": [
+      "elicit",
+      "perplexity",
+      "semantic-scholar"
+    ]
+  },
+  {
+    "id": "qdrant",
+    "slug": "qdrant",
+    "name": "Qdrant",
+    "tagline": "High-performance vector database built in Rust",
+    "description": "Qdrant is an open-source vector similarity search engine and database written in Rust for maximum performance. Supports filtering, payload indexing, and sparse vectors for hybrid search, with a managed cloud offering.",
+    "category": "Infrastructure",
+    "pricing": "Freemium",
+    "vendor": "Qdrant",
+    "tags": [
+      "Vector DB",
+      "Open-Source",
+      "Rust",
+      "High Performance",
+      "Infrastructure"
+    ],
+    "website": "https://qdrant.tech",
+    "useCases": [
+      "Semantic search",
+      "RAG systems",
+      "Recommendation engines",
+      "Anomaly detection"
+    ],
+    "pros": [
+      "High performance (Rust)",
+      "Rich filtering",
+      "Hybrid search support"
+    ],
+    "cons": [
+      "Smaller community than Pinecone",
+      "Less managed tooling"
+    ],
+    "alternatives": [
+      "pinecone",
+      "weaviate",
+      "chroma"
+    ]
+  },
+  {
+    "id": "chroma",
+    "slug": "chroma",
+    "name": "Chroma",
+    "tagline": "The open-source embedding database for AI applications",
+    "description": "Chroma is a lightweight, open-source vector database designed for AI applications. Easy to embed in Python and JavaScript applications, with a simple API and built-in support for multiple embedding functions.",
+    "category": "Infrastructure",
+    "pricing": "Free",
+    "vendor": "Chroma",
+    "tags": [
+      "Vector DB",
+      "Open-Source",
+      "Embeddings",
+      "Developer",
+      "Lightweight"
+    ],
+    "website": "https://trychroma.com",
+    "useCases": [
+      "RAG prototyping",
+      "Local development",
+      "Small-scale semantic search",
+      "LLM app development"
+    ],
+    "pros": [
+      "Simple API",
+      "Local or cloud",
+      "Open source",
+      "Fast prototyping"
+    ],
+    "cons": [
+      "Less production-ready than Pinecone",
+      "Limited scalability"
+    ],
+    "alternatives": [
+      "pinecone",
+      "qdrant",
+      "weaviate"
+    ]
+  },
+  {
+    "id": "modal",
+    "slug": "modal",
+    "name": "Modal",
+    "tagline": "Serverless GPU cloud for AI and ML workloads",
+    "description": "Modal provides serverless GPU infrastructure for running ML models, fine-tuning, and data processing. Developers write Python functions decorated with @modal.function and Modal handles GPU provisioning, scaling, and billing per second.",
+    "category": "Infrastructure",
+    "pricing": "Paid",
+    "vendor": "Modal Labs",
+    "tags": [
+      "GPU",
+      "Serverless",
+      "ML Infrastructure",
+      "Python",
+      "Cloud"
+    ],
+    "website": "https://modal.com",
+    "useCases": [
+      "Model inference",
+      "Fine-tuning",
+      "Batch ML jobs",
+      "Data pipelines"
+    ],
+    "pros": [
+      "Serverless (no infra management)",
+      "Per-second billing",
+      "Pythonic API"
+    ],
+    "cons": [
+      "Newer service",
+      "Cost for sustained workloads"
+    ],
+    "alternatives": [
+      "replicate",
+      "huggingface",
+      "together-ai"
+    ]
+  },
+  {
+    "id": "groq-api",
+    "slug": "groq-api",
+    "name": "Groq API",
+    "tagline": "Ultra-fast LLM inference - 1,000+ tokens/sec via LPU chips",
+    "description": "Groq provides LLM inference at 10-30× the speed of GPU alternatives using proprietary Language Processing Units (LPUs). Offers Llama 4 Scout, Llama 3.3 70B, Mixtral, and Gemma 3 at speeds exceeding 1,000 tokens/second with sub-100ms TTFT. Raised $6.9B and signed $20B chip deal with Nvidia in 2025.",
+    "category": "APIs",
+    "pricing": "Freemium",
+    "vendor": "Groq",
+    "tags": [
+      "Inference",
+      "LPU",
+      "Fast",
+      "API",
+      "Open-Source Models"
+    ],
+    "website": "https://groq.com",
+    "useCases": [
+      "Low-latency AI applications",
+      "Real-time AI agents",
+      "Voice AI",
+      "Chatbots",
+      "Fast prototyping"
+    ],
+    "pros": [
+      "Fastest available inference (1000+ tps)",
+      "Sub-100ms TTFT",
+      "Competitive pricing",
+      "Llama 4 support"
+    ],
+    "cons": [
+      "Limited model selection vs cloud providers",
+      "Not for custom model training"
+    ],
+    "alternatives": [
+      "together-ai",
+      "fireworks-ai",
+      "openai-api"
+    ],
+    "latestUpdate": "Nvidia acquired Groq's LPU patent portfolio for ~$20B Dec 24, 2025; GroqCloud inference continues independently; raising $650M growth round (2026); Llama 5 inference available; 1,000+ tokens/sec maintained",
+    "metrics": {
+      "valuation": "$6.9B+ (2025); patent portfolio acquired by Nvidia for ~$20B (Dec 2025)"
+    }
+  },
+  {
+    "id": "fireworks-ai",
+    "slug": "fireworks-ai",
+    "name": "Fireworks AI",
+    "tagline": "Fast, affordable inference for open-source LLMs at production scale",
+    "description": "Fireworks AI delivers high-throughput, low-latency inference for open-source models with a focus on production readiness. Supports fine-tuned model deployment and offers function calling, JSON mode, and embedding APIs.",
+    "category": "Infrastructure",
+    "pricing": "Paid",
+    "vendor": "Fireworks AI",
+    "tags": [
+      "Inference",
+      "Open-Source Models",
+      "API",
+      "Fine-tuning",
+      "Production"
+    ],
+    "website": "https://fireworks.ai",
+    "useCases": [
+      "Production LLM deployment",
+      "Fine-tuned model hosting",
+      "Batch inference",
+      "Multi-modal APIs"
+    ],
+    "pros": [
+      "Production-ready",
+      "Fast inference",
+      "Fine-tuning support"
+    ],
+    "cons": [
+      "Primarily open-source models",
+      "Less consumer-friendly"
+    ],
+    "alternatives": [
+      "together-ai",
+      "groq-api",
+      "replicate"
+    ]
+  },
+  {
+    "id": "together-ai-tool",
+    "slug": "together-ai",
+    "name": "Together AI",
+    "tagline": "Affordable inference and fine-tuning for open-source models",
+    "description": "Together AI provides fast, cost-effective inference infrastructure for 100+ open-source models including Llama, Mistral, and FLUX. Also offers fine-tuning, embeddings, and a research cluster for training custom models.",
+    "category": "Infrastructure",
+    "pricing": "Paid",
+    "vendor": "Together AI",
+    "tags": [
+      "Inference",
+      "Open-Source",
+      "Fine-tuning",
+      "API",
+      "Affordable"
+    ],
+    "website": "https://together.ai",
+    "useCases": [
+      "Open-source model inference",
+      "Model fine-tuning",
+      "Embeddings",
+      "Research training"
+    ],
+    "pros": [
+      "100+ models",
+      "Competitive pricing",
+      "Fine-tuning platform"
+    ],
+    "cons": [
+      "No proprietary frontier models",
+      "Smaller community"
+    ],
+    "alternatives": [
+      "groq-api",
+      "fireworks-ai",
+      "replicate"
+    ]
+  },
+  {
+    "id": "haystack",
+    "slug": "haystack",
+    "name": "Haystack",
+    "tagline": "Open-source framework for production NLP and RAG pipelines",
+    "description": "Haystack by deepset is an open-source framework for building NLP applications, RAG systems, and LLM pipelines. Features a pipeline architecture with 60+ integrations including all major vector databases and LLM providers.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "deepset",
+    "tags": [
+      "Framework",
+      "RAG",
+      "NLP",
+      "Open-Source",
+      "Pipelines"
+    ],
+    "website": "https://haystack.deepset.ai",
+    "useCases": [
+      "Document Q&A",
+      "RAG pipelines",
+      "Semantic search",
+      "LLM application development"
+    ],
+    "pros": [
+      "Production-ready",
+      "60+ integrations",
+      "Pipeline architecture"
+    ],
+    "cons": [
+      "Steeper learning curve",
+      "Less popular than LangChain"
+    ],
+    "alternatives": [
+      "langchain",
+      "llamaindex",
+      "semantic-kernel"
+    ]
+  },
+  {
+    "id": "semantic-kernel",
+    "slug": "semantic-kernel",
+    "name": "Semantic Kernel",
+    "tagline": "Microsoft's open-source SDK for AI orchestration",
+    "description": "Semantic Kernel is Microsoft's open-source SDK for integrating LLMs into .NET, Python, and Java applications. Designed for enterprise AI orchestration with plugins, planners, and memory components for building complex AI agents.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "Microsoft",
+    "tags": [
+      "Framework",
+      "Microsoft",
+      ".NET",
+      "Enterprise",
+      "Agents",
+      "Open-Source"
+    ],
+    "website": "https://learn.microsoft.com/semantic-kernel",
+    "useCases": [
+      "Enterprise AI integration",
+      "AI agents",
+      "Plugin development",
+      "Copilot extensions"
+    ],
+    "pros": [
+      "Multi-language (.NET/Python/Java)",
+      "Microsoft support",
+      "Enterprise-focused"
+    ],
+    "cons": [
+      "Microsoft ecosystem bias",
+      "Complex for simple use cases"
+    ],
+    "alternatives": [
+      "langchain",
+      "llamaindex",
+      "haystack"
+    ]
+  },
+  {
+    "id": "crewai",
+    "slug": "crewai",
+    "name": "CrewAI",
+    "tagline": "Framework for orchestrating role-playing AI agents",
+    "description": "CrewAI is a framework for creating collaborative AI agent systems where specialized agents play different roles and work together to accomplish complex tasks. Agents can use tools, delegate tasks, and collaborate like a human team.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "CrewAI",
+    "tags": [
+      "Agents",
+      "Multi-Agent",
+      "Framework",
+      "Open-Source",
+      "Collaboration"
+    ],
+    "website": "https://crewai.com",
+    "useCases": [
+      "Multi-agent workflows",
+      "Research automation",
+      "Content pipelines",
+      "Complex task automation"
+    ],
+    "pros": [
+      "Intuitive role-based design",
+      "Active community",
+      "Easy agent collaboration"
+    ],
+    "cons": [
+      "Less mature than LangChain",
+      "Can be non-deterministic"
+    ],
+    "alternatives": [
+      "autogen",
+      "langchain",
+      "llamaindex"
+    ]
+  },
+  {
+    "id": "autogen",
+    "slug": "autogen",
+    "name": "AutoGen",
+    "tagline": "Microsoft's framework for multi-agent conversational AI",
+    "description": "AutoGen is Microsoft Research's framework for building LLM applications using multiple conversational agents that can collaborate, debate, and use tools to solve complex problems. Supports both autonomous and human-in-the-loop workflows.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "Microsoft Research",
+    "tags": [
+      "Multi-Agent",
+      "Framework",
+      "Microsoft",
+      "Conversational",
+      "Open-Source"
+    ],
+    "website": "https://microsoft.github.io/autogen",
+    "useCases": [
+      "Automated research",
+      "Code generation pipelines",
+      "Multi-step reasoning",
+      "Debate-style QA"
+    ],
+    "pros": [
+      "Flexible agent patterns",
+      "Human-in-the-loop support",
+      "Microsoft backing"
+    ],
+    "cons": [
+      "Can be verbose",
+      "Requires careful prompt engineering"
+    ],
+    "alternatives": [
+      "crewai",
+      "langchain",
+      "llamaindex"
+    ]
+  },
+  {
+    "id": "dspy",
+    "slug": "dspy",
+    "name": "DSPy",
+    "tagline": "Programmatic framework for optimizing LLM prompts and weights",
+    "description": "DSPy by Stanford NLP replaces brittle manual prompting with a programming model. Developers define modules and metrics; DSPy compiles and optimizes prompts automatically using techniques like few-shot learning and fine-tuning.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "Stanford NLP",
+    "tags": [
+      "Framework",
+      "Prompt Optimization",
+      "Research",
+      "Open-Source",
+      "NLP"
+    ],
+    "website": "https://dspy-docs.vercel.app",
+    "useCases": [
+      "Prompt optimization",
+      "Pipeline compilation",
+      "Research",
+      "Systematic LLM development"
+    ],
+    "pros": [
+      "Automatic optimization",
+      "Eliminates manual prompting",
+      "Research-backed"
+    ],
+    "cons": [
+      "Steep learning curve",
+      "Less tooling ecosystem"
+    ],
+    "alternatives": [
+      "langchain",
+      "llamaindex"
+    ]
+  },
+  {
+    "id": "langgraph",
+    "slug": "langgraph",
+    "name": "LangGraph",
+    "tagline": "Build stateful multi-agent applications with graph-based flows",
+    "description": "LangGraph extends LangChain with graph-based orchestration for building stateful, cyclic multi-agent applications. Enables complex agent workflows with conditional edges, state persistence, and human-in-the-loop checkpoints.",
+    "category": "Frameworks",
+    "pricing": "Free",
+    "vendor": "LangChain",
+    "tags": [
+      "Agents",
+      "Framework",
+      "Graph",
+      "Stateful",
+      "LangChain"
+    ],
+    "website": "https://langchain-ai.github.io/langgraph",
+    "useCases": [
+      "Stateful AI agents",
+      "Complex multi-step workflows",
+      "Cyclic agent loops",
+      "Human-in-the-loop"
+    ],
+    "pros": [
+      "Stateful by design",
+      "LangChain ecosystem",
+      "Complex flow support"
+    ],
+    "cons": [
+      "Requires LangChain knowledge",
+      "Complex for simple tasks"
+    ],
+    "alternatives": [
+      "langchain",
+      "crewai",
+      "autogen"
+    ]
+  },
+  {
+    "id": "anthropic-api",
+    "slug": "anthropic-api",
+    "name": "Anthropic API",
+    "tagline": "Claude 4 Opus & Sonnet API - leading coding and agentic AI",
+    "description": "The Anthropic API provides access to Claude 4 Opus (top-tier coding, SWE-bench 72.5%), Claude 4 Sonnet (balanced), Claude 3.7 Sonnet (extended thinking), and Claude 3.5 Haiku. Features 200K context, vision, tool use, Computer Use, and MCP support.",
+    "category": "APIs",
+    "pricing": "Paid",
+    "vendor": "Anthropic",
+    "tags": [
+      "API",
+      "Claude",
+      "Enterprise",
+      "Safety",
+      "Long Context",
+      "Agents",
+      "Computer Use"
+    ],
+    "website": "https://anthropic.com/api",
+    "useCases": [
+      "AI application backends",
+      "Agentic coding",
+      "Document analysis",
+      "Computer Use automation",
+      "Multi-step agents"
+    ],
+    "pros": [
+      "Claude 4 Opus leads SWE-bench (72.5%)",
+      "200K context window",
+      "Computer Use (GUI automation)",
+      "Extended thinking (3.7 Sonnet)",
+      "MCP tool use",
+      "Prompt caching (90% savings)"
+    ],
+    "cons": [
+      "Cost at scale",
+      "No image generation"
+    ],
+    "alternatives": [
+      "openai-api",
+      "google-ai-studio",
+      "cohere"
+    ],
+    "underlyingModel": [
+      "claude-opus-4-8",
+      "claude-sonnet-4-6",
+      "claude-3-7-sonnet-20250219",
+      "claude-haiku-4-5-20251001"
+    ],
+    "pricingTiers": [
+      {
+        "name": "Claude 4 Opus",
+        "price": "$15/1M input tokens",
+        "features": [
+          "$75/1M output tokens",
+          "200K context",
+          "Best reasoning & coding",
+          "SWE-bench 72.5%",
+          "Prompt caching available"
+        ]
+      },
+      {
+        "name": "Claude 4 Sonnet",
+        "price": "$3/1M input tokens",
+        "features": [
+          "$15/1M output tokens",
+          "200K context",
+          "Best speed/intelligence balance",
+          "Computer Use",
+          "Vision"
+        ]
+      },
+      {
+        "name": "Claude 3.7 Sonnet",
+        "price": "$3/1M input tokens",
+        "features": [
+          "$15/1M output tokens",
+          "200K context",
+          "Extended thinking mode",
+          "Best for complex reasoning tasks"
+        ]
+      },
+      {
+        "name": "Claude 3.5 Haiku",
+        "price": "$0.80/1M input tokens",
+        "features": [
+          "$4/1M output tokens",
+          "200K context",
+          "Fastest Claude",
+          "Best value for high-volume"
+        ]
+      }
+    ],
+    "latestUpdate": "Claude 4 Opus & Sonnet (May 2025) - top SWE-bench scores; claude-haiku-4-5 latest fast model; prompt caching up to 90% cost reduction; MCP tool-use native; batch API for 50% off async tasks"
+  },
+  {
+    "id": "google-ai-studio",
+    "slug": "google-ai-studio",
+    "name": "Google AI Studio",
+    "tagline": "Prototype with Gemini 2.5 Pro - visual playground + generous free tier",
+    "description": "Google AI Studio is a free web-based IDE for prototyping with Gemini models. Access Gemini 2.5 Pro (top coding benchmarks), Gemini 2.5 Flash (fastest), and the Gemini API with 1M token context. Free tier includes 1,500 requests/day.",
+    "category": "APIs",
+    "pricing": "Freemium",
+    "vendor": "Google",
+    "tags": [
+      "API",
+      "Gemini",
+      "Prototyping",
+      "Multimodal",
+      "Free Tier",
+      "Long Context"
+    ],
+    "website": "https://aistudio.google.com",
+    "useCases": [
+      "Gemini prototyping",
+      "Multimodal AI development",
+      "Long-context analysis",
+      "Prompt engineering",
+      "Live API (real-time voice/video)"
+    ],
+    "pros": [
+      "Gemini 2.5 Pro free tier (1,500 req/day)",
+      "1M token context",
+      "Multimodal (text/image/video/audio)",
+      "Live API for real-time streaming",
+      "No setup required"
+    ],
+    "cons": [
+      "Primarily for Gemini models",
+      "Rate limits on free tier",
+      "Stricter safety filters"
+    ],
+    "alternatives": [
+      "openai-api",
+      "anthropic-api",
+      "mistral-api"
+    ],
+    "underlyingModel": [
+      "Gemini 2.5 Pro",
+      "Gemini 2.5 Flash",
+      "Gemini 2.0 Flash",
+      "Gemini 2.0 Flash-Lite"
+    ],
+    "latestUpdate": "Gemini 2.5 Pro API (Mar 2025, top SWE-bench open-model score 63.8%); Live API for real-time audio/video streaming; 1M context window; Grounding with Google Search; code execution sandbox"
+  },
+  {
+    "id": "mistral-api",
+    "slug": "mistral-api",
+    "name": "Mistral API",
+    "tagline": "European AI API - Mistral Large 2, Codestral & EU data residency",
+    "description": "La Plateforme by Mistral AI provides API access to Mistral Large 2 (123B, rivals GPT-4o), Mistral Small 3 (ultra-efficient 24B), Codestral 2501 (best open-source code model), and Pixtral Large (multimodal). EU data residency and competitive pricing.",
+    "category": "APIs",
+    "pricing": "Paid",
+    "vendor": "Mistral AI",
+    "tags": [
+      "API",
+      "European",
+      "Data Sovereignty",
+      "Open-Source Models",
+      "Code",
+      "Multimodal"
+    ],
+    "website": "https://console.mistral.ai",
+    "useCases": [
+      "EU-compliant AI applications",
+      "Code generation",
+      "Cost-efficient inference",
+      "RAG",
+      "Multimodal analysis"
+    ],
+    "pros": [
+      "EU data residency (GDPR-native)",
+      "Codestral best open-source code model",
+      "Mistral Small 3 excellent efficiency",
+      "Open-source weights available",
+      "Competitive pricing"
+    ],
+    "cons": [
+      "Smaller ecosystem vs OpenAI/Anthropic",
+      "Fewer integrations"
+    ],
+    "alternatives": [
+      "openai-api",
+      "anthropic-api",
+      "groq-api"
+    ],
+    "underlyingModel": [
+      "Mistral Large 2 (123B)",
+      "Mistral Small 3 (24B)",
+      "Codestral 2501",
+      "Pixtral Large (multimodal)",
+      "Mistral Nemo (12B)"
+    ],
+    "latestUpdate": "Codestral 2501 (Jan 2025) - 256K context, fill-in-middle, top code benchmark; Mistral Small 3 (Jan 2025) - best-in-class 24B; Le Chat assistant with fast inference; €600M Series B"
+  },
+  {
+    "id": "figma-ai",
+    "slug": "figma-ai",
+    "name": "Figma AI",
+    "tagline": "AI-powered design features built into the industry standard tool",
+    "description": "Figma AI brings generative capabilities directly into Figma, including AI-assisted wireframing, auto-layout, design system search, rename layers, and the ability to generate UI mockups from text descriptions.",
+    "category": "Image Generation",
+    "pricing": "Paid",
+    "vendor": "Figma",
+    "tags": [
+      "Design",
+      "UI/UX",
+      "Wireframing",
+      "Enterprise",
+      "Collaborative"
+    ],
+    "website": "https://figma.com/ai",
+    "useCases": [
+      "UI wireframing",
+      "Design system management",
+      "Prototype generation",
+      "Design iteration"
+    ],
+    "pros": [
+      "Integrated into Figma",
+      "Collaborative design",
+      "Design system aware"
+    ],
+    "cons": [
+      "Requires Figma subscription",
+      "AI features still maturing"
+    ],
+    "alternatives": [
+      "uizard",
+      "galileo-ai",
+      "framer-ai"
+    ]
+  },
+  {
+    "id": "uizard",
+    "slug": "uizard",
+    "name": "Uizard",
+    "tagline": "Transform hand-drawn sketches and screenshots into UI designs",
+    "description": "Uizard uses AI to convert sketches, screenshots, and text descriptions into interactive UI prototypes. Designed for product managers and non-designers who need to create wireframes and mockups quickly without design skills.",
+    "category": "Image Generation",
+    "pricing": "Freemium",
+    "vendor": "Uizard",
+    "tags": [
+      "Design",
+      "UI/UX",
+      "No-Code",
+      "Prototyping",
+      "Sketch-to-UI"
+    ],
+    "website": "https://uizard.io",
+    "useCases": [
+      "Rapid prototyping",
+      "Stakeholder mockups",
+      "Design validation",
+      "Non-designer use"
+    ],
+    "pros": [
+      "Sketch-to-UI conversion",
+      "No design skills needed",
+      "Fast prototyping"
+    ],
+    "cons": [
+      "Limited design fidelity",
+      "Not for production-ready designs"
+    ],
+    "alternatives": [
+      "figma-ai",
+      "galileo-ai",
+      "framer-ai"
+    ]
+  },
+  {
+    "id": "julius-ai",
+    "slug": "julius-ai",
+    "name": "Julius AI",
+    "tagline": "Chat with your data - AI data analysis for everyone",
+    "description": "Julius AI lets you upload spreadsheets, CSVs, and databases and then converse with your data in natural language. It generates charts, performs statistical analysis, and explains findings in plain language without coding.",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "vendor": "Julius AI",
+    "tags": [
+      "Data Analysis",
+      "No-Code",
+      "CSV",
+      "Charts",
+      "Natural Language"
+    ],
+    "website": "https://julius.ai",
+    "useCases": [
+      "Business analytics",
+      "Research data analysis",
+      "Report generation",
+      "Data exploration"
+    ],
+    "pros": [
+      "No coding required",
+      "Explains findings",
+      "Chart generation"
+    ],
+    "cons": [
+      "Limited to uploaded data",
+      "Premium for large files"
+    ],
+    "alternatives": [
+      "chatgpt",
+      "datarobot",
+      "h2o-ai"
+    ]
+  },
+  {
+    "id": "datarobot",
+    "slug": "datarobot",
+    "name": "DataRobot",
+    "tagline": "Enterprise AI platform for automated machine learning",
+    "description": "DataRobot provides an end-to-end enterprise AI platform with AutoML, MLOps, and generative AI capabilities. It automates model selection, training, and deployment, enabling data teams to move from data to production AI faster.",
+    "category": "Platforms",
+    "pricing": "Enterprise",
+    "vendor": "DataRobot",
+    "tags": [
+      "Enterprise",
+      "AutoML",
+      "MLOps",
+      "Predictive AI",
+      "No-Code"
+    ],
+    "website": "https://datarobot.com",
+    "useCases": [
+      "Predictive modeling",
+      "Risk scoring",
+      "Demand forecasting",
+      "AI governance"
+    ],
+    "pros": [
+      "End-to-end platform",
+      "Explainability built-in",
+      "Enterprise security"
+    ],
+    "cons": [
+      "Very expensive",
+      "Complex for simple use cases"
+    ],
+    "alternatives": [
+      "h2o-ai",
+      "databricks",
+      "aws-sagemaker"
+    ]
+  }
+]
