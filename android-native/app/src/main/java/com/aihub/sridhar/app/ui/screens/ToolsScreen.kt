@@ -1,5 +1,7 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,6 +13,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
@@ -61,11 +65,31 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
                 TextButton(onClick = { category = "All"; pricing = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
             }
         }
-        HorizontalDivider()
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .height(1.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        listOf(NeonViolet.copy(alpha = 0.3f), NeonCyan.copy(alpha = 0.2f), Color.Transparent)
+                    )
+                )
+        )
         LazyColumn {
             items(filtered, key = { it.slug }) { tool ->
                 ToolRow(tool = tool, onClick = { onToolClick(tool.slug) })
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .height(1.dp)
+                        .background(
+                            Brush.horizontalGradient(
+                                listOf(NeonViolet.copy(alpha = 0.05f), Color.Transparent)
+                            )
+                        )
+                )
             }
         }
     }
@@ -75,21 +99,54 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
 fun ToolRow(tool: Tool, onClick: () -> Unit) {
     val (bg, fg) = pricingColor(tool.pricing)
     Row(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick).padding(horizontal = 16.dp, vertical = 12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Surface(color = Violet100, contentColor = Violet600, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(40.dp)) {
-            Box(contentAlignment = Alignment.Center) { Icon(Icons.Filled.Build, null, modifier = Modifier.size(20.dp)) }
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(
+                    Brush.linearGradient(
+                        listOf(NeonViolet.copy(alpha = 0.18f), NeonCyan.copy(alpha = 0.10f))
+                    )
+                ),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(Icons.Filled.Build, null, tint = NeonVioletBright, modifier = Modifier.size(20.dp))
         }
         Column(modifier = Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text(tool.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                Text(
+                    tool.name,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = TextPrimary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false),
+                )
                 if (tool.featured) BadgeChip("Featured", Purple100, Purple500)
             }
-            Text("${tool.vendor} · ${tool.category}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
+            Text(
+                "${tool.vendor} · ${tool.category}",
+                style = MaterialTheme.typography.labelSmall,
+                color = TextSecondary,
+                maxLines = 1,
+            )
         }
-        BadgeChip(tool.pricing, bg, fg)
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(6.dp))
+                .background(Brush.linearGradient(listOf(bg, bg.copy(alpha = 0.7f))))
+                .padding(horizontal = 8.dp, vertical = 3.dp),
+        ) {
+            Text(tool.pricing, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = fg)
+        }
     }
 }
 

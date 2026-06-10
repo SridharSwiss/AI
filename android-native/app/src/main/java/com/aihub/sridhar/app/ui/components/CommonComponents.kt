@@ -1,5 +1,7 @@
 package com.aihub.sridhar.app.ui.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,12 +11,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.aihub.sridhar.app.ui.theme.*
 
 /* ── Filter dropdown ─────────────────────────────────────── */
 
@@ -151,5 +157,80 @@ fun TagRow(tags: List<String>, wrap: Boolean = false, modifier: Modifier = Modif
 fun EmptyState(message: String, modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(message, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+/* ── Premium dark components ─────────────────────────────── */
+
+@Composable
+fun GradientBorderCard(
+    gradient: List<Color> = listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f)),
+    modifier: Modifier = Modifier,
+    content: @Composable BoxScope.() -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(16.dp))
+            .background(Dark800)
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(gradient),
+                shape = RoundedCornerShape(16.dp),
+            ),
+        content = content,
+    )
+}
+
+@Composable
+fun GradientDivider(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(1.dp)
+            .background(
+                Brush.horizontalGradient(
+                    listOf(NeonViolet.copy(alpha = 0.3f), NeonCyan.copy(alpha = 0.2f), Color.Transparent)
+                )
+            )
+    )
+}
+
+@Composable
+fun NeonIconBox(
+    icon: ImageVector,
+    gradient: List<Color> = listOf(NeonViolet.copy(alpha = 0.18f), NeonCyan.copy(alpha = 0.10f)),
+    tint: Color = NeonVioletBright,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .size(40.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Brush.linearGradient(gradient)),
+        contentAlignment = Alignment.Center,
+    ) {
+        Icon(icon, null, tint = tint, modifier = Modifier.size(20.dp))
+    }
+}
+
+@Composable
+fun SectionLabel(text: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            text = text.uppercase(),
+            style = MaterialTheme.typography.labelMedium,
+            color = TextMuted,
+            letterSpacing = 1.2.sp,
+            fontWeight = FontWeight.SemiBold,
+        )
+        Spacer(Modifier.height(4.dp))
+        Box(
+            modifier = Modifier
+                .width(28.dp)
+                .height(2.dp)
+                .background(
+                    Brush.horizontalGradient(listOf(NeonViolet, NeonCyan, Color.Transparent))
+                )
+        )
     }
 }
