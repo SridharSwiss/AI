@@ -1,5 +1,8 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,10 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -32,10 +36,10 @@ private data class NavTile(
 )
 
 private val tiles = listOf(
-    NavTile("Case Studies",  "31 case studies",    Icons.Filled.BarChart,   Amber100,   Amber600,   Screen.CaseStudies.route),
-    NavTile("Learn",         "72 resources",        Icons.Filled.School,    Emerald100, Emerald600, Screen.Learn.route),
-    NavTile("Consulting",    "4 phases · 80+ plays",Icons.Filled.Work,      Violet50,   Violet600,  Screen.Consulting.route),
-    NavTile("Companies",     "33 companies",        Icons.Filled.Business,  Blue100,     Blue600,    Screen.Companies.route),
+    NavTile("Case Studies",  "31 case studies",     Icons.Filled.BarChart,   Amber100,   Amber500,   Screen.CaseStudies.route),
+    NavTile("Learn",         "72 resources",         Icons.Filled.School,    Emerald100, Emerald500, Screen.Learn.route),
+    NavTile("Consulting",    "4 phases · 80+ plays", Icons.Filled.Work,      Violet50,   Violet500,  Screen.Consulting.route),
+    NavTile("Companies",     "33 companies",         Icons.Filled.Business,  Blue100,    Blue500,    Screen.Companies.route),
 )
 
 private data class StatItem(val label: String, val value: String)
@@ -50,59 +54,112 @@ private val globalStats = listOf(
 
 @Composable
 fun HomeScreen(onNavigate: (String) -> Unit) {
+    val infiniteTransition = rememberInfiniteTransition(label = "hero_glow")
+    val glowAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.10f,
+        targetValue  = 0.25f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 2800, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse,
+        ),
+        label = "glow_alpha",
+    )
+
     LazyColumn(
-        contentPadding = PaddingValues(bottom = 24.dp),
+        contentPadding = PaddingValues(bottom = 32.dp),
+        modifier = Modifier.background(Dark900),
     ) {
 
         // ── Hero ───────────────────────────────────────────
         item {
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .padding(top = 24.dp, bottom = 20.dp),
+                    .background(Dark900),
             ) {
-                Text(
-                    text = "AIHub",
-                    style = MaterialTheme.typography.displayMedium,
-                    fontWeight = FontWeight.ExtraBold,
-                    color = MaterialTheme.colorScheme.primary,
+                // Animated radial glow overlay
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(180.dp)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(
+                                    NeonViolet.copy(alpha = glowAlpha),
+                                    NeonCyan.copy(alpha = glowAlpha * 0.4f),
+                                    Color.Transparent,
+                                ),
+                                radius = 600f,
+                            )
+                        )
                 )
-                Text(
-                    text = "Your AI intelligence platform",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 2.dp),
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .padding(top = 32.dp, bottom = 24.dp),
+                ) {
+                    Text(
+                        text = "AIHub",
+                        style = MaterialTheme.typography.displayMedium.copy(letterSpacing = (-1).sp),
+                        fontWeight = FontWeight.ExtraBold,
+                        color = TextPrimary,
+                    )
+                    // Gradient accent line below wordmark
+                    Box(
+                        modifier = Modifier
+                            .width(80.dp)
+                            .height(2.dp)
+                            .padding(top = 0.dp)
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(NeonViolet, NeonCyan, Color.Transparent)
+                                )
+                            )
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text = "Your AI intelligence platform",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = TextSecondary,
+                    )
+                }
             }
         }
 
         // ── Stats bar ──────────────────────────────────────
         item {
             LazyRow(
-                contentPadding = PaddingValues(horizontal = 20.dp, vertical = 4.dp),
+                contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 items(globalStats) { stat ->
-                    Surface(
-                        color  = MaterialTheme.colorScheme.surfaceVariant,
-                        shape  = RoundedCornerShape(10.dp),
-                        modifier = Modifier.width(90.dp),
+                    Box(
+                        modifier = Modifier
+                            .width(90.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Dark700)
+                            .border(
+                                width = 1.dp,
+                                brush = Brush.linearGradient(
+                                    listOf(NeonViolet.copy(alpha = 0.4f), NeonCyan.copy(alpha = 0.2f))
+                                ),
+                                shape = RoundedCornerShape(12.dp),
+                            )
+                            .padding(12.dp),
+                        contentAlignment = Alignment.Center,
                     ) {
-                        Column(
-                            modifier = Modifier.padding(12.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text  = stat.value,
                                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
                                 fontWeight = FontWeight.ExtraBold,
-                                color = MaterialTheme.colorScheme.primary,
+                                color = NeonVioletBright,
                             )
                             Text(
                                 text  = stat.label,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = TextMuted,
                             )
                         }
                     }
@@ -112,34 +169,37 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
 
         // ── Section: Explore ───────────────────────────────
         item {
-            SectionHeader("Explore", modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp))
+            GradientSectionHeader(
+                text = "Explore",
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp),
+            )
         }
 
-        // ── Primary tiles (Tools + News — 2 col) ──────────
+        // ── Primary tiles (Tools + Compliance — 2 col) ────
         item {
             Row(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 PrimaryTile(
-                    label = "AI Tools",
-                    stat  = "82 tools across 15 categories",
-                    icon  = Icons.Filled.Build,
-                    bg    = Violet100,
-                    fg    = Violet600,
-                    route = Screen.Tools.route,
-                    onClick = onNavigate,
-                    modifier = Modifier.weight(1f),
+                    label       = "AI Tools",
+                    stat        = "82 tools across 15 categories",
+                    icon        = Icons.Filled.Build,
+                    iconGradient = listOf(NeonViolet.copy(0.18f), NeonCyan.copy(0.10f)),
+                    iconTint    = NeonVioletBright,
+                    route       = Screen.Tools.route,
+                    onClick     = onNavigate,
+                    modifier    = Modifier.weight(1f),
                 )
                 PrimaryTile(
-                    label = "Compliance",
-                    stat  = "16 regulatory frameworks",
-                    icon  = Icons.Filled.Shield,
-                    bg    = Rose100,
-                    fg    = Rose600,
-                    route = Screen.Compliance.route,
-                    onClick = onNavigate,
-                    modifier = Modifier.weight(1f),
+                    label       = "Compliance",
+                    stat        = "16 regulatory frameworks",
+                    icon        = Icons.Filled.Shield,
+                    iconGradient = listOf(NeonPink.copy(0.18f), NeonViolet.copy(0.10f)),
+                    iconTint    = NeonPink,
+                    route       = Screen.Compliance.route,
+                    onClick     = onNavigate,
+                    modifier    = Modifier.weight(1f),
                 )
             }
         }
@@ -156,9 +216,27 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
             }
         }
 
+        // Gradient divider
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .height(1.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            listOf(NeonViolet.copy(0.3f), NeonCyan.copy(0.2f), Color.Transparent)
+                        )
+                    )
+            )
+        }
+
         // ── Featured insight ───────────────────────────────
         item {
-            SectionHeader("Insight", modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
+            GradientSectionHeader(
+                text = "Insight",
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp),
+            )
         }
         item {
             FeaturedInsightCard(
@@ -171,18 +249,36 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
             )
         }
 
+        // Gradient divider
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 8.dp)
+                    .height(1.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            listOf(Color.Transparent, NeonCyan.copy(0.25f), NeonViolet.copy(0.3f), Color.Transparent)
+                        )
+                    )
+            )
+        }
+
         // ── Quick links ────────────────────────────────────
         item {
-            SectionHeader("Quick Access", modifier = Modifier.padding(horizontal = 20.dp).padding(top = 20.dp, bottom = 4.dp))
+            GradientSectionHeader(
+                text = "Quick Access",
+                modifier = Modifier.padding(horizontal = 20.dp).padding(top = 4.dp, bottom = 12.dp),
+            )
         }
         item {
             QuickLinkRow(
                 modifier = Modifier.padding(horizontal = 20.dp),
                 links = listOf(
-                    Triple(Icons.Filled.School, "Learn AI", Screen.Learn.route),
-                    Triple(Icons.Filled.Work,   "Playbooks", Screen.Consulting.route),
-                    Triple(Icons.Filled.Newspaper, "News", Screen.News.route),
-                    Triple(Icons.Filled.Search, "Search", Screen.Search.route),
+                    Triple(Icons.Filled.School,    "Learn AI",  Screen.Learn.route),
+                    Triple(Icons.Filled.Work,      "Playbooks", Screen.Consulting.route),
+                    Triple(Icons.Filled.Newspaper, "News",      Screen.News.route),
+                    Triple(Icons.Filled.Search,    "Search",    Screen.Search.route),
                 ),
                 onNavigate = onNavigate,
             )
@@ -195,31 +291,60 @@ private fun PrimaryTile(
     label: String,
     stat: String,
     icon: ImageVector,
-    bg: Color,
-    fg: Color,
+    iconGradient: List<Color>,
+    iconTint: Color,
     route: String,
     onClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    ElevatedCard(
-        modifier  = modifier.clickable { onClick(route) },
-        shape     = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(16.dp))
+            .background(Dark800)
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(
+                    listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f))
+                ),
+                shape = RoundedCornerShape(16.dp),
+            )
+            .clickable { onClick(route) }
+            .padding(16.dp),
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            Surface(color = bg, contentColor = fg, shape = RoundedCornerShape(12.dp), modifier = Modifier.size(44.dp)) {
-                Box(contentAlignment = Alignment.Center) { Icon(icon, null, modifier = Modifier.size(22.dp)) }
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Brush.linearGradient(iconGradient)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(icon, null, tint = iconTint, modifier = Modifier.size(22.dp))
             }
             Column {
-                Text(label, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Text(stat, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 2.dp))
+                Text(
+                    label,
+                    style = MaterialTheme.typography.titleMedium.copy(letterSpacing = (-0.3).sp),
+                    fontWeight = FontWeight.Bold,
+                    color = TextPrimary,
+                )
+                Text(
+                    stat,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = TextMuted,
+                    modifier = Modifier.padding(top = 2.dp),
+                )
             }
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("Explore", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
-                Icon(Icons.Filled.ArrowForward, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(14.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Text(
+                    "Explore →",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = NeonVioletBright,
+                )
             }
         }
     }
@@ -227,23 +352,53 @@ private fun PrimaryTile(
 
 @Composable
 private fun SecondaryTile(tile: NavTile, onClick: () -> Unit) {
-    Surface(
-        color    = MaterialTheme.colorScheme.surface,
-        shape    = RoundedCornerShape(14.dp),
-        tonalElevation = 1.dp,
-        modifier = Modifier.width(160.dp).clickable(onClick = onClick),
+    Box(
+        modifier = Modifier
+            .width(168.dp)
+            .clip(RoundedCornerShape(14.dp))
+            .background(Dark800)
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(
+                    listOf(NeonViolet.copy(alpha = 0.35f), NeonCyan.copy(alpha = 0.2f))
+                ),
+                shape = RoundedCornerShape(14.dp),
+            )
+            .clickable(onClick = onClick)
+            .padding(12.dp),
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Surface(color = tile.bg, contentColor = tile.fg, shape = RoundedCornerShape(8.dp), modifier = Modifier.size(36.dp)) {
-                Box(contentAlignment = Alignment.Center) { Icon(tile.icon, null, modifier = Modifier.size(18.dp)) }
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(
+                        Brush.linearGradient(listOf(tile.bg, tile.bg.copy(alpha = 0.6f)))
+                    ),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(tile.icon, null, tint = tile.fg, modifier = Modifier.size(18.dp))
             }
             Column {
-                Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(tile.stat, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 1.dp))
+                Text(
+                    tile.label,
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    color = TextPrimary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Text(
+                    tile.stat,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = TextMuted,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 1.dp),
+                )
             }
         }
     }
@@ -258,42 +413,106 @@ private fun FeaturedInsightCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    ElevatedCard(
-        modifier  = modifier.fillMaxWidth(),
-        shape     = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(Dark800)
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(
+                    listOf(NeonPink.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.4f), NeonCyan.copy(alpha = 0.25f))
+                ),
+                shape = RoundedCornerShape(16.dp),
+            )
+            .padding(18.dp),
     ) {
-        Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Surface(color = Rose100, contentColor = Rose600, shape = RoundedCornerShape(6.dp)) {
-                    Text(label, style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp), fontWeight = FontWeight.SemiBold)
-                }
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            // Neon tag chip
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(
+                        Brush.linearGradient(listOf(NeonPink.copy(0.20f), NeonViolet.copy(0.15f)))
+                    )
+                    .padding(horizontal = 8.dp, vertical = 3.dp),
+            ) {
+                Text(
+                    label,
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = NeonPink,
+                )
             }
-            Text(title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
-            Text(body, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 19.sp)
+            Text(
+                title,
+                style = MaterialTheme.typography.titleLarge.copy(letterSpacing = (-0.5).sp),
+                fontWeight = FontWeight.ExtraBold,
+                color = TextPrimary,
+            )
+            Text(
+                body,
+                style = MaterialTheme.typography.bodySmall,
+                color = TextSecondary,
+                lineHeight = 19.sp,
+            )
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                FilledTonalButton(onClick = onClick) {
-                    Text(ctaText, style = MaterialTheme.typography.labelLarge)
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(
+                            Brush.linearGradient(listOf(NeonViolet.copy(0.25f), NeonCyan.copy(0.15f)))
+                        )
+                        .border(
+                            width = 1.dp,
+                            brush = Brush.linearGradient(listOf(NeonViolet.copy(0.6f), NeonCyan.copy(0.4f))),
+                            shape = RoundedCornerShape(8.dp),
+                        )
+                        .clickable(onClick = onClick)
+                        .padding(horizontal = 14.dp, vertical = 8.dp),
+                ) {
+                    Text(
+                        ctaText,
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = NeonVioletBright,
+                    )
                 }
-                Icon(Icons.Filled.Shield, null, tint = Rose600.copy(alpha = 0.25f), modifier = Modifier.size(32.dp))
+                Icon(
+                    Icons.Filled.Shield,
+                    null,
+                    tint = NeonPink.copy(alpha = 0.25f),
+                    modifier = Modifier.size(32.dp),
+                )
             }
         }
     }
 }
 
 @Composable
-private fun SectionHeader(title: String, modifier: Modifier = Modifier) {
-    Text(
-        text     = title.uppercase(),
-        style    = MaterialTheme.typography.labelMedium,
-        color    = MaterialTheme.colorScheme.onSurfaceVariant,
-        modifier = modifier,
-        letterSpacing = 1.sp,
-    )
+private fun GradientSectionHeader(text: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            text = text.uppercase(),
+            style = MaterialTheme.typography.labelMedium,
+            color = TextMuted,
+            letterSpacing = 1.2.sp,
+            fontWeight = FontWeight.SemiBold,
+        )
+        Spacer(Modifier.height(4.dp))
+        Box(
+            modifier = Modifier
+                .width(28.dp)
+                .height(2.dp)
+                .background(
+                    Brush.horizontalGradient(listOf(NeonViolet, NeonCyan, Color.Transparent))
+                )
+        )
+    }
 }
 
 @Composable
@@ -307,18 +526,45 @@ private fun QuickLinkRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         links.forEach { (icon, label, route) ->
-            Surface(
-                color  = MaterialTheme.colorScheme.surfaceVariant,
-                shape  = RoundedCornerShape(12.dp),
-                modifier = Modifier.weight(1f).clickable { onNavigate(route) },
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Dark700)
+                    .border(
+                        width = 1.dp,
+                        brush = Brush.linearGradient(
+                            listOf(NeonViolet.copy(alpha = 0.3f), NeonCyan.copy(alpha = 0.15f))
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                    )
+                    .clickable { onNavigate(route) }
+                    .padding(10.dp),
+                contentAlignment = Alignment.Center,
             ) {
                 Column(
-                    modifier = Modifier.padding(10.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    Icon(icon, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(22.dp))
-                    Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(NeonViolet.copy(0.18f), NeonCyan.copy(0.10f))
+                                )
+                            ),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(icon, null, tint = NeonVioletBright, modifier = Modifier.size(16.dp))
+                    }
+                    Text(
+                        label,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = TextSecondary,
+                        maxLines = 1,
+                    )
                 }
             }
         }

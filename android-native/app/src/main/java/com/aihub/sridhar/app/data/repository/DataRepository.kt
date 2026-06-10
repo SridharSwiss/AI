@@ -24,13 +24,13 @@ class DataRepository(private val context: Context) {
     private val _phases by lazy { json.decodeFromString<List<Phase>>(context.asset("playbooks.json")) }
     private val _newsSources by lazy { json.decodeFromString<List<NewsSource>>(context.asset("news_sources.json")) }
 
-    suspend fun loadTools()        = withContext(Dispatchers.IO) { _tools }
-    suspend fun loadCompanies()    = withContext(Dispatchers.IO) { _companies }
-    suspend fun loadCaseStudies()  = withContext(Dispatchers.IO) { _caseStudies }
-    suspend fun loadCompliance()   = withContext(Dispatchers.IO) { _compliance }
-    suspend fun loadLearn()        = withContext(Dispatchers.IO) { _learnResources }
-    suspend fun loadPhases()       = withContext(Dispatchers.IO) { _phases }
-    suspend fun loadNewsSources()  = withContext(Dispatchers.IO) { _newsSources }
+    suspend fun loadTools()        = withContext(Dispatchers.IO) { runCatching { _tools }.getOrElse { emptyList() } }
+    suspend fun loadCompanies()    = withContext(Dispatchers.IO) { runCatching { _companies }.getOrElse { emptyList() } }
+    suspend fun loadCaseStudies()  = withContext(Dispatchers.IO) { runCatching { _caseStudies }.getOrElse { emptyList() } }
+    suspend fun loadCompliance()   = withContext(Dispatchers.IO) { runCatching { _compliance }.getOrElse { emptyList() } }
+    suspend fun loadLearn()        = withContext(Dispatchers.IO) { runCatching { _learnResources }.getOrElse { emptyList() } }
+    suspend fun loadPhases()       = withContext(Dispatchers.IO) { runCatching { _phases }.getOrElse { emptyList() } }
+    suspend fun loadNewsSources()  = withContext(Dispatchers.IO) { runCatching { _newsSources }.getOrElse { emptyList() } }
 
     suspend fun fetchNewsArticles(): List<NewsArticle> = withContext(Dispatchers.IO) {
         try {
