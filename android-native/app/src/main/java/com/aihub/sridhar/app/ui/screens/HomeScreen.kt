@@ -35,7 +35,7 @@ private val tiles = listOf(
     NavTile("Case Studies",  "31 case studies",    Icons.Filled.BarChart,   Amber100,   Amber600,   Screen.CaseStudies.route),
     NavTile("Learn",         "72 resources",        Icons.Filled.School,    Emerald100, Emerald600, Screen.Learn.route),
     NavTile("Consulting",    "4 phases · 80+ plays",Icons.Filled.Work,      Violet50,   Violet600,  Screen.Consulting.route),
-    NavTile("Companies",     "33 companies",        Icons.Filled.Business,  Blue50,     Blue600,    Screen.Companies.route),
+    NavTile("Companies",     "33 companies",        Icons.Filled.Business,  Blue100,     Blue600,    Screen.Companies.route),
 )
 
 private data class StatItem(val label: String, val value: String)
