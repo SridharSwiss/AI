@@ -5,8 +5,10 @@ build/
 *.apk
 *.ap_
 
-# Local keystore — back this up separately, never commit if it contains prod keys
-# aihub-upload.jks
+# Keystore — back this up in a secure location, never commit
+aihub-upload.jks
+*.jks
+*.keystore
 
 # Android Studio
 *.iml

@@ -1,6 +1,16 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
 }
+
+// Read signing credentials from local.properties (gitignored) or CI environment variables.
+// Never hardcode passwords here — this file is tracked by git.
+val localProps = Properties()
+val localPropsFile = rootProject.file("local.properties")
+if (localPropsFile.exists()) localProps.load(localPropsFile.inputStream())
+
+fun prop(key: String): String? = System.getenv(key) ?: localProps.getProperty(key)
 
 android {
     namespace = "ch.sridharai.hub"
@@ -17,9 +27,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../aihub-upload.jks")
-            storePassword = System.getenv("KEYSTORE_PASS") ?: "aihub2026secure"
+            storePassword = prop("KEYSTORE_PASS") ?: error("KEYSTORE_PASS not set. Add it to local.properties or as an env var.")
             keyAlias = "aihub-upload"
-            keyPassword = System.getenv("KEY_PASS") ?: "aihub2026secure"
+            keyPassword = prop("KEY_PASS") ?: error("KEY_PASS not set. Add it to local.properties or as an env var.")
         }
     }
 
