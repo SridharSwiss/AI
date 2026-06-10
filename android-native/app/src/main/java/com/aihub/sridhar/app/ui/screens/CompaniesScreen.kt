@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.animation.core.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +21,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.Company
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.components.*
@@ -52,42 +54,41 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
         }
     }
 
-    Column {
-        TopAppBar(title = { Text("Companies", fontWeight = FontWeight.Bold) })
-        Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    val infiniteTransition = rememberInfiniteTransition(label = "divider")
+    val animAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.25f, targetValue = 0.6f,
+        animationSpec = infiniteRepeatable(tween(2200, easing = EaseInOut), RepeatMode.Reverse),
+        label = "alpha",
+    )
+
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+        TopAppBar(
+            title = { Text("Companies", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+        )
+        Box(
+            modifier = Modifier.fillMaxWidth().height(1.dp)
+                .background(Brush.horizontalGradient(listOf(NeonCyan.copy(alpha = animAlpha), NeonViolet.copy(alpha = animAlpha * 0.7f), Color.Transparent)))
+        )
+        Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Type",  stage, stages,  { stage = it }, Modifier.weight(1f))
             FilterDropdown("Focus", focus, focuses, { focus = it }, Modifier.weight(1f))
         }
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text("${filtered.size} of ${all.size} companies", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(
+                if (all.isEmpty()) "Loading…" else "${filtered.size} of ${all.size} companies",
+                style = MaterialTheme.typography.labelSmall, color = TextMuted,
+            )
             if (stage != "All" || focus != "All") {
-                TextButton(onClick = { stage = "All"; focus = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
+                TextButton(onClick = { stage = "All"; focus = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall, color = NeonViolet) }
             }
         }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .height(1.dp)
-                .background(
-                    Brush.horizontalGradient(
-                        listOf(NeonCyan.copy(alpha = 0.3f), NeonViolet.copy(alpha = 0.2f), Color.Transparent)
-                    )
-                )
-        )
         LazyColumn {
             items(filtered, key = { it.slug }) { company ->
                 CompanyRow(company = company, onClick = { onCompanyClick(company.slug) })
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .height(1.dp)
-                        .background(
-                            Brush.horizontalGradient(
-                                listOf(NeonViolet.copy(alpha = 0.05f), Color.Transparent)
-                            )
-                        )
+                    modifier = Modifier.fillMaxWidth().padding(start = 72.dp).height(1.dp)
+                        .background(Brush.horizontalGradient(listOf(NeonCyan.copy(alpha = 0.08f), NeonViolet.copy(alpha = 0.05f), Color.Transparent)))
                 )
             }
         }
@@ -132,7 +133,11 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
                 if (company.featured) BadgeChip("Featured", Purple100, Purple500)
             }
             Text(
-                "${company.focus} · ${company.founded}",
+                buildString {
+                    append(company.focus)
+                    if (company.hq.isNotBlank()) append(" · ${company.hq}")
+                    else if (company.founded > 0) append(" · ${company.founded}")
+                },
                 style = MaterialTheme.typography.labelSmall,
                 color = TextSecondary,
                 maxLines = 1,
@@ -159,15 +164,17 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
+        containerColor = Dark900,
         topBar = {
             TopAppBar(
-                title = { Text(company?.name ?: "Company", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back") } },
+                title = { Text(company?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
                 actions = {
                     company?.website?.let { url ->
-                        IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Open website") }
+                        if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Website", tint = NeonCyan) }
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
             )
         }
     ) { padding ->
@@ -194,7 +201,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
             // Key stats
             item {
                 DetailCard(title = "At a Glance", icon = Icons.Filled.Info, iconTint = Blue500) {
-                    DetailRow("Founded", company.founded)
+                    if (company.founded > 0) DetailRow("Founded", company.founded.toString())
                     if (company.hq.isNotBlank()) DetailRow("Headquarters", company.hq)
                     if (company.employees.isNotBlank()) DetailRow("Employees", company.employees)
                     if (company.funding.isNotBlank()) DetailRow("Total Funding", company.funding)
