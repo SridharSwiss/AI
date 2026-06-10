@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.aihub.sridhar.app",
       "sha256_cert_fingerprints": [
-        "3B:7C:15:8E:9C:EC:5E:AC:D3:56:67:37:56:FA:F6:C7:4D:DC:2B:E8:37:65:14:00:BB:3E:14:27:05:60:1D:8E"
+        "3B:7C:15:8E:9C:EC:5E:AC:D3:56:67:37:56:FA:F6:C7:4D:DC:2B:E8:37:65:14:00:BB:3E:14:27:05:60:1D:8E",
+        "34:B4:90:CB:04:9F:29:3D:50:2A:0D:25:83:68:E8:A8:EE:B6:4E:7A:1E:7D:AE:79:DC:9C:E0:13:D4:B3:5B:B5"
       ]
     }
   }

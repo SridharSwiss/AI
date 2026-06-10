@@ -13,15 +13,15 @@ if (localPropsFile.exists()) localProps.load(localPropsFile.inputStream())
 fun prop(key: String): String? = System.getenv(key) ?: localProps.getProperty(key)
 
 android {
-    namespace = "ch.sridharai.hub"
+    namespace = "com.aihub.sridhar.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ch.sridharai.hub"
+        applicationId = "com.aihub.sridhar.app"
         minSdk = 23
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
     }
 
     signingConfigs {

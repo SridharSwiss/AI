@@ -50,7 +50,7 @@
             <!-- File provider for downloads -->
             <meta-data
                 android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
-                android:value="ch.sridharai.hub.fileprovider" />
+                android:value="${applicationId}.fileprovider" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,7 +70,7 @@
         <!-- File provider for handling downloads -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="ch.sridharai.hub.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
