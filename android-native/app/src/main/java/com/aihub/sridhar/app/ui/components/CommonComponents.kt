@@ -1,6 +1,7 @@
 package com.aihub.sridhar.app.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -122,6 +123,7 @@ fun DetailRow(label: String, value: String, modifier: Modifier = Modifier) {
 
 /* ── Tag row (wrapping) ──────────────────────────────────── */
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TagRow(tags: List<String>, wrap: Boolean = false, modifier: Modifier = Modifier) {
     if (wrap) {
