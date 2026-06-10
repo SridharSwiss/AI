@@ -4,7 +4,11 @@ import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+
+private val White       = Color(0xFFFFFFFF)
+private val ZincBorder  = Color(0xFFE4E4E7)
 
 private val DarkColorScheme = darkColorScheme(
     primary            = Violet500,
@@ -30,16 +34,13 @@ private val LightColorScheme = lightColorScheme(
     onSecondary        = Zinc50,
     background         = Zinc50,
     onBackground       = Zinc950,
-    surface            = Color(0xFFFFFFFF),
+    surface            = White,
     onSurface          = Zinc950,
     surfaceVariant     = Zinc100,
     onSurfaceVariant   = Zinc700,
-    outline            = Color(0xFFE4E4E7),
+    outline            = ZincBorder,
     error              = Rose500,
 )
-
-// pull in white as a named constant to keep the import clean
-private val Color = androidx.compose.ui.graphics.Color
 
 @Composable
 fun AIHubTheme(
