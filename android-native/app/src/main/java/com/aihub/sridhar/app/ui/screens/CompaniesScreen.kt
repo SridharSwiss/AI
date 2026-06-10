@@ -6,8 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Business
-import androidx.compose.material.icons.filled.OpenInNew
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,9 +31,9 @@ private fun stageColors(stage: String) = when (stage) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
-    val all = repo.companies
-    val stages     = remember { listOf("All") + all.map { it.stage }.distinct().sorted() }
-    val focusAreas = remember { listOf("All") + all.map { it.focus }.distinct().sorted() }
+    val all     = repo.companies
+    val stages  = remember { listOf("All") + all.map { it.stage }.distinct().sorted() }
+    val focuses = remember { listOf("All") + all.map { it.focus }.distinct().sorted() }
 
     var stage by remember { mutableStateOf("All") }
     var focus by remember { mutableStateOf("All") }
@@ -42,27 +41,23 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
     val filtered = remember(stage, focus) {
         all.filter {
             (stage == "All" || it.stage == stage) &&
-            (focus  == "All" || it.focus == focus)
+            (focus == "All" || it.focus == focus)
         }
     }
 
     Column {
         TopAppBar(title = { Text("Companies", fontWeight = FontWeight.Bold) })
-
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            FilterDropdown("Type",       stage, stages,     { stage = it }, Modifier.weight(1f))
-            FilterDropdown("Focus Area", focus, focusAreas, { focus  = it }, Modifier.weight(1f))
+            FilterDropdown("Type",  stage, stages,  { stage = it }, Modifier.weight(1f))
+            FilterDropdown("Focus", focus, focuses, { focus = it }, Modifier.weight(1f))
         }
-
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text("${filtered.size} of ${all.size} companies", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (stage != "All" || focus != "All") {
                 TextButton(onClick = { stage = "All"; focus = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
             }
         }
-
         HorizontalDivider()
-
         LazyColumn {
             items(filtered, key = { it.slug }) { company ->
                 CompanyRow(company = company, onClick = { onCompanyClick(company.slug) })
@@ -84,12 +79,17 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
             Box(contentAlignment = Alignment.Center) { Icon(Icons.Filled.Business, null, modifier = Modifier.size(20.dp)) }
         }
         Column(modifier = Modifier.weight(1f)) {
-            Text(company.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text(company.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                if (company.featured) BadgeChip("Featured", Purple100, Purple500)
+            }
             Text("${company.focus} · ${company.founded}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
         }
         BadgeChip(company.stage, bg, fg)
     }
 }
+
+/* ── Company detail ──────────────────────────────────────── */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -101,7 +101,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
         topBar = {
             TopAppBar(
                 title = { Text(company?.name ?: "Company", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.Business, null) } },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back") } },
                 actions = {
                     company?.website?.let { url ->
                         IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Open website") }
@@ -111,50 +111,159 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
         }
     ) { padding ->
         if (company == null) { EmptyState("Company not found", Modifier.padding(padding)); return@Scaffold }
-        LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 16.dp)) {
+        val (stageBg, stageFg) = stageColors(company.stage)
+
+        LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+
+            // Badges
             item {
-                val (bg, fg) = stageColors(company.stage)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 16.dp)) {
-                    BadgeChip(company.stage, bg, fg)
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    BadgeChip(company.stage, stageBg, stageFg)
                     BadgeChip(company.focus, Blue100, Blue500)
+                    if (company.featured) BadgeChip("Featured", Purple100, Purple500)
                 }
             }
+
+            // Description
             item {
-                Text(company.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 16.dp))
+                Text(company.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
+
+            // Key stats
             item {
-                Text("Details", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 8.dp))
-                DetailRow("Founded",      company.founded)
-                DetailRow("Focus",        company.focus)
-                DetailRow("Stage",        company.stage)
-                if (company.headquarters.isNotBlank()) DetailRow("HQ", company.headquarters)
-                if (company.employees.isNotBlank())    DetailRow("Employees", company.employees)
-                if (company.valuation.isNotBlank())    DetailRow("Valuation", company.valuation)
-                if (company.funding.isNotBlank())      DetailRow("Funding", company.funding)
+                DetailCard(title = "At a Glance", icon = Icons.Filled.Info, iconTint = Blue500) {
+                    DetailRow("Founded", company.founded)
+                    if (company.hq.isNotBlank()) DetailRow("Headquarters", company.hq)
+                    if (company.employees.isNotBlank()) DetailRow("Employees", company.employees)
+                    if (company.funding.isNotBlank()) DetailRow("Total Funding", company.funding)
+                    company.financials?.let { fin ->
+                        if (fin.latestValuation.isNotBlank()) DetailRow("Valuation", fin.latestValuation)
+                        if (fin.revenue.isNotBlank()) DetailRow("Revenue", "${fin.revenue} (${fin.revenueYear})")
+                        if (fin.profitStatus.isNotBlank()) DetailRow("Profit Status", fin.profitStatus)
+                        if (fin.annualRevenueGrowth.isNotBlank()) DetailRow("Revenue Growth", fin.annualRevenueGrowth)
+                    }
+                }
             }
-            if (company.products.isNotEmpty()) {
+
+            // History
+            if (company.history.isNotBlank()) {
                 item {
-                    Spacer(Modifier.height(16.dp))
-                    Text("Products", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 8.dp))
-                    TagRow(company.products)
+                    DetailCard(title = "History", icon = Icons.Filled.History, iconTint = Amber500) {
+                        Text(company.history, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
                 }
             }
+
+            // Notable Models
+            if (company.notableModels.isNotEmpty()) {
+                item {
+                    DetailCard(title = "Notable Models", icon = Icons.Filled.Memory, iconTint = Violet500) {
+                        TagRow(company.notableModels, wrap = true)
+                    }
+                }
+            }
+
+            // Model details
+            if (company.models.isNotEmpty()) {
+                item {
+                    DetailCard(title = "AI Models", icon = Icons.Filled.Psychology, iconTint = Violet500) {
+                        company.models.forEach { model ->
+                            ElevatedCard(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), shape = RoundedCornerShape(10.dp)) {
+                                Column(Modifier.padding(12.dp)) {
+                                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                        Text(model.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+                                        BadgeChip(model.type, Violet100, Violet600)
+                                    }
+                                    if (model.releaseDate.isNotBlank()) Text(model.releaseDate, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    if (model.contextWindow.isNotBlank()) {
+                                        Spacer(Modifier.height(4.dp))
+                                        BadgeChip("${model.contextWindow} context", Blue100, Blue500)
+                                    }
+                                    if (model.description.isNotBlank()) {
+                                        Spacer(Modifier.height(6.dp))
+                                        Text(model.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Financials — funding rounds
+            company.financials?.let { fin ->
+                if (fin.fundingRounds.isNotEmpty()) {
+                    item {
+                        DetailCard(title = "Funding Rounds", icon = Icons.Filled.AttachMoney, iconTint = Green500) {
+                            fin.fundingRounds.forEach { round ->
+                                Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text("${round.date} · ${round.round}", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
+                                        if (round.investors.isNotEmpty()) Text(round.investors.joinToString(", "), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    }
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(round.amount, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Green500)
+                                }
+                                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                            }
+                            if (fin.keyInvestors.isNotEmpty()) {
+                                Spacer(Modifier.height(8.dp))
+                                Text("Key Investors", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Spacer(Modifier.height(4.dp))
+                                TagRow(fin.keyInvestors, wrap = true)
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Milestones
+            if (company.milestones.isNotEmpty()) {
+                item {
+                    DetailCard(title = "Milestones", icon = Icons.Filled.Timeline, iconTint = Blue500) {
+                        company.milestones.forEach { milestone ->
+                            Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                BadgeChip(milestone.date, Blue100, Blue500)
+                                Text(milestone.event, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Competitors
+            if (company.competitors.isNotEmpty()) {
+                item {
+                    DetailCard(title = "Competitors", icon = Icons.Filled.CompareArrows, iconTint = Zinc400) {
+                        TagRow(company.competitors, wrap = true)
+                    }
+                }
+            }
+
+            // Key People
             if (company.keyPeople.isNotEmpty()) {
                 item {
-                    Spacer(Modifier.height(16.dp))
-                    Text("Key People", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 8.dp))
-                    company.keyPeople.forEach { person ->
-                        Row(modifier = Modifier.padding(bottom = 4.dp)) { Text("• ", color = Violet500, fontWeight = FontWeight.Bold); Text(person, style = MaterialTheme.typography.bodySmall) }
+                    DetailCard(title = "Key People", icon = Icons.Filled.People, iconTint = Blue500) {
+                        company.keyPeople.forEach { person -> BulletItem(person, Blue500) }
                     }
                 }
             }
-            if (company.recentNews.isNotEmpty()) {
+
+            // Products
+            if (company.products.isNotEmpty()) {
                 item {
-                    Spacer(Modifier.height(16.dp))
-                    Text("Recent News", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 8.dp))
-                    company.recentNews.forEach { news ->
-                        Row(modifier = Modifier.padding(bottom = 6.dp), verticalAlignment = Alignment.Top) { Text("• ", color = Violet500, fontWeight = FontWeight.Bold); Text(news, style = MaterialTheme.typography.bodySmall) }
+                    DetailCard(title = "Products", icon = Icons.Filled.Category, iconTint = Violet500) {
+                        TagRow(company.products, wrap = true)
                     }
+                }
+            }
+
+            // Tags
+            if (company.tags.isNotEmpty()) {
+                item {
+                    Text("Tags", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                    Spacer(Modifier.height(6.dp))
+                    TagRow(company.tags, wrap = true)
                 }
             }
         }

@@ -3,7 +3,7 @@ package com.aihub.sridhar.app.ui.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 /* ── Filter dropdown ─────────────────────────────────────── */
 
@@ -27,29 +27,20 @@ fun FilterDropdown(
     modifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = it },
-        modifier = modifier,
-    ) {
+    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }, modifier = modifier) {
         OutlinedTextField(
             value = selected,
             onValueChange = {},
             readOnly = true,
             label = { Text(label, style = MaterialTheme.typography.labelSmall) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
-            modifier = Modifier
-                .menuAnchor()
-                .width(170.dp),
+            modifier = Modifier.menuAnchor().fillMaxWidth(),
             singleLine = true,
             shape = RoundedCornerShape(10.dp),
             textStyle = MaterialTheme.typography.bodySmall,
             colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
         )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
+        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 DropdownMenuItem(
                     text = { Text(option, style = MaterialTheme.typography.bodySmall) },
@@ -69,12 +60,7 @@ fun BadgeChip(
     contentColor: Color,
     modifier: Modifier = Modifier,
 ) {
-    Surface(
-        color = containerColor,
-        contentColor = contentColor,
-        shape = RoundedCornerShape(50),
-        modifier = modifier,
-    ) {
+    Surface(color = containerColor, contentColor = contentColor, shape = RoundedCornerShape(50), modifier = modifier) {
         Text(
             text = text,
             style = MaterialTheme.typography.labelSmall,
@@ -86,83 +72,75 @@ fun BadgeChip(
     }
 }
 
-/* ── Section header ──────────────────────────────────────── */
+/* ── Detail card ─────────────────────────────────────────── */
 
 @Composable
-fun SectionHeader(
+fun DetailCard(
     title: String,
-    count: Int,
-    total: Int,
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "$count of $total",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    }
-}
-
-/* ── Icon container ──────────────────────────────────────── */
-
-@Composable
-fun IconContainer(
     icon: ImageVector,
-    containerColor: Color,
-    contentColor: Color,
+    iconTint: Color,
     modifier: Modifier = Modifier,
-    size: Int = 40,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-    Surface(
-        color = containerColor,
-        contentColor = contentColor,
-        shape = RoundedCornerShape(10.dp),
-        modifier = modifier.size(size.dp),
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size((size * 0.5f).dp))
+    ElevatedCard(modifier = modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) {
+        Column(Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(bottom = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Icon(icon, null, tint = iconTint, modifier = Modifier.size(16.dp))
+                Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+            }
+            content()
         }
     }
 }
 
-/* ── Detail row ──────────────────────────────────────────── */
+/* ── Bullet item ─────────────────────────────────────────── */
+
+@Composable
+fun BulletItem(
+    text: String,
+    color: Color,
+    icon: ImageVector = Icons.Filled.ArrowForward,
+    modifier: Modifier = Modifier,
+) {
+    Row(modifier = modifier.fillMaxWidth().padding(bottom = 4.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        Icon(icon, null, tint = color, modifier = Modifier.size(13.dp).padding(top = 2.dp))
+        Text(text, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+    }
+}
+
+/* ── Detail row (label : value) ──────────────────────────── */
 
 @Composable
 fun DetailRow(label: String, value: String, modifier: Modifier = Modifier) {
     if (value.isBlank()) return
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.weight(1f),
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodySmall,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.weight(2f),
-            textAlign = androidx.compose.ui.text.style.TextAlign.End,
-        )
+    Row(modifier = modifier.fillMaxWidth().padding(vertical = 5.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+        Text(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Medium, modifier = Modifier.weight(2f), textAlign = TextAlign.End)
     }
     HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
+}
+
+/* ── Tag row (wrapping) ──────────────────────────────────── */
+
+@Composable
+fun TagRow(tags: List<String>, wrap: Boolean = false, modifier: Modifier = Modifier) {
+    if (wrap) {
+        FlowRow(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            tags.forEach { tag ->
+                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(50)) {
+                    Text(tag, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), maxLines = 1)
+                }
+            }
+        }
+    } else {
+        Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            tags.take(4).forEach { tag ->
+                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(50)) {
+                    Text(tag, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp), maxLines = 1)
+                }
+            }
+        }
+    }
 }
 
 /* ── Empty state ─────────────────────────────────────────── */
@@ -170,30 +148,6 @@ fun DetailRow(label: String, value: String, modifier: Modifier = Modifier) {
 @Composable
 fun EmptyState(message: String, modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(message, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
-}
-
-/* ── Tag pills ───────────────────────────────────────────── */
-
-@Composable
-fun TagRow(tags: List<String>, modifier: Modifier = Modifier) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-        tags.take(3).forEach { tag ->
-            Surface(
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(50),
-            ) {
-                Text(
-                    text = tag,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp),
-                    maxLines = 1,
-                )
-            }
-        }
+        Text(message, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
