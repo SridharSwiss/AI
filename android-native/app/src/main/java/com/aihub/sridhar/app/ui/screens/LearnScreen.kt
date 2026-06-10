@@ -39,7 +39,8 @@ private fun levelColors(level: String) = when (level) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LearnScreen(repo: DataRepository) {
-    val all    = repo.learnResources
+    var all by remember { mutableStateOf<List<LearnResource>>(emptyList()) }
+    LaunchedEffect(Unit) { all = repo.loadLearn() }
     val types  = remember { listOf("All", "course", "youtube", "certification", "book", "tutorial") }
     val levels = remember { listOf("All", "beginner", "intermediate", "advanced") }
 
@@ -47,7 +48,7 @@ fun LearnScreen(repo: DataRepository) {
     var level    by remember { mutableStateOf("All") }
     var freeOnly by remember { mutableStateOf(false) }
 
-    val filtered = remember(type, level, freeOnly) {
+    val filtered = remember(all, type, level, freeOnly) {
         all.filter {
             (type  == "All" || it.type  == type)  &&
             (level == "All" || it.level == level) &&

@@ -33,14 +33,16 @@ private fun industryColors(industry: String) = when (industry) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) {
-    val all        = repo.caseStudies
-    val industries = remember { listOf("All") + all.map { it.industry }.distinct().sorted() }
-    val allTags    = remember { listOf("All") + all.flatMap { it.tags }.distinct().sorted() }
+    var all by remember { mutableStateOf<List<CaseStudy>>(emptyList()) }
+    LaunchedEffect(Unit) { all = repo.loadCaseStudies() }
+
+    val industries = remember(all) { listOf("All") + all.map { it.industry }.distinct().sorted() }
+    val allTags    = remember(all) { listOf("All") + all.flatMap { it.tags }.distinct().sorted() }
 
     var industry by remember { mutableStateOf("All") }
     var tag      by remember { mutableStateOf("All") }
 
-    val filtered = remember(industry, tag) {
+    val filtered = remember(all, industry, tag) {
         all.filter {
             (industry == "All" || it.industry == industry) &&
             (tag      == "All" || it.tags.contains(tag))
@@ -96,7 +98,8 @@ fun CaseStudyRow(cs: CaseStudy, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
-    val cs = remember(slug) { repo.caseStudies.find { it.slug == slug } }
+    var cs by remember { mutableStateOf<CaseStudy?>(null) }
+    LaunchedEffect(slug) { cs = repo.loadCaseStudies().find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
 
     Scaffold(

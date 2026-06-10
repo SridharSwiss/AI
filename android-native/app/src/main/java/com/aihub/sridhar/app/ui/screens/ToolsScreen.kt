@@ -33,14 +33,16 @@ fun pricingColor(pricing: String): Pair<Color, Color> = when (pricing.lowercase(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
-    val allTools = repo.tools
-    val categories = remember { listOf("All") + allTools.map { it.category }.distinct().sorted() }
+    var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
+    LaunchedEffect(Unit) { allTools = repo.loadTools() }
+
+    val categories = remember(allTools) { listOf("All") + allTools.map { it.category }.distinct().sorted() }
     val pricings   = remember { listOf("All", "Free", "Freemium", "Paid", "Enterprise") }
 
     var category by remember { mutableStateOf("All") }
     var pricing  by remember { mutableStateOf("All") }
 
-    val filtered = remember(category, pricing) {
+    val filtered = remember(allTools, category, pricing) {
         allTools.filter {
             (category == "All" || it.category == category) &&
             (pricing  == "All" || it.pricing.equals(pricing, ignoreCase = true))
@@ -96,7 +98,9 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
-    val tool = remember(slug) { repo.tools.find { it.slug == slug } }
+    var tool by remember { mutableStateOf<Tool?>(null) }
+    var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
+    LaunchedEffect(slug) { allTools = repo.loadTools(); tool = allTools.find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
@@ -114,7 +118,7 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     ) { padding ->
         if (tool == null) { EmptyState("Tool not found", Modifier.padding(padding)); return@Scaffold }
         val (pricingBg, pricingFg) = pricingColor(tool.pricing)
-        val alternatives = remember(tool) { repo.tools.filter { it.slug in tool.alternatives } }
+        val alternatives = remember(tool, allTools) { allTools.filter { it.slug in tool.alternatives } }
 
         LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
 

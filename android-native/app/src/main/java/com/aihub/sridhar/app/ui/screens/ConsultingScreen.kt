@@ -40,11 +40,13 @@ private fun levelColors(level: String) = when (level) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Unit) {
-    val phases     = repo.phases
-    val phaseOpts  = remember { listOf("All") + phases.map { it.label } }
+    var phases by remember { mutableStateOf<List<Phase>>(emptyList()) }
+    LaunchedEffect(Unit) { phases = repo.loadPhases() }
+
+    val phaseOpts  = remember(phases) { listOf("All") + phases.map { it.label } }
     var phaseFilter by remember { mutableStateOf("All") }
 
-    val filtered = remember(phaseFilter) {
+    val filtered = remember(phases, phaseFilter) {
         if (phaseFilter == "All") phases
         else phases.filter { it.label == phaseFilter }
     }
@@ -116,11 +118,17 @@ fun PlaybookRow(pb: Playbook, phase: Phase, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBack: () -> Unit) {
-    val phase = remember(phaseId) { repo.phases.find { it.phase == phaseId } }
+    var phase by remember { mutableStateOf<Phase?>(null) }
+    LaunchedEffect(phaseId) { phase = repo.loadPhases().find { it.phase == phaseId } }
     val pb    = remember(phase, index) { phase?.playbooks?.getOrNull(index) }
 
-    val checkedItems = remember { mutableStateListOf<Boolean>().also { list -> pb?.checklist?.forEach { _ -> list.add(false) } } }
-    val expandedItems = remember { mutableStateListOf<Boolean>().also { list -> pb?.checklist?.forEach { _ -> list.add(false) } } }
+    val checkedItems  = remember { mutableStateListOf<Boolean>() }
+    val expandedItems = remember { mutableStateListOf<Boolean>() }
+    LaunchedEffect(pb) {
+        if (pb != null && checkedItems.isEmpty()) {
+            repeat(pb.checklist.size) { checkedItems.add(false); expandedItems.add(false) }
+        }
+    }
 
     Scaffold(
         topBar = {

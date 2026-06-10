@@ -260,10 +260,11 @@ private fun ShimmerBox(modifier: Modifier = Modifier, width: androidx.compose.ui
 @Composable
 private fun SourcesTab(repo: DataRepository) {
     val uriHandler = LocalUriHandler.current
-    val sources = repo.newsSources
+    var sources by remember { mutableStateOf<List<NewsSource>>(emptyList()) }
+    LaunchedEffect(Unit) { sources = repo.loadNewsSources() }
     var selectedCat by remember { mutableStateOf("All") }
 
-    val filtered = remember(selectedCat) {
+    val filtered = remember(sources, selectedCat) {
         if (selectedCat == "All") sources else sources.filter { it.category == selectedCat }
     }
 

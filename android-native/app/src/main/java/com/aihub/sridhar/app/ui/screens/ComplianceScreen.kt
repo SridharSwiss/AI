@@ -46,14 +46,16 @@ private fun timelineTypeColor(type: String) = when (type.lowercase()) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
-    val all           = repo.compliance
-    val jurisdictions = remember { listOf("All") + all.map { it.jurisdiction }.distinct().sorted() }
+    var all by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
+    LaunchedEffect(Unit) { all = repo.loadCompliance() }
+
+    val jurisdictions = remember(all) { listOf("All") + all.map { it.jurisdiction }.distinct().sorted() }
     val riskLevels    = remember { listOf("All", "low", "medium", "high", "critical") }
 
     var jurisdiction by remember { mutableStateOf("All") }
     var riskLevel    by remember { mutableStateOf("All") }
 
-    val filtered = remember(jurisdiction, riskLevel) {
+    val filtered = remember(all, jurisdiction, riskLevel) {
         all.filter {
             (jurisdiction == "All" || it.jurisdiction == jurisdiction) &&
             (riskLevel    == "All" || it.riskLevel == riskLevel)
@@ -106,7 +108,9 @@ fun ComplianceRow(f: ComplianceFramework, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
-    val f = remember(slug) { repo.compliance.find { it.slug == slug } }
+    var f by remember { mutableStateOf<ComplianceFramework?>(null) }
+    var allCompliance by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
+    LaunchedEffect(slug) { allCompliance = repo.loadCompliance(); f = allCompliance.find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
@@ -331,7 +335,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
             if (f.relatedFrameworks.isNotEmpty()) {
                 item {
                     val relatedNames = remember(f.relatedFrameworks) {
-                        f.relatedFrameworks.map { rid -> repo.compliance.find { it.slug == rid || it.id == rid }?.name ?: rid }
+                        f.relatedFrameworks.map { rid -> allCompliance.find { it.slug == rid || it.id == rid }?.name ?: rid }
                     }
                     DetailCard(title = "Related Frameworks", icon = Icons.Filled.Schema, iconTint = Blue500) {
                         TagRow(relatedNames, wrap = true)

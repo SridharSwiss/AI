@@ -31,14 +31,16 @@ private fun stageColors(stage: String) = when (stage) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
-    val all     = repo.companies
-    val stages  = remember { listOf("All") + all.map { it.stage }.distinct().sorted() }
-    val focuses = remember { listOf("All") + all.map { it.focus }.distinct().sorted() }
+    var all by remember { mutableStateOf<List<Company>>(emptyList()) }
+    LaunchedEffect(Unit) { all = repo.loadCompanies() }
+
+    val stages  = remember(all) { listOf("All") + all.map { it.stage }.distinct().sorted() }
+    val focuses = remember(all) { listOf("All") + all.map { it.focus }.distinct().sorted() }
 
     var stage by remember { mutableStateOf("All") }
     var focus by remember { mutableStateOf("All") }
 
-    val filtered = remember(stage, focus) {
+    val filtered = remember(all, stage, focus) {
         all.filter {
             (stage == "All" || it.stage == stage) &&
             (focus == "All" || it.focus == focus)
@@ -94,7 +96,8 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
-    val company = remember(slug) { repo.companies.find { it.slug == slug } }
+    var company by remember { mutableStateOf<Company?>(null) }
+    LaunchedEffect(slug) { company = repo.loadCompanies().find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
 
     Scaffold(

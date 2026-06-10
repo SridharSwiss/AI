@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.aihub.sridhar.app.data.models.*
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.navigation.Screen
 
@@ -27,20 +28,33 @@ sealed class SearchResult(val route: String) {
 fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
     var query by remember { mutableStateOf("") }
 
-    val results: List<SearchResult> = remember(query) {
+    var allTools        by remember { mutableStateOf<List<Tool>>(emptyList()) }
+    var allCompanies    by remember { mutableStateOf<List<Company>>(emptyList()) }
+    var allCaseStudies  by remember { mutableStateOf<List<CaseStudy>>(emptyList()) }
+    var allCompliance   by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
+    var allLearn        by remember { mutableStateOf<List<LearnResource>>(emptyList()) }
+    LaunchedEffect(Unit) {
+        allTools       = repo.loadTools()
+        allCompanies   = repo.loadCompanies()
+        allCaseStudies = repo.loadCaseStudies()
+        allCompliance  = repo.loadCompliance()
+        allLearn       = repo.loadLearn()
+    }
+
+    val results: List<SearchResult> = remember(query, allTools, allCompanies, allCaseStudies, allCompliance, allLearn) {
         if (query.length < 2) emptyList()
         else {
             val q = query.lowercase()
             buildList {
-                repo.tools.filter { it.name.lowercase().contains(q) || it.tagline.lowercase().contains(q) || it.vendor.lowercase().contains(q) }
+                allTools.filter { it.name.lowercase().contains(q) || it.tagline.lowercase().contains(q) || it.vendor.lowercase().contains(q) }
                     .take(5).forEach { add(SearchResult.ToolResult(it.slug, it.name, "${it.vendor} · ${it.category}")) }
-                repo.companies.filter { it.name.lowercase().contains(q) || it.focus.lowercase().contains(q) || it.description.lowercase().contains(q) }
+                allCompanies.filter { it.name.lowercase().contains(q) || it.focus.lowercase().contains(q) || it.description.lowercase().contains(q) }
                     .take(5).forEach { add(SearchResult.CompanyResult(it.slug, it.name, "${it.focus} · ${it.stage}")) }
-                repo.caseStudies.filter { it.company.lowercase().contains(q) || it.title.lowercase().contains(q) || it.industry.lowercase().contains(q) }
+                allCaseStudies.filter { it.company.lowercase().contains(q) || it.title.lowercase().contains(q) || it.industry.lowercase().contains(q) }
                     .take(5).forEach { add(SearchResult.CaseStudyResult(it.slug, it.company, it.industry)) }
-                repo.compliance.filter { it.name.lowercase().contains(q) || it.jurisdiction.lowercase().contains(q) }
+                allCompliance.filter { it.name.lowercase().contains(q) || it.jurisdiction.lowercase().contains(q) }
                     .take(4).forEach { add(SearchResult.ComplianceResult(it.slug, it.name, it.jurisdiction)) }
-                repo.learnResources.filter { it.title.lowercase().contains(q) || it.provider.lowercase().contains(q) }
+                allLearn.filter { it.title.lowercase().contains(q) || it.provider.lowercase().contains(q) }
                     .take(4).forEach { add(SearchResult.LearnResult(it.slug, it.title, it.provider, it.link)) }
             }
         }

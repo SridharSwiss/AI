@@ -2,6 +2,8 @@ package com.aihub.sridhar.app.data.repository
 
 import android.content.Context
 import com.aihub.sridhar.app.data.models.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
 private val json = Json { ignoreUnknownKeys = true; coerceInputValues = true }
@@ -11,40 +13,27 @@ private fun Context.asset(name: String) =
 
 class DataRepository(private val context: Context) {
 
-    val tools: List<Tool> by lazy {
-        json.decodeFromString(context.asset("tools.json"))
-    }
+    // All lazy delegates are intentionally loaded on IO thread via loadXxx() helpers.
+    // Never call these properties directly from a Composable — use the suspend wrappers.
 
-    val companies: List<Company> by lazy {
-        json.decodeFromString(context.asset("companies.json"))
-    }
+    private val _tools by lazy { json.decodeFromString<List<Tool>>(context.asset("tools.json")) }
+    private val _companies by lazy { json.decodeFromString<List<Company>>(context.asset("companies.json")) }
+    private val _caseStudies by lazy { json.decodeFromString<List<CaseStudy>>(context.asset("case_studies.json")) }
+    private val _compliance by lazy { json.decodeFromString<List<ComplianceFramework>>(context.asset("compliance.json")) }
+    private val _learnResources by lazy { json.decodeFromString<List<LearnResource>>(context.asset("learn.json")) }
+    private val _phases by lazy { json.decodeFromString<List<Phase>>(context.asset("playbooks.json")) }
+    private val _newsSources by lazy { json.decodeFromString<List<NewsSource>>(context.asset("news_sources.json")) }
 
-    val caseStudies: List<CaseStudy> by lazy {
-        json.decodeFromString(context.asset("case_studies.json"))
-    }
+    suspend fun loadTools()        = withContext(Dispatchers.IO) { _tools }
+    suspend fun loadCompanies()    = withContext(Dispatchers.IO) { _companies }
+    suspend fun loadCaseStudies()  = withContext(Dispatchers.IO) { _caseStudies }
+    suspend fun loadCompliance()   = withContext(Dispatchers.IO) { _compliance }
+    suspend fun loadLearn()        = withContext(Dispatchers.IO) { _learnResources }
+    suspend fun loadPhases()       = withContext(Dispatchers.IO) { _phases }
+    suspend fun loadNewsSources()  = withContext(Dispatchers.IO) { _newsSources }
 
-    val compliance: List<ComplianceFramework> by lazy {
-        json.decodeFromString(context.asset("compliance.json"))
-    }
-
-    val learnResources: List<LearnResource> by lazy {
-        json.decodeFromString(context.asset("learn.json"))
-    }
-
-    val phases: List<Phase> by lazy {
-        json.decodeFromString(context.asset("playbooks.json"))
-    }
-
-    val allPlaybooks: List<Pair<Phase, Playbook>> by lazy {
-        phases.flatMap { phase -> phase.playbooks.map { phase to it } }
-    }
-
-    val newsSources: List<NewsSource> by lazy {
-        json.decodeFromString(context.asset("news_sources.json"))
-    }
-
-    suspend fun fetchNewsArticles(): List<NewsArticle> {
-        return try {
+    suspend fun fetchNewsArticles(): List<NewsArticle> = withContext(Dispatchers.IO) {
+        try {
             val url = java.net.URL("https://sridhar-ai.ch/api/news")
             val conn = url.openConnection() as java.net.HttpURLConnection
             conn.connectTimeout = 10_000

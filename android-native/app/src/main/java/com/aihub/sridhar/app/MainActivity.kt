@@ -5,16 +5,21 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.navigation.*
 import com.aihub.sridhar.app.ui.screens.*
-import com.aihub.sridhar.app.ui.theme.AIHubTheme
+import com.aihub.sridhar.app.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,35 +41,13 @@ fun AIHubApp(repo: DataRepository) {
     val topLevelRoutes = bottomNavItems.map { it.screen.route }.toSet()
     val showBottomBar  = currentRoute in topLevelRoutes
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            if (showBottomBar) {
-                NavigationBar {
-                    bottomNavItems.forEach { item ->
-                        val selected = backstackEntry?.destination
-                            ?.hierarchy?.any { it.route == item.screen.route } == true
-                        NavigationBarItem(
-                            selected = selected,
-                            onClick  = {
-                                navController.navigate(item.screen.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState    = true
-                                }
-                            },
-                            icon  = { Icon(if (selected) item.selectedIcon else item.unselectedIcon, item.label) },
-                            label = { Text(item.label, style = androidx.compose.material3.MaterialTheme.typography.labelSmall) },
-                        )
-                    }
-                }
-            }
-        }
-    ) { innerPadding ->
+    Box(modifier = Modifier.fillMaxSize()) {
         NavHost(
             navController    = navController,
             startDestination = Screen.Home.route,
-            modifier         = Modifier.padding(innerPadding),
+            modifier         = Modifier
+                .fillMaxSize()
+                .padding(bottom = if (showBottomBar) 88.dp else 0.dp),
         ) {
             composable(Screen.Home.route) {
                 HomeScreen(onNavigate = { navController.navigate(it) })
@@ -115,6 +98,79 @@ fun AIHubApp(repo: DataRepository) {
             }
             composable(Screen.Search.route) {
                 SearchScreen(repo = repo, onNavigate = { navController.navigate(it) })
+            }
+        }
+
+        // Floating pill navigation
+        if (showBottomBar) {
+            FloatingPillNav(
+                items         = bottomNavItems,
+                currentRoute  = currentRoute,
+                backstackEntry = backstackEntry,
+                modifier      = Modifier.align(Alignment.BottomCenter).padding(bottom = 20.dp),
+                onItemClick   = { item ->
+                    navController.navigate(item.screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        launchSingleTop = true
+                        restoreState    = true
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun FloatingPillNav(
+    items: List<BottomNavItem>,
+    currentRoute: String?,
+    backstackEntry: androidx.navigation.NavBackStackEntry?,
+    modifier: Modifier = Modifier,
+    onItemClick: (BottomNavItem) -> Unit,
+) {
+    Surface(
+        modifier = modifier.clip(RoundedCornerShape(50)),
+        color    = Dark800.copy(alpha = 0.95f),
+        shadowElevation = 16.dp,
+        shape    = RoundedCornerShape(50),
+        tonalElevation = 4.dp,
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            items.forEach { item ->
+                val selected = backstackEntry?.destination
+                    ?.hierarchy?.any { it.route == item.screen.route } == true
+
+                val bgColor = if (selected) NeonViolet.copy(alpha = 0.18f) else Color.Transparent
+                val iconTint = if (selected) NeonViolet else TextSecondary
+
+                Surface(
+                    color  = bgColor,
+                    shape  = RoundedCornerShape(50),
+                    modifier = Modifier,
+                    onClick = { onItemClick(item) },
+                ) {
+                    Column(
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(3.dp),
+                    ) {
+                        Icon(
+                            imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+                            contentDescription = item.label,
+                            tint     = iconTint,
+                            modifier = Modifier.size(22.dp),
+                        )
+                        Text(
+                            text  = item.label,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = iconTint,
+                        )
+                    }
+                }
             }
         }
     }
