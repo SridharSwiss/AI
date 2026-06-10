@@ -11,6 +11,7 @@ import { caseStudies } from "../src/data/case-studies";
 import { complianceFrameworks } from "../src/data/compliance";
 import { learnResources } from "../src/data/learn";
 import { phases } from "../src/data/playbooks";
+import { newsSources } from "../src/data/news-sources";
 
 const OUT_DIR = path.resolve(__dirname, "../../android-native/app/src/main/assets");
 fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -21,11 +22,12 @@ const write = (name: string, data: unknown) => {
   console.log(`✓ ${name}.json  (${(fs.statSync(file).size / 1024).toFixed(1)} KB)`);
 };
 
-write("tools",       tools);
-write("companies",   companies);
+write("tools",        tools);
+write("companies",    companies);
 write("case_studies", caseStudies);
-write("compliance",  complianceFrameworks);
-write("learn",       learnResources);
-write("playbooks",   phases);
+write("compliance",   complianceFrameworks);
+write("learn",        learnResources);
+write("playbooks",    phases);
+write("news_sources", newsSources);
 
 console.log("\nAll data exported to android-native/app/src/main/assets/");

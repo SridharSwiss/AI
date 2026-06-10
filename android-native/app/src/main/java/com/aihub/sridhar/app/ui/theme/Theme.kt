@@ -4,42 +4,50 @@ import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val White       = Color(0xFFFFFFFF)
-private val ZincBorder  = Color(0xFFE4E4E7)
-
 private val DarkColorScheme = darkColorScheme(
-    primary            = Violet500,
+    primary            = Violet400,
     onPrimary          = Zinc950,
     primaryContainer   = Violet600,
-    secondary          = Emerald500,
+    onPrimaryContainer = Zinc100,
+    secondary          = Sky500,
     onSecondary        = Zinc950,
     background         = Zinc950,
-    onBackground       = Zinc100,
-    surface            = Zinc900,
+    onBackground       = Zinc50,
+    surface            = SurfaceDark,
     onSurface          = Zinc100,
     surfaceVariant     = Zinc800,
     onSurfaceVariant   = Zinc400,
     outline            = Zinc700,
+    outlineVariant     = Zinc800,
     error              = Rose500,
+    scrim              = Zinc950,
+    inverseSurface     = Zinc100,
+    inverseOnSurface   = Zinc900,
+    inversePrimary     = Violet600,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary            = Violet600,
-    onPrimary          = Zinc50,
+    primary            = BrandPrimary,
+    onPrimary          = White,
     primaryContainer   = Violet100,
-    secondary          = Emerald500,
-    onSecondary        = Zinc50,
-    background         = Zinc50,
+    onPrimaryContainer = Violet600,
+    secondary          = BrandSecondary,
+    onSecondary        = White,
+    background         = BgLight,
     onBackground       = Zinc950,
-    surface            = White,
+    surface            = SurfaceLight,
     onSurface          = Zinc950,
     surfaceVariant     = Zinc100,
-    onSurfaceVariant   = Zinc700,
-    outline            = ZincBorder,
-    error              = Rose500,
+    onSurfaceVariant   = Zinc600,
+    outline            = Zinc200,
+    outlineVariant     = Zinc100,
+    error              = Rose600,
+    scrim              = Zinc950,
+    inverseSurface     = Zinc900,
+    inverseOnSurface   = Zinc100,
+    inversePrimary     = Violet400,
 )
 
 @Composable

@@ -38,4 +38,23 @@ class DataRepository(private val context: Context) {
     val allPlaybooks: List<Pair<Phase, Playbook>> by lazy {
         phases.flatMap { phase -> phase.playbooks.map { phase to it } }
     }
+
+    val newsSources: List<NewsSource> by lazy {
+        json.decodeFromString(context.asset("news_sources.json"))
+    }
+
+    suspend fun fetchNewsArticles(): List<NewsArticle> {
+        return try {
+            val url = java.net.URL("https://sridhar-ai.ch/api/news")
+            val conn = url.openConnection() as java.net.HttpURLConnection
+            conn.connectTimeout = 10_000
+            conn.readTimeout    = 15_000
+            conn.setRequestProperty("Accept", "application/json")
+            val text = conn.inputStream.bufferedReader().readText()
+            conn.disconnect()
+            json.decodeFromString(text)
+        } catch (_: Exception) {
+            emptyList()
+        }
+    }
 }
