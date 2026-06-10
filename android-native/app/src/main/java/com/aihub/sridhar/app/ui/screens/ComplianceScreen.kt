@@ -126,7 +126,8 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
             )
         }
     ) { padding ->
-        if (f == null) { EmptyState("Framework not found", Modifier.padding(padding)); return@Scaffold }
+        val f = f
+        if (f == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
         val (bg, fg) = riskColors(f.riskLevel)
 
         LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {

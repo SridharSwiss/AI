@@ -110,7 +110,8 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
             )
         }
     ) { padding ->
-        if (cs == null) { EmptyState("Case study not found", Modifier.padding(padding)); return@Scaffold }
+        val cs = cs
+        if (cs == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
         val (indBg, indFg) = industryColors(cs.industry)
 
         LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {

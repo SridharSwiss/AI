@@ -138,7 +138,9 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
             )
         }
     ) { padding ->
-        if (pb == null || phase == null) { EmptyState("Playbook not found", Modifier.padding(padding)); return@Scaffold }
+        val pb = pb
+        val phase = phase
+        if (pb == null || phase == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
         val done  = checkedItems.count { it }
         val total = pb.checklist.size
         val (lBg, lFg) = levelColors(pb.level)

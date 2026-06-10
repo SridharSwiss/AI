@@ -116,7 +116,8 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
             )
         }
     ) { padding ->
-        if (tool == null) { EmptyState("Tool not found", Modifier.padding(padding)); return@Scaffold }
+        val tool = tool
+        if (tool == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
         val (pricingBg, pricingFg) = pricingColor(tool.pricing)
         val alternatives = remember(tool, allTools) { allTools.filter { it.slug in tool.alternatives } }
 
