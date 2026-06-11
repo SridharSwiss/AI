@@ -185,10 +185,10 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
 
             Spacer(Modifier.height(8.dp))
 
-            // ── 2×2 secondary grid (fills remaining space) ──
+            // ── 2×2 secondary grid (fixed height, no stretch) ──
             Column(
-                modifier              = Modifier.weight(1f).fillMaxWidth(),
-                verticalArrangement   = Arrangement.spacedBy(8.dp),
+                modifier            = Modifier.fillMaxWidth().height(216.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Row(
                     modifier              = Modifier.weight(1f).fillMaxWidth(),
@@ -206,7 +206,8 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                 }
             }
 
-            Spacer(Modifier.height(8.dp))
+            // Absorbs leftover space on taller phones
+            Spacer(Modifier.weight(1f))
 
             // ── Quick links bar ──────────────────────────────
             Row(
@@ -265,7 +266,7 @@ private fun PrimaryTile(
             .clickable { onClick(route) }
             .padding(14.dp),
     ) {
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+        Column(modifier = Modifier.fillMaxSize()) {
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -275,10 +276,10 @@ private fun PrimaryTile(
             ) {
                 Icon(icon, null, tint = iconTint, modifier = Modifier.size(20.dp))
             }
-            Column {
-                Text(label, style = MaterialTheme.typography.titleSmall.copy(letterSpacing = (-0.2).sp), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-                Text(desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
-            }
+            Spacer(Modifier.height(8.dp))
+            Text(label, style = MaterialTheme.typography.titleSmall.copy(letterSpacing = (-0.2).sp), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+            Text(desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
+            Spacer(Modifier.weight(1f))
             Text("Explore →", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = if (isDark) NeonVioletBright else NeonViolet.forLightBackground())
         }
     }
@@ -295,7 +296,7 @@ private fun SecondaryTile(tile: NavTile, onClick: () -> Unit, isDark: Boolean, m
             .clickable(onClick = onClick)
             .padding(12.dp),
     ) {
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+        Column(modifier = Modifier.fillMaxSize()) {
             Box(
                 modifier = Modifier
                     .size(36.dp)
@@ -305,10 +306,11 @@ private fun SecondaryTile(tile: NavTile, onClick: () -> Unit, isDark: Boolean, m
             ) {
                 Icon(tile.icon, null, tint = tileTint, modifier = Modifier.size(18.dp))
             }
-            Column {
-                Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
-                Text(tile.desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
-            }
+            Spacer(Modifier.height(8.dp))
+            Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
+            Text(tile.desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
+            Spacer(Modifier.weight(1f))
+            Text("Explore →", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = tileTint)
         }
     }
 }
