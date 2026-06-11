@@ -121,7 +121,7 @@ fun NewsScreen(repo: DataRepository) {
         // Single unified scrollable feed
         LazyColumn(
             modifier       = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(horizontal = 14.dp, bottom = 20.dp),
+            contentPadding = PaddingValues(start = 14.dp, end = 14.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
 
