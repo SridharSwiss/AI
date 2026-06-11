@@ -192,7 +192,10 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                         Text(pb.desc, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                     }
                     if (pb.guidance.isNotBlank()) item {
-                        Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(Brush.linearGradient(listOf(NeonViolet.copy(0.12f), Dark800))).border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.35f), NeonViolet.copy(0.1f))), RoundedCornerShape(12.dp)).padding(14.dp)) {
+                        Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp))
+                            .background(Brush.linearGradient(listOf(NeonViolet.copy(0.12f), MaterialTheme.colorScheme.surface)))
+                            .border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.35f), NeonViolet.copy(0.1f))), RoundedCornerShape(12.dp))
+                            .padding(14.dp)) {
                             Column {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 8.dp)) {
                                     Icon(Icons.Filled.Lightbulb, null, tint = NeonViolet, modifier = Modifier.size(16.dp))
@@ -227,10 +230,11 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                 else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp)) {
                     itemsIndexed(pb.checklist) { i, item ->
                         val checked = checkedItems.getOrElse(i) { false }
+                        val surfaceColor = MaterialTheme.colorScheme.surface
                         Box(
                             modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(RoundedCornerShape(10.dp))
-                                .background(if (checked) Brush.linearGradient(listOf(NeonGreen.copy(0.12f), Dark800)) else Brush.linearGradient(listOf(Dark800, Dark800)))
-                                .border(1.dp, if (checked) NeonGreen.copy(0.4f) else Dark700, RoundedCornerShape(10.dp)),
+                                .background(if (checked) Brush.linearGradient(listOf(NeonGreen.copy(0.12f), surfaceColor)) else Brush.linearGradient(listOf(surfaceColor, surfaceColor)))
+                                .border(1.dp, if (checked) NeonGreen.copy(0.4f) else MaterialTheme.colorScheme.outline, RoundedCornerShape(10.dp)),
                         ) {
                             Column {
                                 Row(

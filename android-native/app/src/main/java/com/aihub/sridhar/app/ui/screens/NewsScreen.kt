@@ -34,7 +34,7 @@ private fun categoryColors(cat: String): Pair<Color, Color> = when (cat) {
     "Medical"     -> Pair(Emerald100, Emerald500)
     "Financial"   -> Pair(Green100,   Green500)
     "Quantum"     -> Pair(Pink100,    Pink500)
-    else          -> Pair(Dark600,    TextSecondary)
+    else          -> Pair(Color(0xFF3F3F46), Color(0xFF71717A))
 }
 
 private val NEWS_CATEGORIES = listOf("All", "Tech", "Research", "Government", "Medical", "Financial", "Quantum", "General")

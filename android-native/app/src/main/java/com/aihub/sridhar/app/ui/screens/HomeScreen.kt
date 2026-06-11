@@ -31,16 +31,43 @@ private data class NavTile(
     val stat: String,
     val desc: String,
     val icon: ImageVector,
-    val iconGradient: List<Color>,
-    val iconTint: Color,
+    val accentColor: Color,
+    val gradientColors: List<Color>,
     val route: String,
 )
 
-private val secondaryTiles = listOf(
-    NavTile("Case Studies",  "31 deep-dives",   "Real ROI from AI deployments",   Icons.Filled.BarChart,  listOf(NeonAmber.copy(0.22f),  NeonGreen.copy(0.12f)),  NeonAmber,  Screen.CaseStudies.route),
-    NavTile("Learn",         "72 resources",     "Courses, papers & tutorials",    Icons.Filled.School,    listOf(NeonGreen.copy(0.22f),  NeonCyan.copy(0.12f)),   NeonGreen,  Screen.Learn.route),
-    NavTile("Consulting",    "80+ playbooks",    "Expert playbooks & guides",      Icons.Filled.Work,      listOf(NeonViolet.copy(0.22f), NeonPink.copy(0.12f)),   NeonViolet, Screen.Consulting.route),
-    NavTile("Companies",     "33 AI companies",  "Track leading AI companies",     Icons.Filled.Business,  listOf(NeonCyan.copy(0.22f),  NeonViolet.copy(0.12f)), NeonCyan,   Screen.Companies.route),
+// 6 tiles — 3 rows × 2 — all destinations in one unified grid
+private val allTiles = listOf(
+    NavTile(
+        label = "AI Tools", stat = "82 tools", desc = "Discover & compare leading AI tools across 15 categories",
+        icon = Icons.Filled.Build, accentColor = NeonViolet,
+        gradientColors = listOf(NeonViolet.copy(0.25f), NeonCyan.copy(0.12f)), route = Screen.Tools.route,
+    ),
+    NavTile(
+        label = "Compliance", stat = "16 frameworks", desc = "EU AI Act, GDPR & global regulatory frameworks",
+        icon = Icons.Filled.Shield, accentColor = NeonPink,
+        gradientColors = listOf(NeonPink.copy(0.25f), NeonViolet.copy(0.12f)), route = Screen.Compliance.route,
+    ),
+    NavTile(
+        label = "Case Studies", stat = "31 deep-dives", desc = "Real ROI data from enterprise AI deployments",
+        icon = Icons.Filled.BarChart, accentColor = NeonAmber,
+        gradientColors = listOf(NeonAmber.copy(0.25f), NeonGreen.copy(0.12f)), route = Screen.CaseStudies.route,
+    ),
+    NavTile(
+        label = "Learn", stat = "72 resources", desc = "Courses, certifications, papers & tutorials",
+        icon = Icons.Filled.School, accentColor = NeonGreen,
+        gradientColors = listOf(NeonGreen.copy(0.25f), NeonCyan.copy(0.12f)), route = Screen.Learn.route,
+    ),
+    NavTile(
+        label = "Consulting", stat = "80+ playbooks", desc = "Expert playbooks, templates & implementation guides",
+        icon = Icons.Filled.Work, accentColor = NeonVioletBright,
+        gradientColors = listOf(NeonViolet.copy(0.25f), NeonPink.copy(0.12f)), route = Screen.Consulting.route,
+    ),
+    NavTile(
+        label = "Companies", stat = "33 companies", desc = "Track funding, models & news from top AI companies",
+        icon = Icons.Filled.Business, accentColor = NeonCyan,
+        gradientColors = listOf(NeonCyan.copy(0.25f), NeonViolet.copy(0.12f)), route = Screen.Companies.route,
+    ),
 )
 
 private val globalStats = listOf(
@@ -51,47 +78,36 @@ private val globalStats = listOf(
     Triple("Frameworks",  "16",   NeonPink),
 )
 
-// ─────────────────────────────────────────────────────────────
-// Home screen — full-screen non-scrolling dashboard
-// ─────────────────────────────────────────────────────────────
-
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     val isDark = LocalDarkTheme.current
     val inf = rememberInfiniteTransition(label = "glow")
     val glowAlpha by inf.animateFloat(
-        initialValue  = 0.08f,
-        targetValue   = 0.22f,
+        initialValue  = 0.06f,
+        targetValue   = 0.18f,
         animationSpec = infiniteRepeatable(tween(2800, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label         = "glow",
     )
 
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        // Ambient radial glow — drawn behind all content (only in dark mode)
         if (isDark) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(280.dp)
-                    .background(
-                        Brush.radialGradient(
-                            listOf(NeonViolet.copy(glowAlpha), NeonCyan.copy(glowAlpha * 0.35f), Color.Transparent),
-                            radius = 700f,
-                        )
-                    )
+                    .fillMaxWidth().height(300.dp)
+                    .background(Brush.radialGradient(
+                        listOf(NeonViolet.copy(glowAlpha), NeonCyan.copy(glowAlpha * 0.3f), Color.Transparent),
+                        radius = 800f,
+                    ))
             )
         }
 
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 20.dp),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
         ) {
-
             // ── Header ──────────────────────────────────────
             Row(
-                modifier              = Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 6.dp),
+                modifier              = Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment     = Alignment.CenterVertically,
             ) {
@@ -104,25 +120,18 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                         ),
                         fontWeight = FontWeight.ExtraBold,
                     )
-                    Box(
-                        modifier = Modifier
-                            .width(60.dp).height(2.dp)
-                            .background(Brush.horizontalGradient(listOf(NeonViolet, NeonCyan, Color.Transparent)))
-                    )
-                    Spacer(Modifier.height(4.dp))
                     Text(
                         "Your AI intelligence platform",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                // Light / Dark toggle
                 IconButton(onClick = onToggleTheme) {
                     Icon(
-                        imageVector = if (isDark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                        imageVector        = if (isDark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
                         contentDescription = "Toggle theme",
-                        tint = if (isDark) NeonAmber else NeonViolet,
-                        modifier = Modifier.size(22.dp),
+                        tint               = if (isDark) NeonAmber else NeonViolet.forLightBackground(),
+                        modifier           = Modifier.size(22.dp),
                     )
                 }
             }
@@ -138,101 +147,37 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                         modifier = Modifier
                             .clip(RoundedCornerShape(10.dp))
                             .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .border(1.dp, Brush.linearGradient(listOf(chipTint.copy(0.40f), chipTint.copy(0.15f))), RoundedCornerShape(10.dp))
-                            .padding(horizontal = 12.dp, vertical = 8.dp),
+                            .border(1.dp, Brush.linearGradient(listOf(chipTint.copy(0.45f), chipTint.copy(0.15f))), RoundedCornerShape(10.dp))
+                            .padding(horizontal = 12.dp, vertical = 7.dp),
                         contentAlignment = Alignment.Center,
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold, color = chipTint)
+                            Text(value, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, color = chipTint)
                             Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
             }
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(6.dp))
 
-            // ── Primary tiles (Tools + Compliance) ──────────
-            Row(
-                modifier              = Modifier.fillMaxWidth().height(124.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-            ) {
-                PrimaryTile(
-                    label        = "AI Tools",
-                    stat         = "82 tools · 15 categories",
-                    desc         = "Discover & compare AI tools",
-                    icon         = Icons.Filled.Build,
-                    iconGradient = listOf(NeonViolet.copy(0.22f), NeonCyan.copy(0.10f)),
-                    iconTint     = if (isDark) NeonVioletBright else NeonViolet.forLightBackground(),
-                    route        = Screen.Tools.route,
-                    onClick      = onNavigate,
-                    isDark       = isDark,
-                    modifier     = Modifier.weight(1f).fillMaxHeight(),
-                )
-                PrimaryTile(
-                    label        = "Compliance",
-                    stat         = "16 regulatory frameworks",
-                    desc         = "EU AI Act, GDPR & more",
-                    icon         = Icons.Filled.Shield,
-                    iconGradient = listOf(NeonPink.copy(0.22f), NeonViolet.copy(0.10f)),
-                    iconTint     = if (isDark) NeonPink else NeonPink.forLightBackground(),
-                    route        = Screen.Compliance.route,
-                    onClick      = onNavigate,
-                    isDark       = isDark,
-                    modifier     = Modifier.weight(1f).fillMaxHeight(),
-                )
-            }
-
-            Spacer(Modifier.height(8.dp))
-
-            // ── 2×2 secondary grid (fixed height, no stretch) ──
+            // ── 3 × 2 tile grid — fills all remaining space ──
             Column(
-                modifier            = Modifier.fillMaxWidth().height(216.dp),
+                modifier            = Modifier.weight(1f).fillMaxWidth().padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Row(
-                    modifier              = Modifier.weight(1f).fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    SecondaryTile(secondaryTiles[0], { onNavigate(secondaryTiles[0].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
-                    SecondaryTile(secondaryTiles[1], { onNavigate(secondaryTiles[1].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
-                }
-                Row(
-                    modifier              = Modifier.weight(1f).fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    SecondaryTile(secondaryTiles[2], { onNavigate(secondaryTiles[2].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
-                    SecondaryTile(secondaryTiles[3], { onNavigate(secondaryTiles[3].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
-                }
-            }
-
-            // Absorbs leftover space on taller phones
-            Spacer(Modifier.weight(1f))
-
-            // ── Quick links bar ──────────────────────────────
-            Row(
-                modifier              = Modifier.fillMaxWidth().padding(bottom = 10.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                listOf(
-                    Triple(Icons.Filled.School,    "Learn",     Screen.Learn.route),
-                    Triple(Icons.Filled.Work,      "Playbooks", Screen.Consulting.route),
-                    Triple(Icons.Filled.Newspaper, "News",      Screen.News.route),
-                    Triple(Icons.Filled.Search,    "Search",    Screen.Search.route),
-                ).forEach { (icon, label, route) ->
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .clip(RoundedCornerShape(12.dp))
-                            .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.28f), NeonCyan.copy(0.14f))), RoundedCornerShape(12.dp))
-                            .clickable { onNavigate(route) }
-                            .padding(vertical = 10.dp),
-                        contentAlignment = Alignment.Center,
+                allTiles.chunked(2).forEach { row ->
+                    Row(
+                        modifier              = Modifier.weight(1f).fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                            Icon(icon, null, tint = if (isDark) NeonVioletBright else NeonViolet.forLightBackground(), modifier = Modifier.size(17.dp))
-                            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        row.forEach { tile ->
+                            DashboardTile(
+                                tile     = tile,
+                                isDark   = isDark,
+                                onClick  = { onNavigate(tile.route) },
+                                modifier = Modifier.weight(1f).fillMaxHeight(),
+                            )
                         }
                     }
                 }
@@ -241,76 +186,82 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     }
 }
 
-// ─────────────────────────────────────────────────────────────
-// Tile composables
-// ─────────────────────────────────────────────────────────────
-
 @Composable
-private fun PrimaryTile(
-    label: String,
-    stat: String,
-    desc: String,
-    icon: ImageVector,
-    iconGradient: List<Color>,
-    iconTint: Color,
-    route: String,
-    onClick: (String) -> Unit,
+private fun DashboardTile(
+    tile: NavTile,
     isDark: Boolean,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val accent = if (isDark) tile.accentColor else tile.accentColor.forLightBackground()
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.surface)
-            .border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.45f), NeonCyan.copy(0.25f))), RoundedCornerShape(16.dp))
-            .clickable { onClick(route) }
-            .padding(14.dp),
-    ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(11.dp))
-                    .background(Brush.linearGradient(iconGradient)),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(icon, null, tint = iconTint, modifier = Modifier.size(20.dp))
-            }
-            Spacer(Modifier.height(8.dp))
-            Text(label, style = MaterialTheme.typography.titleSmall.copy(letterSpacing = (-0.2).sp), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-            Text(desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
-            Spacer(Modifier.weight(1f))
-            Text("Explore →", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = if (isDark) NeonVioletBright else NeonViolet.forLightBackground())
-        }
-    }
-}
-
-@Composable
-private fun SecondaryTile(tile: NavTile, onClick: () -> Unit, isDark: Boolean, modifier: Modifier = Modifier) {
-    val tileTint = if (isDark) tile.iconTint else tile.iconTint.forLightBackground()
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(14.dp))
-            .background(MaterialTheme.colorScheme.surface)
-            .border(1.dp, Brush.linearGradient(listOf(tileTint.copy(0.35f), NeonViolet.copy(0.15f))), RoundedCornerShape(14.dp))
+            .border(
+                1.dp,
+                Brush.linearGradient(listOf(accent.copy(0.40f), accent.copy(0.12f))),
+                RoundedCornerShape(16.dp),
+            )
             .clickable(onClick = onClick)
             .padding(12.dp),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
+            // Icon pill
             Box(
                 modifier = Modifier
-                    .size(36.dp)
-                    .clip(RoundedCornerShape(9.dp))
-                    .background(Brush.linearGradient(tile.iconGradient)),
+                    .size(38.dp)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(Brush.linearGradient(tile.gradientColors)),
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(tile.icon, null, tint = tileTint, modifier = Modifier.size(18.dp))
+                Icon(tile.icon, null, tint = accent, modifier = Modifier.size(19.dp))
             }
             Spacer(Modifier.height(8.dp))
-            Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
-            Text(tile.desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
-            Spacer(Modifier.weight(1f))
-            Text("Explore →", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = tileTint)
+            // Title + stat on same line
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    tile.label,
+                    style      = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold,
+                    color      = MaterialTheme.colorScheme.onSurface,
+                    maxLines   = 1,
+                )
+                Text(
+                    tile.stat,
+                    style   = MaterialTheme.typography.labelSmall,
+                    color   = accent,
+                    maxLines = 1,
+                )
+            }
+            Spacer(Modifier.height(4.dp))
+            // Description fills remaining space naturally
+            Text(
+                tile.desc,
+                style    = MaterialTheme.typography.labelSmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f),
+            )
+            // Accent explore link always pinned to bottom
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(3.dp),
+                modifier = Modifier.padding(top = 4.dp),
+            ) {
+                Text(
+                    "Explore",
+                    style      = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color      = accent,
+                )
+                Icon(Icons.Filled.ArrowForward, null, tint = accent, modifier = Modifier.size(10.dp))
+            }
         }
     }
 }

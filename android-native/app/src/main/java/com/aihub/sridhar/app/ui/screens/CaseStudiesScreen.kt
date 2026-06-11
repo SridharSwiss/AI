@@ -397,7 +397,7 @@ private fun DarkStatChip(label: String, value: String, accentColor: Color, modif
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(10.dp))
-            .background(Brush.linearGradient(listOf(accentColor.copy(0.15f), Dark800)))
+            .background(Brush.linearGradient(listOf(accentColor.copy(0.15f), MaterialTheme.colorScheme.surface)))
             .border(1.dp, Brush.linearGradient(listOf(accentColor.copy(0.4f), accentColor.copy(0.15f))), RoundedCornerShape(10.dp))
             .padding(10.dp),
     ) {
