@@ -282,7 +282,7 @@ private fun ArticleCard(article: NewsArticle) {
                 article.title,
                 style      = MaterialTheme.typography.titleSmall.copy(lineHeight = 19.sp),
                 fontWeight = FontWeight.SemiBold,
-                color      = TextPrimary,
+                color      = MaterialTheme.colorScheme.onSurface,
                 maxLines   = 2,
                 overflow   = TextOverflow.Ellipsis,
                 modifier   = Modifier.padding(bottom = 5.dp),
@@ -291,7 +291,7 @@ private fun ArticleCard(article: NewsArticle) {
                 Text(
                     article.description,
                     style    = MaterialTheme.typography.bodySmall,
-                    color    = TextSecondary,
+                    color    = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(bottom = 7.dp),

@@ -121,7 +121,7 @@ fun CaseStudyRow(cs: CaseStudy, onClick: () -> Unit) {
             Text(
                 cs.title,
                 style    = MaterialTheme.typography.labelSmall,
-                color    = TextSecondary,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -172,12 +172,12 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                 selectedTabIndex = tab,
                 containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonAmber,
-                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {
                 listOf("Story", "Solution", "Results").forEachIndexed { i, t ->
                     Tab(
                         selected = tab == i, onClick = { tab = i },
-                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonAmber else TextSecondary) },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonAmber else MaterialTheme.colorScheme.onSurfaceVariant) },
                     )
                 }
             }
@@ -222,39 +222,39 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                 1 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     if (cs.businessContext.isNotBlank() || cs.strategicDrivers.isNotEmpty()) item {
                         DetailCard(title = "Business Context", icon = Icons.Filled.Business, iconTint = Blue500) {
-                            if (cs.businessContext.isNotBlank()) Text(cs.businessContext, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                            if (cs.businessContext.isNotBlank()) Text(cs.businessContext, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             if (cs.strategicDrivers.isNotEmpty()) {
                                 if (cs.businessContext.isNotBlank()) Spacer(Modifier.height(8.dp))
-                                Text("Strategic Drivers", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("Strategic Drivers", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 cs.strategicDrivers.forEach { BulletItem(it, Violet500) }
                             }
                         }
                     }
                     if (cs.problem.isNotBlank()) item {
                         DetailCard(title = "The Problem", icon = Icons.Filled.Warning, iconTint = Amber500) {
-                            Text(cs.problem, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                            Text(cs.problem, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                     if (cs.solution.isNotBlank()) item {
                         DetailCard(title = "The Solution", icon = Icons.Filled.Lightbulb, iconTint = Violet500) {
-                            Text(cs.solution, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                            Text(cs.solution, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                     if (cs.techStack.isNotEmpty() || cs.architecture.isNotBlank() || cs.dataRequirements.isNotBlank()) item {
                         DetailCard(title = "Technical Stack", icon = Icons.Filled.Code, iconTint = Blue500) {
                             if (cs.techStack.isNotEmpty()) {
-                                Text("Tech Stack", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("Tech Stack", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 TagRow(cs.techStack, wrap = true)
                                 if (cs.architecture.isNotBlank() || cs.dataRequirements.isNotBlank()) Spacer(Modifier.height(8.dp))
                             }
                             if (cs.architecture.isNotBlank()) {
-                                Text("Architecture", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
-                                Text(cs.architecture, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                Text("Architecture", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
+                                Text(cs.architecture, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 if (cs.dataRequirements.isNotBlank()) Spacer(Modifier.height(8.dp))
                             }
                             if (cs.dataRequirements.isNotBlank()) {
-                                Text("Data Requirements", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
-                                Text(cs.dataRequirements, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                Text("Data Requirements", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
+                                Text(cs.dataRequirements, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                         }
                     }
@@ -272,7 +272,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                                         }
                                         if (phase.description.isNotBlank()) {
                                             Spacer(Modifier.height(4.dp))
-                                            Text(phase.description, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                            Text(phase.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                         }
                                         if (phase.keyOutputs.isNotEmpty()) {
                                             Spacer(Modifier.height(4.dp))
@@ -291,12 +291,12 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                                 Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(roiItem.category, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
-                                        if (roiItem.note.isNotBlank()) Text(roiItem.note, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                        if (roiItem.note.isNotBlank()) Text(roiItem.note, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                     Spacer(Modifier.width(8.dp))
                                     Text(roiItem.value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = Green500)
                                 }
-                                Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+                                Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant))
                             }
                         }
                     }
@@ -307,7 +307,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                                     Box(modifier = Modifier.size(20.dp).clip(RoundedCornerShape(50)).background(NeonAmber.copy(0.15f)).border(1.dp, NeonAmber.copy(0.3f), RoundedCornerShape(50)), contentAlignment = Alignment.Center) {
                                         Text("${index + 1}", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = NeonAmber)
                                     }
-                                    Text(challenge, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                    Text(challenge, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                                 }
                             }
                         }
@@ -316,12 +316,12 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                     if (hasGov) item {
                         DetailCard(title = "Governance", icon = Icons.Filled.Shield, iconTint = Rose500) {
                             if (cs.governanceFramework.isNotEmpty()) {
-                                Text("Governance Framework", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("Governance Framework", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 cs.governanceFramework.forEach { BulletItem(it, Rose500, Icons.Filled.CheckCircle) }
                                 Spacer(Modifier.height(8.dp))
                             }
                             if (cs.dataPrivacy.isNotEmpty()) {
-                                Text("Data Privacy", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("Data Privacy", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 cs.dataPrivacy.forEach { BulletItem(it, Blue500, Icons.Filled.CheckCircle) }
                             }
                             if (cs.humanOversight.isNotBlank()) {
@@ -335,29 +335,29 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                     if (cs.lessonsLearned.isNotEmpty() || cs.whatWorkedWell.isNotEmpty()) item {
                         DetailCard(title = "Lessons & Wins", icon = Icons.Filled.School, iconTint = Purple500) {
                             if (cs.lessonsLearned.isNotEmpty()) {
-                                if (cs.whatWorkedWell.isNotEmpty()) Text("Lessons Learned", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                if (cs.whatWorkedWell.isNotEmpty()) Text("Lessons Learned", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 cs.lessonsLearned.forEach { BulletItem(it, Purple500) }
                             }
                             if (cs.whatWorkedWell.isNotEmpty()) {
                                 if (cs.lessonsLearned.isNotEmpty()) Spacer(Modifier.height(8.dp))
-                                Text("What Worked Well", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("What Worked Well", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 cs.whatWorkedWell.forEach { BulletItem(it, Emerald500, Icons.Filled.CheckCircle) }
                             }
                         }
                     }
                     if (cs.outcome.isNotBlank()) item {
                         DetailCard(title = "Outcome", icon = Icons.Filled.OutlinedFlag, iconTint = Emerald500) {
-                            Text(cs.outcome, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                            Text(cs.outcome, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                     if (cs.openSourceRepos.isNotEmpty()) item {
                         DetailCard(title = "Open Source", icon = Icons.Filled.Code, iconTint = Zinc400) {
                             cs.openSourceRepos.forEach { repo ->
-                                Box(modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(RoundedCornerShape(8.dp)).background(Dark700).border(1.dp, Dark500, RoundedCornerShape(8.dp))) {
+                                Box(modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(RoundedCornerShape(8.dp)).background(MaterialTheme.colorScheme.surfaceVariant).border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))) {
                                     Row(modifier = Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                         Column(modifier = Modifier.weight(1f)) {
                                             Text(repo.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
-                                            if (repo.description.isNotBlank()) Text(repo.description, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                            if (repo.description.isNotBlank()) Text(repo.description, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                         }
                                         if (repo.stars.isNotBlank()) {
                                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -377,12 +377,12 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                                     Icon(Icons.Filled.OpenInNew, null, tint = Blue500, modifier = Modifier.size(14.dp))
                                     Text(ref.label, style = MaterialTheme.typography.bodySmall, color = Blue500, modifier = Modifier.weight(1f), maxLines = 2, overflow = TextOverflow.Ellipsis)
                                 }
-                                Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+                                Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant))
                             }
                         }
                     }
                     if (cs.tags.isNotEmpty()) item {
-                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(Modifier.height(8.dp))
                         TagRow(cs.tags, wrap = true)
                     }
@@ -402,7 +402,7 @@ private fun DarkStatChip(label: String, value: String, accentColor: Color, modif
             .padding(10.dp),
     ) {
         Column {
-            Text(label, style = MaterialTheme.typography.labelSmall, color = TextMuted)
+            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = accentColor, maxLines = 2)
         }
     }

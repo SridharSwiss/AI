@@ -165,7 +165,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                             BadgeChip(pb.level, lBg, lFg)
                             BadgeChip(phase.label, Blue100, Blue500)
                         }
-                        Text("$done / $total", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = if (done == total && total > 0) NeonGreen else TextSecondary)
+                        Text("$done / $total", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = if (done == total && total > 0) NeonGreen else MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     Spacer(Modifier.height(8.dp))
                     Box(modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)).background(MaterialTheme.colorScheme.surfaceVariant)) {
@@ -182,7 +182,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                 listOf("About", "Checklist").forEachIndexed { i, t ->
                     Tab(
                         selected = tab == i, onClick = { tab = i },
-                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonGreen else TextSecondary) },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonGreen else MaterialTheme.colorScheme.onSurfaceVariant) },
                     )
                 }
             }
@@ -204,9 +204,9 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                     }
                     item {
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(Dark800).border(1.dp, Dark700, RoundedCornerShape(10.dp)).padding(12.dp)) {
+                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(MaterialTheme.colorScheme.surface).border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(10.dp)).padding(12.dp)) {
                                 Column {
-                                    Text("Phase", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                                    Text("Phase", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     Spacer(Modifier.height(2.dp))
                                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                         Icon(phIcon, null, tint = phFg, modifier = Modifier.size(14.dp))
@@ -214,9 +214,9 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                                     }
                                 }
                             }
-                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(Dark800).border(1.dp, Dark700, RoundedCornerShape(10.dp)).padding(12.dp)) {
+                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(MaterialTheme.colorScheme.surface).border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(10.dp)).padding(12.dp)) {
                                 Column {
-                                    Text("Items", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                                    Text("Items", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     Spacer(Modifier.height(2.dp))
                                     Text("$total checklist items", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                 }
@@ -241,14 +241,14 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                                     Checkbox(
                                         checked = checked,
                                         onCheckedChange = { if (i < checkedItems.size) checkedItems[i] = it },
-                                        colors = CheckboxDefaults.colors(checkedColor = NeonGreen, uncheckedColor = TextSecondary),
+                                        colors = CheckboxDefaults.colors(checkedColor = NeonGreen, uncheckedColor = MaterialTheme.colorScheme.onSurfaceVariant),
                                         modifier = Modifier.size(20.dp),
                                     )
                                     Text(
                                         text = item.item,
                                         style = MaterialTheme.typography.bodySmall,
                                         modifier = Modifier.weight(1f),
-                                        color = if (checked) TextSecondary else TextPrimary,
+                                        color = if (checked) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
                                     )
                                     if (item.sections.isNotEmpty()) {
                                         IconButton(onClick = { if (i < expandedItems.size) expandedItems[i] = !expandedItems[i] }, modifier = Modifier.size(24.dp)) {

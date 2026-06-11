@@ -87,7 +87,7 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
         LazyColumn {
             items(filtered, key = { it.slug }) { f ->
                 ComplianceRow(f = f, onClick = { onFrameworkClick(f.slug) })
-                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
+                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(MaterialTheme.colorScheme.surfaceVariant))
             }
         }
     }
@@ -107,7 +107,7 @@ fun ComplianceRow(f: ComplianceFramework, onClick: () -> Unit) {
         ) { Icon(Icons.Filled.Shield, null, tint = NeonPink, modifier = Modifier.size(22.dp)) }
         Column(modifier = Modifier.weight(1f)) {
             Text(f.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text("${f.jurisdiction} · ${f.enforcementDate}", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
+            Text("${f.jurisdiction} · ${f.enforcementDate}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
         }
         BadgeChip(f.riskLevel.replaceFirstChar { it.uppercase() }, bg, fg)
     }
@@ -147,7 +147,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
             // Compact badge strip + full name
             Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
                 if (f.shortName.isNotBlank() && f.shortName != f.name) {
-                    Text(f.name, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.padding(bottom = 4.dp))
+                    Text(f.name, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     BadgeChip(f.riskLevel.replaceFirstChar { it.uppercase() } + " Risk", bg, fg)
@@ -159,19 +159,19 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                 selectedTabIndex = tab,
                 containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonPink,
-                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {
                 listOf("Overview", "Scope", "Guidance").forEachIndexed { i, t ->
                     Tab(
                         selected = tab == i, onClick = { tab = i },
-                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonPink else TextSecondary) },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonPink else MaterialTheme.colorScheme.onSurfaceVariant) },
                     )
                 }
             }
             when (tab) {
                 0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     item {
-                        Text(f.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                        Text(f.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                     }
                     item {
                         DetailCard(title = "Details", icon = Icons.Filled.Info, iconTint = Blue500) {
@@ -195,12 +195,12 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                     if (f.whoIsAffected.isNotEmpty() || f.whoIsExempt.isNotEmpty()) item {
                         DetailCard(title = "Who Is Affected", icon = Icons.Filled.People, iconTint = Blue500) {
                             if (f.whoIsAffected.isNotEmpty()) {
-                                Text("Affected", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("Affected", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 f.whoIsAffected.forEach { BulletItem(it, Amber500) }
                             }
                             if (f.whoIsExempt.isNotEmpty()) {
                                 if (f.whoIsAffected.isNotEmpty()) Spacer(Modifier.height(8.dp))
-                                Text("Exempt", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                Text("Exempt", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 4.dp))
                                 f.whoIsExempt.forEach { BulletItem(it, Green500) }
                             }
                         }
@@ -215,7 +215,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                 f.riskTiers.forEach { tier ->
                                     val (tBg, tFg) = riskColors(tier.level)
-                                    Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(tFg.copy(0.3f), tFg.copy(0.1f))), RoundedCornerShape(10.dp))) {
+                                    Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(MaterialTheme.colorScheme.surfaceVariant).border(1.dp, Brush.linearGradient(listOf(tFg.copy(0.3f), tFg.copy(0.1f))), RoundedCornerShape(10.dp))) {
                                         Column(modifier = Modifier.padding(12.dp)) {
                                             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                                                 Text(tier.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
@@ -223,7 +223,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                             }
                                             if (tier.description.isNotBlank()) {
                                                 Spacer(Modifier.height(4.dp))
-                                                Text(tier.description, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                                Text(tier.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                             }
                                             if (tier.examples.isNotEmpty()) {
                                                 Spacer(Modifier.height(6.dp))
@@ -268,12 +268,12 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                 Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(impact.sector, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
-                                        if (impact.notes.isNotBlank()) Text(impact.notes, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                        if (impact.notes.isNotBlank()) Text(impact.notes, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                     Spacer(Modifier.width(8.dp))
                                     BadgeChip(impact.impact.replaceFirstChar { it.uppercase() }, iBg, iFg)
                                 }
-                                Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+                                Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant))
                             }
                         }
                     }
@@ -283,7 +283,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                 val dotColor = timelineTypeColor(event.type)
                                 Row(modifier = Modifier.padding(bottom = 10.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                     BadgeChip(event.date, Blue100, dotColor)
-                                    Text(event.milestone, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                    Text(event.milestone, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                                 }
                             }
                         }
@@ -295,7 +295,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                     Box(modifier = Modifier.size(20.dp).clip(RoundedCornerShape(50)).background(NeonGreen.copy(0.15f)).border(1.dp, NeonGreen.copy(0.35f), RoundedCornerShape(50)), contentAlignment = Alignment.Center) {
                                         Text("${i + 1}", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = NeonGreen)
                                     }
-                                    Text(step, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                    Text(step, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                                 }
                             }
                         }
@@ -305,7 +305,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                             f.notableEnforcementCases.forEach { case ->
                                 Row(modifier = Modifier.padding(bottom = 6.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     Icon(Icons.Filled.FiberManualRecord, null, tint = Rose500, modifier = Modifier.size(8.dp).padding(top = 4.dp))
-                                    Text(case, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                    Text(case, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                                 }
                             }
                         }
@@ -319,7 +319,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                         }
                     }
                     if (f.tags.isNotEmpty()) item {
-                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(Modifier.height(8.dp))
                         TagRow(f.tags, wrap = true)
                     }
