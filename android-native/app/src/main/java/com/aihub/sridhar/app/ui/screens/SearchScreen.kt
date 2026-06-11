@@ -1,6 +1,7 @@
 package com.aihub.sridhar.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,12 +12,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.*
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.navigation.Screen
+import com.aihub.sridhar.app.ui.theme.*
 
 sealed class SearchResult(val route: String) {
     data class ToolResult(val slug: String, val name: String, val sub: String) : SearchResult(Screen.ToolDetail.route(slug))
@@ -68,7 +71,7 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
             title = { Text("Search", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
         )
-        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), Color.Transparent))))
 
         OutlinedTextField(
             value = query,
