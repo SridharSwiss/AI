@@ -83,21 +83,55 @@ fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) 
 fun CaseStudyRow(cs: CaseStudy, onClick: () -> Unit) {
     val (bg, fg) = industryColors(cs.industry)
     Row(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick).padding(horizontal = 16.dp, vertical = 12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 11.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Surface(color = Emerald100, contentColor = Emerald500, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(40.dp)) {
-            Box(contentAlignment = Alignment.Center) { Icon(Icons.Filled.TrendingUp, null, modifier = Modifier.size(20.dp)) }
+        // Uniform gradient icon box — matches Tools/Companies/Compliance style
+        Box(
+            modifier = Modifier
+                .size(44.dp)
+                .background(
+                    Brush.linearGradient(listOf(NeonAmber.copy(alpha = 0.22f), NeonGreen.copy(alpha = 0.12f))),
+                    RoundedCornerShape(12.dp),
+                )
+                .border(
+                    1.dp,
+                    Brush.linearGradient(listOf(NeonAmber.copy(0.40f), NeonGreen.copy(0.25f))),
+                    RoundedCornerShape(12.dp),
+                ),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(Icons.Filled.TrendingUp, null, tint = NeonAmber, modifier = Modifier.size(22.dp))
         }
         Column(modifier = Modifier.weight(1f)) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text(cs.company, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
-                if (cs.featured) BadgeChip("Featured", Purple100, Purple500)
-            }
-            Text(cs.metrics.firstOrNull() ?: cs.industry, style = MaterialTheme.typography.labelSmall, color = Emerald500, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            // Explicit color = TextPrimary ensures visibility on Dark900 background
+            Text(
+                cs.company,
+                style      = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.SemiBold,
+                color      = TextPrimary,
+                maxLines   = 1,
+                overflow   = TextOverflow.Ellipsis,
+            )
+            Text(
+                cs.title,
+                style    = MaterialTheme.typography.labelSmall,
+                color    = TextSecondary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
         }
-        BadgeChip(cs.industry, bg, fg)
+        Column(horizontalAlignment = Alignment.End) {
+            BadgeChip(cs.industry, bg, fg)
+            if (cs.featured) {
+                Spacer(Modifier.height(4.dp))
+                BadgeChip("Featured", Purple100, Purple500)
+            }
+        }
     }
 }
 
