@@ -234,6 +234,7 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
     LaunchedEffect(slug) { allTools = repo.loadTools(); tool = allTools.find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
+    var tab by remember { mutableStateOf(0) }
 
     Scaffold(
         containerColor = Dark900,
@@ -252,207 +253,149 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     ) { padding ->
         val tool = tool
         if (tool == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
-
-        val (pricingBg, pricingFg) = pricingColor(tool.pricing)
         val (g1, g2) = pricingGradient(tool.pricing)
         val alternatives = remember(tool, allTools) { allTools.filter { it.slug in tool.alternatives } }
 
-        LazyColumn(
-            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 32.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-        ) {
-
-            // Badges row
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    GradientBadge(tool.pricing, g1, g2)
-                    GradientBadge(tool.category, NeonCyan, NeonViolet)
-                    if (tool.featured) GradientBadge("★ Featured", NeonViolet, NeonPink)
-                    if (tool.apiAvailable) GradientBadge("API", NeonGreen, NeonCyan)
+        Column(modifier = Modifier.fillMaxSize().padding(top = padding.calculateTopPadding())) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                GradientBadge(tool.pricing, g1, g2)
+                GradientBadge(tool.category, NeonCyan, NeonViolet)
+                if (tool.featured) GradientBadge("★ Featured", NeonViolet, NeonPink)
+                if (tool.apiAvailable) GradientBadge("API", NeonGreen, NeonCyan)
+            }
+            TabRow(
+                selectedTabIndex = tab,
+                containerColor = Dark900,
+                contentColor = NeonViolet,
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+            ) {
+                listOf("Overview", "Pricing", "More").forEachIndexed { i, t ->
+                    Tab(
+                        selected = tab == i, onClick = { tab = i },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonViolet else TextSecondary) },
+                    )
                 }
             }
-
-            // Tagline + description
-            item {
-                Text(tool.tagline, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = TextPrimary)
-                Spacer(Modifier.height(6.dp))
-                Text(tool.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
-            }
-
-            // Key stats grid (metrics map)
-            if (tool.metrics.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("Key Stats", Icons.Filled.BarChart, NeonGreen) {
-                        val entries = tool.metrics.entries.toList()
-                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            entries.chunked(2).forEach { row ->
-                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    row.forEach { (k, v) ->
-                                        Surface(
-                                            color = Dark700,
-                                            shape = RoundedCornerShape(10.dp),
-                                            modifier = Modifier.weight(1f).border(1.dp, Brush.linearGradient(listOf(NeonGreen.copy(0.3f), NeonCyan.copy(0.15f))), RoundedCornerShape(10.dp)),
-                                        ) {
-                                            Column(modifier = Modifier.padding(10.dp)) {
-                                                Text(k, style = MaterialTheme.typography.labelSmall, color = TextMuted)
-                                                Text(v, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = NeonGreen)
+            when (tab) {
+                0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    item {
+                        Text(tool.tagline, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = TextPrimary)
+                        Spacer(Modifier.height(6.dp))
+                        Text(tool.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                    }
+                    if (tool.metrics.isNotEmpty()) item {
+                        PremiumDetailCard("Key Stats", Icons.Filled.BarChart, NeonGreen) {
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                tool.metrics.entries.toList().chunked(2).forEach { row ->
+                                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        row.forEach { (k, v) ->
+                                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(NeonGreen.copy(0.3f), NeonCyan.copy(0.15f))), RoundedCornerShape(10.dp)).padding(10.dp)) {
+                                                Column {
+                                                    Text(k, style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                                                    Text(v, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = NeonGreen)
+                                                }
                                             }
                                         }
+                                        if (row.size == 1) Spacer(Modifier.weight(1f))
                                     }
-                                    // If odd number of entries, fill with spacer
-                                    if (row.size == 1) Spacer(Modifier.weight(1f))
                                 }
                             }
                         }
                     }
-                }
-            }
-
-            // History
-            if (tool.history.isNotBlank()) {
-                item {
-                    PremiumDetailCard("Origin Story", Icons.Filled.Star, NeonAmber) {
-                        Text(tool.history, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
-                    }
-                }
-            }
-
-            // Latest update
-            if (tool.latestUpdate.isNotBlank()) {
-                item {
-                    PremiumDetailCard("Latest in 2026", Icons.Filled.FlashOn, NeonCyan) {
-                        Text(tool.latestUpdate, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
-                    }
-                }
-            }
-
-            // Pricing tiers
-            if (tool.pricingTiers.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("Pricing Plans", Icons.Filled.AttachMoney, NeonGreen) {
-                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            tool.pricingTiers.forEach { tier -> PricingTierCard(tier) }
+                    if (tool.pros.isNotEmpty() || tool.cons.isNotEmpty()) item {
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            if (tool.pros.isNotEmpty()) ProConsCard("Pros", tool.pros, NeonGreen, Modifier.weight(1f))
+                            if (tool.cons.isNotEmpty()) ProConsCard("Cons", tool.cons, Rose500, Modifier.weight(1f))
                         }
                     }
                 }
-            }
-
-            // Use cases
-            if (tool.useCases.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("What You Can Do", Icons.Filled.Lightbulb, NeonViolet) {
-                        tool.useCases.forEach { BulletItem(it, NeonViolet, Icons.Filled.ArrowForward) }
-                    }
-                }
-            }
-
-            // Pros & Cons
-            if (tool.pros.isNotEmpty() || tool.cons.isNotEmpty()) {
-                item {
-                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        if (tool.pros.isNotEmpty()) {
-                            ProConsCard("Pros", tool.pros, NeonGreen, Modifier.weight(1f))
-                        }
-                        if (tool.cons.isNotEmpty()) {
-                            ProConsCard("Cons", tool.cons, Rose500, Modifier.weight(1f))
+                1 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    if (tool.pricingTiers.isNotEmpty()) item {
+                        PremiumDetailCard("Pricing Plans", Icons.Filled.AttachMoney, NeonGreen) {
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                tool.pricingTiers.forEach { PricingTierCard(it) }
+                            }
                         }
                     }
-                }
-            }
-
-            // Underlying models
-            if (tool.underlyingModel.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("Powered By", Icons.Filled.Memory, NeonViolet) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
-                            tool.underlyingModel.forEach { m ->
-                                Box(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(6.dp))
-                                        .background(Brush.linearGradient(listOf(NeonViolet.copy(0.2f), NeonPink.copy(0.1f))))
-                                        .border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.4f), NeonPink.copy(0.25f))), RoundedCornerShape(6.dp))
-                                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                                ) {
-                                    Text(m, style = MaterialTheme.typography.labelSmall, color = NeonVioletBright, fontWeight = FontWeight.SemiBold)
+                    if (tool.useCases.isNotEmpty()) item {
+                        PremiumDetailCard("Use Cases", Icons.Filled.Lightbulb, NeonViolet) {
+                            tool.useCases.forEach { BulletItem(it, NeonViolet, Icons.Filled.ArrowForward) }
+                        }
+                    }
+                    if (tool.underlyingModel.isNotEmpty()) item {
+                        PremiumDetailCard("Powered By", Icons.Filled.Memory, NeonViolet) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
+                                tool.underlyingModel.forEach { m ->
+                                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp)).background(Brush.linearGradient(listOf(NeonViolet.copy(0.2f), NeonPink.copy(0.1f)))).border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.4f), NeonPink.copy(0.25f))), RoundedCornerShape(6.dp)).padding(horizontal = 8.dp, vertical = 4.dp)) {
+                                        Text(m, style = MaterialTheme.typography.labelSmall, color = NeonVioletBright, fontWeight = FontWeight.SemiBold)
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            }
-
-            // Platforms & Integrations
-            if (tool.platforms.isNotEmpty() || tool.integrations.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("Availability", Icons.Filled.DevicesOther, NeonCyan) {
-                        if (tool.platforms.isNotEmpty()) {
-                            Text("Platforms", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 6.dp))
-                            TagRow(tool.platforms)
-                            if (tool.integrations.isNotEmpty()) Spacer(Modifier.height(10.dp))
-                        }
-                        if (tool.integrations.isNotEmpty()) {
-                            Text("Integrations", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 6.dp))
-                            TagRow(tool.integrations)
-                        }
-                    }
-                }
-            }
-
-            // Ideal for
-            if (tool.idealFor.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("Ideal For", Icons.Filled.People, NeonCyan) {
-                        tool.idealFor.forEach { BulletItem(it, NeonCyan, Icons.Filled.ArrowForward) }
-                    }
-                }
-            }
-
-            // Alternatives
-            if (alternatives.isNotEmpty()) {
-                item {
-                    PremiumDetailCard("Alternatives", Icons.Filled.CompareArrows, TextMuted) {
-                        alternatives.forEach { alt ->
-                            val (ag1, ag2) = pricingGradient(alt.pricing)
-                            Row(
-                                modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(alt.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
-                                    Text(alt.category, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
-                                }
-                                Box(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(6.dp))
-                                        .border(1.dp, Brush.linearGradient(listOf(ag1.copy(0.5f), ag2.copy(0.3f))), RoundedCornerShape(6.dp))
-                                        .padding(horizontal = 8.dp, vertical = 3.dp)
-                                ) {
-                                    Text(alt.pricing, style = MaterialTheme.typography.labelSmall, color = ag1)
-                                }
+                    if (tool.platforms.isNotEmpty() || tool.integrations.isNotEmpty()) item {
+                        PremiumDetailCard("Availability", Icons.Filled.DevicesOther, NeonCyan) {
+                            if (tool.platforms.isNotEmpty()) {
+                                Text("Platforms", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 6.dp))
+                                TagRow(tool.platforms)
+                                if (tool.integrations.isNotEmpty()) Spacer(Modifier.height(10.dp))
                             }
-                            Box(Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(Dark500, Color.Transparent))))
+                            if (tool.integrations.isNotEmpty()) {
+                                Text("Integrations", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 6.dp))
+                                TagRow(tool.integrations)
+                            }
                         }
                     }
                 }
-            }
-
-            // Details table
-            item {
-                PremiumDetailCard("Details", Icons.Filled.Info, NeonCyan) {
-                    PremiumDetailRow("Vendor",    tool.vendor)
-                    PremiumDetailRow("Category",  tool.category)
-                    PremiumDetailRow("Pricing",   tool.pricing)
-                    if (tool.launchDate.isNotBlank()) PremiumDetailRow("Launched", tool.launchDate)
-                }
-            }
-
-            // Tags
-            if (tool.tags.isNotEmpty()) {
-                item {
-                    Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
-                    Spacer(Modifier.height(8.dp))
-                    TagRow(tool.tags, wrap = true)
+                else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    if (tool.history.isNotBlank()) item {
+                        PremiumDetailCard("Origin Story", Icons.Filled.Star, NeonAmber) {
+                            Text(tool.history, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                        }
+                    }
+                    if (tool.latestUpdate.isNotBlank()) item {
+                        PremiumDetailCard("Latest in 2026", Icons.Filled.FlashOn, NeonCyan) {
+                            Text(tool.latestUpdate, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                        }
+                    }
+                    if (tool.idealFor.isNotEmpty()) item {
+                        PremiumDetailCard("Ideal For", Icons.Filled.People, NeonCyan) {
+                            tool.idealFor.forEach { BulletItem(it, NeonCyan, Icons.Filled.ArrowForward) }
+                        }
+                    }
+                    if (alternatives.isNotEmpty()) item {
+                        PremiumDetailCard("Alternatives", Icons.Filled.CompareArrows, TextMuted) {
+                            alternatives.forEach { alt ->
+                                val (ag1, ag2) = pricingGradient(alt.pricing)
+                                Row(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(alt.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                        Text(alt.category, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                    }
+                                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp)).border(1.dp, Brush.linearGradient(listOf(ag1.copy(0.5f), ag2.copy(0.3f))), RoundedCornerShape(6.dp)).padding(horizontal = 8.dp, vertical = 3.dp)) {
+                                        Text(alt.pricing, style = MaterialTheme.typography.labelSmall, color = ag1)
+                                    }
+                                }
+                                Box(Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(Dark500, Color.Transparent))))
+                            }
+                        }
+                    }
+                    item {
+                        PremiumDetailCard("Details", Icons.Filled.Info, NeonCyan) {
+                            PremiumDetailRow("Vendor", tool.vendor)
+                            PremiumDetailRow("Category", tool.category)
+                            PremiumDetailRow("Pricing", tool.pricing)
+                            if (tool.launchDate.isNotBlank()) PremiumDetailRow("Launched", tool.launchDate)
+                        }
+                    }
+                    if (tool.tags.isNotEmpty()) item {
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Spacer(Modifier.height(8.dp))
+                        TagRow(tool.tags, wrap = true)
+                    }
                 }
             }
         }

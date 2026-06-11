@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -126,7 +127,7 @@ fun PlaybookRow(pb: Playbook, phase: Phase, onClick: () -> Unit) {
 fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBack: () -> Unit) {
     var phase by remember { mutableStateOf<Phase?>(null) }
     LaunchedEffect(phaseId) { phase = repo.loadPhases().find { it.phase == phaseId } }
-    val pb    = remember(phase, index) { phase?.playbooks?.getOrNull(index) }
+    val pb = remember(phase, index) { phase?.playbooks?.getOrNull(index) }
 
     val checkedItems  = remember { mutableStateListOf<Boolean>() }
     val expandedItems = remember { mutableStateListOf<Boolean>() }
@@ -135,6 +136,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
             repeat(pb.checklist.size) { checkedItems.add(false); expandedItems.add(false) }
         }
     }
+    var tab by remember { mutableStateOf(0) }
 
     Scaffold(
         containerColor = Dark900,
@@ -152,81 +154,126 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
         val done  = checkedItems.count { it }
         val total = pb.checklist.size
         val (lBg, lFg) = levelColors(pb.level)
+        val (phBg, phFg, phIcon) = phaseColors(phase.phase)
 
-        LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 16.dp)) {
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 12.dp)) {
-                    BadgeChip(pb.level, lBg, lFg)
-                    BadgeChip(phase.label, Blue100, Blue500)
-                }
-                Text(pb.desc, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 12.dp))
-            }
-            item {
-                LinearProgressIndicator(
-                    progress = { if (total > 0) done.toFloat() / total else 0f },
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
-                )
-                Text("$done / $total completed", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 16.dp))
-            }
-            if (pb.guidance.isNotBlank()) {
-                item {
-                    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
-                        Text(pb.guidance, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(12.dp))
+        Column(modifier = Modifier.fillMaxSize().padding(top = padding.calculateTopPadding())) {
+            // Progress bar always visible at top
+            Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+                Column {
+                    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            BadgeChip(pb.level, lBg, lFg)
+                            BadgeChip(phase.label, Blue100, Blue500)
+                        }
+                        Text("$done / $total", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = if (done == total && total > 0) NeonGreen else TextSecondary)
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    Box(modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)).background(Dark700)) {
+                        Box(modifier = Modifier.fillMaxWidth(if (total > 0) done.toFloat() / total else 0f).height(4.dp).clip(RoundedCornerShape(2.dp)).background(Brush.horizontalGradient(listOf(NeonGreen, NeonCyan))))
                     }
                 }
             }
-            item {
-                Text("Checklist", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 8.dp))
+            TabRow(
+                selectedTabIndex = tab,
+                containerColor = Dark900,
+                contentColor = NeonGreen,
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+            ) {
+                listOf("About", "Checklist").forEachIndexed { i, t ->
+                    Tab(
+                        selected = tab == i, onClick = { tab = i },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonGreen else TextSecondary) },
+                    )
+                }
             }
-            itemsIndexed(pb.checklist) { i, item ->
-                Surface(
-                    color = if (checkedItems.getOrElse(i) { false }) Emerald100.copy(alpha = 0.4f) else MaterialTheme.colorScheme.surface,
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp),
-                    tonalElevation = 1.dp,
-                ) {
-                    Column {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            Checkbox(
-                                checked  = checkedItems.getOrElse(i) { false },
-                                onCheckedChange = { if (i < checkedItems.size) checkedItems[i] = it },
-                                colors = CheckboxDefaults.colors(checkedColor = Emerald500),
-                                modifier = Modifier.size(20.dp),
-                            )
-                            Text(
-                                text  = item.item,
-                                style = MaterialTheme.typography.bodySmall,
-                                modifier = Modifier.weight(1f),
-                                color = if (checkedItems.getOrElse(i) { false }) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
-                            )
-                            if (item.sections.isNotEmpty()) {
-                                IconButton(onClick = { if (i < expandedItems.size) expandedItems[i] = !expandedItems[i] }, modifier = Modifier.size(24.dp)) {
-                                    Icon(
-                                        if (expandedItems.getOrElse(i) { false }) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                                        "Toggle template",
-                                        modifier = Modifier.size(18.dp),
-                                        tint = Violet500,
-                                    )
+            when (tab) {
+                0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    item {
+                        Text(pb.desc, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                    }
+                    if (pb.guidance.isNotBlank()) item {
+                        Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(Brush.linearGradient(listOf(NeonViolet.copy(0.12f), Dark800))).border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.35f), NeonViolet.copy(0.1f))), RoundedCornerShape(12.dp)).padding(14.dp)) {
+                            Column {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 8.dp)) {
+                                    Icon(Icons.Filled.Lightbulb, null, tint = NeonViolet, modifier = Modifier.size(16.dp))
+                                    Text("Guidance", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = NeonViolet)
+                                }
+                                Text(pb.guidance, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                            }
+                        }
+                    }
+                    item {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(Dark800).border(1.dp, Dark700, RoundedCornerShape(10.dp)).padding(12.dp)) {
+                                Column {
+                                    Text("Phase", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                                    Spacer(Modifier.height(2.dp))
+                                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Icon(phIcon, null, tint = phFg, modifier = Modifier.size(14.dp))
+                                        Text(phase.label, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                    }
+                                }
+                            }
+                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(Dark800).border(1.dp, Dark700, RoundedCornerShape(10.dp)).padding(12.dp)) {
+                                Column {
+                                    Text("Items", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                                    Spacer(Modifier.height(2.dp))
+                                    Text("$total checklist items", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
                                 }
                             }
                         }
-                        if (expandedItems.getOrElse(i) { false } && item.sections.isNotEmpty()) {
-                            Surface(color = Violet500.copy(alpha = 0.06f), modifier = Modifier.fillMaxWidth()) {
-                                Column(modifier = Modifier.padding(12.dp)) {
-                                    Text(item.templateTitle, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = Violet500, modifier = Modifier.padding(bottom = 4.dp))
-                                    if (item.instructions.isNotBlank()) {
-                                        Text(item.instructions, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 8.dp))
+                    }
+                }
+                else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp)) {
+                    itemsIndexed(pb.checklist) { i, item ->
+                        val checked = checkedItems.getOrElse(i) { false }
+                        Box(
+                            modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(RoundedCornerShape(10.dp))
+                                .background(if (checked) Brush.linearGradient(listOf(NeonGreen.copy(0.12f), Dark800)) else Brush.linearGradient(listOf(Dark800, Dark800)))
+                                .border(1.dp, if (checked) NeonGreen.copy(0.4f) else Dark700, RoundedCornerShape(10.dp)),
+                        ) {
+                            Column {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth().padding(12.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    Checkbox(
+                                        checked = checked,
+                                        onCheckedChange = { if (i < checkedItems.size) checkedItems[i] = it },
+                                        colors = CheckboxDefaults.colors(checkedColor = NeonGreen, uncheckedColor = TextSecondary),
+                                        modifier = Modifier.size(20.dp),
+                                    )
+                                    Text(
+                                        text = item.item,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.weight(1f),
+                                        color = if (checked) TextSecondary else TextPrimary,
+                                    )
+                                    if (item.sections.isNotEmpty()) {
+                                        IconButton(onClick = { if (i < expandedItems.size) expandedItems[i] = !expandedItems[i] }, modifier = Modifier.size(24.dp)) {
+                                            Icon(
+                                                if (expandedItems.getOrElse(i) { false }) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                                                "Toggle",
+                                                modifier = Modifier.size(18.dp),
+                                                tint = NeonViolet,
+                                            )
+                                        }
                                     }
-                                    item.sections.forEach { section ->
-                                        Text(section.heading, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = Violet500, modifier = Modifier.padding(bottom = 4.dp, top = 4.dp))
-                                        section.items.forEachIndexed { qi, q ->
-                                            Row(modifier = Modifier.padding(bottom = 3.dp)) {
-                                                Text("${qi + 1}. ", style = MaterialTheme.typography.labelSmall, color = Violet500, fontWeight = FontWeight.Bold)
-                                                Text(q, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                                if (expandedItems.getOrElse(i) { false } && item.sections.isNotEmpty()) {
+                                    Box(modifier = Modifier.fillMaxWidth().background(NeonViolet.copy(alpha = 0.06f))) {
+                                        Column(modifier = Modifier.padding(12.dp)) {
+                                            if (item.templateTitle.isNotBlank()) Text(item.templateTitle, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = NeonViolet, modifier = Modifier.padding(bottom = 4.dp))
+                                            if (item.instructions.isNotBlank()) Text(item.instructions, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.padding(bottom = 8.dp))
+                                            item.sections.forEach { section ->
+                                                Text(section.heading, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = NeonViolet, modifier = Modifier.padding(bottom = 4.dp, top = 4.dp))
+                                                section.items.forEachIndexed { qi, q ->
+                                                    Row(modifier = Modifier.padding(bottom = 3.dp)) {
+                                                        Text("${qi + 1}. ", style = MaterialTheme.typography.labelSmall, color = NeonViolet, fontWeight = FontWeight.Bold)
+                                                        Text(q, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                                    }
+                                                }
                                             }
                                         }
                                     }

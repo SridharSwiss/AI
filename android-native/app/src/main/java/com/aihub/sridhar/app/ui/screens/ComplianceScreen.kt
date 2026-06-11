@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -121,6 +122,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
     var allCompliance by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
     LaunchedEffect(slug) { allCompliance = repo.loadCompliance(); f = allCompliance.find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
+    var tab by remember { mutableStateOf(0) }
 
     Scaffold(
         containerColor = Dark900,
@@ -141,12 +143,11 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
         if (f == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
         val (bg, fg) = riskColors(f.riskLevel)
 
-        LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-
-            // Full name + badges
-            item {
+        Column(modifier = Modifier.fillMaxSize().padding(top = padding.calculateTopPadding())) {
+            // Compact badge strip + full name
+            Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
                 if (f.shortName.isNotBlank() && f.shortName != f.name) {
-                    Text(f.name, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 6.dp))
+                    Text(f.name, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.padding(bottom = 4.dp))
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     BadgeChip(f.riskLevel.replaceFirstChar { it.uppercase() } + " Risk", bg, fg)
@@ -154,213 +155,174 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                     BadgeChip(f.jurisdiction, Emerald100, Emerald500)
                 }
             }
-
-            // Description
-            item {
-                Text(f.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-
-            // Key details
-            item {
-                DetailCard(title = "Details", icon = Icons.Filled.Info, iconTint = Blue500) {
-                    DetailRow("Jurisdiction",      f.jurisdiction)
-                    DetailRow("Status",            f.status)
-                    DetailRow("Enforcement Date",  f.enforcementDate)
-                    DetailRow("Risk Level",        f.riskLevel.replaceFirstChar { it.uppercase() })
-                    if (f.enforcingAuthority.isNotBlank()) DetailRow("Enforcing Authority", f.enforcingAuthority)
-                    if (f.scope.isNotBlank())       DetailRow("Scope", f.scope)
-                    if (f.affectedOrgs.isNotBlank()) DetailRow("Affected Orgs", f.affectedOrgs)
-                    if (f.penalties.isNotBlank())   DetailRow("Penalties", f.penalties)
+            TabRow(
+                selectedTabIndex = tab,
+                containerColor = Dark900,
+                contentColor = NeonPink,
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+            ) {
+                listOf("Overview", "Scope", "Guidance").forEachIndexed { i, t ->
+                    Tab(
+                        selected = tab == i, onClick = { tab = i },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonPink else TextSecondary) },
+                    )
                 }
             }
-
-            // Key requirements
-            if (f.keyRequirements.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Key Requirements", icon = Icons.Filled.CheckCircle, iconTint = Emerald500) {
-                        f.keyRequirements.forEach { BulletItem(it, Emerald500, Icons.Filled.CheckCircle) }
+            when (tab) {
+                0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    item {
+                        Text(f.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
                     }
-                }
-            }
-
-            // Who is affected / exempt
-            if (f.whoIsAffected.isNotEmpty() || f.whoIsExempt.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Scope of Application", icon = Icons.Filled.People, iconTint = Blue500) {
-                        if (f.whoIsAffected.isNotEmpty()) {
-                            Text("Who Is Affected", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 4.dp))
-                            f.whoIsAffected.forEach { BulletItem(it, Amber500) }
+                    item {
+                        DetailCard(title = "Details", icon = Icons.Filled.Info, iconTint = Blue500) {
+                            DetailRow("Jurisdiction", f.jurisdiction)
+                            DetailRow("Status", f.status)
+                            DetailRow("Enforcement Date", f.enforcementDate)
+                            DetailRow("Risk Level", f.riskLevel.replaceFirstChar { it.uppercase() })
+                            if (f.enforcingAuthority.isNotBlank()) DetailRow("Enforcing Authority", f.enforcingAuthority)
+                            if (f.scope.isNotBlank()) DetailRow("Scope", f.scope)
+                            if (f.affectedOrgs.isNotBlank()) DetailRow("Affected Orgs", f.affectedOrgs)
+                            if (f.penalties.isNotBlank()) DetailRow("Penalties", f.penalties)
                         }
-                        if (f.whoIsExempt.isNotEmpty()) {
-                            if (f.whoIsAffected.isNotEmpty()) Spacer(Modifier.height(8.dp))
-                            Text("Who Is Exempt", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 4.dp))
-                            f.whoIsExempt.forEach { BulletItem(it, Green500) }
+                    }
+                    if (f.keyRequirements.isNotEmpty()) item {
+                        DetailCard(title = "Key Requirements", icon = Icons.Filled.CheckCircle, iconTint = Emerald500) {
+                            f.keyRequirements.forEach { BulletItem(it, Emerald500, Icons.Filled.CheckCircle) }
                         }
                     }
                 }
-            }
-
-            // Key prohibitions
-            if (f.keyProhibitions.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Key Prohibitions", icon = Icons.Filled.Block, iconTint = Rose500) {
-                        f.keyProhibitions.forEach { BulletItem(it, Rose500, Icons.Filled.Cancel) }
+                1 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    if (f.whoIsAffected.isNotEmpty() || f.whoIsExempt.isNotEmpty()) item {
+                        DetailCard(title = "Who Is Affected", icon = Icons.Filled.People, iconTint = Blue500) {
+                            if (f.whoIsAffected.isNotEmpty()) {
+                                Text("Affected", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                f.whoIsAffected.forEach { BulletItem(it, Amber500) }
+                            }
+                            if (f.whoIsExempt.isNotEmpty()) {
+                                if (f.whoIsAffected.isNotEmpty()) Spacer(Modifier.height(8.dp))
+                                Text("Exempt", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 4.dp))
+                                f.whoIsExempt.forEach { BulletItem(it, Green500) }
+                            }
+                        }
                     }
-                }
-            }
-
-            // Risk Tiers
-            if (f.riskTiers.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Risk Tiers", icon = Icons.Filled.Layers, iconTint = Amber500) {
-                        f.riskTiers.forEach { tier ->
-                            val (tBg, tFg) = riskColors(tier.level)
-                            ElevatedCard(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), shape = RoundedCornerShape(10.dp)) {
-                                Column(Modifier.padding(12.dp)) {
-                                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                                        Text(tier.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
-                                        BadgeChip(tier.level.replaceFirstChar { it.uppercase() }, tBg, tFg)
-                                    }
-                                    if (tier.description.isNotBlank()) {
-                                        Spacer(Modifier.height(4.dp))
-                                        Text(tier.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    }
-                                    if (tier.examples.isNotEmpty()) {
-                                        Spacer(Modifier.height(6.dp))
-                                        Text("Examples:", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        tier.examples.forEach { BulletItem(it, Amber500) }
-                                    }
-                                    if (tier.requirements.isNotEmpty()) {
-                                        Spacer(Modifier.height(4.dp))
-                                        Text("Requirements:", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        tier.requirements.forEach { BulletItem(it, Emerald500, Icons.Filled.CheckCircle) }
+                    if (f.keyProhibitions.isNotEmpty()) item {
+                        DetailCard(title = "Key Prohibitions", icon = Icons.Filled.Block, iconTint = Rose500) {
+                            f.keyProhibitions.forEach { BulletItem(it, Rose500, Icons.Filled.Cancel) }
+                        }
+                    }
+                    if (f.riskTiers.isNotEmpty()) item {
+                        DetailCard(title = "Risk Tiers", icon = Icons.Filled.Layers, iconTint = Amber500) {
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                f.riskTiers.forEach { tier ->
+                                    val (tBg, tFg) = riskColors(tier.level)
+                                    Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(tFg.copy(0.3f), tFg.copy(0.1f))), RoundedCornerShape(10.dp))) {
+                                        Column(modifier = Modifier.padding(12.dp)) {
+                                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                                Text(tier.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(1f))
+                                                BadgeChip(tier.level.replaceFirstChar { it.uppercase() }, tBg, tFg)
+                                            }
+                                            if (tier.description.isNotBlank()) {
+                                                Spacer(Modifier.height(4.dp))
+                                                Text(tier.description, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                            }
+                                            if (tier.examples.isNotEmpty()) {
+                                                Spacer(Modifier.height(6.dp))
+                                                tier.examples.forEach { BulletItem(it, Amber500) }
+                                            }
+                                            if (tier.requirements.isNotEmpty()) {
+                                                Spacer(Modifier.height(4.dp))
+                                                tier.requirements.forEach { BulletItem(it, Emerald500, Icons.Filled.CheckCircle) }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-            }
-
-            // Guardrails
-            if (f.guardrails.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Guardrails", icon = Icons.Filled.Security, iconTint = Violet500) {
-                        f.guardrails.forEach { BulletItem(it, Violet500) }
+                    if (f.guardrails.isNotEmpty()) item {
+                        DetailCard(title = "Guardrails", icon = Icons.Filled.Security, iconTint = Violet500) {
+                            f.guardrails.forEach { BulletItem(it, Violet500) }
+                        }
                     }
                 }
-            }
-
-            // Technical Requirements
-            if (f.technicalRequirements.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Technical Requirements", icon = Icons.Filled.Code, iconTint = Blue500) {
-                        f.technicalRequirements.forEach { BulletItem(it, Blue500) }
+                else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    if (f.technicalRequirements.isNotEmpty()) item {
+                        DetailCard(title = "Technical Requirements", icon = Icons.Filled.Code, iconTint = Blue500) {
+                            f.technicalRequirements.forEach { BulletItem(it, Blue500) }
+                        }
                     }
-                }
-            }
-
-            // Exposure Areas
-            if (f.exposureAreas.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Exposure Areas", icon = Icons.Filled.Warning, iconTint = Amber500) {
-                        f.exposureAreas.forEach { BulletItem(it, Amber500) }
+                    if (f.exposureAreas.isNotEmpty()) item {
+                        DetailCard(title = "Exposure Areas", icon = Icons.Filled.Warning, iconTint = Amber500) {
+                            f.exposureAreas.forEach { BulletItem(it, Amber500) }
+                        }
                     }
-                }
-            }
-
-            // Implementation Guidance
-            if (f.implementationGuidance.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Implementation Guidance", icon = Icons.Filled.PlayArrow, iconTint = Green500) {
-                        f.implementationGuidance.forEach { BulletItem(it, Green500, Icons.Filled.ArrowForward) }
+                    if (f.implementationGuidance.isNotEmpty()) item {
+                        DetailCard(title = "Implementation Guidance", icon = Icons.Filled.PlayArrow, iconTint = Green500) {
+                            f.implementationGuidance.forEach { BulletItem(it, Green500, Icons.Filled.ArrowForward) }
+                        }
                     }
-                }
-            }
-
-            // Industry Impact
-            if (f.industryImpact.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Industry Impact", icon = Icons.Filled.Business, iconTint = Blue500) {
-                        f.industryImpact.forEach { impact ->
-                            val (iBg, iFg) = impactColors(impact.impact)
-                            Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(impact.sector, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
-                                    if (impact.notes.isNotBlank()) Text(impact.notes, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (f.industryImpact.isNotEmpty()) item {
+                        DetailCard(title = "Industry Impact", icon = Icons.Filled.Business, iconTint = Blue500) {
+                            f.industryImpact.forEach { impact ->
+                                val (iBg, iFg) = impactColors(impact.impact)
+                                Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(impact.sector, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                        if (impact.notes.isNotBlank()) Text(impact.notes, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                    }
+                                    Spacer(Modifier.width(8.dp))
+                                    BadgeChip(impact.impact.replaceFirstChar { it.uppercase() }, iBg, iFg)
                                 }
-                                Spacer(Modifier.width(8.dp))
-                                BadgeChip(impact.impact.replaceFirstChar { it.uppercase() }, iBg, iFg)
-                            }
-                            Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
-                        }
-                    }
-                }
-            }
-
-            // Timeline
-            if (f.timeline.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Timeline", icon = Icons.Filled.Timeline, iconTint = Blue500) {
-                        f.timeline.forEach { event ->
-                            val dotColor = timelineTypeColor(event.type)
-                            Row(modifier = Modifier.padding(bottom = 10.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                BadgeChip(event.date, Blue100, dotColor)
-                                Text(event.milestone, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                                Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
                             }
                         }
                     }
-                }
-            }
-
-            // Compliance Roadmap
-            if (f.complianceRoadmap.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Compliance Roadmap", icon = Icons.Filled.Route, iconTint = Green500) {
-                        f.complianceRoadmap.forEachIndexed { i, step ->
-                            Row(modifier = Modifier.padding(bottom = 8.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Surface(color = Green100, contentColor = Green500, shape = RoundedCornerShape(50), modifier = Modifier.size(20.dp)) {
-                                    Box(contentAlignment = Alignment.Center) { Text("${i + 1}", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold) }
+                    if (f.timeline.isNotEmpty()) item {
+                        DetailCard(title = "Timeline", icon = Icons.Filled.Timeline, iconTint = Blue500) {
+                            f.timeline.forEach { event ->
+                                val dotColor = timelineTypeColor(event.type)
+                                Row(modifier = Modifier.padding(bottom = 10.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    BadgeChip(event.date, Blue100, dotColor)
+                                    Text(event.milestone, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
                                 }
-                                Text(step, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
                             }
                         }
                     }
-                }
-            }
-
-            // Notable Enforcement Cases
-            if (f.notableEnforcementCases.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Notable Enforcement Cases", icon = Icons.Filled.Policy, iconTint = Rose500) {
-                        f.notableEnforcementCases.forEach { case ->
-                            Row(modifier = Modifier.padding(bottom = 6.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Icon(Icons.Filled.FiberManualRecord, null, tint = Rose500, modifier = Modifier.size(8.dp).padding(top = 4.dp))
-                                Text(case, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                    if (f.complianceRoadmap.isNotEmpty()) item {
+                        DetailCard(title = "Compliance Roadmap", icon = Icons.Filled.Route, iconTint = Green500) {
+                            f.complianceRoadmap.forEachIndexed { i, step ->
+                                Row(modifier = Modifier.padding(bottom = 8.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    Box(modifier = Modifier.size(20.dp).clip(RoundedCornerShape(50)).background(NeonGreen.copy(0.15f)).border(1.dp, NeonGreen.copy(0.35f), RoundedCornerShape(50)), contentAlignment = Alignment.Center) {
+                                        Text("${i + 1}", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = NeonGreen)
+                                    }
+                                    Text(step, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                }
                             }
                         }
                     }
-                }
-            }
-
-            // Related Frameworks
-            if (f.relatedFrameworks.isNotEmpty()) {
-                item {
-                    val relatedNames = remember(f.relatedFrameworks) {
-                        f.relatedFrameworks.map { rid -> allCompliance.find { it.slug == rid || it.id == rid }?.name ?: rid }
+                    if (f.notableEnforcementCases.isNotEmpty()) item {
+                        DetailCard(title = "Enforcement Cases", icon = Icons.Filled.Policy, iconTint = Rose500) {
+                            f.notableEnforcementCases.forEach { case ->
+                                Row(modifier = Modifier.padding(bottom = 6.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Icon(Icons.Filled.FiberManualRecord, null, tint = Rose500, modifier = Modifier.size(8.dp).padding(top = 4.dp))
+                                    Text(case, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                }
+                            }
+                        }
                     }
-                    DetailCard(title = "Related Frameworks", icon = Icons.Filled.Schema, iconTint = Blue500) {
-                        TagRow(relatedNames, wrap = true)
+                    if (f.relatedFrameworks.isNotEmpty()) item {
+                        val relatedNames = remember(f.relatedFrameworks) {
+                            f.relatedFrameworks.map { rid -> allCompliance.find { it.slug == rid || it.id == rid }?.name ?: rid }
+                        }
+                        DetailCard(title = "Related Frameworks", icon = Icons.Filled.Schema, iconTint = Blue500) {
+                            TagRow(relatedNames, wrap = true)
+                        }
                     }
-                }
-            }
-
-            // Tags
-            if (f.tags.isNotEmpty()) {
-                item {
-                    Text("Tags", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                    Spacer(Modifier.height(6.dp))
-                    TagRow(f.tags, wrap = true)
+                    if (f.tags.isNotEmpty()) item {
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Spacer(Modifier.height(8.dp))
+                        TagRow(f.tags, wrap = true)
+                    }
                 }
             }
         }

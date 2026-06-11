@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -162,6 +163,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
     var company by remember { mutableStateOf<Company?>(null) }
     LaunchedEffect(slug) { company = repo.loadCompanies().find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
+    var tab by remember { mutableStateOf(0) }
 
     Scaffold(
         containerColor = Dark900,
@@ -182,157 +184,139 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
         if (company == null) { EmptyState("Loading…", Modifier.padding(padding)); return@Scaffold }
         val (stageBg, stageFg) = stageColors(company.stage)
 
-        LazyColumn(contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding() + 8.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-
-            // Badges
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    BadgeChip(company.stage, stageBg, stageFg)
-                    BadgeChip(company.focus, Blue100, Blue500)
-                    if (company.featured) BadgeChip("Featured", Purple100, Purple500)
+        Column(modifier = Modifier.fillMaxSize().padding(top = padding.calculateTopPadding())) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                BadgeChip(company.stage, stageBg, stageFg)
+                BadgeChip(company.focus, Blue100, Blue500)
+                if (company.featured) BadgeChip("Featured", Purple100, Purple500)
+            }
+            TabRow(
+                selectedTabIndex = tab,
+                containerColor = Dark900,
+                contentColor = NeonCyan,
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+            ) {
+                listOf("Overview", "Models", "More").forEachIndexed { i, t ->
+                    Tab(
+                        selected = tab == i, onClick = { tab = i },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonCyan else TextSecondary) },
+                    )
                 }
             }
-
-            // Description
-            item {
-                Text(company.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-
-            // Key stats
-            item {
-                DetailCard(title = "At a Glance", icon = Icons.Filled.Info, iconTint = Blue500) {
-                    if (company.founded > 0) DetailRow("Founded", company.founded.toString())
-                    if (company.hq.isNotBlank()) DetailRow("Headquarters", company.hq)
-                    if (company.employees.isNotBlank()) DetailRow("Employees", company.employees)
-                    if (company.funding.isNotBlank()) DetailRow("Total Funding", company.funding)
-                    company.financials?.let { fin ->
-                        if (fin.latestValuation.isNotBlank()) DetailRow("Valuation", fin.latestValuation)
-                        if (fin.revenue.isNotBlank()) DetailRow("Revenue", "${fin.revenue} (${fin.revenueYear})")
-                        if (fin.profitStatus.isNotBlank()) DetailRow("Profit Status", fin.profitStatus)
-                        if (fin.annualRevenueGrowth.isNotBlank()) DetailRow("Revenue Growth", fin.annualRevenueGrowth)
-                    }
-                }
-            }
-
-            // History
-            if (company.history.isNotBlank()) {
-                item {
-                    DetailCard(title = "History", icon = Icons.Filled.History, iconTint = Amber500) {
-                        Text(company.history, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
-                }
-            }
-
-            // Notable Models
-            if (company.notableModels.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Notable Models", icon = Icons.Filled.Memory, iconTint = Violet500) {
-                        TagRow(company.notableModels, wrap = true)
-                    }
-                }
-            }
-
-            // Model details
-            if (company.models.isNotEmpty()) {
-                item {
-                    DetailCard(title = "AI Models", icon = Icons.Filled.Psychology, iconTint = Violet500) {
-                        company.models.forEach { model ->
-                            ElevatedCard(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), shape = RoundedCornerShape(10.dp)) {
-                                Column(Modifier.padding(12.dp)) {
-                                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                                        Text(model.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
-                                        BadgeChip(model.type, Violet100, Violet600)
-                                    }
-                                    if (model.releaseDate.isNotBlank()) Text(model.releaseDate, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    if (model.contextWindow.isNotBlank()) {
-                                        Spacer(Modifier.height(4.dp))
-                                        BadgeChip("${model.contextWindow} context", Blue100, Blue500)
-                                    }
-                                    if (model.description.isNotBlank()) {
-                                        Spacer(Modifier.height(6.dp))
-                                        Text(model.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Financials — funding rounds
-            company.financials?.let { fin ->
-                if (fin.fundingRounds.isNotEmpty()) {
+            when (tab) {
+                0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     item {
-                        DetailCard(title = "Funding Rounds", icon = Icons.Filled.AttachMoney, iconTint = Green500) {
-                            fin.fundingRounds.forEach { round ->
-                                Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
-                                    Column(modifier = Modifier.weight(1f)) {
-                                        Text("${round.date} · ${round.round}", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
-                                        if (round.investors.isNotEmpty()) Text(round.investors.joinToString(", "), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(company.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                    }
+                    item {
+                        DetailCard(title = "At a Glance", icon = Icons.Filled.Info, iconTint = Blue500) {
+                            if (company.founded > 0) DetailRow("Founded", company.founded.toString())
+                            if (company.hq.isNotBlank()) DetailRow("Headquarters", company.hq)
+                            if (company.employees.isNotBlank()) DetailRow("Employees", company.employees)
+                            if (company.funding.isNotBlank()) DetailRow("Total Funding", company.funding)
+                            company.financials?.let { fin ->
+                                if (fin.latestValuation.isNotBlank()) DetailRow("Valuation", fin.latestValuation)
+                                if (fin.revenue.isNotBlank()) DetailRow("Revenue", "${fin.revenue} (${fin.revenueYear})")
+                                if (fin.profitStatus.isNotBlank()) DetailRow("Profit Status", fin.profitStatus)
+                                if (fin.annualRevenueGrowth.isNotBlank()) DetailRow("Revenue Growth", fin.annualRevenueGrowth)
+                            }
+                        }
+                    }
+                    if (company.notableModels.isNotEmpty()) item {
+                        DetailCard(title = "Notable Models", icon = Icons.Filled.Memory, iconTint = Violet500) {
+                            TagRow(company.notableModels, wrap = true)
+                        }
+                    }
+                }
+                1 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    if (company.models.isNotEmpty()) item {
+                        DetailCard(title = "AI Models", icon = Icons.Filled.Psychology, iconTint = Violet500) {
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                company.models.forEach { model ->
+                                    Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(Violet500.copy(0.3f), NeonViolet.copy(0.15f))), RoundedCornerShape(10.dp))) {
+                                        Column(modifier = Modifier.padding(12.dp)) {
+                                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                                Text(model.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(1f))
+                                                BadgeChip(model.type, Violet100, Violet600)
+                                            }
+                                            if (model.releaseDate.isNotBlank()) Text(model.releaseDate, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                            if (model.contextWindow.isNotBlank()) {
+                                                Spacer(Modifier.height(4.dp))
+                                                BadgeChip("${model.contextWindow} context", Blue100, Blue500)
+                                            }
+                                            if (model.description.isNotBlank()) {
+                                                Spacer(Modifier.height(6.dp))
+                                                Text(model.description, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                            }
+                                        }
                                     }
-                                    Spacer(Modifier.width(8.dp))
-                                    Text(round.amount, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Green500)
                                 }
-                                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
                             }
-                            if (fin.keyInvestors.isNotEmpty()) {
-                                Spacer(Modifier.height(8.dp))
-                                Text("Key Investors", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                Spacer(Modifier.height(4.dp))
-                                TagRow(fin.keyInvestors, wrap = true)
+                        }
+                    }
+                    company.financials?.let { fin ->
+                        if (fin.fundingRounds.isNotEmpty()) item {
+                            DetailCard(title = "Funding Rounds", icon = Icons.Filled.AttachMoney, iconTint = Green500) {
+                                fin.fundingRounds.forEach { round ->
+                                    Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
+                                        Column(modifier = Modifier.weight(1f)) {
+                                            Text("${round.date} · ${round.round}", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                            if (round.investors.isNotEmpty()) Text(round.investors.joinToString(", "), style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                        }
+                                        Spacer(Modifier.width(8.dp))
+                                        Text(round.amount, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Green500)
+                                    }
+                                    Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+                                }
+                                if (fin.keyInvestors.isNotEmpty()) {
+                                    Spacer(Modifier.height(8.dp))
+                                    Text("Key Investors", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                                    Spacer(Modifier.height(4.dp))
+                                    TagRow(fin.keyInvestors, wrap = true)
+                                }
+                            }
+                        }
+                    }
+                    if (company.milestones.isNotEmpty()) item {
+                        DetailCard(title = "Milestones", icon = Icons.Filled.Timeline, iconTint = Blue500) {
+                            company.milestones.forEach { milestone ->
+                                Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    BadgeChip(milestone.date, Blue100, Blue500)
+                                    Text(milestone.event, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                }
                             }
                         }
                     }
                 }
-            }
-
-            // Milestones
-            if (company.milestones.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Milestones", icon = Icons.Filled.Timeline, iconTint = Blue500) {
-                        company.milestones.forEach { milestone ->
-                            Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                BadgeChip(milestone.date, Blue100, Blue500)
-                                Text(milestone.event, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
-                            }
+                else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    if (company.history.isNotBlank()) item {
+                        DetailCard(title = "History", icon = Icons.Filled.History, iconTint = Amber500) {
+                            Text(company.history, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
                         }
                     }
-                }
-            }
-
-            // Competitors
-            if (company.competitors.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Competitors", icon = Icons.Filled.CompareArrows, iconTint = Zinc400) {
-                        TagRow(company.competitors, wrap = true)
+                    if (company.competitors.isNotEmpty()) item {
+                        DetailCard(title = "Competitors", icon = Icons.Filled.CompareArrows, iconTint = Zinc400) {
+                            TagRow(company.competitors, wrap = true)
+                        }
                     }
-                }
-            }
-
-            // Key People
-            if (company.keyPeople.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Key People", icon = Icons.Filled.People, iconTint = Blue500) {
-                        company.keyPeople.forEach { person -> BulletItem(person, Blue500) }
+                    if (company.keyPeople.isNotEmpty()) item {
+                        DetailCard(title = "Key People", icon = Icons.Filled.People, iconTint = Blue500) {
+                            company.keyPeople.forEach { person -> BulletItem(person, Blue500) }
+                        }
                     }
-                }
-            }
-
-            // Products
-            if (company.products.isNotEmpty()) {
-                item {
-                    DetailCard(title = "Products", icon = Icons.Filled.Category, iconTint = Violet500) {
-                        TagRow(company.products, wrap = true)
+                    if (company.products.isNotEmpty()) item {
+                        DetailCard(title = "Products", icon = Icons.Filled.Category, iconTint = Violet500) {
+                            TagRow(company.products, wrap = true)
+                        }
                     }
-                }
-            }
-
-            // Tags
-            if (company.tags.isNotEmpty()) {
-                item {
-                    Text("Tags", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                    Spacer(Modifier.height(6.dp))
-                    TagRow(company.tags, wrap = true)
+                    if (company.tags.isNotEmpty()) item {
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Spacer(Modifier.height(8.dp))
+                        TagRow(company.tags, wrap = true)
+                    }
                 }
             }
         }
