@@ -86,17 +86,19 @@ private val tabExit: AnimatedContentTransitionScope<*>.() -> ExitTransition = {
     fadeOut(tween(160))
 }
 
-// Convenience: wrap a composable block in a top-level tab transition
+// Convenience: wrap a composable block in a top-level tab transition.
+// The content lambda receiver must be AnimatedContentScope to match what
+// NavHost's composable() expects — we cannot forward a plain lambda.
 private fun androidx.navigation.NavGraphBuilder.topLevel(
     route: String,
-    content: @Composable (androidx.navigation.NavBackStackEntry) -> Unit,
+    content: @Composable androidx.compose.animation.AnimatedContentScope.(androidx.navigation.NavBackStackEntry) -> Unit,
 ) = composable(
-    route             = route,
-    enterTransition   = { tabEnter() },
-    exitTransition    = { tabExit() },
-    popEnterTransition= { tabEnter() },
-    popExitTransition = { tabExit() },
-    content           = content,
+    route              = route,
+    enterTransition    = { tabEnter() },
+    exitTransition     = { tabExit() },
+    popEnterTransition = { tabEnter() },
+    popExitTransition  = { tabExit() },
+    content            = content,
 )
 
 @Composable
