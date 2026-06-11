@@ -1,12 +1,18 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -23,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aihub.sridhar.app.ui.components.PalettePickerRow
 import com.aihub.sridhar.app.ui.navigation.Screen
 import com.aihub.sridhar.app.ui.theme.*
 
@@ -36,75 +43,63 @@ private data class NavTile(
     val route: String,
 )
 
-// 6 tiles — 3 rows × 2 — all destinations in one unified grid
-private val allTiles = listOf(
-    NavTile(
-        label = "AI Tools", stat = "82 tools", desc = "Discover & compare leading AI tools across 15 categories",
-        icon = Icons.Filled.Build, accentColor = NeonViolet,
-        gradientColors = listOf(NeonViolet.copy(0.25f), NeonCyan.copy(0.12f)), route = Screen.Tools.route,
-    ),
-    NavTile(
-        label = "Compliance", stat = "16 frameworks", desc = "EU AI Act, GDPR & global regulatory frameworks",
-        icon = Icons.Filled.Shield, accentColor = NeonPink,
-        gradientColors = listOf(NeonPink.copy(0.25f), NeonViolet.copy(0.12f)), route = Screen.Compliance.route,
-    ),
-    NavTile(
-        label = "Case Studies", stat = "31 deep-dives", desc = "Real ROI data from enterprise AI deployments",
-        icon = Icons.Filled.BarChart, accentColor = NeonAmber,
-        gradientColors = listOf(NeonAmber.copy(0.25f), NeonGreen.copy(0.12f)), route = Screen.CaseStudies.route,
-    ),
-    NavTile(
-        label = "Learn", stat = "72 resources", desc = "Courses, certifications, papers & tutorials",
-        icon = Icons.Filled.School, accentColor = NeonGreen,
-        gradientColors = listOf(NeonGreen.copy(0.25f), NeonCyan.copy(0.12f)), route = Screen.Learn.route,
-    ),
-    NavTile(
-        label = "Consulting", stat = "80+ playbooks", desc = "Expert playbooks, templates & implementation guides",
-        icon = Icons.Filled.Work, accentColor = NeonVioletBright,
-        gradientColors = listOf(NeonViolet.copy(0.25f), NeonPink.copy(0.12f)), route = Screen.Consulting.route,
-    ),
-    NavTile(
-        label = "Companies", stat = "33 companies", desc = "Track funding, models & news from top AI companies",
-        icon = Icons.Filled.Business, accentColor = NeonCyan,
-        gradientColors = listOf(NeonCyan.copy(0.25f), NeonViolet.copy(0.12f)), route = Screen.Companies.route,
-    ),
-)
-
-private val globalStats = listOf(
-    Triple("AI Tools",    "82+",  NeonVioletBright),
-    Triple("Companies",   "33",   NeonCyan),
-    Triple("Case Studies","31",   NeonAmber),
-    Triple("Learn",       "72",   NeonGreen),
-    Triple("Frameworks",  "16",   NeonPink),
-)
-
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
-    val isDark = LocalDarkTheme.current
+fun HomeScreen(onNavigate: (String) -> Unit) {
+    val palette         = LocalAppPalette.current
+    val onSelectPalette = LocalSelectPalette.current
+
+    val allTiles = remember(palette) {
+        listOf(
+            NavTile("AI Tools",     "82 tools",       "Discover & compare leading AI tools across 15 categories",
+                Icons.Filled.Build,     palette.t1, listOf(palette.t1.copy(0.28f), palette.t2.copy(0.12f)), Screen.Tools.route),
+            NavTile("Compliance",   "16 frameworks",  "EU AI Act, GDPR & global regulatory frameworks",
+                Icons.Filled.Shield,    palette.t2, listOf(palette.t2.copy(0.28f), palette.t1.copy(0.12f)), Screen.Compliance.route),
+            NavTile("Case Studies", "31 deep-dives",  "Real ROI data from enterprise AI deployments",
+                Icons.Filled.BarChart,  palette.t3, listOf(palette.t3.copy(0.28f), palette.t4.copy(0.12f)), Screen.CaseStudies.route),
+            NavTile("Learn",        "72 resources",   "Courses, certifications, papers & tutorials",
+                Icons.Filled.School,    palette.t4, listOf(palette.t4.copy(0.28f), palette.t5.copy(0.12f)), Screen.Learn.route),
+            NavTile("Consulting",   "80+ playbooks",  "Expert playbooks, templates & implementation guides",
+                Icons.Filled.Work,      palette.t5, listOf(palette.t5.copy(0.28f), palette.t1.copy(0.12f)), Screen.Consulting.route),
+            NavTile("Companies",    "33 companies",   "Track funding, models & news from top AI companies",
+                Icons.Filled.Business,  palette.t6, listOf(palette.t6.copy(0.28f), palette.t2.copy(0.12f)), Screen.Companies.route),
+        )
+    }
+
+    val globalStats = remember(palette) {
+        listOf(
+            Triple("AI Tools",    "82+", palette.t1),
+            Triple("Companies",   "33",  palette.t6),
+            Triple("Case Studies","31",  palette.t3),
+            Triple("Learn",       "72",  palette.t4),
+            Triple("Frameworks",  "16",  palette.t2),
+        )
+    }
+
     val inf = rememberInfiniteTransition(label = "glow")
     val glowAlpha by inf.animateFloat(
-        initialValue  = 0.06f,
-        targetValue   = 0.18f,
+        initialValue  = 0.05f,
+        targetValue   = 0.16f,
         animationSpec = infiniteRepeatable(tween(2800, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label         = "glow",
     )
 
-    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        if (isDark) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth().height(300.dp)
-                    .background(Brush.radialGradient(
-                        listOf(NeonViolet.copy(glowAlpha), NeonCyan.copy(glowAlpha * 0.3f), Color.Transparent),
-                        radius = 800f,
-                    ))
-            )
-        }
+    var showPicker by remember { mutableStateOf(false) }
 
-        Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
-        ) {
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        // Animated radial glow tinted to current palette
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .background(Brush.radialGradient(
+                    listOf(palette.g1.copy(glowAlpha), palette.g2.copy(glowAlpha * 0.4f), Color.Transparent),
+                    radius = 900f,
+                ))
+        )
+
+        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+
             // ── Header ──────────────────────────────────────
             Row(
                 modifier              = Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 4.dp),
@@ -116,7 +111,7 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                         "AIHub",
                         style      = MaterialTheme.typography.displaySmall.copy(
                             letterSpacing = (-1).sp,
-                            brush = Brush.linearGradient(listOf(NeonViolet, NeonCyan)),
+                            brush = Brush.linearGradient(listOf(palette.g1, palette.g2)),
                         ),
                         fontWeight = FontWeight.ExtraBold,
                     )
@@ -126,14 +121,31 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                IconButton(onClick = onToggleTheme) {
-                    Icon(
-                        imageVector        = if (isDark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
-                        contentDescription = "Toggle theme",
-                        tint               = if (isDark) NeonAmber else NeonViolet.forLightBackground(),
-                        modifier           = Modifier.size(22.dp),
-                    )
-                }
+                // Palette circle — opens picker
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(Brush.linearGradient(listOf(palette.t1, palette.t3, palette.t5)))
+                        .border(
+                            width = if (showPicker) 2.dp else 1.dp,
+                            color = White.copy(if (showPicker) 0.9f else 0.3f),
+                            shape = CircleShape,
+                        )
+                        .clickable { showPicker = !showPicker },
+                )
+            }
+
+            // ── Palette picker ───────────────────────────────
+            AnimatedVisibility(
+                visible = showPicker,
+                enter   = expandVertically(tween(220, easing = FastOutSlowInEasing)) + fadeIn(tween(180)),
+                exit    = shrinkVertically(tween(180)) + fadeOut(tween(140)),
+            ) {
+                PalettePickerRow(
+                    onSelect = { p -> onSelectPalette(p); showPicker = false },
+                    modifier = Modifier.padding(vertical = 4.dp),
+                )
             }
 
             // ── Stats chips ─────────────────────────────────
@@ -142,18 +154,17 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(globalStats) { (label, value, tint) ->
-                    val chipTint = if (isDark) tint else tint.forLightBackground()
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(10.dp))
                             .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .border(1.dp, Brush.linearGradient(listOf(chipTint.copy(0.45f), chipTint.copy(0.15f))), RoundedCornerShape(10.dp))
+                            .border(1.dp, Brush.linearGradient(listOf(tint.copy(0.5f), tint.copy(0.18f))), RoundedCornerShape(10.dp))
                             .padding(horizontal = 12.dp, vertical = 7.dp),
                         contentAlignment = Alignment.Center,
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(value, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, color = chipTint)
-                            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(value, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, color = tint)
+                            Text(label, style = MaterialTheme.typography.labelSmall,  color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -161,7 +172,7 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
 
             Spacer(Modifier.height(6.dp))
 
-            // ── 3 × 2 tile grid — fills all remaining space ──
+            // ── 3 × 2 tile grid ─────────────────────────────
             Column(
                 modifier            = Modifier.weight(1f).fillMaxWidth().padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -174,7 +185,6 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
                         row.forEach { tile ->
                             DashboardTile(
                                 tile     = tile,
-                                isDark   = isDark,
                                 onClick  = { onNavigate(tile.route) },
                                 modifier = Modifier.weight(1f).fillMaxHeight(),
                             )
@@ -189,25 +199,22 @@ fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
 @Composable
 private fun DashboardTile(
     tile: NavTile,
-    isDark: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val accent = if (isDark) tile.accentColor else tile.accentColor.forLightBackground()
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.surface)
             .border(
                 1.dp,
-                Brush.linearGradient(listOf(accent.copy(0.40f), accent.copy(0.12f))),
+                Brush.linearGradient(listOf(tile.accentColor.copy(0.45f), tile.accentColor.copy(0.12f))),
                 RoundedCornerShape(16.dp),
             )
             .clickable(onClick = onClick)
             .padding(12.dp),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Icon pill
             Box(
                 modifier = Modifier
                     .size(38.dp)
@@ -215,31 +222,19 @@ private fun DashboardTile(
                     .background(Brush.linearGradient(tile.gradientColors)),
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(tile.icon, null, tint = accent, modifier = Modifier.size(19.dp))
+                Icon(tile.icon, null, tint = tile.accentColor, modifier = Modifier.size(19.dp))
             }
             Spacer(Modifier.height(8.dp))
-            // Title + stat on same line
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
+                modifier              = Modifier.fillMaxWidth(),
+                verticalAlignment     = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                Text(
-                    tile.label,
-                    style      = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.Bold,
-                    color      = MaterialTheme.colorScheme.onSurface,
-                    maxLines   = 1,
-                )
-                Text(
-                    tile.stat,
-                    style   = MaterialTheme.typography.labelSmall,
-                    color   = accent,
-                    maxLines = 1,
-                )
+                Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
+                Text(tile.stat, style = MaterialTheme.typography.labelSmall, color = tile.accentColor, maxLines = 1)
             }
             Spacer(Modifier.height(4.dp))
-            // Description fills remaining space naturally
             Text(
                 tile.desc,
                 style    = MaterialTheme.typography.labelSmall,
@@ -248,19 +243,14 @@ private fun DashboardTile(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f),
             )
-            // Accent explore link always pinned to bottom
             Row(
-                verticalAlignment = Alignment.CenterVertically,
+                verticalAlignment     = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(3.dp),
-                modifier = Modifier.padding(top = 4.dp),
+                modifier              = Modifier.padding(top = 4.dp),
             ) {
-                Text(
-                    "Explore",
-                    style      = MaterialTheme.typography.labelSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color      = accent,
-                )
-                Icon(Icons.Filled.ArrowForward, null, tint = accent, modifier = Modifier.size(10.dp))
+                Text("Explore", style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.SemiBold, color = tile.accentColor)
+                Icon(Icons.Filled.ArrowForward, null, tint = tile.accentColor, modifier = Modifier.size(10.dp))
             }
         }
     }

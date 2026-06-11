@@ -32,42 +32,19 @@ private val DarkColorScheme = darkColorScheme(
     inversePrimary       = Violet600,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary              = Violet600,
-    onPrimary            = White,
-    primaryContainer     = Color(0xFFEDE9FE),
-    onPrimaryContainer   = Violet600,
-    secondary            = Color(0xFF0891B2),
-    onSecondary          = White,
-    secondaryContainer   = Color(0xFFE0F7FA),
-    onSecondaryContainer = Color(0xFF004A57),
-    tertiary             = Color(0xFFBE185D),
-    onTertiary           = White,
-    background           = LightBackground,
-    onBackground         = LightOnBg,
-    surface              = LightSurface,
-    onSurface            = LightOnSurface,
-    surfaceVariant       = LightSurfaceVar,
-    onSurfaceVariant     = LightOnSurfaceVar,
-    outline              = LightBorder,
-    outlineVariant       = Color(0xFFECEBF5),
-    error                = Color(0xFFDC2626),
-    onError              = White,
-    scrim                = Color(0xFF000000),
-    inverseSurface       = LightOnBg,
-    inverseOnSurface     = White,
-    inversePrimary       = NeonVioletBright,
-)
-
 @Composable
 fun AIHubTheme(
-    darkTheme: Boolean = true,
+    palette: AppPalette = PaletteCosmicDark,
+    onSelectPalette: (AppPalette) -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
-    CompositionLocalProvider(LocalDarkTheme provides darkTheme) {
+    CompositionLocalProvider(
+        LocalDarkTheme      provides true,
+        LocalAppPalette     provides palette,
+        LocalSelectPalette  provides onSelectPalette,
+    ) {
         MaterialTheme(
-            colorScheme = colorScheme,
+            colorScheme = DarkColorScheme,
             typography  = Typography,
             content     = content,
         )

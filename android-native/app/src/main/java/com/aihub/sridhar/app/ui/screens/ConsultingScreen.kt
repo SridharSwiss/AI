@@ -44,7 +44,7 @@ private fun levelColors(level: String) = when (level) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Unit, onToggleTheme: () -> Unit = {}) {
+fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Unit) {
     var phases by remember { mutableStateOf<List<Phase>>(emptyList()) }
     LaunchedEffect(Unit) { phases = repo.loadPhases() }
 
@@ -57,7 +57,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        AppTopBar(title = "Consulting Toolkit", onToggleTheme = onToggleTheme)
+        AppTopBar(title = "Consulting Toolkit")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).padding(bottom = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -121,7 +121,7 @@ fun PlaybookRow(pb: Playbook, phase: Phase, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
+fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBack: () -> Unit) {
     var phase by remember { mutableStateOf<Phase?>(null) }
     LaunchedEffect(phaseId) { phase = repo.loadPhases().find { it.phase == phaseId } }
     val pb = remember(phase, index) { phase?.playbooks?.getOrNull(index) }
@@ -140,7 +140,6 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
         topBar = {
             AppTopBar(
                 title          = pb?.title ?: "Playbook",
-                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
             )
         }

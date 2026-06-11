@@ -38,7 +38,7 @@ private fun stageColors(stage: String) = when (stage) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
+fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
     var all by remember { mutableStateOf<List<Company>>(emptyList()) }
     LaunchedEffect(Unit) { all = repo.loadCompanies() }
 
@@ -63,7 +63,7 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit, onTo
     )
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        AppTopBar(title = "Companies", onToggleTheme = onToggleTheme)
+        AppTopBar(title = "Companies")
         Box(
             modifier = Modifier.fillMaxWidth().height(1.dp)
                 .background(Brush.horizontalGradient(listOf(NeonCyan.copy(alpha = animAlpha), NeonViolet.copy(alpha = animAlpha * 0.7f), Color.Transparent)))
@@ -156,7 +156,7 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
+fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     var company by remember { mutableStateOf<Company?>(null) }
     LaunchedEffect(slug) { company = repo.loadCompanies().find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
@@ -167,7 +167,6 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, 
         topBar = {
             AppTopBar(
                 title          = company?.name ?: "Companies",
-                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
             )
         }

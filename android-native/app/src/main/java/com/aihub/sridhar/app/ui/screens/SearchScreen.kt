@@ -32,7 +32,7 @@ sealed class SearchResult(val route: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
+fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
     var query by remember { mutableStateOf("") }
 
     var allTools        by remember { mutableStateOf<List<Tool>>(emptyList()) }
@@ -68,7 +68,7 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit, onToggleThe
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        AppTopBar(title = "Search", onToggleTheme = onToggleTheme)
+        AppTopBar(title = "Search")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), Color.Transparent))))
 
         OutlinedTextField(

@@ -51,7 +51,7 @@ private fun timelineTypeColor(type: String) = when (type.lowercase()) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
+fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
     var all by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
     LaunchedEffect(Unit) { all = repo.loadCompliance() }
 
@@ -69,7 +69,7 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit, o
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        AppTopBar(title = "Compliance", onToggleTheme = onToggleTheme)
+        AppTopBar(title = "Compliance")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonPink.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Jurisdiction", jurisdiction, jurisdictions, { jurisdiction = it }, Modifier.weight(1f))
@@ -114,7 +114,7 @@ fun ComplianceRow(f: ComplianceFramework, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
+fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     var f by remember { mutableStateOf<ComplianceFramework?>(null) }
     var allCompliance by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
     LaunchedEffect(slug) { allCompliance = repo.loadCompliance(); f = allCompliance.find { it.slug == slug } }
@@ -126,7 +126,6 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
         topBar = {
             AppTopBar(
                 title          = f?.shortName?.takeIf { it.isNotBlank() } ?: f?.name ?: "Compliance",
-                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
             )
         }

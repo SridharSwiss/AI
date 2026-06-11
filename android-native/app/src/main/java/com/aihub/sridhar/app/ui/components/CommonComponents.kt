@@ -1,5 +1,6 @@
 package com.aihub.sridhar.app.ui.components
 
+import androidx.compose.animation.*
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -8,6 +9,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -30,60 +34,131 @@ import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.ui.theme.*
 
 // ─────────────────────────────────────────────────────────────
-// App-wide top bar — AIHub brand + screen title + theme toggle
-// Use this in every screen for a consistent app header.
+// App-wide top bar — AIHub brand + screen title + palette picker
+// "AIHub" is always tappable → navigates to Home.
+// Palette circle in actions → expands/collapses picker row.
 // ─────────────────────────────────────────────────────────────
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalTextApi::class)
 @Composable
 fun AppTopBar(
     title: String,
-    onToggleTheme: () -> Unit,
     navigationIcon: @Composable () -> Unit = {},
 ) {
-    val isDark = LocalDarkTheme.current
-    TopAppBar(
-        navigationIcon = navigationIcon,
-        title = {
-            Row(
-                verticalAlignment     = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                Text(
-                    "AIHub",
-                    style      = MaterialTheme.typography.labelLarge.copy(
-                        brush = Brush.linearGradient(listOf(NeonViolet, NeonCyan)),
-                    ),
-                    fontWeight = FontWeight.ExtraBold,
-                )
+    val palette       = LocalAppPalette.current
+    val onNavHome     = LocalNavigateHome.current
+    val onSelectPal   = LocalSelectPalette.current
+    var showPicker    by remember { mutableStateOf(false) }
+
+    Column {
+        TopAppBar(
+            navigationIcon = navigationIcon,
+            title = {
+                Row(
+                    modifier              = Modifier.clickable { onNavHome() },
+                    verticalAlignment     = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Text(
+                        "AIHub",
+                        style      = MaterialTheme.typography.labelLarge.copy(
+                            brush = Brush.linearGradient(listOf(palette.g1, palette.g2)),
+                        ),
+                        fontWeight = FontWeight.ExtraBold,
+                    )
+                    Box(
+                        modifier = Modifier
+                            .size(4.dp)
+                            .background(MaterialTheme.colorScheme.onSurfaceVariant.copy(0.35f), CircleShape)
+                    )
+                    Text(
+                        title,
+                        style         = MaterialTheme.typography.titleSmall,
+                        fontWeight    = FontWeight.ExtraBold,
+                        color         = MaterialTheme.colorScheme.onSurface,
+                        letterSpacing = (-0.3).sp,
+                        maxLines      = 1,
+                        overflow      = TextOverflow.Ellipsis,
+                    )
+                }
+            },
+            actions = {
+                // Palette circle button — shows current theme seed colour
                 Box(
                     modifier = Modifier
-                        .size(4.dp)
-                        .background(MaterialTheme.colorScheme.onSurfaceVariant.copy(0.35f), RoundedCornerShape(50))
+                        .padding(end = 8.dp)
+                        .size(28.dp)
+                        .clip(CircleShape)
+                        .background(Brush.linearGradient(listOf(palette.t1, palette.t3, palette.t5)))
+                        .border(
+                            width = if (showPicker) 2.dp else 1.dp,
+                            color = White.copy(if (showPicker) 0.9f else 0.3f),
+                            shape = CircleShape,
+                        )
+                        .clickable { showPicker = !showPicker },
+                )
+            },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+        )
+        AnimatedVisibility(
+            visible = showPicker,
+            enter   = expandVertically(tween(220, easing = FastOutSlowInEasing)) + fadeIn(tween(180)),
+            exit    = shrinkVertically(tween(180)) + fadeOut(tween(140)),
+        ) {
+            PalettePickerRow(onSelect = { p -> onSelectPal(p); showPicker = false })
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Palette picker — horizontal row of themed colour circles
+// ─────────────────────────────────────────────────────────────
+
+@Composable
+fun PalettePickerRow(
+    onSelect: (AppPalette) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val current = LocalAppPalette.current
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface)
+            .border(
+                width = 1.dp,
+                brush = Brush.horizontalGradient(listOf(current.g1.copy(0.25f), current.g2.copy(0.15f), Color.Transparent)),
+                shape = RoundedCornerShape(0.dp),
+            )
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        verticalAlignment     = Alignment.CenterVertically,
+    ) {
+        AllPalettes.forEach { palette ->
+            val selected = palette.name == current.name
+            Column(
+                modifier            = Modifier.clickable { onSelect(palette) },
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(38.dp)
+                        .clip(CircleShape)
+                        .background(Brush.linearGradient(listOf(palette.t1, palette.t3, palette.t5)))
+                        .then(
+                            if (selected) Modifier.border(2.5.dp, White, CircleShape)
+                            else Modifier.border(1.dp, palette.t1.copy(0.4f), CircleShape)
+                        ),
                 )
                 Text(
-                    title,
-                    style      = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.ExtraBold,
-                    color      = MaterialTheme.colorScheme.onSurface,
-                    letterSpacing = (-0.3).sp,
-                    maxLines   = 1,
-                    overflow   = TextOverflow.Ellipsis,
+                    palette.name,
+                    style      = MaterialTheme.typography.labelSmall,
+                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+                    color      = if (selected) palette.g1 else MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-        },
-        actions = {
-            IconButton(onClick = onToggleTheme) {
-                Icon(
-                    imageVector        = if (isDark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
-                    contentDescription = "Toggle theme",
-                    tint               = if (isDark) NeonAmber else NeonViolet.forLightBackground(),
-                    modifier           = Modifier.size(20.dp),
-                )
-            }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-    )
+        }
+    }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -186,7 +261,7 @@ fun ExpandableCard(
             .background(MaterialTheme.colorScheme.surface)
             .border(
                 1.dp,
-                Brush.linearGradient(listOf(iconTint.copy(0.28f), NeonViolet.copy(0.12f))),
+                Brush.linearGradient(listOf(iconTint.copy(0.28f), LocalAppPalette.current.g1.copy(0.10f))),
                 shape,
             )
             .animateContentSize(
@@ -451,7 +526,7 @@ fun EmptyState(
         Box(
             modifier = Modifier
                 .size(64.dp)
-                .background(Brush.radialGradient(listOf(NeonViolet.copy(0.15f), Color.Transparent)), RoundedCornerShape(20.dp)),
+                .background(Brush.radialGradient(listOf(LocalAppPalette.current.g1.copy(0.18f), Color.Transparent)), RoundedCornerShape(20.dp)),
             contentAlignment = Alignment.Center,
         ) {
             Icon(icon, null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(28.dp))
@@ -509,13 +584,14 @@ fun GradientBorderCard(
 
 @Composable
 fun GradientDivider(modifier: Modifier = Modifier) {
+    val palette = LocalAppPalette.current
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(1.dp)
             .background(
                 Brush.horizontalGradient(
-                    listOf(NeonViolet.copy(alpha = 0.3f), NeonCyan.copy(alpha = 0.2f), Color.Transparent)
+                    listOf(palette.g1.copy(0.5f), palette.g2.copy(0.3f), Color.Transparent)
                 )
             )
     )
@@ -554,7 +630,7 @@ fun SectionLabel(text: String, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .width(28.dp)
                 .height(2.dp)
-                .background(Brush.horizontalGradient(listOf(NeonViolet, NeonCyan, Color.Transparent)))
+                .background(Brush.horizontalGradient(listOf(LocalAppPalette.current.g1, LocalAppPalette.current.g2, Color.Transparent)))
         )
     }
 }

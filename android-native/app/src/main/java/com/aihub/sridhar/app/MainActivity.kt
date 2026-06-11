@@ -39,9 +39,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val repo = DataRepository(applicationContext)
         setContent {
-            var isDarkTheme by remember { mutableStateOf(true) }
-            AIHubTheme(darkTheme = isDarkTheme) {
-                AIHubApp(repo, onToggleTheme = { isDarkTheme = !isDarkTheme })
+            var currentPalette by remember { mutableStateOf(PaletteCosmicDark) }
+            AIHubTheme(palette = currentPalette, onSelectPalette = { currentPalette = it }) {
+                AIHubApp(repo)
             }
         }
     }
@@ -105,7 +105,7 @@ private fun androidx.navigation.NavGraphBuilder.topLevel(
 )
 
 @Composable
-fun AIHubApp(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
+fun AIHubApp(repo: DataRepository) {
     val navController  = rememberNavController()
     val backstackEntry by navController.currentBackStackEntryAsState()
     val currentRoute   = backstackEntry?.destination?.route
@@ -118,17 +118,25 @@ fun AIHubApp(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
     val pillBottomPad    = navBarPadding + 12.dp
     val contentBottomPad = if (showBottomBar) navBarPadding + 80.dp else navBarPadding
 
+    CompositionLocalProvider(
+        LocalNavigateHome provides {
+            navController.navigate(Screen.Home.route) {
+                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                launchSingleTop = true
+                restoreState    = true
+            }
+        }
+    ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .statusBarsPadding()          // Pillar 1: inset content below status bar
-            .imePadding()                 // Pillar 1: slide content above soft keyboard
+            .statusBarsPadding()
+            .imePadding()
     ) {
         NavHost(
             navController     = navController,
             startDestination  = Screen.Home.route,
-            // Default transitions for all non-overridden composables
             enterTransition   = { pushEnter() },
             exitTransition    = { pushExit() },
             popEnterTransition= { popEnter() },
@@ -137,58 +145,58 @@ fun AIHubApp(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
                 .fillMaxSize()
                 .padding(bottom = contentBottomPad),
         ) {
-            // ── Top-level destinations (tab fade-through) ──────────
+            // ── Top-level destinations ─────────────────────
             topLevel(Screen.Home.route) {
-                HomeScreen(onNavigate = { navController.navigate(it) }, onToggleTheme = onToggleTheme)
+                HomeScreen(onNavigate = { navController.navigate(it) })
             }
             topLevel(Screen.Tools.route) {
-                ToolsScreen(repo = repo, onToolClick = { navController.navigate(Screen.ToolDetail.route(it)) }, onToggleTheme = onToggleTheme)
+                ToolsScreen(repo = repo, onToolClick = { navController.navigate(Screen.ToolDetail.route(it)) })
             }
             topLevel(Screen.Companies.route) {
-                CompaniesScreen(repo = repo, onCompanyClick = { navController.navigate(Screen.CompanyDetail.route(it)) }, onToggleTheme = onToggleTheme)
+                CompaniesScreen(repo = repo, onCompanyClick = { navController.navigate(Screen.CompanyDetail.route(it)) })
             }
             topLevel(Screen.CaseStudies.route) {
-                CaseStudiesScreen(repo = repo, onCaseStudyClick = { navController.navigate(Screen.CaseStudyDetail.route(it)) }, onToggleTheme = onToggleTheme)
+                CaseStudiesScreen(repo = repo, onCaseStudyClick = { navController.navigate(Screen.CaseStudyDetail.route(it)) })
             }
             topLevel(Screen.Compliance.route) {
-                ComplianceScreen(repo = repo, onFrameworkClick = { navController.navigate(Screen.ComplianceDetail.route(it)) }, onToggleTheme = onToggleTheme)
+                ComplianceScreen(repo = repo, onFrameworkClick = { navController.navigate(Screen.ComplianceDetail.route(it)) })
             }
             topLevel(Screen.Learn.route) {
-                LearnScreen(repo = repo, onToggleTheme = onToggleTheme)
+                LearnScreen(repo = repo)
             }
             topLevel(Screen.Consulting.route) {
                 ConsultingScreen(repo = repo, onPlaybookClick = { phase, idx ->
                     navController.navigate(Screen.PlaybookDetail.route(phase, idx))
-                }, onToggleTheme = onToggleTheme)
+                })
             }
             topLevel(Screen.News.route) {
-                NewsScreen(repo = repo, onToggleTheme = onToggleTheme)
+                NewsScreen(repo = repo)
             }
             topLevel(Screen.Search.route) {
-                SearchScreen(repo = repo, onNavigate = { navController.navigate(it) }, onToggleTheme = onToggleTheme)
+                SearchScreen(repo = repo, onNavigate = { navController.navigate(it) })
             }
 
-            // ── Detail destinations (push/pop slide) ──────────────
+            // ── Detail destinations ────────────────────────
             composable(Screen.ToolDetail.route) { back ->
                 val slug = back.arguments?.getString("slug") ?: return@composable
-                ToolDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() }, onToggleTheme = onToggleTheme)
+                ToolDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() })
             }
             composable(Screen.CompanyDetail.route) { back ->
                 val slug = back.arguments?.getString("slug") ?: return@composable
-                CompanyDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() }, onToggleTheme = onToggleTheme)
+                CompanyDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() })
             }
             composable(Screen.CaseStudyDetail.route) { back ->
                 val slug = back.arguments?.getString("slug") ?: return@composable
-                CaseStudyDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() }, onToggleTheme = onToggleTheme)
+                CaseStudyDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() })
             }
             composable(Screen.ComplianceDetail.route) { back ->
                 val slug = back.arguments?.getString("slug") ?: return@composable
-                ComplianceDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() }, onToggleTheme = onToggleTheme)
+                ComplianceDetailScreen(repo = repo, slug = slug, onBack = { navController.popBackStack() })
             }
             composable(Screen.PlaybookDetail.route) { back ->
                 val phase = back.arguments?.getString("phase") ?: return@composable
                 val index = back.arguments?.getString("index")?.toIntOrNull() ?: return@composable
-                PlaybookDetailScreen(repo = repo, phaseId = phase, index = index, onBack = { navController.popBackStack() }, onToggleTheme = onToggleTheme)
+                PlaybookDetailScreen(repo = repo, phaseId = phase, index = index, onBack = { navController.popBackStack() })
             }
         }
 
@@ -214,6 +222,7 @@ fun AIHubApp(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
             )
         }
     }
+    } // end CompositionLocalProvider(LocalNavigateHome)
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -233,13 +242,14 @@ private fun FloatingPillNav(
     modifier: Modifier = Modifier,
     onItemClick: (BottomNavItem) -> Unit,
 ) {
+    val palette = LocalAppPalette.current
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(50))
             .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.96f))
             .border(
                 1.dp,
-                Brush.linearGradient(listOf(NeonViolet.copy(0.35f), NeonCyan.copy(0.2f), NeonViolet.copy(0.1f))),
+                Brush.linearGradient(listOf(palette.g1.copy(0.40f), palette.g2.copy(0.22f), palette.g1.copy(0.10f))),
                 RoundedCornerShape(50),
             )
     ) {
@@ -274,13 +284,14 @@ private fun PillTab(
         animationSpec = spring(Spring.DampingRatioMediumBouncy, Spring.StiffnessHigh),
         label         = "tabScale",
     )
+    val palette = LocalAppPalette.current
     val bgAlpha by animateFloatAsState(
-        targetValue   = if (selected) 0.15f else 0f,
+        targetValue   = if (selected) 0.18f else 0f,
         animationSpec = tween(200),
         label         = "tabBg",
     )
     val iconTint by animateColorAsState(
-        targetValue   = if (selected) NeonViolet else MaterialTheme.colorScheme.onSurfaceVariant,
+        targetValue   = if (selected) palette.g1 else MaterialTheme.colorScheme.onSurfaceVariant,
         animationSpec = tween(200),
         label         = "tabTint",
     )
@@ -289,7 +300,7 @@ private fun PillTab(
         modifier = Modifier
             .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(RoundedCornerShape(50))
-            .background(NeonViolet.copy(alpha = bgAlpha))
+            .background(palette.g1.copy(alpha = bgAlpha))
             .pointerInput(onClick) {
                 detectTapGestures(
                     onPress = { pressed = true; tryAwaitRelease(); pressed = false },

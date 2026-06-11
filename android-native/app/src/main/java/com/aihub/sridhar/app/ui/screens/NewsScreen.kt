@@ -41,7 +41,7 @@ private val NEWS_CATEGORIES = listOf("All", "Tech", "Research", "Government", "M
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsScreen(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
+fun NewsScreen(repo: DataRepository) {
     var sources     by remember { mutableStateOf<List<NewsSource>>(emptyList()) }
     var selectedCat by remember { mutableStateOf("All") }
 
@@ -53,7 +53,7 @@ fun NewsScreen(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
 
-        AppTopBar(title = "AI News", onToggleTheme = onToggleTheme)
+        AppTopBar(title = "AI News")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonCyan.copy(0.5f), NeonViolet.copy(0.3f), Color.Transparent))))
 
         // Category filter chips

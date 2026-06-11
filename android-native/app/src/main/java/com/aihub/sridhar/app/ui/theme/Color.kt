@@ -114,3 +114,56 @@ fun Color.forLightBackground(): Color = Color(
     blue  = (blue  * 0.58f).coerceIn(0f, 1f),
     alpha = alpha,
 )
+
+// ── Multi-colour palettes ─────────────────────────────────
+// Each palette provides 6 distinct vivid tile accent colours
+// (t1-t6) plus a global gradient pair (g1/g2) used by the
+// app bar brand text, nav pill border, and divider lines.
+
+data class AppPalette(
+    val name: String,
+    val seed: Color,
+    // tile accent colours (one per home tile, all distinct)
+    val t1: Color, val t2: Color, val t3: Color,
+    val t4: Color, val t5: Color, val t6: Color,
+    // global gradient pair
+    val g1: Color, val g2: Color,
+)
+
+val PaletteCosmicDark = AppPalette(
+    name = "Cosmic",  seed = Color(0xFF8B5CF6),
+    t1   = Color(0xFF8B5CF6), t2 = Color(0xFFF059DA), t3 = Color(0xFFFBBF24),
+    t4   = Color(0xFF4ADE80), t5 = Color(0xFFA78BFA), t6 = Color(0xFF22D3EE),
+    g1   = Color(0xFF8B5CF6), g2 = Color(0xFF22D3EE),
+)
+val PaletteEmber = AppPalette(
+    name = "Ember",   seed = Color(0xFFFF6B35),
+    t1   = Color(0xFFFF6B35), t2 = Color(0xFFFF3355), t3 = Color(0xFFFFCC00),
+    t4   = Color(0xFFCCFF00), t5 = Color(0xFFFF8C42), t6 = Color(0xFFFF4488),
+    g1   = Color(0xFFFF6B35), g2 = Color(0xFFFFCC00),
+)
+val PaletteJade = AppPalette(
+    name = "Jade",    seed = Color(0xFF00E896),
+    t1   = Color(0xFF00E896), t2 = Color(0xFF00D4C8), t3 = Color(0xFF88FF00),
+    t4   = Color(0xFF00FFAA), t5 = Color(0xFF00CCFF), t6 = Color(0xFF66FF55),
+    g1   = Color(0xFF00E896), g2 = Color(0xFF00D4C8),
+)
+val PaletteSakura = AppPalette(
+    name = "Sakura",  seed = Color(0xFFFF6EB4),
+    t1   = Color(0xFFFF6EB4), t2 = Color(0xFFFF91DC), t3 = Color(0xFFBB66FF),
+    t4   = Color(0xFFFF4466), t5 = Color(0xFFFF44CC), t6 = Color(0xFFDD66FF),
+    g1   = Color(0xFFFF6EB4), g2 = Color(0xFFBB66FF),
+)
+val PaletteOcean = AppPalette(
+    name = "Ocean",   seed = Color(0xFF00AAFF),
+    t1   = Color(0xFF00AAFF), t2 = Color(0xFF00FFEA), t3 = Color(0xFF4D88FF),
+    t4   = Color(0xFF00CCFF), t5 = Color(0xFF6644FF), t6 = Color(0xFF00EEFF),
+    g1   = Color(0xFF00AAFF), g2 = Color(0xFF00FFEA),
+)
+
+val AllPalettes = listOf(PaletteCosmicDark, PaletteEmber, PaletteJade, PaletteSakura, PaletteOcean)
+
+// Provided by AIHubTheme / AIHubApp — read anywhere in the tree.
+val LocalAppPalette   = staticCompositionLocalOf<AppPalette> { PaletteCosmicDark }
+val LocalSelectPalette = staticCompositionLocalOf<(AppPalette) -> Unit> { {} }
+val LocalNavigateHome  = staticCompositionLocalOf<() -> Unit> { {} }

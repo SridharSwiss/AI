@@ -46,7 +46,7 @@ private fun pricingGradient(pricing: String): Pair<Color, Color> = when (pricing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
+fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
     var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
     LaunchedEffect(Unit) { allTools = repo.loadTools() }
 
@@ -72,7 +72,7 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit, onToggleThe
     )
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        AppTopBar(title = "AI Tools", onToggleTheme = onToggleTheme)
+        AppTopBar(title = "AI Tools")
 
         // Animated gradient header line
         Box(
@@ -216,7 +216,7 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
+fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     var tool by remember { mutableStateOf<Tool?>(null) }
     var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
     LaunchedEffect(slug) { allTools = repo.loadTools(); tool = allTools.find { it.slug == slug } }
@@ -228,7 +228,6 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onT
         topBar = {
             AppTopBar(
                 title          = tool?.name ?: "AI Tools",
-                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
             )
         }
