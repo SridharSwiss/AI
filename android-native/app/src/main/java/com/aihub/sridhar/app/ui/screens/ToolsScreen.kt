@@ -71,7 +71,7 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
         label = "alpha",
     )
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "AI Tools")
 
         // Animated gradient header line
@@ -140,7 +140,7 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .background(MaterialTheme.colorScheme.background)
+            .background(Color.Transparent)
             .padding(horizontal = 16.dp, vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.Top,
@@ -224,7 +224,7 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         topBar = {
             AppTopBar(
                 title          = tool?.name ?: "AI Tools",
@@ -249,7 +249,7 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = Color.Transparent,
                 contentColor = NeonViolet,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {

@@ -26,6 +26,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.aihub.sridhar.app.data.repository.DataRepository
+import com.aihub.sridhar.app.ui.components.GlassBackground
 import com.aihub.sridhar.app.ui.navigation.*
 import com.aihub.sridhar.app.ui.screens.*
 import com.aihub.sridhar.app.ui.theme.*
@@ -130,10 +131,10 @@ fun AIHubApp(repo: DataRepository) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
             .statusBarsPadding()
             .imePadding()
     ) {
+        GlassBackground(modifier = Modifier.fillMaxSize())
         NavHost(
             navController     = navController,
             startDestination  = Screen.Home.route,
@@ -246,7 +247,7 @@ private fun FloatingPillNav(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(50))
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.96f))
+            .background(Color(0x99000000))
             .border(
                 1.dp,
                 Brush.linearGradient(listOf(palette.g1.copy(0.40f), palette.g2.copy(0.22f), palette.g1.copy(0.10f))),

@@ -67,7 +67,7 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "Search")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), Color.Transparent))))
 
@@ -127,7 +127,7 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
                                 Text(type, style = MaterialTheme.typography.labelSmall, color = NeonViolet, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                             }
                         },
-                        colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
+                        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                         modifier = Modifier.clickable(onClick = { onNavigate(result.route) }),
                     )
                     Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(MaterialTheme.colorScheme.surfaceVariant))

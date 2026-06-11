@@ -62,7 +62,7 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
         label = "alpha",
     )
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "Companies")
         Box(
             modifier = Modifier.fillMaxWidth().height(1.dp)
@@ -163,7 +163,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         topBar = {
             AppTopBar(
                 title          = company?.name ?: "Companies",
@@ -186,7 +186,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = Color.Transparent,
                 contentColor = NeonCyan,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {

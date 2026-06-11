@@ -51,7 +51,7 @@ fun NewsScreen(repo: DataRepository) {
         if (selectedCat == "All") sources else sources.filter { it.category == selectedCat }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
 
         AppTopBar(title = "AI News")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonCyan.copy(0.5f), NeonViolet.copy(0.3f), Color.Transparent))))

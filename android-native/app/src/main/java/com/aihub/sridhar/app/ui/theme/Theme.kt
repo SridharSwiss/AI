@@ -5,31 +5,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary              = NeonViolet,
+// Glass colour scheme — palette.seed drives primary; surfaces are frosted white over the deep bg.
+private fun glassColorScheme(palette: AppPalette) = darkColorScheme(
+    primary              = palette.seed,
     onPrimary            = White,
-    primaryContainer     = Violet50,
-    onPrimaryContainer   = NeonVioletBright,
-    secondary            = NeonCyan,
-    onSecondary          = Dark900,
-    secondaryContainer   = Dark700,
-    onSecondaryContainer = NeonCyan,
-    tertiary             = NeonPink,
+    primaryContainer     = palette.seed.copy(alpha = 0.20f),
+    onPrimaryContainer   = palette.g1,
+    secondary            = palette.g2,
+    onSecondary          = White,
+    secondaryContainer   = palette.g2.copy(alpha = 0.15f),
+    onSecondaryContainer = palette.g2,
+    tertiary             = palette.t2,
     onTertiary           = White,
-    background           = Dark900,
-    onBackground         = TextPrimary,
-    surface              = Dark800,
-    onSurface            = TextPrimary,
-    surfaceVariant       = Dark700,
-    onSurfaceVariant     = TextSecondary,
-    outline              = Dark400,
-    outlineVariant       = Dark500,
+    background           = palette.bgTop,          // used by transparent containers
+    onBackground         = White,
+    surface              = Color(0x1AFFFFFF),       // 10 % frosted glass
+    onSurface            = White,
+    surfaceVariant       = Color(0x26FFFFFF),       // 15 % for elevated glass
+    onSurfaceVariant     = White.copy(alpha = 0.65f),
+    outline              = Color(0x40FFFFFF),       // 25 % white border
+    outlineVariant       = Color(0x26FFFFFF),
     error                = Rose500,
     onError              = White,
     scrim                = Black,
-    inverseSurface       = TextPrimary,
-    inverseOnSurface     = Dark900,
-    inversePrimary       = Violet600,
+    inverseSurface       = White,
+    inverseOnSurface     = palette.bgTop,
+    inversePrimary       = palette.g1,
 )
 
 @Composable
@@ -44,7 +45,7 @@ fun AIHubTheme(
         LocalSelectPalette  provides onSelectPalette,
     ) {
         MaterialTheme(
-            colorScheme = DarkColorScheme,
+            colorScheme = glassColorScheme(palette),
             typography  = Typography,
             content     = content,
         )

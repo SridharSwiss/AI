@@ -55,7 +55,7 @@ fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) 
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "Case Studies")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonAmber.copy(alpha = 0.5f), NeonGreen.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -144,7 +144,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         topBar = {
             AppTopBar(
                 title          = cs?.company ?: "Case Studies",
@@ -166,7 +166,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = Color.Transparent,
                 contentColor = NeonAmber,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {

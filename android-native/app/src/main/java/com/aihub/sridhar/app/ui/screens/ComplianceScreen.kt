@@ -68,7 +68,7 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "Compliance")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonPink.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -122,7 +122,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         topBar = {
             AppTopBar(
                 title          = f?.shortName?.takeIf { it.isNotBlank() } ?: f?.name ?: "Compliance",
@@ -148,7 +148,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = Color.Transparent,
                 contentColor = NeonPink,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {

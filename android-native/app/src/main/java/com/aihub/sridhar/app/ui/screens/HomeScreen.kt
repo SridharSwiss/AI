@@ -86,7 +86,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
 
     var showPicker by remember { mutableStateOf(false) }
 
-    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Box(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         // Animated radial glow tinted to current palette
         Box(
             modifier = Modifier

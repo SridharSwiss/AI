@@ -24,6 +24,7 @@ import com.aihub.sridhar.app.data.models.Phase
 import com.aihub.sridhar.app.data.models.Playbook
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.components.*
+import androidx.compose.ui.graphics.Color
 import com.aihub.sridhar.app.ui.theme.*
 
 private fun phaseColors(phase: String) = when (phase) {
@@ -56,7 +57,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
         else phases.filter { it.label == phaseFilter }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "Consulting Toolkit")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
@@ -136,7 +137,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         topBar = {
             AppTopBar(
                 title          = pb?.title ?: "Playbook",
@@ -171,7 +172,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = Color.Transparent,
                 contentColor = NeonGreen,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {

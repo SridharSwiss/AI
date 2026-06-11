@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.LearnResource
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.components.*
+import androidx.compose.ui.graphics.Color
 import com.aihub.sridhar.app.ui.theme.*
 
 private fun typeColors(type: String) = when (type) {
@@ -62,7 +63,7 @@ fun LearnScreen(repo: DataRepository) {
 
     val uriHandler = LocalUriHandler.current
 
-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.Transparent)) {
         AppTopBar(title = "Learn")
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonGreen.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 

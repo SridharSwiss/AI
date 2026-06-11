@@ -128,37 +128,44 @@ data class AppPalette(
     val t4: Color, val t5: Color, val t6: Color,
     // global gradient pair
     val g1: Color, val g2: Color,
+    // background gradient (top → bottom) for GlassBackground
+    val bgTop: Color, val bgBottom: Color,
 )
 
 val PaletteCosmicDark = AppPalette(
-    name = "Cosmic",  seed = Color(0xFF8B5CF6),
-    t1   = Color(0xFF8B5CF6), t2 = Color(0xFFF059DA), t3 = Color(0xFFFBBF24),
-    t4   = Color(0xFF4ADE80), t5 = Color(0xFFA78BFA), t6 = Color(0xFF22D3EE),
-    g1   = Color(0xFF8B5CF6), g2 = Color(0xFF22D3EE),
+    name   = "Cosmic",  seed = Color(0xFF8B5CF6),
+    t1     = Color(0xFF8B5CF6), t2 = Color(0xFFF059DA), t3 = Color(0xFFFBBF24),
+    t4     = Color(0xFF4ADE80), t5 = Color(0xFFA78BFA), t6 = Color(0xFF22D3EE),
+    g1     = Color(0xFF8B5CF6), g2 = Color(0xFF22D3EE),
+    bgTop  = Color(0xFF12072A), bgBottom = Color(0xFF060D1F),
 )
 val PaletteEmber = AppPalette(
-    name = "Ember",   seed = Color(0xFFFF6B35),
-    t1   = Color(0xFFFF6B35), t2 = Color(0xFFFF3355), t3 = Color(0xFFFFCC00),
-    t4   = Color(0xFFCCFF00), t5 = Color(0xFFFF8C42), t6 = Color(0xFFFF4488),
-    g1   = Color(0xFFFF6B35), g2 = Color(0xFFFFCC00),
+    name   = "Ember",   seed = Color(0xFFFF6B35),
+    t1     = Color(0xFFFF6B35), t2 = Color(0xFFFF3355), t3 = Color(0xFFFFCC00),
+    t4     = Color(0xFFCCFF00), t5 = Color(0xFFFF8C42), t6 = Color(0xFFFF4488),
+    g1     = Color(0xFFFF6B35), g2 = Color(0xFFFFCC00),
+    bgTop  = Color(0xFF1A0608), bgBottom = Color(0xFF0D0A02),
 )
 val PaletteJade = AppPalette(
-    name = "Jade",    seed = Color(0xFF00E896),
-    t1   = Color(0xFF00E896), t2 = Color(0xFF00D4C8), t3 = Color(0xFF88FF00),
-    t4   = Color(0xFF00FFAA), t5 = Color(0xFF00CCFF), t6 = Color(0xFF66FF55),
-    g1   = Color(0xFF00E896), g2 = Color(0xFF00D4C8),
+    name   = "Jade",    seed = Color(0xFF00E896),
+    t1     = Color(0xFF00E896), t2 = Color(0xFF00D4C8), t3 = Color(0xFF88FF00),
+    t4     = Color(0xFF00FFAA), t5 = Color(0xFF00CCFF), t6 = Color(0xFF66FF55),
+    g1     = Color(0xFF00E896), g2 = Color(0xFF00D4C8),
+    bgTop  = Color(0xFF021A10), bgBottom = Color(0xFF020D14),
 )
 val PaletteSakura = AppPalette(
-    name = "Sakura",  seed = Color(0xFFFF6EB4),
-    t1   = Color(0xFFFF6EB4), t2 = Color(0xFFFF91DC), t3 = Color(0xFFBB66FF),
-    t4   = Color(0xFFFF4466), t5 = Color(0xFFFF44CC), t6 = Color(0xFFDD66FF),
-    g1   = Color(0xFFFF6EB4), g2 = Color(0xFFBB66FF),
+    name   = "Sakura",  seed = Color(0xFFFF6EB4),
+    t1     = Color(0xFFFF6EB4), t2 = Color(0xFFFF91DC), t3 = Color(0xFFBB66FF),
+    t4     = Color(0xFFFF4466), t5 = Color(0xFFFF44CC), t6 = Color(0xFFDD66FF),
+    g1     = Color(0xFFFF6EB4), g2 = Color(0xFFBB66FF),
+    bgTop  = Color(0xFF1A0614), bgBottom = Color(0xFF0D020A),
 )
 val PaletteOcean = AppPalette(
-    name = "Ocean",   seed = Color(0xFF00AAFF),
-    t1   = Color(0xFF00AAFF), t2 = Color(0xFF00FFEA), t3 = Color(0xFF4D88FF),
-    t4   = Color(0xFF00CCFF), t5 = Color(0xFF6644FF), t6 = Color(0xFF00EEFF),
-    g1   = Color(0xFF00AAFF), g2 = Color(0xFF00FFEA),
+    name   = "Ocean",   seed = Color(0xFF00AAFF),
+    t1     = Color(0xFF00AAFF), t2 = Color(0xFF00FFEA), t3 = Color(0xFF4D88FF),
+    t4     = Color(0xFF00CCFF), t5 = Color(0xFF6644FF), t6 = Color(0xFF00EEFF),
+    g1     = Color(0xFF00AAFF), g2 = Color(0xFF00FFEA),
+    bgTop  = Color(0xFF020D1A), bgBottom = Color(0xFF050212),
 )
 
 val AllPalettes = listOf(PaletteCosmicDark, PaletteEmber, PaletteJade, PaletteSakura, PaletteOcean)

@@ -98,7 +98,7 @@ fun AppTopBar(
                         .clickable { showPicker = !showPicker },
                 )
             },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         )
         AnimatedVisibility(
             visible = showPicker,
@@ -123,7 +123,7 @@ fun PalettePickerRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface)
+            .background(Color(0x1AFFFFFF))
             .border(
                 width = 1.dp,
                 brush = Brush.horizontalGradient(listOf(current.g1.copy(0.25f), current.g2.copy(0.15f), Color.Transparent)),
@@ -158,6 +158,78 @@ fun PalettePickerRow(
                 )
             }
         }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────
+// GlassBackground — full-screen layered gradient + animated blobs
+// Place this behind NavHost so every screen shows the same bg.
+// ─────────────────────────────────────────────────────────────
+
+@Composable
+fun GlassBackground(modifier: Modifier = Modifier) {
+    val palette = LocalAppPalette.current
+
+    // Three independent infinitely repeating offsets for organic blob movement
+    val inf = rememberInfiniteTransition(label = "blobs")
+    val blob1x by inf.animateFloat(
+        initialValue = 0f, targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(11000, easing = LinearEasing), RepeatMode.Reverse),
+        label = "b1x",
+    )
+    val blob2x by inf.animateFloat(
+        initialValue = 1f, targetValue = 0f,
+        animationSpec = infiniteRepeatable(tween(13700, easing = LinearEasing), RepeatMode.Reverse),
+        label = "b2x",
+    )
+    val blob3y by inf.animateFloat(
+        initialValue = 0.2f, targetValue = 0.8f,
+        animationSpec = infiniteRepeatable(tween(9300, easing = LinearEasing), RepeatMode.Reverse),
+        label = "b3y",
+    )
+
+    Box(modifier = modifier) {
+        // Deep background gradient
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Brush.verticalGradient(listOf(palette.bgTop, palette.bgBottom)))
+        )
+        // Blob 1 — primary seed colour, top-left drift
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.72f)
+                .aspectRatio(1f)
+                .offset(x = ((-80 + blob1x * 120).dp), y = ((-60 + blob1x * 80).dp))
+                .background(
+                    Brush.radialGradient(listOf(palette.g1.copy(0.30f), Color.Transparent)),
+                    CircleShape,
+                )
+        )
+        // Blob 2 — secondary colour, centre-right
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.60f)
+                .aspectRatio(1f)
+                .align(Alignment.CenterEnd)
+                .offset(x = ((40 - blob2x * 100).dp), y = ((blob2x * 60 - 30).dp))
+                .background(
+                    Brush.radialGradient(listOf(palette.t2.copy(0.25f), Color.Transparent)),
+                    CircleShape,
+                )
+        )
+        // Blob 3 — accent colour, bottom-left float
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.50f)
+                .aspectRatio(1f)
+                .align(Alignment.BottomStart)
+                .offset(x = ((-20).dp), y = ((-80 + blob3y * 60).dp))
+                .background(
+                    Brush.radialGradient(listOf(palette.t5.copy(0.22f), Color.Transparent)),
+                    CircleShape,
+                )
+        )
     }
 }
 
