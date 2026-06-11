@@ -168,7 +168,17 @@ val PaletteOcean = AppPalette(
     bgTop  = Color(0xFF020D1A), bgBottom = Color(0xFF050212),
 )
 
-val AllPalettes = listOf(PaletteCosmicDark, PaletteEmber, PaletteJade, PaletteSakura, PaletteOcean)
+// "Vivid" — matches the reference screenshot: electric cobalt-purple bg,
+// warm orange/amber blobs, pure-white frosted glass cards.
+val PaletteVivid = AppPalette(
+    name   = "Vivid",   seed = Color(0xFF5B35F2),
+    t1     = Color(0xFF5B35F2), t2 = Color(0xFFFF8C00), t3 = Color(0xFFFFAA33),
+    t4     = Color(0xFF8B55FF), t5     = Color(0xFFFF6600), t6 = Color(0xFFA875FF),
+    g1     = Color(0xFF7B55FF), g2 = Color(0xFF5535E8),
+    bgTop  = Color(0xFF3D2AE0), bgBottom = Color(0xFF170C7A),
+)
+
+val AllPalettes = listOf(PaletteCosmicDark, PaletteEmber, PaletteJade, PaletteSakura, PaletteOcean, PaletteVivid)
 
 // Provided by AIHubTheme / AIHubApp — read anywhere in the tree.
 val LocalAppPalette   = staticCompositionLocalOf<AppPalette> { PaletteCosmicDark }

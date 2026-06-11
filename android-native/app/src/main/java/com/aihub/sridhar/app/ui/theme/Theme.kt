@@ -19,12 +19,12 @@ private fun glassColorScheme(palette: AppPalette) = darkColorScheme(
     onTertiary           = White,
     background           = palette.bgTop,          // used by transparent containers
     onBackground         = White,
-    surface              = Color(0x1AFFFFFF),       // 10 % frosted glass
+    surface              = Color(0x26FFFFFF),       // 15 % frosted glass
     onSurface            = White,
-    surfaceVariant       = Color(0x26FFFFFF),       // 15 % for elevated glass
-    onSurfaceVariant     = White.copy(alpha = 0.65f),
-    outline              = Color(0x40FFFFFF),       // 25 % white border
-    outlineVariant       = Color(0x26FFFFFF),
+    surfaceVariant       = Color(0x33FFFFFF),       // 20 % for elevated glass
+    onSurfaceVariant     = White.copy(alpha = 0.70f),
+    outline              = Color(0x55FFFFFF),       // 33 % white border
+    outlineVariant       = Color(0x33FFFFFF),
     error                = Rose500,
     onError              = White,
     scrim                = Black,
