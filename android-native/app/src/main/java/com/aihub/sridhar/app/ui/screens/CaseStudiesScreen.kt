@@ -7,14 +7,19 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.CaseStudy
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.components.*
@@ -49,23 +54,26 @@ fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) 
         }
     }
 
-    Column {
-        TopAppBar(title = { Text("Case Studies", fontWeight = FontWeight.Bold) })
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+        TopAppBar(
+            title = { Text("Case Studies", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+        )
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonAmber.copy(alpha = 0.5f), NeonGreen.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Industry", industry, industries, { industry = it }, Modifier.weight(1f))
             FilterDropdown("AI Tool",  tag,      allTags,   { tag      = it }, Modifier.weight(1f))
         }
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text("${filtered.size} of ${all.size} case studies", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(if (all.isEmpty()) "Loading…" else "${filtered.size} of ${all.size} case studies", style = MaterialTheme.typography.labelSmall, color = TextMuted)
             if (industry != "All" || tag != "All") {
-                TextButton(onClick = { industry = "All"; tag = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
+                TextButton(onClick = { industry = "All"; tag = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall, color = NeonViolet) }
             }
         }
-        HorizontalDivider()
         LazyColumn {
             items(filtered, key = { it.slug }) { cs ->
                 CaseStudyRow(cs = cs, onClick = { onCaseStudyClick(cs.slug) })
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                Box(modifier = Modifier.fillMaxWidth().padding(start = 68.dp).height(1.dp).background(Brush.horizontalGradient(listOf(NeonAmber.copy(alpha = 0.08f), Color.Transparent))))
             }
         }
     }
@@ -103,10 +111,12 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
+        containerColor = Dark900,
         topBar = {
             TopAppBar(
-                title = { Text(cs?.company ?: "Case Study", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back") } },
+                title = { Text(cs?.company ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
             )
         }
     ) { padding ->

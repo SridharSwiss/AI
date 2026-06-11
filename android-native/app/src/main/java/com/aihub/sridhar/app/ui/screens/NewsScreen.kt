@@ -1,6 +1,8 @@
 package com.aihub.sridhar.app.ui.screens
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -45,12 +47,14 @@ fun NewsScreen(repo: DataRepository) {
     var selectedTab by remember { mutableStateOf(0) }
     val tabs = listOf("Latest", "Sources")
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
         TopAppBar(
-            title = { Text("AI News", fontWeight = FontWeight.Bold) },
+            title = { Text("AI News", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
         )
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonCyan.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.3f), Color.Transparent))))
 
-        TabRow(selectedTabIndex = selectedTab, containerColor = MaterialTheme.colorScheme.surface) {
+        TabRow(selectedTabIndex = selectedTab, containerColor = Dark900, contentColor = NeonViolet) {
             tabs.forEachIndexed { i, title ->
                 Tab(
                     selected  = selectedTab == i,
@@ -90,7 +94,7 @@ private fun ArticlesTab(repo: DataRepository) {
         else articles.filter { it.sourceCategory == selectedCat }
     }
 
-    Column {
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
         // Category chips
         Row(
             modifier = Modifier
@@ -107,14 +111,16 @@ private fun ArticlesTab(repo: DataRepository) {
                     onClick  = { selectedCat = cat },
                     label    = { Text(cat, style = MaterialTheme.typography.labelMedium) },
                     colors   = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = if (cat == "All") MaterialTheme.colorScheme.primary else bg,
-                        selectedLabelColor     = if (cat == "All") MaterialTheme.colorScheme.onPrimary else fg,
+                        selectedContainerColor = if (cat == "All") NeonViolet else bg,
+                        selectedLabelColor     = if (cat == "All") Color.White else fg,
+                        containerColor         = Dark800,
+                        labelColor             = TextSecondary,
                     ),
                 )
             }
         }
 
-        HorizontalDivider()
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
 
         Box(modifier = Modifier.weight(1f)) {
             when {
@@ -180,10 +186,10 @@ private fun ArticleCard(article: NewsArticle) {
     val uriHandler = LocalUriHandler.current
     val (catBg, catFg) = categoryColors(article.sourceCategory)
 
-    ElevatedCard(
-        modifier = Modifier.fillMaxWidth().clickable { if (article.link.isNotBlank()) uriHandler.openUri(article.link) },
+    Surface(
+        modifier = Modifier.fillMaxWidth().clickable { if (article.link.isNotBlank()) uriHandler.openUri(article.link) }.border(1.dp, Brush.linearGradient(listOf(NeonCyan.copy(0.2f), NeonViolet.copy(0.15f), Dark700)), RoundedCornerShape(14.dp)),
         shape    = RoundedCornerShape(14.dp),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 1.dp),
+        color    = Dark800,
     ) {
         Column(Modifier.padding(14.dp)) {
             // Source + category + time
@@ -208,6 +214,7 @@ private fun ArticleCard(article: NewsArticle) {
                 text = article.title,
                 style = MaterialTheme.typography.titleSmall.copy(lineHeight = 20.sp),
                 fontWeight = FontWeight.SemiBold,
+                color = TextPrimary,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(bottom = 6.dp),
@@ -218,7 +225,7 @@ private fun ArticleCard(article: NewsArticle) {
                 Text(
                     text = article.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = TextSecondary,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(bottom = 8.dp),
@@ -227,8 +234,8 @@ private fun ArticleCard(article: NewsArticle) {
 
             // Read more
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                Icon(Icons.Filled.OpenInNew, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(12.dp))
-                Text("Read article", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
+                Icon(Icons.Filled.OpenInNew, null, tint = NeonCyan, modifier = Modifier.size(12.dp))
+                Text("Read article", style = MaterialTheme.typography.labelSmall, color = NeonCyan, fontWeight = FontWeight.SemiBold)
             }
         }
     }
@@ -236,7 +243,7 @@ private fun ArticleCard(article: NewsArticle) {
 
 @Composable
 private fun ArticleSkeleton() {
-    ElevatedCard(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) {
+    Surface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Dark800) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ShimmerBox(width = 60.dp, height = 20.dp)
@@ -252,7 +259,7 @@ private fun ArticleSkeleton() {
 @Composable
 private fun ShimmerBox(modifier: Modifier = Modifier, width: androidx.compose.ui.unit.Dp = 0.dp, height: androidx.compose.ui.unit.Dp) {
     val m = if (width > 0.dp) modifier.width(width).height(height) else modifier.height(height)
-    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(6.dp), modifier = m) {}
+    Surface(color = Dark700, shape = RoundedCornerShape(6.dp), modifier = m) {}
 }
 
 /* ── Sources tab ─────────────────────────────────────────── */
@@ -268,7 +275,7 @@ private fun SourcesTab(repo: DataRepository) {
         if (selectedCat == "All") sources else sources.filter { it.category == selectedCat }
     }
 
-    Column {
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -284,19 +291,21 @@ private fun SourcesTab(repo: DataRepository) {
                     onClick  = { selectedCat = cat },
                     label    = { Text(cat, style = MaterialTheme.typography.labelMedium) },
                     colors   = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = if (cat == "All") MaterialTheme.colorScheme.primary else bg,
-                        selectedLabelColor     = if (cat == "All") MaterialTheme.colorScheme.onPrimary else fg,
+                        selectedContainerColor = if (cat == "All") NeonViolet else bg,
+                        selectedLabelColor     = if (cat == "All") Color.White else fg,
+                        containerColor         = Dark800,
+                        labelColor             = TextSecondary,
                     ),
                 )
             }
         }
 
-        HorizontalDivider()
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
 
         Text(
             "${filtered.size} sources",
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = TextSecondary,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         )
 
@@ -311,30 +320,30 @@ private fun SourcesTab(repo: DataRepository) {
 @Composable
 private fun SourceCard(source: NewsSource, onClick: () -> Unit) {
     val (bg, fg) = categoryColors(source.category)
-    ElevatedCard(
-        modifier  = Modifier.fillMaxWidth().clickable(onClick = onClick),
-        shape     = RoundedCornerShape(14.dp),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 1.dp),
+    Surface(
+        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick).border(1.dp, Brush.linearGradient(listOf(NeonCyan.copy(0.2f), NeonViolet.copy(0.1f), Dark700)), RoundedCornerShape(14.dp)),
+        shape    = RoundedCornerShape(14.dp),
+        color    = Dark800,
     ) {
         Row(
             modifier = Modifier.padding(14.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.Top,
         ) {
-            Surface(color = bg, contentColor = fg, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(40.dp)) {
-                Box(contentAlignment = Alignment.Center) { Icon(Icons.Filled.RssFeed, null, modifier = Modifier.size(20.dp)) }
+            Box(modifier = Modifier.size(44.dp).background(Brush.linearGradient(listOf(NeonCyan.copy(0.2f), NeonViolet.copy(0.1f))), RoundedCornerShape(12.dp)).border(1.dp, NeonCyan.copy(0.3f), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+                Icon(Icons.Filled.RssFeed, null, tint = NeonCyan, modifier = Modifier.size(22.dp))
             }
             Column(modifier = Modifier.weight(1f)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
-                    Text(source.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+                    Text(source.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(1f))
                     BadgeChip(source.category, bg, fg)
                 }
                 Spacer(Modifier.height(4.dp))
-                Text(source.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(source.description, style = MaterialTheme.typography.bodySmall, color = TextSecondary, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 Spacer(Modifier.height(6.dp))
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Icon(Icons.Filled.OpenInNew, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(12.dp))
-                    Text("Visit source", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Filled.OpenInNew, null, tint = NeonViolet, modifier = Modifier.size(12.dp))
+                    Text("Visit source", style = MaterialTheme.typography.labelSmall, color = NeonViolet)
                 }
             }
         }

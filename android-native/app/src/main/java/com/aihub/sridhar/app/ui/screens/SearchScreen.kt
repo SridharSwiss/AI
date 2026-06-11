@@ -1,5 +1,6 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,8 +10,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.*
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.navigation.Screen
@@ -60,32 +63,43 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
         }
     }
 
-    Column {
-        TopAppBar(title = { Text("Search", fontWeight = FontWeight.Bold) })
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+        TopAppBar(
+            title = { Text("Search", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+        )
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
         OutlinedTextField(
             value = query,
             onValueChange = { query = it },
-            placeholder = { Text("Search tools, companies, compliance…") },
-            leadingIcon = { Icon(Icons.Filled.Search, null) },
+            placeholder = { Text("Search tools, companies, compliance…", color = TextMuted) },
+            leadingIcon = { Icon(Icons.Filled.Search, null, tint = NeonViolet) },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
             singleLine = true,
             shape = MaterialTheme.shapes.medium,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor   = NeonViolet,
+                unfocusedBorderColor = Dark600,
+                focusedTextColor     = TextPrimary,
+                unfocusedTextColor   = TextPrimary,
+                cursorColor          = NeonViolet,
+            ),
         )
 
         if (query.length < 2) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Type to search everything", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
+                Text("Type to search everything", color = TextSecondary, style = MaterialTheme.typography.bodyMedium)
             }
         } else if (results.isEmpty()) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("No results for \"$query\"", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
+                Text("No results for \"$query\"", color = TextSecondary, style = MaterialTheme.typography.bodyMedium)
             }
         } else {
             Text(
                 "${results.size} results",
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = TextSecondary,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
             LazyColumn {
@@ -105,16 +119,17 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
                         is SearchResult.LearnResult     -> result.sub
                     }
                     ListItem(
-                        headlineContent  = { Text(label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold) },
-                        supportingContent = { Text(sub, style = MaterialTheme.typography.bodySmall) },
+                        headlineContent  = { Text(label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary) },
+                        supportingContent = { Text(sub, style = MaterialTheme.typography.bodySmall, color = TextSecondary) },
                         trailingContent  = {
-                            Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
-                                Text(type, style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                            Surface(color = Dark700, shape = MaterialTheme.shapes.small) {
+                                Text(type, style = MaterialTheme.typography.labelSmall, color = NeonViolet, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                             }
                         },
+                        colors = ListItemDefaults.colors(containerColor = Dark900),
                         modifier = Modifier.clickable(onClick = { onNavigate(result.route) }),
                     )
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
                 }
             }
         }

@@ -1,5 +1,7 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,10 +13,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.ComplianceFramework
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.components.*
@@ -62,8 +67,12 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
         }
     }
 
-    Column {
-        TopAppBar(title = { Text("Compliance", fontWeight = FontWeight.Bold) })
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+        TopAppBar(
+            title = { Text("Compliance", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+        )
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonPink.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Jurisdiction", jurisdiction, jurisdictions, { jurisdiction = it }, Modifier.weight(1f))
             FilterDropdown("Risk Level",   riskLevel,   riskLevels,   { riskLevel    = it }, Modifier.weight(1f))
@@ -74,11 +83,10 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
                 TextButton(onClick = { jurisdiction = "All"; riskLevel = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
             }
         }
-        HorizontalDivider()
         LazyColumn {
             items(filtered, key = { it.slug }) { f ->
                 ComplianceRow(f = f, onClick = { onFrameworkClick(f.slug) })
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
             }
         }
     }
@@ -92,12 +100,13 @@ fun ComplianceRow(f: ComplianceFramework, onClick: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Surface(color = Rose100, contentColor = Rose500, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(40.dp)) {
-            Box(contentAlignment = Alignment.Center) { Icon(Icons.Filled.Shield, null, modifier = Modifier.size(20.dp)) }
-        }
+        Box(
+            modifier = Modifier.size(44.dp).background(Brush.linearGradient(listOf(NeonPink.copy(alpha = 0.25f), NeonViolet.copy(alpha = 0.15f))), RoundedCornerShape(12.dp)).border(1.dp, Brush.linearGradient(listOf(NeonPink.copy(0.4f), NeonViolet.copy(0.2f))), RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center,
+        ) { Icon(Icons.Filled.Shield, null, tint = NeonPink, modifier = Modifier.size(22.dp)) }
         Column(modifier = Modifier.weight(1f)) {
-            Text(f.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text("${f.jurisdiction} · ${f.enforcementDate}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
+            Text(f.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("${f.jurisdiction} · ${f.enforcementDate}", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
         }
         BadgeChip(f.riskLevel.replaceFirstChar { it.uppercase() }, bg, fg)
     }
@@ -114,13 +123,15 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
+        containerColor = Dark900,
         topBar = {
             TopAppBar(
-                title = { Text(f?.shortName.takeIf { !it.isNullOrBlank() } ?: f?.name ?: "Framework", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back") } },
+                title = { Text(f?.shortName.takeIf { !it.isNullOrBlank() } ?: f?.name ?: "Framework", fontWeight = FontWeight.Bold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
                 actions = {
                     f?.officialLink?.let { url ->
-                        if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Official link") }
+                        if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Official link", tint = NeonViolet) }
                     }
                 }
             )
@@ -281,7 +292,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                 Spacer(Modifier.width(8.dp))
                                 BadgeChip(impact.impact.replaceFirstChar { it.uppercase() }, iBg, iFg)
                             }
-                            HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                            Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
                         }
                     }
                 }

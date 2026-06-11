@@ -34,11 +34,17 @@ class DataRepository(private val context: Context) {
 
     suspend fun fetchNewsArticles(): List<NewsArticle> = withContext(Dispatchers.IO) {
         try {
-            val url = java.net.URL("https://sridhar-ai.ch/api/news")
+            val url  = java.net.URL("https://sridhar-ai.ch/api/news")
             val conn = url.openConnection() as java.net.HttpURLConnection
-            conn.connectTimeout = 10_000
-            conn.readTimeout    = 15_000
-            conn.setRequestProperty("Accept", "application/json")
+            conn.connectTimeout = 12_000
+            conn.readTimeout    = 20_000
+            conn.setRequestProperty("Accept",     "application/json")
+            conn.setRequestProperty("User-Agent",
+                "Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36")
+            conn.setRequestProperty("Referer",    "https://sridhar-ai.ch/")
+            conn.setRequestProperty("Origin",     "https://sridhar-ai.ch")
+            val code = conn.responseCode
+            if (code != 200) { conn.disconnect(); return@withContext emptyList() }
             val text = conn.inputStream.bufferedReader().readText()
             conn.disconnect()
             json.decodeFromString(text)

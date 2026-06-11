@@ -1,5 +1,7 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,9 +14,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.LearnResource
 import com.aihub.sridhar.app.data.repository.DataRepository
 import com.aihub.sridhar.app.ui.components.*
@@ -58,8 +62,12 @@ fun LearnScreen(repo: DataRepository) {
 
     val uriHandler = LocalUriHandler.current
 
-    Column {
-        TopAppBar(title = { Text("Learn", fontWeight = FontWeight.Bold) })
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+        TopAppBar(
+            title = { Text("Learn", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+        )
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonGreen.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Type",  type,  types,  { type  = it }, Modifier.weight(1f))
@@ -73,14 +81,12 @@ fun LearnScreen(repo: DataRepository) {
                 label    = { Text("Free only", style = MaterialTheme.typography.labelSmall) },
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("${filtered.size} of ${all.size}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("${filtered.size} of ${all.size}", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
                 if (type != "All" || level != "All" || freeOnly) {
                     TextButton(onClick = { type = "All"; level = "All"; freeOnly = false }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
                 }
             }
         }
-
-        HorizontalDivider()
 
         LazyColumn {
             items(filtered, key = { it.slug }) { r ->
@@ -91,19 +97,19 @@ fun LearnScreen(repo: DataRepository) {
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Surface(color = bg, contentColor = fg, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(40.dp)) {
-                        Box(contentAlignment = Alignment.Center) { Icon(icon, null, modifier = Modifier.size(20.dp)) }
+                    Box(modifier = Modifier.size(44.dp).background(Brush.linearGradient(listOf(fg.copy(alpha = 0.25f), fg.copy(alpha = 0.1f))), RoundedCornerShape(12.dp)).border(1.dp, fg.copy(0.3f), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+                        Icon(icon, null, tint = fg, modifier = Modifier.size(22.dp))
                     }
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text(r.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                            Text(r.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
                             if (r.free) BadgeChip("Free", Green100, Green500)
                         }
-                        Text("${r.provider} · ~${r.readTime}h", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
+                        Text("${r.provider} · ~${r.readTime}h", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
                     }
                     BadgeChip(r.level, lBg, lFg)
                 }
-                HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
             }
         }
     }

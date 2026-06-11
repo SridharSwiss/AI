@@ -1,5 +1,7 @@
 package com.aihub.sridhar.app.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,10 +13,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.Phase
 import com.aihub.sridhar.app.data.models.Playbook
 import com.aihub.sridhar.app.data.repository.DataRepository
@@ -51,8 +55,12 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
         else phases.filter { it.label == phaseFilter }
     }
 
-    Column {
-        TopAppBar(title = { Text("Consulting Toolkit", fontWeight = FontWeight.Bold) })
+    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+        TopAppBar(
+            title = { Text("Consulting Toolkit", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+        )
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).padding(bottom = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
             FilterDropdown("Phase", phaseFilter, phaseOpts, { phaseFilter = it }, Modifier.width(180.dp))
@@ -63,8 +71,6 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
-
-        HorizontalDivider()
 
         LazyColumn {
             filtered.forEach { phase ->
@@ -77,7 +83,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
                     ) {
                         Icon(icon, null, tint = fg, modifier = Modifier.size(16.dp))
                         Text(phase.label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = fg)
-                        Text("· ${phase.description}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text("· ${phase.description}", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }
                 itemsIndexed(phase.playbooks, key = { i, pb -> "${phase.phase}_$i" }) { index, pb ->
@@ -86,7 +92,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
                         phase  = phase,
                         onClick = { onPlaybookClick(phase.phase, index) },
                     )
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
                 }
             }
         }
@@ -102,12 +108,12 @@ fun PlaybookRow(pb: Playbook, phase: Phase, onClick: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Surface(color = bg, contentColor = fg, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(40.dp)) {
-            Box(contentAlignment = Alignment.Center) { Icon(icon, null, modifier = Modifier.size(20.dp)) }
+        Box(modifier = Modifier.size(44.dp).background(Brush.linearGradient(listOf(fg.copy(alpha = 0.2f), fg.copy(alpha = 0.1f))), RoundedCornerShape(12.dp)).border(1.dp, fg.copy(0.3f), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+            Icon(icon, null, tint = fg, modifier = Modifier.size(22.dp))
         }
         Column(modifier = Modifier.weight(1f)) {
-            Text(pb.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text("${pb.checklist.size} checklist items", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
+            Text(pb.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("${pb.checklist.size} checklist items", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
         }
         BadgeChip(pb.level, lBg, lFg)
     }
@@ -131,10 +137,12 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
     }
 
     Scaffold(
+        containerColor = Dark900,
         topBar = {
             TopAppBar(
-                title = { Text(pb?.title ?: "Playbook", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.Work, null) } },
+                title = { Text(pb?.title ?: "Playbook", fontWeight = FontWeight.Bold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
             )
         }
     ) { padding ->
