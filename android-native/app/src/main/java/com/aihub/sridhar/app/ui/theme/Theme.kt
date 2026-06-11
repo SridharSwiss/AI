@@ -1,7 +1,9 @@
 package com.aihub.sridhar.app.ui.theme
 
+import android.os.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary            = NeonViolet,
@@ -30,12 +32,23 @@ private val DarkColorScheme = darkColorScheme(
     inversePrimary     = Violet600,
 )
 
+/**
+ * On Android 12+ (API 31), [dynamicColor] uses the user's wallpaper to generate a harmonious
+ * M3 tonal palette. Set to false (default) to preserve the neon brand identity.
+ * Toggle to true in Settings to let users personalise.
+ */
 @Composable
 fun AIHubTheme(
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+            dynamicDarkColorScheme(LocalContext.current)
+        else -> DarkColorScheme
+    }
     MaterialTheme(
-        colorScheme = DarkColorScheme,
+        colorScheme = colorScheme,
         typography  = Typography,
         content     = content,
     )
