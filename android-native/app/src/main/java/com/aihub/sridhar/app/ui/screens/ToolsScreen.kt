@@ -71,19 +71,19 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
         label = "alpha",
     )
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
             title = {
                 Text(
                     "AI Tools",
                     fontWeight = FontWeight.ExtraBold,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     letterSpacing = (-0.5).sp,
                 )
             },
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Dark900,
-                titleContentColor = TextPrimary,
+                containerColor = MaterialTheme.colorScheme.background,
+                titleContentColor = MaterialTheme.colorScheme.onSurface,
             ),
         )
 
@@ -115,7 +115,7 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
             Text(
                 if (allTools.isEmpty()) "Loading…" else "${filtered.size} of ${allTools.size} tools",
                 style = MaterialTheme.typography.labelSmall,
-                color = TextMuted,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             if (category != "All" || pricing != "All") {
                 TextButton(onClick = { category = "All"; pricing = "All" }) {
@@ -153,7 +153,7 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .background(Dark900)
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 16.dp, vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.Top,
@@ -175,7 +175,7 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
                     tool.name,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false),
@@ -194,7 +194,7 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
             Text(
                 "${tool.vendor} · ${tool.category}",
                 style = MaterialTheme.typography.labelSmall,
-                color = TextSecondary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
             )
             if (firstMetric != null) {
@@ -237,17 +237,17 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = Dark900,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text(tool?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
+                title = { Text(tool?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
                 actions = {
                     tool?.website?.let { url ->
                         if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Website", tint = NeonCyan) }
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->
@@ -268,23 +268,23 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = Dark900,
+                containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonViolet,
-                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {
                 listOf("Overview", "Pricing", "More").forEachIndexed { i, t ->
                     Tab(
                         selected = tab == i, onClick = { tab = i },
-                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonViolet else TextSecondary) },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonViolet else MaterialTheme.colorScheme.onSurfaceVariant) },
                     )
                 }
             }
             when (tab) {
                 0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     item {
-                        Text(tool.tagline, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = TextPrimary)
+                        Text(tool.tagline, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                         Spacer(Modifier.height(6.dp))
-                        Text(tool.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                        Text(tool.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                     }
                     if (tool.metrics.isNotEmpty()) item {
                         PremiumDetailCard("Key Stats", Icons.Filled.BarChart, NeonGreen) {
@@ -292,9 +292,9 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
                                 tool.metrics.entries.toList().chunked(2).forEach { row ->
                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                         row.forEach { (k, v) ->
-                                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(NeonGreen.copy(0.3f), NeonCyan.copy(0.15f))), RoundedCornerShape(10.dp)).padding(10.dp)) {
+                                            Box(modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).background(MaterialTheme.colorScheme.surfaceVariant).border(1.dp, Brush.linearGradient(listOf(NeonGreen.copy(0.3f), NeonCyan.copy(0.15f))), RoundedCornerShape(10.dp)).padding(10.dp)) {
                                                 Column {
-                                                    Text(k, style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                                                    Text(k, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                                     Text(v, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = NeonGreen)
                                                 }
                                             }
@@ -339,12 +339,12 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
                     if (tool.platforms.isNotEmpty() || tool.integrations.isNotEmpty()) item {
                         PremiumDetailCard("Availability", Icons.Filled.DevicesOther, NeonCyan) {
                             if (tool.platforms.isNotEmpty()) {
-                                Text("Platforms", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 6.dp))
+                                Text("Platforms", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 6.dp))
                                 TagRow(tool.platforms)
                                 if (tool.integrations.isNotEmpty()) Spacer(Modifier.height(10.dp))
                             }
                             if (tool.integrations.isNotEmpty()) {
-                                Text("Integrations", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted, modifier = Modifier.padding(bottom = 6.dp))
+                                Text("Integrations", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 6.dp))
                                 TagRow(tool.integrations)
                             }
                         }
@@ -353,12 +353,12 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
                 else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     if (tool.history.isNotBlank()) item {
                         PremiumDetailCard("Origin Story", Icons.Filled.Star, NeonAmber) {
-                            Text(tool.history, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                            Text(tool.history, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 20.sp)
                         }
                     }
                     if (tool.latestUpdate.isNotBlank()) item {
                         PremiumDetailCard("Latest in 2026", Icons.Filled.FlashOn, NeonCyan) {
-                            Text(tool.latestUpdate, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                            Text(tool.latestUpdate, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 20.sp)
                         }
                     }
                     if (tool.idealFor.isNotEmpty()) item {
@@ -367,13 +367,13 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
                         }
                     }
                     if (alternatives.isNotEmpty()) item {
-                        PremiumDetailCard("Alternatives", Icons.Filled.CompareArrows, TextMuted) {
+                        PremiumDetailCard("Alternatives", Icons.Filled.CompareArrows, MaterialTheme.colorScheme.onSurfaceVariant) {
                             alternatives.forEach { alt ->
                                 val (ag1, ag2) = pricingGradient(alt.pricing)
                                 Row(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                                     Column(modifier = Modifier.weight(1f)) {
-                                        Text(alt.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
-                                        Text(alt.category, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                        Text(alt.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+                                        Text(alt.category, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                     Box(modifier = Modifier.clip(RoundedCornerShape(6.dp)).border(1.dp, Brush.linearGradient(listOf(ag1.copy(0.5f), ag2.copy(0.3f))), RoundedCornerShape(6.dp)).padding(horizontal = 8.dp, vertical = 3.dp)) {
                                         Text(alt.pricing, style = MaterialTheme.typography.labelSmall, color = ag1)
@@ -392,7 +392,7 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
                         }
                     }
                     if (tool.tags.isNotEmpty()) item {
-                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(Modifier.height(8.dp))
                         TagRow(tool.tags, wrap = true)
                     }
@@ -429,7 +429,7 @@ fun PremiumDetailCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(Dark800)
+            .background(MaterialTheme.colorScheme.surface)
             .border(1.dp, Brush.linearGradient(listOf(iconTint.copy(alpha = 0.35f), NeonViolet.copy(alpha = 0.15f), Color.Transparent)), RoundedCornerShape(16.dp))
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -447,7 +447,7 @@ fun PremiumDetailCard(
                 ) {
                     Icon(icon, null, tint = iconTint, modifier = Modifier.size(16.dp))
                 }
-                Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = TextPrimary)
+                Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
             }
             content()
         }
@@ -461,8 +461,8 @@ private fun PremiumDetailRow(label: String, value: String) {
         modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Text(label, style = MaterialTheme.typography.bodySmall, color = TextMuted, modifier = Modifier.weight(1f))
-        Text(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(2f), textAlign = androidx.compose.ui.text.style.TextAlign.End)
+        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+        Text(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(2f), textAlign = androidx.compose.ui.text.style.TextAlign.End)
     }
     Box(Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(Dark500, Color.Transparent))))
 }
@@ -472,7 +472,7 @@ private fun ProConsCard(title: String, items: List<String>, color: Color, modifi
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(14.dp))
-            .background(Dark800)
+            .background(MaterialTheme.colorScheme.surface)
             .border(1.dp, Brush.linearGradient(listOf(color.copy(0.35f), color.copy(0.1f))), RoundedCornerShape(14.dp))
     ) {
         Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -483,7 +483,7 @@ private fun ProConsCard(title: String, items: List<String>, color: Color, modifi
                         if (color == NeonGreen) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
                         null, tint = color, modifier = Modifier.size(14.dp).padding(top = 2.dp),
                     )
-                    Text(item, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                    Text(item, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                 }
             }
         }
@@ -496,7 +496,7 @@ private fun PricingTierCard(tier: PricingTier) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
-            .background(Dark700)
+            .background(MaterialTheme.colorScheme.surfaceVariant)
             .border(1.dp, Brush.linearGradient(listOf(NeonGreen.copy(0.3f), NeonCyan.copy(0.15f))), RoundedCornerShape(12.dp))
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
@@ -505,7 +505,7 @@ private fun PricingTierCard(tier: PricingTier) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(tier.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = TextPrimary)
+                Text(tier.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                 Text(tier.price, style = MaterialTheme.typography.titleSmall, color = NeonGreen, fontWeight = FontWeight.ExtraBold)
             }
             if (tier.features.isNotEmpty()) {
@@ -513,7 +513,7 @@ private fun PricingTierCard(tier: PricingTier) {
                 tier.features.forEach { feature ->
                     Row(modifier = Modifier.padding(bottom = 4.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Icon(Icons.Filled.CheckCircle, null, tint = NeonGreen, modifier = Modifier.size(13.dp).padding(top = 2.dp))
-                        Text(feature, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                        Text(feature, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }

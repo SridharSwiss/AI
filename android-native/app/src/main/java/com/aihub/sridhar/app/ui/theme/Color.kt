@@ -1,5 +1,6 @@
 package com.aihub.sridhar.app.ui.theme
 
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 // ── Base backgrounds (near-black) ─────────────────────────
@@ -91,3 +92,25 @@ val SurfaceLight    = White
 val SurfaceDark     = Dark700
 val BgLight         = Zinc50
 val BgDark          = Dark900
+
+// ── Light theme colours ───────────────────────────────────
+val LightBackground   = Color(0xFFF8F7FF)   // barely-violet white
+val LightSurface      = Color(0xFFFFFFFF)
+val LightSurfaceVar   = Color(0xFFF1F0F9)
+val LightBorder       = Color(0xFFE0DFEA)
+val LightOnBg         = Color(0xFF111116)
+val LightOnSurface    = Color(0xFF18181F)
+val LightOnSurfaceVar = Color(0xFF52525B)
+val LightOnMuted      = Color(0xFF71717A)
+
+// ── Theme CompositionLocal ────────────────────────────────
+val LocalDarkTheme = staticCompositionLocalOf { true }
+
+// ── Light-mode colour darkening for accessibility ─────────
+// Darkens a neon colour ~42 % so it passes WCAG AA on white.
+fun Color.forLightBackground(): Color = Color(
+    red   = (red   * 0.58f).coerceIn(0f, 1f),
+    green = (green * 0.58f).coerceIn(0f, 1f),
+    blue  = (blue  * 0.58f).coerceIn(0f, 1f),
+    alpha = alpha,
+)

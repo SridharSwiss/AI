@@ -39,7 +39,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val repo = DataRepository(applicationContext)
         setContent {
-            AIHubTheme { AIHubApp(repo) }
+            var isDarkTheme by remember { mutableStateOf(true) }
+            AIHubTheme(darkTheme = isDarkTheme) {
+                AIHubApp(repo, onToggleTheme = { isDarkTheme = !isDarkTheme })
+            }
         }
     }
 }
@@ -102,7 +105,7 @@ private fun androidx.navigation.NavGraphBuilder.topLevel(
 )
 
 @Composable
-fun AIHubApp(repo: DataRepository) {
+fun AIHubApp(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
     val navController  = rememberNavController()
     val backstackEntry by navController.currentBackStackEntryAsState()
     val currentRoute   = backstackEntry?.destination?.route
@@ -118,7 +121,7 @@ fun AIHubApp(repo: DataRepository) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Dark900)
+            .background(MaterialTheme.colorScheme.background)
             .statusBarsPadding()          // Pillar 1: inset content below status bar
             .imePadding()                 // Pillar 1: slide content above soft keyboard
     ) {
@@ -136,7 +139,7 @@ fun AIHubApp(repo: DataRepository) {
         ) {
             // ── Top-level destinations (tab fade-through) ──────────
             topLevel(Screen.Home.route) {
-                HomeScreen(onNavigate = { navController.navigate(it) })
+                HomeScreen(onNavigate = { navController.navigate(it) }, onToggleTheme = onToggleTheme)
             }
             topLevel(Screen.Tools.route) {
                 ToolsScreen(repo = repo, onToolClick = { navController.navigate(Screen.ToolDetail.route(it)) })
@@ -233,7 +236,7 @@ private fun FloatingPillNav(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(50))
-            .background(Dark800.copy(alpha = 0.96f))
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.96f))
             .border(
                 1.dp,
                 Brush.linearGradient(listOf(NeonViolet.copy(0.35f), NeonCyan.copy(0.2f), NeonViolet.copy(0.1f))),
@@ -277,7 +280,7 @@ private fun PillTab(
         label         = "tabBg",
     )
     val iconTint by animateColorAsState(
-        targetValue   = if (selected) NeonViolet else TextSecondary,
+        targetValue   = if (selected) NeonViolet else MaterialTheme.colorScheme.onSurfaceVariant,
         animationSpec = tween(200),
         label         = "tabTint",
     )

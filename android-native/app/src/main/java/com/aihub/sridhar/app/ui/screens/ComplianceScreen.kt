@@ -68,10 +68,10 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
-            title = { Text("Compliance", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title = { Text("Compliance", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonPink.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -106,7 +106,7 @@ fun ComplianceRow(f: ComplianceFramework, onClick: () -> Unit) {
             contentAlignment = Alignment.Center,
         ) { Icon(Icons.Filled.Shield, null, tint = NeonPink, modifier = Modifier.size(22.dp)) }
         Column(modifier = Modifier.weight(1f)) {
-            Text(f.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(f.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text("${f.jurisdiction} · ${f.enforcementDate}", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
         }
         BadgeChip(f.riskLevel.replaceFirstChar { it.uppercase() }, bg, fg)
@@ -125,12 +125,12 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = Dark900,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text(f?.shortName.takeIf { !it.isNullOrBlank() } ?: f?.name ?: "Framework", fontWeight = FontWeight.Bold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+                title = { Text(f?.shortName.takeIf { !it.isNullOrBlank() } ?: f?.name ?: "Framework", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
                 actions = {
                     f?.officialLink?.let { url ->
                         if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Official link", tint = NeonViolet) }
@@ -157,7 +157,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = Dark900,
+                containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonPink,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
             ) {
@@ -218,7 +218,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                     Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(tFg.copy(0.3f), tFg.copy(0.1f))), RoundedCornerShape(10.dp))) {
                                         Column(modifier = Modifier.padding(12.dp)) {
                                             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                                                Text(tier.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(1f))
+                                                Text(tier.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
                                                 BadgeChip(tier.level.replaceFirstChar { it.uppercase() }, tBg, tFg)
                                             }
                                             if (tier.description.isNotBlank()) {
@@ -267,7 +267,7 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
                                 val (iBg, iFg) = impactColors(impact.impact)
                                 Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                     Column(modifier = Modifier.weight(1f)) {
-                                        Text(impact.sector, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                        Text(impact.sector, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                         if (impact.notes.isNotBlank()) Text(impact.notes, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
                                     }
                                     Spacer(Modifier.width(8.dp))

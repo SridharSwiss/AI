@@ -56,10 +56,10 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
         else phases.filter { it.label == phaseFilter }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
-            title = { Text("Consulting Toolkit", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title = { Text("Consulting Toolkit", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
@@ -84,7 +84,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
                     ) {
                         Icon(icon, null, tint = fg, modifier = Modifier.size(16.dp))
                         Text(phase.label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = fg)
-                        Text("· ${phase.description}", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text("· ${phase.description}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }
                 itemsIndexed(phase.playbooks, key = { i, pb -> "${phase.phase}_$i" }) { index, pb ->
@@ -93,7 +93,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
                         phase  = phase,
                         onClick = { onPlaybookClick(phase.phase, index) },
                     )
-                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
+                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(MaterialTheme.colorScheme.surfaceVariant))
                 }
             }
         }
@@ -113,8 +113,8 @@ fun PlaybookRow(pb: Playbook, phase: Phase, onClick: () -> Unit) {
             Icon(icon, null, tint = fg, modifier = Modifier.size(22.dp))
         }
         Column(modifier = Modifier.weight(1f)) {
-            Text(pb.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text("${pb.checklist.size} checklist items", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
+            Text(pb.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("${pb.checklist.size} checklist items", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
         }
         BadgeChip(pb.level, lBg, lFg)
     }
@@ -139,12 +139,12 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = Dark900,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text(pb?.title ?: "Playbook", fontWeight = FontWeight.Bold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+                title = { Text(pb?.title ?: "Playbook", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->
@@ -168,16 +168,16 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                         Text("$done / $total", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = if (done == total && total > 0) NeonGreen else TextSecondary)
                     }
                     Spacer(Modifier.height(8.dp))
-                    Box(modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)).background(Dark700)) {
+                    Box(modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)).background(MaterialTheme.colorScheme.surfaceVariant)) {
                         Box(modifier = Modifier.fillMaxWidth(if (total > 0) done.toFloat() / total else 0f).height(4.dp).clip(RoundedCornerShape(2.dp)).background(Brush.horizontalGradient(listOf(NeonGreen, NeonCyan))))
                     }
                 }
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = Dark900,
+                containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonGreen,
-                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {
                 listOf("About", "Checklist").forEachIndexed { i, t ->
                     Tab(
@@ -189,7 +189,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
             when (tab) {
                 0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     item {
-                        Text(pb.desc, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                        Text(pb.desc, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                     }
                     if (pb.guidance.isNotBlank()) item {
                         Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(Brush.linearGradient(listOf(NeonViolet.copy(0.12f), Dark800))).border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.35f), NeonViolet.copy(0.1f))), RoundedCornerShape(12.dp)).padding(14.dp)) {
@@ -198,7 +198,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                                     Icon(Icons.Filled.Lightbulb, null, tint = NeonViolet, modifier = Modifier.size(16.dp))
                                     Text("Guidance", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = NeonViolet)
                                 }
-                                Text(pb.guidance, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                                Text(pb.guidance, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 20.sp)
                             }
                         }
                     }
@@ -210,7 +210,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                                     Spacer(Modifier.height(2.dp))
                                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                         Icon(phIcon, null, tint = phFg, modifier = Modifier.size(14.dp))
-                                        Text(phase.label, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                        Text(phase.label, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                     }
                                 }
                             }
@@ -218,7 +218,7 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                                 Column {
                                     Text("Items", style = MaterialTheme.typography.labelSmall, color = TextMuted)
                                     Spacer(Modifier.height(2.dp))
-                                    Text("$total checklist items", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                    Text("$total checklist items", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                 }
                             }
                         }
@@ -265,13 +265,13 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
                                     Box(modifier = Modifier.fillMaxWidth().background(NeonViolet.copy(alpha = 0.06f))) {
                                         Column(modifier = Modifier.padding(12.dp)) {
                                             if (item.templateTitle.isNotBlank()) Text(item.templateTitle, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = NeonViolet, modifier = Modifier.padding(bottom = 4.dp))
-                                            if (item.instructions.isNotBlank()) Text(item.instructions, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.padding(bottom = 8.dp))
+                                            if (item.instructions.isNotBlank()) Text(item.instructions, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 8.dp))
                                             item.sections.forEach { section ->
                                                 Text(section.heading, style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = NeonViolet, modifier = Modifier.padding(bottom = 4.dp, top = 4.dp))
                                                 section.items.forEachIndexed { qi, q ->
                                                     Row(modifier = Modifier.padding(bottom = 3.dp)) {
                                                         Text("${qi + 1}. ", style = MaterialTheme.typography.labelSmall, color = NeonViolet, fontWeight = FontWeight.Bold)
-                                                        Text(q, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                                        Text(q, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                                     }
                                                 }
                                             }

@@ -66,43 +66,43 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
-            title = { Text("Search", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title = { Text("Search", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), Color.Transparent))))
 
         OutlinedTextField(
             value = query,
             onValueChange = { query = it },
-            placeholder = { Text("Search tools, companies, compliance…", color = TextMuted) },
+            placeholder = { Text("Search tools, companies, compliance…", color = MaterialTheme.colorScheme.onSurfaceVariant) },
             leadingIcon = { Icon(Icons.Filled.Search, null, tint = NeonViolet) },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
             singleLine = true,
             shape = MaterialTheme.shapes.medium,
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor   = NeonViolet,
-                unfocusedBorderColor = Dark600,
-                focusedTextColor     = TextPrimary,
-                unfocusedTextColor   = TextPrimary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                focusedTextColor     = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor   = MaterialTheme.colorScheme.onSurface,
                 cursorColor          = NeonViolet,
             ),
         )
 
         if (query.length < 2) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Type to search everything", color = TextSecondary, style = MaterialTheme.typography.bodyMedium)
+                Text("Type to search everything", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
             }
         } else if (results.isEmpty()) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("No results for \"$query\"", color = TextSecondary, style = MaterialTheme.typography.bodyMedium)
+                Text("No results for \"$query\"", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
             }
         } else {
             Text(
                 "${results.size} results",
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
             LazyColumn {
@@ -122,17 +122,17 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
                         is SearchResult.LearnResult     -> result.sub
                     }
                     ListItem(
-                        headlineContent  = { Text(label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary) },
-                        supportingContent = { Text(sub, style = MaterialTheme.typography.bodySmall, color = TextSecondary) },
+                        headlineContent  = { Text(label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface) },
+                        supportingContent = { Text(sub, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) },
                         trailingContent  = {
-                            Surface(color = Dark700, shape = MaterialTheme.shapes.small) {
+                            Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
                                 Text(type, style = MaterialTheme.typography.labelSmall, color = NeonViolet, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                             }
                         },
-                        colors = ListItemDefaults.colors(containerColor = Dark900),
+                        colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
                         modifier = Modifier.clickable(onClick = { onNavigate(result.route) }),
                     )
-                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
+                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(MaterialTheme.colorScheme.surfaceVariant))
                 }
             }
         }

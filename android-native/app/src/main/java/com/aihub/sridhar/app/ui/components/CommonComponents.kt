@@ -63,9 +63,8 @@ fun AnimatedPressCard(
     borderGradient: List<Color> = listOf(
         NeonViolet.copy(alpha = 0.30f),
         NeonCyan.copy(alpha = 0.15f),
-        Dark700,
     ),
-    backgroundColor: Color = Dark800,
+    backgroundColor: Color? = null,
     cornerRadius: Int = 16,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -81,12 +80,13 @@ fun AnimatedPressCard(
         label         = "borderAlpha",
     )
     val shape = RoundedCornerShape(cornerRadius.dp)
+    val bgColor = backgroundColor ?: MaterialTheme.colorScheme.surface
 
     Column(
         modifier = modifier
             .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(shape)
-            .background(backgroundColor)
+            .background(bgColor)
             .border(
                 width = 1.dp,
                 brush = Brush.linearGradient(borderGradient.map { it.copy(alpha = it.alpha * borderAlpha) }),
@@ -125,10 +125,10 @@ fun ExpandableCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(Dark800)
+            .background(MaterialTheme.colorScheme.surface)
             .border(
                 1.dp,
-                Brush.linearGradient(listOf(iconTint.copy(0.28f), NeonViolet.copy(0.12f), Dark700)),
+                Brush.linearGradient(listOf(iconTint.copy(0.28f), NeonViolet.copy(0.12f))),
                 shape,
             )
             .animateContentSize(
@@ -162,7 +162,7 @@ fun ExpandableCard(
                 title,
                 style         = MaterialTheme.typography.titleSmall,
                 fontWeight    = FontWeight.SemiBold,
-                color         = TextPrimary,
+                color         = MaterialTheme.colorScheme.onSurface,
                 modifier      = Modifier.weight(1f),
             )
             val chevronRotation by animateFloatAsState(
@@ -173,14 +173,14 @@ fun ExpandableCard(
             Icon(
                 Icons.Filled.ExpandMore,
                 null,
-                tint     = TextMuted,
+                tint     = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(18.dp).graphicsLayer { rotationZ = chevronRotation },
             )
         }
 
         // Collapsible body
         if (expanded) {
-            Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+            Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant))
             Column(modifier = Modifier.padding(14.dp), content = content)
         }
     }
@@ -231,20 +231,20 @@ fun FilterDropdown(
             textStyle      = MaterialTheme.typography.bodySmall,
             colors         = ExposedDropdownMenuDefaults.outlinedTextFieldColors(
                 focusedBorderColor   = NeonViolet,
-                unfocusedBorderColor = Dark500,
-                focusedTextColor     = TextPrimary,
-                unfocusedTextColor   = TextPrimary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                focusedTextColor     = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor   = MaterialTheme.colorScheme.onSurface,
                 focusedLabelColor    = NeonViolet,
             ),
         )
         ExposedDropdownMenu(
             expanded          = expanded,
             onDismissRequest  = { expanded = false },
-            modifier          = Modifier.background(Dark700),
+            modifier          = Modifier.background(MaterialTheme.colorScheme.surfaceVariant),
         ) {
             options.forEach { option ->
                 DropdownMenuItem(
-                    text    = { Text(option, style = MaterialTheme.typography.bodySmall, color = if (option == selected) NeonViolet else TextPrimary) },
+                    text    = { Text(option, style = MaterialTheme.typography.bodySmall, color = if (option == selected) NeonViolet else MaterialTheme.colorScheme.onSurface) },
                     onClick = { onSelected(option); expanded = false },
                 )
             }
@@ -263,9 +263,12 @@ fun BadgeChip(
     contentColor: Color,
     modifier: Modifier = Modifier,
 ) {
+    val isDark = LocalDarkTheme.current
+    val adaptedContainer = if (isDark) containerColor else contentColor.copy(alpha = 0.12f)
+    val adaptedContent   = if (isDark) contentColor   else contentColor.forLightBackground()
     Surface(
-        color        = containerColor,
-        contentColor = contentColor,
+        color        = adaptedContainer,
+        contentColor = adaptedContent,
         shape        = RoundedCornerShape(50),
         modifier     = modifier,
     ) {
@@ -297,7 +300,7 @@ fun BulletItem(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Icon(icon, null, tint = color, modifier = Modifier.size(13.dp).padding(top = 2.dp))
-        Text(text, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+        Text(text, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
     }
 }
 
@@ -313,17 +316,17 @@ fun DetailRow(label: String, value: String, modifier: Modifier = Modifier) {
             modifier              = Modifier.fillMaxWidth().padding(vertical = 7.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text(label, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+            Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
             Text(
                 value,
                 style     = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Medium,
-                color     = TextPrimary,
+                color     = MaterialTheme.colorScheme.onSurface,
                 modifier  = Modifier.weight(2f),
                 textAlign = TextAlign.End,
             )
         }
-        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+        Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant))
     }
 }
 
@@ -342,8 +345,8 @@ fun TagRow(tags: List<String>, wrap: Boolean = false, modifier: Modifier = Modif
         ) {
             tags.forEach { tag ->
                 Surface(
-                    color        = Dark700,
-                    contentColor = TextSecondary,
+                    color        = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     shape        = RoundedCornerShape(50),
                 ) {
                     Text(
@@ -358,7 +361,7 @@ fun TagRow(tags: List<String>, wrap: Boolean = false, modifier: Modifier = Modif
     } else {
         Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             tags.take(4).forEach { tag ->
-                Surface(color = Dark700, contentColor = TextSecondary, shape = RoundedCornerShape(50)) {
+                Surface(color = MaterialTheme.colorScheme.surfaceVariant, contentColor = MaterialTheme.colorScheme.onSurfaceVariant, shape = RoundedCornerShape(50)) {
                     Text(
                         tag,
                         style    = MaterialTheme.typography.labelSmall,
@@ -393,13 +396,13 @@ fun EmptyState(
                 .background(Brush.radialGradient(listOf(NeonViolet.copy(0.15f), Color.Transparent)), RoundedCornerShape(20.dp)),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(icon, null, tint = TextMuted, modifier = Modifier.size(28.dp))
+            Icon(icon, null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(28.dp))
         }
         Spacer(Modifier.height(16.dp))
-        Text(message, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextSecondary)
+        Text(message, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (subtitle.isNotBlank()) {
             Spacer(Modifier.height(4.dp))
-            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = TextMuted, textAlign = TextAlign.Center)
+            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.6f), textAlign = TextAlign.Center)
         }
     }
 }
@@ -440,7 +443,7 @@ fun GradientBorderCard(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(Dark800)
+            .background(MaterialTheme.colorScheme.surface)
             .border(1.dp, Brush.linearGradient(gradient), RoundedCornerShape(16.dp)),
         content = content,
     )
@@ -484,7 +487,7 @@ fun SectionLabel(text: String, modifier: Modifier = Modifier) {
         Text(
             text          = text.uppercase(),
             style         = MaterialTheme.typography.labelMedium,
-            color         = TextMuted,
+            color         = MaterialTheme.colorScheme.onSurfaceVariant,
             letterSpacing = 1.2.sp,
             fontWeight    = FontWeight.SemiBold,
         )

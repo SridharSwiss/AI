@@ -85,11 +85,11 @@ fun NewsScreen(repo: DataRepository) {
         else sources.filter { it.category == selectedCat }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
 
         TopAppBar(
-            title   = { Text("AI News", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors  = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title   = { Text("AI News", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors  = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonCyan.copy(0.5f), NeonViolet.copy(0.3f), Color.Transparent))))
 
@@ -111,8 +111,8 @@ fun NewsScreen(repo: DataRepository) {
                     colors   = FilterChipDefaults.filterChipColors(
                         selectedContainerColor = if (cat == "All") NeonViolet else bg,
                         selectedLabelColor     = if (cat == "All") Color.White else fg,
-                        containerColor         = Dark800,
-                        labelColor             = TextSecondary,
+                        containerColor         = MaterialTheme.colorScheme.surface,
+                        labelColor             = MaterialTheme.colorScheme.onSurfaceVariant,
                     ),
                 )
             }
@@ -160,7 +160,7 @@ fun NewsScreen(repo: DataRepository) {
                             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
                             contentAlignment = Alignment.Center,
                         ) {
-                            Text("No $selectedCat articles", style = MaterialTheme.typography.bodySmall, color = TextMuted)
+                            Text("No $selectedCat articles", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -209,10 +209,10 @@ private fun NewsSectionHeader(title: String, trailing: String, live: Boolean) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             if (live) PulsingDot(NeonGreen)
-            Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = TextPrimary)
+            Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
         }
         if (trailing.isNotBlank()) {
-            Text(trailing, style = MaterialTheme.typography.labelSmall, color = TextMuted)
+            Text(trailing, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -226,17 +226,17 @@ private fun ArticleErrorBanner(onRetry: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Dark800, RoundedCornerShape(12.dp))
-            .border(1.dp, Brush.linearGradient(listOf(Rose500.copy(0.3f), Dark700)), RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
+            .border(1.dp, Rose500.copy(0.3f), RoundedCornerShape(12.dp))
             .padding(horizontal = 14.dp, vertical = 10.dp),
         verticalAlignment    = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Icon(Icons.Filled.WifiOff, null, tint = TextMuted, modifier = Modifier.size(16.dp))
+            Icon(Icons.Filled.WifiOff, null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(16.dp))
             Column {
-                Text("Live feed unavailable", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = TextSecondary)
-                Text("Browse curated sources below", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                Text("Live feed unavailable", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Browse curated sources below", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         TextButton(onClick = onRetry) {
@@ -260,7 +260,7 @@ private fun ArticleCard(article: NewsArticle) {
             .clickable { if (article.link.isNotBlank()) uriHandler.openUri(article.link) }
             .border(1.dp, Brush.linearGradient(listOf(NeonCyan.copy(0.18f), NeonViolet.copy(0.12f), Dark700)), RoundedCornerShape(14.dp)),
         shape = RoundedCornerShape(14.dp),
-        color = Dark800,
+        color = MaterialTheme.colorScheme.surface,
     ) {
         Column(Modifier.padding(13.dp)) {
             Row(
@@ -271,11 +271,11 @@ private fun ArticleCard(article: NewsArticle) {
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
                     BadgeChip(article.sourceCategory, catBg, catFg)
                     if (article.sourceName.isNotBlank()) {
-                        Text(article.sourceName, style = MaterialTheme.typography.labelSmall, color = TextMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(article.sourceName, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }
                 if (article.pubDate.isNotBlank()) {
-                    Text(relativeTime(article.pubDate), style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                    Text(relativeTime(article.pubDate), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
             Text(
@@ -319,7 +319,7 @@ private fun SourceCard(source: NewsSource, modifier: Modifier = Modifier) {
             .clickable { uriHandler.openUri(source.website) }
             .border(1.dp, Brush.linearGradient(listOf(NeonCyan.copy(0.18f), NeonViolet.copy(0.10f), Dark700)), RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
-        color = Dark800,
+        color = MaterialTheme.colorScheme.surface,
     ) {
         Column(modifier = Modifier.padding(11.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -333,12 +333,12 @@ private fun SourceCard(source: NewsSource, modifier: Modifier = Modifier) {
                     Icon(Icons.Filled.RssFeed, null, tint = NeonCyan, modifier = Modifier.size(16.dp))
                 }
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(source.name, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(source.name, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     BadgeChip(source.category, bg, fg)
                 }
             }
             Spacer(Modifier.height(6.dp))
-            Text(source.description, style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(source.description, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
             Spacer(Modifier.height(5.dp))
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(3.dp)) {
                 Icon(Icons.Filled.OpenInNew, null, tint = NeonViolet, modifier = Modifier.size(10.dp))
@@ -370,7 +370,7 @@ private fun ArticleSkeleton() {
 @Composable
 private fun ShimmerBox(modifier: Modifier = Modifier, width: androidx.compose.ui.unit.Dp = 0.dp, height: androidx.compose.ui.unit.Dp) {
     val m = if (width > 0.dp) modifier.width(width).height(height) else modifier.height(height)
-    Surface(color = Dark700, shape = RoundedCornerShape(6.dp), modifier = m) {}
+    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(6.dp), modifier = m) {}
 }
 
 // ─────────────────────────────────────────────────────────────

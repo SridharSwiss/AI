@@ -62,10 +62,10 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
         label = "alpha",
     )
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
-            title = { Text("Companies", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title = { Text("Companies", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(
             modifier = Modifier.fillMaxWidth().height(1.dp)
@@ -78,7 +78,7 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text(
                 if (all.isEmpty()) "Loading…" else "${filtered.size} of ${all.size} companies",
-                style = MaterialTheme.typography.labelSmall, color = TextMuted,
+                style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             if (stage != "All" || focus != "All") {
                 TextButton(onClick = { stage = "All"; focus = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall, color = NeonViolet) }
@@ -126,7 +126,7 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
                     company.name,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false),
@@ -140,7 +140,7 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
                     else if (company.founded > 0) append(" · ${company.founded}")
                 },
                 style = MaterialTheme.typography.labelSmall,
-                color = TextSecondary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
             )
         }
@@ -166,17 +166,17 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = Dark900,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text(company?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
+                title = { Text(company?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
                 actions = {
                     company?.website?.let { url ->
                         if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Website", tint = NeonCyan) }
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->
@@ -195,21 +195,21 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = Dark900,
+                containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonCyan,
-                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
+                divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant)) },
             ) {
                 listOf("Overview", "Models", "More").forEachIndexed { i, t ->
                     Tab(
                         selected = tab == i, onClick = { tab = i },
-                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonCyan else TextSecondary) },
+                        text = { Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Normal, color = if (tab == i) NeonCyan else MaterialTheme.colorScheme.onSurfaceVariant) },
                     )
                 }
             }
             when (tab) {
                 0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     item {
-                        Text(company.description, style = MaterialTheme.typography.bodyMedium, color = TextSecondary, lineHeight = 22.sp)
+                        Text(company.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                     }
                     item {
                         DetailCard(title = "At a Glance", icon = Icons.Filled.Info, iconTint = Blue500) {
@@ -236,20 +236,20 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
                         DetailCard(title = "AI Models", icon = Icons.Filled.Psychology, iconTint = Violet500) {
                             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                 company.models.forEach { model ->
-                                    Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(Dark700).border(1.dp, Brush.linearGradient(listOf(Violet500.copy(0.3f), NeonViolet.copy(0.15f))), RoundedCornerShape(10.dp))) {
+                                    Box(modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(MaterialTheme.colorScheme.surfaceVariant).border(1.dp, Brush.linearGradient(listOf(Violet500.copy(0.3f), NeonViolet.copy(0.15f))), RoundedCornerShape(10.dp))) {
                                         Column(modifier = Modifier.padding(12.dp)) {
                                             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                                                Text(model.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(1f))
+                                                Text(model.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
                                                 BadgeChip(model.type, Violet100, Violet600)
                                             }
-                                            if (model.releaseDate.isNotBlank()) Text(model.releaseDate, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                            if (model.releaseDate.isNotBlank()) Text(model.releaseDate, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                             if (model.contextWindow.isNotBlank()) {
                                                 Spacer(Modifier.height(4.dp))
                                                 BadgeChip("${model.contextWindow} context", Blue100, Blue500)
                                             }
                                             if (model.description.isNotBlank()) {
                                                 Spacer(Modifier.height(6.dp))
-                                                Text(model.description, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                                                Text(model.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                             }
                                         }
                                     }
@@ -263,17 +263,17 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
                                 fin.fundingRounds.forEach { round ->
                                     Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                         Column(modifier = Modifier.weight(1f)) {
-                                            Text("${round.date} · ${round.round}", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
-                                            if (round.investors.isNotEmpty()) Text(round.investors.joinToString(", "), style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                                            Text("${round.date} · ${round.round}", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+                                            if (round.investors.isNotEmpty()) Text(round.investors.joinToString(", "), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                         }
                                         Spacer(Modifier.width(8.dp))
                                         Text(round.amount, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Green500)
                                     }
-                                    Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700))
+                                    Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.surfaceVariant))
                                 }
                                 if (fin.keyInvestors.isNotEmpty()) {
                                     Spacer(Modifier.height(8.dp))
-                                    Text("Key Investors", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                                    Text("Key Investors", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     Spacer(Modifier.height(4.dp))
                                     TagRow(fin.keyInvestors, wrap = true)
                                 }
@@ -285,7 +285,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
                             company.milestones.forEach { milestone ->
                                 Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                     BadgeChip(milestone.date, Blue100, Blue500)
-                                    Text(milestone.event, style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.weight(1f))
+                                    Text(milestone.event, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                                 }
                             }
                         }
@@ -294,7 +294,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
                 else -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     if (company.history.isNotBlank()) item {
                         DetailCard(title = "History", icon = Icons.Filled.History, iconTint = Amber500) {
-                            Text(company.history, style = MaterialTheme.typography.bodySmall, color = TextSecondary, lineHeight = 20.sp)
+                            Text(company.history, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 20.sp)
                         }
                     }
                     if (company.competitors.isNotEmpty()) item {
@@ -313,7 +313,7 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
                         }
                     }
                     if (company.tags.isNotEmpty()) item {
-                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = TextMuted)
+                        Text("Tags", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(Modifier.height(8.dp))
                         TagRow(company.tags, wrap = true)
                     }

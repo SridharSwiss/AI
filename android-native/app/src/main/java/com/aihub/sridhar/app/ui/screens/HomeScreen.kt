@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -28,6 +29,7 @@ import com.aihub.sridhar.app.ui.theme.*
 private data class NavTile(
     val label: String,
     val stat: String,
+    val desc: String,
     val icon: ImageVector,
     val iconGradient: List<Color>,
     val iconTint: Color,
@@ -35,10 +37,10 @@ private data class NavTile(
 )
 
 private val secondaryTiles = listOf(
-    NavTile("Case Studies",  "31 deep-dives",        Icons.Filled.BarChart,   listOf(NeonAmber.copy(0.22f),  NeonGreen.copy(0.12f)),  NeonAmber,  Screen.CaseStudies.route),
-    NavTile("Learn",         "72 resources",          Icons.Filled.School,     listOf(NeonGreen.copy(0.22f),  NeonCyan.copy(0.12f)),   NeonGreen,  Screen.Learn.route),
-    NavTile("Consulting",    "80+ playbooks",         Icons.Filled.Work,       listOf(NeonViolet.copy(0.22f), NeonPink.copy(0.12f)),   NeonViolet, Screen.Consulting.route),
-    NavTile("Companies",     "33 AI companies",       Icons.Filled.Business,   listOf(NeonCyan.copy(0.22f),  NeonViolet.copy(0.12f)), NeonCyan,   Screen.Companies.route),
+    NavTile("Case Studies",  "31 deep-dives",   "Real ROI from AI deployments",   Icons.Filled.BarChart,  listOf(NeonAmber.copy(0.22f),  NeonGreen.copy(0.12f)),  NeonAmber,  Screen.CaseStudies.route),
+    NavTile("Learn",         "72 resources",     "Courses, papers & tutorials",    Icons.Filled.School,    listOf(NeonGreen.copy(0.22f),  NeonCyan.copy(0.12f)),   NeonGreen,  Screen.Learn.route),
+    NavTile("Consulting",    "80+ playbooks",    "Expert playbooks & guides",      Icons.Filled.Work,      listOf(NeonViolet.copy(0.22f), NeonPink.copy(0.12f)),   NeonViolet, Screen.Consulting.route),
+    NavTile("Companies",     "33 AI companies",  "Track leading AI companies",     Icons.Filled.Business,  listOf(NeonCyan.copy(0.22f),  NeonViolet.copy(0.12f)), NeonCyan,   Screen.Companies.route),
 )
 
 private val globalStats = listOf(
@@ -51,12 +53,12 @@ private val globalStats = listOf(
 
 // ─────────────────────────────────────────────────────────────
 // Home screen — full-screen non-scrolling dashboard
-// Every section uses Modifier.weight() so content adapts to
-// any screen height without a single pixel of vertical scroll.
 // ─────────────────────────────────────────────────────────────
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
-fun HomeScreen(onNavigate: (String) -> Unit) {
+fun HomeScreen(onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
+    val isDark = LocalDarkTheme.current
     val inf = rememberInfiniteTransition(label = "glow")
     val glowAlpha by inf.animateFloat(
         initialValue  = 0.08f,
@@ -65,19 +67,21 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         label         = "glow",
     )
 
-    Box(modifier = Modifier.fillMaxSize().background(Dark900)) {
-        // Ambient radial glow — drawn behind all content
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(280.dp)
-                .background(
-                    Brush.radialGradient(
-                        listOf(NeonViolet.copy(glowAlpha), NeonCyan.copy(glowAlpha * 0.35f), Color.Transparent),
-                        radius = 700f,
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        // Ambient radial glow — drawn behind all content (only in dark mode)
+        if (isDark) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp)
+                    .background(
+                        Brush.radialGradient(
+                            listOf(NeonViolet.copy(glowAlpha), NeonCyan.copy(glowAlpha * 0.35f), Color.Transparent),
+                            radius = 700f,
+                        )
                     )
-                )
-        )
+            )
+        }
 
         Column(
             modifier = Modifier
@@ -86,28 +90,41 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         ) {
 
             // ── Header ──────────────────────────────────────
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 14.dp, bottom = 6.dp),
+            Row(
+                modifier              = Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 6.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment     = Alignment.CenterVertically,
             ) {
-                Text(
-                    "AIHub",
-                    style      = MaterialTheme.typography.displaySmall.copy(letterSpacing = (-1).sp),
-                    fontWeight = FontWeight.ExtraBold,
-                    color      = TextPrimary,
-                )
-                Box(
-                    modifier = Modifier
-                        .width(60.dp).height(2.dp)
-                        .background(Brush.horizontalGradient(listOf(NeonViolet, NeonCyan, Color.Transparent)))
-                )
-                Spacer(Modifier.height(4.dp))
-                Text(
-                    "Your AI intelligence platform",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary,
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        "AIHub",
+                        style      = MaterialTheme.typography.displaySmall.copy(
+                            letterSpacing = (-1).sp,
+                            brush = Brush.linearGradient(listOf(NeonViolet, NeonCyan)),
+                        ),
+                        fontWeight = FontWeight.ExtraBold,
+                    )
+                    Box(
+                        modifier = Modifier
+                            .width(60.dp).height(2.dp)
+                            .background(Brush.horizontalGradient(listOf(NeonViolet, NeonCyan, Color.Transparent)))
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        "Your AI intelligence platform",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                // Light / Dark toggle
+                IconButton(onClick = onToggleTheme) {
+                    Icon(
+                        imageVector = if (isDark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                        contentDescription = "Toggle theme",
+                        tint = if (isDark) NeonAmber else NeonViolet,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
             }
 
             // ── Stats chips ─────────────────────────────────
@@ -116,17 +133,18 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(globalStats) { (label, value, tint) ->
+                    val chipTint = if (isDark) tint else tint.forLightBackground()
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(10.dp))
-                            .background(Dark700)
-                            .border(1.dp, Brush.linearGradient(listOf(tint.copy(0.35f), tint.copy(0.12f))), RoundedCornerShape(10.dp))
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                            .border(1.dp, Brush.linearGradient(listOf(chipTint.copy(0.40f), chipTint.copy(0.15f))), RoundedCornerShape(10.dp))
                             .padding(horizontal = 12.dp, vertical = 8.dp),
                         contentAlignment = Alignment.Center,
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold, color = tint)
-                            Text(label, style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                            Text(value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold, color = chipTint)
+                            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -142,21 +160,25 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                 PrimaryTile(
                     label        = "AI Tools",
                     stat         = "82 tools · 15 categories",
+                    desc         = "Discover & compare AI tools",
                     icon         = Icons.Filled.Build,
                     iconGradient = listOf(NeonViolet.copy(0.22f), NeonCyan.copy(0.10f)),
-                    iconTint     = NeonVioletBright,
+                    iconTint     = if (isDark) NeonVioletBright else NeonViolet.forLightBackground(),
                     route        = Screen.Tools.route,
                     onClick      = onNavigate,
+                    isDark       = isDark,
                     modifier     = Modifier.weight(1f).fillMaxHeight(),
                 )
                 PrimaryTile(
                     label        = "Compliance",
                     stat         = "16 regulatory frameworks",
+                    desc         = "EU AI Act, GDPR & more",
                     icon         = Icons.Filled.Shield,
                     iconGradient = listOf(NeonPink.copy(0.22f), NeonViolet.copy(0.10f)),
-                    iconTint     = NeonPink,
+                    iconTint     = if (isDark) NeonPink else NeonPink.forLightBackground(),
                     route        = Screen.Compliance.route,
                     onClick      = onNavigate,
+                    isDark       = isDark,
                     modifier     = Modifier.weight(1f).fillMaxHeight(),
                 )
             }
@@ -172,15 +194,15 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                     modifier              = Modifier.weight(1f).fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    SecondaryTile(secondaryTiles[0], { onNavigate(secondaryTiles[0].route) }, Modifier.weight(1f).fillMaxHeight())
-                    SecondaryTile(secondaryTiles[1], { onNavigate(secondaryTiles[1].route) }, Modifier.weight(1f).fillMaxHeight())
+                    SecondaryTile(secondaryTiles[0], { onNavigate(secondaryTiles[0].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
+                    SecondaryTile(secondaryTiles[1], { onNavigate(secondaryTiles[1].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
                 }
                 Row(
                     modifier              = Modifier.weight(1f).fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    SecondaryTile(secondaryTiles[2], { onNavigate(secondaryTiles[2].route) }, Modifier.weight(1f).fillMaxHeight())
-                    SecondaryTile(secondaryTiles[3], { onNavigate(secondaryTiles[3].route) }, Modifier.weight(1f).fillMaxHeight())
+                    SecondaryTile(secondaryTiles[2], { onNavigate(secondaryTiles[2].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
+                    SecondaryTile(secondaryTiles[3], { onNavigate(secondaryTiles[3].route) }, isDark, Modifier.weight(1f).fillMaxHeight())
                 }
             }
 
@@ -201,15 +223,15 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
                         modifier = Modifier
                             .weight(1f)
                             .clip(RoundedCornerShape(12.dp))
-                            .background(Dark700)
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
                             .border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.28f), NeonCyan.copy(0.14f))), RoundedCornerShape(12.dp))
                             .clickable { onNavigate(route) }
                             .padding(vertical = 10.dp),
                         contentAlignment = Alignment.Center,
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                            Icon(icon, null, tint = NeonVioletBright, modifier = Modifier.size(17.dp))
-                            Text(label, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
+                            Icon(icon, null, tint = if (isDark) NeonVioletBright else NeonViolet.forLightBackground(), modifier = Modifier.size(17.dp))
+                            Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -226,17 +248,19 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
 private fun PrimaryTile(
     label: String,
     stat: String,
+    desc: String,
     icon: ImageVector,
     iconGradient: List<Color>,
     iconTint: Color,
     route: String,
     onClick: (String) -> Unit,
+    isDark: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(Dark800)
+            .background(MaterialTheme.colorScheme.surface)
             .border(1.dp, Brush.linearGradient(listOf(NeonViolet.copy(0.45f), NeonCyan.copy(0.25f))), RoundedCornerShape(16.dp))
             .clickable { onClick(route) }
             .padding(14.dp),
@@ -252,21 +276,22 @@ private fun PrimaryTile(
                 Icon(icon, null, tint = iconTint, modifier = Modifier.size(20.dp))
             }
             Column {
-                Text(label, style = MaterialTheme.typography.titleSmall.copy(letterSpacing = (-0.2).sp), fontWeight = FontWeight.Bold, color = TextPrimary)
-                Text(stat, style = MaterialTheme.typography.labelSmall, color = TextMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
+                Text(label, style = MaterialTheme.typography.titleSmall.copy(letterSpacing = (-0.2).sp), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                Text(desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
             }
-            Text("Explore →", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = NeonVioletBright)
+            Text("Explore →", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = if (isDark) NeonVioletBright else NeonViolet.forLightBackground())
         }
     }
 }
 
 @Composable
-private fun SecondaryTile(tile: NavTile, onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun SecondaryTile(tile: NavTile, onClick: () -> Unit, isDark: Boolean, modifier: Modifier = Modifier) {
+    val tileTint = if (isDark) tile.iconTint else tile.iconTint.forLightBackground()
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(14.dp))
-            .background(Dark800)
-            .border(1.dp, Brush.linearGradient(listOf(tile.iconTint.copy(0.30f), NeonViolet.copy(0.15f), Dark700)), RoundedCornerShape(14.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .border(1.dp, Brush.linearGradient(listOf(tileTint.copy(0.35f), NeonViolet.copy(0.15f))), RoundedCornerShape(14.dp))
             .clickable(onClick = onClick)
             .padding(12.dp),
     ) {
@@ -278,11 +303,11 @@ private fun SecondaryTile(tile: NavTile, onClick: () -> Unit, modifier: Modifier
                     .background(Brush.linearGradient(tile.iconGradient)),
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(tile.icon, null, tint = tile.iconTint, modifier = Modifier.size(18.dp))
+                Icon(tile.icon, null, tint = tileTint, modifier = Modifier.size(18.dp))
             }
             Column {
-                Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1)
-                Text(tile.stat, style = MaterialTheme.typography.labelSmall, color = TextMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
+                Text(tile.label, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1)
+                Text(tile.desc, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
             }
         }
     }

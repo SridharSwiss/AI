@@ -62,10 +62,10 @@ fun LearnScreen(repo: DataRepository) {
 
     val uriHandler = LocalUriHandler.current
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
-            title = { Text("Learn", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title = { Text("Learn", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonGreen.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
@@ -81,7 +81,7 @@ fun LearnScreen(repo: DataRepository) {
                 label    = { Text("Free only", style = MaterialTheme.typography.labelSmall) },
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("${filtered.size} of ${all.size}", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                Text("${filtered.size} of ${all.size}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 if (type != "All" || level != "All" || freeOnly) {
                     TextButton(onClick = { type = "All"; level = "All"; freeOnly = false }) { Text("Clear", style = MaterialTheme.typography.labelSmall) }
                 }
@@ -102,14 +102,14 @@ fun LearnScreen(repo: DataRepository) {
                     }
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text(r.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                            Text(r.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
                             if (r.free) BadgeChip("Free", Green100, Green500)
                         }
-                        Text("${r.provider} · ~${r.readTime}h", style = MaterialTheme.typography.labelSmall, color = TextSecondary, maxLines = 1)
+                        Text("${r.provider} · ~${r.readTime}h", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
                     }
                     BadgeChip(r.level, lBg, lFg)
                 }
-                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(Dark700))
+                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(horizontal = 16.dp).background(MaterialTheme.colorScheme.surfaceVariant))
             }
         }
     }

@@ -55,10 +55,10 @@ fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) 
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Dark900)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         TopAppBar(
-            title = { Text("Case Studies", fontWeight = FontWeight.ExtraBold, color = TextPrimary, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+            title = { Text("Case Studies", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonAmber.copy(alpha = 0.5f), NeonGreen.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -66,7 +66,7 @@ fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) 
             FilterDropdown("AI Tool",  tag,      allTags,   { tag      = it }, Modifier.weight(1f))
         }
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text(if (all.isEmpty()) "Loading…" else "${filtered.size} of ${all.size} case studies", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+            Text(if (all.isEmpty()) "Loading…" else "${filtered.size} of ${all.size} case studies", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (industry != "All" || tag != "All") {
                 TextButton(onClick = { industry = "All"; tag = "All" }) { Text("Clear", style = MaterialTheme.typography.labelSmall, color = NeonViolet) }
             }
@@ -109,12 +109,12 @@ fun CaseStudyRow(cs: CaseStudy, onClick: () -> Unit) {
             Icon(Icons.Filled.TrendingUp, null, tint = NeonAmber, modifier = Modifier.size(22.dp))
         }
         Column(modifier = Modifier.weight(1f)) {
-            // Explicit color = TextPrimary ensures visibility on Dark900 background
+            // Explicit color ensures visibility on background
             Text(
                 cs.company,
                 style      = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
-                color      = TextPrimary,
+                color      = MaterialTheme.colorScheme.onSurface,
                 maxLines   = 1,
                 overflow   = TextOverflow.Ellipsis,
             )
@@ -147,12 +147,12 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
-        containerColor = Dark900,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = { Text(cs?.company ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = TextPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = TextPrimary) } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Dark900),
+                title = { Text(cs?.company ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->
@@ -170,7 +170,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
             }
             TabRow(
                 selectedTabIndex = tab,
-                containerColor = Dark900,
+                containerColor = MaterialTheme.colorScheme.background,
                 contentColor = NeonAmber,
                 divider = { Box(Modifier.fillMaxWidth().height(1.dp).background(Dark700)) },
             ) {
@@ -184,7 +184,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
             when (tab) {
                 0 -> LazyColumn(modifier = Modifier.weight(1f), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     item {
-                        Text(cs.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                        Text(cs.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                     }
                     if (cs.metrics.isNotEmpty()) item {
                         DetailCard(title = "Key Outcomes", icon = Icons.Filled.TrendingUp, iconTint = Emerald500) {
@@ -267,7 +267,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                                     }
                                     Column(modifier = Modifier.weight(1f)) {
                                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text(phase.phase, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary, modifier = Modifier.weight(1f))
+                                            Text(phase.phase, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
                                             BadgeChip(phase.duration, Blue100, Blue500)
                                         }
                                         if (phase.description.isNotBlank()) {
@@ -290,7 +290,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                             cs.roiBreakdown.forEach { roiItem ->
                                 Row(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                     Column(modifier = Modifier.weight(1f)) {
-                                        Text(roiItem.category, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                        Text(roiItem.category, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                         if (roiItem.note.isNotBlank()) Text(roiItem.note, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
                                     }
                                     Spacer(Modifier.width(8.dp))
@@ -356,7 +356,7 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
                                 Box(modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp).clip(RoundedCornerShape(8.dp)).background(Dark700).border(1.dp, Dark500, RoundedCornerShape(8.dp))) {
                                     Row(modifier = Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
                                         Column(modifier = Modifier.weight(1f)) {
-                                            Text(repo.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                                            Text(repo.name, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                             if (repo.description.isNotBlank()) Text(repo.description, style = MaterialTheme.typography.labelSmall, color = TextSecondary)
                                         }
                                         if (repo.stars.isNotBlank()) {
