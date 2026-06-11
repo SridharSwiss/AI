@@ -21,12 +21,70 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.ui.theme.*
+
+// ─────────────────────────────────────────────────────────────
+// App-wide top bar — AIHub brand + screen title + theme toggle
+// Use this in every screen for a consistent app header.
+// ─────────────────────────────────────────────────────────────
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalTextApi::class)
+@Composable
+fun AppTopBar(
+    title: String,
+    onToggleTheme: () -> Unit,
+    navigationIcon: @Composable () -> Unit = {},
+) {
+    val isDark = LocalDarkTheme.current
+    TopAppBar(
+        navigationIcon = navigationIcon,
+        title = {
+            Row(
+                verticalAlignment     = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Text(
+                    "AIHub",
+                    style      = MaterialTheme.typography.labelLarge.copy(
+                        brush = Brush.linearGradient(listOf(NeonViolet, NeonCyan)),
+                    ),
+                    fontWeight = FontWeight.ExtraBold,
+                )
+                Box(
+                    modifier = Modifier
+                        .size(4.dp)
+                        .background(MaterialTheme.colorScheme.onSurfaceVariant.copy(0.35f), RoundedCornerShape(50))
+                )
+                Text(
+                    title,
+                    style      = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.ExtraBold,
+                    color      = MaterialTheme.colorScheme.onSurface,
+                    letterSpacing = (-0.3).sp,
+                    maxLines   = 1,
+                    overflow   = TextOverflow.Ellipsis,
+                )
+            }
+        },
+        actions = {
+            IconButton(onClick = onToggleTheme) {
+                Icon(
+                    imageVector        = if (isDark) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                    contentDescription = "Toggle theme",
+                    tint               = if (isDark) NeonAmber else NeonViolet.forLightBackground(),
+                    modifier           = Modifier.size(20.dp),
+                )
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+    )
+}
 
 // ─────────────────────────────────────────────────────────────
 // Motion tokens  (Pillar 5)

@@ -38,7 +38,7 @@ private fun industryColors(industry: String) = when (industry) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) {
+fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     var all by remember { mutableStateOf<List<CaseStudy>>(emptyList()) }
     LaunchedEffect(Unit) { all = repo.loadCaseStudies() }
 
@@ -56,10 +56,7 @@ fun CaseStudiesScreen(repo: DataRepository, onCaseStudyClick: (String) -> Unit) 
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = { Text("Case Studies", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "Case Studies", onToggleTheme = onToggleTheme)
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonAmber.copy(alpha = 0.5f), NeonGreen.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Industry", industry, industries, { industry = it }, Modifier.weight(1f))
@@ -140,7 +137,7 @@ fun CaseStudyRow(cs: CaseStudy, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
+fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
     var cs by remember { mutableStateOf<CaseStudy?>(null) }
     LaunchedEffect(slug) { cs = repo.loadCaseStudies().find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
@@ -149,10 +146,10 @@ fun CaseStudyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(
-                title = { Text(cs?.company ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            AppTopBar(
+                title          = cs?.company ?: "Case Studies",
+                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->

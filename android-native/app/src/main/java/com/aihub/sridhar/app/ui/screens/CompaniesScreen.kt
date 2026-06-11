@@ -38,7 +38,7 @@ private fun stageColors(stage: String) = when (stage) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
+fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     var all by remember { mutableStateOf<List<Company>>(emptyList()) }
     LaunchedEffect(Unit) { all = repo.loadCompanies() }
 
@@ -63,10 +63,7 @@ fun CompaniesScreen(repo: DataRepository, onCompanyClick: (String) -> Unit) {
     )
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = { Text("Companies", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "Companies", onToggleTheme = onToggleTheme)
         Box(
             modifier = Modifier.fillMaxWidth().height(1.dp)
                 .background(Brush.horizontalGradient(listOf(NeonCyan.copy(alpha = animAlpha), NeonViolet.copy(alpha = animAlpha * 0.7f), Color.Transparent)))
@@ -159,7 +156,7 @@ fun CompanyRow(company: Company, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
+fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
     var company by remember { mutableStateOf<Company?>(null) }
     LaunchedEffect(slug) { company = repo.loadCompanies().find { it.slug == slug } }
     val uriHandler = LocalUriHandler.current
@@ -168,15 +165,10 @@ fun CompanyDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(
-                title = { Text(company?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            AppTopBar(
+                title          = company?.name ?: "Companies",
+                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
-                actions = {
-                    company?.website?.let { url ->
-                        if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Website", tint = NeonCyan) }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->

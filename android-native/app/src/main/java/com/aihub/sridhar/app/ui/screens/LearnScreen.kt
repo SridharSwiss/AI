@@ -42,7 +42,7 @@ private fun levelColors(level: String) = when (level) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LearnScreen(repo: DataRepository) {
+fun LearnScreen(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
     var all by remember { mutableStateOf<List<LearnResource>>(emptyList()) }
     LaunchedEffect(Unit) { all = repo.loadLearn() }
     val types  = remember { listOf("All", "course", "youtube", "certification", "book", "tutorial") }
@@ -63,10 +63,7 @@ fun LearnScreen(repo: DataRepository) {
     val uriHandler = LocalUriHandler.current
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = { Text("Learn", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "Learn", onToggleTheme = onToggleTheme)
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonGreen.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {

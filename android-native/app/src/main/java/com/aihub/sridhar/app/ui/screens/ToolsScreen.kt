@@ -46,7 +46,7 @@ private fun pricingGradient(pricing: String): Pair<Color, Color> = when (pricing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
+fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
     LaunchedEffect(Unit) { allTools = repo.loadTools() }
 
@@ -72,20 +72,7 @@ fun ToolsScreen(repo: DataRepository, onToolClick: (String) -> Unit) {
     )
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = {
-                Text(
-                    "AI Tools",
-                    fontWeight = FontWeight.ExtraBold,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    letterSpacing = (-0.5).sp,
-                )
-            },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.background,
-                titleContentColor = MaterialTheme.colorScheme.onSurface,
-            ),
-        )
+        AppTopBar(title = "AI Tools", onToggleTheme = onToggleTheme)
 
         // Animated gradient header line
         Box(
@@ -229,7 +216,7 @@ fun ToolRow(tool: Tool, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
+fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
     var tool by remember { mutableStateOf<Tool?>(null) }
     var allTools by remember { mutableStateOf<List<Tool>>(emptyList()) }
     LaunchedEffect(slug) { allTools = repo.loadTools(); tool = allTools.find { it.slug == slug } }
@@ -239,15 +226,10 @@ fun ToolDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(
-                title = { Text(tool?.name ?: "Loading…", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            AppTopBar(
+                title          = tool?.name ?: "AI Tools",
+                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
-                actions = {
-                    tool?.website?.let { url ->
-                        if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Website", tint = NeonCyan) }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->

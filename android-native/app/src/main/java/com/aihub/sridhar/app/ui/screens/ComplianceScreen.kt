@@ -51,7 +51,7 @@ private fun timelineTypeColor(type: String) = when (type.lowercase()) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
+fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     var all by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
     LaunchedEffect(Unit) { all = repo.loadCompliance() }
 
@@ -69,10 +69,7 @@ fun ComplianceScreen(repo: DataRepository, onFrameworkClick: (String) -> Unit) {
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = { Text("Compliance", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "Compliance", onToggleTheme = onToggleTheme)
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonPink.copy(alpha = 0.5f), NeonViolet.copy(alpha = 0.3f), Color.Transparent))))
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterDropdown("Jurisdiction", jurisdiction, jurisdictions, { jurisdiction = it }, Modifier.weight(1f))
@@ -117,7 +114,7 @@ fun ComplianceRow(f: ComplianceFramework, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit) {
+fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
     var f by remember { mutableStateOf<ComplianceFramework?>(null) }
     var allCompliance by remember { mutableStateOf<List<ComplianceFramework>>(emptyList()) }
     LaunchedEffect(slug) { allCompliance = repo.loadCompliance(); f = allCompliance.find { it.slug == slug } }
@@ -127,15 +124,10 @@ fun ComplianceDetailScreen(repo: DataRepository, slug: String, onBack: () -> Uni
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(
-                title = { Text(f?.shortName.takeIf { !it.isNullOrBlank() } ?: f?.name ?: "Framework", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            AppTopBar(
+                title          = f?.shortName?.takeIf { it.isNotBlank() } ?: f?.name ?: "Compliance",
+                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-                actions = {
-                    f?.officialLink?.let { url ->
-                        if (url.isNotBlank()) IconButton(onClick = { uriHandler.openUri(url) }) { Icon(Icons.Filled.OpenInNew, "Official link", tint = NeonViolet) }
-                    }
-                }
             )
         }
     ) { padding ->

@@ -1,5 +1,6 @@
 package com.aihub.sridhar.app.ui.screens
 
+import com.aihub.sridhar.app.ui.components.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -31,7 +32,7 @@ sealed class SearchResult(val route: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
+fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit, onToggleTheme: () -> Unit = {}) {
     var query by remember { mutableStateOf("") }
 
     var allTools        by remember { mutableStateOf<List<Tool>>(emptyList()) }
@@ -67,10 +68,7 @@ fun SearchScreen(repo: DataRepository, onNavigate: (String) -> Unit) {
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = { Text("Search", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "Search", onToggleTheme = onToggleTheme)
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonPink.copy(alpha = 0.3f), Color.Transparent))))
 
         OutlinedTextField(

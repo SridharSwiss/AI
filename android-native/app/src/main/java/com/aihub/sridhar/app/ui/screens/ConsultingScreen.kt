@@ -44,7 +44,7 @@ private fun levelColors(level: String) = when (level) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Unit) {
+fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Unit, onToggleTheme: () -> Unit = {}) {
     var phases by remember { mutableStateOf<List<Phase>>(emptyList()) }
     LaunchedEffect(Unit) { phases = repo.loadPhases() }
 
@@ -57,10 +57,7 @@ fun ConsultingScreen(repo: DataRepository, onPlaybookClick: (String, Int) -> Uni
     }
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        TopAppBar(
-            title = { Text("Consulting Toolkit", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "Consulting Toolkit", onToggleTheme = onToggleTheme)
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonViolet.copy(alpha = 0.5f), NeonCyan.copy(alpha = 0.3f), androidx.compose.ui.graphics.Color.Transparent))))
 
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).padding(bottom = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -124,7 +121,7 @@ fun PlaybookRow(pb: Playbook, phase: Phase, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBack: () -> Unit) {
+fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBack: () -> Unit, onToggleTheme: () -> Unit = {}) {
     var phase by remember { mutableStateOf<Phase?>(null) }
     LaunchedEffect(phaseId) { phase = repo.loadPhases().find { it.phase == phaseId } }
     val pb = remember(phase, index) { phase?.playbooks?.getOrNull(index) }
@@ -141,10 +138,10 @@ fun PlaybookDetailScreen(repo: DataRepository, phaseId: String, index: Int, onBa
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(
-                title = { Text(pb?.title ?: "Playbook", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            AppTopBar(
+                title          = pb?.title ?: "Playbook",
+                onToggleTheme  = onToggleTheme,
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back", tint = MaterialTheme.colorScheme.onSurface) } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
         }
     ) { padding ->

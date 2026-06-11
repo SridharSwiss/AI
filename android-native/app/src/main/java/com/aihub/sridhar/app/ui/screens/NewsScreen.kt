@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aihub.sridhar.app.data.models.NewsSource
 import com.aihub.sridhar.app.data.repository.DataRepository
-import com.aihub.sridhar.app.ui.components.BadgeChip
+import com.aihub.sridhar.app.ui.components.*
 import com.aihub.sridhar.app.ui.theme.*
 
 private fun categoryColors(cat: String): Pair<Color, Color> = when (cat) {
@@ -41,7 +41,7 @@ private val NEWS_CATEGORIES = listOf("All", "Tech", "Research", "Government", "M
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsScreen(repo: DataRepository) {
+fun NewsScreen(repo: DataRepository, onToggleTheme: () -> Unit = {}) {
     var sources     by remember { mutableStateOf<List<NewsSource>>(emptyList()) }
     var selectedCat by remember { mutableStateOf("All") }
 
@@ -53,10 +53,7 @@ fun NewsScreen(repo: DataRepository) {
 
     Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
 
-        TopAppBar(
-            title  = { Text("AI News", fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface, letterSpacing = (-0.5).sp) },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-        )
+        AppTopBar(title = "AI News", onToggleTheme = onToggleTheme)
         Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Brush.horizontalGradient(listOf(NeonCyan.copy(0.5f), NeonViolet.copy(0.3f), Color.Transparent))))
 
         // Category filter chips
