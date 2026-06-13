@@ -1633,8 +1633,6 @@ export const companies: CompanyData[] = [
       { date: "2025", event: "ERNIE 4.5 family; 200M+ registered ERNIE Bot users; ERNIE Speed/Lite APIs free" },
     ],
     history: "Baidu has been China's search leader since its founding in 2000. It began AI investment in 2010, hired Andrew Ng as Chief Scientist (2014-2017), and built one of the world's largest AI labs. ERNIE (Enhanced Representation through kNowledge IntEgration) has been in development since 2019. The ERNIE Bot launch in March 2023 was one of the most watched events in Chinese tech. Baidu's Apollo division has conducted over 50M km of autonomous driving tests.",
-    founded: 2000,
-    stage: "Public",
   },
   {
     id: "kuaishou",
@@ -1663,8 +1661,6 @@ export const companies: CompanyData[] = [
       { date: "2025", event: "Kling API launched globally; commercial licenses" },
     ],
     history: "Kuaishou was founded in 2011 as a GIF-sharing app, evolving into China's second-largest short-video platform (after Douyin/TikTok). It went public on the Hong Kong Stock Exchange in 2021. The company pivoted aggressively to AI video generation in 2024 with Kling AI, which quickly became a global leader in video generation quality and length. Kling's competitive pricing and open global access made it a top alternative to OpenAI's Sora.",
-    founded: 2011,
-    stage: "Public",
   },
   {
     id: "codeium",

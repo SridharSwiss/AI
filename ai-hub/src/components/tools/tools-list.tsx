@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
-  ExternalLink, SlidersHorizontal, ChevronDown,
+  ExternalLink, SlidersHorizontal, ChevronDown, Search,
   MessageSquare, Code2, Image, Video, Mic2, SearchCheck,
   Server, Layers, LayoutGrid, Zap, Rocket, Pen, BarChart2, Headphones, Bot,
 } from "lucide-react";
@@ -57,24 +57,84 @@ function FilterSelect({ label, value, options, onChange }: {
   options: string[];
   onChange: (v: string) => void;
 }) {
+  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    function handle(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
+
+  useEffect(() => {
+    if (open) { setQ(""); setTimeout(() => inputRef.current?.focus(), 50); }
+  }, [open]);
+
+  const allOptions = ["All", ...options.filter((o) => o !== "All")];
+  const filtered = allOptions.filter((o) =>
+    o === "All" ? true : o.toLowerCase().includes(q.toLowerCase())
+  );
+  const displayLabel = value === "All" ? `All ${label}s` : value;
+
   return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+    <div className="relative min-w-[160px]" ref={ref}>
+      <button
+        type="button"
+        onClick={() => setOpen((p) => !p)}
         className={cn(
-          "appearance-none w-full pl-3 pr-8 py-2 rounded-lg text-sm font-medium",
-          "border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark]",
+          "flex items-center justify-between gap-2 w-full pl-3 pr-2.5 py-2 rounded-lg text-sm font-medium",
+          "border border-border bg-white dark:bg-zinc-900 text-foreground",
           "hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40",
           "transition-colors cursor-pointer"
         )}
       >
-        <option value="All">All {label}s</option>
-        {options.filter((o) => o !== "All").map((o) => (
-          <option key={o} value={o}>{o}</option>
-        ))}
-      </select>
-      <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+        <span className="truncate">{displayLabel}</span>
+        <ChevronDown className={cn("w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform", open && "rotate-180")} />
+      </button>
+
+      {open && (
+        <div
+          className="absolute top-full left-0 mt-1 w-full min-w-[200px] bg-white dark:bg-zinc-900 border border-border rounded-xl shadow-xl overflow-hidden"
+          style={{ zIndex: 9999 }}
+        >
+          <div className="p-2 border-b border-border">
+            <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-muted/50">
+              <Search className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+              <input
+                ref={inputRef}
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder={`Search ${label.toLowerCase()}s…`}
+                className="flex-1 text-sm bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
+              />
+            </div>
+          </div>
+          <ul className="max-h-56 overflow-y-auto py-1">
+            {filtered.length === 0 ? (
+              <li className="px-3 py-2 text-sm text-muted-foreground">No results</li>
+            ) : filtered.map((o) => (
+              <li key={o}>
+                <button
+                  type="button"
+                  onMouseDown={() => { onChange(o); setOpen(false); }}
+                  className={cn(
+                    "w-full text-left px-3 py-2 text-sm transition-colors",
+                    o === value
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-foreground hover:bg-muted/60"
+                  )}
+                >
+                  {o === "All" ? `All ${label}s` : o}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
