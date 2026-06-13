@@ -36,7 +36,7 @@ STEP 2 — PER SCREEN (run a→e fully for one screen before starting the next)
   b. MANDATORY SET: infer which items are mandatory from the criteria the existing
      items already satisfy and the design conventions on that screen. Do not invent
      new categories or criteria.
-  c. GAP: identify missing mandatory items; for each, gather the full detail the
+  c. GAP: identify missing mandatory items on this screen using your research skills on internet as of now ; for each, gather the full detail the
      screen's data shape (from Step 1) requires.
   d. IMPLEMENT: add missing items using the EXACT data shape, component structure,
      formatting, and styling of existing entries. Additive only — do not delete,
