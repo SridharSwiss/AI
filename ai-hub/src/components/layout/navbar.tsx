@@ -330,35 +330,48 @@ export function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile drawer — full-viewport overlay, outside the constrained nav */}
+      {/* Mobile menu — full-screen solid overlay, outside the constrained nav */}
       <div
         className={cn(
-          "fixed inset-0 z-[99] lg:hidden",
-          "transition-[opacity,visibility] duration-300",
+          "fixed inset-0 z-[98] lg:hidden",
+          "transition-[opacity,visibility] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
           mobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         )}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
         aria-hidden={!mobileOpen}
       >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0 bg-black/20 backdrop-blur-sm"
-          onClick={closeMobile}
-          aria-hidden
-        />
-
-        {/* Drawer panel — slides in from right */}
+        {/* Solid full-screen panel — no transparency, no blur leakage */}
         <div
           className={cn(
-            "absolute top-[calc(2rem+4rem)] right-0 bottom-0 w-full max-w-sm",
-            "bg-background border-l border-border shadow-2xl",
+            "absolute inset-0",
+            /* Solid opaque background — same color as the page so it feels native */
+            "bg-white dark:bg-zinc-950",
             "flex flex-col",
             "transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-            mobileOpen ? "translate-x-0" : "translate-x-full"
+            mobileOpen ? "translate-y-0" : "-translate-y-4"
           )}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
         >
+          {/* Top bar with logo + close */}
+          <div className="flex-shrink-0 flex items-center justify-between px-4 h-16 border-b border-border/40">
+            <Link href="/" onClick={closeMobile} className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center">
+                <Brain className="w-3.5 h-3.5 text-white" />
+              </div>
+              <span className="font-bold text-base tracking-tight">AIHub</span>
+            </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-9 w-9 rounded-lg"
+              onClick={closeMobile}
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          </div>
+
           {/* Scrollable content */}
           <div className="flex-1 overflow-y-auto overscroll-contain">
             <div className="py-2">
@@ -404,20 +417,21 @@ export function Navbar() {
           </div>
 
           {/* Footer actions — always visible at bottom */}
-          <div className="flex-shrink-0 p-3 border-t border-border/40 bg-muted/20 space-y-2">
+          {/* Pinned footer */}
+          <div className="flex-shrink-0 p-3 border-t border-border/40 space-y-2">
             <Link
               href="/search"
               onClick={closeMobile}
-              className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl bg-muted/60 border border-border/60 text-muted-foreground text-sm hover:bg-accent transition-colors"
+              className="flex items-center gap-2.5 w-full px-4 py-3.5 rounded-xl bg-muted/80 border border-border text-muted-foreground text-sm font-medium hover:bg-accent hover:text-foreground transition-colors"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4 flex-shrink-0" />
               Search everything…
             </Link>
-            <div className="flex items-center justify-between px-1">
-              <span className="text-xs text-muted-foreground">AIHub · AI Knowledge Platform</span>
+            <div className="flex items-center justify-between px-2 py-1">
+              <span className="text-xs text-muted-foreground">© 2026 AIHub</span>
               {mounted && (
-                <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle theme" className="h-8 w-8">
-                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                <Button variant="outline" size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle theme" className="h-8 gap-1.5 text-xs">
+                  {theme === "dark" ? <><Sun className="w-3.5 h-3.5" />Light</> : <><Moon className="w-3.5 h-3.5" />Dark</>}
                 </Button>
               )}
             </div>
