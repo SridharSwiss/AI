@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val repo = DataRepository(applicationContext)
         setContent {
-            var currentPalette by remember { mutableStateOf(PaletteCosmicDark) }
+            var currentPalette by remember { mutableStateOf(PaletteLight) }
             AIHubTheme(palette = currentPalette, onSelectPalette = { currentPalette = it }) {
                 AIHubApp(repo)
             }
@@ -244,10 +244,12 @@ private fun FloatingPillNav(
     onItemClick: (BottomNavItem) -> Unit,
 ) {
     val palette = LocalAppPalette.current
+    val isDark  = LocalDarkTheme.current
+    val pillBg  = if (isDark) Color(0x99000000) else Color(0xCCFFFFFF)
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(50))
-            .background(Color(0x99000000))
+            .background(pillBg)
             .border(
                 1.dp,
                 Brush.linearGradient(listOf(palette.g1.copy(0.40f), palette.g2.copy(0.22f), palette.g1.copy(0.10f))),

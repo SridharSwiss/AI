@@ -120,10 +120,11 @@ fun PalettePickerRow(
     modifier: Modifier = Modifier,
 ) {
     val current = LocalAppPalette.current
+    val isDark  = LocalDarkTheme.current
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color(0x1AFFFFFF))
+            .background(if (isDark) Color(0x1AFFFFFF) else Color(0x0F7C3AED))
             .border(
                 width = 1.dp,
                 brush = Brush.horizontalGradient(listOf(current.g1.copy(0.25f), current.g2.copy(0.15f), Color.Transparent)),
@@ -146,7 +147,7 @@ fun PalettePickerRow(
                         .clip(CircleShape)
                         .background(Brush.linearGradient(listOf(palette.t1, palette.t3, palette.t5)))
                         .then(
-                            if (selected) Modifier.border(2.5.dp, White, CircleShape)
+                            if (selected) Modifier.border(2.5.dp, if (isDark) White else palette.t1, CircleShape)
                             else Modifier.border(1.dp, palette.t1.copy(0.4f), CircleShape)
                         ),
                 )
@@ -188,8 +189,14 @@ fun GlassBackground(modifier: Modifier = Modifier) {
         label = "b3y",
     )
 
+    val isDark = LocalDarkTheme.current
+    // blob alpha: lighter in light mode so they feel like soft auras, not dark shadows
+    val blobAlpha1 = if (isDark) 0.30f else 0.18f
+    val blobAlpha2 = if (isDark) 0.25f else 0.14f
+    val blobAlpha3 = if (isDark) 0.22f else 0.12f
+
     Box(modifier = modifier) {
-        // Deep background gradient
+        // Background gradient
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -202,7 +209,7 @@ fun GlassBackground(modifier: Modifier = Modifier) {
                 .aspectRatio(1f)
                 .offset(x = ((-80 + blob1x * 120).dp), y = ((-60 + blob1x * 80).dp))
                 .background(
-                    Brush.radialGradient(listOf(palette.g1.copy(0.30f), Color.Transparent)),
+                    Brush.radialGradient(listOf(palette.g1.copy(blobAlpha1), Color.Transparent)),
                     CircleShape,
                 )
         )
@@ -214,7 +221,7 @@ fun GlassBackground(modifier: Modifier = Modifier) {
                 .align(Alignment.CenterEnd)
                 .offset(x = ((40 - blob2x * 100).dp), y = ((blob2x * 60 - 30).dp))
                 .background(
-                    Brush.radialGradient(listOf(palette.t2.copy(0.25f), Color.Transparent)),
+                    Brush.radialGradient(listOf(palette.t2.copy(blobAlpha2), Color.Transparent)),
                     CircleShape,
                 )
         )
@@ -226,7 +233,7 @@ fun GlassBackground(modifier: Modifier = Modifier) {
                 .align(Alignment.BottomStart)
                 .offset(x = ((-20).dp), y = ((-80 + blob3y * 60).dp))
                 .background(
-                    Brush.radialGradient(listOf(palette.t5.copy(0.22f), Color.Transparent)),
+                    Brush.radialGradient(listOf(palette.t5.copy(blobAlpha3), Color.Transparent)),
                     CircleShape,
                 )
         )

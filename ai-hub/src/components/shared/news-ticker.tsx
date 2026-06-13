@@ -59,7 +59,7 @@ export function NewsTicker() {
   return (
     <Link
       href="/news"
-      className="fixed top-0 left-0 right-0 z-[150] overflow-hidden bg-[hsl(252_55%_4%/0.85)] backdrop-blur-xl text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-white/[0.06] hover:bg-[hsl(252_55%_6%/0.9)] transition-colors"
+      className="fixed top-0 left-0 right-0 z-[150] overflow-hidden bg-white/80 dark:bg-[hsl(252_55%_4%/0.85)] backdrop-blur-xl text-muted-foreground dark:text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-border dark:border-white/[0.06] hover:bg-white/90 dark:hover:bg-[hsl(252_55%_6%/0.9)] transition-colors"
     >
       <div className="absolute left-0 z-10 px-3 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] font-bold uppercase tracking-[0.1em] h-full flex items-center shrink-0 shadow-[4px_0_12px_rgba(225,29,72,0.4)]">
         LIVE

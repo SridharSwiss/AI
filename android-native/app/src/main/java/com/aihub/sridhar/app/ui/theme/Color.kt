@@ -130,6 +130,8 @@ data class AppPalette(
     val g1: Color, val g2: Color,
     // background gradient (top → bottom) for GlassBackground
     val bgTop: Color, val bgBottom: Color,
+    // whether this palette renders a dark or light theme
+    val isDark: Boolean = true,
 )
 
 val PaletteCosmicDark = AppPalette(
@@ -178,7 +180,17 @@ val PaletteVivid = AppPalette(
     bgTop  = Color(0xFF3D2AE0), bgBottom = Color(0xFF170C7A),
 )
 
-val AllPalettes = listOf(PaletteCosmicDark, PaletteEmber, PaletteJade, PaletteSakura, PaletteOcean, PaletteVivid)
+// "Light" — matches website's default light theme: soft lavender/violet on white
+val PaletteLight = AppPalette(
+    name   = "Light",    seed = Color(0xFF7C3AED),
+    t1     = Color(0xFF7C3AED), t2 = Color(0xFFC026D3), t3 = Color(0xFF0EA5E9),
+    t4     = Color(0xFF059669), t5 = Color(0xFFF59E0B), t6 = Color(0xFFEC4899),
+    g1     = Color(0xFF7C3AED), g2 = Color(0xFFC026D3),
+    bgTop  = Color(0xFFF8F7FF), bgBottom = Color(0xFFEDE9FE),
+    isDark = false,
+)
+
+val AllPalettes = listOf(PaletteLight, PaletteCosmicDark, PaletteEmber, PaletteJade, PaletteSakura, PaletteOcean, PaletteVivid)
 
 // Provided by AIHubTheme / AIHubApp — read anywhere in the tree.
 val LocalAppPalette   = staticCompositionLocalOf<AppPalette> { PaletteCosmicDark }
