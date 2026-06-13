@@ -36,20 +36,20 @@ const megaMenus = {
   learn: {
     label: "Learn",
     items: [
-      { icon: GraduationCap, label: "Courses & Certifications", desc: "Structured learning paths",   href: "/learn#certifications", color: "text-emerald-500", bg: "bg-emerald-500/10 dark:bg-emerald-500/[0.18]" },
-      { icon: PlayCircle,    label: "Video Guides",             desc: "YouTube & free tutorials",    href: "/learn#youtube",        color: "text-red-500",     bg: "bg-red-500/10 dark:bg-red-500/[0.18]" },
-      { icon: BookMarked,    label: "Books & Reading",          desc: "Essential AI reading list",   href: "/learn#books",          color: "text-purple-500",  bg: "bg-purple-500/10 dark:bg-purple-500/[0.18]" },
-      { icon: Library,       label: "Resource Library",         desc: "Whitepapers & reports",      href: "/resource-library",    color: "text-indigo-500",  bg: "bg-indigo-500/10 dark:bg-indigo-500/[0.18]" },
+      { icon: GraduationCap, label: "Courses & Certifications", desc: "Structured learning paths",  href: "/learn#certifications", color: "text-emerald-500", bg: "bg-emerald-500/10 dark:bg-emerald-500/[0.18]" },
+      { icon: PlayCircle,    label: "Video Guides",             desc: "YouTube & free tutorials",   href: "/learn#youtube",        color: "text-red-500",     bg: "bg-red-500/10 dark:bg-red-500/[0.18]" },
+      { icon: BookMarked,    label: "Books & Reading",          desc: "Essential AI reading list",  href: "/learn#books",          color: "text-purple-500",  bg: "bg-purple-500/10 dark:bg-purple-500/[0.18]" },
+      { icon: Library,       label: "Resource Library",         desc: "Whitepapers & reports",     href: "/resource-library",     color: "text-indigo-500",  bg: "bg-indigo-500/10 dark:bg-indigo-500/[0.18]" },
     ],
     featured: null,
   },
   governance: {
     label: "Governance",
     items: [
-      { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",      href: "/compliance",                     color: "text-rose-500",   bg: "bg-rose-500/10 dark:bg-rose-500/[0.18]", gold: true },
-      { icon: Briefcase, label: "Consulting Toolkit",    desc: "Playbooks & templates",              href: "/consulting-toolkit",             color: "text-pink-500",   bg: "bg-pink-500/10 dark:bg-pink-500/[0.18]" },
-      { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",   href: "/consulting-toolkit?tab=assess",  color: "text-orange-500", bg: "bg-orange-500/10 dark:bg-orange-500/[0.18]" },
-      { icon: Globe,     label: "Global Regulations",    desc: "Multi-jurisdiction coverage",       href: "/compliance#jurisdictions",       color: "text-teal-500",   bg: "bg-teal-500/10 dark:bg-teal-500/[0.18]" },
+      { icon: Scale,     label: "Compliance Frameworks", desc: "EU AI Act, GDPR, NIST & more",    href: "/compliance",                    color: "text-rose-500",   bg: "bg-rose-500/10 dark:bg-rose-500/[0.18]", gold: true },
+      { icon: Briefcase, label: "Consulting Toolkit",    desc: "Playbooks & templates",            href: "/consulting-toolkit",            color: "text-pink-500",   bg: "bg-pink-500/10 dark:bg-pink-500/[0.18]" },
+      { icon: FileCheck, label: "Risk Assessment",       desc: "Evaluate AI risk systematically",  href: "/consulting-toolkit?tab=assess", color: "text-orange-500", bg: "bg-orange-500/10 dark:bg-orange-500/[0.18]" },
+      { icon: Globe,     label: "Global Regulations",    desc: "Multi-jurisdiction coverage",      href: "/compliance#jurisdictions",      color: "text-teal-500",   bg: "bg-teal-500/10 dark:bg-teal-500/[0.18]" },
     ],
     featured: null,
   },
@@ -57,13 +57,14 @@ const megaMenus = {
 
 type MenuKey = keyof typeof megaMenus;
 
+/* ── Desktop dropdown panel ───────────────────────────────── */
 function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean }) {
   const menu = megaMenus[menuKey];
   return (
     <div
       className={cn(
         "absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-[200]",
-        "surface-dropdown dark:bg-[hsl(222_47%_11%)] dark:border-[hsl(215_32%_28%)] dark:text-[hsl(210_40%_96%)] rounded-2xl shadow-2xl overflow-hidden isolate",
+        "bg-background/95 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl overflow-hidden isolate",
         "origin-top transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
         isOpen
           ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
@@ -79,7 +80,7 @@ function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean 
               className="group flex items-start gap-3 p-3 rounded-xl hover:bg-accent/60 transition-colors duration-150"
             >
               <div className={cn("w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5", item.bg)}>
-                <item.icon className={cn("w-4.5 h-4.5", item.color)} />
+                <item.icon className={cn("w-4 h-4", item.color)} />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
@@ -113,6 +114,78 @@ function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean 
   );
 }
 
+/* ── Mobile accordion section ─────────────────────────────── */
+function MobileSection({
+  menuKey,
+  menu,
+  pathname,
+  onClose,
+  animateIn,
+  startDelay,
+}: {
+  menuKey: MenuKey;
+  menu: (typeof megaMenus)[MenuKey];
+  pathname: string;
+  onClose: () => void;
+  animateIn: boolean;
+  startDelay: number;
+}) {
+  const [open, setOpen] = useState(true);
+  const isGroupActive = menu.items.some(
+    (i) => pathname === i.href || pathname.startsWith(i.href.split("#")[0] + "/")
+  );
+
+  return (
+    <div className="border-b border-border/30 last:border-0">
+      <button
+        onClick={() => setOpen(!open)}
+        className={cn(
+          "w-full flex items-center justify-between px-4 py-3 text-xs font-bold uppercase tracking-widest transition-colors",
+          isGroupActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+        )}
+      >
+        {menu.label}
+        <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200", open ? "rotate-180" : "")} />
+      </button>
+
+      <div className={cn(
+        "overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        open ? "max-h-[400px] pb-2" : "max-h-0"
+      )}>
+        {menu.items.map((item, i) => {
+          const isActive = pathname === item.href || pathname.startsWith(item.href.split("#")[0] + "/");
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onClose}
+              className={cn(
+                "flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl text-sm font-medium",
+                "transition-all duration-200",
+                isActive
+                  ? "text-primary bg-primary/8 dark:bg-primary/12"
+                  : "text-foreground/80 hover:text-foreground hover:bg-accent/60"
+              )}
+              style={{
+                transitionDelay: animateIn ? `${(startDelay + i) * 30}ms` : "0ms",
+                opacity: animateIn ? 1 : 0,
+                transform: animateIn ? "translateX(0)" : "translateX(8px)",
+              }}
+            >
+              <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0", item.bg)}>
+                <item.icon className={cn("w-3.5 h-3.5", item.color)} />
+              </div>
+              <span className="flex-1">{item.label}</span>
+              {isActive && <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />}
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ── Main Navbar ──────────────────────────────────────────── */
 export function Navbar() {
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -121,6 +194,7 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [animateIn, setAnimateIn] = useState(false);
 
   const handleScroll = useCallback(() => setScrolled(window.scrollY > 16), []);
 
@@ -131,6 +205,16 @@ export function Navbar() {
   }, [handleScroll]);
 
   useEffect(() => { setMobileOpen(false); setOpenMenu(null); }, [pathname]);
+
+  // Delay entrance animation so items slide in after panel opens
+  useEffect(() => {
+    if (mobileOpen) {
+      const t = setTimeout(() => setAnimateIn(true), 30);
+      return () => clearTimeout(t);
+    } else {
+      setAnimateIn(false);
+    }
+  }, [mobileOpen]);
 
   const openDropdown = (key: MenuKey) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -146,129 +230,200 @@ export function Navbar() {
     return hrefs.some((h) => pathname === h || pathname.startsWith(h.split("#")[0] + "/"));
   };
 
-  return (
-    <header
-      className={cn(
-        "fixed top-8 left-0 right-0 z-[100]",
-        "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        scrolled || mobileOpen ? "surface-nav dark:bg-[hsl(252_55%_5%/0.88)] dark:backdrop-blur-xl dark:border-b dark:border-white/[0.08] shadow-sm" : "bg-transparent"
-      )}
-    >
-      <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="relative">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center shadow-md group-hover:shadow-violet-500/50 group-hover:scale-105 transition-all duration-300 ring-1 ring-white/20">
-                <Brain className="w-4 h-4 text-white" />
-              </div>
-              <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-background">
-                <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
-              </span>
-            </div>
-            <span className="font-bold text-lg tracking-tight">AIHub</span>
-          </Link>
+  const closeMobile = () => setMobileOpen(false);
 
-          <div className="hidden lg:flex items-center gap-0.5 relative">
-            {(Object.keys(megaMenus) as MenuKey[]).map((key) => (
-              <div key={key} className="relative" onMouseEnter={() => openDropdown(key)} onMouseLeave={closeDropdown}>
-                <button
+  return (
+    <>
+      <header
+        className={cn(
+          "fixed top-8 left-0 right-0 z-[100]",
+          "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
+          scrolled || mobileOpen
+            ? "bg-background/92 backdrop-blur-xl border-b border-border/60 shadow-sm"
+            : "bg-transparent"
+        )}
+      >
+        <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group flex-shrink-0">
+              <div className="relative">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center shadow-md group-hover:shadow-violet-500/50 group-hover:scale-105 transition-all duration-300 ring-1 ring-white/20">
+                  <Brain className="w-4 h-4 text-white" />
+                </div>
+                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-background">
+                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+                </span>
+              </div>
+              <span className="font-bold text-lg tracking-tight">AIHub</span>
+            </Link>
+
+            {/* Desktop nav */}
+            <div className="hidden lg:flex items-center gap-0.5 relative">
+              {(Object.keys(megaMenus) as MenuKey[]).map((key) => (
+                <div key={key} className="relative" onMouseEnter={() => openDropdown(key)} onMouseLeave={closeDropdown}>
+                  <button
+                    className={cn(
+                      "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium",
+                      "transition-colors duration-150 outline-none",
+                      "focus-visible:ring-2 focus-visible:ring-ring",
+                      isGroupActive(key) || openMenu === key
+                        ? "text-foreground bg-accent/70"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    )}
+                  >
+                    {megaMenus[key].label}
+                    <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200", openMenu === key ? "rotate-180" : "")} />
+                  </button>
+                  <DropdownPanel menuKey={key} isOpen={openMenu === key} />
+                </div>
+              ))}
+              {[{ label: "News", href: "/news" }, { label: "About", href: "/about" }].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
                   className={cn(
-                    "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium",
-                    "transition-colors duration-150 outline-none",
-                    "focus-visible:ring-2 focus-visible:ring-ring",
-                    isGroupActive(key) || openMenu === key
-                      ? "text-foreground bg-accent/70"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    "px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
+                    pathname === item.href ? "text-foreground bg-accent/70" : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                   )}
                 >
-                  {megaMenus[key].label}
-                  <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200", openMenu === key ? "rotate-180" : "")} />
-                </button>
-                <DropdownPanel menuKey={key} isOpen={openMenu === key} />
-              </div>
-            ))}
-            {[{ label: "News", href: "/news" }, { label: "About", href: "/about" }].map((item) => (
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Right actions */}
+            <div className="flex items-center gap-1.5">
               <Link
-                key={item.href}
-                href={item.href}
+                href="/search"
                 className={cn(
-                  "px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
-                  pathname === item.href ? "text-foreground bg-accent/70" : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                  "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg",
+                  "border border-border/60 bg-background/60 text-muted-foreground text-sm",
+                  "hover:bg-accent hover:text-foreground hover:border-border",
+                  "transition-all duration-150 backdrop-blur-sm"
                 )}
               >
-                {item.label}
+                <Search className="w-3.5 h-3.5" />
+                <span className="hidden md:inline text-muted-foreground/80">Search…</span>
+                <kbd className="hidden md:inline-flex h-5 select-none items-center rounded border border-border/50 bg-muted/60 px-1.5 font-mono text-[10px] opacity-60">⌘K</kbd>
               </Link>
-            ))}
+              {mounted && (
+                <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle theme" className="h-8 w-8 btn-press">
+                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden h-9 w-9 btn-press rounded-lg"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileOpen}
+              >
+                <div className="relative w-4 h-4">
+                  <span className={cn("absolute inset-0 flex items-center justify-center transition-all duration-200", mobileOpen ? "opacity-0 rotate-90 scale-75" : "opacity-100")}><Menu className="w-4 h-4" /></span>
+                  <span className={cn("absolute inset-0 flex items-center justify-center transition-all duration-200", mobileOpen ? "opacity-100" : "opacity-0 -rotate-90 scale-75")}><X className="w-4 h-4" /></span>
+                </div>
+              </Button>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile drawer — full-viewport overlay, outside the constrained nav */}
+      <div
+        className={cn(
+          "fixed inset-0 z-[99] lg:hidden",
+          "transition-[opacity,visibility] duration-300",
+          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        )}
+        aria-hidden={!mobileOpen}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+          onClick={closeMobile}
+          aria-hidden
+        />
+
+        {/* Drawer panel — slides in from right */}
+        <div
+          className={cn(
+            "absolute top-[calc(2rem+4rem)] right-0 bottom-0 w-full max-w-sm",
+            "bg-background border-l border-border shadow-2xl",
+            "flex flex-col",
+            "transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          )}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+        >
+          {/* Scrollable content */}
+          <div className="flex-1 overflow-y-auto overscroll-contain">
+            <div className="py-2">
+              {(Object.entries(megaMenus) as [MenuKey, (typeof megaMenus)[MenuKey]][]).map(([key, menu], groupIdx) => (
+                <MobileSection
+                  key={key}
+                  menuKey={key}
+                  menu={menu}
+                  pathname={pathname}
+                  onClose={closeMobile}
+                  animateIn={animateIn}
+                  startDelay={groupIdx * 5}
+                />
+              ))}
+
+              {/* Extra top-level links */}
+              <div className="border-b border-border/30 pb-2">
+                <p className="px-4 py-3 text-xs font-bold uppercase tracking-widest text-muted-foreground/60">More</p>
+                {[
+                  { label: "About", href: "/about", icon: Users, color: "text-slate-500", bg: "bg-slate-500/10 dark:bg-slate-500/[0.18]" },
+                  { label: "Contribute", href: "/contribute", icon: Zap, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={closeMobile}
+                    className={cn(
+                      "flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl text-sm font-medium",
+                      "transition-colors duration-150",
+                      pathname === item.href
+                        ? "text-primary bg-primary/8 dark:bg-primary/12"
+                        : "text-foreground/80 hover:text-foreground hover:bg-accent/60"
+                    )}
+                  >
+                    <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0", item.bg)}>
+                      <item.icon className={cn("w-3.5 h-3.5", item.color)} />
+                    </div>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          {/* Footer actions — always visible at bottom */}
+          <div className="flex-shrink-0 p-3 border-t border-border/40 bg-muted/20 space-y-2">
             <Link
               href="/search"
-              className={cn(
-                "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg",
-                "border border-border/60 bg-background/60 text-muted-foreground text-sm",
-                "hover:bg-accent hover:text-foreground hover:border-border",
-                "transition-all duration-150 backdrop-blur-sm"
-              )}
+              onClick={closeMobile}
+              className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl bg-muted/60 border border-border/60 text-muted-foreground text-sm hover:bg-accent transition-colors"
             >
-              <Search className="w-3.5 h-3.5" />
-              <span className="hidden md:inline text-muted-foreground/80">Search…</span>
-              <kbd className="hidden md:inline-flex h-5 select-none items-center rounded border border-border/50 bg-muted/60 px-1.5 font-mono text-[10px] opacity-60">⌘K</kbd>
+              <Search className="w-4 h-4" />
+              Search everything…
             </Link>
-            {mounted && (
-              <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle theme" className="h-8 w-8 btn-press">
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </Button>
-            )}
-            <Button variant="ghost" size="icon" className="lg:hidden h-8 w-8 btn-press" onClick={() => setMobileOpen(!mobileOpen)} aria-label={mobileOpen ? "Close menu" : "Open menu"}>
-              <div className="relative w-4 h-4">
-                <span className={cn("absolute inset-0 flex items-center justify-center transition-all duration-200", mobileOpen ? "opacity-0 rotate-90 scale-75" : "opacity-100")}><Menu className="w-4 h-4" /></span>
-                <span className={cn("absolute inset-0 flex items-center justify-center transition-all duration-200", mobileOpen ? "opacity-100" : "opacity-0 -rotate-90 scale-75")}><X className="w-4 h-4" /></span>
-              </div>
-            </Button>
-          </div>
-        </div>
-
-        <div className={cn("lg:hidden overflow-hidden bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-border", "transition-[max-height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]", mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0")}>
-          <div className="py-3 border-t border-border/40 space-y-4">
-            {(Object.entries(megaMenus) as [MenuKey, typeof megaMenus[MenuKey]][]).map(([key, menu], groupIdx) => (
-              <div key={key}>
-                <p className="px-4 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-1">{menu.label}</p>
-                <div className="space-y-0.5">
-                  {menu.items.map((item, i) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={cn(
-                        "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium",
-                        "transition-all duration-200",
-                        "opacity-0 translate-x-2",
-                        mobileOpen && "opacity-100 translate-x-0",
-                        pathname === item.href || pathname.startsWith(item.href.split("#")[0] + "/")
-                          ? "text-primary bg-primary/8"
-                          : "text-muted-foreground hover:text-foreground hover:bg-accent/60"
-                      )}
-                      style={{ transitionDelay: mobileOpen ? `${(groupIdx * 4 + i) * 35}ms` : "0ms" }}
-                    >
-                      <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0", item.bg)}>
-                        <item.icon className={cn("w-3.5 h-3.5", item.color)} />
-                      </div>
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-            <div className="px-3 pt-1 pb-2">
-              <Link href="/search" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 w-full px-4 py-3 rounded-xl border border-border/60 bg-muted/40 text-muted-foreground text-sm hover:bg-accent transition-colors">
-                <Search className="w-4 h-4" />
-                Search everything…
-              </Link>
+            <div className="flex items-center justify-between px-1">
+              <span className="text-xs text-muted-foreground">AIHub · AI Knowledge Platform</span>
+              {mounted && (
+                <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle theme" className="h-8 w-8">
+                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </Button>
+              )}
             </div>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </>
   );
 }

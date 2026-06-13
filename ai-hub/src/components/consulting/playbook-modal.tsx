@@ -108,17 +108,22 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
   const progress = total > 0 ? Math.round((done / total) * 100) : 0;
 
   return (
-    <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 sm:p-6 bg-black/40 dark:bg-black/65 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-[300] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 dark:bg-black/65 backdrop-blur-sm" onClick={onClose}>
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="playbook-modal-title"
-        className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-2xl overflow-hidden glass-card shadow-[0_32px_80px_rgba(109,40,217,0.22)]"
+        className="relative w-full sm:max-w-2xl max-h-[92dvh] sm:max-h-[90vh] flex flex-col rounded-t-3xl sm:rounded-2xl overflow-hidden glass-card shadow-[0_32px_80px_rgba(109,40,217,0.22)]"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile drag handle */}
+        <div className="sm:hidden flex justify-center pt-3 pb-1 flex-shrink-0">
+          <div className="w-10 h-1 rounded-full bg-border" />
+        </div>
+
         {/* Header */}
-        <div className="relative flex-shrink-0 px-5 sm:px-6 pt-6 pb-5 border-b border-border/60 bg-gradient-to-br from-violet-500/8 to-pink-500/5">
+        <div className="relative flex-shrink-0 px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5 border-b border-border/60 bg-gradient-to-br from-violet-500/8 to-pink-500/5">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-t-2xl" />
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
@@ -131,7 +136,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
               <h2 id="playbook-modal-title" className="text-lg sm:text-xl font-bold leading-tight tracking-tight text-foreground">{playbook.title}</h2>
               <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{playbook.desc}</p>
             </div>
-            <button onClick={onClose} className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40" aria-label="Close playbook">
+            <button onClick={onClose} className="p-2.5 -mr-1 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close playbook">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -149,11 +154,11 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="px-5 sm:px-6 py-5 border-b border-border/50">
+        <div className="flex-1 overflow-y-auto overscroll-contain">
+          <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-border/50">
             <p className="text-sm text-muted-foreground leading-relaxed">{playbook.guidance}</p>
           </div>
-          <div className="px-5 sm:px-6 py-5">
+          <div className="px-4 sm:px-6 py-4 sm:py-5 pb-safe">
             <div className="flex items-center justify-between mb-4">
               <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground/60">Checklist &amp; Templates</p>
               <span className="text-[11px] font-semibold text-muted-foreground">{done}/{total} completed</span>
@@ -166,8 +171,8 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
                     ? "border-emerald-500/30 bg-emerald-500/6"
                     : "border-border/60 bg-card/40 hover:bg-card/80"
                 )}>
-                  <div className="flex items-center gap-3 px-4 py-3">
-                    <button className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-full" onClick={() => toggleChecked(i)} aria-label={checked.has(i) ? "Mark incomplete" : "Mark complete"}>
+                  <div className="flex items-center gap-3 px-3 sm:px-4 py-3 min-h-[52px]">
+                    <button className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-full p-1 -ml-1 min-w-[36px] min-h-[36px] flex items-center justify-center" onClick={() => toggleChecked(i)} aria-label={checked.has(i) ? "Mark incomplete" : "Mark complete"}>
                       <CheckCircle className={cn("w-5 h-5 transition-all duration-200", checked.has(i) ? "text-emerald-500 scale-110" : "text-muted-foreground/30 hover:text-muted-foreground/60")} />
                     </button>
                     <span className={cn("flex-1 text-sm leading-snug transition-colors cursor-pointer select-none", checked.has(i) ? "line-through text-muted-foreground/40" : "text-foreground")} onClick={() => toggleChecked(i)}>
@@ -255,37 +260,42 @@ function ConsultingToolkitInner() {
         <PlaybookModal playbook={activePlaybook.pb} onClose={() => setActivePlaybook(null)} />
       )}
 
-      {/* Horizontal tab bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-8">
-        {phaseOptions.map((opt) => {
-          const Icon = opt.icon;
-          const isActive = activePhase === opt.id;
-          const count = opt.id === "all"
-            ? totalCount
-            : phases.find(p => p.phase === opt.id)?.playbooks.length ?? 0;
-          return (
-            <button
-              key={opt.id}
-              onClick={() => setPhase(opt.id)}
-              className={cn(
-                "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-[0_4px_16px_hsl(var(--primary)/0.35)] scale-[1.02]"
-                  : "glass-card text-muted-foreground hover:text-foreground hover:border-primary/30"
-              )}
-            >
-              <Icon className="w-4 h-4" />
-              {opt.label}
-              <span className={cn(
-                "text-[10px] font-bold px-1.5 py-0.5 rounded-full",
-                isActive ? "bg-white/20 text-white" : "bg-muted text-muted-foreground"
-              )}>{count}</span>
-            </button>
-          );
-        })}
-        <span className="ml-auto text-sm text-muted-foreground hidden sm:block">
+      {/* Horizontal tab bar — scrollable on mobile, no wrap */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap">
+          {phaseOptions.map((opt) => {
+            const Icon = opt.icon;
+            const isActive = activePhase === opt.id;
+            const count = opt.id === "all"
+              ? totalCount
+              : phases.find(p => p.phase === opt.id)?.playbooks.length ?? 0;
+            return (
+              <button
+                key={opt.id}
+                onClick={() => setPhase(opt.id)}
+                className={cn(
+                  "inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 flex-shrink-0",
+                  isActive
+                    ? "bg-primary text-primary-foreground shadow-[0_4px_16px_hsl(var(--primary)/0.35)]"
+                    : "glass-card text-muted-foreground hover:text-foreground hover:border-primary/30"
+                )}
+              >
+                <Icon className="w-4 h-4 flex-shrink-0" />
+                <span className="whitespace-nowrap">{opt.label}</span>
+                <span className={cn(
+                  "text-[10px] font-bold px-1.5 py-0.5 rounded-full flex-shrink-0",
+                  isActive ? "bg-white/20 text-white" : "bg-muted text-muted-foreground"
+                )}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-xs text-muted-foreground mt-2 sm:hidden">
           <span className="font-semibold text-foreground">{allPlaybooks.length}</span> / {totalCount} playbooks
-        </span>
+        </p>
+        <p className="text-sm text-muted-foreground hidden sm:block mt-1">
+          Showing <span className="font-semibold text-foreground">{allPlaybooks.length}</span> of {totalCount} playbooks
+        </p>
       </div>
 
       {/* Cards grid */}
