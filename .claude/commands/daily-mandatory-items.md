@@ -1,21 +1,20 @@
 ---
-description: Daily routine — add mandatory items across the five list screens, update counts, validate, then commit (no push) and ask for approval to push.
+description: Daily routine — add mandatory items across the five list screens, update counts, validate, then commit and auto-push the branch (no pull request).
 ---
 
 # Daily Mandatory-Items Routine
 
 ROLE
-You are running as a daily routine on the SridharSwiss/AI repo, which powers
-sridhar-ai.ch. Use your research and writing skills. Work deterministically through
-the build steps — there is no human to approve steps MID-run. The ONLY human
-checkpoint is at the very end: you will commit but NOT push, and ask the user to
-approve the push.
+You are running unattended as a daily routine on the SridharSwiss/AI repo, which
+powers sridhar-ai.ch. Use your research and writing skills. Work deterministically —
+there is no human to approve any step. When the work passes validation you commit
+and push to the feature branch on your own. You never open a pull request, and you
+never push to the default branch.
 
 STEP 0 — BRANCH
 Check out branch `claude/upbeat-feynman-HrqTF`; create it from the default branch if
-it doesn't exist. All work and the final commit go ONLY to this branch. Never commit
-or push to the default branch, never push at all in this run, and never open a pull
-request.
+it doesn't exist. All work, commits, and the push go ONLY to this branch. Never
+commit or push to the default branch, and never open a pull request.
 
 STEP 1 — DISCOVER & MAP (do this before touching anything)
 Map the real codebase and write the map into a scratch note you keep for the run:
@@ -54,17 +53,22 @@ For every file touched, trace and update dependencies: shared data files, indexe
 type/interface definitions, filters, search/sort logic, sitemaps, snapshots, and any
 generated output.
 
-STEP 5 — VALIDATE, COMMIT (NO PUSH), THEN ASK
+STEP 5 — VALIDATE, COMMIT & PUSH (NO PULL REQUEST)
   1. Run the build, lint, and tests found in Step 1. Fix anything you broke. They
      must pass before committing. If something is genuinely red and out of scope to
-     fix, STOP, leave it uncommitted, and report it in the FINAL SUMMARY instead of
-     committing broken work.
-  2. Stage and COMMIT to `claude/upbeat-feynman-HrqTF` with a clear message
+     fix, STOP, do not commit, and report it in the FINAL SUMMARY instead of
+     committing broken work. (A purely environmental failure that your changes did
+     not cause — e.g. a missing build-time env var — does not block the commit;
+     note it in the summary.)
+  2. Ensure the commit will be GitHub-verified: run
+     `git config user.email noreply@anthropic.com && git config user.name Claude`
+     before committing.
+  3. Stage and COMMIT to `claude/upbeat-feynman-HrqTF` with a clear message
      summarizing additions per screen and count updates.
-  3. DO NOT push. DO NOT open a pull request. Leave the commit local on the branch.
-  4. End the run by printing the FINAL SUMMARY (below) and explicitly asking the
-     user: "Changes are committed locally on claude/upbeat-feynman-HrqTF but NOT
-     pushed. Reply to approve the push." Then stop and wait.
+  4. PUSH with `git push -u origin claude/upbeat-feynman-HrqTF`. On network failure,
+     retry up to 4 times with exponential backoff (2s, 4s, 8s, 16s). DO NOT open a
+     pull request. If there is nothing to commit, skip the push.
+  5. End the run by printing the FINAL SUMMARY (below).
 
 GUARDRAILS
   - Additive changes only; never delete/restyle existing compliant content.
@@ -73,8 +77,8 @@ GUARDRAILS
   - If an item would need a large refactor or change the design system, STOP that
     item, leave it unimplemented, and document why.
   - Keep all item data faithful to verifiable sources; never fabricate details.
-  - Never push and never open a PR in this routine — pushing is a separate,
-    human-approved step.
+  - Auto-push the feature branch when validation passes, but NEVER open a pull
+    request and NEVER push to the default branch.
 
 FINAL SUMMARY (always output, even if nothing changed)
   - The Step 1 map (screens → files → data source).
@@ -83,6 +87,5 @@ FINAL SUMMARY (always output, even if nothing changed)
   - Dependencies touched.
   - Deferred / skipped items, each with a reason.
   - Any screen marked "Not found".
-  - The commit SHA created (or "no commit — nothing changed" / "no commit — build
-    failed").
-  - The approval ask: committed locally, not pushed, awaiting go-ahead to push.
+  - The commit SHA created and confirmation it was pushed (or "no commit — nothing
+    changed" / "no commit — validation failed", with the reason).
