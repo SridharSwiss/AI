@@ -64,7 +64,7 @@ function DropdownPanel({ menuKey, isOpen }: { menuKey: MenuKey; isOpen: boolean 
     <div
       className={cn(
         "absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-[200]",
-        "bg-background/95 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl overflow-hidden isolate",
+        "bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-2xl overflow-hidden isolate",
         "origin-top transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
         isOpen
           ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
