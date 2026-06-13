@@ -1691,6 +1691,37 @@ export const companies: CompanyData[] = [
     ],
     history: "Codeium started as Exafunction in 2021, building GPU utilisation software. After pivoting to AI coding in 2022, it differentiated by offering a genuinely free tier with no limits — directly undercutting GitHub Copilot. Windsurf (Nov 2024) introduced the concept of 'Flows' — persistent agentic context across an entire coding session. The $3B OpenAI acquisition in June 2025 was one of the largest AI industry M&A deals, giving OpenAI a popular consumer coding IDE to compete with Cursor and GitHub Copilot.",
   },
+  {
+    id: "nvidia",
+    slug: "nvidia",
+    name: "NVIDIA",
+    description: "NVIDIA is the dominant designer of GPUs and AI accelerators. Its data-center GPUs (A100, H100, H200, and the Blackwell B200/GB200) together with the CUDA software platform power the majority of the world's AI training and inference, making NVIDIA the foundational infrastructure provider of the modern AI era. Beyond silicon, NVIDIA ships full-stack AI software including NVIDIA AI Enterprise, NIM microservices, TensorRT, and the Omniverse simulation platform.",
+    founded: 1993,
+    hq: "Santa Clara, CA",
+    stage: "Public",
+    focus: "AI Compute & GPUs",
+    products: ["H100 GPU", "H200 GPU", "Blackwell (B200 / GB200)", "CUDA", "DGX Systems", "NVIDIA AI Enterprise", "NIM Microservices", "TensorRT", "Triton Inference Server", "Omniverse"],
+    tags: ["Hardware", "GPUs", "AI Compute", "Infrastructure", "CUDA", "Data Center"],
+    website: "https://nvidia.com",
+    featured: true,
+    financials: {
+      marketCap: "$3T+ (surpassed Jun 2024)",
+      revenue: "$130.5B (FY2025)",
+      stockSymbol: "NVDA",
+      employees: "~29,600 (FY2024)",
+    },
+    notableModels: ["Nemotron-4 340B", "Llama Nemotron", "Megatron-LM"],
+    keyPeople: ["Jensen Huang (CEO / Co-founder)", "Chris Malachowsky (Co-founder)", "Curtis Priem (Co-founder)"],
+    milestones: [
+      { date: "1999", event: "GeForce 256 launched, marketed as 'the world's first GPU'" },
+      { date: "2006", event: "CUDA introduced, enabling general-purpose GPU computing" },
+      { date: "2020", event: "A100 (Ampere) data-center GPU released — standard for LLM training" },
+      { date: "Mar 2022", event: "H100 (Hopper) announced; became the dominant AI training accelerator" },
+      { date: "Mar 2024", event: "Blackwell architecture (B200 / GB200) unveiled at GTC 2024" },
+      { date: "Jun 2024", event: "Surpassed $3T market cap, briefly the world's most valuable company" },
+    ],
+    history: "NVIDIA was founded in 1993 by Jensen Huang, Chris Malachowsky, and Curtis Priem. It popularised the term 'GPU' with the GeForce 256 in 1999 and introduced CUDA in 2006, which turned GPUs into general-purpose parallel computers and became the foundation of the deep-learning revolution. Its A100 (2020) and H100 (2022) data-center GPUs became the de facto standard for training large language models, and the Blackwell architecture followed in 2024. Surging AI demand made NVIDIA one of the world's most valuable companies, surpassing a $3 trillion market capitalisation in mid-2024.",
+  },
 ];
 
 export const companyFocusAreas = [

@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   // Question-based title for GEO/AIO eligibility
   title: "AIHub — Compare 107+ AI Tools, Companies & EU AI Act Compliance (2026)",
   description:
-    "AIHub is the world's most complete AI reference platform. Compare ChatGPT, Claude, Gemini and 107+ AI tools side-by-side. Explore 39 AI companies with funding data. Navigate EU AI Act compliance. Updated June 2026.",
+    "AIHub is the world's most complete AI reference platform. Compare ChatGPT, Claude, Gemini and 107+ AI tools side-by-side. Explore 40 AI companies with funding data. Navigate EU AI Act compliance. Updated June 2026.",
   alternates: { canonical: BASE_URL },
   openGraph: {
     title: "AIHub — Compare 107+ AI Tools, Companies & EU AI Act Compliance (2026)",
     description:
-      "Compare ChatGPT, Claude, Gemini and 107+ AI tools. Explore 39 AI companies with funding data. Navigate EU AI Act compliance. Updated June 2026.",
+      "Compare ChatGPT, Claude, Gemini and 107+ AI tools. Explore 40 AI companies with funding data. Navigate EU AI Act compliance. Updated June 2026.",
     url: BASE_URL,
     type: "website",
     images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "AIHub - The AI Knowledge Platform" }],

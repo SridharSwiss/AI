@@ -41,9 +41,9 @@ const sectionNav = [
   {
     icon: Building2, label: "Companies",          href: "/companies",
     iconCls: "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-500",
-    desc: "39 vendors profiled.",
+    desc: "40 vendors profiled.",
     body: "From OpenAI and Anthropic to niche specialists — funding stage, focus area, and key products in one view.",
-    stat: "39 companies",
+    stat: "40 companies",
   },
   {
     icon: BarChart3, label: "Case Studies",       href: "/case-studies",
@@ -62,9 +62,9 @@ const sectionNav = [
   {
     icon: Shield,    label: "Compliance",         href: "/compliance",
     iconCls: "bg-rose-500/10 dark:bg-rose-500/[0.18] text-rose-500",
-    desc: "16 frameworks. Deadlines tracked.",
+    desc: "17 frameworks. Deadlines tracked.",
     body: "EU AI Act, GDPR, NIST RMF, ISO 42001 and more — obligations mapped, enforcement dates flagged.",
-    stat: "16 frameworks",
+    stat: "17 frameworks",
   },
   {
     icon: Briefcase, label: "Consulting Toolkit", href: "/consulting-toolkit",
@@ -78,7 +78,7 @@ const sectionNav = [
 const personas = [
   { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 107 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
   { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 31 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
-  { role: "Compliance Officer", icon: Shield, desc: "16 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
+  { role: "Compliance Officer", icon: Shield, desc: "17 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
   { role: "Learner", icon: GraduationCap, desc: "72 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
 ];
 
