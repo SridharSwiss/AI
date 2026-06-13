@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuroraBackground } from "@/components/home/aurora-background";
 
@@ -47,73 +47,96 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center justify-center overflow-hidden" style={{ minHeight: "88vh" }}>
+    <section className="relative flex flex-col items-center justify-center overflow-hidden" style={{ minHeight: "92vh" }}>
       <AuroraBackground />
 
-      <div className="container-site py-24 text-center">
-        <div className="animate-fade-up delay-75 w-full flex justify-center mb-8">
-          <Link href="/compliance/eu-ai-act" className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold dark:bg-amber-950/40 dark:border-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors">
-            <span className="relative flex h-1.5 w-1.5">
+      <div className="container-site py-28 text-center relative z-10">
+        {/* Eyebrow badge — glassmorphism pill */}
+        <div className="animate-fade-up delay-75 w-full flex justify-center mb-10">
+          <Link
+            href="/compliance/eu-ai-act"
+            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass-card ring-gradient text-xs font-semibold text-amber-300 dark:text-amber-300 hover:scale-105 transition-transform duration-200 glow-primary-sm"
+          >
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-70" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
             </span>
-            EU AI Act in force · Are you compliant? Read the guide →
+            EU AI Act in force · Are you compliant? Read the guide
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
-        <div className="animate-fade-up delay-100 flex items-center justify-center gap-3 mb-6">
-          <hr className="flex-1 max-w-[80px] border-border/50" />
-          <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">The AI Reference Layer</span>
-          <hr className="flex-1 max-w-[80px] border-border/50" />
+        {/* Eyebrow label */}
+        <div className="animate-fade-up delay-100 flex items-center justify-center gap-3 mb-8">
+          <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-primary/50" />
+          <span className="text-eyebrow text-muted-foreground tracking-[0.18em]">The AI Reference Layer</span>
+          <div className="h-px flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-primary/50" />
         </div>
 
-        <h1 className="animate-fade-up delay-150 max-w-4xl mx-auto mb-6 text-foreground">
-          <span className="text-display-serif block">Navigate AI with</span>
+        {/* Main headline */}
+        <h1 className="animate-fade-up delay-150 max-w-5xl mx-auto mb-8">
+          <span className="text-display-serif block text-foreground">Navigate AI with</span>
           <span
-            className={`text-display-serif gradient-text inline-block transition-all duration-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"}`}
+            className={`text-display-serif gradient-text-vivid inline-block transition-all duration-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"}`}
             style={{ fontFamily: "var(--font-serif), Georgia, serif" }}
           >
             {words[wordIndex]}
           </span>
         </h1>
 
-        <p className="animate-fade-up delay-300 text-xs font-semibold uppercase tracking-wider text-muted-foreground max-w-2xl mx-auto mb-4">
-          82 tools. 33 companies. 31 case studies. 16 compliance frameworks.
+        {/* Subline */}
+        <p className="animate-fade-up delay-200 text-sm font-medium uppercase tracking-widest text-muted-foreground max-w-2xl mx-auto mb-12">
+          82 tools · 33 companies · 31 case studies · 16 compliance frameworks
         </p>
 
-        <div className="animate-fade-up delay-400 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        {/* CTAs */}
+        <div className="animate-fade-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
           <Link href="/search">
-            <Button variant="gradient" size="xl" className="gap-2.5 w-full sm:w-auto btn-press shadow-primary">
+            <Button
+              variant="gradient"
+              size="xl"
+              className="gap-2.5 w-full sm:w-auto btn-press shadow-primary glow-primary hover:glow-primary ring-gradient"
+            >
               <Search className="w-4 h-4" />
               Search the AI landscape
             </Button>
           </Link>
           <Link href="/tools">
-            <Button variant="outline" size="xl" className="gap-2.5 w-full sm:w-auto btn-press bg-background/60 backdrop-blur">
+            <Button
+              variant="outline"
+              size="xl"
+              className="gap-2.5 w-full sm:w-auto btn-press glass-card border-white/20 text-foreground hover:border-primary/50 hover:bg-primary/10"
+            >
               Browse AI Tools
               <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
         </div>
 
-        <div className="animate-fade-up delay-500 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+        {/* Stats grid — glass cards */}
+        <div className="animate-fade-up delay-500 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
           {[
             { target: 82, label: "AI Tools",      href: "/tools" },
             { target: 33, label: "Companies",      href: "/companies" },
             { target: 31, label: "Case Studies",   href: "/case-studies" },
             { target: 16, label: "Frameworks",     href: "/compliance" },
           ].map(({ target, label, href }) => (
-            <Link key={label} href={href} className="group flex flex-col items-center p-4 rounded-xl border border-border/60 bg-background/50 backdrop-blur-sm hover:border-primary/40 hover:bg-primary/5 hover:-translate-y-1 hover:shadow-md transition-all duration-200">
-              <div className="text-3xl font-black gradient-text tabular-nums">
+            <Link
+              key={label}
+              href={href}
+              className="group flex flex-col items-center p-5 rounded-2xl glass-card hover:border-primary/40 hover:bg-primary/10 hover:-translate-y-1.5 hover:glow-primary-sm transition-all duration-200"
+            >
+              <div className="text-3xl font-black gradient-text-vivid tabular-nums leading-none mb-1">
                 <CountUp target={target} />
               </div>
-              <div className="text-xs font-medium text-muted-foreground mt-1 group-hover:text-primary transition-colors">{label}</div>
+              <div className="text-xs font-semibold text-muted-foreground group-hover:text-primary/80 transition-colors tracking-wide">{label}</div>
             </Link>
           ))}
         </div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none -z-10" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }

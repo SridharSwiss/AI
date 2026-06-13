@@ -132,21 +132,21 @@ export function FeaturedSection() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card min-h-[200px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-border"
+                className="group flex flex-col overflow-hidden rounded-2xl glass-card min-h-[200px] transition-all duration-200 hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
               >
                 <div className="flex flex-col flex-1 p-6">
                   <div className="flex items-start justify-between mb-5">
-                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110 ${item.iconCls}`}>
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-110 group-hover:shadow-md ${item.iconCls}`}>
                       <item.icon className="w-5 h-5" />
                     </div>
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide bg-muted text-muted-foreground">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide bg-white/10 dark:bg-white/8 text-muted-foreground border border-white/10">
                       {item.stat}
                     </span>
                   </div>
                   <p className="text-base font-bold tracking-tight mb-1">{item.label}</p>
                   <p className="text-sm font-semibold text-muted-foreground mb-2">{item.desc}</p>
                   <p className="text-xs text-muted-foreground leading-relaxed flex-1">{item.body}</p>
-                  <div className="flex items-center gap-1 mt-5 text-[11px] font-semibold text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-foreground transition-all duration-200">
+                  <div className="flex items-center gap-1 mt-5 text-[11px] font-semibold text-primary opacity-0 group-hover:opacity-100 transition-all duration-200">
                     Explore <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export function FeaturedSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {featuredTools.map((tool) => (
               <Link key={tool.name} href={tool.href} className="group block">
-                <Card className="h-full group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-card-hover)] group-hover:border-border/80">
+                <Card className="h-full glass-card group-hover:-translate-y-1.5 group-hover:border-white/25 group-hover:shadow-[0_16px_48px_rgba(0,0,0,0.3)]">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-2 mb-3">
                       <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${TOOL_COLORS[tool.category] ?? "bg-muted text-muted-foreground"}`}>
@@ -192,7 +192,7 @@ export function FeaturedSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {featuredCaseStudies.map((cs) => (
               <Link key={cs.company} href={cs.href} className="group block">
-                <Card className="h-full border-l-[3px] border-l-emerald-500/40 group-hover:border-l-emerald-500 group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-card-hover)]">
+                <Card className="h-full glass-card border-l-[3px] border-l-emerald-500/50 group-hover:border-l-emerald-400 group-hover:-translate-y-1.5 group-hover:shadow-[0_16px_48px_rgba(0,0,0,0.3)]">
                   <CardHeader>
                     <Badge variant="green" className="w-fit mb-3">{cs.industry}</Badge>
                     <CardTitle className="text-base group-hover:text-primary transition-colors duration-200">{cs.company}</CardTitle>
@@ -218,7 +218,7 @@ export function FeaturedSection() {
         <ScrollReveal stagger>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {personas.map((persona) => (
-              <Link key={persona.role} href={persona.href} className={`relative overflow-hidden rounded-xl border-2 border-border bg-card p-6 group cursor-pointer hover:-translate-y-1 transition-all duration-200 hover:${persona.color}`}>
+              <Link key={persona.role} href={persona.href} className={`relative overflow-hidden rounded-xl glass-card border-2 p-6 group cursor-pointer hover:-translate-y-1.5 transition-all duration-200 hover:${persona.color} hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]`}>
                 <div className="mb-4">
                   <persona.icon className="w-7 h-7 text-muted-foreground group-hover:text-foreground transition-colors duration-200" />
                 </div>
@@ -232,8 +232,10 @@ export function FeaturedSection() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <div className="relative overflow-hidden rounded-3xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-violet-700 to-pink-700" />
+        <div className="relative overflow-hidden rounded-3xl ring-gradient">
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-700 via-purple-700 to-pink-700" />
+          <div className="absolute inset-0 mesh-gradient opacity-60" />
+          <div className="absolute inset-0 dot-grid opacity-30" />
           <div className="relative px-5 py-10 sm:px-8 sm:py-12 md:px-14 md:py-16 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 text-white/90 text-xs font-semibold mb-6 backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5" />

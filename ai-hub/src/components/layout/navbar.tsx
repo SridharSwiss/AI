@@ -150,14 +150,14 @@ export function Navbar() {
       className={cn(
         "fixed top-8 left-0 right-0 z-[100]",
         "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        scrolled || mobileOpen ? "surface-nav dark:bg-[hsl(222_47%_8%/0.95)] shadow-sm" : "bg-transparent"
+        scrolled || mobileOpen ? "surface-nav dark:bg-[hsl(252_55%_5%/0.88)] dark:backdrop-blur-xl dark:border-b dark:border-white/[0.08] shadow-sm" : "bg-transparent"
       )}
     >
       <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group flex-shrink-0">
             <div className="relative">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center shadow-md group-hover:shadow-violet-500/40 transition-shadow duration-300">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center shadow-md group-hover:shadow-violet-500/50 group-hover:scale-105 transition-all duration-300 ring-1 ring-white/20">
                 <Brain className="w-4 h-4 text-white" />
               </div>
               <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-background">
