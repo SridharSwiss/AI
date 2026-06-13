@@ -1,3 +1,5 @@
+import { extendedTools } from "./tools-extended";
+
 export interface PricingTier {
   name: string;
   price: string;
@@ -43,7 +45,7 @@ export interface ToolData {
   idealFor?: string[];
 }
 
-export const tools: ToolData[] = [
+const _coreTools: ToolData[] = [
   {
     id: "chatgpt",
     slug: "chatgpt",
@@ -59,7 +61,7 @@ export const tools: ToolData[] = [
     useCases: ["Content writing", "Code generation", "Research summaries", "Customer support drafts"],
     pros: ["Vast knowledge base", "Strong reasoning", "Plugin ecosystem"],
     cons: ["Knowledge cutoff", "Hallucinations", "Cost at scale"],
-    alternatives: ["claude", "gemini", "llama"],
+    alternatives: ["claude", "gemini", "llama", "deepseek", "microsoft-copilot", "meta-ai"],
     launchDate: "Nov 30, 2022",
     underlyingModel: ["GPT-4.1", "GPT-4.1 mini", "GPT-4.1 nano", "GPT-4o", "o3", "o4-mini", "o3-mini"],
     platforms: ["Web", "iOS", "Android", "macOS App", "Windows App", "API"],
@@ -99,7 +101,7 @@ export const tools: ToolData[] = [
     useCases: ["Document analysis", "Legal review", "Research", "Coding"],
     pros: ["200k+ context window", "Strong instruction following", "Constitutional AI safety"],
     cons: ["Less plugin support", "No image generation"],
-    alternatives: ["chatgpt", "gemini"],
+    alternatives: ["chatgpt", "gemini", "deepseek", "microsoft-copilot", "meta-ai"],
     launchDate: "Mar 2023",
     underlyingModel: ["Claude 4 Opus", "Claude 4 Sonnet", "Claude 3.7 Sonnet", "Claude 3.5 Haiku"],
     platforms: ["Web", "iOS", "Android", "API", "Claude Code (CLI)"],
@@ -139,7 +141,7 @@ export const tools: ToolData[] = [
     useCases: ["Google Workspace automation", "Multimodal analysis", "Code generation", "Search augmentation"],
     pros: ["Google integration", "Multimodal native", "Real-time search access"],
     cons: ["Variable quality vs GPT-4", "Privacy considerations"],
-    alternatives: ["chatgpt", "claude"],
+    alternatives: ["chatgpt", "claude", "deepseek", "microsoft-copilot"],
     launchDate: "Dec 6, 2023 (Gemini 1.0)",
     underlyingModel: ["Gemini 2.5 Pro", "Gemini 2.5 Flash", "Gemini 2.0 Flash", "Gemini 2.0 Flash-Lite"],
     platforms: ["Web", "iOS", "Android", "Google Workspace", "API (AI Studio)", "Vertex AI"],
@@ -175,7 +177,7 @@ export const tools: ToolData[] = [
     useCases: ["Code completion", "Test generation", "Documentation", "Boilerplate generation"],
     pros: ["Deep IDE integration", "Wide language support", "GitHub integration"],
     cons: ["Monthly cost", "Occasional incorrect suggestions", "Requires internet"],
-    alternatives: ["cursor", "codeium", "tabnine"],
+    alternatives: ["cursor", "codeium", "tabnine", "windsurf"],
     launchDate: "Jun 29, 2022",
     underlyingModel: ["GPT-4.1", "Claude Sonnet 4.6", "Gemini 2.5 Pro", "o3", "o4-mini", "Claude Opus 4.8"],
     platforms: ["VS Code", "JetBrains IDEs", "Visual Studio", "Vim/Neovim", "Azure Data Studio", "GitHub.com", "Xcode"],
@@ -213,7 +215,7 @@ export const tools: ToolData[] = [
     useCases: ["Large codebase refactoring", "Chat-driven development", "Code review", "Bug fixing"],
     pros: ["Full codebase context", "Multi-file edits", "VS Code compatible"],
     cons: ["Subscription required for best models", "Learning curve"],
-    alternatives: ["github-copilot", "codeium"],
+    alternatives: ["github-copilot", "codeium", "windsurf", "bolt", "replit"],
     launchDate: "Mar 2023",
     underlyingModel: ["Claude Sonnet 4.6", "Claude Opus 4.8", "GPT-4.1", "Gemini 2.5 Pro", "cursor-small (fast completions)"],
     platforms: ["macOS", "Windows", "Linux"],
@@ -1791,6 +1793,8 @@ export const tools: ToolData[] = [
   },
 ];
 
+export const tools: ToolData[] = [..._coreTools, ...extendedTools];
+
 export const toolCategories = [
   "All",
   "Language Models",
@@ -1806,6 +1810,7 @@ export const toolCategories = [
   "Productivity",
   "Design",
   "Data & Analytics",
+  "Autonomous Agents",
 ];
 
 export const pricingOptions = ["All", "Free", "Freemium", "Paid", "Enterprise"];
