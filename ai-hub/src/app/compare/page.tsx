@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
 import { tools } from "@/data/tools";
 import { PageHeader } from "@/components/shared/page-header";
@@ -8,7 +8,7 @@ import {
   ArrowRight, Scale, Search, TrendingUp,
   MessageSquare, Code2, Image, Video, Mic2, SearchCheck,
   Server, Layers, LayoutGrid, Zap, Rocket, Pen, BarChart2, Headphones, Bot,
-  Shuffle,
+  Shuffle, ChevronDown, X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -67,6 +67,94 @@ function getComparisonPairs() {
 const allPairs = getComparisonPairs();
 const allCategories = ["All", ...Array.from(new Set(allPairs.map((p) => p.category))).sort()];
 const allToolNames = tools.map((t) => ({ slug: t.slug, name: t.name })).sort((a, b) => a.name.localeCompare(b.name));
+
+/* ── Custom searchable tool picker ──────────────────────── */
+function ToolPicker({
+  label, value, exclude, onChange,
+}: { label: string; value: string; exclude: string; onChange: (slug: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const options = useMemo(() =>
+    allToolNames.filter((t) => t.slug !== exclude && t.name.toLowerCase().includes(q.toLowerCase())),
+    [exclude, q]
+  );
+
+  const selected = allToolNames.find((t) => t.slug === value);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const pick = (slug: string) => { onChange(slug); setOpen(false); setQ(""); };
+  const clear = (e: React.MouseEvent) => { e.stopPropagation(); onChange(""); setQ(""); };
+
+  return (
+    <div ref={ref} className="relative">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 mb-1.5">{label}</p>
+      <button
+        type="button"
+        onClick={() => { setOpen(!open); setTimeout(() => inputRef.current?.focus(), 10); }}
+        className={cn(
+          "w-full h-11 px-3 rounded-xl flex items-center gap-2 text-sm transition-all border",
+          "bg-background focus:outline-none",
+          open ? "border-primary ring-2 ring-primary/20" : "border-border hover:border-primary/40"
+        )}
+      >
+        <span className={cn("flex-1 text-left truncate", selected ? "text-foreground font-medium" : "text-muted-foreground/60")}>
+          {selected ? selected.name : "Select a tool…"}
+        </span>
+        {selected
+          ? <X className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0 hover:text-foreground" onClick={clear} />
+          : <ChevronDown className={cn("w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform", open && "rotate-180")} />}
+      </button>
+
+      {open && (
+        <div className="absolute z-50 mt-1 w-full rounded-xl bg-white dark:bg-zinc-900 border border-border shadow-xl overflow-hidden">
+          <div className="p-2 border-b border-border/50">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search tools…"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                className="w-full h-8 pl-8 pr-3 text-xs rounded-lg bg-muted/50 placeholder:text-muted-foreground/50 focus:outline-none"
+              />
+            </div>
+          </div>
+          <div className="max-h-52 overflow-y-auto overscroll-contain">
+            {options.length === 0 ? (
+              <p className="px-3 py-4 text-xs text-muted-foreground text-center">No tools found</p>
+            ) : options.map((t) => (
+              <button
+                key={t.slug}
+                type="button"
+                onClick={() => pick(t.slug)}
+                className={cn(
+                  "w-full text-left px-3 py-2.5 text-sm transition-colors",
+                  t.slug === value
+                    ? "bg-primary/10 text-primary font-semibold"
+                    : "text-foreground hover:bg-muted/60"
+                )}
+              >
+                {t.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ComparePage() {
   const [search, setSearch] = useState("");
@@ -127,35 +215,11 @@ export default function ComparePage() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto] gap-3 items-end">
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 block mb-1.5">Tool A</label>
-              <select
-                value={toolA}
-                onChange={(e) => setToolA(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl bg-background border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-shadow"
-              >
-                <option value="">Select a tool…</option>
-                {allToolNames.filter((t) => t.slug !== toolB).map((t) => (
-                  <option key={t.slug} value={t.slug}>{t.name}</option>
-                ))}
-              </select>
+            <ToolPicker label="Tool A" value={toolA} exclude={toolB} onChange={setToolA} />
+            <div className="flex items-center justify-center pb-1 sm:pb-2.5">
+              <span className="text-base font-black text-muted-foreground/30">vs</span>
             </div>
-            <div className="flex items-center justify-center pb-1">
-              <span className="text-base font-black text-muted-foreground/40">vs</span>
-            </div>
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 block mb-1.5">Tool B</label>
-              <select
-                value={toolB}
-                onChange={(e) => setToolB(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl bg-background border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-shadow"
-              >
-                <option value="">Select a tool…</option>
-                {allToolNames.filter((t) => t.slug !== toolA).map((t) => (
-                  <option key={t.slug} value={t.slug}>{t.name}</option>
-                ))}
-              </select>
-            </div>
+            <ToolPicker label="Tool B" value={toolB} exclude={toolA} onChange={setToolB} />
             <div className="flex gap-2">
               <Link
                 href={customCompareHref ?? "#"}
