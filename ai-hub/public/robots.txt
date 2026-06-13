@@ -4,13 +4,23 @@ Allow: /
 # Block internal/utility paths
 Disallow: /api/
 Disallow: /admin/
-Disallow: /search?*
 Disallow: /_next/
+
+# Block faceted-navigation parameter combinations (crawl budget protection)
+# Sorting and layout params generate no unique content
+Disallow: /*?sort=*
+Disallow: /*?layout=*
+Disallow: /*?view=*
+# Search-result URLs are dynamic and not worth indexing at the /search route
+Disallow: /search?*
 
 # Allow crawlers explicit access to key assets
 Allow: /icon.svg
 Allow: /og-image.png
 Allow: /sitemap.xml
+
+# Comparison hub — let all bots crawl
+Allow: /compare/
 
 User-agent: Googlebot
 Allow: /

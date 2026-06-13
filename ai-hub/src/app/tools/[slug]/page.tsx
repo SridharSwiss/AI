@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import {
-  ExternalLink, CheckCircle, XCircle, ArrowRight,
+  ExternalLink, CheckCircle, XCircle, ArrowRight, GitCompare,
   DollarSign, Users, TrendingUp, Cpu, Globe, Layers,
   Calendar, Zap, Star,
   MessageSquare, Code2, Image, Video, Mic2, SearchCheck,
@@ -421,6 +421,33 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
                       </div>
                     </Link>
                   ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Compare head-to-head links — internal cross-link equity + pSEO entry points */}
+          {alternatives.length > 0 && (
+            <Card>
+              <CardHeader><CardTitle as="h2">Compare {tool.name} Head-to-Head</CardTitle></CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {alternatives.map((alt) => {
+                    const [a, b] = [tool.slug, alt.slug].sort();
+                    return (
+                      <Link
+                        key={alt.slug}
+                        href={`/compare/${a}-vs-${b}`}
+                        className="flex items-center justify-between gap-3 p-3 rounded-xl glass-card hover:border-primary/30 hover:-translate-y-0.5 transition-all group"
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <GitCompare className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="text-sm font-medium truncate">{tool.name} vs {alt.name}</span>
+                        </div>
+                        <ArrowRight className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0 group-hover:text-primary transition-colors" />
+                      </Link>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>

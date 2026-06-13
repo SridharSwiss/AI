@@ -9,7 +9,7 @@ import {
   Library, Newspaper, ChevronDown, ArrowRight,
   Zap, GraduationCap, BookMarked, PlayCircle,
   Scale, FileCheck, Globe, AlertTriangle,
-  TrendingUp, FlaskConical, Layers, Users,
+  TrendingUp, FlaskConical, Layers, Users, GitCompare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,10 +20,11 @@ const megaMenus = {
   explore: {
     label: "Explore",
     items: [
-      { icon: Wrench,    label: "AI Tools",    desc: "82+ tools, compared",        href: "/tools",        color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
-      { icon: Building2, label: "Companies",   desc: "Vendors & AI startups",      href: "/companies",    color: "text-blue-500",   bg: "bg-blue-500/10 dark:bg-blue-500/[0.18]" },
-      { icon: BarChart3, label: "Case Studies",desc: "Real-world outcomes",        href: "/case-studies", color: "text-amber-500",  bg: "bg-amber-500/10 dark:bg-amber-500/[0.18]" },
-      { icon: Newspaper, label: "News",        desc: "Live feed from 20+ sources", href: "/news",         color: "text-sky-500",    bg: "bg-sky-500/10 dark:bg-sky-500/[0.18]" },
+      { icon: Wrench,      label: "AI Tools",    desc: "82+ tools, compared",        href: "/tools",        color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
+      { icon: GitCompare,  label: "Compare",     desc: "Head-to-head tool matchups", href: "/compare",      color: "text-fuchsia-500",bg: "bg-fuchsia-500/10 dark:bg-fuchsia-500/[0.18]" },
+      { icon: Building2,   label: "Companies",   desc: "Vendors & AI startups",      href: "/companies",    color: "text-blue-500",   bg: "bg-blue-500/10 dark:bg-blue-500/[0.18]" },
+      { icon: BarChart3,   label: "Case Studies",desc: "Real-world outcomes",        href: "/case-studies", color: "text-amber-500",  bg: "bg-amber-500/10 dark:bg-amber-500/[0.18]" },
+      { icon: Newspaper,   label: "News",        desc: "Live feed from 20+ sources", href: "/news",         color: "text-sky-500",    bg: "bg-sky-500/10 dark:bg-sky-500/[0.18]" },
     ],
     featured: {
       label: "Just added",

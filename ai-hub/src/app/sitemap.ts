@@ -7,6 +7,20 @@ import { complianceFrameworks } from "@/data/compliance";
 const BASE_URL = "https://sridhar-ai.ch";
 const NOW = new Date().toISOString();
 
+/** Build every canonical comparison pair derived from the alternatives lists */
+function getComparisonSlugs(): string[] {
+  const seen = new Set<string>();
+  for (const tool of tools) {
+    if (!tool.alternatives) continue;
+    for (const altSlug of tool.alternatives) {
+      if (!tools.find((t) => t.slug === altSlug)) continue;
+      const [a, b] = [tool.slug, altSlug].sort();
+      seen.add(`${a}-vs-${b}`);
+    }
+  }
+  return Array.from(seen);
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL,                         lastModified: NOW, priority: 1.0, changeFrequency: "weekly"  },
@@ -14,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/companies`,          lastModified: NOW, priority: 0.9, changeFrequency: "weekly"  },
     { url: `${BASE_URL}/case-studies`,       lastModified: NOW, priority: 0.9, changeFrequency: "weekly"  },
     { url: `${BASE_URL}/compliance`,         lastModified: NOW, priority: 0.9, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/compare`,            lastModified: NOW, priority: 0.9, changeFrequency: "weekly"  },
     { url: `${BASE_URL}/news`,               lastModified: NOW, priority: 0.8, changeFrequency: "daily"   },
     { url: `${BASE_URL}/learn`,              lastModified: NOW, priority: 0.8, changeFrequency: "weekly"  },
     { url: `${BASE_URL}/resource-library`,   lastModified: NOW, priority: 0.7, changeFrequency: "weekly"  },
@@ -52,11 +67,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
+  // Comparison pages — bottom-of-funnel, high purchase-intent traffic (priority 0.8)
+  const compareRoutes: MetadataRoute.Sitemap = getComparisonSlugs().map((slug) => ({
+    url: `${BASE_URL}/compare/${slug}`,
+    lastModified: NOW,
+    priority: 0.8,
+    changeFrequency: "monthly" as const,
+  }));
+
   return [
     ...staticRoutes,
     ...toolRoutes,
     ...companyRoutes,
     ...caseStudyRoutes,
     ...complianceRoutes,
+    ...compareRoutes,
   ];
 }
