@@ -330,31 +330,25 @@ export function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile menu — full-screen solid overlay, outside the constrained nav */}
+      {/* Mobile menu — must be z-[200] to sit above news ticker (z-150) and navbar (z-100) */}
       <div
+        style={{ zIndex: 200 }}
         className={cn(
-          "fixed inset-0 z-[98] lg:hidden",
-          "transition-[opacity,visibility] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          "fixed inset-0 lg:hidden flex flex-col",
+          /* Fully opaque — no alpha, no backdrop-filter, no bleed-through */
+          "bg-white dark:bg-zinc-950",
+          "transition-[opacity,transform,visibility] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          mobileOpen
+            ? "opacity-100 visible translate-y-0 pointer-events-auto"
+            : "opacity-0 invisible -translate-y-2 pointer-events-none"
         )}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
         aria-hidden={!mobileOpen}
       >
-        {/* Solid full-screen panel — no transparency, no blur leakage */}
-        <div
-          className={cn(
-            "absolute inset-0",
-            /* Solid opaque background — same color as the page so it feels native */
-            "bg-white dark:bg-zinc-950",
-            "flex flex-col",
-            "transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-            mobileOpen ? "translate-y-0" : "-translate-y-4"
-          )}
-        >
           {/* Top bar with logo + close */}
-          <div className="flex-shrink-0 flex items-center justify-between px-4 h-16 border-b border-border/40">
+        <div className="flex-shrink-0 flex items-center justify-between px-4 h-16 border-b border-border/40">
             <Link href="/" onClick={closeMobile} className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center">
                 <Brain className="w-3.5 h-3.5 text-white" />
@@ -372,8 +366,8 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Scrollable content */}
-          <div className="flex-1 overflow-y-auto overscroll-contain">
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto overscroll-contain">
             <div className="py-2">
               {(Object.entries(megaMenus) as [MenuKey, (typeof megaMenus)[MenuKey]][]).map(([key, menu], groupIdx) => (
                 <MobileSection
@@ -416,9 +410,8 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Footer actions — always visible at bottom */}
-          {/* Pinned footer */}
-          <div className="flex-shrink-0 p-3 border-t border-border/40 space-y-2">
+        {/* Pinned footer */}
+        <div className="flex-shrink-0 p-3 border-t border-border/40 space-y-2">
             <Link
               href="/search"
               onClick={closeMobile}
@@ -437,7 +430,8 @@ export function Navbar() {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 }
+
+
