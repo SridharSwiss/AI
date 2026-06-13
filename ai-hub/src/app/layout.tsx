@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     default: "AIHub — AI Tools, Companies & Compliance in One Place",
   },
   description:
-    "AIHub is the world's most complete AI knowledge platform: compare 82+ AI tools, explore 33 companies, navigate EU AI Act compliance, and access structured learning paths — all in one place.",
+    "AIHub is the world's most complete AI knowledge platform: compare 107+ AI tools, explore 39 companies, navigate EU AI Act compliance, and access structured learning paths — all in one place.",
   keywords: [
     "AI tools comparison", "artificial intelligence platform", "EU AI Act compliance",
     "AI companies database", "machine learning resources", "AI governance",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     siteName: "AIHub",
     title: "AIHub — AI Tools, Companies & Compliance in One Place",
     description:
-      "Compare 82+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all curated in one platform.",
+      "Compare 107+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all curated in one platform.",
     url: BASE_URL,
     locale: "en_US",
     images: [
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
       default: "AIHub — AI Tools, Companies & Compliance in One Place",
     },
     description:
-      "Compare 82+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all in one platform.",
+      "Compare 107+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all in one platform.",
     images: [`${BASE_URL}/og-image.png`],
     creator: "@AIHubSite",
     site: "@AIHubSite",
@@ -112,7 +112,7 @@ const orgJsonLd = {
     height: 32,
   },
   description:
-    "AIHub is the world's most complete AI knowledge platform: 82+ tools, 33 companies, EU AI Act compliance guides, structured learning paths, and consulting playbooks.",
+    "AIHub is the world's most complete AI knowledge platform: 82+ tools, 39 companies, EU AI Act compliance guides, structured learning paths, and consulting playbooks.",
   foundingDate: "2024",
   sameAs: [
     "https://www.linkedin.com/company/aihub",

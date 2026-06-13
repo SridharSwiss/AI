@@ -49,7 +49,7 @@ export function Footer() {
               <span className="font-bold text-lg tracking-tight">AIHub</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-xs">
-              82 AI tools, 33 vendors, 31 case studies, and 16 compliance frameworks - hand-verified and updated weekly.
+              107 AI tools, 39 vendors, 31 case studies, and 16 compliance frameworks - hand-verified and updated weekly.
             </p>
             <div className="flex items-center gap-2">
               {socialLinks.map(({ href, label, icon: Icon }) => (

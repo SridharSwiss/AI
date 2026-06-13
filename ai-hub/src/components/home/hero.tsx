@@ -86,7 +86,7 @@ export function Hero() {
 
         {/* Subline */}
         <p className="animate-fade-up delay-200 text-sm font-medium uppercase tracking-widest text-muted-foreground max-w-2xl mx-auto mb-12">
-          82 tools · 33 companies · 31 case studies · 16 compliance frameworks
+          107 tools · 39 companies · 31 case studies · 16 compliance frameworks
         </p>
 
         {/* CTAs */}
@@ -116,8 +116,8 @@ export function Hero() {
         {/* Stats grid — glass cards */}
         <div className="animate-fade-up delay-500 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
           {[
-            { target: 82, label: "AI Tools",      href: "/tools" },
-            { target: 33, label: "Companies",      href: "/companies" },
+            { target: 107, label: "AI Tools",      href: "/tools" },
+            { target: 39, label: "Companies",      href: "/companies" },
             { target: 31, label: "Case Studies",   href: "/case-studies" },
             { target: 16, label: "Frameworks",     href: "/compliance" },
           ].map(({ target, label, href }) => (

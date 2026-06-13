@@ -35,15 +35,15 @@ const sectionNav = [
     icon: Wrench,    label: "AI Tools",          href: "/tools",
     iconCls: "bg-violet-500/10 dark:bg-violet-500/[0.18] text-violet-500",
     desc: "Every major AI tool, side by side.",
-    body: "Filter by category, pricing model, and use case. Freemium to enterprise — 82 tools across 15 categories with verified specs.",
-    stat: "82 tools · 15 categories",
+    body: "Filter by category, pricing model, and use case. Freemium to enterprise — 107 tools across 15 categories with verified specs.",
+    stat: "107 tools · 15 categories",
   },
   {
     icon: Building2, label: "Companies",          href: "/companies",
     iconCls: "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-500",
-    desc: "33 vendors profiled.",
+    desc: "39 vendors profiled.",
     body: "From OpenAI and Anthropic to niche specialists — funding stage, focus area, and key products in one view.",
-    stat: "33 companies",
+    stat: "39 companies",
   },
   {
     icon: BarChart3, label: "Case Studies",       href: "/case-studies",
@@ -76,7 +76,7 @@ const sectionNav = [
 ];
 
 const personas = [
-  { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 82 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
+  { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 107 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
   { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 31 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
   { role: "Compliance Officer", icon: Shield, desc: "16 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
   { role: "Learner", icon: GraduationCap, desc: "72 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
@@ -157,7 +157,7 @@ export function FeaturedSection() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <SectionHeading eyebrow="Featured Tools" eyebrowIcon={Sparkles} title="Popular AI tools right now" viewAllHref="/tools" viewAllLabel="View all 82+ tools" />
+        <SectionHeading eyebrow="Featured Tools" eyebrowIcon={Sparkles} title="Popular AI tools right now" viewAllHref="/tools" viewAllLabel="View all 107+ tools" />
         <ScrollReveal stagger>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {featuredTools.map((tool) => (
