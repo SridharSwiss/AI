@@ -132,28 +132,28 @@ export function SearchClient() {
   return (
     <div className="max-w-3xl mx-auto">
       {/* Search input */}
-      <div className="relative mb-6">
+      <div className="relative mb-6 animate-fade-up">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={`Search ${totalCount} tools, companies, resources...`}
-          className="w-full pl-12 pr-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors text-base"
+          className="w-full pl-12 pr-4 py-3 rounded-2xl glass-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors text-base"
           autoFocus
         />
       </div>
 
       {/* Type filters */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6 animate-fade-up delay-75">
         {typeFilters.map((type) => (
           <button
             key={type}
             onClick={() => setActiveType(type)}
             className={`px-3 py-1 rounded-full border text-sm font-medium transition-colors capitalize ${
               activeType === type
-                ? "bg-primary text-primary-foreground border-transparent"
-                : "border-border text-muted-foreground hover:text-foreground hover:bg-accent"
+                ? "bg-primary text-primary-foreground border-transparent glow-primary-sm"
+                : "bg-white/[0.04] border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
             }`}
           >
             {type === "All" ? "All" : typeLabels[type]}
@@ -177,7 +177,7 @@ export function SearchClient() {
 
               return (
                 <Link key={`${item.type}-${item.slug}`} {...linkProps}>
-                  <Card className="group hover:shadow-md hover:border-primary/20 transition-all duration-200 cursor-pointer">
+                  <Card className="glass-card rounded-2xl group transition-all duration-200 cursor-pointer hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)]">
                     <CardContent className="p-4 flex items-start gap-4">
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Icon className="w-4 h-4 text-primary" />
@@ -192,7 +192,7 @@ export function SearchClient() {
                         {item.tags.length > 0 && (
                           <div className="flex flex-wrap gap-1 mt-2">
                             {item.tags.slice(0, 4).map((tag) => (
-                              <span key={tag} className="text-xs px-1.5 py-0.5 rounded bg-muted text-muted-foreground">{tag}</span>
+                              <span key={tag} className="text-xs px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/10 text-muted-foreground">{tag}</span>
                             ))}
                           </div>
                         )}
@@ -215,12 +215,12 @@ export function SearchClient() {
         <div className="text-center py-12">
           <p className="text-muted-foreground">Start typing to search across {totalCount} items</p>
           <div className="flex flex-wrap justify-center gap-2 text-sm text-muted-foreground mt-4">
-            <span className="px-3 py-1 rounded-full bg-muted">Tools</span>
-            <span className="px-3 py-1 rounded-full bg-muted">Companies</span>
-            <span className="px-3 py-1 rounded-full bg-muted">Case Studies</span>
-            <span className="px-3 py-1 rounded-full bg-muted">Learning</span>
-            <span className="px-3 py-1 rounded-full bg-muted">Compliance</span>
-            <span className="px-3 py-1 rounded-full bg-muted">Documents</span>
+            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10">Tools</span>
+            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10">Companies</span>
+            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10">Case Studies</span>
+            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10">Learning</span>
+            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10">Compliance</span>
+            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10">Documents</span>
           </div>
         </div>
       )}

@@ -34,7 +34,7 @@ export function ResourcesList() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {filtered.map((r) => (
-          <Card key={r.slug} className="group hover:shadow-md transition-all duration-200">
+          <Card key={r.slug} className="group hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)] transition-all duration-200">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between gap-2 mb-2">
                 <Badge variant={categoryColor[r.category] ?? "blue"}>{r.category}</Badge>

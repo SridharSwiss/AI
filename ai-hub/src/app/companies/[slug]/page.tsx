@@ -52,7 +52,7 @@ const modelTypeBadge: Record<string, string> = {
 
 function ModelCard({ model }: { model: CompanyModel }) {
   return (
-    <div className="p-4 rounded-xl border border-border bg-card space-y-3">
+    <div className="p-4 rounded-2xl glass-card space-y-3">
       <div className="flex items-start justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-semibold text-sm">{model.name}</span>
@@ -92,7 +92,7 @@ function ModelCard({ model }: { model: CompanyModel }) {
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Benchmarks</p>
           <div className="grid grid-cols-2 gap-1.5">
             {model.benchmarks.map((b) => (
-              <div key={b.name} className="flex items-center justify-between bg-muted rounded-lg px-2.5 py-1.5">
+              <div key={b.name} className="flex items-center justify-between glass-card rounded-2xl px-2.5 py-1.5">
                 <span className="text-xs text-muted-foreground">{b.name}</span>
                 <span className="text-xs font-bold text-foreground">{b.score}</span>
               </div>
@@ -149,13 +149,13 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
       />
 
       {/* Header */}
-      <div className="flex items-start gap-6 mb-10">
+      <div className="flex items-start gap-6 mb-10 animate-fade-up">
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/10 to-blue-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
           <Building2 className="w-8 h-8 text-violet-600" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap mb-2">
-            <h1 className="text-3xl font-bold">{company.name}</h1>
+            <h1 className="text-3xl font-bold gradient-text-vivid">{company.name}</h1>
             <Badge variant={stageColor[company.stage] ?? "blue"}>{company.stage}</Badge>
             {company.featured && <Badge variant="purple">Featured</Badge>}
             {fin?.stockSymbol && (
@@ -188,43 +188,43 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
       {fin && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {fin.latestValuation && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Valuation</p>
-              <p className="text-sm font-bold text-violet-600">{fin.latestValuation}</p>
+              <p className="text-sm font-bold gradient-text-vivid">{fin.latestValuation}</p>
             </div>
           )}
           {fin.marketCap && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Market Cap</p>
               <p className="text-sm font-bold text-green-600">{fin.marketCap}</p>
             </div>
           )}
           {(fin.totalFunding || company.funding) && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Total Funding</p>
               <p className="text-sm font-bold text-blue-600">{fin.totalFunding ?? company.funding}</p>
             </div>
           )}
           {fin.revenue && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Revenue</p>
               <p className="text-sm font-bold text-emerald-600">{fin.revenue}</p>
             </div>
           )}
           {fin.profitStatus && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Profit Status</p>
               <p className="text-xs font-semibold">{fin.profitStatus}</p>
             </div>
           )}
           {fin.annualRevenueGrowth && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Revenue Growth</p>
               <p className="text-sm font-bold text-orange-600">{fin.annualRevenueGrowth}</p>
             </div>
           )}
           {fin.employees && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Employees</p>
               <p className="text-sm font-bold">{fin.employees}</p>
             </div>
@@ -236,7 +236,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
         {/* Main */}
         <div className="lg:col-span-2 space-y-6">
           {/* About */}
-          <Card>
+          <Card className="animate-fade-up delay-150">
             <CardHeader>
               <CardTitle>About {company.name}</CardTitle>
             </CardHeader>
@@ -287,7 +287,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
               </CardHeader>
               <CardContent>
                 <div className="relative">
-                  <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" />
+                  <div className="absolute left-[7px] top-2 bottom-2 w-px bg-white/[0.06]" />
                   <ul className="space-y-4 pl-6">
                     {company.milestones.map((m, i) => (
                       <li key={i} className="relative">
@@ -312,7 +312,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
                 {company.products.map((product) => (
                   <span
                     key={product}
-                    className="px-3 py-1.5 rounded-lg bg-muted text-sm text-muted-foreground border border-border"
+                    className="px-3 py-1.5 rounded-lg glass-card text-sm text-muted-foreground"
                   >
                     {product}
                   </span>
@@ -427,7 +427,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
               <CardContent>
                 <ul className="space-y-3">
                   {fin.fundingRounds.map((r, i) => (
-                    <li key={i} className="text-sm border-b border-border pb-3 last:border-0 last:pb-0">
+                    <li key={i} className="text-sm border-b border-white/[0.06] pb-3 last:border-0 last:pb-0">
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-semibold text-foreground">{r.round}</span>
                         <span className="font-bold text-green-600">{r.amount}</span>
@@ -452,7 +452,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
               <CardContent>
                 <div className="flex flex-wrap gap-1.5">
                   {fin.keyInvestors.map((inv) => (
-                    <span key={inv} className="text-xs px-2 py-1 rounded-lg bg-muted border border-border text-muted-foreground">
+                    <span key={inv} className="text-xs px-2 py-1 rounded-lg glass-card text-muted-foreground">
                       {inv}
                     </span>
                   ))}

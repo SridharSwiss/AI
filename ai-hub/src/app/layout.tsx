@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/layout/providers";
 import { NewsTicker } from "@/components/shared/news-ticker";
 import { ClientOverlays } from "@/components/layout/client-overlays";
+import { PageTransition } from "@/components/shared/page-transition";
 
 const BASE_URL = "https://sridhar-ai.ch";
 
@@ -177,7 +178,9 @@ export default function RootLayout({
           <ClientOverlays />
           <NewsTicker />
           <Navbar />
-          <main className="flex-1 pt-24">{children}</main>
+          <main className="flex-1 pt-24">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </Providers>
       </body>

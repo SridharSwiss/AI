@@ -31,25 +31,32 @@ export function PageHeader({
   const cfg = accentConfig[accent];
 
   return (
-    <div className={cn("relative overflow-hidden border-b border-border/40", className)}>
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-muted/20 to-background pointer-events-none" />
+    <div className={cn("relative overflow-hidden border-b border-white/[0.06]", className)}>
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-muted/10 to-background pointer-events-none" />
       {/* Accent color wash - very subtle */}
       <div className={cn("absolute inset-0 pointer-events-none", cfg.glow, "opacity-60")} />
+      {/* Dot grid texture */}
+      <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
+      {/* Animated accent orb — top-right glow */}
+      <div className={cn("absolute -top-24 -right-16 w-[420px] h-[420px] rounded-full blur-[90px] opacity-50 pointer-events-none animate-float bg-gradient-to-br", cfg.bar)} />
       {/* Gradient top line (accent color) */}
-      <div className={cn("absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r", cfg.bar, "to-transparent opacity-70")} />
+      <div className={cn("absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r", cfg.bar, "to-transparent opacity-80")} />
 
-      <div className="container-site relative py-10 sm:py-12">
+      <div className="container-site relative py-12 sm:py-16">
         {eyebrow && (
-          <div className={cn("flex items-center gap-2 mb-3 text-eyebrow", cfg.eyebrow)}>
-            <span className={cn("w-1.5 h-1.5 rounded-full", cfg.dot)} />
+          <div className={cn("flex items-center gap-2 mb-3 text-eyebrow animate-fade-up", cfg.eyebrow)}>
+            <span className="relative flex h-1.5 w-1.5">
+              <span className={cn("animate-ping absolute inline-flex h-full w-full rounded-full opacity-70", cfg.dot)} />
+              <span className={cn("relative inline-flex rounded-full h-1.5 w-1.5", cfg.dot)} />
+            </span>
             {eyebrow}
           </div>
         )}
-        <h1 className="text-headline mb-3 max-w-3xl">{title}</h1>
+        <h1 className="text-headline mb-3 max-w-3xl animate-fade-up delay-75">{title}</h1>
         {description && (
-          <p className="text-body text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
+          <p className="text-body text-muted-foreground max-w-2xl leading-relaxed animate-fade-up delay-150">{description}</p>
         )}
-        {children && <div className="mt-5">{children}</div>}
+        {children && <div className="mt-5 animate-fade-up delay-200">{children}</div>}
       </div>
     </div>
   );

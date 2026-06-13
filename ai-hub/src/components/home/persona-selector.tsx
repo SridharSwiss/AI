@@ -100,8 +100,8 @@ export function PersonaSelector() {
                 "focus-visible:ring-2 focus-visible:ring-offset-2",
                 persona.ring,
                 isSelected
-                  ? cn(persona.activeBg, persona.activeBorder, "shadow-md")
-                  : "border-border/60 bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]",
+                  ? cn(persona.activeBorder, "glass-card shadow-[0_16px_48px_rgba(0,0,0,0.32)]")
+                  : "glass-card border-white/10 hover:border-white/25 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)]",
                 "active:scale-[0.98]"
               )}
             >

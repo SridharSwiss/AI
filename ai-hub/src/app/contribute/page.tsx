@@ -65,7 +65,7 @@ export default function ContributePage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
 
         {/* How it works */}
-        <section>
+        <section className="animate-fade-up">
           <h2 className="text-2xl font-bold mb-6">How to Contribute</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
@@ -73,8 +73,8 @@ export default function ContributePage() {
               { step: "2", title: "Gather Details", desc: "Collect the key facts using the field guides below. Public sources only - no proprietary info." },
               { step: "3", title: "Submit via GitHub", desc: "Open an issue or pull request on our GitHub repository with your proposed addition." },
             ].map((s) => (
-              <div key={s.step} className="flex gap-4 p-5 rounded-xl border border-border bg-card">
-                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">
+              <div key={s.step} className="flex gap-4 p-5 rounded-2xl glass-card hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)] transition-all duration-200">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground glow-primary-sm flex items-center justify-center font-bold text-sm flex-shrink-0">
                   {s.step}
                 </div>
                 <div>
@@ -91,7 +91,7 @@ export default function ContributePage() {
           <h2 className="text-2xl font-bold mb-6">What You Can Submit</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {contributionTypes.map((ct) => (
-              <Card key={ct.title} className="h-full">
+              <Card key={ct.title} className="glass-card rounded-2xl h-full hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)] transition-all duration-200">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-3 mb-2">
                     <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${ct.color} flex items-center justify-center`}>
@@ -129,7 +129,7 @@ export default function ContributePage() {
               "Compliance entries must reference official government or standards body sources.",
               "We reserve the right to edit submissions for clarity, tone, and accuracy before publishing.",
             ].map((g, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 rounded-lg bg-muted/50 border border-border">
+              <div key={i} className="flex items-start gap-3 p-4 rounded-2xl glass-card">
                 <FileText className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">{g}</p>
               </div>
@@ -138,7 +138,7 @@ export default function ContributePage() {
         </section>
 
         {/* Notice */}
-        <section className="flex items-start gap-4 p-5 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50">
+        <section className="flex items-start gap-4 p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50">
           <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-amber-800 dark:text-amber-300 mb-1">Submission Process Coming Soon</p>

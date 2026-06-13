@@ -57,7 +57,7 @@ function getCategoryVariant(
 
 function ArticleSkeleton() {
   return (
-    <div className="rounded-xl border border-border/60 bg-card p-5 space-y-3 animate-pulse shadow-[var(--shadow-sm)]">
+    <div className="glass-card rounded-2xl p-5 space-y-3 animate-pulse">
       <div className="flex items-center gap-2">
         <div className="h-3 w-24 bg-muted rounded-full" />
         <div className="h-5 w-16 bg-muted rounded-full" />
@@ -66,7 +66,7 @@ function ArticleSkeleton() {
       <div className="h-4 w-4/5 bg-muted rounded" />
       <div className="h-3 w-full bg-muted rounded" />
       <div className="h-3 w-2/3 bg-muted rounded" />
-      <div className="pt-2 border-t border-border/40">
+      <div className="pt-2 border-t border-white/[0.06]">
         <div className="h-3 w-20 bg-muted rounded" />
       </div>
     </div>
@@ -76,7 +76,7 @@ function ArticleSkeleton() {
 function EmptyState({ category }: { category: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-24 text-center gap-4">
-      <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center">
+      <div className="w-16 h-16 rounded-2xl glass-card flex items-center justify-center">
         <Newspaper className="w-7 h-7 text-muted-foreground/50" />
       </div>
       <div>
@@ -165,11 +165,11 @@ export function NewsClient() {
 
       {/* Section divider */}
       <div className="flex items-center gap-4">
-        <div className="flex-1 h-px bg-border/60" />
+        <div className="flex-1 h-px bg-white/[0.06]" />
         <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 px-2">
           Live Feed
         </span>
-        <div className="flex-1 h-px bg-border/60" />
+        <div className="flex-1 h-px bg-white/[0.06]" />
       </div>
 
       {/* Feed header */}
@@ -198,8 +198,8 @@ export function NewsClient() {
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             "active:scale-[0.97]",
             loading || refreshing
-              ? "opacity-50 cursor-not-allowed border-border/40 text-muted-foreground"
-              : "border-border/60 text-muted-foreground hover:text-foreground hover:bg-accent hover:border-border"
+              ? "opacity-50 cursor-not-allowed border-white/10 text-muted-foreground"
+              : "bg-white/[0.04] border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/[0.08]"
           )}
         >
           <RefreshCw className={cn("w-3.5 h-3.5", (loading || refreshing) && "animate-spin")} />
@@ -247,11 +247,9 @@ export function NewsClient() {
             <article
               key={`${article.link}-${idx}`}
               className={cn(
-                "group flex flex-col gap-3 p-5 rounded-xl",
-                "border border-border/60 bg-card",
-                "shadow-[var(--shadow-sm)]",
+                "group flex flex-col gap-3 p-5 rounded-2xl glass-card",
                 "transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-                "hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] hover:border-border/80"
+                "hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)]"
               )}
             >
               {/* Source + category */}
@@ -286,7 +284,7 @@ export function NewsClient() {
 
               {/* Timestamp */}
               {article.pubDate && (
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-auto pt-2.5 border-t border-border/40">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-auto pt-2.5 border-t border-white/[0.06]">
                   <Clock className="w-3 h-3" />
                   <time>{getRelativeTime(article.pubDate)}</time>
                 </div>

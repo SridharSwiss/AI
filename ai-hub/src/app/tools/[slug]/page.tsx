@@ -56,7 +56,7 @@ const pricingBadge: Record<string, "green" | "blue" | "amber" | "purple"> = {
 
 function PricingCard({ tier }: { tier: PricingTier }) {
   return (
-    <div className="p-4 rounded-xl border border-border bg-card flex flex-col gap-3">
+    <div className="p-4 rounded-2xl glass-card flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <p className="font-bold text-sm">{tier.name}</p>
         <p className="text-sm font-semibold text-primary">{tier.price}</p>
@@ -214,13 +214,13 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
       />
 
       {/* Header */}
-      <div className="flex items-start gap-6 mb-8">
+      <div className="flex items-start gap-6 mb-8 animate-fade-up">
         <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${CATEGORY_COLORS[tool.category] ?? "bg-muted text-muted-foreground"}`}>
           {(() => { const Icon = CATEGORY_ICONS[tool.category] ?? Bot; return <Icon className="w-8 h-8" />; })()}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap mb-2">
-            <h1 className="text-3xl font-bold">{tool.name}</h1>
+            <h1 className="text-3xl font-bold gradient-text-vivid">{tool.name}</h1>
             <Badge variant={pricingBadge[tool.pricing] ?? "blue"}>{tool.pricing}</Badge>
             {tool.featured && <Badge variant="purple">Featured</Badge>}
             {tool.apiAvailable && (
@@ -247,7 +247,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
       </div>
 
       {/* GEO: Answer block — front-loaded direct answer for AI Overview extraction */}
-      <div data-speakable className="mb-6 p-4 rounded-xl border border-border bg-muted/40">
+      <div data-speakable className="mb-6 p-4 rounded-2xl glass-card animate-fade-up delay-100">
         <p className="text-sm font-semibold text-foreground mb-1">Quick Answer</p>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <strong>{tool.name}</strong> is {tool.tagline.toLowerCase()}, made by <strong>{tool.vendor}</strong>.{" "}
@@ -264,37 +264,37 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
       {m && (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
           {m.users && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><Users className="w-3 h-3" />Users</p>
-              <p className="text-xs font-bold">{m.users}</p>
+              <p className="text-xs font-bold gradient-text-vivid">{m.users}</p>
             </div>
           )}
           {m.dau && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">DAU</p>
-              <p className="text-sm font-bold text-violet-600">{m.dau}</p>
+              <p className="text-sm font-bold gradient-text-vivid">{m.dau}</p>
             </div>
           )}
           {m.arr && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><DollarSign className="w-3 h-3" />Revenue</p>
               <p className="text-xs font-bold text-emerald-600">{m.arr}</p>
             </div>
           )}
           {m.valuation && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Valuation</p>
               <p className="text-xs font-bold text-blue-600">{m.valuation}</p>
             </div>
           )}
           {m.growth && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1 flex items-center justify-center gap-1"><TrendingUp className="w-3 h-3" />Growth</p>
               <p className="text-xs font-bold text-orange-600">{m.growth}</p>
             </div>
           )}
           {m.employees && (
-            <div className="p-3 rounded-xl border border-border bg-card text-center">
+            <div className="p-3 rounded-2xl glass-card text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Employees</p>
               <p className="text-sm font-bold">{m.employees}</p>
             </div>
@@ -306,7 +306,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
         {/* Main */}
         <div className="lg:col-span-2 space-y-6">
           {/* About */}
-          <Card>
+          <Card className="animate-fade-up delay-150">
             <CardHeader><CardTitle as="h2">What is {tool.name}?</CardTitle></CardHeader>
             <CardContent>
               <p data-speakable className="text-muted-foreground leading-relaxed">{tool.description}</p>
@@ -410,7 +410,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
                     <Link
                       key={alt.slug}
                       href={`/tools/${alt.slug}`}
-                      className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-accent transition-colors group"
+                      className="flex items-center gap-3 p-3 rounded-2xl glass-card transition-all group hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)]"
                     >
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${CATEGORY_COLORS[alt.category] ?? "bg-muted text-muted-foreground"}`}>
                         {(() => { const Icon = CATEGORY_ICONS[alt.category] ?? Bot; return <Icon className="w-4 h-4" />; })()}
@@ -498,7 +498,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
               <CardContent>
                 <div className="flex flex-wrap gap-1.5">
                   {tool.platforms.map((p) => (
-                    <span key={p} className="text-xs px-2 py-1 rounded-lg bg-muted border border-border text-muted-foreground">{p}</span>
+                    <span key={p} className="text-xs px-2 py-1 rounded-lg glass-card text-muted-foreground">{p}</span>
                   ))}
                 </div>
               </CardContent>
@@ -544,7 +544,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
             <CardContent>
               <div className="flex flex-wrap gap-1.5">
                 {tool.tags.map((tag) => (
-                  <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground">{tag}</span>
+                  <span key={tag} className="text-xs px-2.5 py-1 rounded-full glass-card text-muted-foreground">{tag}</span>
                 ))}
               </div>
             </CardContent>

@@ -37,8 +37,8 @@ export function FilterBar({
               "active:scale-[0.97]",
               size === "sm" ? "px-3 py-1 text-xs" : "px-4 py-1.5 text-sm",
               isActive
-                ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                : "border-border/60 bg-transparent text-muted-foreground hover:text-foreground hover:border-border hover:bg-accent/50"
+                ? "bg-primary text-primary-foreground border-primary glow-primary-sm"
+                : "border-white/10 bg-white/[0.04] backdrop-blur-sm text-muted-foreground hover:text-foreground hover:border-white/25 hover:bg-white/[0.08]"
             )}
           >
             {option}

@@ -25,7 +25,7 @@ export default function ConsultingToolkitPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PageHeader accent="pink" eyebrow="Consulting Toolkit" title="AI Implementation Playbooks" description="Practical frameworks, checklists, and templates for every stage of the AI project lifecycle. Click any playbook to see the full checklist." />
+      <PageHeader accent="pink" eyebrow="Consulting Toolkit" title="AI Implementation Playbooks" className="animate-fade-up" description="Practical frameworks, checklists, and templates for every stage of the AI project lifecycle. Click any playbook to see the full checklist." />
       <div className="container-site py-10"><ConsultingToolkitClient /></div>
     </>
   );

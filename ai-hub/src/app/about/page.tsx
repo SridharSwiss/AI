@@ -32,7 +32,7 @@ export default function AboutPage() {
     <>
       <PageHeader accent="violet" eyebrow="About" title="The All-in-One AI Knowledge Platform" description="AIHub brings together everything you need to understand, evaluate, and navigate the AI landscape - from tools and companies to compliance, learning, and real-world case studies." />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-        <section>
+        <section className="animate-fade-up">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center">
               <Brain className="w-5 h-5 text-white" />
@@ -45,12 +45,12 @@ export default function AboutPage() {
             <p className="text-muted-foreground leading-relaxed mt-4">Our content is designed for four audiences: beginners who want to understand AI without a computer science degree, practitioners who are building AI-powered products, managers who need to evaluate AI investments, and executives who are setting AI strategy for their organizations.</p>
           </div>
         </section>
-        <section>
+        <section className="animate-fade-up delay-100">
           <h2 className="text-2xl font-bold mb-6">What’s Inside</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {sections.map((s) => (
               <Link key={s.href} href={s.href}>
-                <Card className="group hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer h-full">
+                <Card className="glass-card rounded-2xl group hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)] transition-all duration-200 cursor-pointer h-full">
                   <CardHeader className="pb-2">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -65,7 +65,7 @@ export default function AboutPage() {
             ))}
           </div>
         </section>
-        <section>
+        <section className="animate-fade-up delay-150">
           <h2 className="text-2xl font-bold mb-6">Our Principles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {values.map((v) => (
@@ -81,14 +81,14 @@ export default function AboutPage() {
             ))}
           </div>
         </section>
-        <section className="p-6 rounded-2xl bg-muted/50 border border-border">
+        <section className="glass-card p-6 rounded-2xl">
           <h2 className="font-semibold mb-3">Content Disclaimer</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">AIHub content is curated for educational and informational purposes. Tool descriptions, company profiles, and compliance summaries are based on publicly available information and may not reflect the most recent changes. Always verify information with official sources before making business, legal, or compliance decisions. We are not affiliated with any of the companies or products listed.</p>
         </section>
         <section className="text-center">
-          <h2 className="text-2xl font-bold mb-3">Help Us Improve</h2>
+          <h2 className="text-2xl font-bold mb-3">Help Us <span className="gradient-text-vivid">Improve</span></h2>
           <p className="text-muted-foreground mb-6">Found an error? Know a tool we’re missing? Want to contribute a case study?</p>
-          <Link href="/contribute" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">Contribute to AIHub</Link>
+          <Link href="/contribute" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium glow-primary-sm hover:bg-primary/90 transition-colors">Contribute to AIHub</Link>
         </section>
       </div>
     </>

@@ -65,10 +65,7 @@ const CATEGORY_VARIANTS: Record<string, "blue" | "purple" | "amber" | "green" | 
 function SummarySkeleton() {
   return (
     <div className={cn(
-      "rounded-2xl border border-violet-200/60 dark:border-violet-800/40 overflow-hidden",
-      "bg-gradient-to-br from-violet-50/60 via-background to-pink-50/40",
-      "dark:from-violet-950/20 dark:via-background dark:to-pink-950/10",
-      "shadow-[var(--shadow-md)] animate-pulse"
+      "rounded-2xl glass-card overflow-hidden animate-pulse"
     )}>
       <div className="px-6 pt-5 pb-4 border-b border-border/50 space-y-3">
         <div className="h-3 w-32 bg-muted rounded-full" />
@@ -163,14 +160,13 @@ export function DailySummary({ articles, loading }: Props) {
 
   return (
     <div className={cn(
-      "rounded-2xl border border-violet-200/60 dark:border-violet-800/40 overflow-hidden",
-      "bg-gradient-to-br from-violet-50/60 via-background to-pink-50/40",
-      "dark:from-violet-950/20 dark:via-background dark:to-pink-950/10",
-      "shadow-[var(--shadow-md)]"
+      "relative rounded-2xl glass-card overflow-hidden animate-fade-up"
     )}>
+      {/* Vivid mesh wash */}
+      <div className="absolute inset-0 mesh-gradient opacity-40 pointer-events-none" />
 
       {/* Header */}
-      <div className="px-6 pt-5 pb-4 border-b border-border/50">
+      <div className="relative px-6 pt-5 pb-4 border-b border-white/[0.08]">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-2">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
@@ -198,7 +194,7 @@ export function DailySummary({ articles, loading }: Props) {
       </div>
 
       {/* Body */}
-      <div className="p-6">
+      <div className="relative p-6">
         {articleCount === 0 ? (
           <div className="flex flex-col items-center py-10 gap-3 text-center">
             <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center">
@@ -296,9 +292,9 @@ export function DailySummary({ articles, loading }: Props) {
                           <Badge variant={CATEGORY_VARIANTS[cat] ?? "outline"}>{cat}</Badge>
                           <span className="text-xs text-muted-foreground font-medium tabular-nums">{count}</span>
                         </div>
-                        <div className="w-full h-1.5 bg-muted/60 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-primary/40 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                            className="h-full rounded-full bg-gradient-to-r from-violet-500 to-pink-500 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
                             style={{ width: `${pct}%` }}
                           />
                         </div>

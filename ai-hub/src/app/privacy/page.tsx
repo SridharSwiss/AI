@@ -61,9 +61,9 @@ export default function PrivacyPage() {
       />
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="space-y-10">
+        <div className="space-y-6 animate-fade-up">
           {sections.map((section) => (
-            <section key={section.title}>
+            <section key={section.title} className="glass-card rounded-2xl p-6">
               <h2 className="text-xl font-bold mb-3">{section.title}</h2>
               <div className="text-muted-foreground leading-relaxed text-sm space-y-2">
                 {section.content.split("\n\n").map((para, i) => (
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-xs text-muted-foreground">
+        <div className="mt-12 pt-8 border-t border-white/[0.06] text-xs text-muted-foreground">
           <p>Last updated: June 2026</p>
           <p className="mt-1">AIHub - Educational AI knowledge platform. Content provided for informational purposes only.</p>
         </div>

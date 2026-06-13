@@ -73,17 +73,17 @@ export function CaseStudiesList() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-4">
+        <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-up">
+          <div className="glass-card w-14 h-14 rounded-2xl flex items-center justify-center mb-4">
             <BarChart3 className="w-6 h-6 text-muted-foreground" />
           </div>
           <p className="text-base font-semibold mb-1">No case studies found</p>
           <p className="text-sm text-muted-foreground">Try adjusting your filters.</p>
         </div>
       ) : (
-        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+        <div className="glass-card rounded-2xl overflow-hidden divide-y divide-white/[0.06]">
           {/* Header */}
-          <div className="hidden md:grid grid-cols-[40px_180px_1fr_200px_160px_120px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          <div className="hidden md:grid grid-cols-[40px_180px_1fr_200px_160px_120px] gap-4 items-center px-5 py-2 bg-white/[0.03] text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
             <div />
             <div>Company</div>
             <div>Case Study</div>
@@ -95,7 +95,7 @@ export function CaseStudiesList() {
             <Link
               key={cs.slug}
               href={`/case-studies/${cs.slug}`}
-              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_180px_1fr_200px_160px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150 border-l-[3px] border-l-emerald-500/30 hover:border-l-emerald-500"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_180px_1fr_200px_160px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 hover:bg-white/[0.04] transition-colors duration-150 border-l-[3px] border-l-emerald-500/30 hover:border-l-emerald-500"
             >
               <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />

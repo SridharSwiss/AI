@@ -92,7 +92,7 @@ function RiskTierCard({ tier }: { tier: RiskTier }) {
 
 function IndustryImpactRow({ item }: { item: IndustryImpact }) {
   return (
-    <div className="flex items-start gap-3 py-3 border-b last:border-0 border-border">
+    <div className="flex items-start gap-3 py-3 border-b last:border-0 border-white/[0.06]">
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium">{item.sector}</p>
         <p className="text-xs text-muted-foreground mt-0.5">{item.notes}</p>
@@ -184,12 +184,12 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
       />
 
       {/* Header */}
-      <div className="flex items-start gap-6 mb-8">
+      <div className="flex items-start gap-6 mb-8 animate-fade-up">
         <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
           <Shield className="w-7 h-7 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <h1 className="text-3xl font-bold mb-2">{framework.name}</h1>
+          <h1 className="text-3xl font-bold mb-2 gradient-text-vivid">{framework.name}</h1>
           <div className="flex items-center gap-2 flex-wrap mb-2">
             <Badge variant={statusColor[framework.status] ?? "blue"}>{framework.status}</Badge>
             <Badge variant={riskColor[framework.riskLevel] ?? "blue"} className="capitalize">{framework.riskLevel} risk</Badge>
@@ -225,7 +225,7 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
           { icon: <MapPin className="w-4 h-4" />, label: "Jurisdiction", value: framework.jurisdiction },
           { icon: <Clock className="w-4 h-4" />, label: "Enforcement", value: framework.enforcementDate },
         ].map((s) => (
-          <div key={s.label} className="bg-card border border-border rounded-xl p-3 text-center">
+          <div key={s.label} className="glass-card rounded-2xl p-3 text-center">
             <div className="flex justify-center text-muted-foreground mb-1">{s.icon}</div>
             <p className="text-xs text-muted-foreground mb-0.5">{s.label}</p>
             <p className="text-sm font-semibold leading-tight">{s.value}</p>
@@ -246,12 +246,12 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
         {/* Main */}
         <div className="lg:col-span-2 space-y-6">
           {/* Overview */}
-          <Card>
+          <Card className="animate-fade-up delay-150">
             <CardHeader><CardTitle>Overview</CardTitle></CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">{framework.description}</p>
               {framework.scope && (
-                <div className="mt-4 p-3 rounded-lg bg-muted/60 border border-border">
+                <div className="mt-4 p-3 rounded-2xl glass-card">
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Scope</p>
                   <p className="text-sm">{framework.scope}</p>
                 </div>
@@ -503,7 +503,7 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
                     <Link
                       key={rf.slug}
                       href={`/compliance/${rf.slug}`}
-                      className="flex items-center justify-between p-3 rounded-lg border border-border hover:bg-accent transition-colors group"
+                      className="flex items-center justify-between p-3 rounded-2xl glass-card transition-all group hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)]"
                     >
                       <div className="flex items-center gap-3">
                         <Shield className="w-4 h-4 text-primary" />
@@ -575,7 +575,7 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
             <CardContent>
               <div className="flex flex-wrap gap-1.5">
                 {framework.tags.map((tag) => (
-                  <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
+                  <span key={tag} className="text-xs px-2.5 py-1 rounded-full glass-card text-muted-foreground">
                     {tag}
                   </span>
                 ))}
@@ -583,7 +583,7 @@ export default async function ComplianceDetailPage({ params }: { params: Promise
             </CardContent>
           </Card>
 
-          <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50">
+          <div className="p-4 rounded-2xl glass-card">
             <p className="text-xs text-amber-800 dark:text-amber-300">
               This is educational guidance only. Always consult qualified legal counsel for compliance decisions affecting your organization.
             </p>

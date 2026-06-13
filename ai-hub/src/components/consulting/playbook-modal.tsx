@@ -45,7 +45,7 @@ const levelColor: Record<string, "blue" | "green" | "purple" | "amber"> = {
   beginner: "green", practitioner: "blue", manager: "purple", executive: "amber",
 };
 
-const SELECT_CLS = "appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-border bg-card text-foreground dark:bg-zinc-900 dark:text-zinc-100 dark:[color-scheme:dark] hover:border-border/80 focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer";
+const SELECT_CLS = "appearance-none pl-3 pr-8 py-2 rounded-lg text-sm font-medium border border-white/10 bg-white/[0.04] text-foreground dark:[color-scheme:dark] hover:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-ring/40 transition-colors cursor-pointer";
 
 /* ── Template panel (inside modal) ──────────────────────── */
 
@@ -154,7 +154,7 @@ function PlaybookModal({ playbook, onClose }: { playbook: Playbook; onClose: () 
 
         {/* Body */}
         <div className="flex-1 overflow-y-auto" style={{ background: "hsl(222 47% 9%)" }}>
-          <div className="px-5 sm:px-6 py-5 border-b border-white/8">
+          <div className="px-5 sm:px-6 py-5 border-b border-white/[0.06]">
             <p className="text-sm text-white/65 leading-relaxed">{playbook.guidance}</p>
           </div>
           <div className="px-5 sm:px-6 py-5">
@@ -205,7 +205,7 @@ function PlaybookRow({ pb, phase, onOpen }: { pb: Playbook; phase: Phase; onOpen
   return (
     <button
       onClick={onOpen}
-      className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_220px_1fr_160px_140px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150 w-full text-left"
+      className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_220px_1fr_160px_140px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-white/[0.02] hover:bg-white/[0.06] transition-colors duration-150 w-full text-left"
     >
       {/* Icon */}
       <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", phaseIconColor[phase.phase] ?? "bg-muted text-muted-foreground")}>
@@ -290,9 +290,9 @@ function ConsultingToolkitInner() {
       </div>
 
       {/* List */}
-      <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+      <div className="glass-card rounded-2xl overflow-hidden divide-y divide-white/[0.06]">
         {/* Header */}
-        <div className="hidden md:grid grid-cols-[40px_220px_1fr_160px_140px_120px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <div className="hidden md:grid grid-cols-[40px_220px_1fr_160px_140px_120px] gap-4 items-center px-5 py-2 bg-white/[0.04] text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           <div />
           <div>Playbook</div>
           <div>Description</div>

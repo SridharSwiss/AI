@@ -76,9 +76,9 @@ export function ComplianceList() {
           <p className="text-sm">Try adjusting your filters.</p>
         </div>
       ) : (
-        <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+        <div className="glass-card rounded-2xl overflow-hidden divide-y divide-white/[0.06]">
           {/* Header */}
-          <div className="hidden md:grid grid-cols-[40px_200px_1fr_260px_120px] gap-4 items-center px-5 py-2 bg-muted/40 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          <div className="hidden md:grid grid-cols-[40px_200px_1fr_260px_120px] gap-4 items-center px-5 py-2 bg-white/[0.03] text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
             <div />
             <div>Framework</div>
             <div>Description</div>
@@ -89,7 +89,7 @@ export function ComplianceList() {
             <Link
               key={f.slug}
               href={`/compliance/${f.slug}`}
-              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_200px_1fr_260px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 bg-card hover:bg-accent/40 transition-colors duration-150"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_200px_1fr_260px_120px] gap-3 md:gap-4 items-center px-4 md:px-5 py-3.5 hover:bg-white/[0.04] transition-colors duration-150"
             >
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Shield className="w-5 h-5 text-primary" />

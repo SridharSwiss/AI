@@ -59,9 +59,9 @@ export function NewsTicker() {
   return (
     <Link
       href="/news"
-      className="fixed top-0 left-0 right-0 z-[150] overflow-hidden bg-zinc-950 dark:bg-zinc-900 text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-zinc-800 hover:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors"
+      className="fixed top-0 left-0 right-0 z-[150] overflow-hidden bg-[hsl(252_55%_4%/0.85)] backdrop-blur-xl text-zinc-300 text-xs font-medium h-8 flex items-center border-b border-white/[0.06] hover:bg-[hsl(252_55%_6%/0.9)] transition-colors"
     >
-      <div className="absolute left-0 z-10 px-3 bg-red-600 text-white text-[10px] font-bold uppercase tracking-[0.1em] h-full flex items-center shrink-0 shadow-[4px_0_8px_rgba(0,0,0,0.4)]">
+      <div className="absolute left-0 z-10 px-3 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] font-bold uppercase tracking-[0.1em] h-full flex items-center shrink-0 shadow-[4px_0_12px_rgba(225,29,72,0.4)]">
         LIVE
       </div>
       <div key={key} className="ticker-track flex gap-12 whitespace-nowrap" style={{ paddingLeft: "72px" }}>

@@ -121,12 +121,12 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
       />
 
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-8 animate-fade-up">
         <div className="flex items-center gap-2 mb-4 flex-wrap">
           <Badge variant={industryColors[cs.industry] ?? "blue"}>{cs.industry}</Badge>
           {cs.featured && <Badge variant="purple">Featured</Badge>}
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold mb-2">{cs.company}</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2 gradient-text-vivid">{cs.company}</h1>
         <p className="text-lg sm:text-xl text-muted-foreground mb-6">{cs.title}</p>
 
         {/* Metrics banner */}
@@ -134,7 +134,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
           {cs.metrics.map((metric) => (
             <div
               key={metric}
-              className="flex items-center gap-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50"
+              className="flex items-center gap-3 p-3 rounded-2xl glass-card animate-fade-up delay-100"
             >
               <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
               <span className="text-sm font-medium text-emerald-800 dark:text-emerald-300">{metric}</span>
@@ -149,7 +149,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
 
           {/* Business Context */}
           {(cs.businessContext || cs.strategicDrivers) && (
-            <SectionCard icon={<Layers className="w-5 h-5 text-violet-500" />} title="Business Context & Strategic Drivers">
+            <SectionCard icon={<Layers className="w-5 h-5 text-violet-500" />} title="Business Context & Strategic Drivers" className="animate-fade-up delay-150">
               {cs.businessContext && (
                 <p className="text-muted-foreground leading-relaxed text-sm mb-4">{cs.businessContext}</p>
               )}
@@ -212,7 +212,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
               {(cs.investmentEstimate || cs.annualReturn || cs.paybackPeriod || cs.roiMultiple) && (
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                   {cs.investmentEstimate && (
-                    <div className="bg-zinc-50 dark:bg-zinc-800/60 border border-border rounded-xl p-3 text-center">
+                    <div className="glass-card rounded-2xl p-3 text-center">
                       <p className="text-xs text-muted-foreground mb-1">Investment</p>
                       <p className="text-xs font-semibold leading-tight">{cs.investmentEstimate}</p>
                     </div>
@@ -241,9 +241,9 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
               {cs.roiBreakdown && cs.roiBreakdown.length > 0 && (
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">ROI Breakdown</p>
-                  <div className="divide-y divide-border border border-border rounded-xl overflow-hidden">
+                  <div className="divide-y divide-white/[0.06] glass-card rounded-2xl overflow-hidden">
                     {cs.roiBreakdown.map((item, i) => (
-                      <div key={i} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 p-3 bg-card">
+                      <div key={i} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 p-3">
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium">{item.category}</p>
                           {item.note && <p className="text-xs text-muted-foreground mt-0.5">{item.note}</p>}
@@ -274,13 +274,13 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
                           {i + 1}
                         </div>
                         {i < (cs.implementationPhases?.length ?? 0) - 1 && (
-                          <div className="flex-1 w-px border-l border-dashed border-border mt-1" />
+                          <div className="flex-1 w-px border-l border-dashed border-white/[0.06] mt-1" />
                         )}
                       </div>
                       <div className="pb-4 min-w-0 flex-1">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
                           <p className="text-sm font-semibold">{phase.phase}</p>
-                          <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">{phase.duration}</span>
+                          <span className="text-xs text-muted-foreground glass-card px-2 py-0.5 rounded-full">{phase.duration}</span>
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-2">{phase.description}</p>
                         {phase.keyOutputs && phase.keyOutputs.length > 0 && (
@@ -401,7 +401,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
           {/* Outcome */}
           <SectionCard icon={<CheckCircle className="w-5 h-5 text-emerald-500" />} title="The Outcome">
             <p className="text-muted-foreground leading-relaxed text-sm mb-4">{cs.outcome}</p>
-            <div className="border-t border-border pt-4">
+            <div className="border-t border-white/[0.06] pt-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">Key Metrics</p>
               <ul className="space-y-2">
                 {cs.metrics.map((metric) => (
@@ -424,7 +424,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
                     href={repo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-3 p-3 rounded-lg border border-border hover:bg-accent transition-colors group"
+                    className="flex items-start gap-3 p-3 rounded-2xl glass-card transition-all group hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)]"
                   >
                     <Code2 className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0 group-hover:text-primary transition-colors" />
                     <div className="flex-1 min-w-0">
@@ -468,7 +468,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
           {/* Tags */}
           <div className="flex flex-wrap gap-2 pt-2">
             {cs.tags.map((tag) => (
-              <span key={tag} className="text-sm px-3 py-1 rounded-full bg-muted text-muted-foreground">
+              <span key={tag} className="text-sm px-3 py-1 rounded-full glass-card text-muted-foreground">
                 {tag}
               </span>
             ))}
@@ -552,7 +552,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
                   {cs.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
+                      className="text-xs px-2 py-0.5 rounded-full glass-card text-muted-foreground"
                     >
                       {tech}
                     </span>
@@ -585,7 +585,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
             </Card>
           )}
 
-          <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50">
+          <div className="p-4 rounded-2xl glass-card">
             <p className="text-xs text-amber-800 dark:text-amber-300">
               ROI figures and metrics are based on publicly available data, company disclosures, and reasonable estimates. Always conduct your own due diligence for strategic decisions.
             </p>
