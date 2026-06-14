@@ -57,7 +57,7 @@ const sectionNav = [
     iconCls: "bg-emerald-500/10 dark:bg-emerald-500/[0.18] text-emerald-500",
     desc: "Structured paths from zero to production.",
     body: "Courses, certifications, video guides, and books — curated for beginners through ML engineers. Updated as the field moves.",
-    stat: "72 resources · all levels",
+    stat: "75 resources · all levels",
   },
   {
     icon: Shield,    label: "Compliance",         href: "/compliance",
@@ -79,7 +79,7 @@ const personas = [
   { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 107 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
   { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 36 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
   { role: "Compliance Officer", icon: Shield, desc: "18 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
-  { role: "Learner", icon: GraduationCap, desc: "72 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
+  { role: "Learner", icon: GraduationCap, desc: "75 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
 ];
 
 const pricingVariant: Record<string, "green" | "blue" | "amber" | "purple"> = {

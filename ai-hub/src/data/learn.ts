@@ -959,6 +959,47 @@ export const learnResources: LearnResource[] = [
     readTime: 15,
     tags: ["Google", "Beginner", "Interactive", "TensorFlow", "Free"],
   },
+
+  // ─── ADDITIONAL HIGH-IMPACT RESOURCES ─────────────────────────────────────
+  {
+    id: "kaggle-learn",
+    slug: "kaggle-learn",
+    title: "Kaggle Learn — Micro-Courses",
+    type: "course",
+    provider: "Kaggle / Google",
+    level: "beginner",
+    free: true,
+    description: "Kaggle's free interactive micro-courses covering Python, pandas, ML fundamentals, deep learning, NLP, computer vision, and intro to AI. Browser-based notebooks, instant feedback, and certificates. Used by millions of data scientists worldwide.",
+    link: "https://www.kaggle.com/learn",
+    readTime: 20,
+    tags: ["Python", "Pandas", "Machine Learning", "Interactive", "Free", "Certificate"],
+  },
+  {
+    id: "ai-agents-deeplearning",
+    slug: "ai-agents-deeplearning",
+    title: "AI Agents in LangGraph",
+    type: "course",
+    provider: "DeepLearning.AI / LangChain",
+    level: "intermediate",
+    free: true,
+    description: "Build production-ready AI agents using LangGraph — the stateful agent orchestration framework. Covers ReAct agents, tool use, memory, human-in-the-loop, and multi-agent collaboration patterns. Co-taught with the LangChain team.",
+    link: "https://learn.deeplearning.ai/courses/ai-agents-in-langgraph",
+    readTime: 5,
+    tags: ["Agents", "LangGraph", "LangChain", "Agentic AI", "Python"],
+  },
+  {
+    id: "build-llm-from-scratch",
+    slug: "build-llm-from-scratch",
+    title: "Build a Large Language Model (From Scratch)",
+    type: "book",
+    provider: "Sebastian Raschka (Manning)",
+    level: "advanced",
+    free: false,
+    description: "Step-by-step guide to building a GPT-class LLM entirely from scratch in Python — from tokenization and attention mechanisms to pre-training and fine-tuning with RLHF and instruction tuning. The most hands-on LLM book of 2024.",
+    link: "https://www.manning.com/books/build-a-large-language-model-from-scratch",
+    readTime: 35,
+    tags: ["LLM", "GPT", "Transformers", "From Scratch", "Python", "RLHF"],
+  },
 ];
 
 export const resourceTypes = ["All", "course", "youtube", "certification", "book", "tutorial"];
