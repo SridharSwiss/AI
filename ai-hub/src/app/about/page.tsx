@@ -8,9 +8,9 @@ const BASE_URL = "https://sridhar-ai.ch";
 
 export const metadata: Metadata = {
   title: "About AIHub",
-  description: "AIHub is the independent, curated AI knowledge platform - covering 107+ tools, 40+ companies, 17 compliance frameworks, and 25+ case studies.",
+  description: "AIHub is the independent, curated AI knowledge platform - covering 107+ tools, 40+ companies, 18 compliance frameworks, and 25+ case studies.",
   alternates: { canonical: `${BASE_URL}/about` },
-  openGraph: { title: "About AIHub - The AI Knowledge Platform", description: "AIHub is the independent, curated AI knowledge platform - 107+ tools, 40+ companies, 17 compliance frameworks, and 25+ case studies.", url: `${BASE_URL}/about`, type: "website" },
+  openGraph: { title: "About AIHub - The AI Knowledge Platform", description: "AIHub is the independent, curated AI knowledge platform - 107+ tools, 40+ companies, 18 compliance frameworks, and 25+ case studies.", url: `${BASE_URL}/about`, type: "website" },
 };
 
 const values = [

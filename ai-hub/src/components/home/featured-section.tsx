@@ -49,8 +49,8 @@ const sectionNav = [
     icon: BarChart3, label: "Case Studies",       href: "/case-studies",
     iconCls: "bg-amber-500/10 dark:bg-amber-500/[0.18] text-amber-500",
     desc: "ROI data, not press releases.",
-    body: "31 real deployments with measured outcomes — cost saved, time reduced, accuracy gained — across healthcare, finance, and more.",
-    stat: "31 case studies",
+    body: "36 real deployments with measured outcomes — cost saved, time reduced, accuracy gained — across healthcare, finance, and more.",
+    stat: "36 case studies",
   },
   {
     icon: BookOpen,  label: "Learn",              href: "/learn",
@@ -62,9 +62,9 @@ const sectionNav = [
   {
     icon: Shield,    label: "Compliance",         href: "/compliance",
     iconCls: "bg-rose-500/10 dark:bg-rose-500/[0.18] text-rose-500",
-    desc: "17 frameworks. Deadlines tracked.",
+    desc: "18 frameworks. Deadlines tracked.",
     body: "EU AI Act, GDPR, NIST RMF, ISO 42001 and more — obligations mapped, enforcement dates flagged.",
-    stat: "17 frameworks",
+    stat: "18 frameworks",
   },
   {
     icon: Briefcase, label: "Consulting Toolkit", href: "/consulting-toolkit",
@@ -77,8 +77,8 @@ const sectionNav = [
 
 const personas = [
   { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 107 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
-  { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 31 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
-  { role: "Compliance Officer", icon: Shield, desc: "17 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
+  { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 36 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
+  { role: "Compliance Officer", icon: Shield, desc: "18 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
   { role: "Learner", icon: GraduationCap, desc: "72 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
 ];
 
