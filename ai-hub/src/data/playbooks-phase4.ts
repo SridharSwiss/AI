@@ -1246,5 +1246,158 @@ export const phase4: Phase = {
         },
       ],
     },
+    {
+      title: "EU AI Act Compliance Checklist",
+      level: "manager",
+      desc: "Step-by-step compliance checklist for the EU Artificial Intelligence Act.",
+      guidance: "The EU AI Act entered into force in August 2024. Prohibited practices applied from February 2025. GPAI model obligations apply from August 2025. High-risk AI obligations (Annex III) apply from August 2026. Use this checklist to assess your organization's compliance posture, prioritise remediation, and build the documentation regulators will expect.",
+      checklist: [
+        {
+          item: "Complete an AI system inventory and classify each system by risk tier",
+          templateTitle: "EU AI Act Risk Classification Register",
+          templateType: "template",
+          instructions: "The EU AI Act applies to AI providers, deployers, importers, and distributors. Your first obligation is knowing what AI systems you have and which tier they fall into. An unclassified AI system is an unmanaged regulatory risk.",
+          sections: [
+            {
+              heading: "Inventory Fields (one row per AI system)",
+              items: [
+                "System name: ___ | Owner: ___ | Version: ___ | Deployment date: ___",
+                "Provider (who built it): ___ | Deployer (who uses it): ___",
+                "Intended purpose: ___ | Actual use cases: ___",
+                "Geographic scope: ___ | User types: ___",
+                "Processing personal data? YES / NO | Special category data? YES / NO",
+              ],
+            },
+            {
+              heading: "Risk Classification Criteria",
+              items: [
+                "PROHIBITED (Article 5): Social scoring, real-time biometric ID in public spaces, subliminal manipulation, predictive policing. → ACTION: Decommission immediately if in this category.",
+                "HIGH RISK (Annex III): CV/recruitment screening, credit scoring, medical diagnostic AI, biometric verification for ID, educational assessment AI, critical infrastructure control AI, law enforcement AI. → ACTION: Full compliance programme required by Aug 2026.",
+                "LIMITED RISK: Chatbots, synthetic media generation, AI-generated text presented as human. → ACTION: Disclose AI nature to users; label synthetic content.",
+                "MINIMAL RISK: Spam filters, recommendation engines, AI games, inventory AI. → ACTION: Voluntary codes of practice; no mandatory obligations.",
+                "GPAI MODEL (>10^25 FLOPs training or systemic risk): → ACTION: Separate Title VIII compliance; contact EU AI Office.",
+              ],
+            },
+            {
+              heading: "Classification Decision Record",
+              items: [
+                "System name: ___ | Classification: PROHIBITED / HIGH / LIMITED / MINIMAL / GPAI | Date: ___ | Approver: ___",
+                "Justification for classification: ___________________________",
+                "Annex III category (if high-risk): ___ | Reference article: ___",
+                "Next review date: ___ | Trigger for reclassification: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Check for prohibited AI practices and certify none are in use",
+          templateTitle: "Prohibited AI Practices Certification",
+          templateType: "template",
+          instructions: "Article 5 prohibitions applied from 1 February 2025. Using prohibited AI systems is a criminal and regulatory offence attracting fines of up to €35M or 7% of global turnover. Complete this check urgently if not already done.",
+          sections: [
+            {
+              heading: "Prohibition Checklist (Article 5)",
+              items: [
+                "☐ Social scoring by public authorities: Do any of our systems score individuals based on behaviour across social contexts? YES / NO",
+                "☐ Real-time biometric ID in public spaces: Do we operate any live facial recognition or gait recognition in publicly accessible areas? YES / NO",
+                "☐ Retrospective biometric databases: Do we build biometric databases through untargeted scraping of CCTV footage or the internet? YES / NO",
+                "☐ Predictive policing: Do we use AI to profile individuals to predict their likelihood of committing crimes? YES / NO",
+                "☐ Subliminal manipulation: Do we deploy AI that exploits subconscious biases or vulnerabilities to cause harm? YES / NO",
+                "☐ Emotion recognition in workplace/education: Do we use AI to infer employees' or students' emotional states? YES / NO",
+                "☐ Vulnerability exploitation: Do we use AI that exploits age, disability, or social circumstances to manipulate decisions? YES / NO",
+                "☐ Biometric categorisation by sensitive attributes: Do we use AI to categorise by race, religion, politics, or sexual orientation from biometric data? YES / NO",
+              ],
+            },
+            {
+              heading: "Certification",
+              items: [
+                "All of the above prohibition checks are NO: YES / NO",
+                "If any check is YES: Legal and DPO notified by: ___ | Remediation plan: ___________________________",
+                "Certified by: ___ (Legal Counsel / DPO) | Date: ___",
+                "Board / AI Steering Committee informed: YES / NO | Date: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Build conformity assessment documentation for each high-risk AI system",
+          templateTitle: "High-Risk AI Conformity Assessment Pack",
+          templateType: "template",
+          instructions: "High-risk AI systems (Annex III) must have Annex IV technical documentation before deployment by August 2026. Start building this now — it takes 3–6 months to complete for a complex system. A conformity assessment is not a one-time document; it must be maintained as the system evolves.",
+          sections: [
+            {
+              heading: "Annex IV Technical Documentation Checklist",
+              items: [
+                "☐ General description: intended purpose, version history, AI system lifecycle stages",
+                "☐ Design and development: architecture, design choices, algorithms, training methodology",
+                "☐ Training data: description of datasets, data collection methodology, data quality criteria",
+                "☐ Training, validation, test results: performance metrics, bias testing results, accuracy across demographic groups",
+                "☐ Known risks: list of identified risks and the mitigations implemented",
+                "☐ Post-market monitoring plan: how performance will be tracked after deployment",
+                "☐ Logging and audit trail: what is logged, where, for how long",
+                "☐ Cybersecurity assessment: measures against adversarial attacks, data poisoning",
+                "☐ Instructions for use (Annex IX): intended purpose, operator training requirements, maintenance guidance",
+              ],
+            },
+            {
+              heading: "Conformity Assessment Route",
+              items: [
+                "Self-assessment (most Annex III systems): Internal review against Article 9 (risk management) and Article 10 (data governance) requirements",
+                "Third-party conformity body: Required for biometric identification, critical infrastructure, and GPAI with systemic risk",
+                "CE marking: Required for all high-risk AI systems before placing on EU market",
+                "EU AI database registration: Required before first deployment for Annex III systems",
+                "Assessment route for this system: SELF / THIRD-PARTY | Date assessment to be completed: ___",
+              ],
+            },
+            {
+              heading: "Human Oversight Implementation",
+              items: [
+                "Designated human overseer role: ___ | Training completed: YES / NO | Date: ___",
+                "Override mechanism: How can the overseer halt or override the AI? ___________________________",
+                "Monitoring frequency: ___ | Performance review calendar: ___",
+                "Escalation path when AI output is questionable: ___________________________",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Implement Article 13 transparency obligations and user rights notices",
+          templateTitle: "EU AI Act Transparency Compliance Pack",
+          templateType: "template",
+          instructions: "Article 13 (high-risk AI transparency), Article 14 (human oversight), and Article 52 (limited risk disclosure) create concrete user-facing obligations. These must be implemented in your UI and documentation — not just in internal policy.",
+          sections: [
+            {
+              heading: "Article 52 — Limited Risk Disclosures",
+              items: [
+                "☐ Chatbots and AI assistants: Display 'You are interacting with an AI' at the start of each session",
+                "☐ AI-generated images/video/audio: Ensure machine-readable metadata labelling AND visible human label",
+                "☐ AI-generated text (used commercially): Clear disclosure when text is AI-generated",
+                "☐ Emotion recognition: Disclose that emotion recognition AI is in use at entry to any interaction",
+                "Disclosure implementation: In-product message / privacy notice / terms update | Completion date: ___",
+              ],
+            },
+            {
+              heading: "Article 13 — High-Risk AI Transparency to Deployers",
+              items: [
+                "Instructions for use document: Draft completed | Legal review: ___",
+                "Intended purpose and operating conditions: Documented at ___ (link/location)",
+                "Performance characteristics: Accuracy, limitations, known biases documented",
+                "Human oversight guidance: Training requirements and oversight mechanism explained in Instructions for use",
+              ],
+            },
+            {
+              heading: "Article 86 — Right to Explanation (High-Risk AI Decisions)",
+              items: [
+                "☐ Where our high-risk AI makes or supports decisions affecting individuals, individuals have a right to meaningful explanation",
+                "Explanation delivery mechanism: ___ (in-product / on request / automated letter)",
+                "Explanation content: Must include the logic, significance, and envisaged consequences of the AI decision",
+                "Response time for explanation requests: ___ days | Team responsible: ___",
+                "Contestation process: How can individuals challenge an AI-supported decision? ___________________________",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
