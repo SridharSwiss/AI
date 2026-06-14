@@ -2,32 +2,25 @@ name: Daily AI Content Maintenance
 
 on:
   schedule:
-    # 06:00 CET (UTC+1 winter) = 05:00 UTC
-    # 06:00 CEST (UTC+2 summer) = 04:00 UTC
-    # Use 04:00 UTC to cover summer (CEST); runs slightly early in winter
+    # 04:00 UTC = 06:00 CET (summer). Runs free — no API key needed.
     - cron: "0 4 * * *"
   workflow_dispatch:
-    inputs:
-      dry_run:
-        description: "Dry run — analyse only, do not commit"
-        required: false
-        default: "false"
 
 permissions:
   contents: write
 
 jobs:
   daily-update:
-    name: Daily Content Update (06:00 CET)
+    name: Update daily-updates.json from recent commits
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 10
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: claude/upbeat-feynman-HrqTF
-          fetch-depth: 0
+          fetch-depth: 50
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -40,80 +33,97 @@ jobs:
         working-directory: ai-hub
         run: npm ci
 
-      - name: Run Claude Code daily maintenance
-        uses: anthropics/claude-code-action@beta
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          timeout_minutes: "45"
-          prompt: |
-            You are performing the daily AIHub content maintenance routine. Today is $(date +%Y-%m-%d). Run ALL steps below fully before stopping.
+      - name: Generate daily-updates.json from git log
+        run: |
+          node -e "
+          const { execSync } = require('child_process');
+          const fs = require('fs');
 
-            ## DAILY MAINTENANCE PROTOCOL
+          const today = new Date().toISOString().split('T')[0];
 
-            For EACH of the following screens, run steps a→e in order. Complete one screen fully before starting the next.
+          // Get commits from the last 24 hours
+          let log = '';
+          try {
+            log = execSync('git log --since=\"24 hours ago\" --pretty=format:\"%s\" -- ai-hub/', {
+              encoding: 'utf8'
+            }).trim();
+          } catch(e) { log = ''; }
 
-            **Screens to process (in order):**
-            1. Tools (/tools) — data file: ai-hub/src/data/tools.ts + ai-hub/src/data/tools-extended.ts
-            2. Companies (/companies) — data file: ai-hub/src/data/companies.ts
-            3. Case Studies (/case-studies) — data files: ai-hub/src/data/case-studies-data-*.ts
-            4. Compliance (/compliance) — data file: ai-hub/src/data/compliance.ts
-            5. Learn (/learn) — data file: ai-hub/src/data/learn.ts
-            6. News (/news) — data file: ai-hub/src/data/news-sources.ts
-            7. Consulting Toolkit (/consulting-toolkit) — data files: ai-hub/src/data/playbooks-phase*.ts
+          const lines = log ? log.split('\n').filter(Boolean) : [];
 
-            **For each screen:**
+          if (lines.length === 0) {
+            console.log('No commits in last 24h — skipping update');
+            process.exit(0);
+          }
 
-            **a. INVENTORY:** Read the current data file. List every item (id, name, category/type).
+          // Map commit messages to category changes
+          const categoryMap = {
+            'tools':      { icon: 'chart',  category: 'Tools' },
+            'compan':     { icon: 'chart',  category: 'Companies' },
+            'case stud':  { icon: 'chart',  category: 'Case Studies' },
+            'case-stud':  { icon: 'chart',  category: 'Case Studies' },
+            'compliance': { icon: 'shield', category: 'Compliance' },
+            'framework':  { icon: 'shield', category: 'Compliance' },
+            'learn':      { icon: 'book',   category: 'Learning' },
+            'resource':   { icon: 'book',   category: 'Learning' },
+            'playbook':   { icon: 'tools',  category: 'Consulting Toolkit' },
+            'toolkit':    { icon: 'tools',  category: 'Consulting Toolkit' },
+            'news':       { icon: 'news',   category: 'News Sources' },
+          };
 
-            **b. MANDATORY SET:** Based only on the criteria the existing items already satisfy (naming convention, categories, data fields), infer which items are mandatory. Do NOT invent new categories.
+          const grouped = {};
+          for (const line of lines) {
+            const lower = line.toLowerCase();
+            let matched = false;
+            for (const [key, val] of Object.entries(categoryMap)) {
+              if (lower.includes(key)) {
+                if (!grouped[val.category]) grouped[val.category] = { ...val, items: [] };
+                // Clean up commit message for display
+                const clean = line.replace(/^(feat|fix|chore|add|update|daily maintenance \\d{4}-\\d{2}-\\d{2}:?\\s*)/i, '').trim();
+                if (clean && !grouped[val.category].items.includes(clean)) {
+                  grouped[val.category].items.push(clean.charAt(0).toUpperCase() + clean.slice(1));
+                }
+                matched = true;
+                break;
+              }
+            }
+            if (!matched) {
+              if (!grouped['General']) grouped['General'] = { icon: 'chart', category: 'General', items: [] };
+              const clean = line.trim();
+              if (clean) grouped['General'].items.push(clean.charAt(0).toUpperCase() + clean.slice(1));
+            }
+          }
 
-            **c. GAP:** Using your knowledge of the AI ecosystem as of today, identify items that are mandatory but missing. For each gap, gather the full details the data shape requires.
+          const changes = Object.values(grouped).filter(g => g.items.length > 0);
+          const totalItems = changes.reduce((n, c) => n + c.items.length, 0);
+          const categoryNames = changes.map(c => c.category).join(', ');
 
-            **d. IMPLEMENT:** Add missing items using the EXACT data shape, component structure, formatting, and style of existing entries. Additive only — do not delete, reorder, or restyle existing items.
+          const output = {
+            date: today,
+            summary: totalItems === 0
+              ? 'Content verified — all screens up to date.'
+              : \`Updated \${totalItems} item\${totalItems === 1 ? '' : 's'} across \${categoryNames}.\`,
+            changes,
+          };
 
-            **e. VERIFY:** Run `npx tsc --noEmit` in ai-hub/ and confirm it exits cleanly. If it fails, fix errors before proceeding.
+          fs.writeFileSync('ai-hub/src/data/daily-updates.json', JSON.stringify(output, null, 2) + '\n');
+          console.log('Written daily-updates.json for', today);
+          console.log(JSON.stringify(output, null, 2));
+          "
 
-            ## AFTER ALL SCREENS:
-
-            1. Count total items in each screen and update ALL hardcoded counts:
-               - ai-hub/src/components/home/hero.tsx (ticker text + CountUp targets)
-               - ai-hub/src/components/home/featured-section.tsx (stat strings + persona descriptions)
-               - ai-hub/src/components/layout/footer.tsx (tagline)
-               - ai-hub/src/app/page.tsx (metadata title/description)
-               - ai-hub/src/app/layout.tsx (metadata description)
-               - ai-hub/src/app/about/page.tsx (metadata description)
-
-            2. Update ai-hub/src/data/daily-updates.json with:
-               - "date": today's date (YYYY-MM-DD)
-               - "summary": one sentence describing what changed overall today
-               - "changes": array with one entry per screen that had additions, using exact same schema as the existing file
-
-            3. Run final `npx tsc --noEmit` to confirm everything is clean.
-
-            4. Commit all changes with message: "Daily maintenance $(date +%Y-%m-%d): [brief summary of what changed]"
-
-            5. Push to branch claude/upbeat-feynman-HrqTF.
-
-            **IMPORTANT RULES:**
-            - Never delete or reorder existing items
-            - Never change styling, component structure, or formatting
-            - Always follow the exact data shape of existing entries
-            - If a screen has no gap, leave it unchanged and move to next
-            - TypeScript must be clean before committing
-
-      - name: Verify TypeScript after update
-        if: ${{ inputs.dry_run != 'true' }}
+      - name: Type-check
         working-directory: ai-hub
         run: npx tsc --noEmit
 
-      - name: Push changes
-        if: ${{ inputs.dry_run != 'true' }}
+      - name: Commit and push if changed
         run: |
           git config user.name "AIHub Daily Bot"
           git config user.email "bot@sridhar-ai.ch"
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes to commit today."
+          git add ai-hub/src/data/daily-updates.json
+          if git diff --staged --quiet; then
+            echo "daily-updates.json unchanged — nothing to commit."
           else
+            git commit -m "Daily update $(date +%Y-%m-%d): refresh what's-new banner"
             git push origin claude/upbeat-feynman-HrqTF
-            echo "Changes pushed successfully."
+            echo "Pushed daily-updates.json"
           fi
