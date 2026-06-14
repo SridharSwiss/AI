@@ -1000,6 +1000,32 @@ export const learnResources: LearnResource[] = [
     readTime: 35,
     tags: ["LLM", "GPT", "Transformers", "From Scratch", "Python", "RLHF"],
   },
+  {
+    id: "huggingface-deep-rl-course",
+    slug: "huggingface-deep-rl-course",
+    title: "Deep Reinforcement Learning Course",
+    type: "course",
+    provider: "Hugging Face",
+    level: "intermediate",
+    free: true,
+    description: "Hugging Face's free hands-on course on deep reinforcement learning covering Q-Learning, Deep Q-Networks (DQN), Policy Gradient methods, Proximal Policy Optimization (PPO), and multi-agent RL. Includes interactive Unity environments and publishes trained agents to the Hugging Face Hub. Used by 70,000+ learners.",
+    link: "https://huggingface.co/learn/deep-rl-course",
+    readTime: 40,
+    tags: ["Reinforcement Learning", "DQN", "PPO", "Policy Gradient", "Hugging Face", "Free"],
+  },
+  {
+    id: "aws-skill-builder-ml",
+    slug: "aws-skill-builder-ml",
+    title: "AWS Skill Builder: Machine Learning Foundations",
+    type: "course",
+    provider: "Amazon Web Services",
+    level: "beginner",
+    free: true,
+    description: "Amazon's official free ML foundations learning path on AWS Skill Builder. Covers ML concepts, AWS AI/ML services (SageMaker, Rekognition, Comprehend, Bedrock), and hands-on labs. Essential preparation for the AWS AI Practitioner and ML Specialty certifications. Used by hundreds of thousands of AWS practitioners worldwide.",
+    link: "https://explore.skillbuilder.aws/learn/public/learning_plan/view/28/machine-learning-learning-plan",
+    readTime: 20,
+    tags: ["AWS", "SageMaker", "Bedrock", "Machine Learning", "Cloud", "Free"],
+  },
 ];
 
 export const resourceTypes = ["All", "course", "youtube", "certification", "book", "tutorial"];

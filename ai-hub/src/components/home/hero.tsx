@@ -86,7 +86,7 @@ export function Hero() {
 
         {/* Subline */}
         <p className="animate-fade-up delay-200 text-sm font-medium uppercase tracking-widest text-muted-foreground max-w-2xl mx-auto mb-12">
-          107 tools · 40 companies · 36 case studies · 18 compliance frameworks
+          111 tools · 47 companies · 39 case studies · 20 compliance frameworks
         </p>
 
         {/* CTAs */}
@@ -116,10 +116,10 @@ export function Hero() {
         {/* Stats grid — glass cards */}
         <div className="animate-fade-up delay-500 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
           {[
-            { target: 107, label: "AI Tools",      href: "/tools" },
-            { target: 40, label: "Companies",      href: "/companies" },
-            { target: 36, label: "Case Studies",   href: "/case-studies" },
-            { target: 18, label: "Frameworks",     href: "/compliance" },
+            { target: 111, label: "AI Tools",      href: "/tools" },
+            { target: 47, label: "Companies",      href: "/companies" },
+            { target: 39, label: "Case Studies",   href: "/case-studies" },
+            { target: 20, label: "Frameworks",     href: "/compliance" },
           ].map(({ target, label, href }) => (
             <Link
               key={label}
