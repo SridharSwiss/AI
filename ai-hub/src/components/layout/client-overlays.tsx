@@ -12,11 +12,17 @@ const AnalyticsTracker = dynamic(
   { ssr: false }
 );
 
+const DailyUpdatesBanner = dynamic(
+  () => import("@/components/shared/daily-updates-banner").then((m) => ({ default: m.DailyUpdatesBanner })),
+  { ssr: false }
+);
+
 export function ClientOverlays() {
   return (
     <>
       <AnalyticsTracker />
       <ConsentBanner />
+      <DailyUpdatesBanner />
     </>
   );
 }

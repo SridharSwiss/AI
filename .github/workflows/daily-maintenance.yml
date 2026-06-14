@@ -1,0 +1,119 @@
+name: Daily AI Content Maintenance
+
+on:
+  schedule:
+    # 06:00 CET (UTC+1 winter) = 05:00 UTC
+    # 06:00 CEST (UTC+2 summer) = 04:00 UTC
+    # Use 04:00 UTC to cover summer (CEST); runs slightly early in winter
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run — analyse only, do not commit"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  daily-update:
+    name: Daily Content Update (06:00 CET)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: claude/upbeat-feynman-HrqTF
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: ai-hub/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ai-hub
+        run: npm ci
+
+      - name: Run Claude Code daily maintenance
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          timeout_minutes: "45"
+          prompt: |
+            You are performing the daily AIHub content maintenance routine. Today is $(date +%Y-%m-%d). Run ALL steps below fully before stopping.
+
+            ## DAILY MAINTENANCE PROTOCOL
+
+            For EACH of the following screens, run steps a→e in order. Complete one screen fully before starting the next.
+
+            **Screens to process (in order):**
+            1. Tools (/tools) — data file: ai-hub/src/data/tools.ts + ai-hub/src/data/tools-extended.ts
+            2. Companies (/companies) — data file: ai-hub/src/data/companies.ts
+            3. Case Studies (/case-studies) — data files: ai-hub/src/data/case-studies-data-*.ts
+            4. Compliance (/compliance) — data file: ai-hub/src/data/compliance.ts
+            5. Learn (/learn) — data file: ai-hub/src/data/learn.ts
+            6. News (/news) — data file: ai-hub/src/data/news-sources.ts
+            7. Consulting Toolkit (/consulting-toolkit) — data files: ai-hub/src/data/playbooks-phase*.ts
+
+            **For each screen:**
+
+            **a. INVENTORY:** Read the current data file. List every item (id, name, category/type).
+
+            **b. MANDATORY SET:** Based only on the criteria the existing items already satisfy (naming convention, categories, data fields), infer which items are mandatory. Do NOT invent new categories.
+
+            **c. GAP:** Using your knowledge of the AI ecosystem as of today, identify items that are mandatory but missing. For each gap, gather the full details the data shape requires.
+
+            **d. IMPLEMENT:** Add missing items using the EXACT data shape, component structure, formatting, and style of existing entries. Additive only — do not delete, reorder, or restyle existing items.
+
+            **e. VERIFY:** Run `npx tsc --noEmit` in ai-hub/ and confirm it exits cleanly. If it fails, fix errors before proceeding.
+
+            ## AFTER ALL SCREENS:
+
+            1. Count total items in each screen and update ALL hardcoded counts:
+               - ai-hub/src/components/home/hero.tsx (ticker text + CountUp targets)
+               - ai-hub/src/components/home/featured-section.tsx (stat strings + persona descriptions)
+               - ai-hub/src/components/layout/footer.tsx (tagline)
+               - ai-hub/src/app/page.tsx (metadata title/description)
+               - ai-hub/src/app/layout.tsx (metadata description)
+               - ai-hub/src/app/about/page.tsx (metadata description)
+
+            2. Update ai-hub/src/data/daily-updates.json with:
+               - "date": today's date (YYYY-MM-DD)
+               - "summary": one sentence describing what changed overall today
+               - "changes": array with one entry per screen that had additions, using exact same schema as the existing file
+
+            3. Run final `npx tsc --noEmit` to confirm everything is clean.
+
+            4. Commit all changes with message: "Daily maintenance $(date +%Y-%m-%d): [brief summary of what changed]"
+
+            5. Push to branch claude/upbeat-feynman-HrqTF.
+
+            **IMPORTANT RULES:**
+            - Never delete or reorder existing items
+            - Never change styling, component structure, or formatting
+            - Always follow the exact data shape of existing entries
+            - If a screen has no gap, leave it unchanged and move to next
+            - TypeScript must be clean before committing
+
+      - name: Verify TypeScript after update
+        if: ${{ inputs.dry_run != 'true' }}
+        working-directory: ai-hub
+        run: npx tsc --noEmit
+
+      - name: Push changes
+        if: ${{ inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "AIHub Daily Bot"
+          git config user.email "bot@sridhar-ai.ch"
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit today."
+          else
+            git push origin claude/upbeat-feynman-HrqTF
+            echo "Changes pushed successfully."
+          fi

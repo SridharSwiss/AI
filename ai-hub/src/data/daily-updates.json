@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-14",
+  "summary": "Added 5 case studies, Brazil AI Bill compliance framework, 3 learning resources, EU AI Act playbook, and 3 news sources.",
+  "changes": [
+    {
+      "category": "Case Studies",
+      "icon": "chart",
+      "items": [
+        "Microsoft 365 Copilot — Enterprise productivity AI deployed at 40%+ of Fortune 500",
+        "Stripe Radar — ML fraud detection across $1T+ in annual payments",
+        "DeepMind / NHS — AI eye disease detection matching senior ophthalmologist accuracy",
+        "Rolls-Royce TotalCare — Predictive engine maintenance preventing $500M+ in removals",
+        "DHL AI Logistics — Demand forecasting and route optimisation saving €300M+ annually"
+      ]
+    },
+    {
+      "category": "Compliance",
+      "icon": "shield",
+      "items": [
+        "Brazil AI Bill (PL 2338/2023) — Senate-passed, EU AI Act-inspired framework for 215M citizens"
+      ]
+    },
+    {
+      "category": "Learning",
+      "icon": "book",
+      "items": [
+        "Kaggle Learn — Free interactive ML micro-courses used by millions",
+        "AI Agents in LangGraph — DeepLearning.AI course on agentic AI (2025)",
+        "Build a Large Language Model From Scratch — Sebastian Raschka's 2024 bestseller"
+      ]
+    },
+    {
+      "category": "Consulting Toolkit",
+      "icon": "tools",
+      "items": [
+        "EU AI Act Compliance Checklist — 4-step practitioner checklist for Article 5 prohibitions, Annex IV conformity and Article 52/86 transparency"
+      ]
+    },
+    {
+      "category": "News Sources",
+      "icon": "news",
+      "items": [
+        "Microsoft Research Blog added to Research feed",
+        "EU AI Office added to Government feed",
+        "Bloomberg Technology added to Financial feed"
+      ]
+    }
+  ]
+}
