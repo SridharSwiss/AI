@@ -57,6 +57,14 @@ export const newsSources: NewsSource[] = [
     website: "https://arstechnica.com",
     description: "Technical AI news and analysis from Ars Technica.",
   },
+  {
+    id: "ieee-spectrum-ai",
+    name: "IEEE Spectrum AI",
+    category: "Tech",
+    rssUrl: "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss",
+    website: "https://spectrum.ieee.org",
+    description: "Engineering-focused AI news and analysis from IEEE Spectrum covering chips, robotics, and applied AI.",
+  },
   // Research
   {
     id: "deepmind-blog",
@@ -97,6 +105,14 @@ export const newsSources: NewsSource[] = [
     rssUrl: "https://huggingface.co/blog/feed.xml",
     website: "https://huggingface.co",
     description: "Open-source AI research and model releases from Hugging Face.",
+  },
+  {
+    id: "meta-ai-blog",
+    name: "Meta AI Blog",
+    category: "Research",
+    rssUrl: "https://ai.meta.com/blog/rss/",
+    website: "https://ai.meta.com",
+    description: "Research papers, model releases, and AI safety updates from Meta AI — including LLaMA and PyTorch research.",
   },
   {
     id: "microsoft-research-blog",

@@ -725,6 +725,150 @@ export const phase1: Phase = {
       ],
     },
     {
+      title: "Competitor AI Landscape Analysis",
+      level: "manager",
+      desc: "Map competitor AI capabilities and identify strategic gaps.",
+      guidance: "Understand where your competitors stand before committing to an AI roadmap. A well-structured competitor analysis reveals capability gaps, informs use-case prioritisation, and builds executive urgency. Focus on observable signals: product changes, job postings, patents, and earnings calls — not speculation.",
+      checklist: [
+        {
+          item: "Identify the top 5–8 direct competitors to monitor",
+          templateTitle: "Competitor AI Monitoring List",
+          templateType: "template",
+          instructions: "Agree the monitoring scope with leadership before starting research. Limit to direct competitors — too broad a list dilutes effort. Include at least one 'aspirational' peer that is ahead of you in AI maturity.",
+          sections: [
+            {
+              heading: "Competitor Selection Criteria",
+              items: [
+                "Direct competitors (same market, same customer): List 3–5 names: ___________________________",
+                "Indirect competitors (adjacent market, could expand into yours via AI): List 1–2 names: ___________________________",
+                "Aspirational peers (same sector, recognised AI leaders — useful as a benchmark): List 1–2 names: ___________________________",
+                "Rationale for exclusions (competitors deliberately left off list and why): ___________________________",
+                "Monitoring scope approved by: ___________________ | Date: ___",
+              ],
+            },
+            {
+              heading: "Signal Sources by Competitor",
+              items: [
+                "Public earnings calls / investor days: Review last 4 quarters for AI mentions | Source: IR website / Seeking Alpha",
+                "Press releases and product announcements: Subscribe to newsroom RSS or PR Newswire alerts",
+                "LinkedIn job postings: Track ML/AI role volume and seniority as a proxy for investment level",
+                "Patent filings: Use Google Patents with company name + 'artificial intelligence' filter | Review quarterly",
+                "Conference papers and research publications: Google Scholar alerts for company-authored AI papers",
+                "Product changelog / release notes: Subscribe to product blogs or G2/Capterra reviews for feature changes",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Build competitor AI capability profiles",
+          templateTitle: "Competitor AI Capability Profile Template",
+          templateType: "template",
+          instructions: "Complete one profile per competitor. Use publicly available information only — do not solicit confidential information from former employees or through improper means. Update profiles quarterly.",
+          sections: [
+            {
+              heading: "AI Capability Inventory",
+              items: [
+                "Competitor name: ___________________ | Profile date: ___ | Analyst: ___",
+                "Known AI-powered products / features (publicly documented): ___________________________",
+                "AI capabilities used internally (inferred from job ads, partnerships, tools referenced in press): ___________________________",
+                "Named AI vendors or cloud AI platforms used: ☐ AWS AI  ☐ Azure AI  ☐ Google AI  ☐ OpenAI API  ☐ Other: ___",
+                "Publicly stated AI investment or initiatives (from earnings, press): ___________________________",
+                "AI-related acquisitions or partnerships in last 24 months: ___________________________",
+              ],
+            },
+            {
+              heading: "Capability Maturity Estimate (Rate 1–5)",
+              items: [
+                "AI in customer-facing products (1=None, 5=Core differentiator): ___ / 5 | Evidence: ___",
+                "AI in internal operations (1=None, 5=AI-native operations): ___ / 5 | Evidence: ___",
+                "AI talent investment (1=No AI roles, 5=Large dedicated AI team): ___ / 5 | Evidence: ___",
+                "Data infrastructure maturity (inferred): ___ / 5 | Evidence: ___",
+                "OVERALL competitor AI maturity estimate: ___ / 5",
+                "Confidence level in this estimate: ☐ High (strong evidence)  ☐ Medium  ☐ Low (inference only)",
+              ],
+            },
+            {
+              heading: "Threat & Opportunity Flags",
+              items: [
+                "Most threatening AI capability this competitor has: ___________________________",
+                "AI gap that represents an opportunity for us to move faster: ___________________________",
+                "Any AI initiative by this competitor that directly threatens our core business: ☐ Yes – describe: ___  ☐ No",
+                "Timeline estimate for their AI capabilities reaching customers: ___ months | Confidence: H/M/L",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Score and benchmark your organisation against competitors",
+          templateTitle: "Competitive AI Benchmarking Scorecard",
+          templateType: "scorecard",
+          instructions: "Use the capability ratings from competitor profiles to build a side-by-side benchmark. Honest self-assessment is essential — do not inflate your own ratings. Use this to identify where you are ahead, at parity, or behind.",
+          sections: [
+            {
+              heading: "Benchmarking Grid",
+              items: [
+                "Dimension | Us | Competitor A | Competitor B | Competitor C | Leader",
+                "Customer-facing AI: ___ / 5 | ___ / 5 | ___ / 5 | ___ / 5 | ___",
+                "Internal AI automation: ___ / 5 | ___ / 5 | ___ / 5 | ___ / 5 | ___",
+                "AI talent & team: ___ / 5 | ___ / 5 | ___ / 5 | ___ / 5 | ___",
+                "Data infrastructure: ___ / 5 | ___ / 5 | ___ / 5 | ___ / 5 | ___",
+                "OVERALL AI maturity: ___ / 5 | ___ / 5 | ___ / 5 | ___ / 5 | ___",
+              ],
+            },
+            {
+              heading: "Gap Analysis Summary",
+              items: [
+                "Dimensions where we LEAD the field: ___________________________",
+                "Dimensions where we are AT PARITY: ___________________________",
+                "Dimensions where we TRAIL: ___________________ | Gap size (1–5 scale): ___",
+                "Fastest-moving competitor overall: ___________________ | Why they're moving fast: ___",
+                "Priority dimension to close first (highest impact on competitive position): ___________________________",
+                "If we do nothing for 12 months, predicted competitive position change: ___________________________",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Identify white-space AI opportunities not yet captured by competitors",
+          templateTitle: "AI White-Space Opportunity Map",
+          templateType: "template",
+          instructions: "Find the capability spaces competitors have not yet exploited — these are your highest-value first-mover opportunities. Cross-reference with your internal use-case list to identify overlapping opportunities that are strategically differentiated.",
+          sections: [
+            {
+              heading: "White-Space Discovery Method",
+              items: [
+                "Step 1: List all known competitor AI capabilities (from profiles) in a single column",
+                "Step 2: List all AI use cases on your internal long-list (from use case nomination exercise)",
+                "Step 3: Highlight use cases on YOUR list that NO competitor has deployed yet — these are white-space candidates",
+                "Step 4: For each white-space candidate, estimate: feasibility for us (1–5) and strategic value if we got there first (1–5)",
+                "White-space opportunities identified (top 5): 1) ___ 2) ___ 3) ___ 4) ___ 5) ___",
+              ],
+            },
+            {
+              heading: "First-Mover Analysis",
+              items: [
+                "Opportunity: ___________________ | Time advantage estimate if we act now: ___ months ahead",
+                "Risk: How quickly could a well-resourced competitor close this gap: ___________________________",
+                "Required capability we already have: ___________________________",
+                "Required capability we would need to build/buy: ___________________________",
+                "Recommended action: ☐ Accelerate into white space immediately  ☐ Watch and wait  ☐ Deprioritise — not defensible",
+              ],
+            },
+            {
+              heading: "Strategic Recommendation",
+              items: [
+                "Top white-space opportunity to pursue: ___________________ | Rationale: ___",
+                "Estimated time-to-market if prioritised now: ___ months",
+                "Risk if we delay 6 months: ___________________________",
+                "Recommended inclusion in AI roadmap: ☐ Yes — add to use case shortlist  ☐ Monitor for 6 months  ☐ No",
+                "Sign-off by: ___________________ | Date: ___",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       title: "Stakeholder Alignment Workshop",
       level: "executive",
       desc: "Templates for getting leadership buy-in.",
