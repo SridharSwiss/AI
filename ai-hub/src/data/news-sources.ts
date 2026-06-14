@@ -98,7 +98,23 @@ export const newsSources: NewsSource[] = [
     website: "https://huggingface.co",
     description: "Open-source AI research and model releases from Hugging Face.",
   },
+  {
+    id: "microsoft-research-blog",
+    name: "Microsoft Research Blog",
+    category: "Research",
+    rssUrl: "https://www.microsoft.com/en-us/research/feed/",
+    website: "https://www.microsoft.com/en-us/research",
+    description: "AI and CS research from Microsoft Research — covering LLMs, Azure AI, responsible AI, and quantum ML.",
+  },
   // Government
+  {
+    id: "eu-ai-office",
+    name: "EU AI Office",
+    category: "Government",
+    rssUrl: "https://digital-strategy.ec.europa.eu/en/policies/artificial-intelligence.rss",
+    website: "https://digital-strategy.ec.europa.eu/en/policies/artificial-intelligence",
+    description: "Official news and guidance from the European AI Office — the primary EU AI Act enforcement authority.",
+  },
   {
     id: "nist-ai",
     name: "NIST AI",
@@ -156,6 +172,14 @@ export const newsSources: NewsSource[] = [
     rssUrl: "https://www.ft.com/technology?format=rss",
     website: "https://www.ft.com",
     description: "Technology and AI business news from the Financial Times.",
+  },
+  {
+    id: "bloomberg-technology",
+    name: "Bloomberg Technology",
+    category: "Financial",
+    rssUrl: "https://feeds.bloomberg.com/technology/news.rss",
+    website: "https://www.bloomberg.com/technology",
+    description: "Technology and AI industry news from Bloomberg covering markets, M&A, and enterprise AI adoption.",
   },
   // Quantum
   {
