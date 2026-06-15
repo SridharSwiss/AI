@@ -197,7 +197,24 @@ export const newsSources: NewsSource[] = [
     website: "https://www.bloomberg.com/technology",
     description: "Technology and AI industry news from Bloomberg covering markets, M&A, and enterprise AI adoption.",
   },
+  // Medical (additions)
+  {
+    id: "nejm-ai",
+    name: "NEJM AI",
+    category: "Medical",
+    rssUrl: "https://ai.nejm.org/rss/current.xml",
+    website: "https://ai.nejm.org",
+    description: "Peer-reviewed AI research and clinical applications from the New England Journal of Medicine.",
+  },
   // Quantum
+  {
+    id: "the-quantum-insider",
+    name: "The Quantum Insider",
+    category: "Quantum",
+    rssUrl: "https://thequantuminsider.com/feed/",
+    website: "https://thequantuminsider.com",
+    description: "News and analysis on quantum computing industry players, investments, and breakthroughs.",
+  },
   {
     id: "quantum-computing-report",
     name: "Quantum Computing Report",
@@ -213,6 +230,15 @@ export const newsSources: NewsSource[] = [
     rssUrl: "https://spectrum.ieee.org/feeds/topic/quantum-computing.rss",
     website: "https://spectrum.ieee.org",
     description: "Quantum computing engineering news from IEEE Spectrum.",
+  },
+  // Government (addition)
+  {
+    id: "uk-aisi",
+    name: "UK AI Safety Institute",
+    category: "Government",
+    rssUrl: "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ai-safety-institute",
+    website: "https://www.gov.uk/government/organisations/ai-safety-institute",
+    description: "Safety research, evaluations, and policy guidance from the UK AI Safety Institute.",
   },
   // General
   {

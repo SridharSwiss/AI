@@ -1101,5 +1101,208 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "Responsible AI & Bias Testing Playbook",
+      level: "practitioner",
+      desc: "Detect, measure, and mitigate bias before and after deployment.",
+      guidance: "Bias in AI is not a theoretical risk — it causes real harm to real people and exposes organisations to regulatory liability. Test every model against protected characteristics before go-live, monitor continuously at scale, and document your methodology. A model that passes bias checks at launch can drift into unfairness within months as input distributions shift.",
+      checklist: [
+        {
+          item: "Define fairness criteria and protected attributes",
+          templateTitle: "Fairness Criteria Definition Worksheet",
+          templateType: "worksheet",
+          instructions: "Agree fairness definitions with Legal, HR, and business before any bias testing begins. Different fairness metrics are mathematically incompatible — you must choose which matters most for your context. Document the rationale so it is auditable.",
+          sections: [
+            {
+              heading: "Protected Attributes in Scope",
+              items: [
+                "Legally protected attributes applicable to this use case: ☐ Age  ☐ Sex/Gender  ☐ Race/Ethnicity  ☐ Disability  ☐ Religion  ☐ Pregnancy  ☐ Sexual orientation  ☐ Other: ___",
+                "Proxy variables to test (correlated with protected attributes): ___________________________",
+                "Data source for attribute labels (for testing): ☐ Self-reported  ☐ Inferred (note risk)  ☐ Not available — use proxies",
+                "Legal counsel sign-off on attribute use in testing: ☐ Yes  ☐ Pending  ☐ Not required",
+              ],
+            },
+            {
+              heading: "Fairness Metric Selection",
+              items: [
+                "DEMOGRAPHIC PARITY: Positive outcome rate equal across groups — Use when: equal representation is required regardless of underlying differences",
+                "EQUALISED ODDS: Equal true positive and false positive rates across groups — Use when: both missing true positives and wrongly flagging negatives are harmful",
+                "PREDICTIVE PARITY: Equal precision (PPV) across groups — Use when: cost of a false positive is equal across groups",
+                "INDIVIDUAL FAIRNESS: Similar individuals receive similar predictions — Use when: discrimination against specific people is the primary concern",
+                "Selected primary metric: ___________________ | Rationale approved by: ___ | Date: ___",
+                "Acceptable maximum disparity threshold: ___% difference between best and worst group | Basis: ___",
+              ],
+            },
+            {
+              heading: "Use Case Risk Classification",
+              items: [
+                "Outcome type: ☐ Binary (approve/reject)  ☐ Score/ranking  ☐ Content recommendation  ☐ Classification  ☐ Other: ___",
+                "Stakes if biased outcome: ☐ Employment  ☐ Credit/finance  ☐ Healthcare  ☐ Education  ☐ Housing  ☐ Low-stakes (content/internal)",
+                "EU AI Act risk classification: ☐ High-risk (Annex III)  ☐ Limited risk  ☐ Minimal risk",
+                "Magnitude of harm if bias not caught: ___ (describe worst-case scenario)",
+                "Frequency of decisions: ___ per day — scale amplifies any bias; flag if >100 decisions/day",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Audit training data for representation and labelling bias",
+          templateTitle: "Training Data Bias Audit Template",
+          templateType: "template",
+          instructions: "Bias baked into training data produces biased models. Audit before training, not after. Labelling bias (human annotators' prejudices encoded as ground truth) is especially insidious because it is invisible in standard data quality checks.",
+          sections: [
+            {
+              heading: "Representation Audit",
+              items: [
+                "Total training records: ___ | Date range: ___ to ___",
+                "Group distribution for each protected attribute (fill in %):",
+                "  Age: <25 ___% | 25–44 ___% | 45–64 ___% | 65+ ___%",
+                "  Gender: Male ___% | Female ___% | Non-binary/other ___% | Unknown ___%",
+                "  Ethnicity: ___________________________ (list groups and %)",
+                "  Disability status: Disclosed disabled ___% | Not disabled ___% | Unknown ___%",
+                "Under-represented groups (any group <5% of training data): ___________________________",
+                "Action for under-representation: ☐ Oversample minority  ☐ Collect more data  ☐ Use synthetic augmentation  ☐ Accept with documented risk",
+              ],
+            },
+            {
+              heading: "Label Quality Audit",
+              items: [
+                "Were labels created by humans: ☐ Yes — audit for inter-annotator agreement  ☐ No — skip this section",
+                "Inter-annotator agreement score (Cohen's Kappa or Fleiss Kappa): ___  Acceptable threshold: >0.7",
+                "Labels reviewed for consistency across demographic groups: ☐ Yes  ☐ No — required before training",
+                "Historical bias risk: Do labels reflect past human decisions that were themselves biased: ☐ Yes — document and weight accordingly  ☐ No  ☐ Unknown",
+                "Label audit completed by: ___ | Date: ___ | Findings: ___",
+              ],
+            },
+            {
+              heading: "Feature Selection Review",
+              items: [
+                "Features directly encoding protected attributes: List and justify inclusion or exclusion: ___________________________",
+                "Proxy features identified (e.g., postcode, school name, surname as proxies for race): ___________________________",
+                "Decision on proxy features: ☐ Remove all proxies  ☐ Keep with documented justification and legal sign-off  ☐ Test impact before deciding",
+                "Causal graph reviewed to identify spurious correlations: ☐ Yes  ☐ No — add to pre-training checklist",
+                "Feature audit sign-off: Data Scientist ___ | Legal ___ | Date ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Run pre-deployment bias testing suite",
+          templateTitle: "Pre-Deployment Bias Testing Report",
+          templateType: "scorecard",
+          instructions: "Run all tests on a held-out test set that reflects real-world deployment distribution — not the training distribution. Use tools such as Fairlearn, IBM AI Fairness 360, or Google What-If Tool. Document every result. No model should be deployed with a known bias disparity above your agreed threshold without explicit sign-off.",
+          sections: [
+            {
+              heading: "Disparate Impact Tests",
+              items: [
+                "Test 1 — Demographic parity difference (positive rate gap): ___ | Threshold: ≤0.1 | ☐ Pass  ☐ Fail",
+                "Test 2 — Equalised odds difference (TPR gap): ___ | Threshold: ≤0.1 | ☐ Pass  ☐ Fail",
+                "Test 3 — Equalised odds difference (FPR gap): ___ | Threshold: ≤0.1 | ☐ Pass  ☐ Fail",
+                "Test 4 — Predictive parity (PPV gap): ___ | Threshold: ≤0.1 | ☐ Pass  ☐ Fail",
+                "Test 5 — Disparate impact ratio (adverse impact rule): ___ | Threshold: ≥0.8 (80% rule) | ☐ Pass  ☐ Fail",
+                "Overall test result: ☐ All pass — approve for deployment  ☐ Failures present — remediation required",
+              ],
+            },
+            {
+              heading: "Subgroup Performance Breakdown",
+              items: [
+                "Report accuracy / F1 / AUC per subgroup for each protected attribute:",
+                "  Age groups: <25: ___ | 25–44: ___ | 45–64: ___ | 65+: ___",
+                "  Gender: Male: ___ | Female: ___ | Non-binary: ___",
+                "  Ethnicity subgroups: ___________________________ (list all)",
+                "Worst-performing subgroup: ___________________ | Performance: ___ vs. overall: ___",
+                "Is the worst-performing group a historically marginalised group: ☐ Yes — escalate  ☐ No",
+                "Subgroup analysis reviewed by Responsible AI lead: ☐ Yes  ☐ Pending",
+              ],
+            },
+            {
+              heading: "Remediation Actions",
+              items: [
+                "If bias threshold exceeded — remediations attempted:",
+                "  ☐ Resampling / reweighting training data for under-represented groups",
+                "  ☐ Threshold adjustment per subgroup (with legal review)",
+                "  ☐ Algorithm change (e.g., switch to fairness-constrained optimisation)",
+                "  ☐ Feature removal (confirm no performance cliff before removing)",
+                "  ☐ Collect additional representative training data",
+                "Re-test after remediation: Date ___ | Results: ___ | Final disposition: ☐ Approved  ☐ Escalate to steering committee",
+                "If deployed with known residual bias — documented exception: Owner ___ | Review date ___ | Human oversight mechanism: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Implement continuous fairness monitoring in production",
+          templateTitle: "Production Fairness Monitoring Plan",
+          templateType: "template",
+          instructions: "Models drift. What is fair at launch can become unfair within months as real-world inputs shift. Wire fairness metrics into your MLOps monitoring dashboard alongside accuracy metrics. Set alerting thresholds and a clear escalation path.",
+          sections: [
+            {
+              heading: "Monitoring Setup",
+              items: [
+                "Fairness monitoring tool: ☐ Fairlearn  ☐ Evidently AI  ☐ WhyLabs  ☐ Arize AI  ☐ Custom  ☐ Other: ___",
+                "Metrics monitored in production: ___________________________",
+                "Monitoring frequency: ☐ Real-time streaming  ☐ Daily batch  ☐ Weekly  ☐ Monthly",
+                "Alert threshold for demographic parity drift: ___% change triggers review",
+                "Dashboard link / location: ___________________________",
+                "Who receives alerts: ___________________________",
+              ],
+            },
+            {
+              heading: "Escalation & Response Protocol",
+              items: [
+                "YELLOW alert (disparity approaching threshold): Notify ML lead + business owner | Auto-investigate root cause | No immediate action required",
+                "RED alert (disparity exceeds threshold): Notify ML lead + Responsible AI lead + Executive Sponsor within 24 hrs",
+                "RED response options: ☐ Increase human review rate  ☐ Roll back to previous model version  ☐ Suspend automated decisions pending review",
+                "Mandatory review timeline after RED alert: ___ business days",
+                "Escalation path to AI Steering Committee if RED alert not resolved within ___  days: ___",
+              ],
+            },
+            {
+              heading: "Quarterly Fairness Review",
+              items: [
+                "Quarterly fairness report covers: trend in all fairness metrics | subgroup performance breakdown | incident log | comparison to pre-deployment baseline",
+                "Report prepared by: ___________________ | Reviewed by: Responsible AI Lead + Legal",
+                "Report shared with: ☐ AI Steering Committee  ☐ Board Risk Committee  ☐ Regulator (if required)",
+                "Annual external fairness audit required: ☐ Yes — provider: ___  ☐ No",
+                "Next quarterly review date: ___ | Owner: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Document and publish AI transparency disclosure",
+          templateTitle: "AI Transparency Disclosure Template",
+          templateType: "template",
+          instructions: "Transparency disclosures build public trust and meet emerging legal requirements (EU AI Act Article 13, UK ICO AI guidance). Write in plain language — aim for a reading age of 14. Avoid jargon. Have someone outside the team review it for clarity.",
+          sections: [
+            {
+              heading: "Model Card (Internal Technical Record)",
+              items: [
+                "Model name and version: ___________________ | Date: ___",
+                "Intended use: ___________________________",
+                "Out-of-scope uses: ___________________________",
+                "Training data description (without revealing confidential details): ___________________________",
+                "Known limitations: ___________________________",
+                "Bias testing results summary: ___________________________",
+                "Performance metrics (overall + worst subgroup): ___________________________",
+                "Human oversight mechanisms in place: ___________________________",
+                "Model card owner: ___ | Review date: ___",
+              ],
+            },
+            {
+              heading: "Public / User-Facing Transparency Notice",
+              items: [
+                "Explain in plain language that AI is used and what for: ___________________________",
+                "Describe what data is used and how it affects the outcome: ___________________________",
+                "Explain right to human review / appeal (if applicable): ___________________________",
+                "Contact for questions or complaints: ___________________________",
+                "Plain language reviewed by: ___ | Date: ___",
+                "Published at: ☐ Website privacy policy  ☐ Point of decision notice  ☐ App settings  ☐ Other: ___",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

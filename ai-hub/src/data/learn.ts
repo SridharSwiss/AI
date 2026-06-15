@@ -1026,6 +1026,47 @@ export const learnResources: LearnResource[] = [
     readTime: 20,
     tags: ["AWS", "SageMaker", "Bedrock", "Machine Learning", "Cloud", "Free"],
   },
+
+  // ─── NEW ADDITIONS ─────────────────────────────────────────────────────────
+  {
+    id: "anthropic-prompt-engineering-interactive",
+    slug: "anthropic-prompt-engineering-interactive",
+    title: "Anthropic Prompt Engineering Interactive Tutorial",
+    type: "tutorial",
+    provider: "Anthropic",
+    level: "beginner",
+    free: true,
+    description: "Anthropic's official interactive tutorial for prompt engineering with Claude. Covers foundational techniques — clarity, role specification, chain-of-thought, XML structuring — through hands-on exercises directly in the browser. Essential starting point for anyone building applications with Claude or other large language models. Regularly updated to reflect Claude's latest capabilities.",
+    link: "https://github.com/anthropics/prompt-eng-interactive-tutorial",
+    readTime: 4,
+    tags: ["Prompt Engineering", "Claude", "Anthropic", "LLM", "Interactive", "Free"],
+  },
+  {
+    id: "microsoft-ai-for-beginners",
+    slug: "microsoft-ai-for-beginners",
+    title: "AI for Beginners — 12-Week Curriculum",
+    type: "course",
+    provider: "Microsoft",
+    level: "beginner",
+    free: true,
+    description: "Microsoft's open-source 12-week, 24-lesson curriculum covering the full scope of AI for beginners. Includes symbolic AI, neural networks, computer vision, NLP, generative AI, and responsible AI. All lessons include Jupyter notebooks with Python and TensorFlow/PyTorch exercises. Used by hundreds of thousands of learners on GitHub. Ideal for developers transitioning into AI.",
+    link: "https://github.com/microsoft/AI-For-Beginners",
+    readTime: 50,
+    tags: ["Beginner", "Python", "Neural Networks", "Computer Vision", "NLP", "Microsoft", "Free"],
+  },
+  {
+    id: "deeplearning-ai-short-courses",
+    slug: "deeplearning-ai-short-courses",
+    title: "DeepLearning.AI Short Courses — Full Catalogue",
+    type: "course",
+    provider: "DeepLearning.AI",
+    level: "intermediate",
+    free: true,
+    description: "DeepLearning.AI's ever-expanding catalogue of free 1–3 hour short courses co-developed with leading AI companies including OpenAI, Anthropic, Google, Mistral, Meta, and AWS. Topics span prompt engineering, RAG, fine-tuning, AI agents, LangChain, vector databases, multimodal AI, and AI safety. Each course is taught by practitioners from the sponsoring company and includes hands-on coding exercises.",
+    link: "https://learn.deeplearning.ai",
+    readTime: 6,
+    tags: ["LLM", "Agents", "RAG", "Fine-tuning", "Practical", "Free", "Andrew Ng"],
+  },
 ];
 
 export const resourceTypes = ["All", "course", "youtube", "certification", "book", "tutorial"];

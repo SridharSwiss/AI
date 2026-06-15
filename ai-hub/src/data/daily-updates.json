@@ -1,69 +1,60 @@
 {
-  "date": "2026-06-14",
-  "summary": "Added 5 tools & companies, 15 case studies, South Korea AI Act, 2 learn resources, and 2 news sources.",
+  "date": "2026-06-15",
+  "summary": "Added 4 tools, 4 companies, 4 case studies, Japan AI Guidelines, 3 learn resources, and 3 news sources.",
   "changes": [
     {
       "category": "Tools",
       "icon": "chart",
       "items": [
-        "Copy.ai — AI-powered GTM marketing platform (17M+ users)",
-        "Azure AI Speech — Microsoft enterprise TTS/STT (400+ voices, 140+ languages)"
+        "LM Studio — run 100+ open-source LLMs locally, no cloud required",
+        "Dify — open-source visual LLM workflow & RAG builder (60K+ GitHub stars)",
+        "Poe — multi-model aggregator: GPT-4o, Claude, Gemini under one subscription",
+        "Glean — enterprise AI search across 100+ apps, $4.6B valuation"
       ]
     },
     {
       "category": "Companies",
       "icon": "chart",
       "items": [
-        "Anysphere (Cursor) — $9.9B valuation, 64% Fortune 500 penetration",
-        "Black Forest Labs (Flux) — Founded by Stable Diffusion creators",
-        "Suno — $5.4B valuation, AI music generation",
-        "Cognition AI (Devin) — $4B valuation, AI software engineer",
-        "Vercel — $3.25B valuation, v0 AI design tool",
-        "StackBlitz — Bolt.new full-stack AI coding"
+        "Writer — enterprise AI with own Palmyra LLMs, $1.9B valuation",
+        "Harvey AI — leading legal AI for law firms, $3B valuation",
+        "Twelve Labs — multimodal video understanding API, NVIDIA-backed",
+        "Poolside — code-focused AI via RL, $3B valuation"
       ]
     },
     {
       "category": "Case Studies",
       "icon": "chart",
       "items": [
-        "Microsoft 365 Copilot — $10B+ ARR, 29% faster email processing",
-        "Stripe Radar — ML fraud on $1T+ annual payments",
-        "DeepMind/NHS — AI eye disease detection matching senior ophthalmologists",
-        "Rolls-Royce TotalCare — 5-8% engine on-wing life extension",
-        "DHL AI Logistics — €300M+ annual savings",
-        "Walmart AI Supply Chain — $1B+ inventory savings",
-        "Tesla Autopilot/FSD — 600M+ miles/day autonomous data",
-        "Adobe Firefly — 12B+ images generated, IP indemnification"
+        "JPMorgan LLM Suite — 360,000 lawyer-hours saved, 50,000 employees on internal AI",
+        "Airbnb Smart Pricing — 13% host revenue uplift, 15-20% booking conversion lift",
+        "GitHub Copilot — $1B+ ARR, 55% faster coding, 1.8M+ paid subscribers",
+        "Google Gemini Enterprise — 1B+ Search AI Overviews users, 28% Cloud growth"
       ]
     },
     {
       "category": "Compliance",
       "icon": "shield",
       "items": [
-        "South Korea AI Basic Act — enacted Jan 2024, in force Jan 2026, first comprehensive AI law in East Asia outside China",
-        "Brazil AI Bill (PL 2338/2023) — Senate-passed, EU AI Act-inspired framework for 215M citizens"
+        "Japan METI AI Guidelines for Business — voluntary pro-innovation framework, April 2024"
       ]
     },
     {
       "category": "Learning",
       "icon": "book",
       "items": [
-        "Hugging Face Deep RL Course — free, 70K+ learners, DQN/PPO/Policy Gradient",
-        "AWS Skill Builder ML Foundations — free, SageMaker & Bedrock hands-on labs",
-        "Kaggle Learn — free interactive ML micro-courses",
-        "AI Agents in LangGraph — DeepLearning.AI agentic AI course",
-        "Build a Large Language Model From Scratch — Sebastian Raschka 2024"
+        "Anthropic Prompt Engineering Tutorial — official interactive course for Claude",
+        "Microsoft AI for Beginners — 12-week open-source curriculum, 24 lessons, free",
+        "DeepLearning.AI Short Courses — full catalogue co-developed with OpenAI, Anthropic, Google"
       ]
     },
     {
       "category": "News Sources",
       "icon": "news",
       "items": [
-        "IEEE Spectrum AI added to Tech feed",
-        "Meta AI Blog added to Research feed",
-        "Microsoft Research Blog added to Research feed",
-        "EU AI Office added to Government feed",
-        "Bloomberg Technology added to Financial feed"
+        "NEJM AI added to Medical feed",
+        "The Quantum Insider added to Quantum feed",
+        "UK AI Safety Institute added to Government feed"
       ]
     }
   ]
