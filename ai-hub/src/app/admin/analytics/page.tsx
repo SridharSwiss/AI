@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin as supabase } from "@/lib/supabase";
 import { Monitor, Smartphone, Tablet, Globe, Clock, MousePointer, TrendingUp, Users, FileText, ArrowUpRight, MapPin } from "lucide-react";
 import { WorldMap } from "./world-map";
 
