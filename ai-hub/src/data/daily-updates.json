@@ -1,60 +1,58 @@
 {
-  "date": "2026-06-15",
-  "summary": "Added 4 tools, 4 companies, 4 case studies, Japan AI Guidelines, 3 learn resources, and 3 news sources.",
+  "date": "2026-06-16",
+  "summary": "Added 3 tools, 3 companies, 4 case studies, UAE AI Strategy, 3 learn resources, and 3 news sources.",
   "changes": [
     {
       "category": "Tools",
       "icon": "chart",
       "items": [
-        "LM Studio — run 100+ open-source LLMs locally, no cloud required",
-        "Dify — open-source visual LLM workflow & RAG builder (60K+ GitHub stars)",
-        "Poe — multi-model aggregator: GPT-4o, Claude, Gemini under one subscription",
-        "Glean — enterprise AI search across 100+ apps, $4.6B valuation"
+        "Jan AI — open-source local AI desktop app, 1M+ downloads, fully offline",
+        "Open WebUI — most popular self-hosted Ollama web UI, 50K+ GitHub stars",
+        "Langfuse — open-source LLM observability, tracing & prompt management"
       ]
     },
     {
       "category": "Companies",
       "icon": "chart",
       "items": [
-        "Writer — enterprise AI with own Palmyra LLMs, $1.9B valuation",
-        "Harvey AI — leading legal AI for law firms, $3B valuation",
-        "Twelve Labs — multimodal video understanding API, NVIDIA-backed",
-        "Poolside — code-focused AI via RL, $3B valuation"
+        "CoreWeave — GPU cloud leader, $23B NASDAQ IPO, 250K+ NVIDIA GPUs",
+        "Databricks — $62B valuation, creators of Apache Spark, MLflow, DBRX",
+        "Luma AI — Dream Machine video generation, millions of videos in week 1"
       ]
     },
     {
       "category": "Case Studies",
       "icon": "chart",
       "items": [
-        "JPMorgan LLM Suite — 360,000 lawyer-hours saved, 50,000 employees on internal AI",
-        "Airbnb Smart Pricing — 13% host revenue uplift, 15-20% booking conversion lift",
-        "GitHub Copilot — $1B+ ARR, 55% faster coding, 1.8M+ paid subscribers",
-        "Google Gemini Enterprise — 1B+ Search AI Overviews users, 28% Cloud growth"
+        "Walmart AI Supply Chain — $1B+ annual savings at $648B scale",
+        "Spotify AI Recommendations — 31% of all streams driven by ML models",
+        "Uber Surge Pricing & Dispatch — 150M+ weekly trips, 10,000+ ML models",
+        "Tesla FSD v12 — end-to-end neural network, 5B+ real-world training miles"
       ]
     },
     {
       "category": "Compliance",
       "icon": "shield",
       "items": [
-        "Japan METI AI Guidelines for Business — voluntary pro-innovation framework, April 2024"
+        "UAE National AI Strategy 2031 — world's first AI Minister, sector-specific regulatory guidance"
       ]
     },
     {
       "category": "Learning",
       "icon": "book",
       "items": [
-        "Anthropic Prompt Engineering Tutorial — official interactive course for Claude",
-        "Microsoft AI for Beginners — 12-week open-source curriculum, 24 lessons, free",
-        "DeepLearning.AI Short Courses — full catalogue co-developed with OpenAI, Anthropic, Google"
+        "Karpathy: Intro to LLMs — 1-hour lecture, tokenization through RLHF, 3M+ views",
+        "OpenAI Spinning Up — deep RL tutorial with PPO/SAC implementations",
+        "Google Responsible AI Practices — fairness, interpretability & safety checklists"
       ]
     },
     {
       "category": "News Sources",
       "icon": "news",
       "items": [
-        "NEJM AI added to Medical feed",
-        "The Quantum Insider added to Quantum feed",
-        "UK AI Safety Institute added to Government feed"
+        "WSJ Technology added to Financial feed",
+        "CNBC Technology added to Financial feed",
+        "TLDR AI added to General feed"
       ]
     }
   ]

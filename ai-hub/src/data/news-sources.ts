@@ -240,6 +240,23 @@ export const newsSources: NewsSource[] = [
     website: "https://www.gov.uk/government/organisations/ai-safety-institute",
     description: "Safety research, evaluations, and policy guidance from the UK AI Safety Institute.",
   },
+  // Financial (additions)
+  {
+    id: "wsj-tech",
+    name: "WSJ Technology",
+    category: "Financial",
+    rssUrl: "https://feeds.a.dj.com/rss/RSSWSJD.xml",
+    website: "https://www.wsj.com/tech",
+    description: "Technology and AI business coverage from The Wall Street Journal including investment trends and market analysis.",
+  },
+  {
+    id: "cnbc-tech",
+    name: "CNBC Technology",
+    category: "Financial",
+    rssUrl: "https://www.cnbc.com/id/19854910/device/rss/rss.html",
+    website: "https://www.cnbc.com/technology",
+    description: "Real-time AI and technology business news from CNBC covering markets, earnings, and enterprise AI deals.",
+  },
   // General
   {
     id: "ai-news",
@@ -264,6 +281,14 @@ export const newsSources: NewsSource[] = [
     rssUrl: "https://the-decoder.com/feed/",
     website: "https://the-decoder.com",
     description: "AI news and research coverage from The Decoder.",
+  },
+  {
+    id: "tldr-ai",
+    name: "TLDR AI",
+    category: "General",
+    rssUrl: "https://tldr.tech/ai/rss",
+    website: "https://tldr.tech/ai",
+    description: "Daily AI newsletter with concise summaries of the most important AI news, research, and tools.",
   },
 ];
 

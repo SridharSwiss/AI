@@ -6,8 +6,9 @@ import { caseStudiesDataInsurance } from "./case-studies-data-insurance";
 import { caseStudiesData3 } from "./case-studies-data-3";
 import { caseStudiesData4 } from "./case-studies-data-4";
 import { caseStudiesData5 } from "./case-studies-data-5";
+import { caseStudiesData6 } from "./case-studies-data-6";
 
-export const caseStudies: CaseStudyData[] = [...caseStudiesData1, ...caseStudiesData2, ...caseStudiesDataInsurance, ...caseStudiesData3, ...caseStudiesData4, ...caseStudiesData5];
+export const caseStudies: CaseStudyData[] = [...caseStudiesData1, ...caseStudiesData2, ...caseStudiesDataInsurance, ...caseStudiesData3, ...caseStudiesData4, ...caseStudiesData5, ...caseStudiesData6];
 
 export const caseStudyIndustries = [
   "All",

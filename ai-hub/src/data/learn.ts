@@ -1027,6 +1027,47 @@ export const learnResources: LearnResource[] = [
     tags: ["AWS", "SageMaker", "Bedrock", "Machine Learning", "Cloud", "Free"],
   },
 
+  // ─── ADDITIONAL 2025 ADDITIONS ────────────────────────────────────────────
+  {
+    id: "karpathy-intro-to-llms",
+    slug: "karpathy-intro-to-llms",
+    title: "Intro to Large Language Models",
+    type: "youtube",
+    provider: "Andrej Karpathy",
+    level: "intermediate",
+    free: true,
+    description: "Andrej Karpathy's widely shared 1-hour lecture giving a clear, no-fluff mental model of what LLMs are and how they work — covering tokenization, transformer architecture, pretraining, fine-tuning, RLHF, emergent capabilities, and practical LLM system security risks. Considered one of the best single-video introductions to LLMs for engineers who already know the basics of ML. Viewed 3M+ times.",
+    link: "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+    readTime: 1,
+    tags: ["LLM", "Transformers", "RLHF", "Emergent Capabilities", "Practical"],
+  },
+  {
+    id: "openai-spinning-up-rl",
+    slug: "openai-spinning-up-rl",
+    title: "Spinning Up in Deep RL",
+    type: "tutorial",
+    provider: "OpenAI",
+    level: "advanced",
+    free: true,
+    description: "OpenAI's comprehensive educational resource for deep reinforcement learning. Covers the fundamentals of RL theory, key algorithms (VPG, TRPO, PPO, DDPG, TD3, SAC), and hands-on implementations in PyTorch. Includes a curated reading list of landmark papers and documentation on running your own RL experiments. The gold-standard starting point for serious RL research and RLHF practitioners.",
+    link: "https://spinningup.openai.com",
+    readTime: 40,
+    tags: ["Reinforcement Learning", "PPO", "SAC", "PyTorch", "RLHF", "Advanced"],
+  },
+  {
+    id: "google-responsible-ai-practices",
+    slug: "google-responsible-ai-practices",
+    title: "Responsible AI Practices",
+    type: "tutorial",
+    provider: "Google",
+    level: "intermediate",
+    free: true,
+    description: "Google's official responsible AI documentation and best practices, covering fairness, interpretability, privacy, security, and safety in ML systems. Includes practical guidance on identifying and mitigating bias in training data, model interpretability techniques, and checklists for responsible AI product development. Essential reference for teams building production AI systems that must meet ethical and regulatory standards.",
+    link: "https://ai.google/responsibility/responsible-ai-practices/",
+    readTime: 3,
+    tags: ["Responsible AI", "Fairness", "Interpretability", "Bias", "Ethics", "Google"],
+  },
+
   // ─── NEW ADDITIONS ─────────────────────────────────────────────────────────
   {
     id: "anthropic-prompt-engineering-interactive",

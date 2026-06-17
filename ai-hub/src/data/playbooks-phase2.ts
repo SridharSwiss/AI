@@ -1093,5 +1093,265 @@ export const phase2: Phase = {
         },
       ],
     },
+    {
+      title: "Prompt Engineering & LLM Integration Playbook",
+      level: "practitioner",
+      desc: "Design, test, and govern LLM prompts for production use cases.",
+      guidance: "Prompt engineering is engineering. Apply the same rigour you would to any software component: version control, testing, failure mode analysis, and monitoring. A prompt that works in a demo will fail in production without systematic development and regression testing.",
+      checklist: [
+        {
+          item: "Define the task, input/output schema, and acceptance criteria",
+          templateTitle: "LLM Task Specification Template",
+          templateType: "template",
+          instructions: "Specify the task precisely before writing a single prompt. Ambiguous task definitions produce ambiguous prompts. A clear spec also defines your test cases before you start.",
+          sections: [
+            {
+              heading: "Task Definition",
+              items: [
+                "Task name: ___________________ | Owner: ___ | Date: ___",
+                "Task description (one sentence): ___________________________",
+                "Input format: ☐ Free text  ☐ Structured JSON  ☐ Document  ☐ Table  ☐ Code  ☐ Multi-modal: ___",
+                "Output format: ☐ Free text  ☐ JSON  ☐ Classification label  ☐ Structured list  ☐ Code  ☐ Other: ___",
+                "Output schema (define fields, types, and constraints): ___________________________",
+                "Expected output length: Min ___ tokens | Max ___ tokens | Ideal: ___",
+              ],
+            },
+            {
+              heading: "Acceptance Criteria",
+              items: [
+                "Success definition (what does a correct output look like): ___________________________",
+                "Failure modes to prevent (what outputs are unacceptable): ___________________________",
+                "Edge cases to handle: ___________________________",
+                "Human evaluation rubric (1–5 on each): Accuracy ___ | Completeness ___ | Tone ___ | Format adherence ___",
+                "Minimum acceptable human eval score: ___ / 5 average | Pass/fail threshold on automated tests: ___",
+              ],
+            },
+            {
+              heading: "Constraints & Guardrails",
+              items: [
+                "Topics the LLM must never address in this context: ___________________________",
+                "Tone / persona required: ☐ Formal  ☐ Conversational  ☐ Technical  ☐ Empathetic  ☐ Custom: ___",
+                "Language / locale constraints: ___________________________",
+                "PII / sensitive data handling: ☐ Redact before sending  ☐ Never reference  ☐ Not applicable",
+                "Safety guardrails: ☐ Profanity filter  ☐ Jailbreak resistance testing  ☐ Factual grounding check",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Select and justify the LLM model and API provider",
+          templateTitle: "LLM Model Selection Scorecard",
+          templateType: "scorecard",
+          instructions: "Model selection is a performance, cost, and compliance decision — not just a capability one. Test on your actual data before committing. Latency and cost at scale often eliminate options that look good in demos.",
+          sections: [
+            {
+              heading: "Model Evaluation Criteria (Rate 1–5)",
+              items: [
+                "Task accuracy on your sample inputs: Vendor A: ___ / 5 | Vendor B: ___ / 5 | Vendor C: ___ / 5",
+                "Output format compliance (follows schema): Vendor A: ___ | Vendor B: ___ | Vendor C: ___",
+                "Latency p50 at expected load (ms): Vendor A: ___ | Vendor B: ___ | Vendor C: ___",
+                "Context window size (tokens): Vendor A: ___ | Vendor B: ___ | Vendor C: ___",
+                "Cost per 1M tokens (input/output): Vendor A: £/$ ___ / ___ | Vendor B: £/$ ___ / ___ | Vendor C: £/$ ___ / ___",
+                "Data residency and DPA available: Vendor A: ☐ Yes  ☐ No | Vendor B: ☐ Yes  ☐ No | Vendor C: ☐ Yes  ☐ No",
+              ],
+            },
+            {
+              heading: "Selection Decision",
+              items: [
+                "Selected model: ___________________ | Provider: ___",
+                "Rationale for selection (top 3 reasons): 1) ___ 2) ___ 3) ___",
+                "Estimated monthly token cost at expected volume (___ requests/day): £/$ ___",
+                "Fallback model if primary unavailable: ___________________ | Switch trigger: ___",
+                "Approved by: ___ (Tech Lead) | ___ (PM) | Date: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Develop and iterate the system prompt using structured techniques",
+          templateTitle: "System Prompt Development Worksheet",
+          templateType: "worksheet",
+          instructions: "Start with a minimal prompt and add complexity only when tests reveal gaps. More words in a prompt do not equal better output — precision beats length. Version every prompt change.",
+          sections: [
+            {
+              heading: "Prompt Components Checklist",
+              items: [
+                "Role / persona: 'You are a [role] who [key attribute].' — sets model behaviour register",
+                "Context: Relevant background the model needs that it cannot infer from the input alone",
+                "Task instruction: Precise, imperative verb ('Summarise', 'Extract', 'Classify', 'Translate') — not vague ('Help with')",
+                "Output format specification: 'Respond with a JSON object with the following fields: ...' — explicit schema reduces format errors >60%",
+                "Examples (few-shot): 1–5 input/output pairs that demonstrate edge cases, not just easy cases",
+                "Constraints / guardrails: 'Do not infer information not present in the input. If uncertain, output null for that field.'",
+              ],
+            },
+            {
+              heading: "Prompt Iteration Log",
+              items: [
+                "Prompt v1.0 | Date: ___ | Change: initial draft | Test score: ___ / 5 | Key failures: ___",
+                "Prompt v1.1 | Date: ___ | Change: ___ | Test score: ___ / 5 | Key failures: ___",
+                "Prompt v1.2 | Date: ___ | Change: ___ | Test score: ___ / 5 | Key failures: ___",
+                "Prompt v2.0 | Date: ___ | Change: major revision — reason: ___ | Test score: ___ / 5",
+                "Production-approved version: ___ | Approved by: ___ | Date: ___",
+                "Prompt stored in version control at: ___________________ | Review cadence: ___",
+              ],
+            },
+            {
+              heading: "Common Failure Patterns & Fixes",
+              items: [
+                "HALLUCINATION: LLM invents facts not in input → Fix: add 'Only use information present in the provided text. Output null if information is absent.'",
+                "FORMAT NON-COMPLIANCE: Output ignores schema → Fix: add explicit format instruction with a complete example; use JSON mode if available",
+                "INSTRUCTION FOLLOWING: Model ignores specific constraints → Fix: move constraint to start of prompt; use XML tags to demarcate sections; repeat critical constraint at end",
+                "INCONSISTENCY: Same input produces different outputs → Fix: reduce temperature to 0.0–0.3; add more few-shot examples for ambiguous cases",
+                "OVER-REFUSAL: Model refuses reasonable inputs → Fix: adjust system prompt framing; review safety configuration for your API tier",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Build a regression test suite for prompt changes",
+          templateTitle: "LLM Prompt Test Suite Design",
+          templateType: "template",
+          instructions: "Every prompt change must be tested against the full test suite before deployment. A regression suite catches prompt degradation that is invisible to manual review of a few examples. Aim for ≥50 test cases covering normal, edge, and adversarial inputs.",
+          sections: [
+            {
+              heading: "Test Case Categories",
+              items: [
+                "HAPPY PATH (50% of suite): Typical inputs the prompt was designed for | Expected: correct, well-formatted output",
+                "EDGE CASES (25%): Unusual but valid inputs (very long, very short, non-English, numeric, empty fields)",
+                "ADVERSARIAL (15%): Inputs designed to break the prompt (prompt injection attempts, off-topic inputs, conflicting instructions in input text)",
+                "REGRESSION (10%): Inputs that previously caused known failures — must pass on every version",
+                "Total test cases: ___ | Minimum recommended: 50 | Distribution: ___ happy / ___ edge / ___ adversarial / ___ regression",
+              ],
+            },
+            {
+              heading: "Automated Evaluation Setup",
+              items: [
+                "Evaluation method: ☐ Exact match (classification tasks)  ☐ JSON schema validation  ☐ LLM-as-judge  ☐ Human eval sample  ☐ Hybrid",
+                "LLM-as-judge prompt (if used): 'You are evaluating the quality of an AI output against the reference answer. Rate 1–5 on accuracy, completeness, and format adherence.'",
+                "Pass threshold for automated tests: ___% of test suite passing (recommended: ≥90%)",
+                "CI integration: Test suite runs automatically on: ☐ Every prompt commit  ☐ Pre-deployment gate  ☐ Daily scheduled run",
+                "Test results storage: Location: ___ | Owner: ___ | Review cadence: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Implement cost controls and token usage monitoring",
+          templateTitle: "LLM Cost Control & Monitoring Plan",
+          templateType: "template",
+          instructions: "LLM costs grow super-linearly with usage. Token costs that seem trivial at pilot scale become significant at production scale. Implement controls before go-live, not when the first invoice surprises you.",
+          sections: [
+            {
+              heading: "Token Budget by Request Type",
+              items: [
+                "System prompt tokens (fixed cost per request): ___ tokens | Optimise if >500 tokens",
+                "Input context tokens (variable): Average: ___ tokens | Max: ___ tokens | P99: ___ tokens",
+                "Output tokens: Average: ___ tokens | Max: ___ tokens | Set max_tokens cap: ___",
+                "Total cost per request: (___ input + ___ output tokens) × £/$ ___ / 1M = £/$ ___ per request",
+                "At ___ requests/day = £/$ ___ /day | £/$ ___ /month | Alert if exceeds: £/$ ___ /day",
+              ],
+            },
+            {
+              heading: "Cost Optimisation Checklist",
+              items: [
+                "☐ System prompt compressed to minimum required length (remove redundant instructions)",
+                "☐ Input truncation applied: Long documents chunked or summarised before sending",
+                "☐ Caching enabled for identical or near-identical inputs: Tool: ___ | Cache hit rate target: ___%",
+                "☐ Smaller/cheaper model used for simpler subtasks (e.g. classification vs generation)",
+                "☐ Batch API used for non-real-time use cases (typically 50% cost reduction)",
+                "☐ Budget alerts configured: ☐ Daily cap at £/$ ___ | ☐ Monthly budget at £/$ ___",
+                "☐ Cost dashboard reviewed weekly by: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Define hallucination detection and output validation",
+          templateTitle: "LLM Output Validation Framework",
+          templateType: "framework",
+          instructions: "LLMs can produce plausible-sounding but factually incorrect outputs. For high-stakes use cases, automated validation must catch hallucinations before they reach users. No LLM output should be treated as ground truth without validation proportional to the stakes.",
+          sections: [
+            {
+              heading: "Validation Layers (apply in order)",
+              items: [
+                "LAYER 1 — Format validation: Does the output conform to the required schema? JSON parse check | Required fields present | Data types correct | Automated; fast; catches ~30% of failures",
+                "LAYER 2 — Grounding check: Does the output reference only information present in the input? Use extractive comparison or a secondary LLM judge | Catches hallucinated facts",
+                "LAYER 3 — Factual consistency: For outputs that include specific claims, verify against a trusted knowledge base or retrieval system (RAG pattern)",
+                "LAYER 4 — Business rule validation: Does the output violate any domain-specific rules? (e.g. regulatory constraints, out-of-range values, prohibited terms) — code-based rules; fast",
+                "LAYER 5 — Human review: For high-stakes outputs or low-confidence outputs (confidence score below threshold), route to human review queue",
+              ],
+            },
+            {
+              heading: "Confidence Thresholds & Routing",
+              items: [
+                "High confidence (>___): Send directly to user | Log for monitoring",
+                "Medium confidence (___–___): Send to user with disclosure: 'This output was generated by AI and may require verification.' | Flag for sampling review",
+                "Low confidence (<___): Route to human review queue before delivery | SLA: ___ hours",
+                "Confidence signal source: ☐ LLM log-probs  ☐ Secondary LLM judge score  ☐ Consistency check across N samples  ☐ Semantic similarity to training distribution",
+                "Fallback behaviour when validation fails: ___________________________",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Set up LLM observability and production monitoring",
+          templateTitle: "LLM Observability Setup Guide",
+          templateType: "template",
+          instructions: "LLM applications require different monitoring from traditional software. You must observe prompt/response pairs, latency, cost, and output quality — not just error rates and uptime.",
+          sections: [
+            {
+              heading: "What to Log per LLM Call",
+              items: [
+                "Timestamp | Request ID | Model name and version | System prompt hash (not full prompt if PII risk)",
+                "Input token count | Output token count | Total cost for this call",
+                "Latency (ms) — time-to-first-token and total response time",
+                "Output quality signals: format validation result | grounding check result | confidence score",
+                "User feedback (if collected): ☐ Thumbs up/down  ☐ Star rating  ☐ Free text correction",
+                "Sampling strategy: Log 100% of calls in pilot | Log 10% of calls at scale + 100% of flagged calls",
+              ],
+            },
+            {
+              heading: "Monitoring Metrics & Alerts",
+              items: [
+                "Format compliance rate: Target ≥___% | Alert if drops below ___% in ___ hour window",
+                "Average response latency: Target ≤___ ms p50 | Alert if p99 exceeds ___ ms",
+                "Daily token spend: Alert if exceeds £/$ ___ /day",
+                "Hallucination / grounding failure rate: Target <___% | Alert if exceeds ___% in rolling ___ hours",
+                "User negative feedback rate: Target <___% | Alert if exceeds ___%",
+                "Monitoring tool: ☐ LangSmith  ☐ Helicone  ☐ Arize Phoenix  ☐ Custom logging  ☐ Other: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Define prompt governance: versioning, access, and change control",
+          templateTitle: "Prompt Governance Policy",
+          templateType: "template",
+          instructions: "Prompts are code. Apply the same governance to prompt changes as to any other production code change. An unapproved prompt change in a high-risk application is an unapproved model change.",
+          sections: [
+            {
+              heading: "Version Control Requirements",
+              items: [
+                "All production prompts stored in: ☐ Git repository  ☐ Dedicated prompt management platform (LangChain Hub, PromptLayer, etc.)  ☐ Other: ___",
+                "Naming convention: [use-case]-[version]-[environment] e.g. invoice-extraction-v2.1-prod",
+                "Change log required for every version: what changed, why, who approved, test results",
+                "Rollback capability: Must be able to revert to any previous prompt version within ___ minutes",
+                "Prompt registry location: ___________________ | Owner: ___ | Access: ___",
+              ],
+            },
+            {
+              heading: "Change Control Process",
+              items: [
+                "Who can edit production prompts: ☐ ML engineers only  ☐ Any engineer with PR review  ☐ Named individuals: ___",
+                "Required approvals before production deployment: Tech Lead ☐ | PM ☐ | Ethics review (if output affects users) ☐",
+                "Mandatory test suite pass rate before promotion: ___% | Reviewer of test results: ___",
+                "Emergency change process (e.g. active hallucination in production): ___ can approve within ___ hours | RCA required within 48 hours",
+                "Audit trail: All prompt changes logged with author, timestamp, test evidence | Retained for: ___ years",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
