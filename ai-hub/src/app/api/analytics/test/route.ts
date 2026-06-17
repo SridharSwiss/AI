@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin as supabase } from "@/lib/supabase";
 
 export async function GET(req: NextRequest) {
   const key = req.nextUrl.searchParams.get("key");
@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
   checks.SUPABASE_URL = process.env.SUPABASE_URL ? "✓ set" : "✗ MISSING";
   checks.SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY ? "✓ set" : "✗ MISSING";
   checks.ANALYTICS_ADMIN_KEY = process.env.ANALYTICS_ADMIN_KEY ? "✓ set" : "✗ MISSING";
+  checks.SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ? "✓ set" : "✗ MISSING — dashboard reads will fail";
 
   // Test Supabase connection — sessions table
   const { data: sessions, error: sessErr } = await supabase
