@@ -1108,6 +1108,47 @@ export const learnResources: LearnResource[] = [
     readTime: 6,
     tags: ["LLM", "Agents", "RAG", "Fine-tuning", "Practical", "Free", "Andrew Ng"],
   },
+
+  // ─── NEW ADDITIONS ─────────────────────────────────────────────────────────
+  {
+    id: "stanford-cs25-transformers",
+    slug: "stanford-cs25-transformers",
+    title: "Stanford CS25: Transformers United — Lecture Series",
+    type: "course",
+    provider: "Stanford University",
+    level: "advanced",
+    free: true,
+    description: "Stanford's CS25 seminar series bringing together leading researchers to explain and extend the Transformer architecture. Lectures cover attention mechanisms, vision transformers (ViT), language model scaling, multimodal transformers, protein structure prediction (AlphaFold), and the latest research frontiers. Guest speakers have included researchers from DeepMind, OpenAI, Google Brain, and Meta AI. All lectures are freely available on YouTube and the course website. Essential for engineers who want to understand frontier model architectures at a research depth.",
+    link: "https://web.stanford.edu/class/cs25/",
+    readTime: 30,
+    tags: ["Transformers", "Architecture", "Research", "Advanced", "Stanford", "Free", "Attention"],
+  },
+  {
+    id: "google-gemini-api-cookbook",
+    slug: "google-gemini-api-cookbook",
+    title: "Google Gemini API Cookbook",
+    type: "tutorial",
+    provider: "Google",
+    level: "intermediate",
+    free: true,
+    description: "Google's official open-source cookbook for the Gemini API, with 100+ Jupyter notebook examples covering multimodal prompting, function calling, code execution, long-context document analysis, grounding with Google Search, embeddings, and Gemini integration with LangChain and LlamaIndex. Kept continuously updated as new Gemini capabilities launch. The fastest path to production-ready Gemini integrations for developers building with Google AI Studio or Vertex AI.",
+    link: "https://github.com/google-gemini/cookbook",
+    readTime: 5,
+    tags: ["Gemini", "Google", "Multimodal", "API", "Cookbook", "Free", "LangChain"],
+  },
+  {
+    id: "simon-willison-llm-blog",
+    slug: "simon-willison-llm-blog",
+    title: "Simon Willison's Weblog — LLM and AI Coverage",
+    type: "tutorial",
+    provider: "Simon Willison",
+    level: "intermediate",
+    free: true,
+    description: "Simon Willison (co-creator of Django) maintains one of the most practical and technically rigorous independent blogs covering LLMs, AI tools, and AI safety. Posts cover hands-on experiments with every major model release, the LLM CLI tool (a Python CLI for running local and API-based LLMs), prompt injection attacks, retrieval-augmented generation, and critical analysis of AI company claims. Essential reading for developers who want opinionated, practitioner-level AI coverage without hype.",
+    link: "https://simonwillison.net/tags/llms/",
+    readTime: 3,
+    tags: ["LLM", "Practical", "AI Safety", "Prompt Injection", "Blog", "Free", "Tools"],
+  },
 ];
 
 export const resourceTypes = ["All", "course", "youtube", "certification", "book", "tutorial"];

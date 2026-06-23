@@ -257,6 +257,32 @@ export const newsSources: NewsSource[] = [
     website: "https://www.cnbc.com/technology",
     description: "Real-time AI and technology business news from CNBC covering markets, earnings, and enterprise AI deals.",
   },
+  // Medical (additions)
+  {
+    id: "jmir-ai",
+    name: "JMIR AI",
+    category: "Medical",
+    rssUrl: "https://ai.jmir.org/articles/rss",
+    website: "https://ai.jmir.org",
+    description: "Peer-reviewed research on AI and machine learning in medicine, nursing, and digital health from the Journal of Medical Internet Research.",
+  },
+  // Quantum (additions)
+  {
+    id: "quanta-magazine-physics",
+    name: "Quanta Magazine — Physics & Quantum",
+    category: "Quantum",
+    rssUrl: "https://api.quantamagazine.org/feed/",
+    website: "https://www.quantamagazine.org",
+    description: "In-depth science journalism covering quantum computing, quantum information, and foundational physics research.",
+  },
+  {
+    id: "aps-physics-quantum",
+    name: "Physical Review Letters — Quantum",
+    category: "Quantum",
+    rssUrl: "https://feeds.aps.org/rss/recent/prl.xml",
+    website: "https://journals.aps.org/prl/",
+    description: "High-impact quantum computing and quantum information research from the American Physical Society's flagship journal.",
+  },
   // General
   {
     id: "ai-news",

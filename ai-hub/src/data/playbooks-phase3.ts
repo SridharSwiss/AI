@@ -1304,5 +1304,242 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "Data Pipeline & Feature Engineering Playbook",
+      level: "practitioner",
+      desc: "Build reliable, reproducible ML data pipelines from raw data to model-ready features.",
+      guidance: "The majority of ML project time is spent on data — collecting, cleaning, transforming, and engineering features. A poorly designed data pipeline creates technical debt that multiplies as you scale. This playbook takes you from raw source data through a production-grade feature store, with reproducibility, data validation, and monitoring built in from day one.",
+      checklist: [
+        {
+          item: "Audit and document all upstream data sources",
+          templateTitle: "Data Source Inventory & Contract Template",
+          templateType: "template",
+          instructions: "Map every upstream data source your pipeline will consume. Capture schema, freshness SLA, owner, and known quality issues before writing a single line of pipeline code. Surprises here become production incidents later.",
+          sections: [
+            {
+              heading: "Source Inventory Table",
+              items: [
+                "Source name | Type | Owner | Update frequency | Format | Access method | SLA | Known issues",
+                "Example: orders_db | PostgreSQL | Data Eng | Real-time CDC | rows | Airbyte connector | <5 min lag | NULL product_id ~0.3%",
+                "Example: product_events_s3 | Parquet files | Platform Eng | Hourly batch | Parquet | S3 SDK | <2 hr | Late arrivals up to 4 hr",
+                "→ Add one row per source consumed by this pipeline",
+              ],
+            },
+            {
+              heading: "Data Contract per Source",
+              items: [
+                "Schema version and owner: ___________________________",
+                "Breaking change notification process: ☐ Slack alert  ☐ Jira ticket  ☐ No formal process — flag as risk",
+                "Schema drift handling strategy: ☐ Fail pipeline  ☐ Quarantine rows  ☐ Apply defaults  ☐ Alert only",
+                "Upstream team contact for incidents: ___________________________",
+                "Data SLA breach escalation path: ___________________________",
+              ],
+            },
+            {
+              heading: "Ingestion Risk Assessment",
+              items: [
+                "Sources with no SLA or owner: ___ — action: establish contact before pipeline build",
+                "Sources with known late-arrival patterns: ___ — action: add watermark tolerance of ___ hours",
+                "Sources requiring PII handling: ___ — action: apply pseudonymisation at ingestion layer",
+                "Sources prone to schema changes without notice: ___ — action: add schema validation gate at entry point",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Design and implement data validation checks",
+          templateTitle: "Pipeline Data Quality Gate Specification",
+          templateType: "template",
+          instructions: "Define explicit pass/fail quality gates at each pipeline stage. Never let bad data silently propagate to model training. Use Great Expectations, Soda, or dbt tests — the tool matters less than having gates at all.",
+          sections: [
+            {
+              heading: "Validation Gate Locations",
+              items: [
+                "Gate 1 — At ingestion: raw source data before any transformation",
+                "Gate 2 — Post-transformation: cleaned and joined data before feature engineering",
+                "Gate 3 — Feature layer: final feature set before training data export",
+                "Gate 4 — Training data: final train/val/test split before model consumption",
+                "Validation tool selected: ☐ Great Expectations  ☐ Soda Core  ☐ dbt tests  ☐ Custom  ☐ Other: ___",
+              ],
+            },
+            {
+              heading: "Standard Checks per Gate (customise per use case)",
+              items: [
+                "NULL rate: ___ column must have null_rate < ___% — action on breach: ☐ Fail  ☐ Warn  ☐ Quarantine",
+                "Row count: expect row count between ___ and ___ — deviation triggers: ___",
+                "Value range: ___ column must be between ___ and ___ — outlier action: ___",
+                "Referential integrity: ___ column must match ___ lookup — orphan action: ___",
+                "Freshness: newest record in ___ must be less than ___ hours old — stale action: ___",
+                "Uniqueness: ___ column(s) must be unique — duplicate action: ___",
+              ],
+            },
+            {
+              heading: "Breach Handling & Alerting",
+              items: [
+                "Hard failure (pipeline stops): criteria: ___________________________",
+                "Soft warning (pipeline continues, alert sent): criteria: ___________________________",
+                "Alert destination: ☐ Slack #data-alerts  ☐ PagerDuty  ☐ Email  ☐ Monitoring dashboard",
+                "On-call owner for pipeline failures: ___________________ | Escalation: ___",
+                "Quarantine bucket/table for failed records: ___________________________",
+                "SLA for resolving hard failures: ___ hours | Owner: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Build reproducible feature engineering transforms",
+          templateTitle: "Feature Engineering Specification Sheet",
+          templateType: "template",
+          instructions: "Document every feature transformation so it can be reproduced exactly at training time and inference time. The training–serving skew problem (different features at train vs. serve) is one of the most common sources of silent model degradation. This spec is your single source of truth.",
+          sections: [
+            {
+              heading: "Feature Definition Table",
+              items: [
+                "Feature name | Source column(s) | Transform logic | Dtype | Range/cardinality | Null handling | Owner",
+                "Example: user_purchase_count_30d | orders.user_id, orders.created_at | COUNT(*) WHERE created_at > NOW()-30d GROUP BY user_id | INT | 0–5000 | Fill 0 (new users) | DS: Jane",
+                "Example: product_category_encoded | products.category | LabelEncoder fitted on train set — MUST use same fitted encoder at serve time | INT | 0–47 | Fill -1 (unknown) | DS: Jane",
+                "→ Document all ___ features in this format before implementation",
+              ],
+            },
+            {
+              heading: "Training–Serving Parity Controls",
+              items: [
+                "Feature computation is identical at train and serve time: ☐ Verified  ☐ Not yet checked",
+                "Fitted encoders/scalers serialised and versioned alongside model: ☐ Yes  ☐ No — action required",
+                "Point-in-time correctness ensured (no future leakage): ☐ Yes  ☐ No — describe risk: ___",
+                "Time-based features use UTC timestamps consistently: ☐ Yes  ☐ No",
+                "Train/validation/test split method: ☐ Random  ☐ Time-ordered (recommended for time series)  ☐ Group-aware",
+                "Data leakage review completed: ☐ Yes — reviewer: ___  ☐ No",
+              ],
+            },
+            {
+              heading: "Feature Importance & Pruning",
+              items: [
+                "Baseline feature importance run (SHAP / permutation importance): ☐ Yes  ☐ Pending",
+                "Features with importance < threshold to drop: ___________________________",
+                "Highly correlated feature pairs (r > 0.95) to de-duplicate: ___________________________",
+                "Final feature count approved for training: ___",
+                "Feature set sign-off: Data Scientist ___ | ML Engineer ___ | Date ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Implement feature store or shared feature layer",
+          templateTitle: "Feature Store Adoption Decision & Setup Checklist",
+          templateType: "template",
+          instructions: "A feature store centralises feature computation, enables sharing across teams, and eliminates training–serving skew at scale. Evaluate whether you need a dedicated feature store now or can start with a simpler shared feature table approach.",
+          sections: [
+            {
+              heading: "Feature Store Need Assessment",
+              items: [
+                "Number of models sharing features: ___ — if >2, a feature store significantly reduces duplication",
+                "Real-time serving latency requirement: ☐ <100ms (needs online store)  ☐ <1s  ☐ Batch only (offline store sufficient)",
+                "Team size writing features: ___ — if >3 data scientists, governance becomes critical",
+                "Decision: ☐ Dedicated feature store  ☐ Shared dbt feature tables  ☐ Per-project feature scripts (small scale only)",
+              ],
+            },
+            {
+              heading: "Feature Store Options",
+              items: [
+                "Feast (open source): ☐ Consider — good for offline+online, Kubernetes-native, free",
+                "Hopsworks: ☐ Consider — managed option, strong governance, enterprise support",
+                "Tecton: ☐ Consider — enterprise, real-time first, high cost",
+                "Databricks Feature Store: ☐ Consider — if already on Databricks",
+                "dbt + Snowflake/BigQuery materialised views: ☐ Consider — simplest, batch-only but often sufficient",
+                "Selected approach: ___________________ | Rationale: ___",
+              ],
+            },
+            {
+              heading: "Feature Registration & Governance",
+              items: [
+                "Feature naming convention agreed: ☐ Yes — convention: ___  ☐ No — agree before first feature registered",
+                "Feature description and owner required fields: ☐ Enforced  ☐ Recommended  ☐ Not required",
+                "Stale feature detection: alert if feature not updated within ___ hours",
+                "Feature deprecation process: ___ weeks notice + migration guide required",
+                "Access control: ☐ All features open to all teams  ☐ ACL by feature group  ☐ Managed by platform team",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Set up pipeline orchestration and scheduling",
+          templateTitle: "Pipeline Orchestration Setup Checklist",
+          templateType: "template",
+          instructions: "Choose an orchestration framework and set up dependency management, scheduling, retry logic, and alerting. Ad-hoc scripts run manually are not production pipelines.",
+          sections: [
+            {
+              heading: "Orchestration Tool Selection",
+              items: [
+                "Apache Airflow: ☐ Consider — most widely adopted, rich operator ecosystem, self-hosted complexity",
+                "Prefect: ☐ Consider — Python-native, easier setup than Airflow, cloud managed option",
+                "Dagster: ☐ Consider — asset-centric model, excellent observability, modern DX",
+                "Mage: ☐ Consider — lower barrier to entry, good for smaller teams",
+                "Cloud-native (Step Functions / Cloud Composer / Dataflow): ☐ Consider — if deep in a single cloud",
+                "Selected tool: ___________________ | Rationale: ___________________ | Managed or self-hosted: ___",
+              ],
+            },
+            {
+              heading: "Pipeline Configuration Standards",
+              items: [
+                "All pipeline code in version control: ☐ Yes  ☐ No — required before production",
+                "DAG / flow definitions reviewed in PR before merge: ☐ Yes  ☐ No",
+                "Retry policy: max ___ retries | backoff: ___ min exponential | alert after ___ failures",
+                "Timeout per task: ___ min | timeout per full run: ___ min",
+                "Pipeline run concurrency limit: ___",
+                "Backfill strategy for missed runs: ☐ Auto-backfill  ☐ Manual trigger  ☐ Skip",
+              ],
+            },
+            {
+              heading: "Monitoring & SLA Enforcement",
+              items: [
+                "Pipeline SLA (must complete by): ___ daily / ___ for each run",
+                "SLA miss alert destination: ___________________________",
+                "Dashboard for pipeline health: ☐ Airflow UI  ☐ Grafana  ☐ Datadog  ☐ Other: ___",
+                "Runbook for each pipeline failure mode: ☐ Written  ☐ In progress  ☐ Not yet",
+                "On-call rotation covering pipeline failures: ☐ Yes  ☐ No — assign owner before go-live",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Document pipeline lineage and create data dictionary",
+          templateTitle: "Pipeline Lineage & Data Dictionary Template",
+          templateType: "template",
+          instructions: "Lineage tracks where data comes from and what transforms it. A data dictionary defines what every field means. Both are essential for debugging, compliance, and onboarding new team members. Many organisations skip this until a production incident forces them to rebuild it under pressure.",
+          sections: [
+            {
+              heading: "Lineage Diagram",
+              items: [
+                "Source systems → ingestion layer → raw zone → transformation layer → feature layer → model input",
+                "Lineage documentation tool: ☐ OpenLineage / Marquez  ☐ dbt lineage graph  ☐ DataHub  ☐ Atlan  ☐ Manual diagram  ☐ Other: ___",
+                "Every transformation step has: named owner ☐ | version ☐ | description ☐ | last-updated timestamp ☐",
+                "Impact analysis: can we trace which models are affected by a source schema change: ☐ Yes  ☐ No — gap",
+              ],
+            },
+            {
+              heading: "Data Dictionary (per key table/feature set)",
+              items: [
+                "Field name | Business definition | Data type | Example values | Null allowed | Source | Last updated",
+                "Example: user_lifetime_value_usd | Total revenue attributed to user since first order in USD | FLOAT | 0.0–50000.0 | No (fill 0.0) | orders table | 2025-01-15",
+                "→ Complete one row per feature/column in the training dataset",
+                "Data dictionary owner: ___________________ | Review cadence: ☐ With each model version  ☐ Quarterly  ☐ Ad-hoc",
+                "Data dictionary location: ___________________________",
+              ],
+            },
+            {
+              heading: "Compliance & Audit Trail",
+              items: [
+                "PII fields identified and documented: ☐ Yes  ☐ No — required for GDPR compliance",
+                "Data retention period per dataset documented: ☐ Yes  ☐ No",
+                "Training data snapshot archived for audit/reproduction: ☐ Yes — location: ___  ☐ No",
+                "Lineage documentation reviewed by DPO: ☐ Yes  ☐ No  ☐ Not required",
+                "Last full lineage audit date: ___  | Next scheduled: ___",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
