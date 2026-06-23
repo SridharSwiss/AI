@@ -108,9 +108,9 @@ export function DailyUpdatesBanner() {
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white leading-tight">Updated Recently</div>
+              <div className="text-xs font-bold text-white leading-tight">Updated today</div>
               <div className="text-[10px] text-zinc-400 leading-tight">
-                {new Date(updatesData.date).toLocaleDateString("en-GB", {
+                {new Date().toLocaleDateString("en-GB", {
                   day: "numeric", month: "long", year: "numeric",
                 })}
               </div>

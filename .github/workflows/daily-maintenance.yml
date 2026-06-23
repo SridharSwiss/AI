@@ -52,7 +52,10 @@ jobs:
           const lines = log ? log.split('\n').filter(Boolean) : [];
 
           if (lines.length === 0) {
-            console.log('No commits in last 24h — skipping update');
+            console.log('No commits in last 24h — updating date only');
+            const existing = JSON.parse(fs.readFileSync('ai-hub/src/data/daily-updates.json', 'utf8'));
+            existing.date = today;
+            fs.writeFileSync('ai-hub/src/data/daily-updates.json', JSON.stringify(existing, null, 2) + '\n');
             process.exit(0);
           }
 
