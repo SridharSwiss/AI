@@ -1,67 +1,19 @@
 {
-  "date": "2026-06-23",
-  "summary": "Added 7 tools, 8 companies, 4 case studies, EU Cyber Resilience Act, 3 learn resources, and 3 news sources.",
+  "date": "2026-06-24",
+  "summary": "Updated 2 items across General, Tools.",
   "changes": [
     {
+      "icon": "chart",
+      "category": "General",
+      "items": [
+        "Fix: banner always shows today's date; workflow updates date even with no commits"
+      ]
+    },
+    {
+      "icon": "chart",
       "category": "Tools",
-      "icon": "chart",
       "items": [
-        "Cursor — AI-first VS Code fork, 1M+ paying developers, $9.9B valuation",
-        "Gemini — Google flagship AI assistant, 350M+ MAU, 1M-token context",
-        "Perplexity — AI answer engine with real-time citations, 100M+ MAU",
-        "Midjourney — Premier image generator, ~18M users, ~$200M ARR",
-        "OpenRouter — Unified API gateway to 200+ LLMs, one endpoint",
-        "LiteLLM — Open-source Python proxy for 100+ LLM providers, 25K stars",
-        "Flowise — Visual drag-and-drop LLM/RAG builder, 35K GitHub stars"
-      ]
-    },
-    {
-      "category": "Companies",
-      "icon": "chart",
-      "items": [
-        "CoreWeave — GPU cloud leader, $23B NASDAQ IPO, 250K+ NVIDIA GPUs",
-        "Databricks — $62B valuation, Apache Spark & MLflow creators",
-        "Luma AI — Dream Machine video generation",
-        "Fireworks AI — fastest open-model inference API, $552M valuation",
-        "Modal Labs — Python-native serverless GPU cloud",
-        "Ideogram — AI image gen with best-in-class text rendering, $230M raised",
-        "Lightricks — AI creative tools (Facetune, LTX-Video), $335M raised",
-        "Lambda Labs — GPU cloud for AI training, $320M raised"
-      ]
-    },
-    {
-      "category": "Case Studies",
-      "icon": "chart",
-      "items": [
-        "ChatGPT Enterprise — 92% Fortune 500 penetration in 18 months",
-        "Meta Llama Open Source — 30M+ downloads, 500M MAU for Meta AI",
-        "Anthropic Claude Enterprise — $500M ARR in regulated industries",
-        "NVIDIA AI Enterprise Platform — chip vendor to $3T market cap"
-      ]
-    },
-    {
-      "category": "Compliance",
-      "icon": "shield",
-      "items": [
-        "EU Cyber Resilience Act — mandatory cybersecurity-by-design for all AI/digital products, full requirements October 2027"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Stanford CS25 Transformers — lecture series with DeepMind/OpenAI/Meta AI guest researchers",
-        "Google Gemini API Cookbook — 100+ Jupyter notebooks for multimodal integrations",
-        "Simon Willison's LLM Blog — hands-on model experiments and prompt injection analysis"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "JMIR AI added to Medical feed",
-        "Quanta Magazine added to Quantum feed",
-        "Physical Review Letters added to Quantum feed"
+        "Tools, companies, case studies, compliance, learn, news"
       ]
     }
   ]
