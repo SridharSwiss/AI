@@ -1,19 +1,12 @@
 {
-  "date": "2026-06-26",
-  "summary": "Updated 2 items across General, Tools.",
+  "date": "2026-06-27",
+  "summary": "Updated 1 item across General.",
   "changes": [
     {
       "icon": "chart",
       "category": "General",
       "items": [
-        "Fix: banner always shows today's date; workflow updates date even with no commits"
-      ]
-    },
-    {
-      "icon": "chart",
-      "category": "Tools",
-      "items": [
-        "Tools, companies, case studies, compliance, learn, news"
+        "Daily update 2026-06-26: refresh what's-new banner"
       ]
     }
   ]
