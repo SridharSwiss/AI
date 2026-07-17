@@ -1,12 +1,12 @@
 {
-  "date": "2026-07-16",
+  "date": "2026-07-17",
   "summary": "Updated 1 item across General.",
   "changes": [
     {
       "icon": "chart",
       "category": "General",
       "items": [
-        "Daily update 2026-07-13: refresh what's-new banner"
+        "Daily update 2026-07-16: refresh what's-new banner"
       ]
     }
   ]
