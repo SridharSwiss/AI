@@ -1541,5 +1541,154 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "LLM Observability & Evaluation in Production",
+      level: "practitioner",
+      desc: "Instrument, trace, and continuously evaluate LLM applications at scale.",
+      guidance: "LLM apps fail in ways classic ML monitoring misses: hallucination, prompt injection, silent quality regression on prompt/model changes, and runaway token cost. Instrument tracing and automated evals before scaling traffic - retrofitting observability after an incident is far more expensive. Treat prompts and model versions as deployable artefacts under change control.",
+      checklist: [
+        {
+          item: "Instrument end-to-end tracing for every LLM request",
+          templateTitle: "LLM Tracing Instrumentation Checklist",
+          templateType: "template",
+          instructions: "Distributed tracing is the foundation of LLM observability - without it, debugging a bad response in a multi-step chain or agent is guesswork. Capture the full trace tree, not just the final call.",
+          sections: [
+            {
+              heading: "What to Capture Per Trace",
+              items: [
+                "Trace ID, span ID, parent span ID (to reconstruct multi-step chains and agent loops)",
+                "Full prompt sent (system + user + retrieved context) and raw model completion",
+                "Model name and version, temperature, top_p, max_tokens, and other decoding params",
+                "Token counts: prompt tokens, completion tokens, total | Latency: time-to-first-token and total",
+                "Tool/function calls made, arguments, and tool responses (for agentic flows)",
+                "User/session ID (hashed if PII) and app version / prompt template version",
+              ],
+            },
+            {
+              heading: "Tracing Stack",
+              items: [
+                "Tracing tool: ☐ LangSmith  ☐ Langfuse  ☐ Arize Phoenix  ☐ Helicone  ☐ OpenTelemetry + custom  ☐ Other: ___",
+                "Sampling strategy: ☐ 100% of traffic  ☐ Sample ___% + 100% of errors/low-scores",
+                "PII redaction applied before storage: ☐ Yes - method: ___  ☐ No (risk: ___)",
+                "Trace retention period: ___ days | Storage location: ___",
+                "Verification: Can an engineer pull the full trace for any user complaint in <5 min? ☐ Yes  ☐ No",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Build an automated LLM evaluation suite (offline + online)",
+          templateTitle: "LLM Evaluation Suite Design Template",
+          templateType: "template",
+          instructions: "You cannot ship prompt or model changes safely without an eval suite. Combine a curated offline dataset (regression gate) with online evals on live traffic (drift detection). LLM-as-judge is useful but must itself be validated against human labels.",
+          sections: [
+            {
+              heading: "Offline Evaluation Dataset",
+              items: [
+                "Golden dataset size: ___ examples | Coverage: happy path, edge cases, known past failures, adversarial inputs",
+                "Evaluation dimensions: ☐ Correctness/factuality  ☐ Faithfulness to context (RAG)  ☐ Relevance  ☐ Tone/format  ☐ Safety/toxicity  ☐ Refusal appropriateness",
+                "Scoring method per dimension: ☐ Exact/regex match  ☐ Embedding similarity  ☐ LLM-as-judge  ☐ Human review",
+                "LLM-as-judge validated against human labels: agreement ___% (target ≥80%) | Judge model + prompt versioned: ☐ Yes",
+                "Regression gate: New prompt/model must not drop any dimension >___% vs current production before ship",
+              ],
+            },
+            {
+              heading: "Online Evaluation (Live Traffic)",
+              items: [
+                "Reference-free scores computed on sampled production traffic: ☐ Groundedness  ☐ Answer relevance  ☐ Toxicity  ☐ PII leakage",
+                "User feedback signals captured: ☐ Thumbs up/down  ☐ Edit/regenerate rate  ☐ Explicit correction  ☐ Downstream conversion",
+                "Sampling rate for online evals: ___% of traffic | Cost budget for eval calls: £/$ ___/month",
+                "Baseline scores recorded per metric: ___________________ | Alert threshold: score drops >___% over ___-day window",
+                "Eval results linked back to trace ID for root-cause drill-down: ☐ Yes  ☐ No",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Deploy quality, safety, and cost monitoring dashboards",
+          templateTitle: "LLM Production Monitoring Dashboard Spec",
+          templateType: "worksheet",
+          instructions: "LLM quality degrades silently when an upstream model provider updates a model, a prompt is edited, or input distribution shifts. Monitor quality, safety, and cost together - optimising one in isolation usually harms another.",
+          sections: [
+            {
+              heading: "Metrics to Track",
+              items: [
+                "QUALITY: Online eval scores (groundedness, relevance), thumbs-down rate, regenerate rate - trend vs 7-day baseline",
+                "SAFETY: Toxicity flag rate, PII-in-output rate, prompt-injection detection rate, off-topic/jailbreak attempts",
+                "COST: Tokens per request (p50/p95), cost per request, daily/monthly spend by feature and model",
+                "PERFORMANCE: Latency p50/p95/p99, time-to-first-token, provider error/timeout rate, rate-limit hits",
+                "DRIFT: Input length/topic distribution vs baseline, output length distribution, refusal-rate change",
+              ],
+            },
+            {
+              heading: "Alerting Configuration",
+              items: [
+                "Quality alert: Online eval score drops >___% OR thumbs-down rate spikes >___× baseline over ___ hours",
+                "Safety alert (page immediately): Any confirmed PII leak in output OR toxicity flag rate >___%",
+                "Cost anomaly alert: Daily spend >___× 7-day average OR tokens/request >___× baseline (runaway loop detection)",
+                "Provider incident alert: Error/timeout rate >___% for ___ consecutive minutes → trigger fallback model",
+                "Alert channel: ☐ Slack/Teams  ☐ PagerDuty  ☐ OpsGenie | On-call owner: ___ | Dashboard tool: ☐ Grafana  ☐ Datadog  ☐ Langfuse  ☐ Arize",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Version prompts and models with regression-gated rollout",
+          templateTitle: "Prompt & Model Change Control Template",
+          templateType: "template",
+          instructions: "A one-word prompt edit can silently break production. Treat every prompt and model version like a code deploy: versioned, eval-gated, canaried, and rollback-ready.",
+          sections: [
+            {
+              heading: "Prompt/Model Registry",
+              items: [
+                "Every prompt template stored with: version ID, author, date, changelog, linked eval run results",
+                "Model version pinned explicitly (never 'latest'): current production model+version: ___",
+                "Change approval: Who must approve a prompt/model change before production: ___",
+                "Rollback: Can we revert to the previous prompt/model version in <___ min? ☐ Yes  ☐ No",
+                "Provider model-deprecation watch: monitor provider changelog | migration owner: ___",
+              ],
+            },
+            {
+              heading: "Gated Rollout Process",
+              items: [
+                "Step 1 - Offline eval: New version must pass regression gate on golden dataset (no dimension down >___%)",
+                "Step 2 - Shadow/canary: Route ___% of live traffic to new version, compare online eval scores + cost for ___ hours",
+                "Step 3 - Decision: Promote if quality ≥ baseline AND cost within ___% AND no safety regressions",
+                "Step 4 - Full cutover: Automated if canary green; manual approval if amber | Auto-rollback if score drops >___%",
+                "Post-change review: Log version, eval deltas, cost delta, and any incidents in change log",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Establish a red-team and jailbreak-response runbook",
+          templateTitle: "LLM Red-Team & Incident Runbook",
+          templateType: "template",
+          instructions: "Adversarial users will probe your LLM app for jailbreaks, prompt injection, and data exfiltration. Run structured red-teaming before scaling and keep a runbook any on-call engineer can execute when an exploit is reported.",
+          sections: [
+            {
+              heading: "Pre-Scale Red-Team Coverage",
+              items: [
+                "Attack categories tested: ☐ Direct jailbreak  ☐ Indirect prompt injection (via retrieved docs/tools)  ☐ System-prompt extraction  ☐ PII/training-data exfiltration  ☐ Harmful content generation  ☐ Denial-of-wallet (cost) attacks",
+                "Red-team method: ☐ Manual expert probing  ☐ Automated adversarial suite (e.g. Garak/PyRIT)  ☐ Bug bounty",
+                "Guardrails in place: ☐ Input filtering  ☐ Output filtering/moderation  ☐ System-prompt hardening  ☐ Tool-permission scoping  ☐ Rate/cost limits per user",
+                "Findings triaged by severity | Critical exploits fixed before scale-up: ☐ Yes  ☐ No - open: ___",
+              ],
+            },
+            {
+              heading: "Live Exploit Response Steps",
+              items: [
+                "Step 1: Log incident (trace ID, attack type, affected users/sessions, potential data exposure)",
+                "Step 2: Notify #llm-incidents and security lead; classify severity (P1 = data exfiltration or harmful output at scale)",
+                "Step 3: Contain - deploy input/output filter rule, tighten system prompt, or disable affected tool/endpoint",
+                "Step 4: Assess blast radius - query traces for other sessions using the same exploit pattern",
+                "Step 5: Verify fix against the exploit prompt in staging before re-enabling",
+                "Step 6: Post-mortem within 48h - add exploit to red-team regression suite so it can never silently return",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

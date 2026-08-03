@@ -316,6 +316,32 @@ export const newsSources: NewsSource[] = [
     website: "https://tldr.tech/ai",
     description: "Daily AI newsletter with concise summaries of the most important AI news, research, and tools.",
   },
+  // Research (additions)
+  {
+    id: "google-research-blog",
+    name: "Google Research Blog",
+    category: "Research",
+    rssUrl: "https://research.google/blog/rss/",
+    website: "https://research.google/blog/",
+    description: "Research advances from Google Research across machine learning, LLMs, systems, and responsible AI.",
+  },
+  {
+    id: "bair-blog",
+    name: "Berkeley AI Research (BAIR) Blog",
+    category: "Research",
+    rssUrl: "https://bair.berkeley.edu/blog/feed.xml",
+    website: "https://bair.berkeley.edu/blog/",
+    description: "Technical research posts from UC Berkeley's AI Research lab on deep learning, robotics, and reinforcement learning.",
+  },
+  // Tech (addition)
+  {
+    id: "nvidia-ai-blog",
+    name: "NVIDIA AI Blog",
+    category: "Tech",
+    rssUrl: "https://blogs.nvidia.com/blog/category/deep-learning/feed/",
+    website: "https://blogs.nvidia.com/ai/",
+    description: "GPU-accelerated AI news from NVIDIA covering model training, inference, generative AI, and enterprise deployments.",
+  },
 ];
 
 export const newsCategories = [
