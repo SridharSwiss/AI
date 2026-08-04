@@ -1,58 +1,19 @@
 {
-  "date": "2026-08-03",
-  "summary": "Added 3 tools, 3 companies, 4 case studies, Council of Europe AI Convention, 3 learn resources, and 3 news sources.",
+  "date": "2026-08-04",
+  "summary": "Updated 2 items across Tools, General.",
   "changes": [
     {
+      "icon": "chart",
       "category": "Tools",
+      "items": [
+        "Tools, companies, case studies, compliance, learn, news"
+      ]
+    },
+    {
       "icon": "chart",
+      "category": "General",
       "items": [
-        "Cline — open-source autonomous coding agent for VS Code with Plan/Act workflow",
-        "Gemini CLI — Google's open-source agentic terminal coding assistant, 1M-token context",
-        "ComfyUI — node-based visual workflow engine for Stable Diffusion, FLUX & video diffusion"
-      ]
-    },
-    {
-      "category": "Companies",
-      "icon": "chart",
-      "items": [
-        "Safe Superintelligence (SSI) — Ilya Sutskever's safety research lab, $32B valuation",
-        "Thinking Machines Lab — Mira Murati's foundation-model company, $12B valuation",
-        "World Labs — Fei-Fei Li's spatial-intelligence lab building Large World Models"
-      ]
-    },
-    {
-      "category": "Case Studies",
-      "icon": "chart",
-      "items": [
-        "Morgan Stanley GPT-4 Advisor — 16,000 advisors, 98% team adoption, 100K+ research docs",
-        "BloombergGPT — 50B-parameter finance LLM beating larger general models on financial NLP",
-        "John Deere See & Spray — edge-AI vision cutting herbicide use 60%+ in real time",
-        "Instacart ML Fulfillment — real-time availability, ETAs & Ask Instacart assistant"
-      ]
-    },
-    {
-      "category": "Compliance",
-      "icon": "shield",
-      "items": [
-        "Council of Europe AI Convention — first legally binding international AI treaty on human rights & rule of law"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Anthropic: Building Effective Agents — reliable LLM agent design patterns",
-        "DeepLearning.AI RAG Course — hands-on retrieval-augmented generation pipelines",
-        "Google Prompting Guide 101 — Gemini for Workspace prompting handbook"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "Google Research Blog added to Research feed",
-        "Berkeley AI Research (BAIR) Blog added to Research feed",
-        "NVIDIA AI Blog added to Tech feed"
+        "Daily update 2026-08-03: refresh what's-new banner"
       ]
     }
   ]
