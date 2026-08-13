@@ -278,7 +278,7 @@ export function Navbar() {
                   <DropdownPanel menuKey={key} isOpen={openMenu === key} />
                 </div>
               ))}
-              {[{ label: "Switzerland", href: "/switzerland" }, { label: "News", href: "/news" }, { label: "About", href: "/about" }].map((item) => (
+              {[{ label: "Switzerland", href: "/switzerland" }, { label: "News", href: "/news" }, { label: "About", href: "/about" }, { label: "Our Team", href: "/team" }].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -387,6 +387,7 @@ export function Navbar() {
                 {[
                   { label: "AI Hub Switzerland", href: "/switzerland", icon: Globe, color: "text-rose-500", bg: "bg-rose-500/10 dark:bg-rose-500/[0.18]" },
                   { label: "About", href: "/about", icon: Users, color: "text-slate-500", bg: "bg-slate-500/10 dark:bg-slate-500/[0.18]" },
+                  { label: "Our Team", href: "/team", icon: Users, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
                   { label: "Contribute", href: "/contribute", icon: Zap, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
                 ].map((item) => (
                   <Link

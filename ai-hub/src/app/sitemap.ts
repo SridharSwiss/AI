@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/search`,             lastModified: NOW, priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/switzerland`,        lastModified: NOW, priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/about`,              lastModified: NOW, priority: 0.5, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/team`,               lastModified: NOW, priority: 0.5, changeFrequency: "monthly" },
     { url: `${BASE_URL}/contribute`,         lastModified: NOW, priority: 0.5, changeFrequency: "monthly" },
     { url: `${BASE_URL}/privacy`,            lastModified: NOW, priority: 0.4, changeFrequency: "yearly"  },
   ];
