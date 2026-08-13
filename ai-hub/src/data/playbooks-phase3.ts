@@ -1690,5 +1690,153 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "RAG System Optimization Playbook",
+      level: "practitioner",
+      desc: "Tune retrieval quality, chunking, and grounding to make RAG applications accurate and reliable at scale.",
+      guidance: "Most RAG failures are retrieval failures, not generation failures - if the right context never reaches the model, no prompt can save the answer. Optimize the retrieval layer first (chunking, embeddings, reranking), measure retrieval quality independently from answer quality, and only then tune the generation prompt. Always ground answers in retrieved sources and measure faithfulness to catch hallucination.",
+      checklist: [
+        {
+          item: "Establish a RAG evaluation set with retrieval and answer metrics",
+          templateTitle: "RAG Evaluation Set Design Template",
+          templateType: "template",
+          instructions: "You cannot tune what you cannot measure. Build a golden evaluation set of representative questions with known-relevant source chunks and reference answers before changing any component. Measure retrieval and generation separately.",
+          sections: [
+            {
+              heading: "Evaluation Set Composition",
+              items: [
+                "Number of question-answer pairs: ___ (minimum 50, target 200+ for statistical signal)",
+                "Question type coverage: ☐ Factual lookup  ☐ Multi-hop (needs 2+ sources)  ☐ Comparison  ☐ Summarization  ☐ Out-of-scope (should refuse)",
+                "For each item record: question | ground-truth answer | list of relevant source chunk IDs | difficulty (easy/medium/hard)",
+                "Include negative cases: questions the corpus cannot answer - the system should say 'I don't know', not hallucinate",
+                "Source of questions: ☐ Real user logs  ☐ Domain expert authored  ☐ Synthetic (LLM-generated then human-reviewed)",
+              ],
+            },
+            {
+              heading: "Metrics to Track (Retrieval vs Generation)",
+              items: [
+                "RETRIEVAL - Recall@k: % of relevant chunks appearing in top-k retrieved | Target: ___% at k=___",
+                "RETRIEVAL - Precision@k / MRR: rank quality of relevant chunks | Target: ___",
+                "GENERATION - Faithfulness/Groundedness: % of answer claims supported by retrieved context | Target: ≥___%",
+                "GENERATION - Answer relevance: does the answer address the question | Target: ≥___%",
+                "GENERATION - Refusal correctness: % of out-of-scope questions correctly declined | Target: ≥___%",
+                "Evaluation tooling: ☐ Ragas  ☐ TruLens  ☐ DeepEval  ☐ LLM-as-judge (custom)  ☐ Human review",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Tune chunking strategy and document preprocessing",
+          templateTitle: "Chunking Strategy Tuning Worksheet",
+          templateType: "worksheet",
+          instructions: "Chunking is the highest-leverage, lowest-cost knob in RAG. Chunks too large dilute relevance and waste context; too small lose meaning. Test multiple strategies against your evaluation set - do not guess.",
+          sections: [
+            {
+              heading: "Chunking Experiments",
+              items: [
+                "Strategy candidates: ☐ Fixed-size (___tokens, ___overlap)  ☐ Recursive by separator  ☐ Semantic (embedding-based)  ☐ Structure-aware (headings/tables)  ☐ Sentence-window",
+                "Chunk size tested: ___ / ___ / ___ tokens | Overlap tested: ___% / ___%",
+                "Preserve structure: ☐ Keep tables intact  ☐ Keep code blocks intact  ☐ Attach section headers/metadata to each chunk",
+                "Metadata attached per chunk: source doc, title, section, page, last-updated, access-level",
+                "Best strategy by Recall@k on eval set: ___ | Recall@k improvement vs baseline: ___%",
+              ],
+            },
+            {
+              heading: "Document Preprocessing Quality",
+              items: [
+                "Extraction quality checked: ☐ PDF text clean (no OCR garble)  ☐ HTML boilerplate stripped  ☐ Tables/figures handled",
+                "Deduplication: near-duplicate chunks removed to avoid retrieval redundancy: ☐ Yes  ☐ No",
+                "Stale content policy: documents older than ___ excluded or flagged | Re-index frequency: ___",
+                "PII/sensitive content: ☐ Redacted before indexing  ☐ Access-control metadata added for filtering at query time",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Optimize embeddings and retrieval configuration",
+          templateTitle: "Retrieval Configuration Tuning Template",
+          templateType: "template",
+          instructions: "The embedding model and retrieval mode determine your ceiling on relevance. Benchmark embedding models on YOUR domain data, not just public leaderboards - domain fit varies widely.",
+          sections: [
+            {
+              heading: "Embedding & Index Configuration",
+              items: [
+                "Embedding model candidates benchmarked on domain eval set: ___ / ___ / ___",
+                "Selected embedding model: ___ | Dimension: ___ | Recall@k on eval set: ___%",
+                "Vector store: ☐ pgvector  ☐ Pinecone  ☐ Weaviate  ☐ Qdrant  ☐ Milvus  ☐ OpenSearch/Elastic  ☐ Other: ___",
+                "Index / ANN config: ☐ HNSW (M=___, ef=___)  ☐ IVF  ☐ Flat (exact) | Recall vs latency trade-off documented",
+                "Distance metric: ☐ Cosine  ☐ Dot product  ☐ Euclidean | matches embedding model's training: ☐ Yes",
+              ],
+            },
+            {
+              heading: "Hybrid Search & Reranking",
+              items: [
+                "Retrieval mode: ☐ Dense only  ☐ Sparse/BM25 only  ☐ Hybrid (dense + keyword) - hybrid usually wins on jargon/acronyms",
+                "Hybrid fusion method: ☐ Reciprocal Rank Fusion (RRF)  ☐ Weighted score | weights tuned on eval set: ☐ Yes",
+                "Reranker applied to top-N candidates: ☐ Cross-encoder  ☐ Cohere Rerank  ☐ None | Precision@k lift from reranking: ___%",
+                "Metadata filtering at query time (recency, access-level, source): ☐ Enabled  ☐ Not needed",
+                "Final k passed to the model: ___ | Chosen to balance recall vs context-window/cost/latency",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Harden generation prompt for grounding and citation",
+          templateTitle: "RAG Generation Prompt & Grounding Template",
+          templateType: "template",
+          instructions: "Once retrieval is solid, the generation prompt controls faithfulness. Instruct the model to answer only from retrieved context, cite sources, and refuse when context is insufficient - then verify with faithfulness metrics.",
+          sections: [
+            {
+              heading: "Prompt Grounding Requirements",
+              items: [
+                "System instruction includes: 'Answer only using the provided context. If the answer is not in the context, say you don't know.'",
+                "Citation requirement: model must cite chunk/source IDs for each claim: ☐ Enforced  ☐ Not required",
+                "Context formatting: each chunk labeled with an ID and source metadata so the model can reference it",
+                "Conflicting-source handling: instruction for what to do when sources disagree: ___",
+                "Answer length / format constraints defined: ___",
+              ],
+            },
+            {
+              heading: "Grounding Verification",
+              items: [
+                "Faithfulness measured on eval set (claims supported by context): ___% | Target: ≥___%",
+                "Hallucination spot-check: ___ answers manually reviewed | Unsupported-claim rate: ___%",
+                "Refusal behavior verified on out-of-scope questions: ___% correctly declined",
+                "Citation accuracy: cited sources actually contain the claim: ___% | Broken/wrong citations: ___",
+                "Post-generation guardrail: ☐ Automated groundedness check flags/blocks unsupported answers  ☐ None",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Monitor RAG quality, cost, and latency in production",
+          templateTitle: "Production RAG Monitoring Worksheet",
+          templateType: "worksheet",
+          instructions: "RAG quality drifts as the corpus and user questions change. Instrument end-to-end so you can trace a bad answer back to a retrieval or generation cause, and watch cost/latency budgets.",
+          sections: [
+            {
+              heading: "Quality & Drift Monitoring",
+              items: [
+                "Per-request logging: query, retrieved chunk IDs + scores, final answer, latency, token counts, trace ID",
+                "Online faithfulness/relevance sampling (LLM-judge on ___% of traffic): ☐ Enabled  ☐ No",
+                "User feedback signal captured: ☐ 👍/👎  ☐ 'sources unhelpful' flag  ☐ escalation to human",
+                "Retrieval-miss detection: alert when top score < threshold ___ (query likely out-of-corpus)",
+                "Corpus freshness: re-index cadence ___ | alert if index age > ___ | new-doc coverage tracked",
+              ],
+            },
+            {
+              heading: "Cost & Latency Budgets",
+              items: [
+                "Latency SLA: retrieval p95 ≤___ ms | end-to-end p95 ≤___ ms",
+                "Cost per query target: £/$ ___ (embedding + retrieval + generation tokens)",
+                "Optimization levers reviewed: ☐ Cache frequent queries/embeddings  ☐ Reduce k  ☐ Smaller/cheaper generation model for simple queries  ☐ Semantic caching",
+                "Alert thresholds: latency >___ ms p95 OR cost/query >___× 7-day average",
+                "Regression gate: re-run offline eval set before any embedding/chunking/prompt change ships: ☐ Enforced in CI",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

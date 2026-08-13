@@ -342,6 +342,33 @@ export const newsSources: NewsSource[] = [
     website: "https://blogs.nvidia.com/ai/",
     description: "GPU-accelerated AI news from NVIDIA covering model training, inference, generative AI, and enterprise deployments.",
   },
+  // General (addition)
+  {
+    id: "the-batch-deeplearning-ai",
+    name: "The Batch (DeepLearning.AI)",
+    category: "General",
+    rssUrl: "https://www.deeplearning.ai/the-batch/rss.xml",
+    website: "https://www.deeplearning.ai/the-batch/",
+    description: "Weekly AI newsletter curated by Andrew Ng and the DeepLearning.AI team covering research, business, and practical developments.",
+  },
+  // Research (addition)
+  {
+    id: "stanford-hai",
+    name: "Stanford HAI",
+    category: "Research",
+    rssUrl: "https://hai.stanford.edu/news/rss.xml",
+    website: "https://hai.stanford.edu",
+    description: "Research, policy analysis, and news from the Stanford Institute for Human-Centered Artificial Intelligence.",
+  },
+  // Tech (addition)
+  {
+    id: "aws-ml-blog",
+    name: "AWS Machine Learning Blog",
+    category: "Tech",
+    rssUrl: "https://aws.amazon.com/blogs/machine-learning/feed/",
+    website: "https://aws.amazon.com/blogs/machine-learning/",
+    description: "Applied machine learning and generative AI engineering guidance from Amazon Web Services covering SageMaker, Bedrock, and production deployments.",
+  },
 ];
 
 export const newsCategories = [
