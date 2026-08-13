@@ -278,7 +278,7 @@ export function Navbar() {
                   <DropdownPanel menuKey={key} isOpen={openMenu === key} />
                 </div>
               ))}
-              {[{ label: "News", href: "/news" }, { label: "About", href: "/about" }].map((item) => (
+              {[{ label: "Switzerland", href: "/switzerland" }, { label: "News", href: "/news" }, { label: "About", href: "/about" }].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -385,6 +385,7 @@ export function Navbar() {
               <div className="border-b border-border/30 pb-2">
                 <p className="px-4 py-3 text-xs font-bold uppercase tracking-widest text-muted-foreground/60">More</p>
                 {[
+                  { label: "AI Hub Switzerland", href: "/switzerland", icon: Globe, color: "text-rose-500", bg: "bg-rose-500/10 dark:bg-rose-500/[0.18]" },
                   { label: "About", href: "/about", icon: Users, color: "text-slate-500", bg: "bg-slate-500/10 dark:bg-slate-500/[0.18]" },
                   { label: "Contribute", href: "/contribute", icon: Zap, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
                 ].map((item) => (
