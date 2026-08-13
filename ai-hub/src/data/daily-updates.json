@@ -1,58 +1,19 @@
 {
   "date": "2026-08-13",
-  "summary": "Added 3 tools, 3 companies, 4 case studies, Colorado AI Act, 3 learn resources, and 3 news sources.",
+  "summary": "Updated 2 items across General, Tools.",
   "changes": [
     {
+      "icon": "chart",
+      "category": "General",
+      "items": [
+        "Add AI Hub Switzerland page (coming soon)"
+      ]
+    },
+    {
+      "icon": "chart",
       "category": "Tools",
-      "icon": "chart",
       "items": [
-        "Genspark — all-in-one autonomous AI agent with Super Agent & AI voice calling",
-        "Krea AI — real-time AI image/video canvas aggregating FLUX, SD, Luma, Kling, Runway",
-        "Hailuo AI — MiniMax's high-fidelity text/image-to-video with cinematic motion"
-      ]
-    },
-    {
-      "category": "Companies",
-      "icon": "chart",
-      "items": [
-        "MiniMax — Shanghai multimodal foundation-model lab (Hailuo, MiniMax-01), ~$4B valuation",
-        "Sierra — Bret Taylor & Clay Bavor's enterprise conversational-AI agents, $10B valuation",
-        "Physical Intelligence — robotics foundation-model company (π0 VLA models), $2.4B valuation"
-      ]
-    },
-    {
-      "category": "Case Studies",
-      "icon": "chart",
-      "items": [
-        "Waymo Autonomous Driving — scaled fully-driverless robotaxi, 150k+ rides/week",
-        "Stitch Fix Styling AI — human-in-the-loop ML pairing algorithms with human stylists",
-        "DBS Bank AI Transformation — 800+ ML models, ~S$370M measured economic impact",
-        "Shell AI Predictive Maintenance — millions of daily failure predictions across assets"
-      ]
-    },
-    {
-      "category": "Compliance",
-      "icon": "shield",
-      "items": [
-        "Colorado AI Act (SB 24-205) — first comprehensive US state AI law on algorithmic discrimination, effective June 2026"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Anthropic Model Context Protocol — official MCP documentation for agent integrations",
-        "Karpathy: Neural Networks Zero to Hero — build LLMs from scratch video series",
-        "DeepLearning.AI Machine Learning Specialization — Andrew Ng's foundational ML course"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "The Batch (DeepLearning.AI) added to General feed",
-        "Stanford HAI added to Research feed",
-        "AWS Machine Learning Blog added to Tech feed"
+        "Tools, companies, case studies, compliance, learn, news"
       ]
     }
   ]
