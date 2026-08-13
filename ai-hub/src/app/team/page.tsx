@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { name: "Sridhar Gande",        role: "Founder",                       icon: Crown,         initials: "SG", accent: "from-violet-500 to-pink-600" },
+  { name: "Sridhar Gande",        role: "Founder & President",           icon: Crown,         initials: "SG", accent: "from-violet-500 to-pink-600" },
   { name: "Thirupathi Pathipaka", role: "Director, AI Advisory",         icon: Compass,       initials: "TP", accent: "from-blue-500 to-cyan-500" },
   { name: "Amar Kavi",            role: "Director, Consumer Relations",  icon: HeartHandshake,initials: "AK", accent: "from-emerald-500 to-teal-500" },
 ];
