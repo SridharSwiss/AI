@@ -1,19 +1,15 @@
 {
-  "date": "2026-08-13",
-  "summary": "Updated 2 items across General, Tools.",
+  "date": "2026-08-14",
+  "summary": "Updated 4 items across General.",
   "changes": [
     {
       "icon": "chart",
       "category": "General",
       "items": [
-        "Add AI Hub Switzerland page (coming soon)"
-      ]
-    },
-    {
-      "icon": "chart",
-      "category": "Tools",
-      "items": [
-        "Tools, companies, case studies, compliance, learn, news"
+        "Add Our Team link to footer bottom bar",
+        "Update Sridhar Gande role to Founder & President",
+        "Add Our Team page; update footer to AIHub Switzerland Team",
+        "Daily update 2026-08-13: refresh what's-new banner"
       ]
     }
   ]
