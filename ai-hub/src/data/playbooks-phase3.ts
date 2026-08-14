@@ -1838,5 +1838,175 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "LLM Inference Cost & Latency Optimization Playbook",
+      level: "practitioner",
+      desc: "Cut serving cost and tail latency for production LLM workloads without sacrificing quality.",
+      guidance: "LLM serving costs scale non-linearly with tokens and traffic, and tail latency (p99) is what users feel. Optimize in order: measure a baseline, exhaust cheap wins (caching, routing, prompt trimming) before expensive ones (quantization, custom serving), and gate every change behind a quality eval so cost savings never silently degrade output.",
+      checklist: [
+        {
+          item: "Establish a token, cost, and latency baseline per endpoint",
+          templateTitle: "LLM Serving Baseline Worksheet",
+          templateType: "worksheet",
+          instructions: "You cannot optimize what you have not measured. Capture a representative baseline across a full traffic cycle before changing anything - optimizing against a non-representative sample leads to regressions under real load.",
+          sections: [
+            {
+              heading: "Traffic & Token Profile",
+              items: [
+                "Endpoint / use case: ___________________ | Model: ___ | Provider: ☐ API (OpenAI/Anthropic/etc.)  ☐ Self-hosted",
+                "Requests per day: ___ | Peak requests/sec: ___ | Traffic pattern: ☐ Steady  ☐ Bursty  ☐ Diurnal",
+                "Avg input tokens: ___ | p95 input tokens: ___ | Avg output tokens: ___ | p95 output tokens: ___",
+                "Prompt composition: system ___ tokens | few-shot examples ___ tokens | retrieved context ___ tokens | user ___ tokens",
+                "Streaming enabled: ☐ Yes  ☐ No | Time-to-first-token (TTFT) p50/p95: ___ / ___ ms",
+              ],
+            },
+            {
+              heading: "Cost & Latency Baseline",
+              items: [
+                "Cost per request: £/$ ___ (input tokens × rate + output tokens × rate) | Daily spend: £/$ ___ | Monthly run-rate: £/$ ___",
+                "End-to-end latency: p50 ___ ms | p95 ___ ms | p99 ___ ms",
+                "Cost driver breakdown: output tokens ___% | input/context tokens ___% | which dominates: ___",
+                "Quality baseline captured (score on eval set before any change): ___ | Eval set size: ___ examples",
+                "Top cost/latency hotspot identified: ___________________",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Implement prompt and context trimming",
+          templateTitle: "Prompt Efficiency Checklist",
+          templateType: "template",
+          instructions: "Input tokens are paid on every single request - trimming them compounds across all traffic. Reduce tokens without reducing task performance, and always re-run the eval set after trimming to confirm no quality loss.",
+          sections: [
+            {
+              heading: "Token Reduction Levers",
+              items: [
+                "System prompt audited for redundancy: removed ___ tokens | ☐ Moved static instructions out of per-request payload",
+                "Few-shot examples: reduced from ___ to ___ examples | ☐ Verified quality held on eval set",
+                "Retrieved context: reduced top-k from ___ to ___ | ☐ Added reranking so fewer, better chunks are sent",
+                "Output length: capped max_tokens at ___ | ☐ Instructed model to be concise where verbosity adds no value",
+                "Structured output (JSON/enum) instead of prose where downstream is machine-parsed: ☐ Applied",
+              ],
+            },
+            {
+              heading: "Verification",
+              items: [
+                "Tokens saved per request (input): ___ | Estimated monthly saving: £/$ ___",
+                "Quality delta vs baseline on eval set: ___ (must be ≥ -1% to ship)",
+                "Regression gate: eval re-run automatically before prompt change merges: ☐ Enforced in CI",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Add semantic and exact-match response caching",
+          templateTitle: "LLM Cache Design Template",
+          templateType: "template",
+          instructions: "Many production workloads have repeated or near-repeated queries. Caching turns those into near-zero-cost, near-zero-latency responses. Guard against serving stale or unsafe cached answers.",
+          sections: [
+            {
+              heading: "Cache Strategy",
+              items: [
+                "Exact-match cache (hash of full prompt): ☐ Enabled | Store: ☐ Redis  ☐ In-memory  ☐ Other: ___ | TTL: ___",
+                "Semantic cache (embedding similarity ≥ threshold ___): ☐ Enabled | Risk of wrong-answer reuse assessed: ☐ Yes",
+                "Prompt-prefix / KV cache reuse for shared system prompts (self-hosted): ☐ Enabled  ☐ N/A",
+                "Cacheability rules: ☐ Only deterministic (temperature 0) responses cached  ☐ Personalized/PII responses excluded",
+                "Invalidation: cache cleared on ☐ model version change  ☐ prompt change  ☐ corpus/context update",
+              ],
+            },
+            {
+              heading: "Cache Effectiveness",
+              items: [
+                "Cache hit rate: ___% | Target: ≥___%",
+                "Cost avoided per day from cache hits: £/$ ___",
+                "Latency on cache hit: ___ ms vs ___ ms uncached",
+                "False-hit audit (semantic cache returned a wrong answer): sampled ___ hits, ___ incorrect | Acceptable: ☐ Yes  ☐ No - raise threshold",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Route requests to right-sized models (model cascade)",
+          templateTitle: "Model Routing Policy Template",
+          templateType: "framework",
+          instructions: "Not every request needs your largest model. Route simple requests to cheaper/smaller models and reserve the flagship model for hard cases. This is often the single biggest cost lever for LLM applications.",
+          sections: [
+            {
+              heading: "Routing Policy",
+              items: [
+                "Tier 1 (cheap/small model): handles ___ (e.g., classification, extraction, short answers) | Model: ___ | Est. ___% of traffic",
+                "Tier 2 (flagship model): handles ___ (complex reasoning, long generation) | Model: ___ | Est. ___% of traffic",
+                "Routing signal: ☐ Rule-based (intent/length)  ☐ Classifier model  ☐ Difficulty score  ☐ Confidence-based escalation",
+                "Escalation path: cheap model attempts first → if low confidence or validation fails → retry on flagship: ☐ Implemented",
+                "Fallback on provider error/timeout: route to ☐ alternate provider  ☐ smaller model  ☐ cached/default response",
+              ],
+            },
+            {
+              heading: "Validation & Impact",
+              items: [
+                "Per-tier quality measured on eval subset: Tier 1 score ___ | Tier 2 score ___ | Blended ___ vs baseline ___",
+                "Blended cost per request after routing: £/$ ___ (was £/$ ___) | Reduction: ___%",
+                "Escalation rate (Tier 1 → Tier 2): ___% | Alert if it exceeds ___% (signals Tier 1 under-performing)",
+                "Guardrail: no user-visible quality regression on the routed traffic vs single-model baseline: ☐ Confirmed",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Optimize self-hosted serving (batching, quantization, hardware)",
+          templateTitle: "Self-Hosted Inference Tuning Checklist",
+          templateType: "template",
+          instructions: "For self-hosted models, throughput per GPU determines cost. Apply serving-engine optimizations before buying more hardware. Skip this item if you are API-only.",
+          sections: [
+            {
+              heading: "Serving Engine & Batching",
+              items: [
+                "Serving engine: ☐ vLLM  ☐ TensorRT-LLM  ☐ TGI  ☐ SGLang  ☐ Other: ___",
+                "Continuous/in-flight batching enabled: ☐ Yes | Max batch size: ___ | GPU utilization at peak: ___%",
+                "PagedAttention / KV-cache management enabled: ☐ Yes | Prefix caching for shared prompts: ☐ Yes",
+                "Speculative decoding evaluated (draft model): ☐ Yes - speedup ___×  ☐ No",
+                "Tensor/pipeline parallelism config: ___ | Matches model size to GPU memory: ☐ Yes",
+              ],
+            },
+            {
+              heading: "Quantization & Hardware",
+              items: [
+                "Quantization tested: ☐ FP8  ☐ INT8  ☐ AWQ/GPTQ 4-bit  ☐ None | Quality delta on eval set: ___ (must be ≥ -1%)",
+                "Throughput after quantization: ___ tokens/sec (was ___) | Cost per 1M tokens: £/$ ___ (was £/$ ___)",
+                "Hardware right-sized: ☐ Moved to cheaper GPU tier  ☐ Spot/preemptible for batch  ☐ Autoscaling min ___ / max ___",
+                "Load test at 2× peak: p99 latency ___ ms | throughput ___ req/s | SLA met: ☐ Yes  ☐ No",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Deploy cost and latency monitoring with regression gates",
+          templateTitle: "LLM Cost & Latency Monitoring Setup",
+          templateType: "template",
+          instructions: "Optimizations decay - traffic patterns shift, prompts grow, and models change. Continuous monitoring plus a quality gate ensures cost stays down and quality stays up over time.",
+          sections: [
+            {
+              heading: "Metrics & Alerts",
+              items: [
+                "Dashboards track: cost/request, tokens/request (in+out), TTFT, p50/p95/p99 latency, cache hit rate, per-model traffic split",
+                "Cost anomaly alert: daily spend > ___× 7-day average | Owner: ___ | Channel: ☐ Slack  ☐ PagerDuty",
+                "Latency alert: p99 > ___ ms sustained for ___ minutes",
+                "Token-creep alert: avg input tokens grows > ___% week-over-week (prompt bloat / context leak)",
+                "Provider error/timeout rate alert: > ___% over ___ minutes → trigger fallback path",
+              ],
+            },
+            {
+              heading: "Quality Regression Gate",
+              items: [
+                "Offline eval set (___ examples) re-run in CI before any prompt, model, routing, or quantization change ships: ☐ Enforced",
+                "Ship criteria: quality delta ≥ -1% AND cost per request not increased (unless justified): ☐ Enforced",
+                "Online quality sampling (LLM-judge or human review on ___% of traffic): ☐ Enabled",
+                "Monthly optimization review: cost per request trend, top cost drivers, next lever to pull | Owner: ___",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

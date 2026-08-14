@@ -369,6 +369,32 @@ export const newsSources: NewsSource[] = [
     website: "https://aws.amazon.com/blogs/machine-learning/",
     description: "Applied machine learning and generative AI engineering guidance from Amazon Web Services covering SageMaker, Bedrock, and production deployments.",
   },
+  // Research (additions)
+  {
+    id: "the-gradient",
+    name: "The Gradient",
+    category: "Research",
+    rssUrl: "https://thegradient.pub/rss/",
+    website: "https://thegradient.pub",
+    description: "Long-form essays and analysis on AI research, trends, and their broader implications from a community of researchers and practitioners.",
+  },
+  {
+    id: "allenai-blog",
+    name: "Allen Institute for AI (AI2) Blog",
+    category: "Research",
+    rssUrl: "https://blog.allenai.org/feed",
+    website: "https://allenai.org",
+    description: "Open AI research from the Allen Institute for AI covering open models (OLMo, Tulu), NLP, and scientific AI.",
+  },
+  // Tech (addition)
+  {
+    id: "cohere-blog",
+    name: "Cohere Blog",
+    category: "Tech",
+    rssUrl: "https://cohere.com/blog/rss.xml",
+    website: "https://cohere.com/blog",
+    description: "Enterprise LLM research, product updates, and applied RAG and retrieval guidance from Cohere.",
+  },
 ];
 
 export const newsCategories = [
