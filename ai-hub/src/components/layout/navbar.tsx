@@ -279,13 +279,23 @@ export function Navbar() {
                   <DropdownPanel menuKey={key} isOpen={openMenu === key} />
                 </div>
               ))}
-              {[{ label: "Switzerland", href: "/switzerland" }, { label: "News", href: "/news" }, { label: "About", href: "/about" }, { label: "Our Team", href: "/team" }].map((item) => (
+              {[
+                { label: "Switzerland", href: "/switzerland" },
+                { label: "News", href: "/news" },
+                { label: "About", href: "/about" },
+                { label: "Contribute", href: "/contribute", prominent: true },
+                { label: "Our Team", href: "/team" },
+              ].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
                     "px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
-                    pathname === item.href ? "text-foreground bg-accent/70" : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    item.prominent
+                      ? "text-white bg-gradient-to-r from-violet-500 to-pink-500 hover:brightness-110 shadow-sm shadow-violet-500/30"
+                      : pathname === item.href
+                        ? "text-foreground bg-accent/70"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                   )}
                 >
                   {item.label}
@@ -389,8 +399,8 @@ export function Navbar() {
                 {[
                   { label: "AI Hub Switzerland", href: "/switzerland", icon: Globe, color: "text-rose-500", bg: "bg-rose-500/10 dark:bg-rose-500/[0.18]" },
                   { label: "About", href: "/about", icon: Users, color: "text-slate-500", bg: "bg-slate-500/10 dark:bg-slate-500/[0.18]" },
-                  { label: "Our Team", href: "/team", icon: Users, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
                   { label: "Contribute", href: "/contribute", icon: Zap, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
+                  { label: "Our Team", href: "/team", icon: Users, color: "text-violet-500", bg: "bg-violet-500/10 dark:bg-violet-500/[0.18]" },
                 ].map((item) => (
                   <Link
                     key={item.href}

@@ -78,7 +78,7 @@ export function Footer() {
             © {new Date().getFullYear()} AIHub Switzerland Team. Curated for educational purposes - always verify with official sources.
           </p>
           <div className="flex items-center gap-5">
-            {[{ label: "About", href: "/about" }, { label: "Our Team", href: "/team" }, { label: "Contribute", href: "/contribute" }, { label: "Privacy", href: "/privacy" }, { label: "News", href: "/news" }].map(({ label, href }) => (
+            {[{ label: "About", href: "/about" }, { label: "Contribute", href: "/contribute" }, { label: "Our Team", href: "/team" }, { label: "Privacy", href: "/privacy" }, { label: "News", href: "/news" }].map(({ label, href }) => (
               <Link key={href} href={href} className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-150">{label}</Link>
             ))}
           </div>
