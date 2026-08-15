@@ -395,6 +395,32 @@ export const newsSources: NewsSource[] = [
     website: "https://cohere.com/blog",
     description: "Enterprise LLM research, product updates, and applied RAG and retrieval guidance from Cohere.",
   },
+  // Tech (addition)
+  {
+    id: "semianalysis",
+    name: "SemiAnalysis",
+    category: "Tech",
+    rssUrl: "https://www.semianalysis.com/feed",
+    website: "https://www.semianalysis.com",
+    description: "Deep analysis of AI hardware, semiconductors, data centers, and compute economics from Dylan Patel and the SemiAnalysis team.",
+  },
+  // General (additions)
+  {
+    id: "latent-space",
+    name: "Latent Space",
+    category: "General",
+    rssUrl: "https://www.latent.space/feed",
+    website: "https://www.latent.space",
+    description: "Practitioner-focused newsletter and podcast on AI engineering, LLM tooling, and building production AI products.",
+  },
+  {
+    id: "simon-willison",
+    name: "Simon Willison's Weblog",
+    category: "General",
+    rssUrl: "https://simonwillison.net/atom/everything/",
+    website: "https://simonwillison.net",
+    description: "Hands-on writing on LLMs, prompt engineering, and practical AI tooling from the co-creator of Django.",
+  },
 ];
 
 export const newsCategories = [

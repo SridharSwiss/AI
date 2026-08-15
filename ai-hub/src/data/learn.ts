@@ -1266,6 +1266,32 @@ export const learnResources: LearnResource[] = [
     readTime: 20,
     tags: ["Generative AI", "RAG", "Embeddings", "AI Agents", "Kaggle", "Google", "Free"],
   },
+  {
+    id: "anthropic-building-with-claude-code",
+    slug: "anthropic-building-with-claude-code",
+    title: "Building Effective Agents with Claude",
+    type: "course",
+    provider: "Anthropic",
+    level: "intermediate",
+    free: true,
+    description: "Anthropic's practical guidance for building reliable AI agents with Claude, drawn from its widely cited 'Building Effective Agents' engineering work. Covers when to use simple workflows versus autonomous agents, common agent patterns (prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer), tool design and tool use, and how to keep agentic systems debuggable and cost-effective. A grounded, pattern-first path for developers moving from single prompts to multi-step, tool-using systems.",
+    link: "https://www.anthropic.com/research/building-effective-agents",
+    readTime: 10,
+    tags: ["AI Agents", "Claude", "Anthropic", "Tool Use", "Agentic Workflows", "Free"],
+  },
+  {
+    id: "hugging-face-agents-course",
+    slug: "hugging-face-agents-course",
+    title: "Hugging Face AI Agents Course",
+    type: "course",
+    provider: "Hugging Face",
+    level: "intermediate",
+    free: true,
+    description: "Hugging Face's free, hands-on course on building AI agents from the ground up. Covers agent fundamentals, the think-act-observe loop, tools and function calling, popular agent frameworks (smolagents, LlamaIndex, LangGraph), retrieval and memory, and evaluating agentic systems, culminating in a capstone project and certification. A practical route for developers who want to build and ship working agents with open-source tooling.",
+    link: "https://huggingface.co/learn/agents-course",
+    readTime: 18,
+    tags: ["AI Agents", "Hugging Face", "Function Calling", "Open Source", "Certificate", "Free"],
+  },
 ];
 
 export const resourceTypes = ["All", "course", "youtube", "certification", "book", "tutorial"];

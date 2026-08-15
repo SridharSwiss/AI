@@ -2008,5 +2008,123 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "AI Incident Response Playbook",
+      level: "practitioner",
+      desc: "Detect, triage, and resolve production AI incidents with a repeatable process.",
+      guidance: "AI incidents differ from classic software outages: models can fail silently, degrade gradually, or produce confidently wrong outputs while every system health check stays green. Treat model quality as a first-class SLO, define severity by user and business impact (not just uptime), and rehearse the response before you need it. A blameless post-incident review that ships concrete preventions is what turns a bad day into a more resilient system.",
+      checklist: [
+        {
+          item: "Define AI incident severity levels and detection signals",
+          templateTitle: "AI Incident Severity & Detection Matrix",
+          templateType: "matrix",
+          instructions: "Classic uptime severity misses the failure modes unique to AI. Define severity by user and business impact, and map each level to the concrete signals that should trigger it. Do this before launch, not during your first incident.",
+          sections: [
+            {
+              heading: "Severity Levels (impact-based)",
+              items: [
+                "SEV1 - Critical: Model down, or systematically wrong outputs driving harmful decisions at scale, or safety/bias/data-leak incident | Response: 15 min | Comms: exec + on-call",
+                "SEV2 - High: Significant quality degradation, elevated error/timeout rate, or partial outage on key path | Response: 1 hour",
+                "SEV3 - Medium: Drift detected or localized quality regression with limited user impact | Response: 4 hours",
+                "SEV4 - Low: Anomaly or single-user report needing investigation, no measurable impact | Response: next business day",
+                "Escalation rule: any suspected safety, privacy, or regulatory-breach incident is minimum SEV2 and notifies Legal/DPO regardless of scale",
+              ],
+            },
+            {
+              heading: "Detection Signals per Failure Mode",
+              items: [
+                "Hard failure: error rate, timeout rate, 5xx from model endpoint > ___% over ___ minutes",
+                "Silent quality drop: online quality score (LLM-judge / human sample) falls > ___% vs 7-day baseline",
+                "Drift: input feature or prompt-distribution PSI > 0.2 on ≥ ___ key signals",
+                "Cost/latency anomaly: cost per request or p99 latency > ___× baseline (often the first visible sign of a deeper problem)",
+                "User-reported: spike in 👎 / 'report a problem' feedback > ___× baseline in ___ hours",
+                "Detection ownership: who/what watches each signal: ___ | Alert channel: ☐ Slack  ☐ PagerDuty  ☐ OpsGenie",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Establish triage roles and the first-30-minutes runbook",
+          templateTitle: "AI Incident Triage Runbook",
+          templateType: "template",
+          instructions: "The first 30 minutes decide whether an incident is contained or compounded. Assign clear roles and give the on-call engineer an unambiguous decision tree they can run under pressure at 3am.",
+          sections: [
+            {
+              heading: "Incident Roles",
+              items: [
+                "Incident Commander (IC): owns the response, makes ship/rollback calls, runs comms cadence - not necessarily the most technical person",
+                "Ops/On-call Engineer: executes runbook steps (rollback, scaling, fallback routing)",
+                "Subject-matter expert (ML): diagnoses model-specific root cause | Scribe: timestamps every action in the incident channel",
+                "Comms owner: updates stakeholders and, if needed, users | Handoff plan for incidents > ___ hours: ___",
+              ],
+            },
+            {
+              heading: "First 30 Minutes (decision tree)",
+              items: [
+                "Step 1: Declare incident + severity in #ai-incidents, assign IC and scribe, start the timeline log",
+                "Step 2: Contain first, diagnose second - can we roll back to last-known-good model/prompt? ☐ Yes → execute rollback runbook  ☐ No → next step",
+                "Step 3: Can we degrade gracefully? (route to fallback model, serve cached/safe default, disable the AI feature) ☐ Yes → execute  ☐ No → escalate",
+                "Step 4: Establish blast radius - who/what is affected, since when, how many users/requests: ___",
+                "Step 5: Confirm containment via monitoring (error rate, quality score, latency back within SLO) before starting root-cause work",
+                "Step 6: Post first stakeholder update within ___ minutes of declaration, then update every ___ minutes until resolved",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Create stakeholder and user communication templates",
+          templateTitle: "AI Incident Communication Templates",
+          templateType: "template",
+          instructions: "Pre-write comms so you are editing, not composing, during an incident. Be factual, avoid speculation on root cause, and never overstate what you know. If AI produced harmful or biased output, transparency builds more trust than silence.",
+          sections: [
+            {
+              heading: "Internal Updates (incident channel / stakeholders)",
+              items: [
+                "DECLARED: 'SEV__ declared for [model/feature] at [time]. Symptom: [what users see]. IC: [name]. Next update by [time].'",
+                "MITIGATED: 'Impact contained via [rollback/fallback/disable] at [time]. Monitoring for stability. Root-cause investigation ongoing.'",
+                "RESOLVED: 'Resolved at [time]. Duration: [X]. Root cause: [1-line]. Post-incident review scheduled for [date].'",
+              ],
+            },
+            {
+              heading: "User-Facing Communication (if impact reached users)",
+              items: [
+                "Trigger: notify users when incident caused wrong outputs affecting their decisions, exposed data, or degraded a core workflow > ___ minutes",
+                "Template: 'Between [start] and [end], [feature] may have [specific impact]. We have fixed this. If you were affected, [action/next step]. Contact [channel] with questions.'",
+                "Approval chain before external comms: ☐ IC  ☐ Legal/DPO  ☐ Comms lead - for SEV1/SEV2",
+                "Regulatory notification check: does this incident trigger a reporting duty (GDPR breach, EU AI Act serious incident)? ☐ Yes - notify ___ within ___  ☐ No",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Run a blameless post-incident review with tracked preventions",
+          templateTitle: "AI Post-Incident Review Template",
+          templateType: "template",
+          instructions: "A post-incident review that does not produce owned, tracked prevention actions is theatre. Keep it blameless - the goal is a more resilient system, not accountability for individuals. Hold it within 48 hours while memory is fresh.",
+          sections: [
+            {
+              heading: "Incident Summary",
+              items: [
+                "Incident ID: ___ | Severity: ___ | Detected at: ___ | Resolved at: ___ | Total duration: ___",
+                "Time to detect: ___ | Time to mitigate: ___ | Time to resolve: ___ (track these trends across incidents)",
+                "User/business impact: ___ requests / ___ users affected | Estimated cost/harm: ___",
+                "Timeline: chronological log of key events, decisions, and actions with timestamps",
+              ],
+            },
+            {
+              heading: "Root Cause & Prevention",
+              items: [
+                "Root cause (technical): ___ | Contributing factors (process, monitoring gaps, ambiguous ownership): ___",
+                "What worked well in the response: ___ | What slowed us down: ___",
+                "Detection gap: would our monitoring have caught this earlier? What signal was missing: ___",
+                "Prevention action 1: ___ | Owner: ___ | Due: ___ | Tracked in: ___",
+                "Prevention action 2: ___ | Owner: ___ | Due: ___ | Tracked in: ___",
+                "Runbook update needed: ☐ Yes → update RB-___ and re-test  ☐ No | Review published to team: ☐",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

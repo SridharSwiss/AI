@@ -1,19 +1,57 @@
 {
   "date": "2026-08-15",
-  "summary": "Updated 2 items across Tools, General.",
+  "summary": "Added 3 tools, 3 companies, 4 case studies, California SB 53, 2 learn resources, and 3 news sources.",
   "changes": [
     {
-      "icon": "chart",
       "category": "Tools",
+      "icon": "chart",
       "items": [
-        "Tools, companies, case studies, compliance, learn, news"
+        "Firecrawl — open-source web scraping API turning sites into LLM-ready markdown",
+        "Mem0 — universal memory layer giving AI agents long-term recall",
+        "Codex CLI — OpenAI's open-source terminal coding agent"
       ]
     },
     {
+      "category": "Companies",
       "icon": "chart",
-      "category": "General",
       "items": [
-        "Daily update 2026-08-14: refresh what's-new banner"
+        "Figure AI — humanoid robotics (Figure 03, Helix VLA), ~$39B valuation",
+        "Cartesia — real-time voice AI (Sonic TTS) on state space models",
+        "Decagon AI — enterprise AI customer-support agents, $1.5B valuation"
+      ]
+    },
+    {
+      "category": "Case Studies",
+      "icon": "chart",
+      "items": [
+        "Mastercard Decision Intelligence — real-time AI fraud scoring on billions of transactions",
+        "Mercedes-Benz MBUX — generative AI in-car voice assistant",
+        "Shopify Sidekick & Magic — generative commerce across millions of stores",
+        "Pinterest Visual Search — CV embeddings & graph neural networks for recommendations"
+      ]
+    },
+    {
+      "category": "Compliance",
+      "icon": "shield",
+      "items": [
+        "California SB 53 Frontier AI Transparency Act — safety frameworks & critical-incident reporting for frontier developers"
+      ]
+    },
+    {
+      "category": "Learning",
+      "icon": "book",
+      "items": [
+        "Anthropic: Building Effective Agents with Claude — agent design patterns",
+        "Hugging Face AI Agents Course — hands-on agent building with certification"
+      ]
+    },
+    {
+      "category": "News Sources",
+      "icon": "news",
+      "items": [
+        "SemiAnalysis added to Tech feed",
+        "Latent Space added to General feed",
+        "Simon Willison's Weblog added to General feed"
       ]
     }
   ]

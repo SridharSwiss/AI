@@ -2336,10 +2336,82 @@ export const complianceFrameworks: ComplianceFramework[] = [
     relatedFrameworks: ["colorado-ai-act", "eu-ai-act", "nist-ai-rmf"],
     penalties: "Enforced exclusively by the Texas Attorney General; civil penalties per violation (with higher amounts for uncurable or continuing violations) after a statutory cure period. No private right of action.",
   },
+  {
+    id: "california-sb53-frontier-ai",
+    slug: "california-sb53-frontier-ai",
+    name: "California Transparency in Frontier Artificial Intelligence Act (SB 53)",
+    shortName: "California SB 53",
+    jurisdiction: "United States (California)",
+    status: "Published",
+    description: "California's frontier-AI safety and transparency law (SB 53), signed in 2025, targeting the largest developers of the most capable 'frontier' AI models. Rather than a broad risk-tier regime, it imposes transparency, safety-framework publication, and critical-incident reporting duties on frontier developers above defined compute and revenue thresholds, and adds whistleblower protections for employees raising catastrophic-risk concerns. It reflects a shift toward regulating advanced foundation models at the point of development.",
+    enforcingAuthority: "California Attorney General (civil enforcement). The California Office of Emergency Services receives critical safety-incident reports.",
+    scope: "Large 'frontier' AI developers training models above high compute thresholds and meeting annual-revenue thresholds, whose models are made available to Californians. Focuses on catastrophic-risk-relevant frontier models rather than ordinary or narrow AI systems.",
+    keyRequirements: [
+      "Publish a frontier AI safety framework describing how catastrophic risks are assessed and mitigated",
+      "Publish transparency reports and model documentation before or upon deploying frontier models",
+      "Report critical safety incidents to the California Office of Emergency Services within statutory deadlines",
+      "Implement and disclose internal governance for assessing catastrophic risk from frontier models",
+      "Provide whistleblower protections for employees reporting significant safety risks",
+      "Maintain and follow the published safety framework, with updates as capabilities change",
+    ],
+    whoIsAffected: [
+      "Frontier AI developers training models above defined compute thresholds",
+      "Large AI companies meeting the Act's annual-revenue thresholds",
+      "Providers making frontier models available to California users",
+      "Employees of covered frontier developers (as protected whistleblowers)",
+    ],
+    whoIsExempt: [
+      "Developers of models below the compute and revenue thresholds",
+      "Narrow or non-frontier AI systems not implicating catastrophic risk",
+      "Academic and research uses not deploying frontier models to market",
+    ],
+    keyProhibitions: [
+      "Deploying covered frontier models without a published safety framework and transparency disclosures",
+      "Failing to report qualifying critical safety incidents within required timeframes",
+      "Retaliating against employees who report catastrophic-risk safety concerns",
+    ],
+    guardrails: [
+      "Threshold-based scope: obligations attach only to the largest, most capable frontier developers",
+      "Transparency-first: mandated public safety frameworks and reporting rather than pre-approval",
+      "Incident reporting: critical safety incidents flow to state emergency authorities",
+      "Whistleblower protection: internal safety concerns are legally shielded from retaliation",
+    ],
+    exposureAreas: [
+      "Foundation-model developers: frontier training runs trigger framework and disclosure duties",
+      "Cloud & compute providers: large training workloads implicate covered-developer thresholds",
+      "AI governance teams: must operationalize incident detection and reporting pipelines",
+      "HR & legal: whistleblower protections require updated internal reporting channels",
+    ],
+    industryImpact: [
+      { sector: "Technology / AI Vendors", impact: "critical", notes: "Directly targets the largest frontier developers with safety-framework, transparency, and incident-reporting duties." },
+      { sector: "Cloud & Infrastructure", impact: "high", notes: "Large training runs and compute thresholds bring hyperscale providers and their customers into scope." },
+      { sector: "Enterprise AI Adopters", impact: "medium", notes: "Downstream users gain more transparency into frontier-model safety practices." },
+      { sector: "Government & Public Sector", impact: "medium", notes: "State emergency services take on a frontier-AI critical-incident reporting role." },
+    ],
+    timeline: [
+      { date: "2025", milestone: "California SB 53 signed into law", type: "past" },
+      { date: "2025–2026", milestone: "Rulemaking and safety-framework / reporting mechanisms stand-up", type: "current" },
+      { date: "2026", milestone: "Core transparency and incident-reporting obligations take effect", type: "upcoming" },
+    ],
+    affectedOrgs: "Large frontier AI developers above defined compute and revenue thresholds whose models reach California users, plus their employees as protected whistleblowers.",
+    enforcementDate: "Effective 2026 (signed 2025; enforced by the California Attorney General)",
+    riskLevel: "high",
+    tags: ["Frontier AI", "Enterprise", "Transparency", "US", "State Law"],
+    officialLink: "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53",
+    implementationGuidance: [
+      "Determine whether your models exceed the Act's compute and revenue thresholds",
+      "Draft and publish a frontier AI safety framework covering catastrophic-risk assessment and mitigation",
+      "Build a critical-incident detection and reporting pipeline to the Office of Emergency Services",
+      "Establish protected whistleblower channels and anti-retaliation policies",
+      "Prepare transparency reports and model documentation ahead of frontier-model deployment",
+    ],
+    relatedFrameworks: ["eu-ai-act", "nist-ai-rmf", "us-executive-order-ai"],
+    penalties: "Enforced by the California Attorney General through civil penalties for violations such as missing safety-framework publication, transparency failures, or unreported critical incidents.",
+  },
 ];
 
 export const complianceRiskLevels = ["All", "low", "medium", "high", "critical"];
 export const complianceJurisdictions = [
   "All", "European Union", "United States", "United Kingdom", "International",
-  "China", "Canada", "Singapore", "Australia", "India", "G7 Nations", "International (OECD Members)", "Brazil", "South Korea", "Japan", "United Arab Emirates", "Council of Europe", "United States (Colorado)", "United States (Texas)",
+  "China", "Canada", "Singapore", "Australia", "India", "G7 Nations", "International (OECD Members)", "Brazil", "South Korea", "Japan", "United Arab Emirates", "Council of Europe", "United States (Colorado)", "United States (Texas)", "United States (California)",
 ];
