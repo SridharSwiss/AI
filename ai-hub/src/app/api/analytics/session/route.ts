@@ -20,7 +20,7 @@ async function geolocate(ip: string): Promise<{ country: string; country_code: s
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { session_id, device_type, browser, os, referrer_source, referrer_url, utm_source, utm_medium, utm_campaign } = body;
+    const { session_id, device_type, browser, os, referrer_source, referrer_url, utm_source, utm_medium, utm_campaign, user_id, user_email } = body;
     if (!session_id) return NextResponse.json({ error: "missing session_id" }, { status: 400 });
 
     // Resolve visitor IP — Vercel sets x-forwarded-for
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const ip = (forwarded ? forwarded.split(",")[0] : req.headers.get("x-real-ip") ?? "").trim();
     const geo = await geolocate(ip);
 
-    const { error } = await supabase.from("analytics_sessions").insert({
+    const base = {
       id: session_id,
       device_type,
       browser,
@@ -41,7 +41,18 @@ export async function POST(req: NextRequest) {
       country: geo?.country ?? null,
       country_code: geo?.country_code ?? null,
       city: geo?.city ?? null,
+    };
+
+    let { error } = await supabase.from("analytics_sessions").insert({
+      ...base,
+      user_id: user_id ?? null,
+      user_email: user_email ?? null,
     });
+
+    // Migration-safe: if user columns don't exist yet, insert without them.
+    if (error && /user_id|user_email|column/i.test(error.message)) {
+      ({ error } = await supabase.from("analytics_sessions").insert(base));
+    }
 
     if (error) {
       console.error("[analytics/session POST]", error.message);

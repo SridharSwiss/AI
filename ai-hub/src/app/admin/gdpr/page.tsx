@@ -69,9 +69,13 @@ function GdprInner() {
         <div className="w-8 h-8 rounded-lg bg-rose-600 flex items-center justify-center">
           <ShieldAlert className="w-4 h-4 text-white" />
         </div>
-        <div>
+        <div className="flex-1">
           <h1 className="text-base font-bold">GDPR Data Management</h1>
           <p className="text-xs text-white/40">Right to access &amp; erasure (Art. 15 &amp; 17)</p>
+        </div>
+        <div className="flex items-center gap-1 text-xs">
+          <a href={`/admin/analytics?key=${adminKey}`} className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors">Site Analytics</a>
+          <a href={`/admin/users?key=${adminKey}`} className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors">Users</a>
         </div>
       </div>
 

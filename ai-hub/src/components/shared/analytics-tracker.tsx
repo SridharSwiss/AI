@@ -3,6 +3,20 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { getConsent } from "./consent-banner";
+import { createClient } from "@/lib/auth/client";
+
+/** Best-effort read of the current logged-in user (null if signed out / unconfigured). */
+async function getCurrentUser(): Promise<{ id: string; email: string | null } | null> {
+  try {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return null;
+    const supabase = createClient();
+    const { data } = await supabase.auth.getUser();
+    if (!data.user) return null;
+    return { id: data.user.id, email: data.user.email ?? null };
+  } catch {
+    return null;
+  }
+}
 
 /* ── helpers ─────────────────────────────────────── */
 
@@ -124,6 +138,7 @@ export function AnalyticsTracker() {
     pageStarted.current = Date.now();
 
     const ref = document.referrer;
+    const user = await getCurrentUser();
     await fetch("/api/analytics/session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -137,6 +152,8 @@ export function AnalyticsTracker() {
         utm_source: getUTM("utm_source") || null,
         utm_medium: getUTM("utm_medium") || null,
         utm_campaign: getUTM("utm_campaign") || null,
+        user_id: user?.id ?? null,
+        user_email: user?.email ?? null,
       }),
     }).catch(() => {});
   }
