@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { PageHeader } from "@/components/shared/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Wrench, Building2, TrendingUp, Shield, BookOpen, Library, FileText, AlertCircle } from "lucide-react";
+import { ContributeForm } from "@/components/contribute/contribute-form";
+import { Wrench, Building2, TrendingUp, Shield, BookOpen, Library, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contribute to AIHub",
@@ -71,7 +72,7 @@ export default function ContributePage() {
             {[
               { step: "1", title: "Find a Gap", desc: "Browse the directory and find something missing - a tool, company, case study, or resource." },
               { step: "2", title: "Gather Details", desc: "Collect the key facts using the field guides below. Public sources only - no proprietary info." },
-              { step: "3", title: "Submit via GitHub", desc: "Open an issue or pull request on our GitHub repository with your proposed addition." },
+              { step: "3", title: "Submit the Form", desc: "Fill in the form below for your submission type. It goes straight to our team for review." },
             ].map((s) => (
               <div key={s.step} className="flex gap-4 p-5 rounded-2xl glass-card hover:-translate-y-1.5 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.32)] transition-all duration-200">
                 <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground glow-primary-sm flex items-center justify-center font-bold text-sm flex-shrink-0">
@@ -137,15 +138,13 @@ export default function ContributePage() {
           </div>
         </section>
 
-        {/* Notice */}
-        <section className="flex items-start gap-4 p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50">
-          <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="font-semibold text-amber-800 dark:text-amber-300 mb-1">Submission Process Coming Soon</p>
-            <p className="text-sm text-amber-700 dark:text-amber-400">
-              A formal submission form is under development. In the meantime, you can open an issue on our GitHub repository describing your proposed addition using the field guides above.
-            </p>
-          </div>
+        {/* Submission form */}
+        <section id="submit" className="scroll-mt-28">
+          <h2 className="text-2xl font-bold mb-2">Submit Your Contribution</h2>
+          <p className="text-sm text-muted-foreground mb-6">
+            Pick a type, fill in the details, and send it to our team. We review every submission.
+          </p>
+          <ContributeForm />
         </section>
 
       </div>
