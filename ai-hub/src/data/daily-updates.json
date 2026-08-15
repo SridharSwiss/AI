@@ -1,58 +1,19 @@
 {
-  "date": "2026-08-14",
-  "summary": "Added 3 tools, 3 companies, 4 case studies, Texas AI Act, 3 learn resources, and 3 news sources.",
+  "date": "2026-08-15",
+  "summary": "Updated 2 items across Tools, General.",
   "changes": [
     {
+      "icon": "chart",
       "category": "Tools",
+      "items": [
+        "Tools, companies, case studies, compliance, learn, news"
+      ]
+    },
+    {
       "icon": "chart",
+      "category": "General",
       "items": [
-        "DeepL — high-accuracy AI translator & DeepL Write assistant, $2B valuation",
-        "Recraft — designer-focused AI image generator with true SVG/vector output",
-        "Granola — bot-free AI meeting notetaker blending notes with transcript"
-      ]
-    },
-    {
-      "category": "Companies",
-      "icon": "chart",
-      "items": [
-        "Glean — enterprise Work AI search & agents platform, $7.2B valuation",
-        "Hume AI — emotionally intelligent voice AI (Empathic Voice Interface)",
-        "Abridge — healthcare ambient clinical documentation AI, $5.3B valuation"
-      ]
-    },
-    {
-      "category": "Case Studies",
-      "icon": "chart",
-      "items": [
-        "Ocado AI Fulfillment — swarm-robotics grid licensed globally as an AI platform",
-        "Recursion Drug Discovery — automated wet-lab biology + deep-learning phenomics",
-        "Bank of America Erica — NLU assistant past 2 billion client interactions",
-        "Grammarly AI Writing — NLP + generative AI reaching tens of millions daily"
-      ]
-    },
-    {
-      "category": "Compliance",
-      "icon": "shield",
-      "items": [
-        "Texas Responsible AI Governance Act (HB 149) — intent-based state AI law enforced by the Texas AG"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Anthropic AI Fluency Course — working effectively and responsibly with AI",
-        "DeepLearning.AI Agentic AI Course — building tool-using multi-step agents",
-        "Google/Kaggle GenAI Intensive — 5-day course on prompting, RAG, embeddings, agents"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "The Gradient added to Research feed",
-        "Allen Institute for AI (AI2) Blog added to Research feed",
-        "Cohere Blog added to Tech feed"
+        "Daily update 2026-08-14: refresh what's-new banner"
       ]
     }
   ]
