@@ -3,6 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ShieldAlert, Search, Trash2, Loader2, CheckCircle2, AlertCircle, UserX } from "lucide-react";
+import { AdminNav } from "@/components/admin/admin-nav";
 
 type LookupResult =
   | { found: false; email: string }
@@ -73,11 +74,9 @@ function GdprInner() {
           <h1 className="text-base font-bold">GDPR Data Management</h1>
           <p className="text-xs text-white/40">Right to access &amp; erasure (Art. 15 &amp; 17)</p>
         </div>
-        <div className="flex items-center gap-1 text-xs">
-          <a href={`/admin/analytics?key=${adminKey}`} className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors">Site Analytics</a>
-          <a href={`/admin/users?key=${adminKey}`} className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors">Users</a>
-        </div>
       </div>
+
+      <AdminNav active="gdpr" adminKey={adminKey} />
 
       <div className="max-w-2xl mx-auto px-6 py-10">
         <div className="rounded-2xl border border-white/10 p-6" style={{ background: "rgba(255,255,255,0.03)" }}>

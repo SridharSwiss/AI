@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { supabaseAdmin as supabase } from "@/lib/supabase";
+import { AdminNav } from "@/components/admin/admin-nav";
 import { Monitor, Smartphone, Tablet, Globe, Clock, MousePointer, TrendingUp, Users, FileText, ArrowUpRight, MapPin } from "lucide-react";
 import { WorldMap } from "./world-map";
 
@@ -157,12 +158,7 @@ export default async function AnalyticsPage({
             <p className="text-xs text-white/40">Private dashboard · {totalSessions} sessions logged</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 text-xs">
-            <a href={`/admin/users?key=${key}`} className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors">Users</a>
-            <a href={`/admin/gdpr?key=${key}`} className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors">GDPR</a>
-          </div>
-          <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5">
           {dayOptions.map((d) => (
             <a
               key={d}
@@ -174,9 +170,10 @@ export default async function AnalyticsPage({
               {d}d
             </a>
           ))}
-          </div>
         </div>
       </div>
+
+      <AdminNav active="analytics" adminKey={key ?? ""} />
 
       <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
 

@@ -5,6 +5,7 @@ import {
   Users, UserPlus, Activity, Globe, Mail, Search, Clock, Eye, Layers,
   ChevronDown, ChevronRight, Monitor, MapPin, ArrowUpDown,
 } from "lucide-react";
+import { AdminNav } from "@/components/admin/admin-nav";
 
 export type AreaCount = { area: string; views: number };
 export type UserRow = {
@@ -67,10 +68,12 @@ export function UsersDashboard({
   users,
   summary,
   migrationReady,
+  adminKey,
 }: {
   users: UserRow[];
   summary: Summary;
   migrationReady: boolean;
+  adminKey: string;
 }) {
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<SortKey>("lastActive");
@@ -112,11 +115,9 @@ export function UsersDashboard({
             <p className="text-xs text-white/40">{summary.totalUsers} registered users</p>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-xs">
-          <AdminLink label="Site Analytics" href="analytics" />
-          <AdminLink label="GDPR" href="gdpr" />
-        </div>
       </div>
+
+      <AdminNav active="users" adminKey={adminKey} />
 
       <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
 
@@ -259,13 +260,3 @@ function Meta({ icon: Icon, label, value }: { icon: React.ElementType; label: st
   );
 }
 
-function AdminLink({ label, href }: { label: string; href: string }) {
-  return (
-    <a
-      href={`/admin/${href}${typeof window !== "undefined" ? window.location.search : ""}`}
-      className="px-3 h-8 inline-flex items-center rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors"
-    >
-      {label}
-    </a>
-  );
-}

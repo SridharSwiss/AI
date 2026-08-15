@@ -182,5 +182,5 @@ export default async function AdminUsersPage({
     totalPageViews: pageviews.length,
   };
 
-  return <UsersDashboard users={rows} summary={summary} migrationReady={migrationReady} />;
+  return <UsersDashboard users={rows} summary={summary} migrationReady={migrationReady} adminKey={params.key ?? ""} />;
 }
