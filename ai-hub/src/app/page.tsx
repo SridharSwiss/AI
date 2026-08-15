@@ -40,23 +40,23 @@ const homeFaqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is the best AI tool in 2026?",
-      acceptedAnswer: { "@type": "Answer", text: "The best AI tools in 2026 include ChatGPT (1B weekly users, GPT-5.5), Claude (Opus 4.8, $45B ARR), and Gemini 3.5 Flash (750M MAU). The right choice depends on your use case: ChatGPT for general use, Claude for coding and long documents, Gemini for Google Workspace integration." },
+      name: "What is the best AI tool?",
+      acceptedAnswer: { "@type": "Answer", text: "There is no single best AI tool — the right choice depends on your use case. ChatGPT (OpenAI) is a strong all-round assistant, Claude (Anthropic) excels at coding and long-document analysis, Gemini (Google) integrates deeply with Google Workspace, and Perplexity is built for cited web research. AIHub lets you compare AI tools side by side by category, pricing, and use case to find the best fit." },
     },
     {
       "@type": "Question",
       name: "What is the EU AI Act and who does it apply to?",
-      acceptedAnswer: { "@type": "Answer", text: "The EU AI Act is the world's first comprehensive AI regulation, in force from August 2024. It applies to any company deploying AI systems affecting EU citizens, regardless of where the company is based. It classifies AI systems into risk tiers: unacceptable risk (banned), high risk (strict requirements), limited risk (transparency obligations), and minimal risk (no requirements)." },
+      acceptedAnswer: { "@type": "Answer", text: "The EU AI Act is the world's first comprehensive AI regulation, in force from August 2024. It applies to any organization that develops, deploys, or distributes AI systems affecting people in the EU, regardless of where the organization is based. It classifies AI systems into risk tiers: unacceptable risk (banned), high risk (strict requirements), limited risk (transparency obligations), and minimal risk (no requirements)." },
     },
     {
       "@type": "Question",
-      name: "How much does ChatGPT cost per month?",
-      acceptedAnswer: { "@type": "Answer", text: "ChatGPT pricing in 2026: Free ($0/mo with ads), Go ($8/mo), Plus ($20/mo with GPT-5.5), Business ($20/seat/mo), Pro ($200/mo unlimited), and Enterprise (custom pricing). The free tier now includes GPT-5.3 Instant but shows ads." },
+      name: "How do I choose between ChatGPT, Claude, and Gemini?",
+      acceptedAnswer: { "@type": "Answer", text: "Choose based on your primary task. ChatGPT is a versatile general assistant with a broad plugin and app ecosystem. Claude is often preferred for software development, reasoning, and analyzing long documents. Gemini is the natural choice if you work heavily in Google Workspace (Docs, Gmail, Sheets). All three offer free tiers and paid plans — AIHub compares their capabilities, pricing, and best-fit use cases." },
     },
     {
       "@type": "Question",
       name: "What are the best alternatives to ChatGPT?",
-      acceptedAnswer: { "@type": "Answer", text: "The top ChatGPT alternatives in 2026 are: Claude by Anthropic (best for coding and long documents), Gemini by Google (best for Workspace integration), Grok by xAI (best for real-time X/Twitter data), Perplexity (best for cited research), and Llama 5 (best open-source option)." },
+      acceptedAnswer: { "@type": "Answer", text: "Popular ChatGPT alternatives include Claude by Anthropic (coding and long documents), Gemini by Google (Workspace integration), Perplexity (cited web research), Grok by xAI (real-time social data), and open-weight models like Meta's Llama for self-hosting. The best alternative depends on your needs — AIHub provides side-by-side comparisons to help you decide." },
     },
   ],
 };
