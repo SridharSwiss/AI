@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/auth/client";
 import { Button } from "@/components/ui/button";
-import { Brain, Mail, Lock, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Brain, Mail, Lock, Loader2, AlertCircle, CheckCircle2, Cookie } from "lucide-react";
 
 type Mode = "login" | "signup";
 
@@ -175,6 +175,18 @@ function LoginInner() {
             >
               {mode === "login" ? "Sign up" : "Sign in"}
             </button>
+          </p>
+        </div>
+
+        {/* GDPR / cookie notice */}
+        <div className="mt-6 flex items-start gap-2 rounded-xl border border-border/60 bg-muted/30 p-3.5">
+          <Cookie className="w-4 h-4 text-violet-500 mt-0.5 flex-shrink-0" />
+          <p className="text-[11px] text-muted-foreground leading-relaxed">
+            Signing in stores a strictly-necessary authentication cookie to keep you logged in — this is
+            exempt from consent under GDPR/ePrivacy as it is essential to the service. We process your email
+            solely to manage your account. See our{" "}
+            <Link href="/privacy" className="underline hover:text-foreground">Privacy &amp; Cookie Policy</Link>.
+            You can request erasure of your data at any time.
           </p>
         </div>
 

@@ -9,17 +9,31 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: "Overview",
-    content: `AIHub is a periodically updated, read-only knowledge platform. We do not require account creation, do not collect personal information, and do not sell or share user data with third parties. This privacy policy explains what minimal data is collected and how it is used.`,
+    content: `AIHub is a periodically updated knowledge platform. Most of the site is public and requires no account. Certain premium sections (the Consulting Toolkit and Case Studies) require you to sign in. We collect only the minimal personal data needed to provide accounts, never sell or share user data with third parties, and honour your GDPR rights including the right to erasure. This policy explains what data is collected and how it is used.`,
   },
   {
     title: "Information We Collect",
-    content: `We collect minimal anonymous data to understand how the platform is used:
+    content: `We collect minimal data to run the platform:
 
-• **Analytics**: We use privacy-respecting analytics to count page views and understand which sections are most useful. This data is aggregated and does not identify individual users.
+• **Account data**: If you create an account to access gated sections, we store your email address and authentication details via our authentication provider (Supabase). If you sign in with Google, we receive only your email and basic profile identifier — never your Google password.
 
-• **Local Storage**: The News page stores a cache of fetched RSS articles in your browser's localStorage to reduce load times. This data never leaves your device and is not transmitted to our servers.
+• **Analytics**: We use privacy-respecting analytics to count page views and understand which sections are most useful. This data is aggregated and anonymous — it is not stored against your name or email.
 
-• **No Cookies for Tracking**: We do not use cookies for advertising or cross-site tracking purposes. The only browser storage used is functional (theme preference, news cache).`,
+• **Local Storage**: The News page caches fetched RSS articles in your browser's localStorage to reduce load times. This never leaves your device.
+
+• **No Advertising Cookies**: We do not use cookies for advertising or cross-site tracking.`,
+  },
+  {
+    title: "Accounts & Authentication",
+    content: `Access to gated sections requires an account. Authentication is handled by Supabase Auth. When you sign in, a strictly-necessary authentication cookie is stored in your browser to keep you logged in. Under GDPR/ePrivacy, strictly-necessary cookies are exempt from consent because they are essential to a service you have requested. We use your email solely to manage your account and secure access — we do not send marketing email.`,
+  },
+  {
+    title: "Your Rights (GDPR)",
+    content: `If you are in the EU/EEA, UK, or Switzerland, you have the right to access, rectify, restrict, port, and erase your personal data, and to object to processing.
+
+• **Right to erasure (Art. 17)**: You can request deletion of your account and all identity data at any time. We action erasure requests promptly; deleting your account permanently removes your email and authentication records.
+
+• **How to exercise your rights**: Contact us via the Contribute page or our GitHub repository with your request. Because our analytics are anonymous, deleting your account removes all personal data we hold about you.`,
   },
   {
     title: "Third-Party Links",
