@@ -2,7 +2,7 @@ import { requireUser } from "@/lib/auth/require-auth";
 
 export const dynamic = "force-dynamic";
 
-export default async function ComplianceLayout({
+export default async function ComplianceDetailLayout({
   children,
 }: {
   children: React.ReactNode;

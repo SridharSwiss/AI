@@ -2,7 +2,7 @@ import { requireUser } from "@/lib/auth/require-auth";
 
 export const dynamic = "force-dynamic";
 
-export default async function CaseStudiesLayout({
+export default async function CaseStudyDetailLayout({
   children,
 }: {
   children: React.ReactNode;

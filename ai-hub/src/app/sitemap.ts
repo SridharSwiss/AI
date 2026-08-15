@@ -1,8 +1,6 @@
 import { MetadataRoute } from "next";
 import { tools } from "@/data/tools";
 import { companies } from "@/data/companies";
-import { caseStudies } from "@/data/case-studies";
-import { complianceFrameworks } from "@/data/compliance";
 
 const BASE_URL = "https://ai-hub.host";
 const NOW = new Date().toISOString();
@@ -55,19 +53,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
-  const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((cs) => ({
-    url: `${BASE_URL}/case-studies/${cs.slug}`,
-    lastModified: NOW,
-    priority: 0.7,
-    changeFrequency: "monthly" as const,
-  }));
-
-  const complianceRoutes: MetadataRoute.Sitemap = complianceFrameworks.map((f) => ({
-    url: `${BASE_URL}/compliance/${f.slug}`,
-    lastModified: NOW,
-    priority: 0.7,
-    changeFrequency: "monthly" as const,
-  }));
+  // Note: /case-studies/[slug] and /compliance/[slug] detail pages are gated
+  // (require sign-in), so they are intentionally excluded from the sitemap —
+  // only their public index pages (in staticRoutes) are submitted for indexing.
 
   // Comparison pages — bottom-of-funnel, high purchase-intent traffic (priority 0.8)
   const compareRoutes: MetadataRoute.Sitemap = getComparisonSlugs().map((slug) => ({
@@ -81,8 +69,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...toolRoutes,
     ...companyRoutes,
-    ...caseStudyRoutes,
-    ...complianceRoutes,
     ...compareRoutes,
   ];
 }

@@ -1,13 +1,20 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/** Route prefixes that require a signed-in user. */
-const GATED_PREFIXES = ["/consulting-toolkit", "/case-studies", "/compliance"];
+/** Sections gated entirely — index and all sub-pages require sign-in. */
+const FULLY_GATED = ["/consulting-toolkit"];
+/** Sections whose index/listing is public (SEO) but detail pages are gated. */
+const DETAIL_GATED = ["/case-studies", "/compliance"];
 
 function isGated(pathname: string): boolean {
-  return GATED_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
-  );
+  if (FULLY_GATED.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    return true;
+  }
+  // Only sub-paths (a specific slug) are gated — the bare index stays public.
+  if (DETAIL_GATED.some((p) => pathname.startsWith(`${p}/`))) {
+    return true;
+  }
+  return false;
 }
 
 /**
