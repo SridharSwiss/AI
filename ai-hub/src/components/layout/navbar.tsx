@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { AuthButton } from "@/components/layout/auth-button";
 import { useTheme } from "next-themes";
 
 /* ── Mega-menu data ─────────────────────────────────────── */
@@ -312,6 +313,7 @@ export function Navbar() {
                   {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 </Button>
               )}
+              <AuthButton />
               <Button
                 variant="ghost"
                 size="icon"
