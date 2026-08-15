@@ -34,4 +34,51 @@ Allow: /
 User-agent: Twitterbot
 Allow: /
 
+# ── AI answer engines & LLM crawlers ─────────────────────────────
+# Explicitly welcomed so AIHub content can be surfaced and cited in
+# AI assistants and answer engines (better reach / GEO).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# LLM-friendly site index
+# https://ai-hub.host/llms.txt
 Sitemap: https://ai-hub.host/sitemap.xml
