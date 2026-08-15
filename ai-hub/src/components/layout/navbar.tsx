@@ -283,7 +283,7 @@ export function Navbar() {
                 { label: "Switzerland", href: "/switzerland" },
                 { label: "News", href: "/news" },
                 { label: "About", href: "/about" },
-                { label: "Contribute", href: "/contribute", prominent: true },
+                { label: "Contribute", href: "/contribute" },
                 { label: "Our Team", href: "/team" },
               ].map((item) => (
                 <Link
@@ -291,11 +291,7 @@ export function Navbar() {
                   href={item.href}
                   className={cn(
                     "px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-150",
-                    item.prominent
-                      ? "text-white bg-gradient-to-r from-violet-500 to-pink-500 hover:brightness-110 shadow-sm shadow-violet-500/30"
-                      : pathname === item.href
-                        ? "text-foreground bg-accent/70"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    pathname === item.href ? "text-foreground bg-accent/70" : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                   )}
                 >
                   {item.label}
