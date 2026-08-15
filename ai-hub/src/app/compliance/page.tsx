@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { AlertCircle } from "lucide-react";
 import { ComplianceList } from "@/components/compliance/compliance-list";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   title: "AI Compliance & Governance",

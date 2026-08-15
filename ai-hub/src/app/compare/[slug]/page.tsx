@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 const CATEGORY_ICONS: Record<string, React.ElementType> = {
   "Language Models":   MessageSquare,

@@ -31,7 +31,7 @@ const footerLinks = {
 
 const socialLinks = [
   { href: "https://www.linkedin.com/in/ch-sgande/", label: "LinkedIn", icon: Link2 },
-  { href: "https://sridhar-ai.ch", label: "Website", icon: Globe },
+  { href: "https://ai-hub.host", label: "Website", icon: Globe },
 ];
 
 export function Footer() {

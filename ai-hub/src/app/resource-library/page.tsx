@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/shared/page-header";
 import { ResourcesList } from "@/components/resources/resources-list";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   title: "AI Resource Library",

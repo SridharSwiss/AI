@@ -12,7 +12,7 @@ import {
   Users, Clock, Layers, Lock, FileText,
 } from "lucide-react";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 const industryColors: Record<string, "blue" | "green" | "amber" | "purple" | "pink"> = {
   Finance: "green",

@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Target, Users, Globe, Zap, Shield, BookOpen, TrendingUp } from "lucide-react";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   title: "About AIHub",

@@ -124,7 +124,7 @@ export async function generateStaticParams() {
   return complianceFrameworks.map((f) => ({ slug: f.slug }));
 }
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

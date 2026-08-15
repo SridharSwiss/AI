@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FlaskConical, Cpu, Rocket, Landmark, Globe, Sparkles, ArrowRight } from "lucide-react";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   title: "AI Hub Switzerland — Coming Soon",

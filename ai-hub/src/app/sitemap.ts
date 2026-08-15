@@ -4,7 +4,7 @@ import { companies } from "@/data/companies";
 import { caseStudies } from "@/data/case-studies";
 import { complianceFrameworks } from "@/data/compliance";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 const NOW = new Date().toISOString();
 
 /** Build every canonical comparison pair derived from the alternatives lists */

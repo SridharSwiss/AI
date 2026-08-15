@@ -8,7 +8,7 @@ import { NewsTicker } from "@/components/shared/news-ticker";
 import { ClientOverlays } from "@/components/layout/client-overlays";
 import { PageTransition } from "@/components/shared/page-transition";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +69,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
     type: "website",
     siteName: "AIHub",

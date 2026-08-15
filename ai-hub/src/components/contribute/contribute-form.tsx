@@ -86,7 +86,7 @@ const TYPES: TypeDef[] = [
     fields: [
       { key: "Subject", label: "Subject", placeholder: "Bug report, suggestion, correction…" },
       { key: "Message", label: "Message", textarea: true },
-      { key: "Related page (optional)", label: "Related page (optional)", placeholder: "https://sridhar-ai.ch/…" },
+      { key: "Related page (optional)", label: "Related page (optional)", placeholder: "https://ai-hub.host/…" },
     ],
   },
 ];

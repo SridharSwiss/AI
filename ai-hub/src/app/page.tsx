@@ -4,7 +4,7 @@ import { PersonaSelector } from "@/components/home/persona-selector";
 import { FeaturedSection } from "@/components/home/featured-section";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
-const BASE_URL = "https://sridhar-ai.ch";
+const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   // Question-based title for GEO/AIO eligibility
