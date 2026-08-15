@@ -22,10 +22,17 @@ function LoginInner() {
   const [error, setError] = useState(initialError);
   const [notice, setNotice] = useState("");
 
+  const authConfigured =
+    !!process.env.NEXT_PUBLIC_SUPABASE_URL && !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
   const supabase = createClient();
 
   async function handleEmailAuth(e: React.FormEvent) {
     e.preventDefault();
+    if (!authConfigured) {
+      setError("Sign-in is not available yet — it is being configured. Please check back soon.");
+      return;
+    }
     setLoading(true);
     setError("");
     setNotice("");
@@ -52,6 +59,10 @@ function LoginInner() {
   }
 
   async function handleOAuth(provider: "google") {
+    if (!authConfigured) {
+      setError("Sign-in is not available yet — it is being configured. Please check back soon.");
+      return;
+    }
     setError("");
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
