@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 /** Route prefixes that require a signed-in user. */
-const GATED_PREFIXES = ["/consulting-toolkit", "/case-studies"];
+const GATED_PREFIXES = ["/consulting-toolkit", "/case-studies", "/compliance"];
 
 function isGated(pathname: string): boolean {
   return GATED_PREFIXES.some(

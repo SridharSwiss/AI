@@ -88,8 +88,8 @@ function LoginInner() {
           </h1>
           <p className="text-sm text-muted-foreground">
             {mode === "login"
-              ? "Sign in to access the Consulting Toolkit and Case Studies."
-              : "Sign up to unlock the Consulting Toolkit and Case Studies."}
+              ? "Sign in to access the Consulting Toolkit, Case Studies, and Compliance frameworks."
+              : "Sign up to unlock the Consulting Toolkit, Case Studies, and Compliance frameworks."}
           </p>
         </div>
 
