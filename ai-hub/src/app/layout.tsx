@@ -106,7 +106,10 @@ export const metadata: Metadata = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${BASE_URL}/#organization`,
   name: "AIHub",
+  legalName: "AIHub Switzerland",
+  alternateName: ["AI Hub", "AI Hub Switzerland", "AIHub Switzerland", "ai-hub.host"],
   url: BASE_URL,
   logo: {
     "@type": "ImageObject",
@@ -114,11 +117,26 @@ const orgJsonLd = {
     width: 32,
     height: 32,
   },
+  image: `${BASE_URL}/og-image.png`,
   description:
-    "AIHub is the world's most complete AI knowledge platform: 137+ tools, 73 companies, EU AI Act compliance guides, structured learning paths, and consulting playbooks.",
+    "AIHub (AI Hub Switzerland) is an independent AI knowledge platform: 137+ tools, 73 companies, EU AI Act compliance guides, real-world case studies, structured learning paths, and consulting playbooks.",
   foundingDate: "2024",
+  foundingLocation: { "@type": "Place", name: "Switzerland" },
+  address: { "@type": "PostalAddress", addressCountry: "CH" },
+  founder: { "@type": "Person", name: "Sridhar Gande" },
+  email: "info@ai-hub.host",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "info@ai-hub.host",
+    contactType: "customer support",
+    availableLanguage: ["English"],
+  },
+  knowsAbout: [
+    "Artificial Intelligence", "AI tools", "Large Language Models",
+    "EU AI Act", "AI compliance", "AI governance", "Machine Learning",
+  ],
   sameAs: [
-    "https://www.linkedin.com/company/aihub",
+    "https://www.linkedin.com/in/ch-sgande/",
   ],
   potentialAction: {
     "@type": "SearchAction",
@@ -133,8 +151,10 @@ const orgJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${BASE_URL}/#website`,
   name: "AIHub",
-  alternateName: "AIHub — The AI Knowledge Platform",
+  alternateName: ["AI Hub", "AI Hub Switzerland", "ai-hub.host"],
+  publisher: { "@id": `${BASE_URL}/#organization` },
   url: BASE_URL,
   description: "Compare AI tools, explore companies, navigate EU AI Act compliance, and access learning resources — all in one platform.",
   inLanguage: "en",
