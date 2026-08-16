@@ -1,46 +1,58 @@
 {
   "date": "2026-08-16",
-  "summary": "Updated 17 items across Case Studies, General, Tools, Compliance.",
+  "summary": "Added 3 tools, 3 companies, 4 case studies, Saudi SDAIA AI Ethics, 3 learn resources, and 3 news sources.",
   "changes": [
     {
-      "icon": "chart",
-      "category": "Case Studies",
-      "items": [
-        "SEO: make Compliance & Case Studies index pages public, gate only details"
-      ]
-    },
-    {
-      "icon": "chart",
-      "category": "General",
-      "items": [
-        "SEO: replace fabricated homepage FAQ specifics with evergreen, defensible answers",
-        "SEO + AI optimization for better reach",
-        "SEO: switch canonical domain to ai-hub.host",
-        "Style Contribute nav link like all other menu items",
-        "Add prominent Contribute link to navbar (after About); reorder in footer",
-        "Add contribute email delivery diagnostic endpoint (admin-key gated)",
-        "Unify admin console: shared tab bar across Analytics, Users, GDPR",
-        "Add /admin/users dashboard: per-user login & engagement analytics",
-        "Contribute: dynamic submission form that emails info@ai-hub.host",
-        "Fix gating: relocate proxy to src/ and add server-side layout guards",
-        "Add GDPR tooling: erasure admin page, cookie notice, updated privacy policy",
-        "Login: show friendly message when auth env vars not yet configured",
-        "Remove LinkedIn login; keep email + Google",
-        "Add user authentication with gated premium areas"
-      ]
-    },
-    {
-      "icon": "chart",
       "category": "Tools",
+      "icon": "chart",
       "items": [
-        "Tools, companies, case studies, compliance, learn, news"
+        "Kimi — Moonshot AI's long-context assistant & open-weight Kimi K2 MoE model",
+        "Le Chat — Mistral AI's European chat assistant with Flash Answers",
+        "Photoroom — AI photo editor for background removal & product imagery"
       ]
     },
     {
-      "icon": "shield",
-      "category": "Compliance",
+      "category": "Companies",
+      "icon": "chart",
       "items": [
-        "Gate compliance frameworks behind sign-in"
+        "Lovable — Stockholm AI full-stack app builder, ~$1.8B valuation",
+        "Contextual AI — enterprise RAG platform by the original RAG paper authors",
+        "Nous Research — open-source LLM lab (Hermes) & decentralized training pioneer"
+      ]
+    },
+    {
+      "category": "Case Studies",
+      "icon": "chart",
+      "items": [
+        "Coca-Cola Generative AI Marketing — GPT-4/DALL-E 'Create Real Magic' at scale",
+        "Expedia AI Trip Planning — ChatGPT integration & proprietary 'Romie' assistant",
+        "LinkedIn AI Hiring — Hiring Assistant agent grounded in the economic graph (1B+ members)",
+        "Maersk AI Supply Chain — ML for ETA, demand forecasting & emissions optimization"
+      ]
+    },
+    {
+      "category": "Compliance",
+      "icon": "shield",
+      "items": [
+        "Saudi SDAIA AI Ethics Principles — Vision 2030 risk-tiered AI framework alongside the PDPL"
+      ]
+    },
+    {
+      "category": "Learning",
+      "icon": "book",
+      "items": [
+        "Google Cloud Generative AI Leader — business-focused certification",
+        "Anthropic Claude Cookbook — open-source code recipes (tool use, RAG, vision, agents)",
+        "DeepLearning.AI MCP Course — short course on the Model Context Protocol"
+      ]
+    },
+    {
+      "category": "News Sources",
+      "icon": "news",
+      "items": [
+        "Ahead of AI (Sebastian Raschka) added to General feed",
+        "Epoch AI added to Research feed",
+        "MarkTechPost added to Tech feed"
       ]
     }
   ]

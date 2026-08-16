@@ -421,6 +421,31 @@ export const newsSources: NewsSource[] = [
     website: "https://simonwillison.net",
     description: "Hands-on writing on LLMs, prompt engineering, and practical AI tooling from the co-creator of Django.",
   },
+  // Additions
+  {
+    id: "ahead-of-ai",
+    name: "Ahead of AI (Sebastian Raschka)",
+    category: "General",
+    rssUrl: "https://magazine.sebastianraschka.com/feed",
+    website: "https://magazine.sebastianraschka.com",
+    description: "Deep, practitioner-level explainers on LLM architectures, training, and research trends from Sebastian Raschka.",
+  },
+  {
+    id: "epoch-ai",
+    name: "Epoch AI",
+    category: "Research",
+    rssUrl: "https://epoch.ai/blog/rss.xml",
+    website: "https://epoch.ai",
+    description: "Data-driven research on AI compute trends, scaling, model economics, and forecasts of machine learning progress.",
+  },
+  {
+    id: "marktechpost",
+    name: "MarkTechPost",
+    category: "Tech",
+    rssUrl: "https://www.marktechpost.com/feed/",
+    website: "https://www.marktechpost.com",
+    description: "High-volume coverage of new AI models, research papers, and open-source ML releases.",
+  },
 ];
 
 export const newsCategories = [

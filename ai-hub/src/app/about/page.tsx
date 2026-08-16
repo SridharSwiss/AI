@@ -8,9 +8,9 @@ const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   title: "About AIHub",
-  description: "AIHub is the independent, curated AI knowledge platform - covering 137+ tools, 73+ companies, 27 compliance frameworks, and 65+ case studies.",
+  description: "AIHub is the independent, curated AI knowledge platform - covering 140+ tools, 76+ companies, 28 compliance frameworks, and 69+ case studies.",
   alternates: { canonical: `${BASE_URL}/about` },
-  openGraph: { title: "About AIHub - The AI Knowledge Platform", description: "AIHub is the independent, curated AI knowledge platform - 137+ tools, 73+ companies, 27 compliance frameworks, and 65+ case studies.", url: `${BASE_URL}/about`, type: "website" },
+  openGraph: { title: "About AIHub - The AI Knowledge Platform", description: "AIHub is the independent, curated AI knowledge platform - 140+ tools, 76+ companies, 28 compliance frameworks, and 69+ case studies.", url: `${BASE_URL}/about`, type: "website" },
 };
 
 const values = [
@@ -21,10 +21,10 @@ const values = [
 ];
 
 const sections = [
-  { icon: Zap,        label: "AI Tools Directory", href: "/tools",        description: "137+ tools across every category" },
-  { icon: TrendingUp, label: "Case Studies",        href: "/case-studies", description: "65 real-world implementations with measured outcomes" },
-  { icon: Shield,     label: "Compliance",          href: "/compliance",   description: "27 regulatory frameworks explained clearly" },
-  { icon: BookOpen,   label: "Learn AI",             href: "/learn",        description: "98 curated courses, videos, and certifications" },
+  { icon: Zap,        label: "AI Tools Directory", href: "/tools",        description: "140+ tools across every category" },
+  { icon: TrendingUp, label: "Case Studies",        href: "/case-studies", description: "69 real-world implementations with measured outcomes" },
+  { icon: Shield,     label: "Compliance",          href: "/compliance",   description: "28 regulatory frameworks explained clearly" },
+  { icon: BookOpen,   label: "Learn AI",             href: "/learn",        description: "101 curated courses, videos, and certifications" },
 ];
 
 export default function AboutPage() {
