@@ -1,57 +1,46 @@
 {
-  "date": "2026-08-15",
-  "summary": "Added 3 tools, 3 companies, 4 case studies, California SB 53, 2 learn resources, and 3 news sources.",
+  "date": "2026-08-16",
+  "summary": "Updated 17 items across Case Studies, General, Tools, Compliance.",
   "changes": [
     {
-      "category": "Tools",
       "icon": "chart",
-      "items": [
-        "Firecrawl — open-source web scraping API turning sites into LLM-ready markdown",
-        "Mem0 — universal memory layer giving AI agents long-term recall",
-        "Codex CLI — OpenAI's open-source terminal coding agent"
-      ]
-    },
-    {
-      "category": "Companies",
-      "icon": "chart",
-      "items": [
-        "Figure AI — humanoid robotics (Figure 03, Helix VLA), ~$39B valuation",
-        "Cartesia — real-time voice AI (Sonic TTS) on state space models",
-        "Decagon AI — enterprise AI customer-support agents, $1.5B valuation"
-      ]
-    },
-    {
       "category": "Case Studies",
+      "items": [
+        "SEO: make Compliance & Case Studies index pages public, gate only details"
+      ]
+    },
+    {
       "icon": "chart",
+      "category": "General",
       "items": [
-        "Mastercard Decision Intelligence — real-time AI fraud scoring on billions of transactions",
-        "Mercedes-Benz MBUX — generative AI in-car voice assistant",
-        "Shopify Sidekick & Magic — generative commerce across millions of stores",
-        "Pinterest Visual Search — CV embeddings & graph neural networks for recommendations"
+        "SEO: replace fabricated homepage FAQ specifics with evergreen, defensible answers",
+        "SEO + AI optimization for better reach",
+        "SEO: switch canonical domain to ai-hub.host",
+        "Style Contribute nav link like all other menu items",
+        "Add prominent Contribute link to navbar (after About); reorder in footer",
+        "Add contribute email delivery diagnostic endpoint (admin-key gated)",
+        "Unify admin console: shared tab bar across Analytics, Users, GDPR",
+        "Add /admin/users dashboard: per-user login & engagement analytics",
+        "Contribute: dynamic submission form that emails info@ai-hub.host",
+        "Fix gating: relocate proxy to src/ and add server-side layout guards",
+        "Add GDPR tooling: erasure admin page, cookie notice, updated privacy policy",
+        "Login: show friendly message when auth env vars not yet configured",
+        "Remove LinkedIn login; keep email + Google",
+        "Add user authentication with gated premium areas"
       ]
     },
     {
-      "category": "Compliance",
+      "icon": "chart",
+      "category": "Tools",
+      "items": [
+        "Tools, companies, case studies, compliance, learn, news"
+      ]
+    },
+    {
       "icon": "shield",
+      "category": "Compliance",
       "items": [
-        "California SB 53 Frontier AI Transparency Act — safety frameworks & critical-incident reporting for frontier developers"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Anthropic: Building Effective Agents with Claude — agent design patterns",
-        "Hugging Face AI Agents Course — hands-on agent building with certification"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "SemiAnalysis added to Tech feed",
-        "Latent Space added to General feed",
-        "Simon Willison's Weblog added to General feed"
+        "Gate compliance frameworks behind sign-in"
       ]
     }
   ]
