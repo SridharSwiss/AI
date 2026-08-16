@@ -123,7 +123,11 @@ const orgJsonLd = {
   foundingDate: "2024",
   foundingLocation: { "@type": "Place", name: "Switzerland" },
   address: { "@type": "PostalAddress", addressCountry: "CH" },
-  founder: { "@type": "Person", name: "Sridhar Gande" },
+  founder: {
+    "@type": "Person",
+    name: "Sridhar Gande",
+    sameAs: "https://www.linkedin.com/in/ch-sgande/",
+  },
   email: "info@ai-hub.host",
   contactPoint: {
     "@type": "ContactPoint",
@@ -136,6 +140,7 @@ const orgJsonLd = {
     "EU AI Act", "AI compliance", "AI governance", "Machine Learning",
   ],
   sameAs: [
+    "https://www.linkedin.com/company/aihub-swiss/",
     "https://www.linkedin.com/in/ch-sgande/",
   ],
   potentialAction: {

@@ -30,7 +30,7 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { href: "https://www.linkedin.com/in/ch-sgande/", label: "LinkedIn", icon: Link2 },
+  { href: "https://www.linkedin.com/company/aihub-swiss/", label: "LinkedIn", icon: Link2 },
   { href: "https://ai-hub.host", label: "Website", icon: Globe },
 ];
 
