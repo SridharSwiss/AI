@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     default: "AIHub — AI Tools, Companies & Compliance in One Place",
   },
   description:
-    "AIHub is the world's most complete AI knowledge platform: compare 136+ AI tools, explore 76 companies, navigate EU AI Act compliance, and access structured learning paths — all in one place.",
+    "Compare 136+ AI tools, explore 76 AI companies, navigate EU AI Act compliance, and access curated AI learning paths — all in one platform.",
   keywords: [
     "AI tools comparison", "artificial intelligence platform", "EU AI Act compliance",
     "AI companies database", "machine learning resources", "AI governance",

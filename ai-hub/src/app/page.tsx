@@ -7,15 +7,15 @@ import { ScrollReveal } from "@/components/shared/scroll-reveal";
 const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
-  // Question-based title for GEO/AIO eligibility
-  title: "AIHub — Compare 136+ AI Tools, Companies & EU AI Act Compliance (2026)",
+  // Brand-first, ~55 chars — full and untruncated in Google results
+  title: "AIHub — Compare 136+ AI Tools, Companies & Compliance",
   description:
-    "AIHub is the world's most complete AI reference platform. Compare ChatGPT, Claude, Gemini and 136+ AI tools side-by-side. Explore 76 AI companies with funding data. Navigate EU AI Act compliance. Updated daily.",
+    "Compare 136+ AI tools side by side, explore 76 AI companies, and navigate EU AI Act compliance — one independent, daily-updated AI platform.",
   alternates: { canonical: BASE_URL },
   openGraph: {
-    title: "AIHub — Compare 136+ AI Tools, Companies & EU AI Act Compliance (2026)",
+    title: "AIHub — Compare 136+ AI Tools, Companies & Compliance",
     description:
-      "Compare ChatGPT, Claude, Gemini and 136+ AI tools. Explore 76 AI companies with funding data. Navigate EU AI Act compliance. Updated daily.",
+      "Compare 136+ AI tools, explore 76 AI companies, and navigate EU AI Act compliance — one independent, daily-updated AI platform.",
     url: BASE_URL,
     type: "website",
     images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "AIHub - The AI Knowledge Platform" }],
