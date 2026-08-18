@@ -8,12 +8,12 @@ const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   // Brand-first, keyword-rich, plain text (no symbols), ~58 chars
-  title: "AIHub Directory of 136+ AI Tools, Companies and Compliance",
+  title: "AI Hub Switzerland Directory of 136+ AI Tools, Companies and Compliance",
   description:
     "Compare 136+ AI tools side by side, explore 76 AI companies, and navigate EU AI Act compliance in one independent, daily-updated AI platform.",
   alternates: { canonical: BASE_URL },
   openGraph: {
-    title: "AIHub Directory of 136+ AI Tools, Companies and Compliance",
+    title: "AI Hub Switzerland Directory of 136+ AI Tools, Companies and Compliance",
     description:
       "Compare 136+ AI tools, explore 76 AI companies, and navigate EU AI Act compliance — one independent, daily-updated AI platform.",
     url: BASE_URL,
