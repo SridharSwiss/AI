@@ -8,14 +8,14 @@ const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
   // Question-based title for GEO/AIO eligibility
-  title: "AIHub — Compare 140+ AI Tools, Companies & EU AI Act Compliance (2026)",
+  title: "AIHub — Compare 136+ AI Tools, Companies & EU AI Act Compliance (2026)",
   description:
-    "AIHub is the world's most complete AI reference platform. Compare ChatGPT, Claude, Gemini and 140+ AI tools side-by-side. Explore 76 AI companies with funding data. Navigate EU AI Act compliance. Updated daily.",
+    "AIHub is the world's most complete AI reference platform. Compare ChatGPT, Claude, Gemini and 136+ AI tools side-by-side. Explore 76 AI companies with funding data. Navigate EU AI Act compliance. Updated daily.",
   alternates: { canonical: BASE_URL },
   openGraph: {
-    title: "AIHub — Compare 140+ AI Tools, Companies & EU AI Act Compliance (2026)",
+    title: "AIHub — Compare 136+ AI Tools, Companies & EU AI Act Compliance (2026)",
     description:
-      "Compare ChatGPT, Claude, Gemini and 140+ AI tools. Explore 76 AI companies with funding data. Navigate EU AI Act compliance. Updated daily.",
+      "Compare ChatGPT, Claude, Gemini and 136+ AI tools. Explore 76 AI companies with funding data. Navigate EU AI Act compliance. Updated daily.",
     url: BASE_URL,
     type: "website",
     images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "AIHub - The AI Knowledge Platform" }],
