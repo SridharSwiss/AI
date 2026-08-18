@@ -1,7 +1,8 @@
-import { BarChart3, Users, ShieldAlert, Bot } from "lucide-react";
+import { BarChart3, Users, ShieldAlert, Bot, Search } from "lucide-react";
 
 const TABS = [
   { id: "agent", label: "AI Agent", href: "/admin/agent", icon: Bot },
+  { id: "seo", label: "SEO Agent", href: "/admin/seo", icon: Search },
   { id: "analytics", label: "Site Analytics", href: "/admin/analytics", icon: BarChart3 },
   { id: "users", label: "User Analytics", href: "/admin/users", icon: Users },
   { id: "gdpr", label: "GDPR / Data", href: "/admin/gdpr", icon: ShieldAlert },
