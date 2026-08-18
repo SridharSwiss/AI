@@ -1,26 +1,12 @@
 {
-  "date": "2026-08-17",
-  "summary": "Updated 3 items across Tools, Companies, General.",
+  "date": "2026-08-18",
+  "summary": "Updated 1 item across General.",
   "changes": [
-    {
-      "icon": "chart",
-      "category": "Tools",
-      "items": [
-        "Tools, companies, case studies, compliance, learn, news"
-      ]
-    },
-    {
-      "icon": "chart",
-      "category": "Companies",
-      "items": [
-        "SEO: add AIHub Swiss LinkedIn company page to sameAs + footer"
-      ]
-    },
     {
       "icon": "chart",
       "category": "General",
       "items": [
-        "SEO: strengthen brand entity signals for AIHub / AI Hub Switzerland"
+        "Daily update 2026-08-17: refresh what's-new banner"
       ]
     }
   ]
