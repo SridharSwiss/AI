@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     template: "%s | AIHub",
-    default: "AIHub — AI Tools, Companies & Compliance in One Place",
+    default: "AIHub AI Tools, Companies and Compliance in One Place",
   },
   description:
     "Compare 136+ AI tools, explore 76 AI companies, navigate EU AI Act compliance, and access curated AI learning paths — all in one platform.",
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "AIHub",
-    title: "AIHub — AI Tools, Companies & Compliance in One Place",
+    title: "AIHub AI Tools, Companies and Compliance in One Place",
     description:
       "Compare 136+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all curated in one platform.",
     url: BASE_URL,
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: {
       template: "%s | AIHub",
-      default: "AIHub — AI Tools, Companies & Compliance in One Place",
+      default: "AIHub AI Tools, Companies and Compliance in One Place",
     },
     description:
       "Compare 136+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all in one platform.",

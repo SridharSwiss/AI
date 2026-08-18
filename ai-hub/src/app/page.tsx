@@ -7,13 +7,13 @@ import { ScrollReveal } from "@/components/shared/scroll-reveal";
 const BASE_URL = "https://ai-hub.host";
 
 export const metadata: Metadata = {
-  // Brand-first, ~55 chars — full and untruncated in Google results
-  title: "AIHub — Compare 136+ AI Tools, Companies & Compliance",
+  // Brand-first, keyword-rich, plain text (no symbols), ~58 chars
+  title: "AIHub Directory of 136+ AI Tools, Companies and Compliance",
   description:
-    "Compare 136+ AI tools side by side, explore 76 AI companies, and navigate EU AI Act compliance — one independent, daily-updated AI platform.",
+    "Compare 136+ AI tools side by side, explore 76 AI companies, and navigate EU AI Act compliance in one independent, daily-updated AI platform.",
   alternates: { canonical: BASE_URL },
   openGraph: {
-    title: "AIHub — Compare 136+ AI Tools, Companies & Compliance",
+    title: "AIHub Directory of 136+ AI Tools, Companies and Compliance",
     description:
       "Compare 136+ AI tools, explore 76 AI companies, and navigate EU AI Act compliance — one independent, daily-updated AI platform.",
     url: BASE_URL,
