@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Brain, Globe, Link2 } from "lucide-react";
+import { Brain, Globe } from "lucide-react";
+import { LinkedInIcon } from "@/components/shared/linkedin-icon";
 
 const footerLinks = {
   Explore: [
@@ -30,7 +31,7 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { href: "https://www.linkedin.com/company/aihub-swiss/", label: "LinkedIn", icon: Link2 },
+  { href: "https://www.linkedin.com/company/aihub-swiss/", label: "LinkedIn", icon: LinkedInIcon },
   { href: "https://ai-hub.host", label: "Website", icon: Globe },
 ];
 
