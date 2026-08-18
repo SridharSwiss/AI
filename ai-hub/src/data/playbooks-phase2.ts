@@ -1353,5 +1353,178 @@ export const phase2: Phase = {
         },
       ],
     },
+    {
+      title: "LLM Fine-Tuning & Model Adaptation Playbook",
+      level: "practitioner",
+      desc: "Decide when to fine-tune and run adaptation experiments that beat prompting.",
+      guidance: "Fine-tuning is rarely the first answer - exhaust prompting, few-shot examples, and RAG before spending on training. Fine-tune when you need consistent format/style, lower latency and cost per call, or domain behaviour that prompting cannot reliably produce. Prefer parameter-efficient methods (LoRA/QLoRA) over full fine-tuning for most use cases, and always measure against a strong prompted baseline.",
+      checklist: [
+        {
+          item: "Confirm fine-tuning is the right tool before investing",
+          templateTitle: "Fine-Tuning Decision Worksheet",
+          templateType: "worksheet",
+          instructions: "Most fine-tuning projects should never start - a better prompt, few-shot examples, or RAG solves the problem cheaper. Work through this before committing budget and data effort.",
+          sections: [
+            {
+              heading: "Rule Out Cheaper Alternatives First",
+              items: [
+                "Have you tried an optimised prompt with clear instructions and format examples: ☐ Yes  ☐ No",
+                "Have you tried few-shot prompting (5-10 curated examples in context): ☐ Yes  ☐ No",
+                "Is the problem actually a knowledge gap (→ use RAG, not fine-tuning): ☐ Yes  ☐ No",
+                "Prompted baseline quality on your eval set: ___% | Target quality: ___%",
+                "Remaining gap that only fine-tuning can close: ___________________________",
+              ],
+            },
+            {
+              heading: "Valid Reasons to Fine-Tune",
+              items: [
+                "CONSISTENT FORMAT/STYLE: Model must always output a specific structure/tone prompting can't reliably enforce",
+                "COST/LATENCY: Fine-tuning a smaller model to match a larger model's task performance at lower cost per call",
+                "DOMAIN BEHAVIOUR: Specialised task behaviour (classification labels, extraction schema) with abundant labelled examples",
+                "TOOL/FUNCTION CALLING: Reliable structured calls in a narrow domain",
+                "Selected reason(s): ___________________ | Expected benefit (quantified): ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Assemble and validate the training dataset",
+          templateTitle: "Fine-Tuning Dataset Preparation Checklist",
+          templateType: "template",
+          instructions: "Data quality determines fine-tuning success far more than hyperparameters. A few hundred high-quality, consistent examples beat thousands of noisy ones. Curate ruthlessly.",
+          sections: [
+            {
+              heading: "Dataset Requirements",
+              items: [
+                "Number of training examples: ___ (start small: 50-100 to validate signal, scale to 500-1000+ if it helps)",
+                "Examples reflect real production inputs (not synthetic-only unless validated): ☐ Yes  ☐ No",
+                "Format matches serving format exactly (same system prompt, message roles, schema): ☐ Yes  ☐ No",
+                "Label/output consistency audited - same input style always gets same output style: ☐ Yes  ☐ No",
+                "Held-out validation split reserved (10-20%, never seen in training): ___ examples",
+                "PII / sensitive data removed or masked from training data: ☐ Yes  ☐ Reviewed by: ___",
+              ],
+            },
+            {
+              heading: "Data Quality Controls",
+              items: [
+                "Duplicate and near-duplicate examples removed: ☐ Yes",
+                "Edge cases and hard examples deliberately included: ☐ Yes - count: ___",
+                "Class/label balance checked (no single label dominating unintentionally): ☐ Yes",
+                "Second reviewer spot-checked ___% of examples for correctness: ☐ Yes",
+                "Data versioned and hashed for reproducibility: version ___ | hash ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Select fine-tuning method and base model",
+          templateTitle: "Fine-Tuning Method Selection Template",
+          templateType: "template",
+          instructions: "Choose the lightest method that meets your goal. Parameter-efficient fine-tuning (LoRA/QLoRA) is cheaper, faster, and easier to roll back than full fine-tuning, and is sufficient for the large majority of tasks.",
+          sections: [
+            {
+              heading: "Method Choice",
+              items: [
+                "LoRA / QLoRA (parameter-efficient, low cost, adapter is portable) → default choice for most tasks",
+                "Full fine-tuning (all weights, expensive, needs large curated data) → only for deep behaviour change with strong justification",
+                "Hosted provider fine-tuning API (managed, less control, no weights export unless offered) → fastest path, check ownership terms",
+                "Selected method: ___________________ | Rationale: ___",
+              ],
+            },
+            {
+              heading: "Base Model & Infrastructure",
+              items: [
+                "Base model candidates: ___________________ (consider licence, size, context length, hostability)",
+                "Licence permits your intended use (commercial, redistribution): ☐ Confirmed",
+                "Training compute: ☐ Provider API  ☐ Cloud GPU (___ x ___)  ☐ On-prem | Est. cost: £/$ ___",
+                "Smallest model that could plausibly meet the target chosen (avoid over-provisioning): ☐ Yes",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Run training experiments with a measured baseline",
+          templateTitle: "Fine-Tuning Experiment Log Template",
+          templateType: "template",
+          instructions: "Treat fine-tuning as experiments, not a one-shot job. Always compare against the best prompted baseline and log every run so you can reproduce and explain the winner.",
+          sections: [
+            {
+              heading: "Experiment Setup",
+              items: [
+                "Baseline recorded (prompted, no fine-tuning) on eval set: ___% - THIS IS THE BAR TO BEAT",
+                "Hyperparameters logged per run: learning rate, epochs, batch size, LoRA rank/alpha, seed",
+                "Overfitting guardrail: monitor validation loss - stop when it stops improving (typically 1-3 epochs)",
+                "Experiment tracking tool: ☐ Weights & Biases  ☐ MLflow  ☐ Provider dashboard  ☐ Spreadsheet",
+              ],
+            },
+            {
+              heading: "Run Comparison",
+              items: [
+                "Run | LR | Epochs | LoRA rank | Val loss | Eval score | Notes",
+                "Baseline (prompted) | - | - | - | - | ___% | reference",
+                "Run 1 | ___ | ___ | ___ | ___ | ___% | ___",
+                "Run 2 | ___ | ___ | ___ | ___ | ___% | ___",
+                "Best run: ___ | Improvement over prompted baseline: ___ percentage points",
+                "Did fine-tuning actually beat the baseline meaningfully: ☐ Yes → proceed  ☐ No → stop, revert to prompting",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Evaluate the fine-tuned model beyond the training objective",
+          templateTitle: "Fine-Tuned Model Evaluation Checklist",
+          templateType: "template",
+          instructions: "Fine-tuning can improve the target task while quietly degrading general capability, safety, or formatting on out-of-distribution inputs. Test for regressions before shipping.",
+          sections: [
+            {
+              heading: "Capability & Regression Testing",
+              items: [
+                "Target task metric vs baseline: ___% vs ___% (improvement: ___)",
+                "General capability regression check (unrelated prompts still handled well): ☐ Passed  ☐ Regressed: ___",
+                "Catastrophic forgetting check (model retains broad knowledge/skills it had before): ☐ Passed",
+                "Format/schema adherence on held-out inputs: ___% valid outputs",
+                "Latency and cost per call vs previous approach: ___ ms / £/$ ___ (was ___ ms / £/$ ___)",
+              ],
+            },
+            {
+              heading: "Safety & Robustness",
+              items: [
+                "Safety/guardrail behaviour re-tested (fine-tuning can weaken safety alignment): ☐ Passed  ☐ Issues: ___",
+                "Adversarial / edge-case inputs tested: ___ cases | Failures: ___",
+                "Human review of a sample of production-like outputs: ___% acceptable (target ≥___%)",
+                "Sign-off to promote: ☐ Yes  ☐ No - blockers: ___ | Approver: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Package the fine-tuned model for versioned deployment",
+          templateTitle: "Fine-Tuned Model Handoff Template",
+          templateType: "template",
+          instructions: "A fine-tuned model is a versioned artefact with the same governance needs as any production model. Document it so it can be reproduced, rolled back, and audited.",
+          sections: [
+            {
+              heading: "Artefact & Reproducibility",
+              items: [
+                "Model/adapter registered in model registry with version: ___",
+                "Training data version and hash linked to model version: ☐ Yes",
+                "Exact training config saved (hyperparameters, base model, code commit): ☐ Yes",
+                "Rollback path defined (previous prompted approach or prior model version): ___",
+                "Weights/adapter ownership and export rights confirmed (esp. for provider APIs): ☐ Confirmed",
+              ],
+            },
+            {
+              heading: "Documentation & Monitoring Handoff",
+              items: [
+                "Model card created (purpose, data, metrics, limitations, safety notes): ☐ Yes",
+                "Retraining trigger defined (when data drifts or task changes): ___",
+                "Production monitoring plan: track output quality, format validity, drift, cost per call",
+                "Owner for the fine-tuned model going forward: ___________________",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

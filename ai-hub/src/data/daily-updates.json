@@ -1,12 +1,57 @@
 {
   "date": "2026-08-18",
-  "summary": "Updated 1 item across General.",
+  "summary": "Added 3 tools, 3 companies, 3 case studies, NYC Local Law 144, 3 learn resources, and 3 news sources.",
   "changes": [
     {
+      "category": "Tools",
       "icon": "chart",
-      "category": "General",
       "items": [
-        "Daily update 2026-08-17: refresh what's-new banner"
+        "Warp — AI-powered agentic terminal (Rust) with Agent Mode",
+        "Harvey — domain-specific generative AI for law firms",
+        "Abacus.AI — end-to-end AI/ML platform with ChatLLM & DeepAgent"
+      ]
+    },
+    {
+      "category": "Companies",
+      "icon": "chart",
+      "items": [
+        "Prime Intellect — decentralized AI compute & distributed training (INTELLECT)",
+        "Reka AI — efficient multimodal foundation models (Reka Core/Flash/Edge)",
+        "Mercor — AI hiring & expert human-data marketplace, ~$10B valuation"
+      ]
+    },
+    {
+      "category": "Case Studies",
+      "icon": "chart",
+      "items": [
+        "McDonald's AI Drive-Thru — dynamic menu personalization & automated voice ordering",
+        "Unilever AI Hiring — gamified assessments & AI-analyzed video interviews",
+        "IKEA AI Interior Design — IKEA Kreativ AR tools & Billie assistant"
+      ]
+    },
+    {
+      "category": "Compliance",
+      "icon": "shield",
+      "items": [
+        "NYC Local Law 144 — mandatory bias audits & disclosure for automated hiring tools"
+      ]
+    },
+    {
+      "category": "Learning",
+      "icon": "book",
+      "items": [
+        "Google Prompting Essentials — practical prompting framework (Coursera)",
+        "Microsoft AI Agents for Beginners — open-source hands-on course",
+        "Anthropic Prompt Engineering Tutorial — interactive notebook course"
+      ]
+    },
+    {
+      "category": "News Sources",
+      "icon": "news",
+      "items": [
+        "KDnuggets added to General feed",
+        "Mistral AI News added to Research feed",
+        "Towards Data Science added to General feed"
       ]
     }
   ]

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     default: "AIHub AI Tools, Companies and Compliance in One Place",
   },
   description:
-    "Compare 136+ AI tools, explore 76 AI companies, navigate EU AI Act compliance, and access curated AI learning paths — all in one platform.",
+    "Compare 139+ AI tools, explore 79 AI companies, navigate EU AI Act compliance, and access curated AI learning paths — all in one platform.",
   keywords: [
     "AI tools comparison", "artificial intelligence platform", "EU AI Act compliance",
     "AI companies database", "machine learning resources", "AI governance",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     siteName: "AIHub",
     title: "AIHub AI Tools, Companies and Compliance in One Place",
     description:
-      "Compare 136+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all curated in one platform.",
+      "Compare 139+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all curated in one platform.",
     url: BASE_URL,
     locale: "en_US",
     images: [
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
       default: "AIHub AI Tools, Companies and Compliance in One Place",
     },
     description:
-      "Compare 136+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all in one platform.",
+      "Compare 139+ AI tools, explore AI companies, navigate EU AI Act compliance, and access learning paths — all in one platform.",
     images: [`${BASE_URL}/og-image.png`],
     creator: "@AIHubSite",
     site: "@AIHubSite",
@@ -119,7 +119,7 @@ const orgJsonLd = {
   },
   image: `${BASE_URL}/og-image.png`,
   description:
-    "AIHub (AI Hub Switzerland) is an independent AI knowledge platform: 136+ tools, 76 companies, EU AI Act compliance guides, real-world case studies, structured learning paths, and consulting playbooks.",
+    "AIHub (AI Hub Switzerland) is an independent AI knowledge platform: 139+ tools, 79 companies, EU AI Act compliance guides, real-world case studies, structured learning paths, and consulting playbooks.",
   foundingDate: "2024",
   foundingLocation: { "@type": "Place", name: "Switzerland" },
   address: { "@type": "PostalAddress", addressCountry: "CH" },

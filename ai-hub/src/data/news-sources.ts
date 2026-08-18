@@ -446,6 +446,31 @@ export const newsSources: NewsSource[] = [
     website: "https://www.marktechpost.com",
     description: "High-volume coverage of new AI models, research papers, and open-source ML releases.",
   },
+  // Additions
+  {
+    id: "kdnuggets",
+    name: "KDnuggets",
+    category: "General",
+    rssUrl: "https://www.kdnuggets.com/feed",
+    website: "https://www.kdnuggets.com",
+    description: "Long-running data science, machine learning, and AI publication covering tutorials, tools, and industry trends.",
+  },
+  {
+    id: "mistral-ai-news",
+    name: "Mistral AI News",
+    category: "Research",
+    rssUrl: "https://mistral.ai/news/rss.xml",
+    website: "https://mistral.ai/news",
+    description: "Model releases, research, and product announcements from Mistral AI, a leading European open-weight LLM lab.",
+  },
+  {
+    id: "towards-data-science",
+    name: "Towards Data Science",
+    category: "General",
+    rssUrl: "https://towardsdatascience.com/feed",
+    website: "https://towardsdatascience.com",
+    description: "Practitioner-authored articles and tutorials on machine learning, data science, and applied AI.",
+  },
 ];
 
 export const newsCategories = [
