@@ -19,10 +19,22 @@ export default function SetPasswordPage() {
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setAuthed(!!data.user);
-      setReady(true);
+    let settled = false;
+
+    // The recovery link delivers the session in the URL (hash or code); the
+    // browser client parses it on load and fires an auth event — wait for it.
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) { settled = true; setAuthed(true); setReady(true); }
     });
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) { settled = true; setAuthed(true); setReady(true); }
+    });
+
+    // Grace period: if no session materializes, treat the link as invalid.
+    const timer = setTimeout(() => { if (!settled) { setAuthed(false); setReady(true); } }, 3500);
+
+    return () => { clearTimeout(timer); sub.subscription.unsubscribe(); };
   }, []);
 
   async function submit(e: React.FormEvent) {

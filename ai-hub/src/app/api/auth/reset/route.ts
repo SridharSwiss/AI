@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       const { data, error } = await supabaseAdmin.auth.admin.generateLink({
         type: "recovery",
         email,
-        options: { redirectTo: "https://ai-hub.host/auth/callback?redirect=/auth/set-password" },
+        options: { redirectTo: "https://ai-hub.host/auth/set-password" },
       });
       const link = error ? null : (data?.properties?.action_link as string) ?? null;
       if (link) {

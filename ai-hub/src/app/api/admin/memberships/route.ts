@@ -49,7 +49,7 @@ async function setPasswordLink(email: string): Promise<string | null> {
     const { data, error } = await supabaseAdmin.auth.admin.generateLink({
       type: "recovery",
       email,
-      options: { redirectTo: "https://ai-hub.host/auth/callback?redirect=/auth/set-password" },
+      options: { redirectTo: "https://ai-hub.host/auth/set-password" },
     });
     if (error) { console.error("[memberships] generateLink", error.message); return null; }
     return (data?.properties?.action_link as string) ?? null;
