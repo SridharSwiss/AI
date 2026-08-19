@@ -67,6 +67,22 @@ export async function POST(req: NextRequest) {
     status: "pending" as const,
   };
 
+  // De-dupe by email: one active application per person.
+  try {
+    const { data: dupe } = await supabaseAdmin
+      .from("switzerland_memberships")
+      .select("status")
+      .ilike("email", email)
+      .in("status", ["pending", "approved"])
+      .maybeSingle();
+    if (dupe) {
+      const msg = dupe.status === "approved"
+        ? "You are already a member. Please sign in."
+        : "An application with this email is already under review.";
+      return NextResponse.json({ error: msg }, { status: 409 });
+    }
+  } catch { /* table may be missing — handled on insert */ }
+
   // Link to the signed-in user, if any
   let user_id: string | null = null;
   try {

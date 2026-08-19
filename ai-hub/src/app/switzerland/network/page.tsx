@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AuthGate } from "@/components/shared/auth-gate";
+import { MemberGate } from "@/components/switzerland/member-gate";
 import {
   Scale, FlaskConical, Building2, BookOpen, Calendar, MapPin, Sparkles,
   Handshake, ArrowRight, ArrowLeft,
@@ -46,11 +46,7 @@ export default function NetworkPage() {
           <ArrowLeft className="w-4 h-4" /> Back to AI Hub Switzerland
         </Link>
 
-        <AuthGate
-          title="Members only"
-          description="Working groups and events are available to AI Hub Switzerland members. Sign in, or apply for free membership."
-          redirect="/switzerland/network"
-        >
+        <MemberGate>
           <div className="space-y-14">
             {/* Working groups */}
             <section>
@@ -114,7 +110,7 @@ export default function NetworkPage() {
               </div>
             </section>
           </div>
-        </AuthGate>
+        </MemberGate>
       </div>
     </>
   );
