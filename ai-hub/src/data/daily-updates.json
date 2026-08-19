@@ -1,57 +1,25 @@
 {
-  "date": "2026-08-18",
-  "summary": "Added 3 tools, 3 companies, 3 case studies, NYC Local Law 144, 3 learn resources, and 3 news sources.",
+  "date": "2026-08-19",
+  "summary": "Updated 8 items across Tools, General.",
   "changes": [
     {
+      "icon": "chart",
       "category": "Tools",
+      "items": [
+        "Tools, companies, case studies, compliance, learn, news",
+        "SEO: homepage title to AI Hub Switzerland Directory of 136+ AI Tools, Companies and Compliance"
+      ]
+    },
+    {
       "icon": "chart",
+      "category": "General",
       "items": [
-        "Warp — AI-powered agentic terminal (Rust) with Agent Mode",
-        "Harvey — domain-specific generative AI for law firms",
-        "Abacus.AI — end-to-end AI/ML platform with ChatLLM & DeepAgent"
-      ]
-    },
-    {
-      "category": "Companies",
-      "icon": "chart",
-      "items": [
-        "Prime Intellect — decentralized AI compute & distributed training (INTELLECT)",
-        "Reka AI — efficient multimodal foundation models (Reka Core/Flash/Edge)",
-        "Mercor — AI hiring & expert human-data marketplace, ~$10B valuation"
-      ]
-    },
-    {
-      "category": "Case Studies",
-      "icon": "chart",
-      "items": [
-        "McDonald's AI Drive-Thru — dynamic menu personalization & automated voice ordering",
-        "Unilever AI Hiring — gamified assessments & AI-analyzed video interviews",
-        "IKEA AI Interior Design — IKEA Kreativ AR tools & Billie assistant"
-      ]
-    },
-    {
-      "category": "Compliance",
-      "icon": "shield",
-      "items": [
-        "NYC Local Law 144 — mandatory bias audits & disclosure for automated hiring tools"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Google Prompting Essentials — practical prompting framework (Coursera)",
-        "Microsoft AI Agents for Beginners — open-source hands-on course",
-        "Anthropic Prompt Engineering Tutorial — interactive notebook course"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "KDnuggets added to General feed",
-        "Mistral AI News added to Research feed",
-        "Towards Data Science added to General feed"
+        "Add proper LinkedIn icon in footer; add team members' LinkedIn profiles",
+        "SEO: plain-text homepage title (no em-dash/ampersand), keyword-forward",
+        "SEO: shorten homepage title (74→55) & meta descriptions (215→142) per SEO Agent",
+        "Fix: remove 4 duplicate tool entries flagged by the AI Agent",
+        "Add SEO Agent: live continuous SEO audit of the production site",
+        "Add AI Management Agent: autonomous site health & ops monitor (free)"
       ]
     }
   ]
