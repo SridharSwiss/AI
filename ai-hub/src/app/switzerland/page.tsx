@@ -3,12 +3,9 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AuthGate } from "@/components/shared/auth-gate";
-import { MembershipForm } from "@/components/switzerland/membership-form";
 import {
   FlaskConical, Cpu, Rocket, Landmark, Globe, Sparkles, ArrowRight,
-  Network, Users, Handshake, Scale, TrendingUp, Calendar, MapPin,
-  BookOpen, Building2, Lightbulb,
+  Network, Handshake, Scale, TrendingUp, MapPin, Lightbulb, Users,
 } from "lucide-react";
 
 const BASE_URL = "https://ai-hub.host";
@@ -48,19 +45,6 @@ const ecosystem = [
   { stat: "CERN", label: "Home to landmark open science & computing" },
 ];
 
-const workingGroups = [
-  { icon: Scale, title: "AI Governance & the EU AI Act", desc: "Translating regulation into practice for organizations operating in and beyond the EU." },
-  { icon: FlaskConical, title: "Frontier Research", desc: "Foundation models, safety, interpretability, and multimodal systems." },
-  { icon: Building2, title: "Enterprise Adoption", desc: "Real-world deployment patterns, ROI, and change management." },
-  { icon: BookOpen, title: "AI Literacy & Talent", desc: "Education, upskilling, and building the next generation of AI practitioners." },
-];
-
-const events = [
-  { month: "SEP", day: "18", title: "Responsible AI Roundtable", place: "Zürich · Hybrid", tag: "Roundtable" },
-  { month: "OCT", day: "07", title: "EU AI Act: Practitioner Workshop", place: "Online", tag: "Workshop" },
-  { month: "NOV", day: "12", title: "Swiss AI Founders Night", place: "Lausanne", tag: "Networking" },
-];
-
 export default function SwitzerlandPage() {
   return (
     <>
@@ -71,12 +55,12 @@ export default function SwitzerlandPage() {
         description="AI Hub Switzerland brings together researchers, technology experts, entrepreneurs, and policymakers from across the world — connecting people, ideas, and institutions to advance trustworthy AI from the heart of Europe."
       >
         <div className="flex flex-col sm:flex-row gap-3">
-          <Link href="/login?redirect=/switzerland%23network">
+          <Link href="/switzerland/join">
             <Button variant="gradient" size="lg" className="gap-2">
               <Sparkles className="w-4 h-4" /> Join the network
             </Button>
           </Link>
-          <Link href="#network">
+          <Link href="/switzerland/network">
             <Button variant="outline" size="lg" className="gap-2">
               Explore the network <ArrowRight className="w-4 h-4" />
             </Button>
@@ -172,97 +156,32 @@ export default function SwitzerlandPage() {
           </div>
         </section>
 
-        {/* ── Gated: The Network ─────────────────────────────── */}
-        <section id="network" className="animate-fade-up scroll-mt-28">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-5 h-5 text-rose-500" />
-            <h2 className="text-2xl font-bold">The Network</h2>
-          </div>
-          <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
-            Working groups, member events, and the community directory are open to signed-in members.
-          </p>
-
-          <AuthGate
-            title="Join AI Hub Switzerland"
-            description="Sign in or create a free account to access working groups, upcoming events, and the member network."
-            redirect="/switzerland"
-          >
-            <div className="space-y-12">
-              {/* Membership application */}
-              <MembershipForm />
-
-              {/* Working groups */}
-              <div>
-                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-rose-500" /> Working groups
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {workingGroups.map((g) => (
-                    <Card key={g.title} className="glass-card h-full">
-                      <CardContent className="p-5 flex gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center flex-shrink-0">
-                          <g.icon className="w-4 h-4 text-rose-500" />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-0.5">{g.title}</h4>
-                          <p className="text-xs text-muted-foreground leading-relaxed">{g.desc}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+        {/* Two doors: Join / Explore */}
+        <section className="animate-fade-up grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <Link href="/switzerland/join" className="group">
+            <Card className="glass-card h-full hover:-translate-y-1.5 transition-transform duration-200">
+              <CardContent className="p-8">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-pink-600 flex items-center justify-center mb-4">
+                  <Sparkles className="w-5 h-5 text-white" />
                 </div>
-              </div>
-
-              {/* Events */}
-              <div>
-                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-rose-500" /> Upcoming events
-                </h3>
-                <div className="space-y-3">
-                  {events.map((ev) => (
-                    <Card key={ev.title} className="glass-card">
-                      <CardContent className="p-4 flex items-center gap-4">
-                        <div className="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white flex-shrink-0">
-                          <span className="text-[10px] font-bold tracking-widest">{ev.month}</span>
-                          <span className="text-xl font-black leading-none">{ev.day}</span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold truncate">{ev.title}</h4>
-                          <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-                            <MapPin className="w-3 h-3" /> {ev.place}
-                          </p>
-                        </div>
-                        <span className="text-[10px] uppercase tracking-wider text-rose-500 bg-rose-500/10 rounded-full px-2.5 py-1 flex-shrink-0">
-                          {ev.tag}
-                        </span>
-                      </CardContent>
-                    </Card>
-                  ))}
+                <h3 className="text-lg font-bold mb-1.5">Join the network</h3>
+                <p className="text-sm text-muted-foreground mb-4">Apply for free membership. Applications are reviewed by our team.</p>
+                <span className="text-sm font-medium text-rose-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">Apply now <ArrowRight className="w-4 h-4" /></span>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link href="/switzerland/network" className="group">
+            <Card className="glass-card h-full hover:-translate-y-1.5 transition-transform duration-200">
+              <CardContent className="p-8">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center mb-4">
+                  <Users className="w-5 h-5 text-white" />
                 </div>
-              </div>
-
-              {/* Join CTA */}
-              <div className="rounded-3xl border border-rose-500/15 bg-gradient-to-br from-rose-500/10 via-violet-500/5 to-transparent p-8 sm:p-10 text-center">
-                <h3 className="text-2xl font-bold mb-2">You&apos;re in. Let&apos;s build.</h3>
-                <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-6">
-                  Introduce yourself, join a working group, and help shape the agenda for responsible AI.
-                  Reach the team to get involved.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="mailto:info@ai-hub.host?subject=Joining%20AI%20Hub%20Switzerland">
-                    <Button variant="gradient" size="lg" className="gap-2">
-                      <Handshake className="w-4 h-4" /> Get involved
-                    </Button>
-                  </a>
-                  <Link href="/team">
-                    <Button variant="outline" size="lg" className="gap-2">
-                      Meet the team <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </AuthGate>
+                <h3 className="text-lg font-bold mb-1.5">Explore the network</h3>
+                <p className="text-sm text-muted-foreground mb-4">Working groups and member events for the AI Hub Switzerland community.</p>
+                <span className="text-sm font-medium text-rose-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">View working groups <ArrowRight className="w-4 h-4" /></span>
+              </CardContent>
+            </Card>
+          </Link>
         </section>
       </div>
     </>

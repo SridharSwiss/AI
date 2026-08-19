@@ -107,6 +107,9 @@ export function MembershipForm() {
   }
 
   const input = "w-full h-11 px-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/40";
+  // Native <option> lists ignore parent bg; set explicit light/dark colors so
+  // the dropdown items are visible in dark mode.
+  const select = `${input} [color-scheme:light] dark:[color-scheme:dark] [&>option]:bg-white [&>option]:text-zinc-900 dark:[&>option]:bg-zinc-900 dark:[&>option]:text-white`;
 
   return (
     <form onSubmit={submit} className="glass-card rounded-2xl p-6 sm:p-8">
@@ -119,13 +122,13 @@ export function MembershipForm() {
         <Field label="Organization"><input className={input} value={form.organization} onChange={(e) => set("organization", e.target.value)} placeholder="Company / University / Agency" /></Field>
         <Field label="Job title"><input className={input} value={form.job_title} onChange={(e) => set("job_title", e.target.value)} /></Field>
         <Field label="I am a *">
-          <select required className={input} value={form.membership_category} onChange={(e) => set("membership_category", e.target.value)}>
+          <select required className={select} value={form.membership_category} onChange={(e) => set("membership_category", e.target.value)}>
             <option value="">Select…</option>
             {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
         </Field>
         <Field label="Seniority">
-          <select className={input} value={form.seniority} onChange={(e) => set("seniority", e.target.value)}>
+          <select className={select} value={form.seniority} onChange={(e) => set("seniority", e.target.value)}>
             <option value="">Select…</option>
             {SENIORITY.map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
