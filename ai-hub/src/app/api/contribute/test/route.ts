@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 const TO_EMAIL = "info@ai-hub.host";
-const FROM_EMAIL = process.env.CONTRIBUTE_FROM_EMAIL || "AIHub Contribute <onboarding@resend.dev>";
+import { normalizeFrom } from "@/lib/email";
+const FROM_EMAIL = normalizeFrom(process.env.CONTRIBUTE_FROM_EMAIL || "AIHub Contribute <onboarding@resend.dev>");
 
 /**
  * Diagnostic for contribute email delivery. Admin-key gated.

@@ -1,6 +1,14 @@
 import "server-only";
 
-const DEFAULT_FROM = process.env.CONTRIBUTE_FROM_EMAIL || "AIHub <onboarding@resend.dev>";
+/** Normalize a "Name <email>" from-address; repair a missing closing bracket. */
+export function normalizeFrom(raw?: string): string {
+  const v = (raw || "").trim();
+  if (!v) return "AIHub <onboarding@resend.dev>";
+  if (v.includes("<") && !v.includes(">")) return `${v}>`;
+  return v;
+}
+
+const DEFAULT_FROM = normalizeFrom(process.env.CONTRIBUTE_FROM_EMAIL);
 export const ADMIN_EMAIL = "info@ai-hub.host";
 
 export function escapeHtml(s: string): string {

@@ -5,7 +5,8 @@ export const dynamic = "force-dynamic";
 const TO_EMAIL = "info@ai-hub.host";
 // Verify your domain in Resend, then set CONTRIBUTE_FROM_EMAIL=noreply@ai-hub.host.
 // Falls back to Resend's shared onboarding sender for initial testing.
-const FROM_EMAIL = process.env.CONTRIBUTE_FROM_EMAIL || "AIHub Contribute <onboarding@resend.dev>";
+import { normalizeFrom } from "@/lib/email";
+const FROM_EMAIL = normalizeFrom(process.env.CONTRIBUTE_FROM_EMAIL || "AIHub Contribute <onboarding@resend.dev>");
 
 const TYPE_LABELS: Record<string, string> = {
   tool: "AI Tool",
