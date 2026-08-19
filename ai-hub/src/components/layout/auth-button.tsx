@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/auth/client";
-import { LogIn, LogOut, User as UserIcon } from "lucide-react";
+import { LogIn, LogOut, User as UserIcon, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function AuthButton() {
@@ -66,6 +66,11 @@ export function AuthButton() {
             </div>
             <div className="text-sm font-medium truncate">{email}</div>
           </div>
+          <Link href="/account" onClick={() => setMenuOpen(false)}
+            className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-left hover:bg-accent transition-colors">
+            <Settings className="w-3.5 h-3.5" />
+            Account &amp; password
+          </Link>
           <form action="/auth/signout" method="post">
             <button
               type="submit"

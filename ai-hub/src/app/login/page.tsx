@@ -58,6 +58,24 @@ function LoginInner() {
     router.refresh();
   }
 
+  async function handleForgot() {
+    setError(""); setNotice("");
+    if (!email.includes("@")) { setError("Enter your email above, then click ‘Forgot password’."); return; }
+    setLoading(true);
+    try {
+      await fetch("/api/auth/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      setNotice("If an account exists for that email, we've sent a password reset link. Check your inbox.");
+    } catch {
+      setError("Could not send the reset email. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleOAuth(provider: "google") {
     if (!authConfigured) {
       setError("Sign-in is not available yet — it is being configured. Please check back soon.");
@@ -133,7 +151,14 @@ function LoginInner() {
               </div>
             </div>
             <div>
-              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Password</label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-medium text-muted-foreground">Password</label>
+                {mode === "login" && (
+                  <button type="button" onClick={handleForgot} className="text-xs font-medium text-violet-500 hover:text-violet-400">
+                    Forgot password?
+                  </button>
+                )}
+              </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
