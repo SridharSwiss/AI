@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { createClient } from "@/lib/auth/server";
 import { screenMembership } from "@/lib/agent/membership-screen";
+import { sendEmail, emailShell, escapeHtml, ADMIN_EMAIL } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -101,6 +102,41 @@ export async function POST(req: NextRequest) {
     console.error("[switzerland/join]", error.message);
     return NextResponse.json({ error: "Could not submit your application. Please try again." }, { status: 500 });
   }
+
+  // Mandatory notification to the team (best-effort — never blocks the applicant).
+  const rows = [
+    ["Name", application.full_name],
+    ["Email", application.email],
+    ["Category", application.membership_category],
+    ["Organization", application.organization ?? "—"],
+    ["Job title", application.job_title ?? "—"],
+    ["Seniority", application.seniority ?? "—"],
+    ["Location", [application.city, application.country].filter(Boolean).join(", ") || "—"],
+    ["LinkedIn", application.linkedin_url ?? "—"],
+    ["Interests", application.areas_of_interest.join(", ") || "—"],
+    ["Agent", `${screen.recommendation} (score ${screen.score})`],
+  ];
+  const html = emailShell(
+    "New membership application",
+    `<table style="width:100%;border-collapse:collapse">${rows
+      .map(([k, v]) => `<tr><td style="padding:4px 8px;font-weight:600;color:#e11d48;white-space:nowrap;vertical-align:top">${escapeHtml(k)}</td><td style="padding:4px 8px">${escapeHtml(String(v))}</td></tr>`)
+      .join("")}</table>
+     ${application.bio ? `<p style="margin-top:12px"><b>Motivation:</b><br>${escapeHtml(application.bio)}</p>` : ""}
+     <p style="margin-top:16px"><a href="https://ai-hub.host/admin/memberships" style="color:#e11d48">Review in the admin console →</a></p>`
+  );
+  const text =
+    `New membership application\n\n` +
+    rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
+    (application.bio ? `\n\nMotivation:\n${application.bio}` : "") +
+    `\n\nReview: https://ai-hub.host/admin/memberships`;
+
+  await sendEmail({
+    to: ADMIN_EMAIL,
+    subject: `New AI Hub Switzerland application — ${application.full_name}`,
+    html,
+    text,
+    replyTo: application.email,
+  });
 
   return NextResponse.json({ ok: true, recommendation: screen.recommendation });
 }
