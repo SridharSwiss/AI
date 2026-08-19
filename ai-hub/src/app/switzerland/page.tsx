@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AuthGate } from "@/components/shared/auth-gate";
+import { MembershipForm } from "@/components/switzerland/membership-form";
 import {
   FlaskConical, Cpu, Rocket, Landmark, Globe, Sparkles, ArrowRight,
   Network, Users, Handshake, Scale, TrendingUp, Calendar, MapPin,
@@ -70,7 +71,7 @@ export default function SwitzerlandPage() {
         description="AI Hub Switzerland brings together researchers, technology experts, entrepreneurs, and policymakers from across the world — connecting people, ideas, and institutions to advance trustworthy AI from the heart of Europe."
       >
         <div className="flex flex-col sm:flex-row gap-3">
-          <Link href="/login?redirect=/switzerland">
+          <Link href="/login?redirect=/switzerland%23network">
             <Button variant="gradient" size="lg" className="gap-2">
               <Sparkles className="w-4 h-4" /> Join the network
             </Button>
@@ -187,6 +188,9 @@ export default function SwitzerlandPage() {
             redirect="/switzerland"
           >
             <div className="space-y-12">
+              {/* Membership application */}
+              <MembershipForm />
+
               {/* Working groups */}
               <div>
                 <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
