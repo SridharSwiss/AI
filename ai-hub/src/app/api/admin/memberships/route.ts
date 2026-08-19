@@ -22,22 +22,17 @@ async function findUserByEmail(email: string) {
   return null;
 }
 
-/** Readable strong temporary password. */
-function genPassword() {
-  return "AIH-" + randomBytes(9).toString("base64url");
-}
-
 /**
  * Provision (or link) an auth account for an approved member.
- * - No account yet  → create one with a generated password (no duplicate sign-up)
+ * - No account yet  → create one (email confirmed, random unshared password)
  * - Already signed up → reuse it (no duplicate)
- * Returns whether a new account was created and the temp password if so.
  */
 async function provisionAccount(email: string, full_name: string) {
   const existing = await findUserByEmail(email);
-  if (existing) return { userId: existing.id, created: false, password: null as string | null };
+  if (existing) return { userId: existing.id, created: false };
 
-  const password = genPassword();
+  // Random password the member never sees — they set their own via the link below.
+  const password = randomBytes(24).toString("base64url");
   const { data, error } = await supabaseAdmin.auth.admin.createUser({
     email,
     password,
@@ -45,7 +40,23 @@ async function provisionAccount(email: string, full_name: string) {
     user_metadata: { full_name, aihub_switzerland_member: true },
   });
   if (error || !data.user) throw new Error(error?.message ?? "createUser failed");
-  return { userId: data.user.id, created: true, password };
+  return { userId: data.user.id, created: true };
+}
+
+/** Generate a one-click "set your password" (recovery) link for the member. */
+async function setPasswordLink(email: string): Promise<string | null> {
+  try {
+    const { data, error } = await supabaseAdmin.auth.admin.generateLink({
+      type: "recovery",
+      email,
+      options: { redirectTo: "https://ai-hub.host/auth/callback?redirect=/auth/set-password" },
+    });
+    if (error) { console.error("[memberships] generateLink", error.message); return null; }
+    return (data?.properties?.action_link as string) ?? null;
+  } catch (e) {
+    console.error("[memberships] generateLink exception", e);
+    return null;
+  }
 }
 
 /** PATCH — approve/reject a membership application. */
@@ -73,15 +84,15 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "application not found" }, { status: 404 });
   }
 
-  let provisioned: { created: boolean; password: string | null; userId: string | null } = {
-    created: false, password: null, userId: app.user_id ?? null,
+  let provisioned: { created: boolean; userId: string | null } = {
+    created: false, userId: app.user_id ?? null,
   };
 
   // On approval, ensure the member has an account (no duplicate sign-up).
   if (status === "approved") {
     try {
       const r = await provisionAccount(app.email, app.full_name ?? "");
-      provisioned = { created: r.created, password: r.password, userId: r.userId };
+      provisioned = { created: r.created, userId: r.userId };
     } catch (e) {
       console.error("[memberships approve] provisioning failed", e);
       return NextResponse.json(
@@ -105,13 +116,15 @@ export async function PATCH(req: NextRequest) {
   // Decision emails (best-effort).
   const first = (app.full_name ?? "there").split(" ")[0];
   if (status === "approved") {
-    const credentialsBlock = provisioned.created && provisioned.password
-      ? `<div style="margin:16px 0;padding:14px 16px;background:#fdf2f8;border:1px solid #fbcfe8;border-radius:10px">
-           <p style="margin:0 0 6px"><b>Your login credentials</b></p>
-           <p style="margin:0">Email: <b>${escapeHtml(app.email)}</b><br>Temporary password: <b>${escapeHtml(provisioned.password)}</b></p>
-           <p style="margin:8px 0 0;font-size:12px;color:#9d174d">Please sign in and change your password. You can also sign in with Google using this email.</p>
+    // Passwordless activation: a one-click link that signs them in and lets
+    // them set their own password (no plaintext password is ever emailed).
+    const link = await setPasswordLink(app.email);
+    const activate = link
+      ? `<div style="margin:16px 0">
+           <a href="${link}" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600">Activate your account &amp; set a password</a>
+           <p style="margin:10px 0 0;font-size:12px;color:#9d174d">This secure link signs you in and lets you choose your password. It expires for your safety — you can also sign in with Google using ${escapeHtml(app.email)}.</p>
          </div>`
-      : `<p>You can access the members area using your existing account (<b>${escapeHtml(app.email)}</b>).</p>`;
+      : `<p>Sign in to the members area with the email <b>${escapeHtml(app.email)}</b> (use “Continue with Google”, or contact us to set a password).</p>`;
 
     await sendEmail({
       to: app.email,
@@ -120,16 +133,16 @@ export async function PATCH(req: NextRequest) {
         "Membership approved",
         `<p>Hi ${escapeHtml(first)},</p>
          <p>Your application to <b>AI Hub Switzerland</b> has been <b style="color:#059669">approved</b>. Welcome to the network!</p>
-         ${credentialsBlock}
-         <p><a href="https://ai-hub.host/login?redirect=/switzerland/network" style="color:#e11d48">Sign in to the members area →</a></p>
+         ${activate}
+         <p><a href="https://ai-hub.host/switzerland/network" style="color:#e11d48">Go to the members area →</a></p>
          <p style="color:#666">— The AI Hub Switzerland Team</p>`
       ),
       text:
         `Hi ${first},\n\nYour application to AI Hub Switzerland has been approved. Welcome!\n\n` +
-        (provisioned.created && provisioned.password
-          ? `Login email: ${app.email}\nTemporary password: ${provisioned.password}\n(Please change it after signing in.)\n\n`
-          : `Sign in with your existing account (${app.email}).\n\n`) +
-        `Members area: https://ai-hub.host/login?redirect=/switzerland/network\n\n— The AI Hub Switzerland Team`,
+        (link
+          ? `Activate your account and set your password:\n${link}\n(You can also sign in with Google using ${app.email}.)\n\n`
+          : `Sign in with the email ${app.email} (use Continue with Google).\n\n`) +
+        `Members area: https://ai-hub.host/switzerland/network\n\n— The AI Hub Switzerland Team`,
     });
   } else if (status === "rejected") {
     await sendEmail({
