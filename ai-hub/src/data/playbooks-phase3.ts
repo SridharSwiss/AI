@@ -2126,5 +2126,68 @@ export const phase3: Phase = {
         },
       ],
     },
+    {
+      title: "AI Agent Orchestration & Tool-Use Playbook",
+      level: "practitioner",
+      desc: "Design reliable multi-step agents with tools, guardrails, and fallbacks.",
+      guidance: "Agentic systems fail differently from single-shot LLM calls: errors compound across steps, tool calls have side effects, and a wrong turn early can cascade. Treat every tool as an untrusted boundary, cap the agent's autonomy with explicit step and cost budgets, and make each action reversible or gated. Start with the narrowest useful tool set and add capability only when a real task demands it.",
+      checklist: [
+        {
+          item: "Define tool contracts and the agent's autonomy boundaries",
+          templateTitle: "Agent Tool & Autonomy Specification",
+          templateType: "template",
+          instructions: "Complete one specification per agent before implementation. An agent whose tools and limits are not written down will exceed them in production. Review with an engineer and whoever owns the systems the tools touch.",
+          sections: [
+            {
+              heading: "Tool Inventory",
+              items: [
+                "Tool name: ___ | Purpose (one line): ___ | Owner of underlying system: ___",
+                "Side effects: ☐ Read-only  ☐ Writes/mutations  ☐ External spend  ☐ Sends comms",
+                "Input schema validated before call: ☐ Yes  ☐ No | Output schema validated after call: ☐ Yes  ☐ No",
+                "Failure mode when the tool errors or times out: ☐ Retry (max ___)  ☐ Fallback tool  ☐ Halt & escalate",
+                "Requires human approval before execution: ☐ Never  ☐ Above threshold ___  ☐ Always",
+              ],
+            },
+            {
+              heading: "Autonomy Budgets",
+              items: [
+                "Max reasoning/tool steps per task before forced stop: ___",
+                "Max token / API cost budget per task: ___ | Hard kill at: ___",
+                "Loop and repetition detection: halt if the same tool+args is called ___ times",
+                "Irreversible actions (deletes, payments, external sends): ☐ Blocked  ☐ Gated by human  ☐ Allowed with audit log",
+                "Timeout for the whole task: ___ | What the user sees on timeout: ___",
+              ],
+            },
+          ],
+        },
+        {
+          item: "Test agent trajectories and add regression cases for failures",
+          templateTitle: "Agent Trajectory Evaluation Sheet",
+          templateType: "template",
+          instructions: "Evaluate the full trajectory, not just the final answer — a right answer reached through a wrong or expensive path is still a bug. Every production failure becomes a permanent regression case here.",
+          sections: [
+            {
+              heading: "Trajectory Scoring (per representative task)",
+              items: [
+                "Task: ___ | Expected tools in order: ___ | Actual tools called: ___",
+                "Reached correct outcome: ☐ Yes  ☐ Partial  ☐ No | Steps taken: ___ vs budget ___",
+                "Unnecessary or redundant tool calls: ___ | Wasted cost: ___",
+                "Recovered from an injected tool failure: ☐ Yes  ☐ No — behaviour observed: ___",
+                "Safety: attempted any blocked/irreversible action without gate: ☐ No  ☐ Yes → file incident",
+              ],
+            },
+            {
+              heading: "Regression Suite Hygiene",
+              items: [
+                "Every past production failure has a reproducing case here: ☐ Yes  ☐ Gaps: ___",
+                "Adversarial cases: prompt injection via tool output, ambiguous instructions, missing data: ☐ Covered",
+                "Eval runs automatically on prompt/tool/model change: ☐ Yes  ☐ Manual only",
+                "Pass threshold to ship: ___% | Current pass rate: ___% | Owner: ___",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

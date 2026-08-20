@@ -1,20 +1,58 @@
 {
   "date": "2026-08-20",
-  "summary": "Updated 9 items across General.",
+  "summary": "Added 3 tools, 3 companies, 4 case studies, Illinois AI employment law, 3 learn resources, and 3 news sources.",
   "changes": [
     {
+      "category": "Tools",
       "icon": "chart",
-      "category": "General",
       "items": [
-        "Fix: password recovery link now lands on set-password form correctly",
-        "Auth: forgot-password on login + change-password in account page",
-        "Email: auto-repair from-address missing closing bracket (Resend 422)",
-        "Memberships: passwordless activation link instead of plaintext password",
-        "Memberships: auto-provision credentials on approval; separate members from sign-ups",
-        "Switzerland: split Join and Explore into dedicated pages; fix dark dropdown",
-        "Membership emails: notify team on new application, notify applicant on decision",
-        "Add AI Hub Switzerland membership workflow with admin review + agentic screening",
-        "Fully develop AI Hub Switzerland page with soft sign-in gate"
+        "fal.ai — serverless generative-media inference (FLUX, Kling, Veo)",
+        "Napkin AI — turns text into editable diagrams and infographics",
+        "Wispr Flow — AI voice dictation that types polished text in any app"
+      ]
+    },
+    {
+      "category": "Companies",
+      "icon": "chart",
+      "items": [
+        "Magic AI — frontier long-context models for autonomous software engineering",
+        "Hippocratic AI — safety-focused healthcare LLMs for patient-facing voice agents",
+        "Imbue — research lab building reasoning and coding agents"
+      ]
+    },
+    {
+      "category": "Case Studies",
+      "icon": "chart",
+      "items": [
+        "Wells Fargo Fargo — privacy-first generative AI banking assistant, 100M+ interactions",
+        "Vodafone TOBi — multilingual AI chatbot automating telecom support",
+        "H&M AI Supply Chain — ML demand forecasting and personalization",
+        "Kaiser Permanente Advance Alert Monitor — AI early-warning cutting hospital mortality"
+      ]
+    },
+    {
+      "category": "Compliance",
+      "icon": "shield",
+      "items": [
+        "Illinois HB 3773 — regulates AI in employment decisions under the Human Rights Act"
+      ]
+    },
+    {
+      "category": "Learning",
+      "icon": "book",
+      "items": [
+        "Hugging Face Agents Course — hands-on AI agents",
+        "DeepLearning.AI ChatGPT Prompt Engineering for Developers",
+        "LangChain Academy — Intro to LangGraph for stateful agents"
+      ]
+    },
+    {
+      "category": "News Sources",
+      "icon": "news",
+      "items": [
+        "Unite.AI added to General feed",
+        "Analytics India Magazine added to General feed",
+        "BDTechTalks added to Tech feed"
       ]
     }
   ]

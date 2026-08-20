@@ -471,6 +471,30 @@ export const newsSources: NewsSource[] = [
     website: "https://towardsdatascience.com",
     description: "Practitioner-authored articles and tutorials on machine learning, data science, and applied AI.",
   },
+  {
+    id: "unite-ai",
+    name: "Unite.AI",
+    category: "General",
+    rssUrl: "https://www.unite.ai/feed/",
+    website: "https://www.unite.ai",
+    description: "News, interviews, and explainers covering AI tools, companies, and emerging machine learning research.",
+  },
+  {
+    id: "analytics-india-magazine",
+    name: "Analytics India Magazine",
+    category: "General",
+    rssUrl: "https://analyticsindiamag.com/feed/",
+    website: "https://analyticsindiamag.com",
+    description: "Coverage of AI, data science, and the machine learning industry with a strong focus on the Indian and global AI ecosystem.",
+  },
+  {
+    id: "bdtechtalks",
+    name: "BDTechTalks",
+    category: "General",
+    rssUrl: "https://bdtechtalks.com/feed/",
+    website: "https://bdtechtalks.com",
+    description: "In-depth analysis of AI research, deep learning, and the practical and business implications of emerging technologies.",
+  },
 ];
 
 export const newsCategories = [

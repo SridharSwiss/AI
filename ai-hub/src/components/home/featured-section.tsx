@@ -35,36 +35,36 @@ const sectionNav = [
     icon: Wrench,    label: "AI Tools",          href: "/tools",
     iconCls: "bg-violet-500/10 dark:bg-violet-500/[0.18] text-violet-500",
     desc: "Every major AI tool, side by side.",
-    body: "Filter by category, pricing model, and use case. Freemium to enterprise — 139 tools across 15 categories with verified specs.",
-    stat: "139 tools · 15 categories",
+    body: "Filter by category, pricing model, and use case. Freemium to enterprise — 142 tools across 15 categories with verified specs.",
+    stat: "142 tools · 15 categories",
   },
   {
     icon: Building2, label: "Companies",          href: "/companies",
     iconCls: "bg-blue-500/10 dark:bg-blue-500/[0.18] text-blue-500",
-    desc: "79 vendors profiled.",
+    desc: "82 vendors profiled.",
     body: "From OpenAI and Anthropic to niche specialists — funding stage, focus area, and key products in one view.",
-    stat: "79 companies",
+    stat: "82 companies",
   },
   {
     icon: BarChart3, label: "Case Studies",       href: "/case-studies",
     iconCls: "bg-amber-500/10 dark:bg-amber-500/[0.18] text-amber-500",
     desc: "ROI data, not press releases.",
-    body: "72 real deployments with measured outcomes — cost saved, time reduced, accuracy gained — across healthcare, finance, and more.",
-    stat: "72 case studies",
+    body: "76 real deployments with measured outcomes — cost saved, time reduced, accuracy gained — across healthcare, finance, and more.",
+    stat: "76 case studies",
   },
   {
     icon: BookOpen,  label: "Learn",              href: "/learn",
     iconCls: "bg-emerald-500/10 dark:bg-emerald-500/[0.18] text-emerald-500",
     desc: "Structured paths from zero to production.",
     body: "Courses, certifications, video guides, and books — curated for beginners through ML engineers. Updated as the field moves.",
-    stat: "104 resources · all levels",
+    stat: "107 resources · all levels",
   },
   {
     icon: Shield,    label: "Compliance",         href: "/compliance",
     iconCls: "bg-rose-500/10 dark:bg-rose-500/[0.18] text-rose-500",
-    desc: "29 frameworks. Deadlines tracked.",
+    desc: "30 frameworks. Deadlines tracked.",
     body: "EU AI Act, GDPR, NIST RMF, ISO 42001 and more — obligations mapped, enforcement dates flagged.",
-    stat: "29 frameworks",
+    stat: "30 frameworks",
   },
   {
     icon: Briefcase, label: "Consulting Toolkit", href: "/consulting-toolkit",
@@ -76,10 +76,10 @@ const sectionNav = [
 ];
 
 const personas = [
-  { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 139 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
-  { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 72 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
-  { role: "Compliance Officer", icon: Shield, desc: "29 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
-  { role: "Learner", icon: GraduationCap, desc: "104 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
+  { role: "Builder", icon: Code2, desc: "Compare APIs, pricing, and capabilities across 142 tools.", href: "/tools", color: "border-violet-500", barColor: "bg-violet-500" },
+  { role: "Executive", icon: BarChart3, desc: "ROI evidence and vendor comparison from 76 case studies.", href: "/case-studies", color: "border-blue-500", barColor: "bg-blue-500" },
+  { role: "Compliance Officer", icon: Shield, desc: "30 frameworks mapped. Deadlines tracked.", href: "/compliance", color: "border-amber-500", barColor: "bg-amber-500" },
+  { role: "Learner", icon: GraduationCap, desc: "107 resources from beginner to production ML.", href: "/learn", color: "border-emerald-500", barColor: "bg-emerald-500" },
 ];
 
 const pricingVariant: Record<string, "green" | "blue" | "amber" | "purple"> = {
@@ -157,7 +157,7 @@ export function FeaturedSection() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <SectionHeading eyebrow="Featured Tools" eyebrowIcon={Sparkles} title="Popular AI tools right now" viewAllHref="/tools" viewAllLabel="View all 139+ tools" />
+        <SectionHeading eyebrow="Featured Tools" eyebrowIcon={Sparkles} title="Popular AI tools right now" viewAllHref="/tools" viewAllLabel="View all 142+ tools" />
         <ScrollReveal stagger>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {featuredTools.map((tool) => (

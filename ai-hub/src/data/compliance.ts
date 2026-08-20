@@ -2567,10 +2567,84 @@ export const complianceFrameworks: ComplianceFramework[] = [
     relatedFrameworks: ["ftc-ai-guidelines", "colorado-ai-act", "eu-ai-act"],
     penalties: "Civil penalties of up to $500 for a first violation and $500–$1,500 for each subsequent violation, assessed per day and per tool by NYC DCWP.",
   },
+  {
+    id: "illinois-hb-3773-ai-employment",
+    slug: "illinois-hb-3773-ai-employment",
+    name: "Illinois HB 3773 — AI in Employment (Human Rights Act Amendment)",
+    shortName: "Illinois HB 3773",
+    jurisdiction: "United States (Illinois)",
+    status: "Published",
+    description: "Illinois House Bill 3773 amends the Illinois Human Rights Act to expressly regulate employers' use of artificial intelligence in employment decisions. It makes it a civil rights violation for an employer to use AI that has a discriminatory effect on employees or applicants on the basis of protected classes, or to use ZIP codes as a proxy for protected classes. It also requires employers to notify employees and applicants when AI is used in recruitment, hiring, promotion, discipline, discharge, and other terms of employment, building on Illinois' earlier AI Video Interview Act.",
+    enforcingAuthority: "Illinois Department of Human Rights (IDHR)",
+    scope: "Employers operating in Illinois that use artificial intelligence or generative AI to make or assist employment decisions, including recruitment, hiring, promotion, discipline, and discharge.",
+    keyRequirements: [
+      "Do not use AI that results in unlawful discrimination against protected classes in employment decisions",
+      "Do not use ZIP codes as a proxy for protected classes in AI-driven decisions",
+      "Notify employees and applicants when AI is used in covered employment decisions",
+      "Provide notice in a manner and form to be specified by IDHR rulemaking",
+      "Maintain the ability to demonstrate AI tools do not produce discriminatory effects",
+    ],
+    whoIsAffected: [
+      "Illinois employers using automated or AI-based hiring and HR tools",
+      "Employers using generative AI in recruitment, promotion, or discipline",
+      "HR technology vendors supplying AI decision tools to Illinois employers",
+      "Staffing and recruiting firms operating in Illinois",
+    ],
+    whoIsExempt: [
+      "Employment decisions made without the use of AI",
+      "Tools that do not assist or replace covered employment decision-making",
+    ],
+    keyProhibitions: [
+      "Using AI with a discriminatory effect on protected classes in employment decisions",
+      "Using ZIP codes as a proxy for protected classes",
+      "Using AI in covered decisions without notifying affected individuals",
+    ],
+    guardrails: [
+      "Non-discrimination: AI must not produce disparate treatment or impact on protected classes",
+      "Transparency: employees and applicants must be told when AI is used",
+      "Proxy prohibition: geographic proxies for protected characteristics are barred",
+    ],
+    exposureAreas: [
+      "Résumé screening and candidate ranking tools",
+      "AI video-interview and assessment platforms",
+      "Promotion, discipline, and workforce-management algorithms",
+      "Generative-AI tools used in HR workflows",
+    ],
+    complianceRoadmap: [
+      "STEP 1 - Inventory: Identify AI tools used in Illinois employment decisions",
+      "STEP 2 - Assess: Test tools for discriminatory effects across protected classes",
+      "STEP 3 - Remove Proxies: Eliminate ZIP-code and similar proxy features",
+      "STEP 4 - Notice: Implement employee and applicant AI-use notifications",
+      "STEP 5 - Monitor: Establish ongoing bias monitoring and documentation",
+    ],
+    industryImpact: [
+      { sector: "Human Resources", impact: "critical", notes: "Illinois employers using AI in hiring must ensure non-discrimination and provide notice." },
+      { sector: "HR Technology / SaaS", impact: "high", notes: "Vendors must help customers avoid discriminatory effects and support notice obligations." },
+      { sector: "Staffing & Recruiting", impact: "high", notes: "Firms using AI screening for Illinois roles are directly covered." },
+    ],
+    timeline: [
+      { date: "Aug 2024", milestone: "Illinois enacts HB 3773 amending the Human Rights Act to cover AI in employment", type: "past" },
+      { date: "Jan 2026", milestone: "HB 3773 takes effect for covered employers", type: "current" },
+      { date: "2026+", milestone: "IDHR rulemaking clarifies notice requirements and enforcement", type: "upcoming" },
+    ],
+    affectedOrgs: "Employers in Illinois using artificial intelligence to make or assist employment decisions such as hiring, promotion, discipline, and discharge.",
+    enforcementDate: "January 2026 - Published (effective, enforced by IDHR)",
+    riskLevel: "high",
+    tags: ["Employment", "AI", "Anti-Discrimination", "US", "Regulation"],
+    officialLink: "https://www.ilga.gov/legislation/BillStatus.asp?DocNum=3773&GAID=17&DocTypeID=HB&SessionID=112",
+    implementationGuidance: [
+      "Inventory AI tools used in Illinois employment decisions and classify covered uses",
+      "Test AI tools for discriminatory effects and remove ZIP-code proxies",
+      "Implement AI-use notice workflows for employees and applicants",
+      "Establish ongoing bias monitoring and retain supporting documentation",
+    ],
+    relatedFrameworks: ["nyc-local-law-144", "colorado-ai-act", "ftc-ai-guidelines"],
+    penalties: "Violations are treated as civil rights violations under the Illinois Human Rights Act, subject to IDHR charges, damages, and remedies available under the Act.",
+  },
 ];
 
 export const complianceRiskLevels = ["All", "low", "medium", "high", "critical"];
 export const complianceJurisdictions = [
   "All", "European Union", "United States", "United Kingdom", "International",
-  "China", "Canada", "Singapore", "Australia", "India", "G7 Nations", "International (OECD Members)", "Brazil", "South Korea", "Japan", "United Arab Emirates", "Council of Europe", "United States (Colorado)", "United States (Texas)", "United States (California)", "Saudi Arabia", "United States (New York)",
+  "China", "Canada", "Singapore", "Australia", "India", "G7 Nations", "International (OECD Members)", "Brazil", "South Korea", "Japan", "United Arab Emirates", "Council of Europe", "United States (Colorado)", "United States (Texas)", "United States (California)", "Saudi Arabia", "United States (New York)", "United States (Illinois)",
 ];
