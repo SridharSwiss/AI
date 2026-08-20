@@ -14,7 +14,7 @@ export const caseStudiesData4: CaseStudyData[] = [
     outcome:
       "Walmart reports over $1B in annual cost savings attributable to AI supply chain optimization. On-shelf availability improved by 3–5 percentage points during peak periods. Perishable waste reduced by an estimated 15%. The system also powers Walmart's 'Intelligent Retail Lab' — a 50,000-square-foot real-time AI-monitored store in Levittown, NY.",
     metrics: [
-      "$1B+ annual cost savings from AI supply chain (Walmart 2023 disclosures)",
+      "$1B+ estimated annual cost savings from AI supply chain (industry estimate)",
       "3–5pp improvement in on-shelf availability during peak seasons",
       "~15% reduction in perishable food waste",
       "Demand forecast horizon extended from 2 weeks to 8 weeks at store-SKU level",

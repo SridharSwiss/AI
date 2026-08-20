@@ -187,14 +187,14 @@ export const caseStudiesData5: CaseStudyData[] = [
     techStack: [
       "Python (XGBoost, LightGBM for pricing models; TensorFlow for ranking)",
       "Apache Spark for large-scale feature engineering across 7M+ listings",
-      "Airbnb's Chronos time-series forecasting platform (internal, open-sourced in 2024)",
+      "Airbnb's internal time-series demand-forecasting pipeline",
       "Elasticsearch for real-time search ranking inference",
       "Airbnb's internal ML platform (Bighead / ML Infra)",
       "Flink and Kafka for real-time event processing (local events, sudden demand spikes)",
       "Airbnb's internal A/B testing platform (Experimentation Platform) for continuous model evaluation",
     ],
     architecture:
-      "Smart Pricing operates on a demand forecasting pipeline: a multi-horizon time-series model (Chronos) forecasts booking demand at a listing's local market level 6 weeks ahead, adjusted for seasonality, macro-economic signals, and event calendars. A pricing optimizer then maps forecast demand to a recommended price curve considering host occupancy targets, competitor supply density, and booking lead times. Hosts receive a suggested price per night that they can accept, adjust, or override. Search Ranking uses a two-stage retrieval and ranking architecture: a candidate retrieval model uses approximate nearest neighbour search to generate a shortlist of 200–300 listings per query; a dense neural ranking model then re-ranks these using 100+ user, listing, and contextual features to produce the final search results page. Both systems are updated daily via batch retraining pipelines on Airbnb's Spark infrastructure.",
+      "Smart Pricing operates on a demand forecasting pipeline: a multi-horizon time-series model forecasts booking demand at a listing's local market level 6 weeks ahead, adjusted for seasonality, macro-economic signals, and event calendars. A pricing optimizer then maps forecast demand to a recommended price curve considering host occupancy targets, competitor supply density, and booking lead times. Hosts receive a suggested price per night that they can accept, adjust, or override. Search Ranking uses a two-stage retrieval and ranking architecture: a candidate retrieval model uses approximate nearest neighbour search to generate a shortlist of 200–300 listings per query; a dense neural ranking model then re-ranks these using 100+ user, listing, and contextual features to produce the final search results page. Both systems are updated daily via batch retraining pipelines on Airbnb's Spark infrastructure.",
     dataRequirements:
       "7M+ active listings with historical pricing, availability, booking rates, and host response data. 150M+ guest reviews providing quality and preference signals. Real-time signals: local event calendars (sports, concerts, festivals), Airbnb search query volume, competitor listing supply on Airbnb and competing OTAs. External data: macroeconomic travel demand indicators, airline booking data (licensed), holiday calendars for 50+ countries.",
     investmentEstimate: "$200–400M in marketplace AI (pricing, ranking, trust) over 5 years — embedded in Airbnb's $1.8B annual engineering budget",
@@ -218,7 +218,7 @@ export const caseStudiesData5: CaseStudyData[] = [
         note: "Hosts using Smart Pricing have materially higher annual earnings — reducing churn to competing platforms",
       },
     ],
-    implementationTimeline: "6 years from initial pricing features (2018) to production Chronos-based Smart Pricing (2024)",
+    implementationTimeline: "6 years from initial pricing features (2018) to production ML-based Smart Pricing (2024)",
     implementationPhases: [
       {
         phase: "Rule-Based Price Tips and Basic Ranking",
@@ -242,11 +242,11 @@ export const caseStudiesData5: CaseStudyData[] = [
         keyOutputs: ["Personalized search ranking", "Event-aware pricing model", "Real-time demand pipeline"],
       },
       {
-        phase: "Chronos Time-Series Platform and Neural Ranking",
+        phase: "Time-Series Forecasting Platform and Neural Ranking",
         duration: "18 months",
         description:
-          "Migrated to Airbnb's Chronos forecasting platform for consistent time-series modeling across pricing and other use cases. Deployed neural ranking model for search, replacing gradient boosted trees. Open-sourced Chronos in 2024.",
-        keyOutputs: ["Chronos forecasting platform (open-sourced)", "Neural search ranking model", "Production Smart Pricing with 100+ signals"],
+          "Consolidated onto a unified internal time-series forecasting platform for consistent modeling across pricing and other use cases. Deployed a neural ranking model for search, replacing gradient-boosted trees.",
+        keyOutputs: ["Unified forecasting platform", "Neural search ranking model", "Production Smart Pricing with 100+ signals"],
       },
     ],
     teamSize: "150+ ML engineers and data scientists in Airbnb's ML Platform and Pricing/Ranking teams; 50+ data engineers; significant infrastructure team",
@@ -282,7 +282,7 @@ export const caseStudiesData5: CaseStudyData[] = [
       "Advisory AI wins more than mandatory AI: making Smart Pricing a recommendation hosts could accept or decline was critical to adoption — forced pricing automation would have driven host churn",
       "Marketplace AI must optimize both sides simultaneously: improving guest search results at the expense of host earnings creates platform instability — the objective function must balance both",
       "Cold start is the hardest problem in marketplace AI: new listings without booking history require creative feature engineering using property characteristics, neighbourhood demand, and comparable comps",
-      "Open-sourcing Chronos created a talent and reputation dividend that justified the decision beyond direct product value",
+      "Investing in a unified forecasting platform paid dividends across multiple product teams beyond pricing",
     ],
     whatWorkedWell: [
       "Continuous A/B experimentation infrastructure meant that every model improvement was validated before rollout — preventing large-scale negative impacts on host earnings or guest conversion",
@@ -291,7 +291,7 @@ export const caseStudiesData5: CaseStudyData[] = [
     ],
     references: [
       {
-        label: "Airbnb Engineering Blog: Chronos Forecasting Platform",
+        label: "Airbnb Engineering Blog: Machine Learning at Airbnb",
         url: "https://medium.com/airbnb-engineering/introducing-chronos-forecasting-at-scale-with-economy-and-accuracy-9d33e6ee2a59",
       },
       {

@@ -135,7 +135,7 @@ export const caseStudiesData7: CaseStudyData[] = [
     slug: "nvidia-ai-enterprise-platform",
     company: "NVIDIA",
     industry: "Technology",
-    title: "NVIDIA AI Enterprise: How GPU Architecture Leadership Became a $96B Revenue Business",
+    title: "NVIDIA AI Enterprise: How GPU Architecture Leadership Became the Engine of the AI Boom",
     problem:
       "As generative AI demand exploded in 2023–2024, enterprises and cloud providers needed massively scalable AI training and inference infrastructure. Existing CPU-based architectures were 100–1000x too slow for large language model training. Software fragmentation — dozens of ML frameworks, libraries, and deployment tools — created enormous complexity for enterprise AI teams. NVIDIA needed to translate GPU hardware leadership into a full-stack enterprise software and services business.",
     solution:

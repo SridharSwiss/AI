@@ -12,11 +12,11 @@ export const caseStudiesData6: CaseStudyData[] = [
     solution:
       "Spotify built a multi-model recommendation system combining collaborative filtering (what similar users listen to), natural language processing (analysis of music blog text, lyrics, and metadata), and audio analysis (convolutional neural networks analyzing raw audio waveforms). These signals feed into personalized playlist generation products: Discover Weekly (new music every Monday), Daily Mix (ongoing listening mix), and the AI DJ (2023) — a generative AI-powered DJ that narrates transitions between tracks with personalized commentary. Spotify's BaRT (Bandits for Recommendations as Treatments) model handles real-time recommendation context-switching.",
     outcome:
-      "Discover Weekly drives billions of streams monthly and was responsible for reactivating millions of churned users when launched in 2015. AI-powered recommendations now account for approximately 31% of all listening on Spotify — making the recommendation engine one of the most impactful products in the company's history. The AI DJ, launched in 2023, rapidly became one of the most-used listening modes. Spotify's MAU reached 602 million in Q1 2024, with recommendation quality a primary driver of subscriber retention.",
+      "Discover Weekly drives billions of streams monthly and was responsible for reactivating millions of churned users when launched in 2015. AI-powered recommendations now account for approximately 31% of all listening on Spotify — making the recommendation engine one of the most impactful products in the company's history. The AI DJ, launched in 2023, rapidly became one of the most-used listening modes. Spotify's MAU reached 615 million in Q1 2024, with recommendation quality a primary driver of subscriber retention.",
     metrics: [
       "31% of all Spotify streams driven by AI recommendations",
       "Discover Weekly: billions of streams monthly; reactivated millions of churned users at launch (2015)",
-      "602 million MAUs in Q1 2024 — recommendation quality cited as key retention driver",
+      "615 million MAUs in Q1 2024 — recommendation quality cited as key retention driver",
       "AI DJ: launched Feb 2023, became top-3 listening mode within months",
       "1B+ personalized playlists generated monthly across Discover Weekly, Daily Mix, and Radio",
       "100M+ track catalogue with >4M new uploads monthly — all indexed for AI recommendation",
@@ -24,7 +24,7 @@ export const caseStudiesData6: CaseStudyData[] = [
     tags: ["Media", "Recommendation AI", "Personalization", "NLP", "Collaborative Filtering"],
     featured: false,
     businessContext:
-      "Spotify is the world's largest audio streaming platform with $14B+ in revenue (2023) and 602 million MAUs. The core business model is conversion from free (ad-supported) to premium subscribers, with a €10.99/month premium plan. Recommendation quality is the primary driver of this conversion — users who discover music they love are more likely to pay for uninterrupted access. At Spotify's scale, even a 1% improvement in user retention represents tens of millions in recurring subscription revenue. The challenge of recommending music is harder than video (shorter listening sessions, more diverse tastes, no plot structure to provide context signals) and requires genuinely novel AI approaches.",
+      "Spotify is the world's largest audio streaming platform with $14B+ in revenue (2023) and 615 million MAUs (Q1 2024). The core business model is conversion from free (ad-supported) to premium subscribers, with a €10.99/month premium plan. Recommendation quality is the primary driver of this conversion — users who discover music they love are more likely to pay for uninterrupted access. At Spotify's scale, even a 1% improvement in user retention represents tens of millions in recurring subscription revenue. The challenge of recommending music is harder than video (shorter listening sessions, more diverse tastes, no plot structure to provide context signals) and requires genuinely novel AI approaches.",
     strategicDrivers: [
       "Subscriber conversion: users who engage deeply with recommendations convert to premium at 2–3× the rate of passive listeners",
       "Churn reduction: recommendation quality is Spotify's primary retention driver — users who stop discovering new music they love churn",

@@ -432,11 +432,11 @@ export const caseStudiesData3: CaseStudyData[] = [
     problem:
       "DHL handles 1.8 billion+ shipments per year across 220 countries. Volume surges (Black Friday, Q4, geopolitical disruptions) create network overloads that cause missed delivery promises, costly emergency capacity, and driver overtime. Traditional linear forecasting models failed to anticipate surge demand 4–8 weeks in advance, leaving insufficient lead time for capacity adjustments.",
     solution:
-      "DHL's data analytics division (DHL Resilience360, later expanded to DHL Data & Analytics) built AI-powered demand forecasting, predictive sorting hub capacity planning, and dynamic route optimisation. The AI system ingests 50+ external data signals (weather, macroeconomic indicators, e-commerce trends, holidays) to forecast volume 8 weeks in advance by hub and route, enabling proactive capacity booking rather than reactive emergency spending.",
+      "DHL's data analytics teams (including work formerly under Resilience360, since spun off as Everstream Analytics) built AI-powered demand forecasting, predictive sorting hub capacity planning, and dynamic route optimisation. The AI system ingests 50+ external data signals (weather, macroeconomic indicators, e-commerce trends, holidays) to forecast volume 8 weeks in advance by hub and route, enabling proactive capacity booking rather than reactive emergency spending.",
     outcome:
       "DHL reports saving €300M+ annually from AI-optimised logistics operations. Forecasting accuracy improved from 60–70% (traditional models) to 85–90% at the hub level 4 weeks out. Proactive capacity booking reduced emergency air freight costs by 30%. On-time delivery rates improved by 3–5 percentage points during peak periods. AI route optimisation reduced vehicle kilometres by an average of 15%, reducing carbon emissions by ~100,000 tonnes per year.",
     metrics: [
-      "€300M+ annual savings from AI-optimised operations (DHL 2023 Annual Report)",
+      "€300M+ estimated annual savings from AI-optimised operations (industry estimate)",
       "Forecasting accuracy: 60–70% → 85–90% at 4-week horizon",
       "30% reduction in emergency air freight costs during peak periods",
       "3–5 percentage point improvement in on-time delivery during Q4 peaks",
@@ -521,7 +521,7 @@ export const caseStudiesData3: CaseStudyData[] = [
       "Side-by-side comparison phase: running AI forecast alongside human planner forecast for 6 months, with results compared, built faster trust than any training programme",
     ],
     references: [
-      { label: "DHL 2023 Annual Report — digital and AI strategy", url: "https://www.dhl.com/global-en/home/investors/annual-report.html" },
+      { label: "DHL — Digital &amp; AI strategy", url: "https://www.dhl.com/global-en/home/about-us/digitalization.html" },
       { label: "DHL Data & Analytics overview", url: "https://www.dhl.com/global-en/home/our-divisions/supply-chain/innovation/data-analytics.html" },
       { label: "Google Cloud + DHL case study", url: "https://cloud.google.com/customers/dhl" },
     ],
