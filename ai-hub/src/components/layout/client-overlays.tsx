@@ -17,9 +17,15 @@ const DailyUpdatesBanner = dynamic(
   { ssr: false }
 );
 
+const IntroReel = dynamic(
+  () => import("@/components/shared/intro-reel").then((m) => ({ default: m.IntroReel })),
+  { ssr: false }
+);
+
 export function ClientOverlays() {
   return (
     <>
+      <IntroReel />
       <AnalyticsTracker />
       <ConsentBanner />
       <DailyUpdatesBanner />
