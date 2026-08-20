@@ -1,25 +1,20 @@
 {
-  "date": "2026-08-19",
-  "summary": "Updated 8 items across Tools, General.",
+  "date": "2026-08-20",
+  "summary": "Updated 9 items across General.",
   "changes": [
-    {
-      "icon": "chart",
-      "category": "Tools",
-      "items": [
-        "Tools, companies, case studies, compliance, learn, news",
-        "SEO: homepage title to AI Hub Switzerland Directory of 136+ AI Tools, Companies and Compliance"
-      ]
-    },
     {
       "icon": "chart",
       "category": "General",
       "items": [
-        "Add proper LinkedIn icon in footer; add team members' LinkedIn profiles",
-        "SEO: plain-text homepage title (no em-dash/ampersand), keyword-forward",
-        "SEO: shorten homepage title (74→55) & meta descriptions (215→142) per SEO Agent",
-        "Fix: remove 4 duplicate tool entries flagged by the AI Agent",
-        "Add SEO Agent: live continuous SEO audit of the production site",
-        "Add AI Management Agent: autonomous site health & ops monitor (free)"
+        "Fix: password recovery link now lands on set-password form correctly",
+        "Auth: forgot-password on login + change-password in account page",
+        "Email: auto-repair from-address missing closing bracket (Resend 422)",
+        "Memberships: passwordless activation link instead of plaintext password",
+        "Memberships: auto-provision credentials on approval; separate members from sign-ups",
+        "Switzerland: split Join and Explore into dedicated pages; fix dark dropdown",
+        "Membership emails: notify team on new application, notify applicant on decision",
+        "Add AI Hub Switzerland membership workflow with admin review + agentic screening",
+        "Fully develop AI Hub Switzerland page with soft sign-in gate"
       ]
     }
   ]
