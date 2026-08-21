@@ -1,58 +1,26 @@
 {
-  "date": "2026-08-20",
-  "summary": "Added 3 tools, 3 companies, 4 case studies, Illinois AI employment law, 3 learn resources, and 3 news sources.",
+  "date": "2026-08-21",
+  "summary": "Updated 3 items across General, Case Studies, Tools.",
   "changes": [
     {
-      "category": "Tools",
       "icon": "chart",
+      "category": "General",
       "items": [
-        "fal.ai — serverless generative-media inference (FLUX, Kling, Veo)",
-        "Napkin AI — turns text into editable diagrams and infographics",
-        "Wispr Flow — AI voice dictation that types polished text in any app"
+        "Add intro reel overlay: play YouTube Short on site launch, then enter site"
       ]
     },
     {
-      "category": "Companies",
       "icon": "chart",
-      "items": [
-        "Magic AI — frontier long-context models for autonomous software engineering",
-        "Hippocratic AI — safety-focused healthcare LLMs for patient-facing voice agents",
-        "Imbue — research lab building reasoning and coding agents"
-      ]
-    },
-    {
       "category": "Case Studies",
+      "items": [
+        "Case-study legitimacy audit: rewrite 4 fabricated studies around real work, fix factual errors"
+      ]
+    },
+    {
       "icon": "chart",
+      "category": "Tools",
       "items": [
-        "Wells Fargo Fargo — privacy-first generative AI banking assistant, 100M+ interactions",
-        "Vodafone TOBi — multilingual AI chatbot automating telecom support",
-        "H&M AI Supply Chain — ML demand forecasting and personalization",
-        "Kaiser Permanente Advance Alert Monitor — AI early-warning cutting hospital mortality"
-      ]
-    },
-    {
-      "category": "Compliance",
-      "icon": "shield",
-      "items": [
-        "Illinois HB 3773 — regulates AI in employment decisions under the Human Rights Act"
-      ]
-    },
-    {
-      "category": "Learning",
-      "icon": "book",
-      "items": [
-        "Hugging Face Agents Course — hands-on AI agents",
-        "DeepLearning.AI ChatGPT Prompt Engineering for Developers",
-        "LangChain Academy — Intro to LangGraph for stateful agents"
-      ]
-    },
-    {
-      "category": "News Sources",
-      "icon": "news",
-      "items": [
-        "Unite.AI added to General feed",
-        "Analytics India Magazine added to General feed",
-        "BDTechTalks added to Tech feed"
+        "Tools, companies, case studies, compliance, learn, news"
       ]
     }
   ]
