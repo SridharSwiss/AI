@@ -1,26 +1,12 @@
 {
-  "date": "2026-08-21",
-  "summary": "Updated 3 items across General, Case Studies, Tools.",
+  "date": "2026-08-22",
+  "summary": "Updated 1 item across General.",
   "changes": [
     {
       "icon": "chart",
       "category": "General",
       "items": [
-        "Add intro reel overlay: play YouTube Short on site launch, then enter site"
-      ]
-    },
-    {
-      "icon": "chart",
-      "category": "Case Studies",
-      "items": [
-        "Case-study legitimacy audit: rewrite 4 fabricated studies around real work, fix factual errors"
-      ]
-    },
-    {
-      "icon": "chart",
-      "category": "Tools",
-      "items": [
-        "Tools, companies, case studies, compliance, learn, news"
+        "Daily update 2026-08-21: refresh what's-new banner"
       ]
     }
   ]
